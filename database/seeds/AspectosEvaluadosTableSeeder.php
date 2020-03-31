@@ -25,5 +25,12 @@ class AspectosEvaluadosTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('aspectos_evaluados')->insert([
+            'id_aspecto' => '2',
+            'id_programacion' => '2',
+            'descripcion' => 'Nada que destacar',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

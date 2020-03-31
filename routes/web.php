@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Programacion;
+use App\Usuario;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,4 +22,24 @@ Route::get('/login', function () {
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/prueba',function () {
+    
+   
+    $evaluable = App\AspectoEvaluable::findorfail(1);
+    $programacion = new Programacion([
+        'f_comprobacion' => '2019-09-26',	
+        'observaciones' => 'Muy bien estructurado',
+        'id_profesor' => 3,
+        'id_responsable' => 4
+    ]);
+
+    $asignatura = App\Asignatura::find(2);
+
+    $asignatura->programaciones()->save($programacion);
+   
+    foreach ($evaluable->programaciones as $programacion){
+        echo $programacion->pivot->created_at.'-----'.$programacion->pivot->descripcion.'-----'.$programacion->id;
+    }
+
 });
