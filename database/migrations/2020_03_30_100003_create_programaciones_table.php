@@ -20,9 +20,9 @@ class CreateProgramacionesTable extends Migration
             $table->integer('id_asignatura')->unsigned();
             $table->integer('id_profesor')->unsigned();
             $table->integer('id_responsable')->unsigned();
-            $table->foreign('id_asignatura')->references('id')->on('asignaturas');
-            $table->foreign('id_profesor')->references('id')->on('usuarios');
-            $table->foreign('id_responsable')->references('id')->on('usuarios');
+            $table->foreign('id_asignatura')->references('id')->on('asignaturas')->onDelete('cascade');
+            $table->foreign('id_profesor')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_responsable')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +34,7 @@ class CreateProgramacionesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('programaciones');
     }
 }

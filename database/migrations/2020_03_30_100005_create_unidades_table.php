@@ -24,7 +24,7 @@ class CreateUnidadesTable extends Migration
             $table->text('observaciones');
             $table->text('mejoras');
             $table->integer('id_programacion')->unsigned();
-            $table->foreign('id_programacion')->references('id')->on('programaciones');
+            $table->foreign('id_programacion')->references('id')->on('programaciones')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -37,5 +37,6 @@ class CreateUnidadesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('unidades');
+        Schema::enableForeignKeyConstraints();
     }
 }

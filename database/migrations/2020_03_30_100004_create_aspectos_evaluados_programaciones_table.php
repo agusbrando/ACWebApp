@@ -13,12 +13,12 @@ class CreateAspectosEvaluadosProgramacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('aspectos_evaluados_programaciones', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('id_aspecto_evaluable')->unsigned();
+        Schema::create('aspectos_evaluados', function (Blueprint $table) {
+            $table->primary(['id_programacion', 'id_aspecto']);
+            $table->integer('id_aspecto')->unsigned();
             $table->integer('id_programacion')->unsigned();
-            $table->foreign('id_aspecto_evaluable')->references('id')->on('aspectos_evaluables');
-            $table->foreign('id_programacion')->references('id')->on('programaciones');
+            $table->foreign('id_aspecto')->references('id')->on('aspectos_evaluables')->onDelete('cascade');
+            $table->foreign('id_programacion')->references('id')->on('programaciones')->onDelete('cascade');
             $table->text('descripcion');
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateAspectosEvaluadosProgramacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aspectos_evaluados_programaciones');
+        Schema::dropIfExists('aspectos_evaluados');
     }
 }

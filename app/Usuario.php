@@ -1,0 +1,16 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Usuario extends Model
+{
+    protected $fillable = [
+        'nombre',
+        'apellidos',
+        'id_rol',
+        'contrasenya',
+        'email'
+    ];
+}

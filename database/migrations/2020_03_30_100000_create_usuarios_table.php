@@ -17,7 +17,8 @@ class CreateUsuariosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('apellidos');
-            $table->string('rol');
+            $table->integer('id_rol')->unsigned();
+            /*$table->foreign('id_rol')->references('id')->on('rol');*/
             $table->string('contrasenya');
             $table->string('email')->unique();
             $table->timestamps();
