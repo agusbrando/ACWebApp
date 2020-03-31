@@ -14,7 +14,7 @@ class SeguimientosTableSeeder extends Seeder
         $seguimientos = [
             [
                 'firma'=>'',
-                'id_usuario' => 'GGarrido',
+                'id_usuario' => '0001',
                 'hora_entrada' => '8:30',
                 'hora_salida' => '12:25',
                 'horas'=>'4',
@@ -23,7 +23,7 @@ class SeguimientosTableSeeder extends Seeder
             ],
             [
                 'firma'=>'',
-                'id_usuario' => 'GGarrido',
+                'id_usuario' => '0001',
                 'hora_entrada' => '16:30',
                 'hora_salida' => '19:25',
                 'horas'=>'3',
