@@ -14,7 +14,8 @@ class CreateEvaluatedsTable extends Migration
     public function up()
     {
         Schema::create('evaluateds', function (Blueprint $table) {
-            $table->primary(['program_id', 'evaluable_id']);
+            $table->unique(['program_id', 'evaluable_id']);
+            $table->increments('id');
             $table->integer('evaluable_id')->unsigned();
             $table->integer('program_id')->unsigned();
             $table->foreign('evaluable_id')->references('id')->on('evaluables')->onDelete('cascade');

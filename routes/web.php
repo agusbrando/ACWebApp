@@ -26,20 +26,22 @@ Route::get('/', function () {
 Route::get('/prueba',function () {
     
    
-    $evaluable = App\Evaluated::findorfail(1);
-    $programacion = new Program([
-        'f_comprobacion' => '2019-09-26',	
-        'observaciones' => 'Muy bien estructurado',
-        'id_profesor' => 3,
-        'id_responsable' => 4
-    ]);
+    $asignatura = Program::findorfail(1)->subject;
 
-    $asignatura = App\Subject::find(2);
+    echo $asignatura->name.'<br>';
 
+    $id = DB::table('roles')->select('id')->where('name','Profesor')->get()->first()->id;
+
+
+    $profesores = DB::table('users')->where('rol_id', $id)->get();
+
+    foreach($profesores as $profesor){
+        echo $profesor->first_name.'<br>';
+    }
     //$asignatura->programaciones()->save($programacion);
    
-    foreach ($evaluable->programaciones as $programacion){
+    /*foreach ($evaluable->programs as $programacion){
         echo $programacion->pivot->created_at.'-----'.$programacion->pivot->description.'-----'.$programacion->id;
-    }
+    }*/
 
 });
