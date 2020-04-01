@@ -1,32 +1,31 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAsignaturasTable extends Migration
+class CreateRolesTable extends Migration
 {
-    /**
+    /*
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('asignaturas', function (Blueprint $table) {
-            $table->string('id_asignaturas');
-            $table->string('idCursos');
-            $table->string('nombre');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
-    /**
+    /*
      * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('asignaturas');
+        Schema::dropIfExists('roles');
     }
 }
