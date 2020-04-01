@@ -13,29 +13,29 @@ class ItemsTableSeeder extends Seeder
     public function run()
     {
         DB::table('items')->insert([
-            'nombre' => 'Portatil HP',
-            'fecha_compra' => Carbon::create('2020','03','30'),
-            'id_aula' => 1,
-            'id_estado' => 6,
-            'id_tipo_item' => 5,
+            'name' => 'Portatil HP',
+            'date_pucharse' => Carbon::create('2020','03','30'),
+            'classroom_id' => 1,
+            'state_id' => 6,
+            'type_id' => 5,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('items')->insert([
-            'nombre' => 'All in One Lenovo',
-            'fecha_compra' => Carbon::create('2020','02','23'),
-            'id_aula' => 2,
-            'id_estado' => 4,
-            'id_tipo_item' => 2,
+            'name' => 'All in One Lenovo',
+            'date_pucharse' => Carbon::create('2020','02','23'),
+            'classroom_id' => 2,
+            'state_id' => 4,
+            'type_id' => 2,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('items')->insert([
-            'nombre' => 'Teclado Logitech',
-            'fecha_compra' => Carbon::create('2015','01','10'),
-            'id_aula' => 2,
-            'id_estado' => 1,
-            'id_tipo_item' => 1,
+            'name' => 'Teclado Logitech',
+            'date_pucharse' => Carbon::create('2015','01','10'),
+            'classroom_id' => 2,
+            'state_id' => 1,
+            'type_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
