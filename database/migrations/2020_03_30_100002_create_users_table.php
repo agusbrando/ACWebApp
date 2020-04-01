@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            // $table->integer('rol_id')->unsigned();
-            // $table->foreign('rol_id')->references('id')->on('roles');
+            $table->integer('rol_id')->unsigned();
+            $table->foreign('rol_id')->references('id')->on('roles');
             $table->string('password');
             $table->string('email')->unique();
             $table->timestamps();
@@ -32,8 +32,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        // Schema::disableForeignKeyConstraints();  No lo activo por que no tengo la tabla roles, 
-        //                                          una vez migremos ya miramos que tabla es la primera para activarlo
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('users');
     }
 }
