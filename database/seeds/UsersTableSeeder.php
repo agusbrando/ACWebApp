@@ -15,11 +15,13 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@campusaula.com',
             'password' => bcrypt('adminPass'),
+            'id_curso' => 'SMR',
         ]);
         DB::table('users')->insert([
             'name' => 'User',
             'email' => 'user@campusaula.com',
             'password' => bcrypt('userPass'),
+            'id_curso' => 'DAM',
         ]);
     }
 }
