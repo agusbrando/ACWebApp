@@ -17,7 +17,6 @@ class CreateTableClassrooms extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('num_aula');
-            $table->integer('num_alumnos');
             $table->timestamps();
         });
     }
