@@ -1,0 +1,10 @@
+diff a/app/Asignatura.php b/app/Asignatura.php	(rejected hunks)
+@@ -15,6 +15,7 @@
+ 
+    protected $guarded = [];
+ 
++   public function programaciones(){
+         return $this->hasMany('App\Programacion', 'id_asignatura');
+    }
+ }
+\ No newline at end of file

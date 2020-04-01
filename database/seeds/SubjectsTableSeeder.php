@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AsignaturasTableSeeder extends Seeder
+class SubjectsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,18 +11,18 @@ class AsignaturasTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('asignaturas')->insert([
-            'nombre' => 'Acceso a Datos',
+        DB::table('subjects')->insert([
+            'name' => 'Acceso a Datos',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('asignaturas')->insert([
-            'nombre' => 'Bases de Datos',
+        DB::table('subjects')->insert([
+            'name' => 'Bases de Datos',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('asignaturas')->insert([
-            'nombre' => '​​​​​​​Programación multimedia y dispositivos móviles​',
+        DB::table('subjects')->insert([
+            'name' => '​​​​​​​Programación multimedia y dispositivos móviles​',
             'created_at' => now(),
             'updated_at' => now()
         ]);

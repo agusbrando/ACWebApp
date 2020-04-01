@@ -1,10 +1,9 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAspectosEvaluablesTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +12,9 @@ class CreateAspectosEvaluablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('aspectos_evaluables', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +26,8 @@ class CreateAspectosEvaluablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aspectos_evaluables');
+        Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('roles');
+        Schema::disableForeignKeyConstraints();
     }
 }

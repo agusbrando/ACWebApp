@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class AspectoEvaluado extends Pivot
+class Evaluated extends Pivot
 {
-    protected $table = 'aspectos_evaluados';
+    protected $table = 'evaluateds';
     protected $guarded = [];
 
 }

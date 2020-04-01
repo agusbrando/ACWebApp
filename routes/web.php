@@ -36,7 +36,7 @@ Route::get('/prueba',function () {
 
     $asignatura = App\Asignatura::find(2);
 
-    $asignatura->programaciones()->save($programacion);
+    //$asignatura->programaciones()->save($programacion);
    
     foreach ($evaluable->programaciones as $programacion){
         echo $programacion->pivot->created_at.'-----'.$programacion->pivot->descripcion.'-----'.$programacion->id;

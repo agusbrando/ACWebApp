@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AspectosEvaluablesTableSeeder extends Seeder
+class EvaluablesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,13 +11,13 @@ class AspectosEvaluablesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('aspectos_evaluables')->insert([
-            'nombre' => 'La metodología didáctica aplicada',
+        DB::table('evaluables')->insert([
+            'name' => 'La metodología didáctica aplicada',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('aspectos_evaluables')->insert([
-            'nombre' => 'Los criterios de evaluación',
+        DB::table('evaluables')->insert([
+            'name' => 'Los criterios de evaluación',
             'created_at' => now(),
             'updated_at' => now()
         ]);
