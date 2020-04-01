@@ -12,17 +12,15 @@ class ClassroomsTableSeeder extends Seeder
     public function run()
     {
         DB::table('classrooms')->insert([
-            'nombre' => 'Taller',
-            'num_aula' => 1,
-            'num_alumnos' => 25,
+            'name' => 'Taller',
+            'number' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('classrooms')->insert([
-            'nombre' => 'Aula_2',
-            'num_aula' => 2,
-            'num_alumnos' => 22,
+            'name' => 'Aula_2',
+            'number' => 2,
             'created_at' => now(),
             'updated_at' => now()
         ]);
