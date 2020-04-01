@@ -13,31 +13,31 @@ class TypesTableSeeder extends Seeder
     {
         DB::table('types')->insert([
             'model' => 'Item',
-            'nombre' => 'Teclado',
+            'name' => 'Teclado',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('types')->insert([
             'model' => 'Item',
-            'nombre' => 'All in One',
+            'name' => 'All in One',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('types')->insert([
             'model' => 'Item',
-            'nombre' => 'Raton',
+            'name' => 'Raton',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('types')->insert([
             'model' => 'Item',
-            'nombre' => 'Aire Acondicionado',
+            'name' => 'Aire Acondicionado',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('types')->insert([
             'model' => 'Item',
-            'nombre' => 'Portatil',
+            'name' => 'Portatil',
             'created_at' => now(),
             'updated_at' => now()
         ]);
