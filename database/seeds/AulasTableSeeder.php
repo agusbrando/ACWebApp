@@ -11,18 +11,17 @@ class AulasTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('aulas')->insert([
-            'nombre' => 'Taller',
-            'num_aula' => 1,
+        DB::table('classrooms')->insert([
+            'name' => 'Taller',
+            'number' => 1,
             'num_alumnos' => 25,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        DB::table('aulas')->insert([
-            'nombre' => 'Aula_2',
-            'num_aula' => 2,
-            'num_alumnos' => 22,
+        DB::table('classrooms')->insert([
+            'name' => 'Aula_2',
+            'number' => 2,
             'created_at' => now(),
             'updated_at' => now()
         ]);
