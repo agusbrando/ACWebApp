@@ -11,6 +11,35 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('estados')->insert([
+            'name' => 'Averiado',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('estados')->insert([
+            'name' => 'Mantenimiento',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('estados')->insert([
+            'name' => 'Reparado',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('estados')->insert([
+            'name' => 'Sin Averias',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('estados')->insert([
+            'name' => 'Obsoleto',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('estados')->insert([
+            'name' => 'Pendiente de compra',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }
