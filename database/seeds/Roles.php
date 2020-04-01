@@ -11,8 +11,8 @@ class Roles extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'email'=> 'juangarcia@gmail.com'
+         DB::table('roles')->insert([
+            'name' => 'administrador',
         ]);
     }
 }

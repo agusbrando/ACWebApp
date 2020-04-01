@@ -12,8 +12,7 @@ class Permisos extends Seeder
     public function run()
     {
         DB::table('permisos')->insert([
-            'nombre_permiso' => 'Editar usuario',
-            'id_rol'=>'50',
+            'name' => 'borrar usuario',
         ]);
     }
 }
