@@ -18,12 +18,12 @@ class CreateTableItemsUsers extends Migration
             $table->primary(['item_id','user_id']); //Declaro las claves primarias
             $table->integer('item_id')->unsigned(); //Pongo unsigned para que sepa que es una clave primaria
             $table->integer('user_id')->unsigned();
-            $table->DateTime('fecha_inicio');
-            $table->DateTime('fecha_fin');
+            $table->DateTime('date_inicio');
+            $table->DateTime('date_fin');
             $table->timestamps();
 
 
-            $table->foreign('id_item')->references('id')->on('items');
+            $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
