@@ -1,18 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Types extends Model
+class States extends Model
 {
-    protected $table = 'types';
+    protected $table = 'states';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
-        'model',
         'name',
     ];
 
