@@ -16,5 +16,8 @@ class TypesModel extends Model
         'model'
     ];
 
-    
+    public function events()
+    {
+        return $this->hasMany('App\Models\EventsModel', 'types_id');
+    }
 }
