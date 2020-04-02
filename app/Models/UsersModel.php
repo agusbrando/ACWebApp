@@ -12,10 +12,16 @@ class UsersModel extends Model
 
     protected $fillable = [
         'id',
+        'rol_id',
         'first_name',
         'last_name',
         'email',
-        'password',
-        'rol_id'
+        'password'
     ];
+
+    public function events()
+    {
+        return $this->hasMany('App\Models\EventsModel', 'users_id');
+    }
+
 }
