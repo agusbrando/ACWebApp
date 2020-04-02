@@ -15,4 +15,10 @@ class ClassesModel extends Model
         'name',
         'number'
     ];
+
+    public function sessions()
+    {
+        return $this->hasMany('App\Models\SessionsModel', 'sessions_id');
+    }
+
 }
