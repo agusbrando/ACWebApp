@@ -22,3 +22,26 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/models', function () {
+
+    $role = 1;
+
+    echo '*Usuarios con el id_role '.$role.'*<br>';
+    $users = App\Models\Role::find($role)->users;
+
+    foreach ($users as $user) {
+        echo ($user->first_name).'<br>';
+    }
+
+    echo'<br>';
+
+    $idUser = 3;
+
+    echo '*Rol del usuario con id '.$idUser.'*<br>';
+
+    $user = App\Models\User::find($idUser);
+
+    echo $user->role->name;
+
+});
