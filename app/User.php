@@ -9,14 +9,21 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    protected $table = 'users';
 
+    protected $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id',
+        'first_name',
+        'last_name',
+        'rol_id',
+        'password',
+        'email',
     ];
 
     /**
@@ -36,4 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Relaciones
+    public function events()
+    {
+        // return $this->hasMany('App\Models\EventsModel', 'users_id');
+    }
 }
