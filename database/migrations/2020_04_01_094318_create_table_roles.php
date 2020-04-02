@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableTypes extends Migration
+class CreateTableRoles extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateTableTypes extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('model');
-            $table->string('name');            
+        Schema::create('roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,7 +27,6 @@ class CreateTableTypes extends Migration
      */
     public function down()
     {
-        Schema::enableForeignKeyConstraints(); //Ponemos esto en la ultima tabla para que no de error de permisos al hacer el refesh
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('roles');
     }
 }

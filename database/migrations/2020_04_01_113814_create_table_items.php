@@ -17,9 +17,9 @@ class CreateTableItems extends Migration
             $table->increments('id');
             $table->string('name');
             $table->DateTime('date_pucharse');
-            $table->integer('classroom_id'); //Clava ajena
-            $table->integer('state_id'); //Clava ajena
-            $table->integer('type_id'); //Clava ajena
+            $table->integer('classroom_id')->unsigned(); //Clava ajena
+            $table->integer('state_id')->unsigned(); //Clava ajena
+            $table->integer('type_id')->unsigned(); //Clava ajena
             $table->timestamps();
 
             //Ponemos las claves ajenas

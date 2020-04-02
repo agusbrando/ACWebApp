@@ -12,7 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            //Hay que llamarlos segun el orden conforme esten colocados
+            RolesTableSeeder::class,
             UsersTableSeeder::class
+
         ]);
     }
 }
