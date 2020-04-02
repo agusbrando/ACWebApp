@@ -1,21 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SessionsModel extends Model
+class TypesModel extends Model
 {
-    protected $table = 'sessions';
+    protected $table = 'types';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
-        'classes_id',
-        'time_start',
-        'time_end',
+        'name',
         'model'
     ];
 
+    
 }
