@@ -14,9 +14,24 @@ class EventsModel extends Model
         'id',
         'types_id',
         'sessions_id',
-        'users_id' ,
+        'users_id',
         'description',
         'date'
     ];
+
+    public function events()
+    {
+        return $this->belongsTo('App\Models\EventsModel', 'sessions_id');
+    }
+
+    public function types()
+    {
+        return $this->belongsTo('App\Models\TypesModel', 'types_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo('App\Models\UsersModel', 'users_id');
+    }
 
 }
