@@ -16,7 +16,7 @@ class CreateTableItemsUsers extends Migration
         Schema::create('items-users', function (Blueprint $table) {
 
             $table->primary(['item_id','user_id']); //Declaro las claves primarias
-            $table->integer('item_id')->unsigned(); //Pongo unsigned para que sepa que es una clave primaria
+            $table->integer('item_id')->unsigned(); //Pongo unsigned para que tenga el mismo tipo de variable que la clave primara de la otra tabla
             $table->integer('user_id')->unsigned();
             $table->DateTime('date_inicio');
             $table->DateTime('date_fin');
@@ -35,6 +35,7 @@ class CreateTableItemsUsers extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints(); //Ponemos esto en la ultima tabla para que no de error de permisos al hacer el refesh
         Schema::dropIfExists('items-users');
     }
 }
