@@ -20,7 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('password');
-            $table->bigInteger('rol_id')->unsigned();
+            $table->integer('rol_id')->unsigned();
             $table->timestamps();
             
             $table->foreign('rol_id')->references('id')->on('roles');
