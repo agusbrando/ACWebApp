@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 
             ClassroomsTableSeeder::class,
             StatesTableSeeder::class,
-            TypesItemTableSeeder::class,
+            TypesTableSeeder::class,
             RolesUsersTableSeeder::class,
             UsersTableSeeder::class,
             ItemsTableSeeder::class,
