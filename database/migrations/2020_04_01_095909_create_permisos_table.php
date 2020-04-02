@@ -14,12 +14,9 @@ class CreatePermisosTable extends Migration
     public function up()
     {
         Schema::create('permisos', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned;
-            $table->string('nombre_permiso');
-            $table->integer('id_rol')->foreign('id_rol')->references('id')->on('roles');
+            $table->increments('id');
+            $table->string('name');
             $table->timestamps();
-
-
         });
     }
 
@@ -30,9 +27,7 @@ class CreatePermisosTable extends Migration
      */
     public function down()
     {
-        
         Schema::enableForeignKeyConstraints();
         Schema::dropIfExists('permisos');
-        Schema::disableForeignKeyConstraints();
     }
 }
