@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Permiso extends Model
+class Permission extends Model
 {
-    protected $table = 'permisos';
-    protected $pimaryKey = 'id_permiso';
+    protected $table = 'permissions';
+    protected $pimaryKey = 'id_permission';
     const CREATED_AT = 'Creacion';
     const UPDATED_AT = 'Actualizacion';
 }
