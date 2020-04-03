@@ -16,11 +16,11 @@ class Item extends Model
     // Asignación masiva
     protected $fillable =[
         'id',
-        'nombre',
-        'fecha_compra',
-        'id_aula', //classroom_id
-        'id_estado', //status_id
-        'id_tipo_item', //item_type_id
+        'name',
+        'date_pucharse',
+        'classroom_id', //classroom_id
+        'state_id', //status_id
+        'type_id', //item_type_id
         
 
     ];
