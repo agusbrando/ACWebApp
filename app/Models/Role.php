@@ -10,4 +10,9 @@ class Role extends Model
     protected $pimaryKey = 'id_role';
     const CREATED_AT = 'Creacion';
     const UPDATED_AT = 'Actualizacion';
+    
+    public function User()
+    {
+        return $this->hasMany('app/Models/User');
+    }
 }
