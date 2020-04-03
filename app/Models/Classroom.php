@@ -69,7 +69,7 @@ class Classroom extends Model
     public function items()
     {
         
-        return $this->hasMany('App\Models\Item');
+        return $this->hasMany('App\Models\Item' , 'classroom_id');
     }
     // $items = App\Models\Item::find(1)->items;
     
