@@ -18,7 +18,7 @@ class Types extends Model
 
     public function events()
     {
-        // return $this->hasMany('App\Models\EventsModel', 'types_id');
+        return $this->hasMany('App\Models\Item' , 'state_id');
     }
-    return $this->hasMany('App\Models\Item' , 'state_id');
+    
 }
