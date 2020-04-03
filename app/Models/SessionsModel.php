@@ -12,7 +12,7 @@ class SessionsModel extends Model
 
     protected $fillable = [
         'id',
-        'classes_id',
+        'classroom_id',
         'model',
         'time_start',
         'time_end'
@@ -25,7 +25,7 @@ class SessionsModel extends Model
 
     public function classes()
     {
-        return $this->belongsTo('App\Models\ClassesModel', 'classes_id');
+        return $this->belongsTo('App\Models\ClassroomModel', 'classroom_id');
     }
 
 }

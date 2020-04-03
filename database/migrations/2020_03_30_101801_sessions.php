@@ -15,13 +15,13 @@ class Sessions extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('classes_id')->unsigned();
+            $table->integer('classroom_id')->unsigned();
             $table->dateTime('time_start', 0);
             $table->dateTime('time_end', 0);
             $table->string('model');
             $table->timestamps();
 
-            $table->foreign('classes_id')->references('id')->on('classes');
+            $table->foreign('classroom_id')->references('id')->on('classroom');
         });
     }
 
