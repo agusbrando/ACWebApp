@@ -10,4 +10,9 @@ class Permission extends Model
     protected $pimaryKey = 'id_permission';
     const CREATED_AT = 'Creacion';
     const UPDATED_AT = 'Actualizacion';
+    
+    public function Roles()
+    {
+        return $this->hasMany('app/Models/Role');
+    }
 }
