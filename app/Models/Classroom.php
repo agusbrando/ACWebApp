@@ -65,4 +65,13 @@ class Classroom extends Model
         'num_alumnos',
 
     ];
+
+    //Relacion entre Item Y Classroom
+    public function items()
+    {
+        
+        return $this->hasMany('App\Models\Item');
+    }
+    // $items = App\Models\Item::find(1)->items;
+    
 }
