@@ -18,12 +18,14 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->integer('rol_id')->unsigned();
+            $table->integer('timetable_id')->unsigned();
             $table->timestamps();
             
             $table->foreign('rol_id')->references('id')->on('roles');
+            $table->foreign('timetable_id')->references('id')->on('timetables');
             
         });
     }
