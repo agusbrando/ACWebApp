@@ -16,7 +16,7 @@ class CreateTableTypes extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('model');
-            $table->string('name');            
+            $table->string('name')->unique();            
             $table->timestamps();
         });
     }
