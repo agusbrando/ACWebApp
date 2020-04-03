@@ -19,4 +19,10 @@ class States extends Model
     {
         // return $this->hasMany('App\Models\EventsModel', 'types_id');
     }
+
+    public function items()
+    {
+        
+        return $this->hasMany('App\Models\Item' , 'state_id');
+    }
 }
