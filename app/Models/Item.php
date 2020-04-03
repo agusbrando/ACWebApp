@@ -14,16 +14,12 @@ class Item extends Model
     public $timestamps = true;
 
     // Asignación masiva
-    protected $fillable =[
-        'id',
-        'name',
-        'date_pucharse',
-        'classroom_id', //classroom_id
-        'state_id', //status_id
-        'type_id', //item_type_id
-        
-
-    ];
-
+    protected $guarded =[]; //En vez de poner fillable y todos los atributos,
+                            //con esto se anaden todos los atributos directamente.
+    //Relaciones
+    public function Items()
+    {
+        return $this->belongsToMany('App\Models\User', 'item_user', 'item_id', 'user_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
+    }
     
 }

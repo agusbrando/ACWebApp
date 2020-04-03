@@ -45,8 +45,8 @@ class User extends Authenticatable
     ];
 
     //Relaciones
-    public function events()
+    public function Items()
     {
-        // return $this->hasMany('App\Models\EventsModel', 'users_id');
+        return $this->belongsToMany('App\Models\Item', 'item_user', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
     }
 }
