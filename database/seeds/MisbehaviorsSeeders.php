@@ -15,6 +15,8 @@ class MisbehaviorsSeeders extends Seeder
             'id' => 1,
             'description' => 'Retraso',
             'type_id' => 1,
+            'user_id' => 1,
+            'date' => now(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
