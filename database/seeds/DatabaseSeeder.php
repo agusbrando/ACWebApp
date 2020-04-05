@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             SubjectsSeeders::class,
             UsersSeeders::class,
             SessionsSeeders::class,
-            SchedulesSeeders::class,
             TypesSeeders::class,
             MisbehaviorsSeeders::class
         ]);
