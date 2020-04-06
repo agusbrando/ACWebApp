@@ -11,17 +11,17 @@ class User extends Model
 
     public function trackings()
     {
-        return $this->hasMany('App\Models\Trackings', 'user_id');
+        return $this->hasMany('App\Models\Trackings');
     }
 
-    public function roles()
+    public function role()
     {
-        return $this->belongsTo('App\Models\Role', 'rol_id');
+        return $this->belongsTo('App\Models\Role');
     }
 
     public function timetables()
     {
-        return $this->belongsTo('App\Models\Timetable', 'timetable_id');
+        return $this->belongsTo('App\Models\Timetable');
     }
 
     public function califications(){
