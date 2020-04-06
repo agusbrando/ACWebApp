@@ -12,13 +12,13 @@ class SessionsSeeder extends Seeder
     public function run()
     {
         DB::table('sessions')->insert([
-            'classroom_id'=>1,
+            'classrooms_id'=>1,
             'time_start' => date('Y-m-d H:i:s'),
             'time_end' => date('Y-m-d H:i:s'),
             'model' => 'defaultModel'
         ]);
         DB::table('sessions')->insert([
-            'classroom_id'=>2,
+            'classrooms_id'=>2,
             'time_start' => date('Y-m-d H:i:s') ,
             'time_end' => date('Y-m-d H:i:s') ,   
             'model' => 'defaultModel'   

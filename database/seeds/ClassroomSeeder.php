@@ -11,11 +11,11 @@ class ClassroomSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('classroom')->insert([
+        DB::table('classrooms')->insert([
             'name' => 'default',
             'number' => 1,
         ]);
-        DB::table('classroom')->insert([
+        DB::table('classrooms')->insert([
             'name' => 'default2',
             'number' => 2,
         ]);
