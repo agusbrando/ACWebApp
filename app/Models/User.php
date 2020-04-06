@@ -2,21 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
     protected $table = 'users';
     protected $guarded = [];
 
-    public function role(){
+    public function trackings()
+    {
+        return $this->hasMany('App\Models\Trackings');
+    }
+
+    public function role()
+    {
         return $this->belongsTo('App\Models\Role');
+    }
+
+    public function timetables()
+    {
+        return $this->belongsTo('App\Models\Timetable');
     }
 
     public function califications(){
         return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
     }
-
 }
