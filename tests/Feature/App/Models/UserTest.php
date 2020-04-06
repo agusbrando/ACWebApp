@@ -3,6 +3,7 @@
 namespace Tests\Feature\App\Models;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Program;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -43,7 +44,7 @@ class UserTest extends TestCase
             'role_id' => 3
         ]);
         
-        $role_id = $user_one_profesor->rol->id;
+        $role_id = $user_one_profesor->role->id;
        
 
         $expected_role_id = $user_one_profesor->role_id;
@@ -64,7 +65,7 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => 2
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -121,7 +122,7 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => 2
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
