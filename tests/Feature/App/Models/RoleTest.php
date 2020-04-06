@@ -22,11 +22,39 @@ class RoleTest extends TestCase
     /**@test */
     public function testUsers(){
 
-        $role_id=3;
-        $users = Role::findorfail($role_id)->users->pluck('id');
+        $role = Role::create([
+            'name' => 'Profesor',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $user_one = User::create([
+            'first_name' => 'Profesor',
+            'last_name' => 'Apellido Apellido',
+            'email' => 'profesor.apellido1@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => $role->id
+        ]);
+        $user_two = User::create([
+            'first_name' => 'Profesor',
+            'last_name' => 'Apellido Apellido',
+            'email' => 'profesor.apellido2@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => $role->id
+        ]);
+        $role_id=$role->id;
+        $users = $role->users->pluck('id');
 
-        $expected_users = DB::table('users')->where('role_id', $role_id)->pluck('id');
-        $this->assertEquals($users,$expected_users);
+        $expected_users_ids = [$user_one,$user_two];
+        $expected_users_ids->pluck('id');
+        $this->assertEquals($users_ids,$expected_users_ids);
+
+        $user_one->delete();
+        $user_two->delete();
+        $role->delete();
 
     }
 }
