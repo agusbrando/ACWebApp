@@ -46,10 +46,13 @@ class RoleTest extends TestCase
             'role_id' => $role->id
         ]);
         $role_id=$role->id;
-        $users = $role->users->pluck('id');
+        $users_ids = $role->users->pluck('id');
 
-        $expected_users_ids = [$user_one,$user_two];
-        $expected_users_ids->pluck('id');
+        $expected_users_ids = collect([
+            ['id' => $user_one->id],
+            ['id' => $user_two->id]
+        ])->pluck('id');
+
         $this->assertEquals($users_ids,$expected_users_ids);
 
         $user_one->delete();
