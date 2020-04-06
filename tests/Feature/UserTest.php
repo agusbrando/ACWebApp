@@ -10,12 +10,8 @@ use App\Models\Role;
 
 class UserTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function rolTest()
+    
+    public function testExample()
     {
         $user = User::find(3);
         $role = Role::find($user->role_id);

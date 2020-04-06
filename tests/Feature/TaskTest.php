@@ -5,10 +5,10 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\Course;
-use App\Models\Subject;
+use App\Models\Task;
+use App\Models\Evaluation;
 
-class CourseTest extends TestCase
+class TaskTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -17,12 +17,10 @@ class CourseTest extends TestCase
      */
     public function testExample()
     {
+        $task = Task::find(1);
 
-        $subject = Subject::find(1);
+        $evaluation = Evaluation::find($task->evaluation_id);
 
-        $course = Course::find($subject->course_id);
-
-        $this->assertEquals($subject->course->name, $course->name);
-
+        $this->assertEquals($task->evaluation->name, $evaluation->name);
     }
 }
