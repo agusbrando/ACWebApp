@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ClassroomTest extends TestCase
+class StatesTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -15,12 +15,8 @@ class ClassroomTest extends TestCase
      */
     public function testExample()
     {
-        // $classroom = Classroom:create([
-        //     'id' => 1,
-        //     'name' => 'Taller',
-        //     'number' => 1,
-        //     'created_at' => now(),
-        //     'updated_at' => now()
-        // ]);
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
     }
 }
