@@ -45,6 +45,7 @@ class ItemTest extends TestCase
             'updated_at' => now()
         ]);
         
+        //Aqui compara los id
         $this->assertEquals($Item->classroom_id, $classroom->id);
         $this->assertEquals($Item->state_id, $state->id);
         $this->assertEquals($Item->type_id, $type->id);
