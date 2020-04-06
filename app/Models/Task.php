@@ -9,7 +9,7 @@ class Task extends Model
     protected $table = 'tasks';
     protected $guarded = [];
 
-    public function evaluations(){
+    public function evaluation(){
         return $this->belongsTo('App\Models\Evaluation');
     }
 

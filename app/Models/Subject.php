@@ -9,7 +9,7 @@ class Subject extends Model
     protected $table = 'subjects';
     protected $guarded = [];
 
-    public function courses(){
+    public function course(){
         return $this->belongsTo('App\Models\Course');
     }
 
