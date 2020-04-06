@@ -11,7 +11,7 @@ class Role extends Model
     const CREATED_AT = 'Creacion';
     const UPDATED_AT = 'Actualizacion';
     
-    public function User()
+    public function user()
     {
         return $this->hasMany('app/Models/User');
     }
