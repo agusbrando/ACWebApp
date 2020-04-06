@@ -12,11 +12,11 @@ class SubjectsTableSeeder extends Seeder
     public function run()
     {
         DB::table('subjects')->insert([
-            'courses_id' => 1,
+            'course_id' => 1,
             'name' => 'PMM'
         ]);
         DB::table('subjects')->insert([
-            'courses_id' => 2,
+            'course_id' => 2,
             'name' => 'DI'
         ]);
     }
