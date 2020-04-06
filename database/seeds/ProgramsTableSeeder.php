@@ -29,5 +29,14 @@ class ProgramsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('programs')->insert([
+            'date_check' => '2019-09-22',	
+            'notes' => 'Muy bien estructurado',
+            'subject_id' => 3,
+            'professor_id' => 3,
+            'user_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

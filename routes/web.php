@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Program;
-use App\User;
+use App\Models\Subject;
+use App\Models\Program;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,18 +27,10 @@ Route::get('/', function () {
 Route::get('/prueba',function () {
     
    
-    $asignatura = Program::findorfail(1)->subject;
-
-    echo $asignatura->name.'<br>';
-
-    $id = DB::table('roles')->select('id')->where('name','Profesor')->get()->first()->id;
-
-
-    $profesores = DB::table('users')->where('rol_id', $id)->get();
-
-    foreach($profesores as $profesor){
-        echo $profesor->first_name.'<br>';
-    }
+    $programs = Subject::findorfail(3)->programs->pluck('id');
+    echo $programs;
+    $expected_programs = DB::table('programs')->where('subject_id', 3)->pluck('id');
+    echo '<br>'.$expected_programs;
     //$asignatura->programaciones()->save($programacion);
    
     /*foreach ($evaluable->programs as $programacion){
