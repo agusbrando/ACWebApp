@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\DB;
 
-class RolTest extends TestCase
+class RoleTest extends TestCase
 {
 
     /**
@@ -22,10 +22,10 @@ class RolTest extends TestCase
     /**@test */
     public function testUsers(){
 
-        $rol_id=3;
-        $users = Rol::findorfail($rol_id)->users->pluck('id');
+        $role_id=3;
+        $users = Role::findorfail($role_id)->users->pluck('id');
 
-        $expected_users = DB::table('users')->where('rol_id', $rol_id)->pluck('id');
+        $expected_users = DB::table('users')->where('role_id', $role_id)->pluck('id');
         $this->assertEquals($users,$expected_users);
 
     }
