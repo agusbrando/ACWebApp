@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('adminPass'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => 1
+            'role_id' => 1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Alumno',
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => 4
+            'role_id' => 4
         ]);
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => 2
+            'role_id' => 2
         ]);
         DB::table('users')->insert([
             'first_name' => 'Marcelo',
@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => 3
+            'role_id' => 3
         ]);
     }
 }
