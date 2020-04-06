@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\App\Models;
 
-use App\Models\Rol;
+use App\Models\Role;
 use App\Models\User;
 
 use Tests\TestCase;
