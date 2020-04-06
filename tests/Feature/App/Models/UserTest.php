@@ -4,6 +4,7 @@ namespace Tests\Feature\App\Models;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Program;
+use App\Models\Subject;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -25,6 +26,11 @@ class UserTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        $role_responsable = Role::create([
+            'name' => 'Jefe de estudios',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         $user_one_profesor = User::create([
             'first_name' => 'Profesor',
             'last_name' => 'Apellido Apellido',
@@ -41,7 +47,7 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 3
+            'role_id' => $role_responsable->id
         ]);
         
         $role_id = $user_one_profesor->role->id;
@@ -54,10 +60,21 @@ class UserTest extends TestCase
         $user_two_responsable->delete();
         $user_one_profesor->delete();
         $role->delete();
+        $role_responsable->delete();
     }
     /**@test lista de programas en los que ese usuario es profesor*/
     public function testProgramsProfessor(){
 
+        $role = Role::create([
+            'name' => 'Profesor',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $role_responsable = Role::create([
+            'name' => 'Jefe de estudios',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         $user_one_profesor = User::create([
             'first_name' => 'Profesor',
             'last_name' => 'Apellido Apellido',
@@ -65,7 +82,7 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 2
+            'role_id' => $role->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -74,12 +91,22 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 3
+            'role_id' => $role_responsable->id
+        ]);
+        $subject_one = Subject::create([
+            'name' => 'PMM',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $subject_two = Subject::create([
+            'name' => 'DI',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
             'notes' => 'Muy bien estructurado',
-            'subject_id' => 3,
+            'subject_id' =>$subject_one->id,
             'professor_id' => $user_one_profesor->id,
             'user_id' => $user_two_responsable->id,
             'created_at' => now(),
@@ -88,7 +115,7 @@ class UserTest extends TestCase
         $program_two = Program::create([
             'date_check' => '2019-09-22',	
             'notes' => 'Muy bien estructurado',
-            'subject_id' => 3,
+            'subject_id' =>$subject_two ->id,
             'professor_id' => $user_one_profesor->id,
             'user_id' => $user_two_responsable->id,
             'created_at' => now(),
@@ -108,13 +135,27 @@ class UserTest extends TestCase
         
         $program_two->delete();
         $program_one->delete();
+        $subject_two->delete();
+        $subject_one->delete();
         $user_two_responsable->delete();
         $user_one_profesor->delete();
+        $role_responsable->delete();
+        $role->delete();
 
     }
     /**@test lista de programas en los que ese usuario es responsable*/
     public function testProgramsResponsable(){
 
+        $role = Role::create([
+            'name' => 'Profesor',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $role_responsable = Role::create([
+            'name' => 'Jefe de estudios',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         $user_one_profesor = User::create([
             'first_name' => 'Profesor',
             'last_name' => 'Apellido Apellido',
@@ -122,7 +163,7 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 2
+            'role_id' => $role->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -131,12 +172,22 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 3
+            'role_id' => $role_responsable->id
+        ]);
+        $subject_one = Subject::create([
+            'name' => 'PMM',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $subject_two = Subject::create([
+            'name' => 'DI',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
             'notes' => 'Muy bien estructurado',
-            'subject_id' => 3,
+            'subject_id' =>$subject_one->id,
             'professor_id' => $user_one_profesor->id,
             'user_id' => $user_two_responsable->id,
             'created_at' => now(),
@@ -145,7 +196,7 @@ class UserTest extends TestCase
         $program_two = Program::create([
             'date_check' => '2019-09-22',	
             'notes' => 'Muy bien estructurado',
-            'subject_id' => 3,
+            'subject_id' =>$subject_two->id,
             'professor_id' => $user_one_profesor->id,
             'user_id' => $user_two_responsable->id,
             'created_at' => now(),
@@ -162,8 +213,13 @@ class UserTest extends TestCase
 
         $program_two->delete();
         $program_one->delete();
+        $subject_two->delete();
+        $subject_one->delete();
         $user_two_responsable->delete();
         $user_one_profesor->delete();
+        $role_responsable->delete();
+        $role->delete();
+
     }
     
 }

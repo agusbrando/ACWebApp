@@ -21,7 +21,7 @@ class Program extends Model
     public function units(){
         return $this->hasMany(Unit::class);
     }
-    public function evaluateds(){
+    public function evaluables(){
         return $this->belongsToMany(Evaluable::class, 'evaluateds', 'program_id', 'evaluable_id')->using(Evaluated::class)
         ->withTimeStamps()->withPivot('description');
     }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Subject;
 use App\Models\Program;
+use App\Models\Evaluable;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +27,11 @@ Route::get('/', function () {
 });
 Route::get('/prueba',function () {
     
-   
-    $programs = Subject::findorfail(3)->programs->pluck('id');
-    echo $programs;
-    $expected_programs = DB::table('programs')->where('subject_id', 3)->pluck('id');
-    echo '<br>'.$expected_programs;
+   $evaluable = Evaluable::find(1);
+    
+    $programs_ids = $evaluable->programs;
+
+    echo '<br>'.$programs_ids;
     //$asignatura->programaciones()->save($programacion);
    
     /*foreach ($evaluable->programs as $programacion){
