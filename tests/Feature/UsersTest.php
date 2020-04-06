@@ -18,6 +18,6 @@ class UsersTest extends TestCase
         $user = User::find(3);
         $role = Role::find($user->role_id);
 
-        $this->assertEquals($user->role->name, $role->name);
+        $this->assertEquals($user->role, $role);
     }
 }

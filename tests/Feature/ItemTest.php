@@ -15,8 +15,38 @@ class ItemTest extends TestCase
      */
     public function testExample()
     {
-        $response = $this->get('/');
+        $classroom = Classroom::create([
+            'name' => 'Taller',
+            'number' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
-        $response->assertStatus(200);
+        $state = State::create([
+            'name' => 'Averiado',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $type = Type::create([
+            'model' => 'Item', 
+            'name' => 'Teclado',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $Item = Item::create([
+            'name' => 'Portatil HP',
+            'date_pucharse' => Carbon::create('2020','03','30'),
+            'classroom_id' => $classroom->id,
+            'state_id' => $state->id,
+            'type_id' => $type->id,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        
+        $this->assertEquals($Item->classroom_id, $classroom->id);
+        $this->assertEquals($Item->state_id, $state->id);
+        $this->assertEquals($Item->type_id, $type->id);
     }
 }
