@@ -15,4 +15,8 @@ class User extends Model
    public function programs_professor(){
         return $this->hasMany(Program::class, 'professor_id');
    }
+   //Rol de ese usuario
+   public function role(){
+        return $this->belongsTo(Role::class);
+   }
 }
