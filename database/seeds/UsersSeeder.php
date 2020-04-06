@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('adminPass'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => 1
+            'rol_id' => 1,
+            'timetable_id'=>1,
         ]);
         DB::table('users')->insert([
             'first_name' => 'Alumno',
@@ -27,7 +28,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => 4
+            'rol_id' => 4,
+            'timetable_id'=>1,
         ]);
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
@@ -36,7 +38,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => 2
+            'rol_id' => 2,
+            'timetable_id'=>1,
         ]);
         DB::table('users')->insert([
             'first_name' => 'Marcelo',
@@ -45,7 +48,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => 3
+            'rol_id' => 3,
+            'timetable_id'=>1,
         ]);
     }
 }
