@@ -14,7 +14,7 @@ class UserTest extends TestCase
     
     public function testRole()
     {
-        // $roleC = Role::create([
+        // $role = Role::create([
         //     'id' => '1',
         //     'name' => 'Administrador',
         //     'created_at' => now(),
@@ -38,12 +38,15 @@ class UserTest extends TestCase
         $role = Role::find($user->role_id);
 
         $this->assertEquals($user->role, $role);
+
+        // $user->delete();
+        // $role->delete();
     }
 
     public function testTimetable(){
 
         // $timetable = Timetable::create([
-        //     'id' = > '1',
+        //     'id' => '1',
         //     'name' => '2DAM2020',
         //     'date_start' =>  now(),
         //     'date_end' => now(),
@@ -67,5 +70,8 @@ class UserTest extends TestCase
         $timetable = Timetable::find($user->timetable_id);
 
         $this->assertEquals($user->timetable, $timetable);
+
+        // $user->delete();
+        // $timetable->delete();
     }
 }
