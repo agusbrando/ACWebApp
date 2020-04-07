@@ -20,7 +20,8 @@ class ItemTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    
+    public function testBasicExample()
     {
         $classroom = Classroom::create([
             'name' => 'Taller',
