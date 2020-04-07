@@ -46,8 +46,8 @@ class EvaluationTest extends TestCase
         $tasks = $evaluation->tasks->pluck('id');
         
         $expected_tasks_ids = collect([
-            ['id' => 1],
-            ['id' => 2]
+            ['id' => 1 /*task1->id*/],
+            ['id' => 2 /*task2->id*/]
         ])->pluck('id');
 
         $this->assertEquals($tasks, $expected_tasks_ids);
