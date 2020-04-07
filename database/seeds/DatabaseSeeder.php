@@ -12,14 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            TimeTableSeeder::class,
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             MessagesTableSeeder::class,
             PostsTableSeeder::class,
            AttachmentsTableSeeder::class,
-            
-           
-            
             SendsTableSeeder::class
         ]);
     }
