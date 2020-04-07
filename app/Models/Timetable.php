@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Timetable extends Model
 {
     protected $table ='timetables';
+    protected $primaryKey ='id';
     protected $guarded = [];
 
     public function timetables()

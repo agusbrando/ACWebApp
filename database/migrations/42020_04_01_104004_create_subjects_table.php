@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimetablesTable extends Migration
+class CreateSubjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateTimetablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('timetables', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->date('date_start');
-            $table->date('date_end');
+            $table->integer('courses_id')->unsigned();
+            $table->string('name')->unique();
             $table->timestamps();
 
-
-
-           
+            $table->foreign('courses_id')->references('id')->on('courses');
         });
     }
 
@@ -33,6 +30,6 @@ class CreateTimetablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timetables');
+        Schema::dropIfExists('subjects');
     }
 }

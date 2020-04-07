@@ -23,12 +23,14 @@ class DatabaseSeeder extends Seeder
             EvaluablesTableSeeder::class,
             ProgramsTableSeeder::class,
             UnitsTableSeeder::class,
-            EvaluatedsTableSeeder::class
-            EventsTableSeeder::class
+            EvaluatedsTableSeeder::class,
+            EventsTableSeeder::class,
 	    EvaluationsTableSeeder::class,
             PercentagesTableSeeder::class,
             TasksTableSeeder::class,
-            CalificationsTableSeeder::class
+            CalificationsTableSeeder::class,
+	    TrackingsSeeder::class,
+	    SessionTimetableSeeder::class
         ]);
     }
 }

@@ -18,7 +18,7 @@ class Session extends Model
         'time_end'
     ];
 
-    public function sessions()
+    public function session()
     {
         return $this->hasOne('App\Models\Session', 'session_id');
     }
@@ -26,6 +26,11 @@ class Session extends Model
     public function classroom()
     {
         return $this->belongsTo('App\Models\Classroom', 'classroom_id');
+    }
+
+    public function timetables()
+    {
+        return $this->hasMany('App\Models\SessionTimetable');
     }
 
 }

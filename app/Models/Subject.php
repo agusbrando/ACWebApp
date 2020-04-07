@@ -16,8 +16,18 @@ class Subject extends Model
     public function evaluations(){
         return $this->hasMany('App\Models\Evaluation');
     }
-}
 
- public function programs(){
+   public function programs(){
         return $this->hasMany(Program::class);
    }
+
+    public function courses(){
+        return $this->belongsTo('App\Models\Course');
+    }
+
+    public function timetables()
+    {
+        return $this->hasMany('App\Models\SessionTimetable');
+    }
+
+}
