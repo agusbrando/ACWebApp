@@ -9,7 +9,7 @@ class Evaluation extends Model
     protected $table = 'evaluations';
     protected $guarded = [];
 
-    public function subjects(){
+    public function subject(){
         return $this->belongsTo('App\Models\Subject');
     }
 
@@ -17,7 +17,7 @@ class Evaluation extends Model
         return $this->hasMany('App\Models\Task');
     }
 
-    public function percentages(){
-        return $this->belongsToMany(Type::class, 'percentages')->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+    public function types(){
+        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
     }
 }
