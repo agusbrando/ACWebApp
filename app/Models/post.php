@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class post extends Model
+class Post extends Model
 {
     protected $table = 'posts';
     protected $primaryKey = 'id';
@@ -12,7 +12,7 @@ class post extends Model
 
     public function attachments()
     {
-        return $this->morphMany('App\Models\attachment', 'attachmentable');
+        return $this->morphMany('App\Models\Attachment', 'attachmentable');
     }
 
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class message extends Model
+class Message extends Model
 {
       protected $table = 'messages';
     protected $primaryKey = 'id';
@@ -12,17 +12,17 @@ class message extends Model
 
     public function sends()
     {
-        return $this->hasMany('App\Models\send');
+        return $this->hasMany('App\Models\Send');
     }
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo('App\Models\user');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function attachments()
     {
-        return $this->morphMany('App\Models\attachment', 'attachmentable');
+        return $this->morphMany('App\Models\Attachment', 'attachmentable');
     }
 
 

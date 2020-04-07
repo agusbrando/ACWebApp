@@ -16,6 +16,6 @@ class Timetable extends Model
 
     public function users()
     {
-        return $this->hasMany('App\Models\user');
+        return $this->hasMany('App\Models\User');
     }
 }

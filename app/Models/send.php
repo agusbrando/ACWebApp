@@ -4,20 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class send extends Model
+class Send extends Model
 {
     protected $table = 'sends';
     protected $primaryKey = ['message_id','user_id'];
     protected $guarded = [];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo('App\Models\user');
+        return $this->belongsTo('App\Models\User');
     }
 
-    public function messages()
+    public function message()
     {
-        return $this->belongsTo('App\Models\message');
+        return $this->belongsTo('App\Models\Message');
     }
 
 

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class role extends Model
+class Role extends Model
 {
     protected $table = 'roles';
     protected $primaryKey = 'id';
@@ -12,7 +12,7 @@ class role extends Model
 
     public function users()
     {
-        return $this->hasMany('App\Models\user');
+        return $this->hasMany('App\Models\User');
     }
 
 
