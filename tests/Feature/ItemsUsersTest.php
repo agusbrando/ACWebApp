@@ -5,6 +5,11 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Carbon\Carbon;
+
+use app\Models\ItemUser;
+use app\Models\Item;
+use app\Models\User;
 
 class ItemsUsersTest extends TestCase
 {
@@ -16,7 +21,7 @@ class ItemsUsersTest extends TestCase
     public function testExample()
     {
         
-        $Item = Item::create([
+        $item = Item::create([
             'name' => 'Portatil HP',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => 1,
@@ -26,7 +31,7 @@ class ItemsUsersTest extends TestCase
             'updated_at' => now()
         ]);
         
-        $User = User::create([
+        $user = User::create([
             'first_name' => 'Admin',
             'email' => 'admin@campusaula.com',
             'last_name' => 'Admin',
@@ -36,9 +41,9 @@ class ItemsUsersTest extends TestCase
             'rol_id' => 1
         ]);
 
-        $ItemUser = ItemUser::create([
-            'item_id' => $Item->id,
-            'user_id' => $User->id,
+        $itemUser = ItemUser::create([
+            'item_id' => $item->id,
+            'user_id' => $user->id,
             'date_inicio' => Carbon::create('2019','09','16'),
             'date_fin' => Carbon::create('2020','06','12'),
             'created_at' => now(),
@@ -46,8 +51,13 @@ class ItemsUsersTest extends TestCase
         ]);
         
 
-        //Aqui compara los id
-        $this->assertEquals($ItemUser->item_id, $Item->id);
-        $this->assertEquals($ItemUser->user_id, $User->id);
+        $this->assertEquals($itemUser->item_id, $item->id);
+        $this->assertEquals($itemUser->user_id, $user->id);
+
+
+        //Elimina los opjetos creados de la BD
+        $itemUser->delete();
+        $item->delete();
+        $user->delete();
     }
 }
