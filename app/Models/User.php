@@ -2,53 +2,51 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Model
+class User extends Authenticatable
 {
+    use Notifiable;
     protected $table = 'users';
 
     protected $primaryKey = 'id';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+        'first_name',
+        'last_name',
+        'rol_id',
+        'password',
+        'email',
+    ];
 
-    protected $guarded = [];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
-    public function events()
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    //Relaciones
+    public function Items()
     {
-        return $this->hasMany('App\Models\Event', 'user_id');
+        return $this->belongsToMany('App\Models\Item', 'item_user', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
     }
-
-    public function role()
-    {
-        return $this->belongsTo('App\Models\Role', 'role_id');
-    }
-
-    public function timetable()
-    {
-        return $this->belongsTo('App\Models\Timetable', 'timetable_id');
-    }
-
-   /**Todas las programaciones de las cuales es profesor**/
-   public function programs_professor(){
-        return $this->hasMany(Program::class, 'professor_id');
-   }
-
-   /**Todas las programaciones de las cuales es responsable**/
-   public function programs_responsable(){
-        return $this->hasMany(Program::class, 'user_id');
-   }
-
-   public function trackings()
-   {
-        return $this->hasMany('App\Models\Trackings');
-   }
-
-    public function tasks(){
-        return $this->belongsToMany(Task::class)->using(Calification::class)->withPivot('value')->withTimestamps();
-    }
-
-    public function misbehaviors()
-    {
-        return $this->hasMany('App\Misbehavior');
-    }
-
 }

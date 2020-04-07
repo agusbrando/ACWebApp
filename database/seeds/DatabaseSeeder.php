@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 	    RolesTableSeeder::class,
             TypesTableSeeder::class,
             ClassroomsTableSeeder::class,
+	    StatesTableSeeder::class,
             SessionsTableSeeder::class,
             UsersTableSeeder::class,
 	    CoursesTableSeeder::class,
@@ -31,7 +32,9 @@ class DatabaseSeeder extends Seeder
             CalificationsTableSeeder::class,
 	    TrackingsTableSeeder::class,
             MisbehaviorsTableSeeders::class,
-	    SessionTimeTableSeeder::class
+	    SessionTimeTableSeeder::class,
+	    ItemsTableSeeder::class,
+            ItemsUsersTableSeeder::class,
         ]);
     }
 }

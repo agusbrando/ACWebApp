@@ -20,7 +20,6 @@ class Classroom extends Model
     * @var string
     */
     protected $primaryKey = 'id';
-    // protected $primaryKey = 'classroom_id';
 
 
     /**
@@ -69,6 +68,11 @@ class Classroom extends Model
         return $this->hasMany('App\Models\Sessions');
     }
     
-    // $items = App\Models\Item::find(1)->items;
+    //Relacion entre Item Y Classroom
+    public function items()
+    {
+        
+        return $this->hasMany('App\Models\Item' , 'classroom_id');
+    }
     
 }

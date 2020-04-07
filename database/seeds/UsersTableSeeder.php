@@ -1,9 +1,8 @@
-
 <?php
 
 use Illuminate\Database\Seeder;
 
-class UsersSeeders extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +11,6 @@ class UsersSeeders extends Seeder
      */
     public function run()
     {
-       
         DB::table('users')->insert([
             'first_name' => 'Admin',
             'email' => 'admin@campusaula.com',
@@ -20,10 +18,8 @@ class UsersSeeders extends Seeder
             'password' => bcrypt('adminPass'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 1,
-            'timetable_id'=>1,
+            'rol_id' => 1
         ]);
-        
         DB::table('users')->insert([
             'first_name' => 'Alumno',
             'last_name' => 'Apellido',
@@ -31,8 +27,7 @@ class UsersSeeders extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 4,
-	    'timetable_id'=>2
+            'rol_id' => 4
         ]);
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
@@ -41,8 +36,7 @@ class UsersSeeders extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 2,
-	    'timetable_id'=>3
+            'rol_id' => 2
         ]);
         DB::table('users')->insert([
             'first_name' => 'Marcelo',
@@ -51,8 +45,7 @@ class UsersSeeders extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 3,
-	    'timetable_id'=>4
+            'rol_id' => 3
         ]);
     }
 }
