@@ -21,7 +21,7 @@ class Sessions extends Migration
             $table->string('model');
             $table->timestamps();
 
-            $table->foreign('classroom_id')->references('id')->on('classroom');
+            $table->foreign('classroom_id')->references('id')->on('classrooms');
         });
     }
 
