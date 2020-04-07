@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Seeder;
@@ -11,15 +12,21 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+       
         DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@campusaula.com',
-            'password' => bcrypt('adminPass'),
+            'first_name' => 'default',
+            'last_name' => 'default',
+            'email' => Str::random(10).'@gmail.com',
+            'password' => Str::random(10),
+            'role_id' => 1
         ]);
+        
         DB::table('users')->insert([
-            'name' => 'User',
-            'email' => 'user@campusaula.com',
-            'password' => bcrypt('userPass'),
+            'first_name' => 'default2',
+            'last_name' => 'default2',
+            'email' => Str::random(10).'@gmail.com',
+            'password' => Str::random(10),
+            'role_id' => 2
         ]);
     }
 }
