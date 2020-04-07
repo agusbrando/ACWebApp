@@ -8,7 +8,8 @@ class Item extends Model
 {
     protected $table = 'items';
 
-    protected $primaryKey = 'item_id';
+    protected $primaryKey = 'id';
+    // protected $primaryKey = 'item_id';
 
     public $timestamps = true;
 
