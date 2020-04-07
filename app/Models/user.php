@@ -21,5 +21,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\send');
     }
-
+    public function timetables()
+    {
+        return $this->belongsTo('App\Models\Timetable');
+    }
 }
