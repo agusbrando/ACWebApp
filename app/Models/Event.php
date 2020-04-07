@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EventsModel extends Model
+class Event extends Model
 {
     protected $table = 'events';
 
@@ -12,26 +12,26 @@ class EventsModel extends Model
 
     protected $fillable = [
         'id',
-        'types_id',
-        'sessions_id',
-        'users_id',
+        'type_id',
+        'session_id',
+        'user_id',
         'description',
         'date'
     ];
 
     public function events()
     {
-        return $this->belongsTo('App\Models\EventsModel', 'sessions_id');
+        return $this->belongsTo('App\Models\Event', 'session_id');
     }
 
     public function types()
     {
-        return $this->belongsTo('App\Models\TypesModel', 'types_id');
+        return $this->belongsTo('App\Models\Type', 'type_id');
     }
 
     public function users()
     {
-        return $this->belongsTo('App\Models\UsersModel', 'users_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
 }

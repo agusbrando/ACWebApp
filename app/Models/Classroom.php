@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ClassroomModel extends Model
+class Classroom extends Model
 {
-    protected $table = 'classroom';
+    protected $table = 'classrooms';
 
     protected $primaryKey = 'id';
 
@@ -18,7 +18,7 @@ class ClassroomModel extends Model
 
     public function sessions()
     {
-        return $this->hasMany('App\Models\SessionsModel', 'sessions_id');
+        return $this->hasMany('App\Models\Session', 'session_id');
     }
 
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TypesModel extends Model
+class Type extends Model
 {
     protected $table = 'types';
 
@@ -18,6 +18,6 @@ class TypesModel extends Model
 
     public function events()
     {
-        return $this->hasMany('App\Models\EventsModel', 'types_id');
+        return $this->hasMany('App\Models\Event', 'type_id');
     }
 }

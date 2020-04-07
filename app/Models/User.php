@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UsersModel extends Model
+class User extends Model
 {
     protected $table = 'users';
 
@@ -12,7 +12,7 @@ class UsersModel extends Model
 
     protected $fillable = [
         'id',
-        'rol_id',
+        'role_id',
         'first_name',
         'last_name',
         'email',
@@ -21,7 +21,12 @@ class UsersModel extends Model
 
     public function events()
     {
-        return $this->hasMany('App\Models\EventsModel', 'users_id');
+        return $this->hasMany('App\Models\Event', 'user_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
 }
