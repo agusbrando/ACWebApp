@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Subject;
 use App\Models\Course;
+use App\Models\Evaluation; 
 
 class SubjectTest extends TestCase
 {
@@ -17,56 +18,61 @@ class SubjectTest extends TestCase
      */
     public function testCourse()
     {
-        // $subject = Subject::create([
-        //     'course_id' => 1,
-        //     'name' => 'PMM'
-        // ]);
+        $course = Course::create([
+            'level' => 1,
+            'name' => 'Primero',
+            'num_students' => 30
+        ]);
 
-        // $course = Course::create([
-        //     'level' => 1,
-        //     'name' => 'Primero',
-        //     'num_students' => 30
-        // ]);
+        $subject = Subject::create([
+            'course_id' => $course->id,
+            'name' => 'Ejemplo5'
+        ]);
 
-        $subject = Subject::find(1);
         $course = Course::find($subject->course_id);
 
         $this->assertEquals($subject->course, $course);
 
-        // $subject->delete();
-        // $course->delete();
+        $subject->delete();
+        $course->delete();
     }
 
     public function testEvaluation()
     {
-        // $subject = Subject::create([
-        //     'course_id' => 1,
-        //     'name' => 'PMM'
-        // ]);
+        $course = Course::create([
+            'level' => 1,
+            'name' => 'Primero',
+            'num_students' => 30
+        ]);
 
-        // $evaluation = Evaluation::create([
-        //     'subject_id' => 1,
-        //     'name' => '1Eval'
-        // ]);
+        $subject = Subject::create([
+            'course_id' => $course->id,
+            'name' => 'Ejemplo6'
+        ]);
 
-        // $evaluation2 = Evaluation::create([
-        //     'subject_id' => 1,
-        //     'name' => '2Eval'
-        // ]);
+         $evaluation = Evaluation::create([
+             'subject_id' => $subject->id,
+             'name' => '1Eval'
+         ]);
 
-        $subject = Subject::find(1);
+         $evaluation2 = Evaluation::create([
+            'subject_id' => $subject->id,
+            'name' => '2Eval'
+        ]);
 
         $evaluations = $subject->evaluations->pluck('id');
         
         $expected_evaluations_ids = collect([
-            ['id' => 1],
-            ['id' => 2]
+            ['id' => $evaluation->id],
+            ['id' => $evaluation2->id]
         ])->pluck('id');
 
         $this->assertEquals($evaluations, $expected_evaluations_ids);
 
-        // $subject->delete();
-        // $evaluation->delete();
-        // $evaluation2->delete();
+        $evaluation->delete();
+        $evaluation2->delete();
+        $subject->delete();
+        $course->delete();
+        
     }
 }
