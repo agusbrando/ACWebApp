@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
             ClassroomsTableSeeder::class,
             SessionsTableSeeder::class,
             UsersTableSeeder::class,
+	    SubjectsTableSeeder::class,
+            EvaluablesTableSeeder::class,
+            ProgramsTableSeeder::class,
+            UnitsTableSeeder::class,
+            EvaluatedsTableSeeder::class
             EventsTableSeeder::class
         ]);
     }

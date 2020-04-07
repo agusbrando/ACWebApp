@@ -34,4 +34,14 @@ class User extends Model
         return $this->belongsTo('App\Models\Timetable', 'timetable_id');
     }
 
+   /**Todas las programaciones de las cuales es profesor**/
+   public function programs_professor(){
+        return $this->hasMany(Program::class, 'professor_id');
+   }
+
+   /**Todas las programaciones de las cuales es responsable**/
+   public function programs_responsable(){
+        return $this->hasMany(Program::class, 'user_id');
+   }
+
 }

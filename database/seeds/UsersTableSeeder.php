@@ -14,19 +14,41 @@ class UsersTableSeeder extends Seeder
     {
        
         DB::table('users')->insert([
-            'first_name' => 'default',
-            'last_name' => 'default',
-            'email' => Str::random(10).'@gmail.com',
-            'password' => Str::random(10),
+            'first_name' => 'Admin',
+            'email' => 'admin@campusaula.com',
+            'last_name' => 'Admin',
+            'password' => bcrypt('adminPass'),
+            'created_at' => now(),
+            'updated_at' => now(),
             'role_id' => 1
         ]);
         
         DB::table('users')->insert([
-            'first_name' => 'default2',
-            'last_name' => 'default2',
-            'email' => Str::random(10).'@gmail.com',
-            'password' => Str::random(10),
+            'first_name' => 'Alumno',
+            'last_name' => 'Apellido',
+            'email' => 'user@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 4
+        ]);
+        DB::table('users')->insert([
+            'first_name' => 'Guillermo',
+            'last_name' => 'Garrido Portes',
+            'email' => 'guillermo.garrido@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
             'role_id' => 2
+        ]);
+        DB::table('users')->insert([
+            'first_name' => 'Marcelo',
+            'last_name' => 'Malonda Pellicer',
+            'email' => 'marcelo.malonda@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3
         ]);
     }
 }
