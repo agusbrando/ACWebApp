@@ -5,6 +5,13 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Carbon\Carbon;
+
+use app\Models\Classroom;
+use app\Models\Item;
+use app\Models\User;
+use app\Models\Type;
+use app\Models\State;
 
 class ItemTest extends TestCase
 {
@@ -35,7 +42,7 @@ class ItemTest extends TestCase
             'updated_at' => now()
         ]);
 
-        $Item = Item::create([
+        $item = Item::create([
             'name' => 'Portatil HP',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => $classroom->id,
@@ -45,9 +52,14 @@ class ItemTest extends TestCase
             'updated_at' => now()
         ]);
         
-        //Aqui compara los id
-        $this->assertEquals($Item->classroom_id, $classroom->id);
-        $this->assertEquals($Item->state_id, $state->id);
-        $this->assertEquals($Item->type_id, $type->id);
+        $this->assertEquals($item->classroom_id, $classroom->id);
+        $this->assertEquals($item->state_id, $state->id);
+        $this->assertEquals($item->type_id, $type->id);
+
+        $item->delete();
+        $state->delete();
+        $type->delete();
+        $classroom->delete();
+
     }
 }
