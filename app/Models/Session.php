@@ -23,7 +23,7 @@ class Session extends Model
         return $this->hasOne('App\Models\Session', 'session_id');
     }
 
-    public function classes()
+    public function classroom()
     {
         return $this->belongsTo('App\Models\Classroom', 'classroom_id');
     }

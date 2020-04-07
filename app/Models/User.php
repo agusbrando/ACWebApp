@@ -24,12 +24,12 @@ class User extends Model
         return $this->hasMany('App\Models\Event', 'user_id');
     }
 
-    public function roles()
+    public function role()
     {
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-    public function timetables()
+    public function timetable()
     {
         return $this->belongsTo('App\Models\Timetable', 'timetable_id');
     }

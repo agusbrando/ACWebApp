@@ -12,17 +12,17 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         DB::table('events')->insert([
-            'types_id' => 1,
-            'sessions_id' => 1,
-            'users_id' =>1,
+            'type_id' => 1,
+            'session_id' => 1,
+            'user_id' =>1,
             'description' => 'default',
             'date' => date("Y-m-d")
         ]);
 
         DB::table('events')->insert([
-            'types_id' => 2,
-            'sessions_id' => 2,
-            'users_id' =>2,
+            'type_id' => 2,
+            'session_id' => 2,
+            'user_id' =>2,
             'description' => 'default',
             'date' => date("Y-m-d")
         ]);

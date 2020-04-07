@@ -19,17 +19,17 @@ class Event extends Model
         'date'
     ];
 
-    public function events()
+    public function session()
     {
-        return $this->belongsTo('App\Models\Event', 'session_id');
+        return $this->belongsTo('App\Models\Session', 'session_id');
     }
 
-    public function types()
+    public function type()
     {
         return $this->belongsTo('App\Models\Type', 'type_id');
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }

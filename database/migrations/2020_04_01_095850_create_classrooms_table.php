@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 
-class Classrooms extends Migration
+class CreateClassroomsTable extends Migration
 {
     /**
      * Run the migrations.
