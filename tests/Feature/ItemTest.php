@@ -23,14 +23,14 @@ class ItemTest extends TestCase
     public function testExample()
     {
         $classroom = Classroom::create([
-            'name' => '05',
-            'number' => 5,
+            'name' => '6',
+            'number' => 6,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         $state = State::create([
-            'name' => 'patata',
+            'name' => 'Roto',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -43,7 +43,7 @@ class ItemTest extends TestCase
         ]);
 
         $item = Item::create([
-            'name' => 'Portatil HP',
+            'name' => 'Portatil Asus',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => $classroom->id,
             'state_id' => $state->id,
@@ -56,10 +56,10 @@ class ItemTest extends TestCase
         $this->assertEquals($item->state_id, $state->id);
         $this->assertEquals($item->type_id, $type->id);
 
-        $item->delete();
-        $state->delete();
-        $type->delete();
-        $classroom->delete();
+        // $item->delete();
+        // $state->delete();
+        // $type->delete();
+        // $classroom->delete();
 
     }
 }

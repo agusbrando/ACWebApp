@@ -22,7 +22,7 @@ class ItemsUsersTest extends TestCase
     {
         
         $item = Item::create([
-            'name' => 'Portatil HP',
+            'name' => 'Portatil Lenovo',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => 1,
             'state_id' => 2,
@@ -32,10 +32,10 @@ class ItemsUsersTest extends TestCase
         ]);
         
         $user = User::create([
-            'first_name' => 'Admin',
-            'email' => 'admin@campusaula.com',
-            'last_name' => 'Admin',
-            'password' => bcrypt('adminPass'),
+            'first_name' => 'Sergio',
+            'email' => 'Sergio@campusaula.com',
+            'last_name' => 'Sergio',
+            'password' => bcrypt('SergioPass'),
             'created_at' => now(),
             'updated_at' => now(),
             'rol_id' => 1
