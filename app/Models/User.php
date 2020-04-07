@@ -19,7 +19,7 @@ class User extends Model
         return $this->belongsTo('App\Models\Role');
     }
 
-    public function timetables()
+    public function timetable()
     {
         return $this->belongsTo('App\Models\Timetable');
     }
