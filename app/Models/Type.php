@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Misbehaviors extends Model
+class Type extends Model
 {
-    protected $table = 'misbehaviors';
+    protected $table = 'types';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
-        'description',
-        'type_id',
+        'model',
+        'name',
         'created_at',
         'updated_at'
 
     ];
+    
 }

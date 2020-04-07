@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subjects extends Model
+class Course extends Model
 {
-    protected $table = 'subjects';
+    protected $table = 'courses';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'id',
         'name',
-        'course_id',
+        'level',
         'created_at',
         'updated_at'
 
