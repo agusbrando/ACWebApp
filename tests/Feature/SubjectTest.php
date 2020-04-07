@@ -39,8 +39,39 @@ class SubjectTest extends TestCase
         // $course->delete();
     }
 
-    public function testEaluation()
+    public function testEvaluation()
     {
+        // $subject = Subject::create([
+        //     'id' => 1,
+        //     'course_id' => 1,
+        //     'name' => 'PMM'
+        // ]);
+
+        // $evaluation = Evaluation::create([
+        //     'id' => 1,
+        //     'subject_id' => 1,
+        //     'name' => '1Eval'
+        // ]);
+
+        // $evaluation2 = Evaluation::create([
+        //     'id' => 2,
+        //     'subject_id' => 1,
+        //     'name' => '2Eval'
+        // ]);
+
+        $subject = Subject::find(1);
+
+        $evaluations = $subject->evaluations->pluck('id');
         
+        $expected_evaluations_ids = collect([
+            ['id' => 1],
+            ['id' => 2]
+        ])->pluck('id');
+
+        $this->assertEquals($evaluations, $expected_evaluations_ids);
+
+        // $subject->delete();
+        // $evaluation->delete();
+        // $evaluation2->delete();
     }
 }
