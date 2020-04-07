@@ -42,19 +42,16 @@ class SubjectTest extends TestCase
     public function testEvaluation()
     {
         // $subject = Subject::create([
-        //     'id' => 1,
         //     'course_id' => 1,
         //     'name' => 'PMM'
         // ]);
 
         // $evaluation = Evaluation::create([
-        //     'id' => 1,
         //     'subject_id' => 1,
         //     'name' => '1Eval'
         // ]);
 
         // $evaluation2 = Evaluation::create([
-        //     'id' => 2,
         //     'subject_id' => 1,
         //     'name' => '2Eval'
         // ]);
