@@ -21,7 +21,7 @@ class User extends Model
 
     public function events()
     {
-        return $this->hasMany('App\Models\Event', 'user_id');
+        return $this->hasMany('App\Models\Event');
     }
 
     public function role()

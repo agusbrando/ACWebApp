@@ -18,7 +18,7 @@ class Classroom extends Model
 
     public function sessions()
     {
-        return $this->hasMany('App\Models\Session', 'session_id');
+        return $this->hasMany('App\Models\Session');
     }
 
 }

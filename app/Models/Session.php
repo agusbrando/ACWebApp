@@ -18,9 +18,9 @@ class Session extends Model
         'time_end'
     ];
 
-    public function sessions()
+    public function event()
     {
-        return $this->hasOne('App\Models\Session', 'session_id');
+        return $this->hasOne('App\Models\Event');
     }
 
     public function classroom()

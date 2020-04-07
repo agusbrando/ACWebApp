@@ -18,6 +18,6 @@ class Type extends Model
 
     public function events()
     {
-        return $this->hasMany('App\Models\Event', 'type_id');
+        return $this->hasMany('App\Models\Event');
     }
 }
