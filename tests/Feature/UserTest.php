@@ -102,14 +102,14 @@ class UserTest extends TestCase
         ]);
 
         $role = Role::create([
-            'name' => 'Prueba11',
+            'name' => 'Prueba1',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         $user = User::create([
             'first_name' => 'Admin',
-            'email' => 'prueba11@campusaula.com',
+            'email' => 'prueba1@campusaula.com',
             'last_name' => 'Admin',
             'password' => bcrypt('adminPass'),
             'created_at' => now(),
@@ -126,7 +126,7 @@ class UserTest extends TestCase
 
         $subject = Subject::create([
             'course_id' => $course->id,
-            'name' => 'Ejemplo11'
+            'name' => 'Ejemplo1'
         ]);
 
         $evaluation = Evaluation::create([
@@ -168,9 +168,6 @@ class UserTest extends TestCase
         $evaluation->delete();
         $subject->delete();
         $course->delete();
-        
-        
-        
         
     }
 

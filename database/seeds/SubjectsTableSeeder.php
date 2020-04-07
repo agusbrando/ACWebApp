@@ -19,9 +19,5 @@ class SubjectsTableSeeder extends Seeder
             'course_id' => 2,
             'name' => 'DI'
         ]);
-        DB::table('subjects')->insert([
-            'courses_id' => 1,
-            'name' => 'FOL'
-        ]);
     }
 }
