@@ -11,8 +11,8 @@ class Classroom extends Model
     *
     * @var string
     */
-    protected $table = 'aulas';
-    // protected $table = 'classrooms';
+    
+    protected $table = 'classrooms';
 
 
     /**
@@ -20,8 +20,8 @@ class Classroom extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'id';
-    // protected $primaryKey = 'classroom_id';
+  
+    protected $primaryKey = 'classroom_id';
 
 
     /**
@@ -71,6 +71,6 @@ class Classroom extends Model
         
         return $this->hasMany('App\Models\Item' , 'classroom_id');
     }
-    // $items = App\Models\Item::find(1)->items;
+    
     
 }
