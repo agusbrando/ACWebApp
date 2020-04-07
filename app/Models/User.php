@@ -10,14 +10,7 @@ class User extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'id',
-        'role_id',
-        'first_name',
-        'last_name',
-        'email',
-        'password'
-    ];
+    protected $guarded = [];
 
     public function events()
     {
@@ -43,5 +36,14 @@ class User extends Model
    public function programs_responsable(){
         return $this->hasMany(Program::class, 'user_id');
    }
+
+   public function trackings()
+   {
+        return $this->hasMany('App\Models\Trackings');
+   }
+
+    public function tasks(){
+        return $this->belongsToMany(Task::class)->using(Calification::class)->withPivot('value')->withTimestamps();
+    }
 
 }

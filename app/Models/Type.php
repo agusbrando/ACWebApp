@@ -10,14 +10,15 @@ class Type extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'id',
-        'name',
-        'model'
-    ];
+    protected $guarded = [];
 
     public function events()
     {
         return $this->hasMany('App\Models\Event', 'type_id');
     }
+
+    public function evaluations(){
+        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+    }
+
 }

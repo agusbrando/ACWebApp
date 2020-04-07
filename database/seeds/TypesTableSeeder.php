@@ -13,12 +13,22 @@ class TypesTableSeeder extends Seeder
     {
         DB::table('types')->insert([
             'name' => 'default',
-            'model' => 'defaultModel'
+            'model' => 'App\Models\Percentage'
         ]);
         
         DB::table('types')->insert([
             'name' => 'default2',
-            'model' => 'defaultModel'      
+            'model' => 'App\Models\Event'      
+        ]);
+
+	DB::table('types')->insert([
+            'name' => 'default2',
+            'model' => 'App\Models\Item'      
+        ]);
+	
+	DB::table('types')->insert([
+            'name' => 'default2',
+            'model' => 'App\Models\Misbehaviors'      
         ]);
     }
 }
