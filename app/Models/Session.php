@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SessionsModel extends Model
+class Session extends Model
 {
     protected $table = 'sessions';
 
@@ -20,12 +20,12 @@ class SessionsModel extends Model
 
     public function sessions()
     {
-        return $this->hasOne('App\Models\SessionsModel', 'sessions_id');
+        return $this->hasOne('App\Models\Session', 'session_id');
     }
 
     public function classes()
     {
-        return $this->belongsTo('App\Models\ClassroomModel', 'classroom_id');
+        return $this->belongsTo('App\Models\Classroom', 'classroom_id');
     }
 
 }

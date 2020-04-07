@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Sessions extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class Sessions extends Migration
      */
     public function up()
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('classroom_id')->unsigned();
-            $table->dateTime('time_start', 0);
-            $table->dateTime('time_end', 0);
-            $table->string('model');
+            $table->string('name');
             $table->timestamps();
-
-            $table->foreign('classroom_id')->references('id')->on('classroom');
         });
     }
 
@@ -32,6 +27,6 @@ class Sessions extends Migration
      */
     public function down()
     {
-        Schema::drop('sessions');
+        Schema::dropIfExists('roles');
     }
 }
