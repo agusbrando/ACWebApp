@@ -25,6 +25,6 @@ class User extends Model
     }
 
     public function tasks(){
-        return $this->belongsToMany(Task::class)->using(Calification::class)->withPivot('value')->withTimestamps();
+        return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
     }
 }
