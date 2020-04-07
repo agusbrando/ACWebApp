@@ -46,4 +46,9 @@ class User extends Model
         return $this->belongsToMany(Task::class)->using(Calification::class)->withPivot('value')->withTimestamps();
     }
 
+    public function misbehaviors()
+    {
+        return $this->hasMany('App\Misbehavior');
+    }
+
 }

@@ -16,7 +16,5 @@ class SessionTimetableSeeder extends Seeder
             'timetable_id' => 1,
             'subject_id' => 1
         ]);
-
-        
     }
 }

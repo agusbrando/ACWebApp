@@ -24,4 +24,9 @@ class SessionTimetable extends Model
     {
         return $this->belongsTo('App\Models\Timetable');
     }
+
+     public function misbehaviors()
+    {
+        return $this->hasMany('App\Misbehavior');
+    }
 }

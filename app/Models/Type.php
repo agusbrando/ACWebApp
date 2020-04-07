@@ -21,4 +21,9 @@ class Type extends Model
         return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
     }
 
+    public function misbehaviors()
+    {
+        return $this->hasMany('App\Misbehavior');
+    }
+
 }

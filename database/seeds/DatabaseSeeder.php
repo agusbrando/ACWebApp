@@ -29,8 +29,9 @@ class DatabaseSeeder extends Seeder
             PercentagesTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,
-	    TrackingsSeeder::class,
-	    SessionTimetableSeeder::class
+	    TrackingsTableSeeder::class,
+            MisbehaviorsTableSeeders::class,
+	    SessionTimeTableSeeder::class
         ]);
     }
 }
