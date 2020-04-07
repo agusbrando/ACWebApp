@@ -24,7 +24,7 @@ class User extends Model
         return $this->belongsTo('App\Models\Timetable');
     }
 
-    public function califications(){
-        return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
+    public function tasks(){
+        return $this->belongsToMany(Task::class)->using(Calification::class)->withPivot('value')->withTimestamps();
     }
 }
