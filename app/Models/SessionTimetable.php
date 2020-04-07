@@ -4,19 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class SessionTimetable extends Model
 {
-    protected $table = 'types';
-
-    protected $primaryKey = 'id';
-
+    protected $table ='session_timetables';
+ 
+    protected $primaryKey ='id';
+ 
     protected $fillable = [
-        'id',
-        'model',
-        'name',
-        'created_at',
-        'updated_at'
-
+        
     ];
     public function misbehaviors()
     {

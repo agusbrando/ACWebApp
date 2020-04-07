@@ -18,7 +18,10 @@ class DatabaseSeeder extends Seeder
             UsersSeeders::class,
             SessionsSeeders::class,
             TypesSeeders::class,
-            MisbehaviorsSeeders::class
+            MisbehaviorsSeeders::class,
+            TimetableSeeder::class,
+            SessionTimetableSeeder::class,
+            
         ]);
     }
 }

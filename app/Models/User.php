@@ -22,7 +22,7 @@ class User extends Model
         'updated_at'
 
     ];
-    public function misbehabiors()
+    public function misbehaviors()
     {
         return $this->hasMany('App\Misbehavior');
     }
