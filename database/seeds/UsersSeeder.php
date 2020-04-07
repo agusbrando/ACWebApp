@@ -18,7 +18,7 @@ class UsersSeeder extends Seeder
             'last_name' => 'default',
             'email' => Str::random(10).'@gmail.com',
             'password' => Str::random(10),
-            'rol_id' => 1,
+            'rol_id' => 1
         ]);
         
         DB::table('users')->insert([
@@ -26,7 +26,7 @@ class UsersSeeder extends Seeder
             'last_name' => 'default2',
             'email' => Str::random(10).'@gmail.com',
             'password' => Str::random(10),
-            'rol_id' => 2,
+            'rol_id' => 2
         ]);
     }
 }
