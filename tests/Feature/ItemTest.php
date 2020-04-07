@@ -7,11 +7,11 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Carbon\Carbon;
 
-use app\Models\Classroom;
-use app\Models\Item;
-use app\Models\User;
-use app\Models\Type;
-use app\Models\State;
+use App\Models\Classroom;
+use App\Models\Item;
+use App\Models\User;
+use App\Models\Type;
+use App\Models\State;
 
 class ItemTest extends TestCase
 {
