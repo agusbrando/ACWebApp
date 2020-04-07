@@ -13,7 +13,7 @@ class Task extends Model
         return $this->belongsTo('App\Models\Evaluation');
     }
 
-    public function califications(){
-        return $this->belongsToMany(User::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
+    public function users(){
+        return $this->belongsToMany(User::class)->using(Calification::class)->withPivot('value')->withTimestamps();
     }
 }
