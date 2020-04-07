@@ -20,6 +20,30 @@ class EvaluationTest extends TestCase
     public function testSubject()
     {
 
+        $course = Course::create([
+            'level' => 1,
+            'name' => 'Primero',
+            'num_students' => 30
+        ]);
+
+        $subject = Subject::create([
+            'course_id' => $course->id,
+            'name' => 'Ejemplo2'
+        ]);
+
+         $evaluation = Evaluation::create([
+             'subject_id' => $subject->id,
+             'name' => '1Eval'
+         ]);
+        
+        $subject = Subject::find($evaluation->subject_id);
+
+        $this->assertEquals($evaluation->subject, $subject);
+
+        $evaluation->delete();
+        $subject->delete();
+        $course->delete();
+
     }
 
     public function testTasks()
