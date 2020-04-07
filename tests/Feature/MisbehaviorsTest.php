@@ -1,14 +1,14 @@
 <?php
 
 namespace Tests\Feature;
-
+use app\Models\User;
+use app\Models\Misbehavior;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-use app\Models\User;
-use app\Models\Misbehavior;
+
 
 class MisbehaviorsTest extends TestCase
 {
