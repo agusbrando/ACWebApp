@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
                 'password'    =>    'password ' . $i,
                 'first_name'         =>    'first_name ' . $i,
                 'last_name'    =>    'last_name ' . $i,
+                'timetable_id' =>    $i,
                 'rol_id'         =>    $i
             ]);
         }
