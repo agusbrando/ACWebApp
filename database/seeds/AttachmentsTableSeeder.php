@@ -15,9 +15,7 @@ class AttachmentsTableSeeder extends Seeder
             DB::table('attachments')->insert([
                 'name'         =>  'name ' .  $i,
                 'attachable_id'         =>     $i,
-                'attachable_type'         =>  'attachable_type ' .  $i,
-                'messages_id'         =>     $i,
-                'post_id'         =>     $i
+                'attachable_type'         =>  'App\Modules\Message'
             ]);
         }
     }
