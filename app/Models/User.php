@@ -29,4 +29,9 @@ class User extends Model
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
+    public function timetables()
+    {
+        return $this->belongsTo('App\Models\Timetable', 'timetable_id');
+    }
+
 }
