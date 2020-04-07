@@ -21,7 +21,7 @@ class Classroom extends Model
     * @var string
     */
   
-    protected $primaryKey = 'classroom_id';
+    protected $primaryKey = 'id';
 
 
     /**
@@ -41,7 +41,7 @@ class Classroom extends Model
     * como en este caso
     * @var string
     */
-    protected $keyType = 'string';
+    // protected $keyType = 'string';
 
 
     /**

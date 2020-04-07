@@ -19,6 +19,11 @@ class Item extends Model
     public function Items()
     {
         return $this->belongsToMany('App\Models\User', 'item_user', 'item_id', 'user_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
+        
     }
-    
+    public function classroom()
+    {
+        return $this->belongsTo('App\Models\Classroom');
+        
+    }
 }
