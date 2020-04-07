@@ -23,21 +23,21 @@ class ItemTest extends TestCase
     public function testExample()
     {
         $classroom = Classroom::create([
-            'name' => 'Taller',
-            'number' => 1,
+            'name' => '05',
+            'number' => 5,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         $state = State::create([
-            'name' => 'Averiado',
+            'name' => 'patata',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         $type = Type::create([
             'model' => 'Item', 
-            'name' => 'Teclado',
+            'name' => ' movil',
             'created_at' => now(),
             'updated_at' => now()
         ]);

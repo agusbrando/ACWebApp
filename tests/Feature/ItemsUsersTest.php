@@ -7,9 +7,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Carbon\Carbon;
 
-use app\Models\ItemUser;
-use app\Models\Item;
-use app\Models\User;
+use App\Models\ItemUser;
+use App\Models\Item;
+use App\Models\User;
 
 class ItemsUsersTest extends TestCase
 {
