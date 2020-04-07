@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Task;
 use App\Models\Evaluation;
+use App\Models\Course;
+use App\Models\Subject; 
 
 class EvaluationTest extends TestCase
 {
@@ -23,8 +25,19 @@ class EvaluationTest extends TestCase
     public function testTasks()
     {
 
+        $course = Course::create([
+            'level' => 1,
+            'name' => 'Primero',
+            'num_students' => 30
+        ]);
+
+        $subject = Subject::create([
+            'course_id' => $course->id,
+            'name' => 'Ejemplo2'
+        ]);
+
          $evaluation = Evaluation::create([
-             'subject_id' => 1,
+             'subject_id' => $subject->id,
              'name' => '1Eval'
          ]);
 
@@ -51,6 +64,8 @@ class EvaluationTest extends TestCase
          $task1->delete();
          $task2->delete();
          $evaluation->delete();
+         $subject->delete();
+         $course->delete();
     }
 
     public function testTypes()

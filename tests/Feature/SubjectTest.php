@@ -18,13 +18,11 @@ class SubjectTest extends TestCase
     public function testCourse()
     {
         // $subject = Subject::create([
-        //     'id' => 1,
         //     'course_id' => 1,
         //     'name' => 'PMM'
         // ]);
 
         // $course = Course::create([
-        //     'id' => 1,
         //     'level' => 1,
         //     'name' => 'Primero',
         //     'num_students' => 30
