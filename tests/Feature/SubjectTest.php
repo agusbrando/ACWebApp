@@ -38,4 +38,9 @@ class SubjectTest extends TestCase
         // $subject->delete();
         // $course->delete();
     }
+
+    public function testEaluation()
+    {
+        
+    }
 }

@@ -74,4 +74,11 @@ class UserTest extends TestCase
         // $user->delete();
         // $timetable->delete();
     }
+
+    public function testCalifications()
+    {
+
+    }
+
+    
 }

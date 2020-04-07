@@ -15,8 +15,16 @@ class EvaluationTest extends TestCase
      */
     public function testSubject()
     {
-        $response = $this->get('/');
 
-        $response->assertStatus(200);
+    }
+
+    public function testTasks()
+    {
+        
+    }
+
+    public function testPercentages()
+    {
+        
     }
 }

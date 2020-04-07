@@ -23,4 +23,9 @@ class TaskTest extends TestCase
 
         $this->assertEquals($task->evaluation->name, $evaluation->name);
     }
+
+    public function testCalifications()
+    {
+        
+    }
 }
