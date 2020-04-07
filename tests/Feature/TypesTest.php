@@ -15,8 +15,25 @@ class TypesTest extends TestCase
      */
     public function testExample()
     {
-        $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $type = Type::create([
+            'model' => 'Item', 
+            'name' => 'Teclado',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $Item = Item::create([
+            'name' => 'Portatil HP',
+            'date_pucharse' => Carbon::create('2020','03','30'),
+            'classroom_id' => $classroom->id,
+            'state_id' => $state->id,
+            'type_id' => $type->id,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        
+        //Aqui compara los id
+        $this->assertEquals($Item->type_id, $type->id);
     }
 }
