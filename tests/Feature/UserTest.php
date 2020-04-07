@@ -17,9 +17,21 @@ class UserTest extends TestCase
      */
     public function testExample()
     {
-        $user = User::find(3);
-        $role = Rol::find($user->rol_id);
+        $role = Role::create([
+            'name' => 'Test',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $user = User::create([
+            'first_name' => 'Pruebas',
+            'last_name' => 'Tests',
+            'email' => 'pruebas@campusaula.com',
+            'password' => 'pruebas',
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => $role->id
+        ]);
 
-        $this->assertEquals($user->rol->name,$rol->name);
+        $this->assertEquals($user->role->id,$role->id);
     }
 }

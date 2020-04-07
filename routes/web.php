@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,9 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+ Route::get('/prueba', function () {
+     echo "Hola";
+     $rol1 = Role::find(1);
+     $permisos = $rol1->permissions;
+     echo var_dump($permisos);
+ });

@@ -14,5 +14,8 @@ class Permissions extends Seeder
         DB::table('permissions')->insert([
             'name' => 'borrar usuario',
         ]);
+        DB::table('permissions')->insert([
+            'name' => 'insertar usuario',
+        ]);
     }
 }

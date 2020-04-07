@@ -1,18 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
     protected $table = 'permissions';
-    protected $pimaryKey = 'id_permission';
-    const CREATED_AT = 'Creacion';
-    const UPDATED_AT = 'Actualizacion';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'id',
+        'name'
+    ];
     
-    public function Roles()
+    public function roles()
     {
-        return $this->hasMany('app/Models/Role');
+        return $this->belongsToMany(Role::class,'roles_permissions','id_permission','role_id')->using(RolePermission::class)->withTimeStamps();
     }
 }

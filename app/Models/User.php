@@ -1,26 +1,35 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Model
 {
+    protected $table = 'users';
+
+    protected $primaryKey = 'id';
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'id',
+        'role_id',
+        'first_name',
+        'last_name',
+        'email',
+        'password'
     ];
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
+    public function trackings()
+    {
+        return $this->hasMany('App\Models\Trackings', 'user_id');
+    }
     public function role()
     {
-        return $this->belongsTo('app/Models/Role');
+        return $this->belongsTo('App\Models\Role', 'role_id');
     }
-    
+
+    public function timetables()
+    {
+        return $this->belongsTo('App\Models\Timetable', 'timetable_id');
+    }
 }
