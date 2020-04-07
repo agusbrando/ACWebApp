@@ -15,12 +15,13 @@ class CourseTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testSubjects()
     {
+        $course = Course::find(1);
 
-        $subject = Subject::find(1);
-
-        $course = Course::find($subject->course_id);
+        $subjects = [];
+        
+        array_push($subjects, Subject::find($course->subject_id));
 
         $this->assertEquals($subject->course->name, $course->name);
 

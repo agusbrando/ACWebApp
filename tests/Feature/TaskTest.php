@@ -15,7 +15,7 @@ class TaskTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testEvaluation()
     {
         $task = Task::find(1);
 
