@@ -4,8 +4,9 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-
-class ExampleTest extends TestCase
+use App\Models\User;
+use App\Models\Role;
+class UserTest extends TestCase
 {
     /**
      * A basic test example.
@@ -14,8 +15,10 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+         $user = User::find(3);
+        $role = Role::find($user->role_id);
 
-        $response->assertStatus(200);
+        $this->assertEquals($user->role->name, $role->name);
+
     }
 }
