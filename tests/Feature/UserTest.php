@@ -14,65 +14,75 @@ class UserTest extends TestCase
     
     public function testRole()
     {
-        // $role = Role::create([
-        //     'id' => '1',
-        //     'name' => 'Administrador',
-        //     'created_at' => now(),
-        //     'updated_at' => now()
-        // ]);
 
-        // $user = User::create([
-        //     'id' => '1',
-        //     'first_name' => 'Admin',
-        //     'email' => 'admin@campusaula.com',
-        //     'last_name' => 'Admin',
-        //     'password' => bcrypt('adminPass'),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        //     'role_id' => 1,
-        //     'timetable_id'=>1,
-        // ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        $user = User::find(3);
+        $role = Role::create([
+            'name' => 'Prueba2',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $user = User::create([
+            'first_name' => 'Admin',
+            'email' => 'prueba2@campusaula.com',
+            'last_name' => 'Admin',
+            'password' => bcrypt('adminPass'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id,
+        ]);
         
         $role = Role::find($user->role_id);
 
         $this->assertEquals($user->role, $role);
 
-        // $user->delete();
-        // $role->delete();
+        $user->delete();
+        $role->delete();
+        $timetable->delete();
     }
 
     public function testTimetable(){
 
-        // $timetable = Timetable::create([
-        //     'id' => '1',
-        //     'name' => '2DAM2020',
-        //     'date_start' =>  now(),
-        //     'date_end' => now(),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-        // $user = User::create([
-        //     'id' => '1',
-        //     'first_name' => 'Admin',
-        //     'email' => 'admin@campusaula.com',
-        //     'last_name' => 'Admin',
-        //     'password' => bcrypt('adminPass'),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        //     'role_id' => 1,
-        //     'timetable_id'=>1,
-        // ]);
+        $role = Role::create([
+            'name' => 'Prueba2',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
-        $user = User::find(2);
+        $user = User::create([
+            'first_name' => 'Admin',
+            'email' => 'prueba2@campusaula.com',
+            'last_name' => 'Admin',
+            'password' => bcrypt('adminPass'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id,
+        ]);
+
         $timetable = Timetable::find($user->timetable_id);
 
         $this->assertEquals($user->timetable, $timetable);
 
-        // $user->delete();
-        // $timetable->delete();
+        $user->delete();
+        $role->delete();
+        $timetable->delete();
     }
 
     public function testCalifications()
