@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        
         $this->call([
             TimetableTableSeeder::class,
 	    RolesTableSeeder::class,
@@ -35,6 +36,8 @@ class DatabaseSeeder extends Seeder
 	    SessionTimeTableSeeder::class,
 	    ItemsTableSeeder::class,
             ItemsUsersTableSeeder::class,
+	    Permissions::class,
+	    RolesPermissions::class
         ]);
     }
 }
