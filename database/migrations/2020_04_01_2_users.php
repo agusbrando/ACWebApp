@@ -14,11 +14,13 @@ class Users extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->increments('id');
             $table->string('email');
             $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
+            $table->integer('timetable_id')->unsigned();
+            $table->integer('role_id')->unsigned();
 
             $table->timestamps();
 
