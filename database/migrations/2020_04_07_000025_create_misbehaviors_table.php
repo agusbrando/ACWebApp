@@ -21,7 +21,7 @@ class CreateMisbehaviorsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('session_timetable_id')->unsigned();
-            $table->foreign('session_timetable_id')->references('id')->on('session_timetable');
+            $table->foreign('session_timetable_id')->references('id')->on('session_timetables');
             $table->dateTime('date');
             $table->timestamps();
         });
