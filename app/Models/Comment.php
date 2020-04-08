@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Comment extends Model
+{
+    //Nombre tabla
+    protected $table = 'comments';
+
+    //Nombre primaryKey
+    protected $primaryKey = 'id';
+
+    //Columnas tabla
+    protected $fillable = [
+        'id',
+        'user_id',
+        'text',
+        'post_id'
+    ];
+
+    //Relaciones
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function post() {
+        return $this->belongsTo('App\Models\Post');
+    }
+}

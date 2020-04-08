@@ -14,4 +14,8 @@ class Timetable extends Model
     {
         return $this->belongsToMany(Session::class, 'session_timetable')->using(SessionTimetable::class)->withPivot('')->withTimestamps();
     }
+    public function users()
+    {
+        return $this->hasMany('App\Models\User');
+    }
 }

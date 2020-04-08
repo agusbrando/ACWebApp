@@ -18,5 +18,21 @@ class TimetableTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('timetables')->insert([
+            'name' => '2ASIR2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('timetables')->insert([
+            'name' => '2DAW2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

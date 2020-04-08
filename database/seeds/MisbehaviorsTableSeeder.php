@@ -17,9 +17,11 @@ class MisbehaviorsTableSeeder extends Seeder
             'session_timetable_id'=>1,
             'type_id' => 1,
             'user_id' => 1,
+            'session_timetable_id' => 1,
             'date' => now(),
             'created_at' => now(),
             'updated_at' => now(),
+            'session_timetable_id'=>1
         ]);
     }
 }
