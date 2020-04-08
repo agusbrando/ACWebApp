@@ -23,7 +23,14 @@ class Type extends Model
 
     public function misbehaviors()
     {
-        return $this->hasMany('App\Misbehavior');
+        return $this->hasMany('App\Models\Misbehavior');
+    }
+    public function items()
+    {
+        return $this->hasMany('App\Models\Item');
     }
 
+    public function percentages(){
+        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+    }
 }

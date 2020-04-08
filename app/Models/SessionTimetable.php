@@ -14,19 +14,13 @@ class SessionTimetable extends Model
         
     ];
 
-    public function sessions(){
-        return $this->belongsTo('App\Models\Sessions');
-    }
+    
     public function subjects(){
         return $this->belongsTo('App\Models\Subject');
     }
-    public function timetables()
-    {
-        return $this->belongsTo('App\Models\Timetable');
-    }
-
+    
      public function misbehaviors()
     {
-        return $this->hasMany('App\Misbehavior');
+        return $this->hasMany('App\Models\Misbehavior');
     }
 }

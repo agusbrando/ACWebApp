@@ -17,9 +17,14 @@ class Item extends Model
     protected $guarded =[]; //En vez de poner fillable y todos los atributos,
                             //con esto se anaden todos los atributos directamente.
     //Relaciones
-    public function Items()
+    public function responsables()
     {
         return $this->belongsToMany('App\Models\User', 'item_user', 'item_id', 'user_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
     }
-    
+
+    public function classroom()
+    {
+        return $this->belongsTo('App\Models\Classroom');
+        
+    }
 }
