@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TrackingsSeeder extends Seeder
+class TrackingsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,6 +18,8 @@ class TrackingsSeeder extends Seeder
                 'datetime_start' =>  now(),
                 'datetime_end' => now(),
                 'num_hours'=>'4',
+                'created_at' => now(),
+                'updated_at' => now(),
                 
                 
             ],
@@ -27,6 +29,8 @@ class TrackingsSeeder extends Seeder
                 'datetime_start' =>  now(),
                 'datetime_end' =>  now(),
                 'num_hours'=>'3',
+                'created_at' => now(),
+                'updated_at' => now(),
                 
                 
             ],

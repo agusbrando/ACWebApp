@@ -13,31 +13,36 @@ class DatabaseSeeder extends Seeder
     {
         
         $this->call([
-            TimetableTableSeeder::class,
-	    RolesTableSeeder::class,
+            RolesTableSeeder::class,
+            PermissionsTableSeeder::class,
             TypesTableSeeder::class,
-            ClassroomsTableSeeder::class,
-	    StatesTableSeeder::class,
-            SessionsTableSeeder::class,
+            TimetableTableSeeder::class,
             UsersTableSeeder::class,
-	    CoursesTableSeeder::class,
-	    SubjectsTableSeeder::class,
-            EvaluablesTableSeeder::class,
-            ProgramsTableSeeder::class,
-            UnitsTableSeeder::class,
-            EvaluatedsTableSeeder::class,
-            EventsTableSeeder::class,
-	    EvaluationsTableSeeder::class,
-            PercentagesTableSeeder::class,
+            ClassroomsTableSeeder::class,
+            CoursesTableSeeder::class,
+            SubjectsTableSeeder::class,
+            EvaluationsTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,
-	    TrackingsTableSeeder::class,
-            MisbehaviorsTableSeeders::class,
-	    SessionTimeTableSeeder::class,
-	    ItemsTableSeeder::class,
+            PercentagesTableSeeder::class,
+            TrackingsTableSeeder::class,
+            SessionsTableSeeder::class,
+            ProgramsTableSeeder::class,
+            UnitsTableSeeder::class,
+            EvaluablesTableSeeder::class,
+            EvaluatedsTableSeeder::class,
+	        StatesTableSeeder::class,
+            ItemsTableSeeder::class,
+            EventsTableSeeder::class,
             ItemsUsersTableSeeder::class,
-	    Permissions::class,
-	    RolesPermissions::class
+            SessionTimetableTableSeeder::class,
+            RolesPermissionsTableSeeder::class,
+            MisbehaviorsTableSeeder::class
+	    
+	    
+            
+	    
+	    
         ]);
     }
 }

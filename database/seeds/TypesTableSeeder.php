@@ -33,7 +33,7 @@ class TypesTableSeeder extends Seeder
         ]);
 	
 	DB::table('types')->insert([
-            'name' => 'default2',
+            'name' => 'default3',
             'model' => 'App\Models\Misbehaviors',
 	    'created_at' => now(),
             'updated_at' => now()            

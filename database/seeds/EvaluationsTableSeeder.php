@@ -13,7 +13,9 @@ class EvaluationsTableSeeder extends Seeder
     {
         DB::table('evaluations')->insert([
             'subject_id' => 1,
-            'name' => '1Eval'
+            'name' => '1Eval',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

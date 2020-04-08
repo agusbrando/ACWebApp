@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SessionTimetableSeeder extends Seeder
+class SessionTimetableTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,9 @@ class SessionTimetableSeeder extends Seeder
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 1
+            'subject_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

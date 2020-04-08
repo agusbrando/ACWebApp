@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RolesPermissions extends Seeder
+class RolesPermissionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,9 @@ class RolesPermissions extends Seeder
     {
         DB::table('roles_permissions')->insert([
             'role_id' => 1,
-            'id_permission' => 2
+            'id_permission' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

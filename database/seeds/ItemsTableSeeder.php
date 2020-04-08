@@ -16,8 +16,8 @@ class ItemsTableSeeder extends Seeder
             'name' => 'Portatil HP',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => 1,
-            'state_id' => 6,
-            'type_id' => 5,
+            'state_id' => 1,
+            'type_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -25,7 +25,7 @@ class ItemsTableSeeder extends Seeder
             'name' => 'All in One Lenovo',
             'date_pucharse' => Carbon::create('2020','02','23'),
             'classroom_id' => 2,
-            'state_id' => 4,
+            'state_id' => 1,
             'type_id' => 2,
             'created_at' => now(),
             'updated_at' => now()

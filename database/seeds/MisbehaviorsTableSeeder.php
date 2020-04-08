@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TimetableSeeder extends Seeder
+class MisbehaviorsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,10 +11,12 @@ class TimetableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('timetables')->insert([
-            'name' => '2DAM2020',
-            'date_start' =>  now(),
-            'date_end' => now(),
+        DB::table('misbehaviors')->insert([
+            'id' => 1,
+            'description' => 'Retraso',
+            'type_id' => 1,
+            'user_id' => 1,
+            'date' => now(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
