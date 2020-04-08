@@ -19,72 +19,75 @@ class TypeTest extends TestCase
      *
      * @return void
      */
-    public function testEvents()
+    public function testEvent()
     {
-        // $role = Role::create([
-        //     'name' => 'default',
-        //     'created_at' => now(),
-        //     'updated_at' => now()
-        // ]);
+
+        $role = Role::create([
+            'name' => 'default',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $user = User::create([
+            'first_name' => 'default',
+            'last_name' => 'default',
+            'email' => 'default@gmail.com',
+            'password' => 'default',
+            'role_id' => $role->id
+        ]);    
+
+        $type = Type::create([
+            'name' => 'default',
+            'model' => 'defaultModel'
+        ]);
         
-        // $type = Type::create([
-        //      'name' => 'default',
-        //      'model' => 'defaultModel'
-        //  ]);
+        $classroom = Classroom::create([
+            'name' => 'default',
+            'number' => 1,
+        ]);
 
-        // $classroom = Classroom::create([
-        //     'name' => 'default',
-        //     'number' => 1,
-        // ]);
+        $session = Session::create([
+            'classroom_id'=>$classroom->id,
+            'time_start' => date('Y-m-d H:i:s'),
+            'time_end' => date('Y-m-d H:i:s'),
+            'model' => 'defaultModel'
+        ]);
+        
+        
+        $event = Event::create([
+            'type_id' => $type->id,
+            'session_id' => $session->id,
+            'user_id' => $user->id,
+            'description' => 'default',
+            'date' => date("Y-m-d")
+        ]); 
+        
+        $event2 = Event::create([
+            'type_id' => $type->id,
+            'session_id' => $session->id,
+            'user_id' => $user->id,
+            'description' => 'default',
+            'date' => date("Y-m-d")
+        ]);
 
-        // $session = Session::create([
-        //     'classroom_id'=>$classroom->id,
-        //     'time_start' => date('Y-m-d H:i:s'),
-        //     'time_end' => date('Y-m-d H:i:s'),
-        //     'model' => 'defaultModel'
-        // ]);
-
-        // $user = User::create([
-        //     'first_name' => 'default',
-        //     'last_name' => 'default',
-        //     'email' => 'default@gmail.com',
-        //     'password' => 'default',
-        //     'role_id' => $role->id
-        // ]);
-
-        //  $evento = Event::create([
-        //     'type_id' => $type->id,
-        //     'session_id' => $session->id,
-        //     'user_id' => $user->id,
-        //     'description' => 'default',
-        //     'date' => date("Y-m-d")
-        //  ]);
-
-        // $evento2 = Event::create([
-        //     'type_id' => $type->id,
-        //     'session_id' => $session->id,
-        //     'user_id' => $user->id,
-        //     'description' => 'default',
-        //     'date' => date("Y-m-d")
-        // ]);
-
-        $type = Type::find(1);
-
-        $evento = $type->events->pluck('id');
+        
+        $events = $type->events->pluck('id');
 
         $expected_events_ids = collect([
-            ['id'=>1]
+            ['id'=>$event->id],
+            ['id'=>$event2->id]
         ])->pluck('id');
 
-        $this->assertEquals($evento,$expected_events_ids); 
-              
-        // $evento->delete();
-        // $user->delete();
-        // $session->delete();
-        // $classroom->delete();
-        // $type->delete();
-        // $role->delete();
-        }
+        $this->assertEquals($events,$expected_events_ids); 
+        
+        $event->destroy($event);
+        $user->destroy($user);
+        $session->destroy($session);
+        $classroom->destroy($classroom);
+        $type->destroy($type);
+        $role->destroy($role); 
+
+    }
 
     
 }
