@@ -16,14 +16,12 @@ class Attachments extends Migration
         Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('attachable_id')->unsigned();
-            $table->string('attachable_type');
-            $table->integer('messages_id')->unsigned();
-            $table->integer('post_id')->unsigned();
+            $table->integer('attachmentable_id')->unsigned();
+            $table->string('attachmentable_type');
+
             $table->timestamps();
 
-            $table->foreign('messages_id')->references('id')->on('messages');
-            $table->foreign('post_id')->references('id')->on('posts');
+
         });
     }
 
