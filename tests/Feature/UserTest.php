@@ -144,17 +144,8 @@ class UserTest extends TestCase
             'name' => 'Practica 1'
         ]);
 
-        $califications = Calification::create([
-            'task_id' => $tarea1->id,
-            'user_id' => $user->id,
-            'value' => 8
-        ]);
-
-        $califications2 = Calification::create([
-            'task_id' => $tarea2->id,
-            'user_id' => $user->id,
-            'value' => 6
-        ]);
+        $tarea1->users()->attach($user, ['value'=>6]);
+        $tarea2->users()->attach($user, ['value'=>10]);
 
         $tasks = $user->tasks->pluck('id');
         
@@ -165,9 +156,8 @@ class UserTest extends TestCase
 
         $this->assertEquals($tasks, $expected_tasks_ids);
 
-        
-        $califications->delete();
-        $califications2->delete();
+        $tarea1->users()->detach($user);
+        $tarea2->users()->detach($user);
         $tarea1->delete();
         $tarea2->delete();
         $evaluation->delete();
