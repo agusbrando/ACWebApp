@@ -18,17 +18,12 @@ class Session extends Model
         'time_end'
     ];
 
-    public function session()
-    {
-        return $this->hasOne('App\Models\Event');
-    }
-
     public function classroom()
     {
-        return $this->belongsTo('App\Models\Classroom', 'classroom_id');
+        return $this->belongsTo('App\Models\Classroom');
     }
 
-    public function timetables()
+    public function sessionTimetables()
     {
         return $this->hasMany('App\Models\SessionTimetable');
     }
