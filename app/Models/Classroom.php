@@ -71,8 +71,7 @@ class Classroom extends Model
     //Relacion entre Item Y Classroom
     public function items()
     {
-        
-        return $this->hasMany('App\Models\Item' , 'classroom_id');
+        return $this->hasMany('App\Models\Session');
     }
     
 }

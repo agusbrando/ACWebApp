@@ -8,6 +8,13 @@ use Tests\TestCase;
 use App\Models\Role;
 use App\Models\User;
 
+use App\Models\Role;
+use App\Models\Type;
+use App\Models\Classroom;
+use App\Models\Session;
+use App\Models\User;
+use App\Models\Event;
+
 class UserTest extends TestCase
 {
     /**
@@ -15,7 +22,21 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testEvents()
+    {
+        $user = User::find(1);
+
+        $events = $user->events->pluck('id');
+
+        $expected_events_ids = collect([
+            ['id'=>1]
+        ])->pluck('id');
+
+        $this->assertEquals($events,$expected_events_ids); 
+
+    }  
+
+    public function testRole()
     {
         $role = Role::create([
             'name' => 'Test',
@@ -34,4 +55,6 @@ class UserTest extends TestCase
 
         $this->assertEquals($user->role->id,$role->id);
     }
+
+
 }

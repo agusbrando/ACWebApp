@@ -20,7 +20,7 @@ class Session extends Model
 
     public function session()
     {
-        return $this->hasOne('App\Models\Session', 'session_id');
+        return $this->hasOne('App\Models\Event');
     }
 
     public function classroom()
@@ -31,6 +31,11 @@ class Session extends Model
     public function timetables()
     {
         return $this->hasMany('App\Models\SessionTimetable');
+    }
+
+    public function event()
+    {
+        return $this->hasOne('App\Models\Event');
     }
 
 }
