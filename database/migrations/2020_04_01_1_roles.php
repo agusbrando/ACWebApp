@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class Roles extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,6 @@ class CreateRolesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
-
         });
     }
 

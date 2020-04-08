@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class Users extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('email');
+            $table->string('password');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->integer('timetable_id')->unsigned();
+            $table->integer('role_id')->unsigned();
+
             $table->timestamps();
 
         });
