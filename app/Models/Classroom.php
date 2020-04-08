@@ -26,10 +26,18 @@ class Classroom extends Model
 
     
     public function sessions(){
-        return $this->hasMany('App\Models\Sessions');
+        return $this->hasMany('App\Models\Session');
     }
     
+<<<<<<< HEAD
     
    
+=======
+    //Relacion entre Item Y Classroom
+    public function items()
+    {
+        return $this->hasMany('App\Models\Item');
+    }
+>>>>>>> hotfix/migration_master
     
 }
