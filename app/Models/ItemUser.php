@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Model;
 
 class ItemUser extends Pivot  //Al ser la tabla intermedia extiende de Pivot
