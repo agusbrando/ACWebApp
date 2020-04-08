@@ -16,7 +16,7 @@ class CreatePercentagesTable extends Migration
         Schema::create('percentages', function (Blueprint $table) {
             $table->integer('evaluation_id')->unsigned();
             $table->integer('type_id')->unsigned();
-            $table->integer('percentege')->unsigned();
+            $table->integer('percentage')->unsigned();
             $table->timestamps();
 
             $table->primary(['evaluation_id', 'type_id']);
