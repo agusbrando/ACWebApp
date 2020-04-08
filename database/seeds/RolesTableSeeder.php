@@ -13,6 +13,8 @@ class RolesTableSeeder extends Seeder
     {
         for ($i = 1; $i < 6; $i++) {
             DB::table('roles')->insert([
+                'created_at' => now(),
+                'updated_at' => now(),
                 'name'         =>    'name ' . $i
             ]);
         }

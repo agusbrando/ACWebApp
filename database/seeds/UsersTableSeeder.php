@@ -19,6 +19,8 @@ class UsersTableSeeder extends Seeder
                 'first_name'         =>    'first_name ' . $i,
                 'last_name'    =>    'last_name ' . $i,
                 'timetable_id' =>    $i,
+                'created_at' => now(),
+                'updated_at' => now(),
                 'role_id'         =>    $i
             ]);
         }

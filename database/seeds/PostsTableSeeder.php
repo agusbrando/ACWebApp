@@ -13,6 +13,8 @@ class PostsTableSeeder extends Seeder
     {
         for ($i = 1; $i < 6; $i++) {
             DB::table('posts')->insert([
+                'created_at' => now(),
+                'updated_at' => now(),
                 'text'         =>    'text ' . $i
             ]);
         }

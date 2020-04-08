@@ -15,6 +15,8 @@ class MessagesTableSeeder extends Seeder
             DB::table('messages')->insert([
                 'user_id'         =>     $i,
                 'title'         =>  'title ' .  $i,
+                'created_at' => now(),
+                'updated_at' => now(),
                 'text'         =>  'text ' .  $i
             ]);
         }

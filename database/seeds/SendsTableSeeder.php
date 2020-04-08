@@ -15,6 +15,8 @@ class SendsTableSeeder extends Seeder
             DB::table('sends')->insert([
                 'message_id'         =>     $i,
                 'user_id'         =>    $i,
+                'created_at' => now(),
+                'updated_at' => now(),
                 'read'         =>    $i
             ]);
         }

@@ -14,8 +14,10 @@ class AttachmentsTableSeeder extends Seeder
         for ($i = 1; $i < 6; $i++) {
             DB::table('attachments')->insert([
                 'name'         =>  'name ' .  $i,
-                'attachable_id'         =>     $i,
-                'attachable_type'         =>  'App\Modules\Message'
+                'attachmentable_id'         =>     $i,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'attachmentable_type'         =>  Message::class
             ]);
         }
     }
