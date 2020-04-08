@@ -17,7 +17,6 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->integer('level')->unsigned();
             $table->string('name');
-            $table->integer('level');
             $table->integer('num_students');
             $table->timestamps();
         });
