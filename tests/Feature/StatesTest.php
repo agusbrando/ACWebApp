@@ -5,6 +5,9 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Carbon\Carbon;
+
+use App\Models\State;
 
 class StatesTest extends TestCase
 {
@@ -15,8 +18,13 @@ class StatesTest extends TestCase
      */
     public function testExample()
     {
-        $response = $this->get('/');
+        $state = State::create([
+            'name' => 'Roto',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        // $this->assertEquals($item->state_id, $state->id);
 
-        $response->assertStatus(200);
+        // $state->delete();
     }
 }

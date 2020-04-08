@@ -35,31 +35,48 @@ class ItemTest extends TestCase
             'updated_at' => now()
         ]);
 
-        $type = Type::create([
-            'model' => 'Item', 
-            'name' => ' movil',
+        
+
+        $user = User::create([
+            'first_name' => 'user',
+            'email' => 'user@campusaula.com',
+            'last_name' => 'user',
+            'password' => bcrypt('userPass'),
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'rol_id' => 1
         ]);
 
-        $item = Item::create([
-            'name' => 'Portatil Asus',
-            'date_pucharse' => Carbon::create('2020','03','30'),
-            'classroom_id' => $classroom->id,
-            'state_id' => $state->id,
-            'type_id' => $type->id,
+        $user2 = User::create([
+            'first_name' => 'user2',
+            'email' => 'user2@campusaula.com',
+            'last_name' => 'user2',
+            'password' => bcrypt('user2Pass'),
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'rol_id' => 1
         ]);
         
-        $this->assertEquals($item->classroom_id, $classroom->id);
-        $this->assertEquals($item->state_id, $state->id);
-        $this->assertEquals($item->type_id, $type->id);
+        
 
-        // $item->delete();
-        // $state->delete();
-        // $type->delete();
-        // $classroom->delete();
+        //Creacion de la tabla intermedia con los datos extra que no son los id
+        $user->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','09','16'),'date_fin' => Carbon::create('2020','06','12')]);
+        $user2->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','04','16'),'date_fin' => Carbon::create('2020','06','12')]);
+        
+        //Array de Items recuperados
+        $users = $itemuser->users->pluck('id');
+
+        $expectedUsersIds = collect([
+            ['id'=> $user->id],
+            ['id'=> $user2->id]
+        ])->pluck('id');
+
+        $this->assertEquals($users, $expectedUsersIds);
+
+        $user->itemUser()->detach($itemuser);  
+        $user2->itemUser()->detach($itemuser);      
+
+        
 
     }
 }

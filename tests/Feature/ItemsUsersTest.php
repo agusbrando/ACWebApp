@@ -41,22 +41,27 @@ class ItemsUsersTest extends TestCase
             'rol_id' => 1
         ]);
 
-        $itemUser = ItemUser::create([
-            'item_id' => $item->id,
-            'user_id' => $user->id,
-            'date_inicio' => Carbon::create('2019','09','16'),
-            'date_fin' => Carbon::create('2020','06','12'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // $itemUser = ItemUser::create([
+        //     'item_id' => $item->id,
+        //     'user_id' => $user->id,
+        //     'date_inicio' => Carbon::create('2019','09','16'),
+        //     'date_fin' => Carbon::create('2020','06','12'),
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
         
 
-        $this->assertEquals($itemUser->item_id, $item->id);
-        $this->assertEquals($itemUser->user_id, $user->id);
+        // $this->assertEquals($itemUser->item_id, $item->id);
+        // $this->assertEquals($itemUser->user_id, $user->id);
 
+        $item->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','09','16')]);
+        $item->itemUser()->attach($itemuser, ['date_fin' => Carbon::create('2020','06','12')]);
+        
+            
 
         //Elimina los opjetos creados de la BD
-        $itemUser->delete();
+        ItemUser::destroy($itemUser->item_id);
+        // $itemUser->delete();
         $item->delete();
         $user->delete();
     }
