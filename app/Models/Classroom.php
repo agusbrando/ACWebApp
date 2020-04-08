@@ -65,13 +65,13 @@ class Classroom extends Model
 
     //Relacion entre Item Y Classroom
     public function sessions(){
-        return $this->hasMany('App\Models\Sessions');
+        return $this->hasMany('App\Models\Session');
     }
     
     //Relacion entre Item Y Classroom
     public function items()
     {
-        return $this->hasMany('App\Models\Session');
+        return $this->hasMany('App\Models\Item');
     }
     
 }
