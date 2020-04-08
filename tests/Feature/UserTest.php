@@ -33,5 +33,6 @@ class UserTest extends TestCase
         ]);
 
         $this->assertEquals($user->role->id,$role->id);
+
     }
 }
