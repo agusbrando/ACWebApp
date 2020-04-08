@@ -78,11 +78,6 @@ class TypeTest extends TestCase
             ['id'=>$event2->id]
         ])->pluck('id');
 
-<<<<<<< HEAD
-        $this->assertEquals($evento,$expected_events_ids); 
-      
-        }
-=======
         $this->assertEquals($events,$expected_events_ids); 
         
         $event->destroy($event);
@@ -93,7 +88,6 @@ class TypeTest extends TestCase
         $role->destroy($role); 
 
     }
->>>>>>> feat_tests_kehocu
 
     
 }
