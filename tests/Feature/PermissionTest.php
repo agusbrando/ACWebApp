@@ -50,14 +50,13 @@ class PermissionTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        // $roles_ids = $permission_1->roles->pluck('id');
-        // $expected_roles_id = collect([
-        //     ['id' => $role_1->id],
-        //     ['id' => $role_2->id]
-        // ])->pluck('id');
+         $roles_ids = $permission_1->roles->pluck('id');
+         $expected_roles_id = collect([
+             ['id' => $role_1->id],
+             ['id' => $role_2->id]
+         ])->pluck('id');
 
-        // $this->assertEquals($roles_ids,$expected_roles_id);
-        $this->assertEquals($permission_1->role_id);
+         $this->assertEquals($roles_ids,$expected_roles_id);
 
     }
 }
