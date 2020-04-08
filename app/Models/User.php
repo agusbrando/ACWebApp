@@ -42,9 +42,30 @@ class User extends Model
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-    //Relaciones
-    public function Items()
+    
+    public function responsables()
     {
         return $this->belongsToMany('App\Models\Item', 'item_user', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
+    }
+
+    public function trackings()
+    {
+        return $this->hasMany('App\Models\Trackings');
+    }
+
+    public function timetable()
+    {
+        return $this->belongsTo('App\Models\Timetable');
+    }
+
+    public function tasks(){
+        return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
+    }
+    public function programs_responsable(){
+        return $this->hasMany(Program::class, 'user_id');
+    }
+   
+    public function programs_professor(){
+        return $this->hasMany(Program::class, 'professor_id');
     }
 }

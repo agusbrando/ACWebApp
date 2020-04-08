@@ -17,13 +17,21 @@ class Type extends Model
         return $this->hasMany('App\Models\Event');
     }
 
+<<<<<<< HEAD
     public function evaluations(){
         return $this->belongsToMany(Type::class, 'percentages', 'type_id', 'evaluation_id')->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+=======
+    public function percentages(){
+        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+>>>>>>> hotfix/models_master
     }
 
     public function misbehaviors()
     {
-        return $this->hasMany('App\Misbehavior');
+        return $this->hasMany('App\Models\Misbehavior');
     }
-
+    public function items()
+    {
+        return $this->hasMany('App\Models\Item');
+    }
 }

@@ -21,10 +21,7 @@ class Subject extends Model
         return $this->hasMany(Program::class);
    }
 
-    public function courses(){
-        return $this->belongsTo('App\Models\Course');
-    }
-
+    
     public function timetables()
     {
         return $this->hasMany('App\Models\SessionTimetable');
