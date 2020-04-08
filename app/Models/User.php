@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    use Notifiable;
     protected $table = 'users';
 
     protected $primaryKey = 'id';
@@ -15,14 +14,7 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'id',
-        'role_id',
-        'first_name',
-        'last_name',
-        'password',
-        'email',
-    ];
+    protected $guarded = [];
     /**
      * The attributes that should be hidden for arrays.
      *

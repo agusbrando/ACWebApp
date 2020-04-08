@@ -4,6 +4,8 @@ namespace Tests\Feature\App\Models;
 use Illuminate\Support\Facades\DB;
 use App\Models\Evaluable;
 use App\Models\Evaluated;
+use App\Models\Course;
+use App\Models\Timetable;
 
 use App\Models\Program;
 use App\Models\Subject;
@@ -22,6 +24,20 @@ class EvaluableTest extends TestCase
      */
     public function testPrograms()
     {
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $evaluable = Evaluable::create([
             'name' => 'La metodología didáctica aplicada',
             'created_at' => now(),
@@ -29,6 +45,7 @@ class EvaluableTest extends TestCase
         ]);
         
         $subject = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'Acceso a Datos',
             'created_at' => now(),
             'updated_at' => now()
@@ -50,7 +67,8 @@ class EvaluableTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -59,7 +77,8 @@ class EvaluableTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role_responsable->id
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_three_profesor = User::create([
             'first_name' => 'Profesor',
@@ -68,7 +87,8 @@ class EvaluableTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
@@ -121,5 +141,7 @@ class EvaluableTest extends TestCase
         $role->delete();
         $subject->delete();
         $evaluable->delete();
+        $timetable->delete();
+        $course->delete();
     }
 }
