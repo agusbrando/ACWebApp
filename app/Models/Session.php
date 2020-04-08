@@ -12,11 +12,26 @@ class Session extends Model
 
     protected $fillable = [
         'id',
-        'time_start',
-        'time_end',
+        'classroom_id',
         'model',
-        'created_at',
-        'updated_at'
-
+        'time_start',
+        'time_end'
     ];
+
+    public function classroom()
+    {
+        return $this->belongsTo('App\Models\Classroom');
+    }
+
+    public function sessionTimetables()
+    {
+        return $this->belongsToMany(Timetable::class, 'session_timetable')->using(SessionTimetable::class)->withPivot('')->withTimestamps();
+    }
+    
+
+    public function event()
+    {
+        return $this->hasOne('App\Models\Event');
+    }
+
 }

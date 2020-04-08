@@ -12,7 +12,12 @@ class SessionTimetable extends Pivot
  
     protected $guarded = [];
 
-    public function misbehaviors()
+    
+    public function subjects(){
+        return $this->belongsTo('App\Models\Subject');
+    }
+    
+     public function misbehaviors()
     {
         return $this->hasMany('App\Models\Misbehavior');
     }

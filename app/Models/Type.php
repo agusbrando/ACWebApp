@@ -14,12 +14,11 @@ class Type extends Model
         'id',
         'model',
         'name',
-        'created_at',
-        'updated_at'
-
     ];
-    public function misbehaviors()
+
+    public function items()
     {
-        return $this->hasMany('App\Misbehavior');
+        return $this->hasMany('App\Models\Item' , 'type_id');
     }
+    
 }
