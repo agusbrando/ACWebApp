@@ -14,7 +14,7 @@ class CreateSessionTimetablesTable extends Migration
     public function up()
     {
         Schema::create('session_timetables', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->increments('id');
             $table->integer('timetable_id')->unsigned();
             $table->integer('session_id')->unsigned();
             $table->integer('subject_id')->unsigned();

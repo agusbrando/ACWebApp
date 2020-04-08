@@ -5,6 +5,8 @@ use App\Models\Unit;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Course;
+use App\Models\Timetable;
 
 use App\Models\Program;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,7 +22,22 @@ class UnitTest extends TestCase
      */
     public function testProgram()
     {
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $subject = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'Acceso a Datos',
             'created_at' => now(),
             'updated_at' => now()
@@ -42,7 +59,8 @@ class UnitTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 2
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -51,7 +69,8 @@ class UnitTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 3
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
@@ -91,5 +110,7 @@ class UnitTest extends TestCase
         $user_two_responsable->delete();
         $user_one_profesor->delete();
         $subject->delete();
+        $timetable->delete();
+        $course->delete();
     }
 }

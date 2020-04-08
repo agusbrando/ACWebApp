@@ -6,7 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class userTest extends TestCase
+use App\Models\Type;
+use App\Models\Classroom;
+use App\Models\Session;
+use App\Models\Event;
+
+class UserTest extends TestCase
 {
     /**
      * A basic feature test example.

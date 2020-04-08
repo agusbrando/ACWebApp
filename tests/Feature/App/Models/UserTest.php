@@ -5,6 +5,8 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Program;
 use App\Models\Subject;
+use App\Models\Course;
+use App\Models\Timetable;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -20,7 +22,20 @@ class UserTest extends TestCase
      */
     public function testRol()
     {
-
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $role = Role::create([
             'name' => 'Profesor',
             'created_at' => now(),
@@ -38,7 +53,8 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -47,7 +63,8 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role_responsable->id
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         
         $role_id = $user_one_profesor->role->id;
@@ -61,10 +78,25 @@ class UserTest extends TestCase
         $user_one_profesor->delete();
         $role->delete();
         $role_responsable->delete();
+        $timetable->delete();
+        $course->delete();
     }
     /**@test lista de programas en los que ese usuario es profesor*/
     public function testProgramsProfessor(){
-
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $role = Role::create([
             'name' => 'Profesor',
             'created_at' => now(),
@@ -82,7 +114,8 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -91,14 +124,17 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role_responsable->id
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         $subject_one = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'PMM',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         $subject_two = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'DI',
             'created_at' => now(),
             'updated_at' => now()
@@ -141,11 +177,25 @@ class UserTest extends TestCase
         $user_one_profesor->delete();
         $role_responsable->delete();
         $role->delete();
-
+        $timetable->delete();
+        $course->delete();
     }
     /**@test lista de programas en los que ese usuario es responsable*/
     public function testProgramsResponsable(){
-
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $role = Role::create([
             'name' => 'Profesor',
             'created_at' => now(),
@@ -163,7 +213,8 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -172,14 +223,17 @@ class UserTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role_responsable->id
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         $subject_one = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'PMM',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         $subject_two = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'DI',
             'created_at' => now(),
             'updated_at' => now()
@@ -219,7 +273,8 @@ class UserTest extends TestCase
         $user_one_profesor->delete();
         $role_responsable->delete();
         $role->delete();
-
+        $timetable->delete();
+        $course->delete();
     }
     
 }

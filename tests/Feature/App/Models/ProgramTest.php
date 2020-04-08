@@ -9,7 +9,8 @@ use App\Models\Unit;
 use App\Models\Evaluable;
 use App\Models\Evaluated;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Course;
+use App\Models\Timetable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -24,7 +25,22 @@ class ProgramTest extends TestCase
     /**@test prueba de la relacion subject, devuelve la asignatura del programa en cuestion */
     public function testSubject()
     {
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $subject = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'Acceso a Datos',
             'created_at' => now(),
             'updated_at' => now()
@@ -46,7 +62,9 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
+
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -55,7 +73,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role_responsable->id
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
@@ -82,11 +101,28 @@ class ProgramTest extends TestCase
         $role_responsable->delete();
         $role->delete();
         $subject->delete();
+        $timetable->delete();
+        $course->delete();
     }
     /**@test prueba de la relacion responsable, devuelve el usuario responsable del programa en cuestion */
     public function testResponsable()
     {
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $subject = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'Acceso a Datos',
             'created_at' => now(),
             'updated_at' => now()
@@ -108,7 +144,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -117,7 +154,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role_responsable->id
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
@@ -142,11 +180,28 @@ class ProgramTest extends TestCase
         $role_responsable->delete();
         $role->delete();
         $subject->delete();
+        $timetable->delete();
+        $course->delete();
     }
     /**@test prueba de la relacion responsable, devuelve el profesor que planifica el programa*/
     public function testProfessor()
     {
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $subject = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'Acceso a Datos',
             'created_at' => now(),
             'updated_at' => now()
@@ -168,7 +223,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -177,7 +233,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role_responsable->id
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
@@ -204,10 +261,27 @@ class ProgramTest extends TestCase
         $role_responsable->delete();
         $role->delete();
         $subject->delete();
+        $timetable->delete();
+        $course->delete();
     }
     /**@test lista de programas en los que ese usuario es responsable*/
     public function testUnits(){
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $subject = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'Acceso a Datos',
             'created_at' => now(),
             'updated_at' => now()
@@ -229,7 +303,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 2
+            'role_id' => 2,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -238,7 +313,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 3
+            'role_id' => 3,
+            'timetable_id'=>$timetable->id
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
@@ -293,10 +369,26 @@ class ProgramTest extends TestCase
         $role_responsable->delete();
         $role->delete();
         $subject->delete();
+        $timetable->delete();
+        $course->delete();
     }
     /**@test lista de aspectos evaluados en esa programacion*/
     public function testEvaluables()
     {
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'Segundo',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $evaluable_one = Evaluable::create([
             'name' => 'La metodología didáctica aplicada',
             'created_at' => now(),
@@ -308,6 +400,7 @@ class ProgramTest extends TestCase
             'updated_at' => now()
         ]);
         $subject = Subject::create([
+            'course_id'=> $course->id,
             'name' => 'Acceso a Datos',
             'created_at' => now(),
             'updated_at' => now()
@@ -329,7 +422,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',
@@ -338,7 +432,8 @@ class ProgramTest extends TestCase
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role_responsable->id
+            'role_id' => $role_responsable->id,
+            'timetable_id'=>$timetable->id
         ]);
         $program_one = Program::create([
             'date_check' => '2019-09-22',	
@@ -382,5 +477,7 @@ class ProgramTest extends TestCase
         $subject->delete();
         $evaluable_one->delete();
         $evaluable_two->delete();
+        $timetable->delete();
+        $course->delete();
     }
 }
