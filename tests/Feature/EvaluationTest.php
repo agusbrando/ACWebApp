@@ -95,6 +95,50 @@ class EvaluationTest extends TestCase
 
     public function testTypes()
     {
+        $course = Course::create([
+            'level' => 1,
+            'name' => 'Primero',
+            'num_students' => 30
+        ]);
+
+        $subject = Subject::create([
+            'course_id' => $course->id,
+            'name' => 'Ejemplo2'
+        ]);
+
+        $evaluation = Evaluation::create([
+             'subject_id' => $subject->id,
+             'name' => '1Eval'
+         ]);
+            
+        $type = Type::create([
+            'model' => 'ejemplo',
+            'name' => 'default'
+        ]);
+
+        $type2 = Type::create([
+            'model' => 'ejemplo2',
+            'name' => 'default2'
+        ]);
+
+        $type->evaluations()->attach($evaluation, ['percentage'=>30]);
+        $type2->evaluations()->attach($evaluation, ['percentage'=>10]);
+
+        $types = $evaluation->types->pluck('id');
         
+        $expected_types_ids = collect([
+            ['id' => $type->id],
+            ['id' => $type2->id]
+        ])->pluck('id');
+
+        $this->assertEquals($types, $expected_types_ids);
+
+        $type->evaluations()->detach($evaluation);
+        $type2->evaluations()->detach($evaluation);
+        $type->delete();
+        $type2->delete();
+        $evaluation->delete();
+        $subject->delete();
+        $course->delete();
     }
 }

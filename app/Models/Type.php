@@ -10,6 +10,6 @@ class Type extends Model
     protected $guarded = [];
 
     public function evaluations(){
-        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+        return $this->belongsToMany(Type::class, 'percentages', 'type_id', 'evaluation_id')->using(Percentage::class)->withPivot('percentage')->withTimestamps();
     }
 }

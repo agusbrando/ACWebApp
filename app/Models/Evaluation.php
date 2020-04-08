@@ -18,6 +18,6 @@ class Evaluation extends Model
     }
 
     public function types(){
-        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+        return $this->belongsToMany(Type::class, 'percentages', 'evaluation_id', 'type_id')->using(Percentage::class)->withPivot('percentage')->withTimestamps();
     }
 }
