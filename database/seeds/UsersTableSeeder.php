@@ -17,7 +17,9 @@ class UsersTableSeeder extends Seeder
             'last_name' => 'Admin',
             'password' => bcrypt('adminPass'),
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'role_id' => 1,
+            'timetable_id'=>1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Alumno',
@@ -25,7 +27,9 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@campusaula.com',
             'password' => bcrypt('password'),
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'role_id' => 4,
+            'timetable_id'=>1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
@@ -33,7 +37,9 @@ class UsersTableSeeder extends Seeder
             'email' => 'guillermo.garrido@campusaula.com',
             'password' => bcrypt('password'),
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'role_id' => 2,
+            'timetable_id'=>1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Marcelo',
@@ -41,7 +47,9 @@ class UsersTableSeeder extends Seeder
             'email' => 'marcelo.malonda@campusaula.com',
             'password' => bcrypt('password'),
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
         ]);
     }
 }
