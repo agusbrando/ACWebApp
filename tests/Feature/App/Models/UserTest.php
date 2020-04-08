@@ -20,7 +20,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testRol()
+    public function testRole()
     {
         $course = Course::create([
             'level' => 2,
