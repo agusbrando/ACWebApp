@@ -3,22 +3,42 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\User;
 use App\Models\Role;
+use App\Models\Timetable;
+use App\Models\User;
+
 class UserTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A basic feature test example.
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testExample()
     {
-         $user = User::find(3);
-        $role = Role::find($user->role_id);
+        $role = Role::create([
+            'name' => 'Test',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
-        $this->assertEquals($user->role->name, $role->name);
 
+        $user = User::create([
+            'first_name' => 'Pruebas',
+            'last_name' => 'Tests',
+            'email' => 'pruebas@campusaula.com',
+            'password' => 'pruebas',
+            'created_at' => now(),
+            'updated_at' => now(),
+            'timetable_id'=>'1',
+            'role_id' => $role->id
+        ]);
+
+        $this->assertEquals($user->role->id,$role->id);
+
+        $role->delete();
+         $user->delete();
     }
 }
