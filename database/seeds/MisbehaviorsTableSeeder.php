@@ -14,8 +14,10 @@ class MisbehaviorsTableSeeder extends Seeder
         DB::table('misbehaviors')->insert([
             'id' => 1,
             'description' => 'Retraso',
+            'session_timetable_id'=>1,
             'type_id' => 1,
             'user_id' => 1,
+            'session_timetable_id' => 1,
             'date' => now(),
             'created_at' => now(),
             'updated_at' => now(),
