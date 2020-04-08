@@ -23,10 +23,10 @@ class Misbehavior extends Model
     public function user(){
         $this ->BelongsTo(User::class);
     }
-    public function type(){
+    public function sessionTimetable(){
         $this ->BelongsTo(SessionTimetable::class);
     }
-    public function session(){
+    public function type(){
         $this ->BelongsTo(Type::class);
     }
 }
