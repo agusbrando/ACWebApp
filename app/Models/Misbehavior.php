@@ -12,21 +12,18 @@ class Misbehavior extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'id',
-        'description',
-        'type_id',
-        'created_at',
-        'updated_at'
+    protected $guarded = [];
 
-    ];
-    public function user(){
-        $this ->BelongsTo(User::class);
+    public function user()
+    {
+        return $this->BelongsTo(User::class);
     }
-    public function type(){
-        $this ->BelongsTo(SessionTimetable::class);
+    public function type()
+    {
+        return  $this->BelongsTo(Type::class);
     }
-    public function session(){
-        $this ->BelongsTo(Type::class);
+    public function session()
+    {
+        return  $this->BelongsTo(SessionTimetable::class);
     }
 }

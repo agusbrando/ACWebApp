@@ -24,6 +24,6 @@ class User extends Model
     ];
     public function misbehaviors()
     {
-        return $this->hasMany('App\Misbehavior');
+        return $this->hasMany('App\Models\Misbehavior');
     }
 }

@@ -15,6 +15,7 @@ class CoursesSeeders extends Seeder
             'id' => 1,
             'name' => '2DAM',
             'level' => 1,
+            'num_students'=>40,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

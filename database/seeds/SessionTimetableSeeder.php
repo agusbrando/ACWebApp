@@ -12,6 +12,7 @@ class SessionTimetableSeeder extends Seeder
     public function run()
     {
         DB::table('session_timetables')->insert([
+            'id'=>1,
             'session_id' => 1,
             'timetable_id' => 1,
             'subject_id' => 1
