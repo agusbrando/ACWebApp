@@ -18,8 +18,7 @@ class CreateTimetablesTable extends Migration
             $table->string('name');
             $table->date('date_start');
             $table->date('date_end');
-            $table->timestamps();
-           
+            $table->timestamps();           
         });
     }
 

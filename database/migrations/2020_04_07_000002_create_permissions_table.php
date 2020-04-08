@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableTypes extends Migration
+class CreatePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateTableTypes extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('model');
-            $table->string('name');           
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,7 @@ class CreateTableTypes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('permissions');
     }
 }

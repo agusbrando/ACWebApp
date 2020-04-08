@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 1,
-            'timetable_id'=>1,
+            'timetable_id'=>1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Alumno',
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 4,
-            'timetable_id'=>1,
+            'timetable_id'=>1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 2,
-            'timetable_id'=>1,
+            'timetable_id'=>1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Marcelo',
@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1,
+            'timetable_id'=>1
         ]);
     }
 }

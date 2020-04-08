@@ -5,8 +5,15 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
+
+use App\Models\Role;
+use App\Models\Type;
+use App\Models\Classroom;
+use App\Models\Session;
+use App\Models\User;
+use App\Models\Event;
 use App\Models\Timetable;
 use App\Models\Task;
 use App\Models\Evaluation;
@@ -16,8 +23,81 @@ use App\Models\Calification;
 
 class UserTest extends TestCase
 {
-    
-    public function testRole()
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function testEvent()
+    {
+
+        $role = Role::create([
+            'name' => 'default',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $user = User::create([
+            'first_name' => 'default',
+            'last_name' => 'default',
+            'email' => 'default@gmail.com',
+            'password' => 'default',
+            'role_id' => $role->id
+        ]);
+
+        $type = Type::create([
+            'name' => 'default',
+            'model' => 'defaultModel'
+        ]);
+
+        $classroom = Classroom::create([
+            'name' => 'default',
+            'number' => 1,
+        ]);
+
+        $session = Session::create([
+            'classroom_id'=>$classroom->id,
+            'time_start' => date('Y-m-d H:i:s'),
+            'time_end' => date('Y-m-d H:i:s'),
+            'model' => 'defaultModel'
+        ]);
+
+
+        $event = Event::create([
+            'type_id' => $type->id,
+            'session_id' => $session->id,
+            'user_id' => $user->id,
+            'description' => 'default',
+            'date' => date("Y-m-d")
+        ]);
+
+
+        $event2 = Event::create([
+            'type_id' => $type->id,
+            'session_id' => $session->id,
+            'user_id' => $user->id,
+            'description' => 'default',
+            'date' => date("Y-m-d")
+        ]);
+
+        $events = $user->events->pluck('id');
+
+        $expected_events_ids = collect([
+            ['id'=>$event->id],
+            ['id'=>$event2->id]
+        ])->pluck('id');
+
+        $this->assertEquals($events,$expected_events_ids); 
+
+        $event->destroy($event);
+        $user->destroy($user);
+        $session->destroy($session);
+        $classroom->destroy($classroom);
+        $type->destroy($type);
+        $role->destroy($role); 
+        
+    }  
+public function testRole()
     {
 
         $timetable = Timetable::create([
@@ -53,44 +133,7 @@ class UserTest extends TestCase
         $role->delete();
         $timetable->delete();
     }
-
-    public function testTimetable(){
-
-        $timetable = Timetable::create([
-            'name' => '2DAM2020',
-            'date_start' =>  now(),
-            'date_end' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        $role = Role::create([
-            'name' => 'Prueba2',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        $user = User::create([
-            'first_name' => 'Admin',
-            'email' => 'prueba2@campusaula.com',
-            'last_name' => 'Admin',
-            'password' => bcrypt('adminPass'),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'role_id' => $role->id,
-            'timetable_id'=>$timetable->id,
-        ]);
-
-        $timetable = Timetable::find($user->timetable_id);
-
-        $this->assertEquals($user->timetable, $timetable);
-
-        $user->delete();
-        $role->delete();
-        $timetable->delete();
-    }
-
-    public function testCalifications()
+public function testCalifications()
     {
 
         $timetable = Timetable::create([
@@ -169,5 +212,5 @@ class UserTest extends TestCase
         
     }
 
-    
+
 }
