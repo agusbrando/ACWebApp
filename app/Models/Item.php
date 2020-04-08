@@ -9,7 +9,6 @@ class Item extends Model
     protected $table = 'items';
 
     protected $primaryKey = 'id';
-    // protected $primaryKey = 'item_id';
 
     public $timestamps = true;
 
@@ -20,11 +19,17 @@ class Item extends Model
     public function responsables()
     {
         return $this->belongsToMany('App\Models\User', 'item_user', 'item_id', 'user_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
+        
     }
-
     public function classroom()
     {
         return $this->belongsTo('App\Models\Classroom');
+        
+    }
+
+    public function Items()
+    {
+        return $this->belongsToMany('App\Models\User', 'item_user', 'item_id', 'user_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
         
     }
 }

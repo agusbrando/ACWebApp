@@ -11,9 +11,33 @@ class Classroom extends Model
 
     protected $primaryKey = 'id';
 
+    /**
+    * The primary key associated with the table.
+    *
+    * @var string
+    */
+  
+    protected $primaryKey = 'id';
+
+
+    /**
+    * Indicates if the IDs are auto-incrementing.
+    * Por defecto Eloquent asume que la clave primaria 
+    * es un valor incremental y de tipo int, 
+    * Si fuera de tipo string o no fuera auto incremental pondríamos false
+    * @var bool
+    */
     public $incrementing = true;
 
-    protected $keyType = 'string';
+
+    /**
+    * The "type" of the auto-incrementing ID.
+    * Si tu clave primaria no es un entero, debes establecer 
+    * la propiedad protegida $keyType de tu modelo a string,
+    * como en este caso
+    * @var string
+    */
+    // protected $keyType = 'string';
 
     public $timestamps = true;
 
