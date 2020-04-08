@@ -8,14 +8,15 @@ use Tests\TestCase;
 use App\Models\Role;
 use App\Models\User;
 
-use App\Models\Role;
+
 use App\Models\Type;
 use App\Models\Classroom;
 use App\Models\Session;
-use App\Models\User;
+
 use App\Models\Event;
 
-class userTest extends TestCase
+
+class UserTest extends TestCase
 {
     /**
      * A basic feature test example.

@@ -43,7 +43,7 @@ class StatesTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+        //Llamamos a la funcion items que tiene el Modelo state
         $items = $state->items->pluck('id');
         
         $expected_items_ids = collect([

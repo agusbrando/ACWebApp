@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class SessionTimetable extends Model
+class SessionTimetable extends Pivot
 {
     protected $table ='session_timetables';
  
     protected $primaryKey ='id';
  
-    protected $fillable = [
-        
-    ];
+    protected $guarded = [];
 
     
     public function subjects(){
