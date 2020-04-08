@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
 
-use App\Models\Type;
 class TypeTest extends TestCase
 {
     /**
@@ -18,7 +17,7 @@ class TypeTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testItem()
     {
         $type = Type::create([
             'model' => 'Item', 
@@ -26,21 +25,39 @@ class TypeTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
-        $item = Item::create([
+        
+        $item1 = Item::create([
             'name' => 'Portatil Asus',
             'date_pucharse' => Carbon::create('2020','03','30'),
-            'classroom_id' => $classroom->id,
-            'state_id' => $state->id,
+            'classroom_id' => 1,
+            'state_id' => 2,
             'type_id' => $type->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        $item2 = Item::create([
+            'name' => 'Portatil MSI',
+            'date_pucharse' => Carbon::create('2020','03','30'),
+            'classroom_id' => 1,
+            'state_id' => 2,
+            'type_id' => $type->id,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        
+        //Llamamos a la funcion items que tiene el Modelo type
+        $items = $type->items->pluck('id');
+        
+        $expected_items_ids = collect([
+            ['id' => $item1->id],
+            ['id' => $item2->id]
+        ])->pluck('id');
 
+        $this->assertEquals($items, $expected_items_ids);
 
-        $this->assertEquals($item->type_id, $type->id);
-
-        // $type->delete();
+        $item2->delete();
+        $item1->delete();
+        $type->delete();
 
     }
 }
