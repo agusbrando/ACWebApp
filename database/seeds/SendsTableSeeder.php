@@ -11,7 +11,7 @@ class SendsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             DB::table('sends')->insert([
                 'message_id'         =>     $i,
                 'user_id'         =>    $i,

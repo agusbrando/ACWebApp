@@ -11,7 +11,7 @@ class AttachmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             DB::table('attachments')->insert([
                 'name'         =>  'name ' .  $i,
                 'attachmentable_id'         =>     $i,

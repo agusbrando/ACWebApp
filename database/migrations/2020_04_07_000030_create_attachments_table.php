@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Users extends Migration
+class CreateAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class Users extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
-            $table->string('password');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->integer('timetable_id')->unsigned();
-            $table->integer('role_id')->unsigned();
+            $table->string('name');
+            $table->integer('attachmentable_id')->unsigned();
+            $table->string('attachmentable_type');
 
             $table->timestamps();
+
 
         });
     }
@@ -34,6 +32,6 @@ class Users extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('attachments');
     }
 }
