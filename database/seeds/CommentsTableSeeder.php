@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PostsTableSeeder extends Seeder
+class CommentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +12,10 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         for ($i = 1; $i < 5; $i++) {
-            DB::table('posts')->insert([
+            DB::table('comments')->insert([
                 'user_id' => $i,
-                'text' => 'Post '.$i,
+                'text' => 'Comment '.$i,
+                'post_id' => $i,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

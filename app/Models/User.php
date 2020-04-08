@@ -62,4 +62,8 @@ class User extends Model
     public function programs_professor(){
         return $this->hasMany(Program::class, 'professor_id');
     }
+
+    public function comments() {
+        return $this->hasMany('App\Models\Comment');
+    }
 }

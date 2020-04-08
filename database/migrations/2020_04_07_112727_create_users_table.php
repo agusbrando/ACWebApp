@@ -13,11 +13,15 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('password');
+            $table->string('email')->unique();
             $table->timestamps();
-
         });
     }
 
@@ -29,6 +33,6 @@ class CreateRolesTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('users');
     }
 }

@@ -17,7 +17,7 @@ class AttachmentsTableSeeder extends Seeder
                 'attachmentable_id'         =>     $i,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'attachmentable_type'         =>  Message::class
+                'attachmentable_type' =>  Message::class
             ]);
         }
     }
