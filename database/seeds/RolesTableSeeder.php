@@ -11,12 +11,25 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 6; $i++) {
-            DB::table('roles')->insert([
-                'created_at' => now(),
-                'updated_at' => now(),
-                'name'         =>    'name ' . $i
-            ]);
-        }
+        DB::table('roles')->insert([
+            'name' => 'Administrador',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'Profesor',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'Jefe de Estudios',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'Alumno',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

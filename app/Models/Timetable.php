@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Timetable extends Model
 {
     protected $table ='timetables';
- 
     protected $primaryKey ='id';
- 
-    protected $fillable = [
-        'name'
-    ];
+    protected $guarded = [];
 
+    public function sessionTimetables()
+    {
+        return $this->belongsToMany(Session::class, 'session_timetable')->using(SessionTimetable::class)->withPivot('')->withTimestamps();
+    }
     public function users()
     {
         return $this->hasMany('App\Models\User');
