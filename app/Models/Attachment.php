@@ -13,15 +13,10 @@ class Attachment extends Model
     protected $primaryKey = 'id';
 
     //Columnas tabla
-    protected $fillable = [
-        'id',
-        'name',
-        'attachable_type',
-        'attachable_id'
-    ];
+    protected $guarded = [];
 
     //Relaciones
-    public function attachable() {
+    public function attachmentable() {
         return $this->morphTo();
     }
 }

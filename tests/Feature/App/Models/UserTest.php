@@ -20,7 +20,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testRol()
+    public function testRole()
     {
         $course = Course::create([
             'level' => 2,
@@ -214,7 +214,7 @@ class UserTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => $role->id,
-            'timetable_id'=>$timetable->id
+            'timetable_id'=> $timetable->id
         ]);
         $user_two_responsable = User::create([
             'first_name' => 'Profesor',

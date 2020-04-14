@@ -10,15 +10,27 @@ class Type extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'id',
-        'model',
-        'name',
-    ];
+    protected $guarded = [];
 
-    public function items()
+    public function events()
     {
-        return $this->hasMany('App\Models\Item' , 'type_id');
+        return $this->hasMany('App\Models\Event');
+    }
+
+    public function evaluations(){
+        return $this->belongsToMany(Type::class, 'percentages', 'type_id', 'evaluation_id')->using(Percentage::class)->withPivot('percentage')->withTimestamps();
     }
     
+    public function misbehaviors()
+    {
+        return $this->hasMany('App\Models\Misbehavior');
+    }
+    public function items()
+    {
+        return $this->hasMany('App\Models\Item');
+    }
+
+    public function percentages(){
+        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+    }
 }

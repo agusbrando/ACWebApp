@@ -28,12 +28,13 @@ class SessionTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+            
+        //name unico, cambiar a otro
         $type = Type::create([
             'name' => 'default',
             'model' => 'defaultModel'
         ]);
-
+            //name y number unicos, cambiar a otro
         $classroom = Classroom::create([
             'name' => 'default',
             'number' => 1,
@@ -45,7 +46,7 @@ class SessionTest extends TestCase
             'time_end' => date('Y-m-d H:i:s'),
             'model' => 'defaultModel'
         ]);
-
+            //timetable falta
         $user = User::create([
             'first_name' => 'default',
             'last_name' => 'default',
