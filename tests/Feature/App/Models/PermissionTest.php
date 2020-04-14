@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\App\Models;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -58,5 +58,11 @@ class PermissionTest extends TestCase
 
          $this->assertEquals($roles_ids,$expected_roles_id);
 
+         RolePermission::destroy($roles_permissions_2);
+         RolePermission::destroy($roles_permissions_1);
+         $permission_2->delete();
+         $permission_1->delete();
+         $role_2->delete();
+         $role_1->delete();
     }
 }
