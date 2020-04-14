@@ -1,5 +1,6 @@
 <?php
 
+//namespace Tests\Feature\App\Models;
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -28,7 +29,7 @@ class TypeTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+            //falta timetable
         $user = User::create([
             'first_name' => 'default',
             'last_name' => 'default',
@@ -38,13 +39,13 @@ class TypeTest extends TestCase
         ]);    
 
         $type = Type::create([
-            'name' => 'default',
-            'model' => 'defaultModel'
+            'name' => 'prueba',
+            'model' => 'pruebaModel'
         ]);
         
         $classroom = Classroom::create([
-            'name' => 'default',
-            'number' => 1,
+            'name' => 'prueba',
+            'number' => 6,
         ]);
 
         $session = Session::create([

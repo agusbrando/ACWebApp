@@ -11,6 +11,7 @@ use App\Models\Classroom;
 use App\Models\Session;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Timetable;
 
 class EventTest extends TestCase
 {
@@ -21,7 +22,13 @@ class EventTest extends TestCase
      */
     public function testType()
     {
-
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $role = Role::create([
             'name' => 'default',
             'created_at' => now(),
@@ -29,13 +36,14 @@ class EventTest extends TestCase
         ]);
 
         $type = Type::create([
-            'name' => 'default',
-            'model' => 'defaultModel'
+            'model' => 'ejemplo',
+            'name' => 'ejemplo'
         ]);
 
+
         $classroom = Classroom::create([
-            'name' => 'default',
-            'number' => 1,
+            'name' => 'prueba',
+            'number' => 5
         ]);
 
         $session = Session::create([
@@ -46,11 +54,14 @@ class EventTest extends TestCase
         ]);
 
         $user = User::create([
-            'first_name' => 'default',
-            'last_name' => 'default',
-            'email' => 'default@gmail.com',
-            'password' => 'default',
-            'role_id' => $role->id
+            'first_name' => 'Profesor',
+            'last_name' => 'Apellido Apellido',
+            'email' => 'profesor.apellido1@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
 
         $evento = Event::create([
@@ -68,12 +79,19 @@ class EventTest extends TestCase
         $classroom->delete();
         $type->delete();
         $role->delete();
+        $timetable->delete();
 
     }
 
     public function testSession()
     {
-
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $role = Role::create([
             'name' => 'default',
             'created_at' => now(),
@@ -81,13 +99,14 @@ class EventTest extends TestCase
         ]);
 
         $type = Type::create([
-            'name' => 'default',
-            'model' => 'defaultModel'
+            'model' => 'ejemplo',
+            'name' => 'ejemplo'
         ]);
 
+
         $classroom = Classroom::create([
-            'name' => 'default',
-            'number' => 1,
+            'name' => 'prueba',
+            'number' => 5
         ]);
 
         $session = Session::create([
@@ -98,11 +117,14 @@ class EventTest extends TestCase
         ]);
 
         $user = User::create([
-            'first_name' => 'default',
-            'last_name' => 'default',
-            'email' => 'default@gmail.com',
-            'password' => 'default',
-            'role_id' => $role->id
+            'first_name' => 'Profesor',
+            'last_name' => 'Apellido Apellido',
+            'email' => 'profesor.apellido1@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
 
         $evento = Event::create([
@@ -120,12 +142,19 @@ class EventTest extends TestCase
         $classroom->delete();
         $type->delete();
         $role->delete();
+        $timetable->delete();
 
     }
 
     public function testUser()
     {
-
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $role = Role::create([
             'name' => 'default',
             'created_at' => now(),
@@ -133,13 +162,13 @@ class EventTest extends TestCase
         ]);
 
         $type = Type::create([
-            'name' => 'default',
-            'model' => 'defaultModel'
+            'model' => 'ejemplo',
+            'name' => 'ejemplo'
         ]);
 
         $classroom = Classroom::create([
-            'name' => 'default',
-            'number' => 1,
+            'name' => 'prueba',
+            'number' => 5,
         ]);
 
         $session = Session::create([
@@ -150,11 +179,14 @@ class EventTest extends TestCase
         ]);
 
         $user = User::create([
-            'first_name' => 'default',
-            'last_name' => 'default',
-            'email' => 'default@gmail.com',
-            'password' => 'default',
-            'role_id' => $role->id
+            'first_name' => 'Profesor',
+            'last_name' => 'Apellido Apellido',
+            'email' => 'profesor.apellido1@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => $role->id,
+            'timetable_id'=>$timetable->id
         ]);
 
         $evento = Event::create([
@@ -172,6 +204,6 @@ class EventTest extends TestCase
         $classroom->delete();
         $type->delete();
         $role->delete();
-
+        $timetable->delete();
     }
 }

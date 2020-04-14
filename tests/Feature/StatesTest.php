@@ -24,7 +24,7 @@ class StatesTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+            //type y classroom id hardcodeados
         $item1 = Item::create([
             'name' => 'Portatil Asus',
             'date_pucharse' => Carbon::create('2020','03','30'),
