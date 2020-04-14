@@ -106,25 +106,13 @@ class ClassroomTest extends TestCase
             'updated_at' => now()
         ]);
 
-        
-        $state2 = State::create([
-            'name' => 'Defectuoso',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
         $type = Type::create([
             'model' => 'Item', 
             'name' => ' movil',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        $type2 = Type::create([
-            'model' => 'Item', 
-            'name' => ' portatil',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+      
 
         $item1 = Item::create([
             'name' => 'Portatil Asus',
@@ -139,8 +127,8 @@ class ClassroomTest extends TestCase
             'name' => 'Portatil MSI',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => $classroom->id,
-            'state_id' => $state2->id,
-            'type_id' => $type2->id,
+            'state_id' => $state->id,
+            'type_id' => $type->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
