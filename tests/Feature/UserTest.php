@@ -5,11 +5,14 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Carbon\Carbon;
 
 use App\Models\Type;
 use App\Models\Classroom;
 use App\Models\Session;
 use App\Models\Event;
+use App\Models\Item;
+
 
 class UserTest extends TestCase
 {
@@ -18,7 +21,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testItems()
     {
         $item = Item::create([
             'name' => 'Portatil Asus',
