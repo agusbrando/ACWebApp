@@ -14,7 +14,6 @@ use App\Models\Event;
 use Carbon\Carbon;
 
 use App\Models\Item;
-use App\Models\Classroom;
 class ClassroomTest extends TestCase
 {
     /**
@@ -78,13 +77,14 @@ class ClassroomTest extends TestCase
             ['id'=>$session2->id]
         ])->pluck('id');
 
-        $this->assertEquals($sessions,$expected_sessions_ids);
+        $this->assertEquals($sessions, $expected_sessions_ids);
         $event->destroy($event);
         $user->destroy($user);
         $session->destroy($session);
         $classroom->destroy($classroom);
         $type->destroy($type);
-        $role->destroy($role);  
+        $role->destroy($role);
+    }
 
     public function testItem()
     {
