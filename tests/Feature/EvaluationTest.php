@@ -113,12 +113,12 @@ class EvaluationTest extends TestCase
             
         $type = Type::create([
             'model' => 'ejemplo',
-            'name' => 'default'
+            'name' => 'ejemplo'
         ]);
 
         $type2 = Type::create([
             'model' => 'ejemplo2',
-            'name' => 'default2'
+            'name' => 'test'
         ]);
 
         $type->evaluations()->attach($evaluation, ['percentage'=>30]);
