@@ -11,14 +11,6 @@ class Classroom extends Model
 
     protected $primaryKey = 'id';
 
-    /**
-    * The primary key associated with the table.
-    *
-    * @var string
-    */
-  
-    protected $primaryKey = 'id';
-
 
     /**
     * Indicates if the IDs are auto-incrementing.

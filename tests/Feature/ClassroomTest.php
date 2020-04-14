@@ -6,15 +6,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Role;
+use App\Models\State;
 use App\Models\Type;
 use App\Models\Classroom;
+use App\Models\Item;
 use App\Models\Session;
 use App\Models\User;
 use App\Models\Event;
 use Carbon\Carbon;
 
-use App\Models\Item;
-use App\Models\Classroom;
+
+
+
 class ClassroomTest extends TestCase
 {
     /**
@@ -86,6 +89,9 @@ class ClassroomTest extends TestCase
         $type->destroy($type);
         $role->destroy($role);  
 
+        
+    }
+
     public function testItem()
     {
         $classroom = Classroom::create([
@@ -94,13 +100,38 @@ class ClassroomTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        $state = State::create([
+            'name' => 'Roto',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        
+        $state2 = State::create([
+            'name' => 'Defectuoso',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $type = Type::create([
+            'model' => 'Item', 
+            'name' => ' movil',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $type2 = Type::create([
+            'model' => 'Item', 
+            'name' => ' portatil',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
         $item1 = Item::create([
             'name' => 'Portatil Asus',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => $classroom->id,
-            'state_id' => 2,
-            'type_id' => 1,
+            'state_id' => $state->id,
+            'type_id' => $type->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -108,8 +139,8 @@ class ClassroomTest extends TestCase
             'name' => 'Portatil MSI',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => $classroom->id,
-            'state_id' => 2,
-            'type_id' => 1,
+            'state_id' => $state2->id,
+            'type_id' => $type2->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
