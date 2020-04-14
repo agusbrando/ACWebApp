@@ -14,7 +14,7 @@ use App\Models\Event;
 use Carbon\Carbon;
 
 use App\Models\Item;
-use App\Models\Classroom;
+
 class ClassroomTest extends TestCase
 {
     /**
@@ -85,7 +85,7 @@ class ClassroomTest extends TestCase
         $classroom->destroy($classroom);
         $type->destroy($type);
         $role->destroy($role);  
-
+    }
     public function testItem()
     {
         $classroom = Classroom::create([
