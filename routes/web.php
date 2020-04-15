@@ -45,8 +45,8 @@ Route::get('/models', function () {
     echo $user->role->name;
 
 });
-// Route::get('/stock', function () {
-//     return view('stock');
-// });
+Route::get('/stock', function () {
+    return view('stock.index');
+});
 
-Route::resource('stock', 'StockController');
+// Route::resource('stock', 'StockController');
