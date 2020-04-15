@@ -24,3 +24,5 @@ Route::get('/', function () {
 });
 
 Route::resource('notesPercentages', 'NotasPorcentagesController');
+
+Route::resource('evaluaciones', 'EvaluacionesController');
