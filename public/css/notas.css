@@ -28,3 +28,21 @@
 .dropdown{
     margin: 2% 0 0;
 }
+
+.evaluaciones{
+    height: 10%;
+    margin: 2% 1% 0;
+}
+
+.evaluaciones a{
+    text-decoration: none;
+    color: white;
+}
+.evaluaciones a:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.boton button{
+    background-color: white;
+}
