@@ -50,7 +50,7 @@
             </div>
         </div>  
         <button class="btn btn-secondary evaluaciones" type="submit">
-            <a href="http://127.0.0.1:8000/Evaluaciones">Evaluaciones</a>
+            <a href="http://127.0.0.1:8000/evaluaciones">Evaluaciones</a>
         </button>
     </div>
         
