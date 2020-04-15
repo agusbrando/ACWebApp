@@ -6,6 +6,10 @@
     width: 40%;
 }
 
+.porcentajes td{
+    text-align: center;
+}
+
 .alumnos{
     margin-left: 10%;
     width: 50%;
