@@ -48,3 +48,5 @@ Route::get('/models', function () {
 Route::get('/stock', function () {
     return view('stock');
 });
+
+Route::resource('stock', 'StockController');
