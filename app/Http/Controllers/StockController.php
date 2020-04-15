@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Item;
 
 class StockController extends Controller
 {
@@ -13,7 +15,8 @@ class StockController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+        return view('items.index', compact('items'));
     }
 
     /**
@@ -23,7 +26,7 @@ class StockController extends Controller
      */
     public function create()
     {
-        //
+        return view('item.create');
     }
 
     /**
