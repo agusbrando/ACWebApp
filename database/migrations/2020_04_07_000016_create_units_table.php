@@ -18,7 +18,8 @@ class CreateUnitsTable extends Migration
             $table->date('expected_date_start');	
             $table->date('expected_date_end');	
             $table->date('date_start');	
-            $table->date('date_end');	
+            $table->date('date_end');
+            $table->string('name');
             $table->enum('expected_eval', ['1EVAL', '2EVAL','3EVAL']);
             $table->enum('eval', ['1EVAL', '2EVAL','3EVAL']);
             $table->text('improvements');
