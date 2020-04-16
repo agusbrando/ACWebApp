@@ -75,9 +75,11 @@
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Fecha Compra</th>
-                            <th>Fecha Compra</th>
-                            <th>Fecha Compra</th>
-                            <th>Fecha Compra</th>
+                            <th>Id clase</th>
+                            <th>Estado</th>
+                            <th>Tipo</th>
+                            <th>Fecha creación</th>
+                            <th>Fecha actualización</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -87,6 +89,9 @@
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->date_pucharse}}</td>
+                            <td>{{$item->classroom_id}}</td>
+                            <td>{{$item->state_id}}</td>
+                            <td>{{$item->type_id}}</td>
                             <td>{{$item->created_at}}</td>
                             <td>{{$item->updated_at}}</td>
                             <td class="botones">
