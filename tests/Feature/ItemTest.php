@@ -14,100 +14,11 @@ use App\Models\Type;
 use App\Models\Role;
 use App\Models\State;
 use App\Models\Timetable;
+use App\Models\ItemUser;
 
 class ItemTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    // public function testExample()
-    // {
-
-    //     $classroom = Classroom::create([
-    //         'name' => '6',
-    //         'number' => 6,
-    //         'created_at' => now(),
-    //         'updated_at' => now()
-    //     ]);
-
-    //     $state = State::create([
-    //         'name' => 'Roto',
-    //         'created_at' => now(),
-    //         'updated_at' => now()
-    //     ]);
-    //     $role = Role::create([
-    //         'name' => 'default',
-    //         'created_at' => now(),
-    //         'updated_at' => now()
-    //     ]);
-
-    //     $user = User::create([
-    //         'first_name' => 'default',
-    //         'last_name' => 'default',
-    //         'email' => 'default@gmail.com',
-    //         'password' => 'default',
-    //         'role_id' => $role->id
-    //     ]);
-
-    //     $type = Type::create([
-    //         'name' => 'default',
-    //         'model' => 'defaultModel'
-    //     ]);
-    //     $timetable = Timetable::create([
-    //         'name' => '2ASIR2020',
-    //         'date_start' =>  now(),
-    //         'date_end' => now(),
-    //         'created_at' => now(),
-    //         'updated_at' => now(),
-    //     ]);
-
-    //     $user = User::create([
-    //         'first_name' => 'user',
-    //         'email' => 'user@campusaula.com',
-    //         'last_name' => 'user',
-    //         'password' => bcrypt('userPass'),
-    //         'created_at' => now(),
-    //         'updated_at' => now(),
-    //         'rol_id' => $role->id,
-    //         'timetable' => $timetable->id
-    //     ]);
-
-    //     $user2 = User::create([
-    //         'first_name' => 'user2',
-    //         'email' => 'user2@campusaula.com',
-    //         'last_name' => 'user2',
-    //         'password' => bcrypt('user2Pass'),
-    //         'created_at' => now(),
-    //         'updated_at' => now(),
-    //         'rol_id' => $role->id,
-    //         'timetable' => $timetable->id
-    //     ]);
-        
-        
-
-    //     //Creacion de la tabla intermedia con los datos extra que no son los id
-    //     $user->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','09','16'),'date_fin' => Carbon::create('2020','06','12')]);
-    //     $user2->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','04','16'),'date_fin' => Carbon::create('2020','06','12')]);
-        
-    //     //Array de Items recuperados
-    //     $users = $itemuser->users->pluck('id');
-
-    //     $expectedUsersIds = collect([
-    //         ['id'=> $user->id],
-    //         ['id'=> $user2->id]
-    //     ])->pluck('id');
-
-    //     $this->assertEquals($users, $expectedUsersIds);
-
-    //     $user->itemUser()->detach($itemuser);  
-    //     $user2->itemUser()->detach($itemuser);      
-
-        
-
-    // }
-    public function testItemUser()
+    public function testUsers()
     {
         //CREACION ITEM
         $classroom = Classroom::create([
@@ -128,7 +39,7 @@ class ItemTest extends TestCase
             'model' => 'defaultModel'
         ]);
 
-        $item1 = Item::create([
+        $item = Item::create([
             'name' => 'Portatil Asus',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => $classroom->id,
@@ -138,18 +49,8 @@ class ItemTest extends TestCase
             'updated_at' => now()
         ]);
 
-        $item2 = Item::create([
-            'name' => 'Portatil MSI',
-            'date_pucharse' => Carbon::create('2020','03','30'),
-            'classroom_id' => $classroom->id,
-            'state_id' => $state->id,
-            'type_id' => $type->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
         //CREACION USER
-        $role = Role::create([
+        $rol = Role::create([
             'name' => 'default',
             'created_at' => now(),
             'updated_at' => now()
@@ -166,46 +67,32 @@ class ItemTest extends TestCase
         $user = User::create([
             'first_name' => 'user',
             'last_name' => 'user',
-            'email' => 'user@campusaula.com',
+            'email' => 'user23424@campusaula.com',
             'password' => bcrypt('userPass'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => $role->id,
-            'timetable' => $timetable->id
+            'role_id' => $rol->id,
+            'timetable_id' => $timetable->id
         ]);
 
         $user2 = User::create([
-            'first_name' => 'user2',
-            'last_name' => 'user2',
-            'email' => 'user2@campusaula.com',
+            'first_name' => 'user223',
+            'last_name' => 'user223',
+            'email' => 'user23323@campusaula.com',
             'password' => bcrypt('user2Pass'),
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' => $role->id,
-            'timetable' => $timetable->id
+            'role_id' => $rol->id,
+            'timetable_id' => $timetable->id
         ]);
         
-        //CREACION itemUser
-        $itemUser = User::create([
-            'item_id' => $item1->id,
-            'user_id' => $user->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        $itemUser2 = User::create([
-            'item_id' => $item1->id,
-            'user_id' => $user->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
 
         //Creacion de la tabla intermedia con los datos extra que no son los id
-        $user->responsables()->attach($itemUser, ['date_inicio' => Carbon::create('2019','09','16'),'date_fin' => Carbon::create('2020','06','12')]);
-        $user2->responsables()->attach($itemUser2, ['date_inicio' => Carbon::create('2018','04','16'),'date_fin' => Carbon::create('2019','06','12')]);
+        $item->users()->attach($user, ['date_inicio' => Carbon::create('2019','09','16'),'date_fin' => Carbon::create('2020','06','12')]);
+        $item->users()->attach($user2, ['date_inicio' => Carbon::create('2018','04','16'),'date_fin' => Carbon::create('2019','06','12')]);
         
         //Array de Items recuperados
-        $users = $itemUser->users->pluck('id');
+        $users = $item->users->pluck('id');
 
         $expectedUsersIds = collect([
             ['id'=> $user->id],
@@ -214,18 +101,18 @@ class ItemTest extends TestCase
 
         $this->assertEquals($users, $expectedUsersIds);
 
-        $user->itemUser()->detach($itemUser);  
-        $user2->itemUser()->detach($itemUser);     
+        $item->users()->detach($user);  
+        $item->users()->detach($user2);     
 
 
-        $itemUser->delete();
-        $itemUser2->delete();
-        $User->delete();
-        $User2->delete();
+        // $itemUser->delete();
+        // $itemUser2->delete();
+        $user->delete();
+        $user2->delete();
         $rol->delete();
         $timetable->delete();
         $item->delete();
-        $item2->delete();
+        // $item2->delete();
         $classroom->delete();
         $type->delete();
         $state->delete();
