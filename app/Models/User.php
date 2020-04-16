@@ -37,9 +37,9 @@ class User extends Model
     }
 
     
-    public function responsables()
+    public function items()
     {
-        return $this->belongsToMany('App\Models\Item', 'item_user', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
+        return $this->belongsToMany('App\Models\Item', 'items-users', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
     }
 
     public function trackings()

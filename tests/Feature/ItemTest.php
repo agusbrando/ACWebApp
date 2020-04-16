@@ -14,7 +14,6 @@ use App\Models\Type;
 use App\Models\Role;
 use App\Models\State;
 use App\Models\Timetable;
-use App\Models\ItemUser;
 
 class ItemTest extends TestCase
 {
@@ -33,7 +32,7 @@ class ItemTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        
+
         $type = Type::create([
             'name' => 'alumno',
             'model' => 'defaultModel'
@@ -41,7 +40,7 @@ class ItemTest extends TestCase
 
         $item = Item::create([
             'name' => 'Portatil Asus',
-            'date_pucharse' => Carbon::create('2020','03','30'),
+            'date_pucharse' => Carbon::create('2020', '03', '30'),
             'classroom_id' => $classroom->id,
             'state_id' => $state->id,
             'type_id' => $type->id,
@@ -85,24 +84,24 @@ class ItemTest extends TestCase
             'role_id' => $rol->id,
             'timetable_id' => $timetable->id
         ]);
-        
+
 
         //Creacion de la tabla intermedia con los datos extra que no son los id
-        $item->users()->attach($user, ['date_inicio' => Carbon::create('2019','09','16'),'date_fin' => Carbon::create('2020','06','12')]);
-        $item->users()->attach($user2, ['date_inicio' => Carbon::create('2018','04','16'),'date_fin' => Carbon::create('2019','06','12')]);
-        
+        $item->users()->attach($user, ['date_inicio' => Carbon::create('2019', '09', '16'), 'date_fin' => Carbon::create('2020', '06', '12')]);
+        $item->users()->attach($user2, ['date_inicio' => Carbon::create('2018', '04', '16'), 'date_fin' => Carbon::create('2019', '06', '12')]);
+
         //Array de Items recuperados
         $users = $item->users->pluck('id');
 
         $expectedUsersIds = collect([
-            ['id'=> $user->id],
-            ['id'=> $user2->id]
+            ['id' => $user->id],
+            ['id' => $user2->id]
         ])->pluck('id');
 
         $this->assertEquals($users, $expectedUsersIds);
 
-        $item->users()->detach($user);  
-        $item->users()->detach($user2);     
+        $item->users()->detach($user);
+        $item->users()->detach($user2);
 
 
         // $itemUser->delete();
