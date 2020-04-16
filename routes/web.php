@@ -23,6 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('notesPercentages', 'NotasPorcentagesController');
+Route::resource('notas', 'NotasController');
 
 Route::resource('evaluaciones', 'EvaluacionesController');
