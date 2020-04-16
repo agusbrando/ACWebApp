@@ -45,3 +45,9 @@ Route::get('/models', function () {
     echo $user->role->name;
 
 });
+
+Route::resource('units', 'UnitController');
+Route::resource('notesPercentages', 'NotesPercentagesController');
+Route::resource('programs', 'ProgramController');
+
+
