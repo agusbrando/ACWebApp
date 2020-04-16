@@ -60,9 +60,11 @@
                 Aula
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">DAM</a>
-                <a class="dropdown-item" href="#">DAW</a>
-                <a class="dropdown-item" href="#">ASIR</a>
+                @foreach($classrooms as $classroom)
+                    <a class="dropdown-item" href="#">{{$classroom->name}}</a>
+                        
+                @endforeach
+              
             </div>
         </div>  
         <div class="d-flex flex-row bd-highlight mb-3">
@@ -70,7 +72,11 @@
                 <table id='tabla' class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Nombre</th>
+                            <th>Fecha Compra</th>
+                            <th>Fecha Compra</th>
+                            <th>Fecha Compra</th>
                             <th>Fecha Compra</th>
                             <th>Actions</th>
                         </tr>
@@ -78,8 +84,11 @@
                     <tbody>
                     @foreach($items as $item)
                         <tr>
-                            <td>{{$items->name}}</td>
-                            <td>{{$items->fecha_compra}}</td>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->date_pucharse}}</td>
+                            <td>{{$item->created_at}}</td>
+                            <td>{{$item->updated_at}}</td>
                             <td class="botones">
                                 <a href="#" class="btn btn-primary">Edit</a>
                                 <form action="#" method="post">
@@ -91,31 +100,7 @@
                     </tbody>
                 </table>
             </div> 
-            <div>
-                <table id='tablaUnidades' class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Fecha Compra</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($items as $item)
-                        <tr>
-                            <td>{{$items->name}}</td>
-                            <td>{{$items->fecha_compra}}</td>
-                            <td class="botones">
-                                <a href="#" class="btn btn-primary">Edit</a>
-                                <form action="#" method="post">
-                                <button class="btn btn-danger" type="submit">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div> 
+            
         </div>        
     <div>
     </div>

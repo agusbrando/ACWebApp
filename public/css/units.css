@@ -23,3 +23,7 @@ table.dataTable thead th{
 .botones *{
     padding-left: 10px;
 }
+
+main{
+    min-margin-left: 20px;
+}

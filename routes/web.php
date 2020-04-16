@@ -49,4 +49,4 @@ Route::get('/stock', function () {
     return view('stock.index');
 });
 
-// Route::resource('stock', 'StockController');
+Route::resource('stock', 'StockController');

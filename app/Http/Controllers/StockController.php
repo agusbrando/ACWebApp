@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Item;
+use App\Models\Classroom;
 
 class StockController extends Controller
 {
@@ -16,7 +17,8 @@ class StockController extends Controller
     public function index()
     {
         $items = Item::all();
-        return view('items.index', compact('items'));
+        $classrooms = Classroom::all();
+        return view('stock.index', compact('items','classrooms'));
     }
 
     /**
