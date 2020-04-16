@@ -14,7 +14,7 @@
                     text: 'Desglose',
                     action: function ( nButton, oConfig, oFlash ) {
  
-                    window.location = "http://127.0.0.1:8000/notas"
+                    window.location = "http://127.0.0.1:8000/desglose"
                     
                     },
                     className: 'btn btn-outline-primary ml-1'
@@ -56,7 +56,7 @@
                     text: 'Desglose',
                     action: function ( nButton, oConfig, oFlash ) {
  
-                    window.location = "http://127.0.0.1:8000/notas"
+                    window.location = "http://127.0.0.1:8000/desglose"
                     
                     },
                     className: 'btn btn-outline-primary ml-1'
@@ -98,7 +98,7 @@
                     text: 'Desglose',
                     action: function ( nButton, oConfig, oFlash ) {
  
-                    window.location = "http://127.0.0.1:8000/notas"
+                    window.location = "http://127.0.0.1:8000/desglose"
                     
                     },
                     className: 'btn btn-outline-primary ml-1'
@@ -140,7 +140,7 @@
                     text: 'Desglose',
                     action: function ( nButton, oConfig, oFlash ) {
  
-                    window.location = "http://127.0.0.1:8000/notas"
+                    window.location = "http://127.0.0.1:8000/desglose"
                     
                     },
                     className: 'btn btn-outline-primary ml-1'
