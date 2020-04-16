@@ -37,7 +37,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="row">
     <div class="col-sm-12">
-    <div class="d-flex flex-flow">
+    <div class="d-flex flex-flow mb-4">
         <h1 class="display-4 pr-5">Notas y Porcentages</h1>
         <div class="dropdown">
             <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
