@@ -46,7 +46,8 @@
                 <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Aula
                 </button>
-                <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formPorcentajes"> Añadir</button>
+                <!-- <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a> -->
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach($classrooms as $classroom)
                     <a class="dropdown-item" onClick="" href="#">{{$classroom->name}}</a>
@@ -96,9 +97,57 @@
                 </div>
 
             </div>
-            <div>
+        </div>
+    </div>
+    <div class="modal fade" id="formPorcentajes" tabindex="-1" role="dialog" aria-labelledby="formPorcentajes" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Añadir porcentaje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                    @csrf
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre del porcentaje">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">¿En que Aula va a estar?</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                @foreach($classrooms as $classroom)
+                                <option>{{$classroom->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Tipo de objeto</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                @foreach($types as $type)
+                                <option>{{$type->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Observaciones</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                    
+                </div>
             </div>
-            <div class="col-sm-12">
+        </div>
+    </div>
+
+
 
 </main>
 @endsection

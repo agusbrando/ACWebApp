@@ -21,7 +21,9 @@ class ItemController extends Controller
         //Cojo todas las aulas que exiten para mostrarlas en el desplegable
         // para elegir a que aula pertenece el Item
         $classrooms = Classroom::all();
-        $types = Type::all();
+        
+        //Filtro para coger solo los typos del modelo Item
+        $types = DB::table('types')->where('model','Item')->get();
         $items = Item::all();
         return view('items.index', compact('classrooms', 'items', 'types'));
     }
