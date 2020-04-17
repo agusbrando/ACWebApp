@@ -27,9 +27,4 @@ class Item extends Model
         
     }
 
-    // public function Items()
-    // {
-    //     return $this->belongsToMany('App\Models\User', 'items_users', 'item_id', 'user_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
-        
-    // }
 }

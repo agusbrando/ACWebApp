@@ -90,9 +90,10 @@ class ItemTest extends TestCase
         $item->users()->attach($user, ['date_inicio' => Carbon::create('2019', '09', '16'), 'date_fin' => Carbon::create('2020', '06', '12')]);
         $item->users()->attach($user2, ['date_inicio' => Carbon::create('2018', '04', '16'), 'date_fin' => Carbon::create('2019', '06', '12')]);
 
-        //Array de Items recuperados
+        //Creamos un array de todos los id de los users creados en la DB
         $users = $item->users->pluck('id');
 
+        //Array de Items recuperados    
         $expectedUsersIds = collect([
             ['id' => $user->id],
             ['id' => $user2->id]
@@ -104,14 +105,12 @@ class ItemTest extends TestCase
         $item->users()->detach($user2);
 
 
-        // $itemUser->delete();
-        // $itemUser2->delete();
+        
         $user->delete();
         $user2->delete();
         $rol->delete();
         $timetable->delete();
         $item->delete();
-        // $item2->delete();
         $classroom->delete();
         $type->delete();
         $state->delete();
