@@ -86,7 +86,7 @@ class TaskTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 1,
-            'timetable_id'=>1
+            'timetable_id'=> 1
         ]);
         $user2 = User::create([
             'first_name' => 'Alumno',
