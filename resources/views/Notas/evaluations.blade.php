@@ -181,11 +181,11 @@
     <section id="tabs">
         <div class="container-fluid">
             <div class="d-flex flex-row">
+                <a href="notas" class=" atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
                 <h1 class="display-4 pr-3">Evaluaciones</h1>
-                <a href="notas" class="btn btn-primary atras mt-4"><i class="fas fa-arrow-left"></i></a>
             </div>
             <div class="row">
-                <div class="col mt-5">
+                <div class="col mt-4">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-eval1-tab" data-toggle="tab" href="#nav-eval1" role="tab" aria-controls="nav-eval1" aria-selected="true">Evaluacion 1</a>

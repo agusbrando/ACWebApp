@@ -5,23 +5,39 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
+use App\Models\Course;
 use Illuminate\Support\Facades\DB; 
 
 class NotasController extends Controller
 {
     public function index()
     {
-        $baja = 'No';
         $users = DB::table('users')->where('role_id', '=', 4)->get();
         $subjects = Subject::all();
-        return view('Notas.index', compact('users', 'subjects', 'baja'));
+        $courses = Course::all();
+        return view('Notas.index', compact('users', 'subjects', 'courses'));
     }
 
-    public function baja()
-    {
-        return view('Notas.index', compact('baja'));
-    }
+    public function datos(Request $request){
 
+        $request->validate([
+            'cicloFormativo'=>'required',
+            'curso'=>'required',
+            'asignatura'=>'required'
+        ]);
+
+        $cicloFormativo = $request->get('cicloFormativo');
+        $curso = $request->get('curso');
+        $asignatura = $request->get('asignatura');
+
+        $users = DB::table('users')->where('role_id', '=', 4)->get();
+        $subjects = Subject::all();
+        $courses = Course::all();
+
+        $users = DB::table('users')->where('role_id', '=', 1)->get();
+
+        return view('Notas.index', compact('users', 'subjects', 'courses'));
+    }
     
     /**
      * Show the form for creating a new resource.

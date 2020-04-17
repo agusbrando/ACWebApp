@@ -75,85 +75,86 @@
 </script>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="d-flex flex-row">
-        <h1 class="display-4 pr-3 mb-5">Desglose</h1>
-        <h1 class="display-4 collapse multi-collapse show" id="ex">Examenes</h1>
-        <h1 class="display-4 collapse multi-collapse" id="act">Actitud</h1>
-    </div>
+    <div class="container-fluid">
+        <div class="d-flex flex-row mb-4">
+            <a href="evaluaciones" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
+            <h1 class="display-4 pr-3">Desglose</h1>
+            <h1 class="display-4 collapse multi-collapse show" id="ex">Examenes</h1>
+            <h1 class="display-4 collapse multi-collapse" id="act">Actitud</h1>
+        </div>
 
-    <div class="mb-4">
-        <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Actitud" aria-expanded="false" aria-controls="Actitud">Actitud</button> -->
-        <a href="evaluaciones" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="Examenes Actitud nuevaColumna ex">Cambiar Vista</button>
-        <button class="btn btn-primary collapse multi-collapse show" id="nuevaColumna">Añadir columna</button>
-    </div>
-    <div class="collapse multi-collapse show">
-        <table id="examenes" class="table table-striped examenes" style="width:100%">
-            <thead class="cabezeraTabla">
-                <tr id='columna'>
-                    <td>Apellidos, Nombre</td>
-                    <td>Parcial 1</td>
-                    <td>Parcial 2</td>
-                    <td>Nota Examenes</td>
-                    <td>Comentarios</td>
-                    <td>Action</td>
-                </tr>
-            </thead>
-            <tbody id="fila">
-                @foreach($users as $user)
-                <tr>
-                    <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                    <td>
-                        <div class="input-group col-10">
-                            <input type="text" class="form-control w" placeholder="">
-                        </div>
-
-                    </td>
-                    <td>
-                        <div class="input-group col-10">
-                            <input type="text" class="form-control w" placeholder="">
-                        </div>
-                    </td>
-                    <td>6</td>
-                    <td>
-                        <div class="input-group col-10">
-                            <input type="text" class="form-control w" placeholder="">
-                        </div>
-                    </td>
-                    <td>
-                        <form action="#" method="post">
-                            <button class="btn btn-outline-primary btn-sm" type="submit">Guardar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="collapse multi-collapse" id="Actitud">
-        <table id="actitud" class="table table-striped examenes" style="width:100%">
-            <thead class="cabezeraTabla">
-                <tr>
-                    <td>Apellidos, Nombre</td>
-                    <td>Nota Media Actitud</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $user)
-                <tr>
-                    <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                    <td>
-                        <div class="input-group col-10">
-                            <input type="text" class="form-control w" placeholder="">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon1">Guardar</button>
+        <div class="mb-4">
+            <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Actitud" aria-expanded="false" aria-controls="Actitud">Actitud</button> -->
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="Examenes Actitud nuevaColumna ex">Cambiar Vista</button>
+            <button class="btn btn-primary collapse multi-collapse show" id="nuevaColumna">Añadir columna</button>
+        </div>
+        <div class="collapse multi-collapse show">
+            <table id="examenes" class="table table-striped examenes" style="width:100%">
+                <thead class="cabezeraTabla">
+                    <tr id='columna'>
+                        <td>Apellidos, Nombre</td>
+                        <td>Parcial 1</td>
+                        <td>Parcial 2</td>
+                        <td>Nota Examenes</td>
+                        <td>Comentarios</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody id="fila">
+                    @foreach($users as $user)
+                    <form action="#" method="post">
+                        <tr>
+                            <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                            <td>
+                                <div class="input-group col-10">
+                                    <input type="text" class="form-control w" placeholder="">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group col-10">
+                                    <input type="text" class="form-control w" placeholder="">
+                                </div>
+                            </td>
+                            <td>6</td>
+                            <td>
+                                <div class="input-group col-10">
+                                    <input type="text" class="form-control w" placeholder="">
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
+                            </td>
+                        </tr>
+                    </form>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="collapse multi-collapse" id="Actitud">
+            <table id="actitud" class="table table-striped examenes" style="width:100%">
+                <thead class="cabezeraTabla">
+                    <tr>
+                        <td>Apellidos, Nombre</td>
+                        <td>Nota Media Actitud</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($users as $user)
+                    <tr>
+                        <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                        <td>
+                            <div class="input-group col-10">
+                                <input type="text" class="form-control w" placeholder="">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon1">Guardar</button>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 @endsection

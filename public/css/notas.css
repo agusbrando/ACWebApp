@@ -6,9 +6,6 @@
     width: 40%;
 }
 
-.porcentajes td {
-    text-align: center;
-}
 
 .alumnos {
     margin-left: 10%;
@@ -31,7 +28,6 @@
 
 .evaluaciones {
     height: 10%;
-    margin: 2% 1% 0;
 }
 
 .evaluaciones a {
@@ -57,4 +53,5 @@
 
 .atras{
     height: 10%;
+    font-size: 25px;
 }
