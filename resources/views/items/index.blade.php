@@ -46,7 +46,7 @@
                 <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Aula
                 </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formPorcentajes"> Añadir</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formCrearItem"> Añadir</button>
                 <!-- <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a> -->
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach($classrooms as $classroom)
@@ -99,11 +99,12 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="formPorcentajes" tabindex="-1" role="dialog" aria-labelledby="formPorcentajes" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <!-- Modal -->
+    <div class="modal fade" id="formCrearItem" tabindex="-1" role="dialog" aria-labelledby="formCrearItem" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Añadir porcentaje</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Añadir Objeto</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -113,7 +114,7 @@
                     @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre del porcentaje">
+                            <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre del objeto">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">¿En que Aula va a estar?</label>
