@@ -21,7 +21,7 @@ class ItemController extends Controller
         //Cojo todas las aulas que exiten para mostrarlas en el desplegable
         // para elegir a que aula pertenece el Item
         $classrooms = Classroom::all();
-        
+
         //Filtro para coger solo los typos del modelo Item
         $types = DB::table('types')->where('model','Item')->get();
         $items = Item::all();
@@ -50,7 +50,23 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'date_pucharse'=>'required',
+            'classroom_id'=>'required',
+            'type_id'=>'required',
+        ]);
+
+        $item = new Item([
+            'name' => $request->get('name'),
+            'date_pucharse'=>$request->get('fechaCompra'),
+            'classroom_id'=>'required',
+            'state_id'=>'Nuevo',
+            'type_id'=>'required',
+
+        ]);
+        $item->save();
+        return redirect('/items')->with('exito', 'Item creado!');
     }
 
     /**

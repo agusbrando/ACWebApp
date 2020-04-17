@@ -3,6 +3,11 @@
 @section('main')
 <script>
     $(document).ready(function() {
+        $('#datepicker').datepicker({
+            language: 'es'
+        });
+    });
+    $(document).ready(function() {
         $('#tabla').DataTable({
             dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             buttons: [{
@@ -39,6 +44,7 @@
 </script>
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <!-- Listado de Items -->
     <div class="row">
         <div class="col-sm-12">
             <h1 class="display-4">Material del Aula </h1>
@@ -114,11 +120,16 @@
                     @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre del objeto">
+                            <input type="text" class="form-control" id="nombreItem" name="nombreItem" aria-describedby="nombreHelp" placeholder="Nombre del objeto">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Fecha de Compra</label>
+                            <input type="date" id="datepickerItem" name="fechaCompra" placeholder="- Seleccionar fecha -" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">¿En que Aula va a estar?</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select class="form-control" id="exampleFormControlSelect1" name="nombreAula" >
+                                <option disabled selected>Selecciona un Aula</option> <!--Hace la funcion de un placeholder-->
                                 @foreach($classrooms as $classroom)
                                 <option>{{$classroom->name}}</option>
                                 @endforeach
@@ -126,17 +137,15 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Tipo de objeto</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select class="form-control" id="exampleFormControlSelect1" name="tipoItem">
+                                <option disabled selected>Selecciona un tipo</option> <!--Hace la funcion de un placeholder-->
                                 @foreach($types as $type)
                                 <option>{{$type->name}}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Observaciones</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
+                        
                         <div class="form-group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-primary">Guardar Cambios</button>
