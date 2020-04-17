@@ -28,7 +28,9 @@ class TimetableController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            
+            'name'=>'required',
+            'date_start'=>'required',
+            'date_end'=>'required'
         ]);
       
         $timetable = new Timetable([
@@ -38,7 +40,7 @@ class TimetableController extends Controller
            
         ]);
         $timetable->save();
-        return redirect('/horario')->with('exito', 'Horario creado!');
+        return redirect('/horarios')->with('exito', 'Horario creado!');
     }
 
     /**
@@ -73,15 +75,19 @@ class TimetableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'name'=>'required',
+            'date_start'=>'required',
+            'date_end'=>'required'
+        ]);
 
         $timetable = Timetable::find($id);
-        $timetable->name =  $request->get('name');
+        $timetable->name = $request->get('name');
         $timetable->date_start= $request->get('date_start');
         $timetable->date_end= $request->get('date_end');
         $timetable->save();
 
-        return redirect('/horario')->with('exito', 'Horario editado!');
+        return redirect('/horarios')->with('exito', 'Horario editado!');
     }
 
     /**
@@ -95,7 +101,7 @@ class TimetableController extends Controller
         $timetable = Timetable::find($id);
         $timetable->delete();
 
-        return redirect('/horario')->with('exito', 'Horario borrado!');
+        return redirect('/horarios')->with('exito', 'Horario borrado!');
     }
 }
 

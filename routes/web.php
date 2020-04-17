@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('horarios', 'TimetableController');
-
+Route::resource('seguimiento', 'CalendarController');
 Route::get('/models', function () {
 
     $role = 1;

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Seguimiento extends Model
+class Tracking extends Model
 {
    protected $table ='trackings';
 
