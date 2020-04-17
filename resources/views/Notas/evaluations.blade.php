@@ -3,19 +3,21 @@
 @section('main')
 <script>
     $(document).ready(function() {
-        var table = $('#evaluacion1').DataTable( {
-            dom : "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
+        var table = $('#evaluacion1').DataTable({
+            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
             scrollCollapse: true,
-            buttons:[
-                { extend: 'excel', className: 'btn-outline-success' },
+            buttons: [{
+                    extend: 'excel',
+                    className: 'btn-outline-success'
+                },
                 {
                     label: 'Create',
                     text: 'Desglose',
-                    action: function ( nButton, oConfig, oFlash ) {
- 
-                    window.location = "http://127.0.0.1:8000/desglose"
-                    
+                    action: function(nButton, oConfig, oFlash) {
+
+                        window.location = "http://127.0.0.1:8000/desglose"
+
                     },
                     className: 'btn btn-outline-primary ml-1'
                 }
@@ -40,24 +42,26 @@
                     "previous": "Anterior"
                 }
             }
-        } );
-    } );
+        });
+    });
 </script>
 <script>
     $(document).ready(function() {
-        $('#evaluacion2').DataTable( {
-            dom : "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
+        $('#evaluacion2').DataTable({
+            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
             scrollCollapse: true,
-            buttons:[
-                { extend: 'excel', className: 'btn-outline-success' },
+            buttons: [{
+                    extend: 'excel',
+                    className: 'btn-outline-success'
+                },
                 {
                     label: 'Create',
                     text: 'Desglose',
-                    action: function ( nButton, oConfig, oFlash ) {
- 
-                    window.location = "http://127.0.0.1:8000/desglose"
-                    
+                    action: function(nButton, oConfig, oFlash) {
+
+                        window.location = "http://127.0.0.1:8000/desglose"
+
                     },
                     className: 'btn btn-outline-primary ml-1'
                 }
@@ -82,24 +86,26 @@
                     "previous": "Anterior"
                 }
             }
-        } );
-    } );
+        });
+    });
 </script>
 <script>
     $(document).ready(function() {
-        $('#evaluacion3').DataTable( {
-            dom : "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
+        $('#evaluacion3').DataTable({
+            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
             scrollCollapse: true,
-            buttons:[
-                { extend: 'excel', className: 'btn-outline-success' },
+            buttons: [{
+                    extend: 'excel',
+                    className: 'btn-outline-success'
+                },
                 {
                     label: 'Create',
                     text: 'Desglose',
-                    action: function ( nButton, oConfig, oFlash ) {
- 
-                    window.location = "http://127.0.0.1:8000/desglose"
-                    
+                    action: function(nButton, oConfig, oFlash) {
+
+                        window.location = "http://127.0.0.1:8000/desglose"
+
                     },
                     className: 'btn btn-outline-primary ml-1'
                 }
@@ -124,24 +130,26 @@
                     "previous": "Anterior"
                 }
             }
-        } );
-    } );
+        });
+    });
 </script>
 <script>
     $(document).ready(function() {
-        $('#evaluacionF').DataTable( {
-            dom : "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
+        $('#evaluacionF').DataTable({
+            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
             scrollCollapse: true,
-            buttons:[
-                { extend: 'excel', className: 'btn-outline-success' },
+            buttons: [{
+                    extend: 'excel',
+                    className: 'btn-outline-success'
+                },
                 {
                     label: 'Create',
                     text: 'Desglose',
-                    action: function ( nButton, oConfig, oFlash ) {
- 
-                    window.location = "http://127.0.0.1:8000/desglose"
-                    
+                    action: function(nButton, oConfig, oFlash) {
+
+                        window.location = "http://127.0.0.1:8000/desglose"
+
                     },
                     className: 'btn btn-outline-primary ml-1'
                 }
@@ -166,15 +174,18 @@
                     "previous": "Anterior"
                 }
             }
-        } );
-    } );
+        });
+    });
 </script>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <section id="tabs">
         <div class="container-fluid">
-        <h1 class="display-4 pr-5 mb-5">Evaluaciones</h1>
+            <div class="d-flex flex-row">
+                <h1 class="display-4 pr-3">Evaluaciones</h1>
+                <a href="notas" class="btn btn-primary atras mt-4"><i class="fas fa-arrow-left"></i></a>
+            </div>
             <div class="row">
-                <div class="col">
+                <div class="col mt-5">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-eval1-tab" data-toggle="tab" href="#nav-eval1" role="tab" aria-controls="nav-eval1" aria-selected="true">Evaluacion 1</a>
@@ -193,13 +204,13 @@
                                         <td>%Trabajos</td>
                                         <td>%Examen</td>
                                         <td>%Actitud</td>
-                                        <td>%NOTA FINAL</td>
+                                        <td>NOTA FINAL</td>
                                         <td>%Recuperacion</td>
-                                        <td>%BOLETIN</td>
+                                        <td>BOLETIN</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
+                                    @foreach($users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->last_name}} {{$user->first_name}}</td>
@@ -210,7 +221,7 @@
                                         <td>X</td>
                                         <td>X</td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -229,7 +240,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
+                                    @foreach($users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->last_name}} {{$user->first_name}}</td>
@@ -240,7 +251,7 @@
                                         <td>X</td>
                                         <td>X</td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -259,7 +270,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
+                                    @foreach($users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->last_name}} {{$user->first_name}}</td>
@@ -270,7 +281,7 @@
                                         <td>X</td>
                                         <td>X</td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -289,7 +300,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
+                                    @foreach($users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->last_name}} {{$user->first_name}}</td>
@@ -300,12 +311,12 @@
                                         <td>X</td>
                                         <td>X</td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                
+
                 </div>
             </div>
         </div>

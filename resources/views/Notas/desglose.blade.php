@@ -3,8 +3,14 @@
 @section('main')
 <script>
     $(document).ready(function() {
+        $("#nuevaColumna").click(function() {
+            $("#columna").append('<td>Action</td>');
+
+        });
+    });
+    $(document).ready(function() {
         $('#examenes').DataTable({
-            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
+            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
             scrollCollapse: true,
             buttons: [{
@@ -37,7 +43,7 @@
 <script>
     $(document).ready(function() {
         $('#actitud').DataTable({
-            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
+            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
             scrollCollapse: true,
             buttons: [{
@@ -69,36 +75,55 @@
 </script>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <h1 class="display-4 pr-5 mb-5">Desglose {{$titulo}} </h1>
+    <div class="d-flex flex-row">
+        <h1 class="display-4 pr-3 mb-5">Desglose</h1>
+        <h1 class="display-4 collapse multi-collapse show" id="ex">Examenes</h1>
+        <h1 class="display-4 collapse multi-collapse" id="act">Actitud</h1>
+    </div>
+
     <div class="mb-4">
         <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Actitud" aria-expanded="false" aria-controls="Actitud">Actitud</button> -->
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="Examenes Actitud">Cambiar Vista</button>
+        <a href="evaluaciones" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="Examenes Actitud nuevaColumna ex">Cambiar Vista</button>
+        <button class="btn btn-primary collapse multi-collapse show" id="nuevaColumna">Añadir columna</button>
     </div>
-    <div class="collapse multi-collapse show" id="Examenes">
+    <div class="collapse multi-collapse show">
         <table id="examenes" class="table table-striped examenes" style="width:100%">
             <thead class="cabezeraTabla">
-                <tr>
+                <tr id='columna'>
                     <td>Apellidos, Nombre</td>
                     <td>Parcial 1</td>
                     <td>Parcial 2</td>
                     <td>Nota Examenes</td>
                     <td>Comentarios</td>
+                    <td>Action</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="fila">
                 @foreach($users as $user)
                 <tr>
                     <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                    <td>5</td>
-                    <td>6</td>
+                    <td>
+                        <div class="input-group col-10">
+                            <input type="text" class="form-control w" placeholder="">
+                        </div>
+
+                    </td>
+                    <td>
+                        <div class="input-group col-10">
+                            <input type="text" class="form-control w" placeholder="">
+                        </div>
+                    </td>
                     <td>6</td>
                     <td>
                         <div class="input-group col-10">
-                            <input type="text" class="form-control" placeholder="">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon1">Guardar</button>
-                            </div>
+                            <input type="text" class="form-control w" placeholder="">
                         </div>
+                    </td>
+                    <td>
+                        <form action="#" method="post">
+                            <button class="btn btn-outline-primary btn-sm" type="submit">Guardar</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -117,7 +142,14 @@
                 @foreach($users as $user)
                 <tr>
                     <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                    <td>5</td>
+                    <td>
+                        <div class="input-group col-10">
+                            <input type="text" class="form-control w" placeholder="">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon1">Guardar</button>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
