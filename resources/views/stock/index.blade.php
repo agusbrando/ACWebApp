@@ -1,23 +1,5 @@
 @extends('base')
 
-<!-- @section('login')
-<form class="form-signin center">
-    <img class="mb-4" src="{{ asset('img/Logo.png') }}" alt="" height="150">
-    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-    <label for="inputEmail" class="sr-only">Dirección de Email</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Dirección de Email" required autofocus>
-    <label for="inputPassword" class="sr-only">Contraseña</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> Recordarme
-        </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-    <p class="mt-3 mb-3 text-muted">&copy; Aula Campus 2020</p>
-</form>
-@endsection -->
-
 @section('main')
 <script>
     $(document).ready(function() {
@@ -61,7 +43,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @foreach($classrooms as $classroom)
-                    <a class="dropdown-item" href="#">{{$classroom->name}}</a>
+                    <a class="dropdown-item"  onClick="" href="#">{{$classroom->name}}</a>
                         
                 @endforeach
               

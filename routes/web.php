@@ -50,3 +50,9 @@ Route::get('/stock', function () {
 });
 
 Route::resource('stock', 'StockController');
+
+Route::get('/newitem', function () {
+    return view('item.index');
+});
+
+Route::resource('item', 'ItemController');
