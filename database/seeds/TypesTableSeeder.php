@@ -13,30 +13,48 @@ class TypesTableSeeder extends Seeder
     {
         DB::table('types')->insert([
             'name' => 'default',
-            'model' => 'App\Models\Percentage',
-	    'created_at' => now(),
-            'updated_at' => now()      
-        ]);
-        
-        DB::table('types')->insert([
-            'name' => 'default2',
-            'model' => 'App\Models\Event',
-	    'created_at' => now(),
-            'updated_at' => now()      
+            'model' => 'Percentage',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
-	DB::table('types')->insert([
-            'name' => 'Portatil',
-            'model' => 'App\Models\Item',	    
+        DB::table('types')->insert([
+            'name' => 'default2',
+            'model' => 'Event',
             'created_at' => now(),
-            'updated_at' => now()      
+            'updated_at' => now()
         ]);
-	
-	DB::table('types')->insert([
+
+        DB::table('types')->insert([
+            'name' => 'Portatil',
+            'model' => 'Item',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('types')->insert([
+            'name' => 'All in One',
+            'model' => 'Item',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('types')->insert([
+            'name' => 'Torre',
+            'model' => 'Item',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('types')->insert([
+            'name' => 'Pantalla',
+            'model' => 'Item',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('types')->insert([
             'name' => 'default3',
-            'model' => 'App\Models\Misbehaviors',
-	    'created_at' => now(),
-            'updated_at' => now()            
+            'model' => 'Misbehaviors',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

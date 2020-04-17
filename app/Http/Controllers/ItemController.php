@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Classroom;
+use App\Models\Type;
+use App\Models\Item;
 
 class ItemController extends Controller
 {
@@ -13,7 +18,12 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        //Cojo todas las aulas que exiten para mostrarlas en el desplegable
+        // para elegir a que aula pertenece el Item
+        $classrooms = Classroom::all();
+        $types = Type::all();
+        $items = Item::all();
+        return view('items.index', compact('classrooms', 'items', 'types'));
     }
 
     /**
@@ -23,7 +33,11 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        $classrooms = Classroom::all();
+        //Filtro para coger solo los typos del modelo Item
+        $types = DB::table('types')->where('model','Item')->get();
+        $items = Item::all();
+        return view('items.create', compact('classrooms', 'items', 'types'));
     }
 
     /**

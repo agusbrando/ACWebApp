@@ -71,7 +71,7 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="stock">
+        <a class="nav-link" href="/items">
             <span data-feather="file-text"></span>
             Stock
         </a>
