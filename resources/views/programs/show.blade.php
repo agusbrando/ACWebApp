@@ -4,10 +4,14 @@
 <script>
     $(document).ready(function() {
         $('#tabla').DataTable( {
-            dom : "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
+            dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-6 boton'B><'col-sm-6'>>",
             buttons: [
                 { extend: 'excel', className: 'btn-outline-success mr-2' }, 
-                { extend: 'pdf', className: 'btn-outline-danger mr-2' }
+                { extend: 'pdf', className: 'btn-outline-danger mr-2' },
+                {text: 'Añadir Unidad', className: 'btn-outline-primary', 
+                    action: function () {
+                        $('#crearAspecto').modal('show');
+                }} 
             ],
             language: {
                 "decimal": "",
@@ -32,6 +36,61 @@
         } );
     } );
 </script>
+<script>
+    $(document).ready(function() {
+        $('#tablaAspectos').DataTable( {
+            dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-6 boton'B><'col-sm-6'>>",
+            buttons: [
+                { extend: 'excel', className: 'btn-outline-success mr-2' }, 
+                { extend: 'pdf', className: 'btn-outline-danger mr-2' },
+                {text: 'Añadir Aspecto Evaluado', className: 'btn-outline-primary', 
+                    action: function () {
+                        $('#crearUnidad').modal('show');
+                }} 
+            ],
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
+                "infoEmpty": "No hay informacion",
+                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No se han encontrado resultados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+        } );
+    } );
+</script>
+<script type="text/javascript">
+	$(document).ready(function()
+	    {
+        $('#multiCollapseExample1').show();
+	    $("#et1").on( "click", function() {	 
+            $('#multiCollapseExample1').toggle();
+            $('#multiCollapseExample2').toggle();
+            $('#et1').toggleClass('active');
+            $('#et2').toggleClass('active');
+             });
+        $("#et2").on( "click", function() {	 
+            $('#multiCollapseExample1').toggle();
+            $('#multiCollapseExample2').toggle();
+            $('#et1').toggleClass('active');
+            $('#et2').toggleClass('active');
+             });
+        });
+        
+</script>
+
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -46,155 +105,204 @@
             </ol>
         </nav>
         
-        <div class="bd-highlight mb-3 tablas col-6 center">
-            <p>Lista de unidades de la programacion</p>
-            <div>
-                <table id='tabla' class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Contenido</th>
-                            <th>Fecha inicio programada</th>
-                            <th>Fecha final programada</th>
-                            <th>Evaluacion programada</th>
-                            <th>Fecha inicio</th>
-                            <th>Fecha final</th>
-                            <th>Evaluacion</th>
-                            <th>Observaciones</th>
-                            <th>Mejoras</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($unidades as $unidad)
-                        <tr>
-                            <td>{{$unidad->name}}</td>
-                            <td>{{$unidad->}}</td>
-                            <td>{{$unidad->}}</td>
-                            <td>{{$unidad->}}</td>
-                            <td>{{$unidad->}}</td>
-                            <td>{{$unidad->}}</td>
-                            <td>{{$unidad->}}</td>
-                            <td>{{$unidad->}}</td>
-                            <td>{{$unidad->}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div> 
-    </div>   
+        <div class="bd-highlight mb-3 tablas col-12 center">
+            
+            <h1 class="display-5 text-center">{{$program->subject->name}} ({{date("Y", strtotime($program->created_at))}})</h1>
+            <div class="card text-center">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a id="et1" class="nav-link active" href="#">Unidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="et2" class="nav-link" href="#">Aspectos Evaluados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Comprobar</a>
+                    </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    
+                
+            <div class="row justify-content-center">
+                <div class="collapse multi-collapse"  id="multiCollapseExample1">
+                    <table id='tabla' class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Contenido</th>
+                                <th>F. inicio prevista</th>
+                                <th>F. final prevista</th>
+                                <th>Eval. prevista</th>
+                                <th>F. inicio</th>
+                                <th>F. final</th>
+                                <th>Eval.</th>
+                                <th>Observaciones</th>
+                                <th>Mejoras</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($program->units as $unidad)
+                            <tr>
+                                <td>{{$unidad->name}}</td>
+                                <td>{{$unidad->expected_date_start}}</td>
+                                <td>{{$unidad->expected_date_end}}</td>
+                                <td>{{$unidad->expected_eval}}</td>
+                                <td>{{$unidad->date_start}}</td>
+                                <td>{{$unidad->date_end}}</td>
+                                <td>{{$unidad->eval}}</td>
+                                <td>
+                                    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#observaciones">Mostrar</button><!-- Modal Observaciones-->
+                                    <div class="modal fade" id="observaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Observaciones</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    
+                                                {{$unidad->notes}}
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#mejoras">Mostrar</button>
+                                    <div class="modal fade" id="mejoras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Mejoras</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    
+                                                {{$unidad->improvements}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    
+                    
+                </div> 
+                <div class="collapse multi-collapse col-8"  id="multiCollapseExample2">
+                    <table id='tablaAspectos' class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Aspecto Evaluado</th>
+                                <th>Observaciones</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($program->evaluables as $evaluable)
+                            <tr>
+                                <td>{{$evaluable->name}}</td>
+                                <td>
+                                    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#descripcion">Mostrar</button><!-- Modal Observaciones-->
+                                    <div class="modal fade" id="descripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Descripcion</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                            {{$evaluable->pivot->description}}
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </td>
+                                <td class="botones">
+                                    <a href="#" class="btn btn-primary">Edit</a>
+                                    <form action="#" method="post">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    
+                    
+                </div> 
+            </div>
+            
+            <div class="row justify-content-center">
+                    <div class="input-group col-6 pt-5">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Profesor</span>
+                        </div>
+                        <div class="form-control">{{$program->professor->first_name}} {{$program->professor->last_name}}</div>
+                        <div class="col-1"></div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Responsable</span>
+                        </div>
+                        <div class="form-control">{{$program->responsable->first_name}} {{$program->professor->last_name}}</div>
+                    </div>
+
+            </div>
+
+
+                </div>
+            </div>
+  
+    </div> 
+        
 </main>
 
-<!-- Modal Observaciones-->
-<div class="modal fade" id="observaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nueva Programacion</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-      <form method="post" action="{{ route('programs.store') }}">
-      @csrf
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Profesor</span>
+        <!-- Modal form Unidad -->
+        <div class="modal fade" id="crearUnidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Unidad Nueva</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    dasdadasdadaddad
+                    hola
+                </div>
+            </div>
         </div>
-            <select class="form-control" id="exampleFormControlSelect1" name="professor_id">
-                @foreach($profesores as $profesor)
-                <option value="{{$profesor->id}}">{{$profesor->first_name}} {{$profesor->last_name}}</option>
-                @endforeach
-            </select>
-       </div>
-       <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Responsable</span>
-        </div>
-        <select class="form-control" id="exampleFormControlSelect1" name="user_id">
-            @foreach($profesores as $profesor)
-            <option value="{{$profesor->id}}">{{$profesor->first_name}} {{$profesor->last_name}}</option>
-            @endforeach
-        </select>
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Asignaturas</span>
-        </div>
-        <select class="form-control" id="exampleFormControlSelect1" name="subject_id">
-            @foreach($subjects as $subject)
-            <option value="{{$subject->id}}">{{$subject->name}}</option>
-            @endforeach
-        </select>
-      </div>
-      
-      
+        </div>  
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Añadir Programación</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
+        <!-- Modal form Aspecto -->
+        <div class="modal fade" id="crearAspecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aspecto Nuevo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    dasdadasdadaddad
+                    hola
+                </div>
+            </div>
+        </div>
+        </div>  
 
-<!-- Modal Acciones de Mejor-->
-<div class="modal fade" id="mejoras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nueva Programacion</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-      <form method="post" action="{{ route('programs.store') }}">
-      @csrf
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Profesor</span>
-        </div>
-            <select class="form-control" id="exampleFormControlSelect1" name="professor_id">
-                @foreach($profesores as $profesor)
-                <option value="{{$profesor->id}}">{{$profesor->first_name}} {{$profesor->last_name}}</option>
-                @endforeach
-            </select>
-       </div>
-       <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Responsable</span>
-        </div>
-        <select class="form-control" id="exampleFormControlSelect1" name="user_id">
-            @foreach($profesores as $profesor)
-            <option value="{{$profesor->id}}">{{$profesor->first_name}} {{$profesor->last_name}}</option>
-            @endforeach
-        </select>
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Asignaturas</span>
-        </div>
-        <select class="form-control" id="exampleFormControlSelect1" name="subject_id">
-            @foreach($subjects as $subject)
-            <option value="{{$subject->id}}">{{$subject->name}}</option>
-            @endforeach
-        </select>
-      </div>
-      
-      
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Añadir Programación</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 @endsection

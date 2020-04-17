@@ -66,6 +66,7 @@ class ProgramController extends Controller
     public function show($id)
     {
         $program = Program::findorfail($id);
+        
         return view('programs.show',compact('program'));
     }
 

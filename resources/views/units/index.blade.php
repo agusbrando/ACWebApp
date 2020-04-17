@@ -1,71 +1,9 @@
 @extends('base')
 
 @section('main')
-<script>
-    $(document).ready(function() {
-        $('#tabla').DataTable( {
-            dom : "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-            buttons: [
-                { extend: 'excel', className: 'btn-outline-success mr-2' }, 
-                { extend: 'pdf', className: 'btn-outline-danger mr-2' }/*,
-                {text: 'Nombre', action: function () {
-                    window.location = "/" ;}, className: 'btn-outline-primary'
-                } */
-            ],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        } );
-    } );
-</script>
-<script>
-    $(document).ready(function() {
-        $('#tablaUnidades').DataTable( {
-            dom : "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-            buttons: [
-                { extend: 'excel', className: 'btn-outline-success mr-2' }, 
-                { extend: 'pdf', className: 'btn-outline-danger mr-2' }
-            ],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        } );
-    } );
-</script>
+
+<script src="{{ mix('/js/datatable.js') }}"></script>
+
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -109,10 +47,10 @@
                 </table>
             </div> 
             <div>
-                <table id='tablaUnidades' class="table table-striped table-bordered">
+                <table id='tablaUnidadesdadada' class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
+                            <th>Nombresdadadad</th>
                             <th>Curso</th>
                             <th>Actions</th>
                         </tr>

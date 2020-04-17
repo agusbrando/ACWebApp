@@ -22,14 +22,11 @@ table.dataTable thead th{
 }
 .botones *{
     padding-left: 10px;
+
 }
 
 .tablas{
     display: flex;
     flex-direction: column;
 
-}
-
-.tablas div{
-    padding-bottom: 20px;
 }
