@@ -26,3 +26,4 @@ Route::get('/', function () {
 Route::resource('notas', 'NotasController');
 Route::resource('evaluaciones', 'EvaluacionesController');
 Route::resource('desglose', 'DesgloseController');
+Route::post('/notas/datos', 'NotasController@datos');
