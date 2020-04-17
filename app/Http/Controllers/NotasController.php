@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\Course;
+use App\Models\Role;
 use Illuminate\Support\Facades\DB; 
 
 class NotasController extends Controller
@@ -13,9 +14,10 @@ class NotasController extends Controller
     public function index()
     {
         $users = DB::table('users')->where('role_id', '=', 4)->get();
+        $roles = Role::all();
         $subjects = Subject::all();
         $courses = Course::all();
-        return view('Notas.index', compact('users', 'subjects', 'courses'));
+        return view('Notas.index', compact('users', 'subjects', 'courses', 'roles'));
     }
 
     public function datos(Request $request){
@@ -23,20 +25,22 @@ class NotasController extends Controller
         $request->validate([
             'cicloFormativo'=>'required',
             'curso'=>'required',
-            'asignatura'=>'required'
+            'asignatura'=>'required',
+            'role_id' => 'required'
         ]);
 
+        $role_id = $request->get('role_id');
         $cicloFormativo = $request->get('cicloFormativo');
         $curso = $request->get('curso');
         $asignatura = $request->get('asignatura');
 
-        $users = DB::table('users')->where('role_id', '=', 4)->get();
         $subjects = Subject::all();
         $courses = Course::all();
+        $roles = Role::all();
 
-        $users = DB::table('users')->where('role_id', '=', 1)->get();
+        $users = DB::table('users')->where('role_id', '=', $role_id)->get();
 
-        return view('Notas.index', compact('users', 'subjects', 'courses'));
+        return view('Notas.index', compact('users', 'subjects', 'courses', 'roles'));
     }
     
     /**

@@ -54,6 +54,17 @@
                                 <form method="post" action="{{ asset('notas/datos') }}">
                                 @csrf
                                     <div class="modal-body">
+                                    <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Role Usuario</label>
+                                            </div>
+                                            <select class="custom-select" name="role_id">
+                                                <option selected>Roles</option>
+                                                @foreach($roles as $role)
+                                                <option value={{$role->id}}>{{$role->id}}-{{$role->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <label class="input-group-text" for="inputGroupSelect01">Ciclo Formativo</label>
