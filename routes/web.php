@@ -49,5 +49,8 @@ Route::get('/models', function () {
 Route::resource('units', 'UnitController');
 Route::resource('notesPercentages', 'NotesPercentagesController');
 Route::resource('programs', 'ProgramController');
-
+Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
+Route::post('programs/{id}/aspecto','ProgramController@storeAspecto')->name('programs.storeAspecto');
+Route::patch('programs/{program_id}/unit/{id}','ProgramController@updateUnit')->name('programs.updateUnit');
+Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspecto')->name('programs.updateAspecto');
 

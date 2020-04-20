@@ -17,13 +17,13 @@ class CreateUnitsTable extends Migration
             $table->increments('id');
             $table->date('expected_date_start');	
             $table->date('expected_date_end');	
-            $table->date('date_start');	
-            $table->date('date_end');
+            $table->date('date_start')->nullable();	
+            $table->date('date_end')->nullable();
             $table->string('name');
             $table->enum('expected_eval', ['1EVAL', '2EVAL','3EVAL']);
-            $table->enum('eval', ['1EVAL', '2EVAL','3EVAL']);
-            $table->text('improvements');
-            $table->text('notes');
+            $table->enum('eval', ['1EVAL', '2EVAL','3EVAL'])->nullable();
+            $table->text('improvements')->nullable();
+            $table->text('notes')->nullable();
             $table->integer('program_id')->unsigned();
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();

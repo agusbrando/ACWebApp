@@ -25,7 +25,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('units.create');
+        //
     }
 
     /**
@@ -36,7 +36,23 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'expected_date_start'=>'required',
+            'expected_date_end'=>'required',
+            'expected_eval'=>'required'
+        ]);
+
+        $unit = new Unit([
+            'name' => $request->get('name'),
+            'expected_date_start' => $request->get('expected_date_start'),
+            'expected_date_end' => $request->get('expected_date_end'),
+            'expected_eval'=>$request->get('expected_date_end')
+        ]);
+        $unit->save();
+        return redirect('/programs');
+        
+
     }
 
     /**
