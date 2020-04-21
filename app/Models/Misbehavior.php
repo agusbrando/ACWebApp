@@ -18,10 +18,12 @@ class Misbehavior extends Model
     {
         return $this->BelongsTo(User::class);
     }
-        public function sessionTimetable(){
-        $this ->BelongsTo(SessionTimetable::class);
+    public function sessionTimetable()
+    {
+        $this->BelongsTo(SessionTimetable::class);
     }
-    public function type(){
-        $this ->BelongsTo(Type::class);
+    public function type()
+    {
+        $this->BelongsTo(Type::class);
     }
 }
