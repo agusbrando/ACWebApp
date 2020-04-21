@@ -18,6 +18,9 @@
 				<span class="s3">Nuevo usuario...?</span>
 				<span class="s4">Registrate</span>
 			</a>
+			<div>
+			<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.educadigital.es%2Fwp-content%2Fuploads%2F2015%2F05%2FLogo.png&f=1&nofb=1" class="imagen-auca" />
+			</div>
 		</div>
 		<div class="veen">
 			<div class="tada">
@@ -46,7 +49,7 @@
 			<div class="check"><span class="p1"></span> <span class="p2"></span> <span class="p3"></span> <span class="p4"></span> <span class="p5"></span></div>
 			<div class="tada">
 				<form action="">
-					<p class="head"><a href="{{ route('user.create') }}">Registrate</a></p>
+					<p class="head">Registrate</a></p>
 					<div class="name">
 						<label>Nombre</label><input type="text" name="name"></input>
 					</div>

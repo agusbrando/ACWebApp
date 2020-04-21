@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
-class loginController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class loginController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('login.index',compact('users')); 
+        $roles = Role::all();
+        return view('permissions.index',compact('roles'));
     }
 
     /**
@@ -25,7 +25,7 @@ class loginController extends Controller
      */
     public function create()
     {
-        return view('login.index');
+        return view('permissions.create');
     }
 
     /**
@@ -36,30 +36,18 @@ class loginController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'id_permission'=>'required',
-            'name'=>'required'
-        ]);
-
-        $permission = new Permission([
-            'id_permission' => $request->get('id'),
-            'name' => $request->get('name')
-        ]);
-        $permission->save();
-        return redirect('permissions')->with('success', 'Contact saved!');
+       
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.  
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $users=User::find($id);
-        return view('user.show',compact('users'));
-
+        //
     }
 
     /**
@@ -70,8 +58,7 @@ class loginController extends Controller
      */
     public function edit($id)
     {
-        $user=user::find($id);
-        return view('views.login',compact('user'));
+        
     }
 
     /**
@@ -83,9 +70,7 @@ class loginController extends Controller
      */
     public function update(Request $request, $id)
     {
-        user::find($id)->update($request->all());
-        return redirect()->route('user.index')->with('success','Registro actualizado satisfactoriamente');
- 
+        //
     }
 
     /**
@@ -96,8 +81,6 @@ class loginController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('user.index')->with('success','Registro eliminado satisfactoriamente');
-    
+        
     }
 }

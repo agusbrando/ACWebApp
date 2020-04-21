@@ -14,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-Route::get('/permissions', function () {
-    return view('permissions');
-});
+Route::resource('permissions','PermissionController');
 Route::get('/login', function () {
     return view('welcome');
 });
@@ -25,4 +22,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('user','loginController');
