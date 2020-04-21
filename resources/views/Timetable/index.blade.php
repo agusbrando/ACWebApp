@@ -118,8 +118,10 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="put" action="{{ route('horarios.update',$timetable->id) }}">
+                                                <form method="post" action="{{ route('horarios.update',$timetable->id) }}">
+                                                    @method('patch')
                                                     @csrf
+
                                                     <div class="form-group">
                                                         <label for="name">Nombre</label>
                                                         <input type="text" class="form-control" id="name" name="name" value="{{$timetable->name}}">

@@ -38,22 +38,22 @@
 <div class="container">
   <div class="space" style="height:50px"></div>
   <p class="lead">
-    <h2>Calendario de eventos</h2>
+    <h2>Calendario de seguimiento</h2>
     <br>
 
     <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#formModal">
-      Crear un evento
+      Realizar firma
     </button>
     <hr>
 
     <div class="row header-calendar" style="width: 85%; position: relative; left: 95px;">
 
       <div class="col" style="display: flex; justify-content: space-between; padding: 10px;">
-        <a href="{{ asset('/calendar') }}/<?= $data ?? ''['last']; ?>" style="margin:10px;">
+        <a href="{{ asset('/Calendar') }}/<?= $data ?? ''['last']; ?>" style="margin:10px;">
           <i class="fas fa-chevron-circle-left" style="font-size:30px;color:white;"></i>
         </a>
         <h2 style="font-weight:bold;margin:10px;"><?= $mespanish; ?> <small><?= $data ?? ''['year']; ?></small></h2>
-        <a href="{{ asset('/calendar') }}/<?= $data ?? ''['next']; ?>" style="margin:10px;">
+        <a href="{{ asset('/Calendar') }}/<?= $data ?? ''['next']; ?>" style="margin:10px;">
           <i class="fas fa-chevron-circle-right" style="font-size:30px;color:white;"></i>
         </a>
       </div>

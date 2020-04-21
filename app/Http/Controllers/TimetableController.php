@@ -8,6 +8,14 @@ use App\Models\Timetable;
 class TimetableController extends Controller
 {
     
+    
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $timetables=Timetable::all();
@@ -18,13 +26,6 @@ class TimetableController extends Controller
     {
         return view('Timetable.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
