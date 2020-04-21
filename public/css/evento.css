@@ -34,3 +34,46 @@
 .inicio{
     margin-top: 5%;
 } */
+
+
+
+
+
+.tut-info-box {
+    background: #fff;
+      width: 500px;
+    border: 2px solid rgb(121, 140, 143);
+    padding: 20px 20px 0px 20px;
+    -webkit-font-smoothing: antialiased;
+    font-family: Helvetica;
+    margin: 0px 0px;
+    }
+    
+    .tut-info-box h3 {
+    font-family: Helvetica;
+    font-weight: bold;
+    color: white;
+    background: rgb(121, 140, 143);
+    margin: -20px -20px 0px -20px;
+    padding: 10px;
+    font-size: 16px;
+    }
+    
+    
+    .tut-info-box p {
+    font-family: Helvetica;
+    font-size: 14px;
+    }
+    
+    .barra_separadora {
+      background-color: #333333; /* Color de fondo */
+      border: 3px solid #C9C9C9; /* Color de Borde */
+      border-radius: 6px 6px 6px 6px;
+      color: #FFFFFF; /* Color de Letra */
+      font-family: Arial,Helvetica;
+      font-size: 20px;  /* tamaño de Letra */
+      font-style: normal;
+      font-weight: bold;
+      line-height: 30px;
+    }
+    

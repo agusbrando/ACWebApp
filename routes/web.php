@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/calendar/{mes}','CalendarController@index_month');
 Route::get('/calendar','CalendarController@index');
 
-Route::post('/create','CalendarController@create');
-
-//detalles
-Route::get('/details/{id}','CalendarController@details');
+Route::post('/event/store','CalendarController@store');
+Route::post('/event/create','CalendarController@create');
+Route::put('/event/destroy/{id}','CalendarController@destroy');
+Route::put('/event/update','CalendarController@update');
+Route::get('/event/details/{id}','CalendarController@details');
 
 Route::get('/login', function () {
     return view('welcome');

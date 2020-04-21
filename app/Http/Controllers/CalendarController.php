@@ -176,7 +176,18 @@ class CalendarController extends Controller
      */
     public function create(Request $request)
     {
-      //validacion
+      
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+       //validacion
       $this->validate($request, [
         'titulo' => 'required',
         'descripcion'  =>  'required',
@@ -198,17 +209,6 @@ class CalendarController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -227,7 +227,7 @@ class CalendarController extends Controller
      */
     public function edit($id)
     {
-        //
+     
     }
 
     /**
@@ -239,7 +239,8 @@ class CalendarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          
+
     }
 
     /**
@@ -250,6 +251,9 @@ class CalendarController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $event = event::find($id);
+      $event->delete();
+
+      return redirect('/calendar')->with('Exito', 'Evento borrado!');
     }
 }
