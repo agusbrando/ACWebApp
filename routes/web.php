@@ -48,5 +48,3 @@ Route::get('/models', function () {
 
 
 Route::resource('items', 'ItemController');
-
-Route::post('/items/create', 'ItemController@store');

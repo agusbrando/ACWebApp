@@ -21,8 +21,8 @@
                 <!-- DropDown Aulas -->
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach($classrooms as $classroom)
-                    <!-- <a class="dropdown-item" onClick="" href="#">{{$classroom->name}}</a> -->
-                    <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                    <a class="dropdown-item" value="{{$classroom->id}}" href="#">{{$classroom->name}}</a>
+                    <!-- <option value="{{$classroom->id}}">{{$classroom->name}}</option> -->
                     @endforeach
 
                 </div>
@@ -71,56 +71,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <!-- <div class="modal fade" id="formCrearItem" tabindex="-1" role="dialog" aria-labelledby="formCrearItem" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Añadir Objeto</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post">
-                    @csrf
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombreItem" name="nombreItem" aria-describedby="nombreHelp" placeholder="Nombre del objeto">
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre">Fecha de Compra</label>
-                            <input type="date" id="datepickerItem" name="fechaCompra" placeholder="- Seleccionar fecha -" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">¿En que Aula va a estar?</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="nombreAula" >
-                                <option disabled selected>Selecciona un Aula</option> Hace la funcion de un placeholder
-                                @foreach($classrooms as $classroom)
-                                <option>{{$classroom->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Tipo de objeto</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="tipoItem">
-                                <option disabled selected>Selecciona un tipo</option> Hace la funcion de un placeholder
-                                @foreach($types as $type)
-                                <option>{{$type->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        
-                        <div class="form-group">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                        </div>
-                    </form>
-                    
-                </div>
-            </div>
-        </div> -->
+    
     </div>
     <script>
     // $(document).ready(function() {
