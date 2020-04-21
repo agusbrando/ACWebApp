@@ -15,6 +15,7 @@ class Event extends Model
         'type_id',
         'session_id',
         'user_id',
+        'title',
         'description',
         'date'
     ];

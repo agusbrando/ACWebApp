@@ -14,7 +14,8 @@ class EventsTableSeeder extends Seeder
         DB::table('events')->insert([
             'type_id' => 1,
             'session_id' => 1,
-            'user_id' =>1,
+            'user_id' => 1,
+            'title' => 'default',
             'description' => 'default',
             'date' => date("Y-m-d"),
             'created_at' => now(),
@@ -24,7 +25,8 @@ class EventsTableSeeder extends Seeder
         DB::table('events')->insert([
             'type_id' => 2,
             'session_id' => 2,
-            'user_id' =>2,
+            'user_id' => 2,
+            'title' => 'default',
             'description' => 'default',
             'date' => date("Y-m-d"),
             'created_at' => now(),

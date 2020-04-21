@@ -18,6 +18,7 @@ class CreateEventsTable extends Migration
             $table->integer('type_id')->unsigned();
             $table->integer('session_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->string('title');
             $table->string('description');
             $table->date('date');
             $table->timestamps();
