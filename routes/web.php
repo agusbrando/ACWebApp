@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/calendar/{mes}','CalendarController@index_month');
+Route::get('/calendar','CalendarController@index');
 
+Route::post('/create','CalendarController@create');
+
+//detalles
+Route::get('/details/{id}','CalendarController@details');
 
 Route::get('/login', function () {
     return view('welcome');
