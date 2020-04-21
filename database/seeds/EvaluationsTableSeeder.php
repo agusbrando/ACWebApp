@@ -17,5 +17,17 @@ class EvaluationsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('evaluations')->insert([
+            'subject_id' => 1,
+            'name' => '2Eval',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('evaluations')->insert([
+            'subject_id' => 1,
+            'name' => '3Eval',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

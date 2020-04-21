@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="d-flex flex-flow mb-4">
-                    <h1 class="display-4 pr-5">Notas y Porcentages</h1>
+                    <h1 class="display-4 pr-5">Porcentajes</h1>
                     <a class="btn btn-secondary evaluaciones mt-4" href="http://127.0.0.1:8000/evaluaciones">Evaluaciones</a>
                 </div>
                 <div class="d-flex flex-row bd-highlight mb-3 mt-n3">
@@ -54,73 +54,23 @@
                                     <td>Actions</td>
                                 </tr>
                             </thead>
+                            
                             <tbody>
+                                @foreach($percentages as $percentage)
                                 <tr>
-                                    <td>Trabajos</td>
-                                    <td>20%</td>
-                                    <td>4,00</td>
-                                    <td>5,00</td>
+                                    <td>{{$percentage->name}}</td>
+                                    <td>{{$percentage->percentage}}</td>
+                                    <td>{{$percentage->nota_min}}</td>
+                                    <td>{{$percentage->nota_media}}</td>
                                     <td>
-                                        <form action="#" method="post">
-                                            <button class="btn btn-danger btn-sm" type="submit">Borrar</button>
-                                        </form>
-                                        <!-- Modal añadir porcentaje -->
-                                        <div class="modal fade" id="formPorcentajes" tabindex="-1" role="dialog" aria-labelledby="formPorcentajes" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Añadir porcentaje</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="post">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <label for="nombre">Nombre</label>
-                                                                <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre del porcentaje">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="Nombre">Porcentaje</label>
-                                                                <select class="custom-select" id="inputGroupSelect01">
-                                                                    <option value="0" selected>0%</option>
-                                                                    <option value="10">10%</option>
-                                                                    <option value="20">20%</option>
-                                                                    <option value="30">30%</option>
-                                                                    <option value="40">40%</option>
-                                                                    <option value="50">50%</option>
-                                                                    <option value="60">60%</option>
-                                                                    <option value="70">70%</option>
-                                                                    <option value="80">80%</option>
-                                                                    <option value="90">90%</option>
-                                                                    <option value="100">100%</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="nota_min">Nota Minima</label>
-                                                                <input type="text" class="form-control" id="nota_min" placeholder="Nota minima para hacer media">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="nota_med">Nota Maxima</label>
-                                                                <input type="text" class="form-control" id="nota_med" placeholder="Nota media para aprobar">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <a class="btn btn-primary btn-sm text-white">Editar</a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
+                           
                         </table>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formPorcentajes">
-                            Añadir
-                        </button>
+                        <a class="btn btn-outline-primary" href="{{ asset('/porcentajes/create') }}">Añadir</a>
                     </div>
                     <div class="tablaPorcentajes alumnos">
                         <table id="alumnos" class="table table-striped" style="width:100%">
@@ -147,5 +97,7 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
 </main>
 @endsection

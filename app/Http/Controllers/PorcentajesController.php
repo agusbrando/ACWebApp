@@ -3,21 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Subject;
-use App\Models\Course;
-use App\Models\Role;
-use Illuminate\Support\Facades\DB; 
+use App\Models\Percentage;
+use Illuminate\Support\Facades\DB;
 
 class PorcentajesController extends Controller
 {
     public function index()
     {
         $users = DB::table('users')->where('role_id', '=', 4)->get();
-        $roles = Role::all();
         $subjects = Subject::all();
-        $courses = Course::all();
-        return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
+        $percentages = Percentage::all();
+        return view('Notas.porcentajes', compact('users', 'subjects', 'percentages'));
     }
 
     // public function datos(Request $request){
@@ -42,7 +39,7 @@ class PorcentajesController extends Controller
 
     //     return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
     // }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,7 +47,7 @@ class PorcentajesController extends Controller
      */
     public function create()
     {
-        //
+        return view('Notas.crearPorcentaje');
     }
 
     /**
@@ -61,7 +58,33 @@ class PorcentajesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'porcentaje' => 'required',
+            'nota_min' => 'required',
+            'nota_med' => 'required',
+        ]);
+
+        $name = $request->get('name');
+        $porcentaje = $request->get('porcentaje');
+        $nota_min = $request->get('nota_min');
+        $nota_med = $request->get('nota_med');
+
+        $porcentaje = Percentage::create([
+            'evaluation_id' => 2,
+            'type_id' => 1,
+            'name' => $request->get('name'),
+            'porcentaje' => $request->get('porcentaje'),
+            'nota_min' => $request->get('nota_min'),
+            'nota_med' => $request->get('nota_med'),
+        ]);
+
+        $porcentaje->save();
+        $users = DB::table('users')->where('role_id', '=', 4)->get();
+        $subjects = Subject::all();
+        $percentages = Percentage::all();
+        return view('Notas.porcentajes', compact('users', 'subjects', 'percentages'));
+
     }
 
     /**

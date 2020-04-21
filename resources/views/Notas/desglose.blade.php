@@ -14,9 +14,17 @@
             scrollY: 500,
             scrollCollapse: true,
             buttons: [{
-                extend: 'excel',
-                className: 'btn-outline-success'
-            }],
+                    extend: 'excel',
+                    className: 'btn-outline-success'
+                },
+                {
+                    label: 'Nueva Tarea',
+                    text: 'Nueva Tarea',
+                    action: function(nButton, oConfig, oFlash) {
+
+                    },
+                    className: 'btn btn-outline-primary ml-1'
+                }],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
