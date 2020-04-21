@@ -50,6 +50,9 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        // muestra los datos obtenidos del formulario en pantallak
+        // dd(request()->all()); 
+
         $request->validate([
             'name'=>'required',
             'date_pucharse'=>'required',
@@ -59,10 +62,11 @@ class ItemController extends Controller
 
         $item = new Item([
             'name' => $request->get('name'),
-            'date_pucharse'=>$request->get('fechaCompra'),
-            'classroom_id'=>'required',
-            'state_id'=>'Nuevo',
-            'type_id'=>'required',
+            'date_pucharse'=>$request->get('date_pucharse'),
+            'classroom_id'=>$request->get('classroom_id'),
+            'state_id'=>'1',
+            'type_id'=>$request->get('type_id'),
+            
 
         ]);
         $item->save();

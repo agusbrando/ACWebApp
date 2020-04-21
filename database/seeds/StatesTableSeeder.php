@@ -12,6 +12,11 @@ class StatesTableSeeder extends Seeder
     public function run()
     {
         DB::table('states')->insert([
+            'name' => 'Nuevo',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('states')->insert([
             'name' => 'Averiado',
             'created_at' => now(),
             'updated_at' => now()
