@@ -23,6 +23,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('asistencia', 'AsistenciaController');
+
 Route::get('/models', function () {
 
     $role = 1;
