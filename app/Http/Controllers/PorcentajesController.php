@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Subject;
 use App\Models\Percentage;
 use Illuminate\Support\Facades\DB;
@@ -11,34 +12,11 @@ class PorcentajesController extends Controller
 {
     public function index()
     {
-        $users = DB::table('users')->where('role_id', '=', 4)->get();
+        $users = User::all()->where('role_id', '=', 4);
         $subjects = Subject::all();
         $percentages = Percentage::all();
         return view('Notas.porcentajes', compact('users', 'subjects', 'percentages'));
     }
-
-    // public function datos(Request $request){
-
-    //     $request->validate([
-    //         'cicloFormativo'=>'required',
-    //         'curso'=>'required',
-    //         'asignatura'=>'required',
-    //         'role_id' => 'required'
-    //     ]);
-
-    //     $role_id = $request->get('role_id');
-    //     $cicloFormativo = $request->get('cicloFormativo');
-    //     $curso = $request->get('curso');
-    //     $asignatura = $request->get('asignatura');
-
-    //     $subjects = Subject::all();
-    //     $courses = Course::all();
-    //     $roles = Role::all();
-
-    //     $users = DB::table('users')->where('role_id', '=', $role_id)->get();
-
-    //     return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
-    // }
 
     /**
      * Show the form for creating a new resource.
