@@ -20,28 +20,28 @@ class PorcentajesController extends Controller
         return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
     }
 
-    public function datos(Request $request){
+    // public function datos(Request $request){
 
-        $request->validate([
-            'cicloFormativo'=>'required',
-            'curso'=>'required',
-            'asignatura'=>'required',
-            'role_id' => 'required'
-        ]);
+    //     $request->validate([
+    //         'cicloFormativo'=>'required',
+    //         'curso'=>'required',
+    //         'asignatura'=>'required',
+    //         'role_id' => 'required'
+    //     ]);
 
-        $role_id = $request->get('role_id');
-        $cicloFormativo = $request->get('cicloFormativo');
-        $curso = $request->get('curso');
-        $asignatura = $request->get('asignatura');
+    //     $role_id = $request->get('role_id');
+    //     $cicloFormativo = $request->get('cicloFormativo');
+    //     $curso = $request->get('curso');
+    //     $asignatura = $request->get('asignatura');
 
-        $subjects = Subject::all();
-        $courses = Course::all();
-        $roles = Role::all();
+    //     $subjects = Subject::all();
+    //     $courses = Course::all();
+    //     $roles = Role::all();
 
-        $users = DB::table('users')->where('role_id', '=', $role_id)->get();
+    //     $users = DB::table('users')->where('role_id', '=', $role_id)->get();
 
-        return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
-    }
+    //     return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
+    // }
     
     /**
      * Show the form for creating a new resource.

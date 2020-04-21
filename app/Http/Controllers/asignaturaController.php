@@ -7,8 +7,9 @@ use App\Models\User;
 use App\Models\Subject;
 use App\Models\Course;
 use App\Models\Role;
+use Illuminate\Support\Facades\DB; 
 
-class asignaturaController extends Controller
+class AsignaturaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,6 +21,15 @@ class asignaturaController extends Controller
         $users = User::all();
         $subjects = Subject::all();
         return view('Notas.index', compact('users', 'subjects'));
+    }
+
+    public function porcentajes()
+    {
+        $users = DB::table('users')->where('role_id', '=', 4)->get();
+        $roles = Role::all();
+        $subjects = Subject::all();
+        $courses = Course::all();
+        return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
     }
 
     /**

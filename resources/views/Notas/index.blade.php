@@ -37,60 +37,27 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="container-fluid">
         <h1 class="display-4 pr-5">Asignaturas</h1>
-        <div class="d-flex flex-row bd-highlight mb-3 mt-n3">
-            <div class="tablaPorcentajes porcentajes">
-                <table class="table table-striped mt-5">
-                    <thead class="cabezeraTabla">
-                        <tr>
-                            <td></td>
-                            <td>Porcentaje</td>
-                            <td>Nota Minima</td>
-                            <td>Nota Media</td>
-                            <td>Actions</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Trabajos</td>
-                            <td>20%</td>
-                            <td>4,00</td>
-                            <td>5,00</td>
-                            <td>
-                                <form action="#" method="post">
-                                    <button class="btn btn-danger btn-sm" type="submit">Borrar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formPorcentajes">
-                    Añadir
-                </button>
-            </div>
-            <div class="tablaPorcentajes alumnos">
-                <table id="alumnos" class="table table-striped" style="width:100%">
-                    <thead class="cabezeraTabla">
-                        <tr>
-                            <td>Nº</td>
-                            <td>Apellidos, Nombre</td>
-                            <td>Baja</td>
-                            <td>Actions</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($users as $user)
-                        <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->last_name}} {{$user->first_name}}</td>
-                            <td>No</td>
-                            <td>
-                                <a href="#" class="btn btn-danger btn-sm">Baja</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div class="mt-5">
+            <table id="alumnos" class="table table-striped" style="width:100%">
+                <thead class="cabezeraTabla">
+                    <tr>
+                        <td>Id</td>
+                        <td>Nombre</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($subjects as $subject)
+                    <tr>
+                        <td>{{$subject->id}}</td>
+                        <td>{{$subject->name}}</td>
+                        <td>
+                            <a href="{{ route('porcentajes', $subject->id) }}" class="btn btn-primary btn-sm"> Ver </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 </main>
 @endsection
