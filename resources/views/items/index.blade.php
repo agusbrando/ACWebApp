@@ -52,8 +52,12 @@
                 <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Aula
                 </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formCrearItem"> Añadir</button>
-                <!-- <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a> -->
+                <!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formCrearItem"> Añadir</button> -->
+
+                <!-- Enlace al form create -->
+                <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a>
+
+                <!-- DropDown Aulas -->
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach($classrooms as $classroom)
                     <a class="dropdown-item" onClick="" href="#">{{$classroom->name}}</a>
@@ -106,7 +110,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="formCrearItem" tabindex="-1" role="dialog" aria-labelledby="formCrearItem" aria-hidden="true">
+    <!-- <div class="modal fade" id="formCrearItem" tabindex="-1" role="dialog" aria-labelledby="formCrearItem" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -129,7 +133,7 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">¿En que Aula va a estar?</label>
                             <select class="form-control" id="exampleFormControlSelect1" name="nombreAula" >
-                                <option disabled selected>Selecciona un Aula</option> <!--Hace la funcion de un placeholder-->
+                                <option disabled selected>Selecciona un Aula</option> Hace la funcion de un placeholder
                                 @foreach($classrooms as $classroom)
                                 <option>{{$classroom->name}}</option>
                                 @endforeach
@@ -138,7 +142,7 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Tipo de objeto</label>
                             <select class="form-control" id="exampleFormControlSelect1" name="tipoItem">
-                                <option disabled selected>Selecciona un tipo</option> <!--Hace la funcion de un placeholder-->
+                                <option disabled selected>Selecciona un tipo</option> Hace la funcion de un placeholder
                                 @foreach($types as $type)
                                 <option>{{$type->name}}</option>
                                 @endforeach
@@ -154,7 +158,7 @@
                     
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 
