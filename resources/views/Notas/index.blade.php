@@ -36,183 +36,61 @@
 </script>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="d-flex flex-flow mb-4">
-                    <h1 class="display-4 pr-5">Notas y Porcentages</h1>
-                    <button class="btn btn-secondary evaluaciones mr-2 mt-4" data-toggle="modal" data-target="#formDatos">Datos</button>
-                    <!-- Modal Añadir datos -->
-                    <div class="modal fade" id="formDatos" tabindex="-1" role="dialog" aria-labelledby="formDatos" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Añadir Datos</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form method="post" action="{{ asset('notas/datos') }}">
-                                @csrf
-                                    <div class="modal-body">
-                                    <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <label class="input-group-text" for="inputGroupSelect01">Role Usuario</label>
-                                            </div>
-                                            <select class="custom-select" name="role_id">
-                                                <option selected>Roles</option>
-                                                @foreach($roles as $role)
-                                                <option value={{$role->id}}>{{$role->id}}-{{$role->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <label class="input-group-text" for="inputGroupSelect01">Ciclo Formativo</label>
-                                            </div>
-                                            <select class="custom-select" name="cicloFormativo">
-                                                <option selected>Elige el ciclo formativo</option>
-                                                @foreach($courses as $course)
-                                                <option value={{$course->name}}>{{$course->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <label class="input-group-text" for="inputGroupSelect01">Curso</label>
-                                            </div>
-                                            <select class="custom-select" name="curso">
-                                                <option selected>Elige el curso</option>
-                                                @foreach($courses as $course)
-                                                <option value="1">{{$course->level}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <label class="input-group-text" for="inputGroupSelect01">Modulo</label>
-                                            </div>
-                                            <select class="custom-select" name="asignatura">
-                                                <option selected>Elige el curso</option>
-                                                @foreach($subjects as $subject)
-                                                <option value="1">{{$subject->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                                        </div>
+        <h1 class="display-4 pr-5">Asignaturas</h1>
+        <div class="d-flex flex-row bd-highlight mb-3 mt-n3">
+            <div class="tablaPorcentajes porcentajes">
+                <table class="table table-striped mt-5">
+                    <thead class="cabezeraTabla">
+                        <tr>
+                            <td></td>
+                            <td>Porcentaje</td>
+                            <td>Nota Minima</td>
+                            <td>Nota Media</td>
+                            <td>Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Trabajos</td>
+                            <td>20%</td>
+                            <td>4,00</td>
+                            <td>5,00</td>
+                            <td>
+                                <form action="#" method="post">
+                                    <button class="btn btn-danger btn-sm" type="submit">Borrar</button>
                                 </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="btn btn-secondary evaluaciones mt-4" href="http://127.0.0.1:8000/evaluaciones">Evaluaciones</a>
-                </div>
-                <div class="d-flex flex-row bd-highlight mb-3 mt-n3">
-                    <div class="tablaPorcentajes porcentajes">
-                        <table class="table table-striped mt-5">
-                            <thead class="cabezeraTabla">
-                                <tr>
-                                    <td></td>
-                                    <td>Porcentaje</td>
-                                    <td>Nota Minima</td>
-                                    <td>Nota Media</td>
-                                    <td>Actions</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Trabajos</td>
-                                    <td>20%</td>
-                                    <td>4,00</td>
-                                    <td>5,00</td>
-                                    <td>
-                                        <form action="#" method="post">
-                                            <button class="btn btn-danger btn-sm" type="submit">Borrar</button>
-                                        </form>
-                                        <!-- Modal añadir porcentaje -->
-                                        <div class="modal fade" id="formPorcentajes" tabindex="-1" role="dialog" aria-labelledby="formPorcentajes" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Añadir porcentaje</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="post" action="{{ route('notas.store') }}">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <label for="nombre">Nombre</label>
-                                                                <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre del porcentaje">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="Nombre">Porcentaje</label>
-                                                                <select class="custom-select" id="inputGroupSelect01">
-                                                                    <option value="0" selected>0%</option>
-                                                                    <option value="10">10%</option>
-                                                                    <option value="20">20%</option>
-                                                                    <option value="30">30%</option>
-                                                                    <option value="40">40%</option>
-                                                                    <option value="50">50%</option>
-                                                                    <option value="60">60%</option>
-                                                                    <option value="70">70%</option>
-                                                                    <option value="80">80%</option>
-                                                                    <option value="90">90%</option>
-                                                                    <option value="100">100%</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="nota_min">Nota Minima</label>
-                                                                <input type="text" class="form-control" id="nota_min" placeholder="Nota minima para hacer media">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="nota_med">Nota Maxima</label>
-                                                                <input type="text" class="form-control" id="nota_med" placeholder="Nota media para aprobar">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formPorcentajes">
-                            Añadir
-                        </button>
-                    </div>
-                    <div class="tablaPorcentajes alumnos">
-                        <table id="alumnos" class="table table-striped" style="width:100%">
-                            <thead class="cabezeraTabla">
-                                <tr>
-                                    <td>Nº</td>
-                                    <td>Apellidos, Nombre</td>
-                                    <td>Baja</td>
-                                    <td>Actions</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($users as $user)
-                                <tr>
-                                    <td>{{$user->id}}</td>
-                                    <td>{{$user->last_name}} {{$user->first_name}}</td>
-                                    <td>No</td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger btn-sm">Baja</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formPorcentajes">
+                    Añadir
+                </button>
+            </div>
+            <div class="tablaPorcentajes alumnos">
+                <table id="alumnos" class="table table-striped" style="width:100%">
+                    <thead class="cabezeraTabla">
+                        <tr>
+                            <td>Nº</td>
+                            <td>Apellidos, Nombre</td>
+                            <td>Baja</td>
+                            <td>Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->last_name}} {{$user->first_name}}</td>
+                            <td>No</td>
+                            <td>
+                                <a href="#" class="btn btn-danger btn-sm">Baja</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </main>
 @endsection

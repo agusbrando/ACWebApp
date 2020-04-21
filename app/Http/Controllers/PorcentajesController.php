@@ -9,7 +9,7 @@ use App\Models\Course;
 use App\Models\Role;
 use Illuminate\Support\Facades\DB; 
 
-class NotasController extends Controller
+class PorcentajesController extends Controller
 {
     public function index()
     {
@@ -17,7 +17,7 @@ class NotasController extends Controller
         $roles = Role::all();
         $subjects = Subject::all();
         $courses = Course::all();
-        return view('Notas.index', compact('users', 'subjects', 'courses', 'roles'));
+        return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
     }
 
     public function datos(Request $request){
@@ -40,7 +40,7 @@ class NotasController extends Controller
 
         $users = DB::table('users')->where('role_id', '=', $role_id)->get();
 
-        return view('Notas.index', compact('users', 'subjects', 'courses', 'roles'));
+        return view('Notas.porcentajes', compact('users', 'subjects', 'courses', 'roles'));
     }
     
     /**
