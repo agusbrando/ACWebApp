@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::resource('permissions','PermissionController');
+
+
 Route::get('/login', function () {
     return view('welcome');
 });
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () {   
+    return view('login');
 });
-
+Route::resource('permissions','PermissionController');

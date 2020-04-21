@@ -14,8 +14,6 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('permissions.index',compact('roles'));
     }
 
     /**
@@ -25,7 +23,6 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('permissions.create');
     }
 
     /**
