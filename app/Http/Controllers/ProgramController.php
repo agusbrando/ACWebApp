@@ -8,6 +8,7 @@ use App\Models\Program;
 use App\Models\Unit;
 use App\Models\User;
 use App\Models\Evaluable;
+use App\Models\Evaluated;
 
 use Illuminate\Support\Facades\DB;
 
@@ -133,6 +134,25 @@ class ProgramController extends Controller
         
         return redirect('/programs/'.$id);
     }
+    public function updateAspecto(Request $request, $program_id, $id){
+
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required'
+        ]);
+        $name = $request->get('name');
+        $description = $request->get('description');
+
+        $aspecto = Evaluated::find($id);
+        
+        $evaluable = Evaluable::find($aspecto->evaluable_id);
+        $evaluable->name = $name;
+        $evaluable->save();
+        $aspecto->description = $description;
+        $aspecto->save();
+        
+        return redirect('/programs/'.$program_id);
+    }
     /**
      * Display the specified resource.
      *
@@ -178,5 +198,25 @@ class ProgramController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function destroyUnit($program_id, $id)
+    {
+
+        $unit = Unit::find($id);
+        $unit->delete();
+
+        return redirect('/programs/'.$program_id);
+
+    }
+    public function destroyAspecto($program_id,$id)
+    {
+        $aspecto = Evaluated::find($id);
+        
+
+
+        $aspecto->delete();
+        return redirect('/programs/'.$program_id);
+
     }
 }
