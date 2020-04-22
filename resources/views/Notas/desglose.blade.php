@@ -85,7 +85,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="container-fluid">
         <div class="d-flex flex-row mb-4">
-            <a href="evaluaciones" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
+            <a href="javascript:history.go(-1)" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
             <h1 class="display-4 pr-3">Desglose</h1>
         </div>
         <div class="row">

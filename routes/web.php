@@ -27,6 +27,5 @@ Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('porcentajes', 'PorcentajesController');
 Route::resource('evaluaciones', 'EvaluacionesController');
 Route::resource('desglose', 'DesgloseController');
-Route::post('/notas/datos', 'PorcentajesController@datos');
-Route::get('/porcentajes/create', 'PorcentajesController@create');
-Route::get('asignaturas/{id}/porcentajes', 'AsignaturaController@porcentajes')->name('porcentajes');
+Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
+Route::get('porcentajes/create/{id}', 'PorcentajesController@create');

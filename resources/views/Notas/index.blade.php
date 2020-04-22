@@ -51,8 +51,11 @@
                     <tr>
                         <td>{{$subject->id}}</td>
                         <td>{{$subject->name}}</td>
-                        <td>
-                            <a href="{{ route('porcentajes', $subject->id) }}" class="btn btn-primary btn-sm"> Ver </a>
+                        <td class="w-25">
+                            <div class="d-flex flex-row">
+                                <a href="{{ route('asignaturas.show', $subject->id) }}" class="btn btn-primary btn-sm mr-2">Evaluaciones</a>
+                                <a href="#" class="btn btn-primary btn-sm">Programacion</a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

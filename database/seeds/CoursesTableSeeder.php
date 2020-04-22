@@ -13,14 +13,14 @@ class CoursesTableSeeder extends Seeder
     {
         DB::table('courses')->insert([
             'level' => 1,
-            'name' => 'Primero',
+            'name' => 'DAM',
             'num_students' => 30,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('courses')->insert([
             'level' => 2,
-            'name' => 'Segundo',
+            'name' => 'DAW',
             'num_students' => 19,
             'created_at' => now(),
             'updated_at' => now()

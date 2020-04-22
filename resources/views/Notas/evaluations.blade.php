@@ -181,13 +181,14 @@
     <section id="tabs">
         <div class="container-fluid">
             <div class="d-flex flex-row">
-                <a href="notas" class=" atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
-                <h1 class="display-4 pr-3">Evaluaciones</h1>
+                <a href="/asignaturas" class=" atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
+                <h1 class="display-4 pr-3">{{$subject->course->name}} - {{$subject->name}}</h1>
             </div>
             <div class="row">
                 <div class="col mt-4">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link" id="nav-base-tab" data-toggle="tab" href="#nav-base" role="tab" aria-controls="nav-base" aria-selected="false">Base</a>
                             <a class="nav-item nav-link active" id="nav-eval1-tab" data-toggle="tab" href="#nav-eval1" role="tab" aria-controls="nav-eval1" aria-selected="true">Evaluacion 1</a>
                             <a class="nav-item nav-link" id="nav-eval2-tab" data-toggle="tab" href="#nav-eval2" role="tab" aria-controls="nav-eval2" aria-selected="false">Evaluacion 2</a>
                             <a class="nav-item nav-link" id="nav-eval3-tab" data-toggle="tab" href="#nav-eval3" role="tab" aria-controls="nav-eval3" aria-selected="false">Evaluacion 3</a>
@@ -195,6 +196,33 @@
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        <div class="tab-pane fade" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
+                            <table class="table table-striped mt-5">
+                                <thead class="cabezeraTabla">
+                                    <tr>
+                                        <td></td>
+                                        <td>Porcentaje</td>
+                                        <td>Nota Minima</td>
+                                        <td>Nota Media</td>
+                                        <td>Actions</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($percentages as $percentage)
+                                    <tr>
+                                        <td>{{$percentage->percentage}}</td>
+                                        <td>{{$percentage->nota_min}}</td>
+                                        <td>{{$percentage->nota_media}}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm text-white">Editar</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <a class="btn btn-outline-primary" href="{{ url('/porcentajes/create', $subject->id) }}">Añadir</a>
+                        
+                        </div>
                         <div class="tab-pane fade show active" id="nav-eval1" role="tabpanel" aria-labelledby="nav-eval1-tab">
                             <table id="evaluacion1" class="table table-striped" style="width:100%">
                                 <thead class="cabezeraTabla">
@@ -316,7 +344,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

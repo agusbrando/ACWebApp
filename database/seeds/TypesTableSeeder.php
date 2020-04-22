@@ -12,7 +12,28 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('types')->insert([
-            'name' => 'default',
+            'name' => 'Trabajos',
+            'model' => 'App\Models\Percentage',
+	    'created_at' => now(),
+            'updated_at' => now()      
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Examenes',
+            'model' => 'App\Models\Percentage',
+	    'created_at' => now(),
+            'updated_at' => now()      
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Practicas',
+            'model' => 'App\Models\Percentage',
+	    'created_at' => now(),
+            'updated_at' => now()      
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Actitud',
             'model' => 'App\Models\Percentage',
 	    'created_at' => now(),
             'updated_at' => now()      
@@ -25,14 +46,14 @@ class TypesTableSeeder extends Seeder
             'updated_at' => now()      
         ]);
 
-	DB::table('types')->insert([
+	    DB::table('types')->insert([
             'name' => 'Portatil',
             'model' => 'App\Models\Item',	    
             'created_at' => now(),
             'updated_at' => now()      
         ]);
 	
-	DB::table('types')->insert([
+	    DB::table('types')->insert([
             'name' => 'default3',
             'model' => 'App\Models\Misbehaviors',
 	    'created_at' => now(),

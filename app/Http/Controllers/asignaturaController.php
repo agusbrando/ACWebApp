@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\Course;
+use App\Models\Evaluation;
 use App\Models\Role;
 use App\Models\Percentage;
 use Illuminate\Support\Facades\DB; 
@@ -23,14 +24,6 @@ class AsignaturaController extends Controller
         $subjects = Subject::all();
         return view('Notas.index', compact('users', 'subjects'));
         
-    }
-
-    public function porcentajes()
-    {
-        $users = DB::table('users')->where('role_id', '=', 4)->get();
-        $subjects = Subject::all();
-        $percentages = Percentage::all();
-        return view('Notas.porcentajes', compact('users', 'subjects', 'percentages'));
     }
 
     /**
@@ -62,7 +55,10 @@ class AsignaturaController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::all()->where('role_id', '=', 4);
+        $subject = Subject::find($id);
+        $percentages = Percentage::all();
+        return view('Notas.evaluations', compact('users', 'subject', 'percentages'));
     }
 
     /**

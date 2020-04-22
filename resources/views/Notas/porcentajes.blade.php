@@ -39,65 +39,38 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="d-flex flex-flow mb-4">
-                    <h1 class="display-4 pr-5">Porcentajes</h1>
-                    <a class="btn btn-secondary evaluaciones mt-4" href="http://127.0.0.1:8000/evaluaciones">Evaluaciones</a>
-                </div>
-                <div class="d-flex flex-row bd-highlight mb-3 mt-n3">
-                    <div class="tablaPorcentajes porcentajes">
-                        <table class="table table-striped mt-5">
-                            <thead class="cabezeraTabla">
-                                <tr>
-                                    <td></td>
-                                    <td>Porcentaje</td>
-                                    <td>Nota Minima</td>
-                                    <td>Nota Media</td>
-                                    <td>Actions</td>
-                                </tr>
-                            </thead>
-                            
-                            <tbody>
-                                @foreach($percentages as $percentage)
-                                <tr>
-                                    <td>{{$percentage->name}}</td>
-                                    <td>{{$percentage->percentage}}</td>
-                                    <td>{{$percentage->nota_min}}</td>
-                                    <td>{{$percentage->nota_media}}</td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm text-white">Editar</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                           
-                        </table>
-                        <a class="btn btn-outline-primary" href="{{ asset('/porcentajes/create') }}">Añadir</a>
-                    </div>
-                    <div class="tablaPorcentajes alumnos">
-                        <table id="alumnos" class="table table-striped" style="width:100%">
-                            <thead class="cabezeraTabla">
-                                <tr>
-                                    <td>Nº</td>
-                                    <td>Apellidos, Nombre</td>
-                                    <td>Baja</td>
-                                    <td>Actions</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($users as $user)
-                                <tr>
-                                    <td>{{$user->id}}</td>
-                                    <td>{{$user->last_name}} {{$user->first_name}}</td>
-                                    <td>No</td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger btn-sm">Baja</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <div class="d-flex flex-row">
+                        <a href="javascript:history.go(-1)" class=" atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
+                        <h1 class="display-4 pr-3">Porcentajes</h1>
                     </div>
                 </div>
+                <table class="table table-striped mt-5">
+                    <thead class="cabezeraTabla">
+                        <tr>
+                            <td></td>
+                            <td>Porcentaje</td>
+                            <td>Nota Minima</td>
+                            <td>Nota Media</td>
+                            <td>Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($percentages as $percentage)
+                        <tr>
+                            <td>{{$percentage->percentage}}</td>
+                            <td>{{$percentage->nota_min}}</td>
+                            <td>{{$percentage->nota_media}}</td>
+                            <td>
+                                <a href="#" class="atras"><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
+                <a class="btn btn-outline-primary" href="{{ asset('/porcentajes.create') }}">Añadir</a>
             </div>
         </div>
+    </div>
 </main>
 @endsection

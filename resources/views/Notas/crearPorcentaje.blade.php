@@ -1,17 +1,21 @@
 @extends('base')
 
 @section('main')
+<script>
+    $('.my-select').selectpicker();
+</script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
     <div class="container">
         <h1 class="display-4 pr-5">Crear Porcentaje</h1>
         <hr>
-        <form action="">
+        <form action="{{ route('porcentajes.store') }}" method="post">
             @csrf
-            @method('CREATE')
-            <div class="form-group">
-                <label for="Nombre">Nombre</label>
-                <input type="text" class="form-control" name="name">
-            </div>
             <div class="form-group">
                 <label for="Porcentaje">Porcentaje</label>
                 <select class="form-control" name="porcentaje">
@@ -29,24 +33,35 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="Porcentaje">Evaluaciones</label>
+                <select class="selectpicker w-100" title="Selecciona Evaluacion" multiple data-actions-box="true" name="evaluaciones[]">
+                    @foreach($evaluaciones as $eval)
+                    <option value="{{$eval->id}}">{{$eval->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Porcentaje">Tipos</label>
+                <select class="form-control" name="type">
+                    @foreach($types as $type)
+                    <option value="{{$type->id}}">{{$type->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="nota_min">Nota Minima</label>
-                <select multiple class="form-control" name="nota_min">
+                <select class="form-control" name="nota_min">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="nota_med">Nota Media</label>
-                <select multiple class="form-control" name="nota_med">
+                <select class="form-control" name="nota_med">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>

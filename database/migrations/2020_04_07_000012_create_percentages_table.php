@@ -17,7 +17,6 @@ class CreatePercentagesTable extends Migration
             $table->integer('evaluation_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->integer('percentage')->unsigned();
-            $table->string('name');
             $table->integer('nota_min')->unsigned();
             $table->integer('nota_media')->unsigned();
             $table->timestamps();

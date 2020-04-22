@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Subject;
 use Illuminate\Support\Facades\DB; 
 
 
@@ -12,7 +13,8 @@ class EvaluacionesController extends Controller
     public function index()
     {
         $users = DB::table('users')->where('role_id', '=', 4)->get();
-        return view('Notas.evaluations', compact('users'));
+
+        return view('Notas.evaluations', compact('users', 'nombre'));
     }
 
     
