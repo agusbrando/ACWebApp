@@ -13,15 +13,14 @@
                 <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Aula
                 </button>
-                <!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#formCrearItem"> Añadir</button> -->
-
+                
                 <!-- Enlace al form create -->
                 <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a>
 
                 <!-- DropDown Aulas -->
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach($classrooms as $classroom)
-                    <a class="dropdown-item" value="{{$classroom->id}}" href="#">{{$classroom->name}}</a>
+                    <a class="dropdown-item" type="submit" name="aulaSeleccionada" value="{{$classroom->id}}" href="/items/filter/{{$classroom->id}}">{{$classroom->name}}</a>
                     <!-- <option value="{{$classroom->id}}">{{$classroom->name}}</option> -->
                     @endforeach
 

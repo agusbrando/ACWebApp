@@ -27,4 +27,10 @@ class Item extends Model
         
     }
 
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Type')->where('model', Item::class);
+        
+    }
+
 }

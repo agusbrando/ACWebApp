@@ -48,3 +48,4 @@ Route::get('/models', function () {
 
 
 Route::resource('items', 'ItemController');
+Route::get('/items/filter/{id}', 'ItemController@index');

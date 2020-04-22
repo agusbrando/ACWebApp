@@ -16,16 +16,22 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id=null)
     {
+        if($id == null){
+            $items = Item::all();
+        }else{
+            $types = Type::all()->where('model', Item::class);
+        }
         //Cojo todas las aulas que exiten para mostrarlas en el desplegable
         // para elegir a que aula pertenece el Item
+
         $classrooms = Classroom::all();
 
         //Filtro para coger solo los typos del modelo Item
-        $types = DB::table('types')->where('model','Item')->get();
+        // $types = Type::all()->where('model','Item');
         $items = Item::all();
-        return view('items.index', compact('classrooms', 'items', 'types'));
+        return view('items.index', compact('classrooms', 'items'));
     }
 
     /**
@@ -37,9 +43,9 @@ class ItemController extends Controller
     {
         $classrooms = Classroom::all();
         //Filtro para coger solo los typos del modelo Item
-        $types = DB::table('types')->where('model','Item')->get();
-        $items = Item::all();
-        return view('items.create', compact('classrooms', 'items', 'types'));
+        $types = Type::all()->where('model','Item');
+        
+        return view('items.create', compact('classrooms', 'types'));
     }
 
     /**
@@ -81,7 +87,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        $items = DB::table('items')->where('classroom_id', $id)->get();
+        return view('items.index', compact('items'));
     }
 
     /**
