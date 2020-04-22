@@ -9,7 +9,9 @@
         <div class="col-sm-12">
             <h1 class="display-4">Material del Aula </h1>
             <form method="post" action="{{ url('items/filter') }}">
+            
                 {{ csrf_field() }}
+
                 <div class="form-group">
                     <label for="formControlSelect1">Aulas</label>
                     <select class="form-control" id="classroom_id" name="idClass">
@@ -31,6 +33,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="formControlSelect1">Estado</label>
                     <select class="form-control" id="state_id" name="idState">
@@ -94,6 +97,7 @@
 
     </div>
     <script>
+        // <link href="{{ asset('resources/js/tabla.css') }}"  type="text/js" />
         // $(document).ready(function() {
         //     $('#datepicker').datepicker({
         //         language: 'es'

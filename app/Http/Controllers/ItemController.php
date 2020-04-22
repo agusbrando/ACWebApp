@@ -31,12 +31,17 @@ class ItemController extends Controller
     }
     public function filter(Request $request)
     {
+        //Definimos que obtendrá objetos de la tabla items
         $query = DB::table('items');
-        
+
+        //cogemos los valores de los selects
         $idClass = $request->get('idClass');
         $idState = $request->get('idState');
         $idType = $request->get('idType');
 
+        //Controlamos que si no llega null haga una consulta obteniendo los item 
+        //que tenga dicho id de los diferentes filtros.
+        //Los resultados de cada consulta se va concatenando en $query
         if($idClass != ""){
             $query = $query->where('classroom_id', $idClass);
             
@@ -47,6 +52,7 @@ class ItemController extends Controller
         if($idType != ""){
             $query = $query->where('type_id', $idType);
         }
+        //Finalmente obtenemos todos los items que han pasado los filtros
         $items = $query->get();
         
 
