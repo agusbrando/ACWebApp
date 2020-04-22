@@ -11,7 +11,7 @@ class PercentagesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('percentages')->insert([
+        DB::table('evaluation_type')->insert([
             'evaluation_id' => 1,
             'type_id' => 1,
             'percentage' => 30,
@@ -20,7 +20,7 @@ class PercentagesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('percentages')->insert([
+        DB::table('evaluation_type')->insert([
             'evaluation_id' => 1,
             'type_id' => 2,
             'percentage' => 30,

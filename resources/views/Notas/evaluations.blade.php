@@ -200,19 +200,29 @@
                             <table class="table table-striped mt-5">
                                 <thead class="cabezeraTabla">
                                     <tr>
-                                        <td></td>
+                                        <!-- <td></td>
                                         <td>Porcentaje</td>
                                         <td>Nota Minima</td>
                                         <td>Nota Media</td>
-                                        <td>Actions</td>
+                                        <td>Actions</td> -->
+                                        <td>Nota Minima</td>
+                                        <td>Nota Media</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($percentages as $percentage)
+                                    <!-- @foreach($percentages as $percentage)
                                     <tr>
                                         <td>{{$percentage->percentage}}</td>
                                         <td>{{$percentage->nota_min}}</td>
                                         <td>{{$percentage->nota_media}}</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm text-white">Editar</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach -->
+                                    @foreach($evaluations as $eval)
+                                    <tr>
+                                        <td>{{$eval->name}}</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm text-white">Editar</a>
                                         </td>

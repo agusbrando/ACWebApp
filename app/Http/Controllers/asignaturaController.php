@@ -9,7 +9,7 @@ use App\Models\Course;
 use App\Models\Evaluation;
 use App\Models\Role;
 use App\Models\Percentage;
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\DB;
 
 class AsignaturaController extends Controller
 {
@@ -23,7 +23,6 @@ class AsignaturaController extends Controller
         $users = User::all();
         $subjects = Subject::all();
         return view('Notas.index', compact('users', 'subjects'));
-        
     }
 
     /**
@@ -57,8 +56,18 @@ class AsignaturaController extends Controller
     {
         $users = User::all()->where('role_id', '=', 4);
         $subject = Subject::find($id);
-        $percentages = Percentage::all();
-        return view('Notas.evaluations', compact('users', 'subject', 'percentages'));
+        
+        foreach($subject->evaluations as $eval){
+            $aux = $eval->types;
+            foreach($aux as $type){
+                $name = $type->name;
+                $percentage = $type->pivot->percentage;
+            }
+        }
+
+        // $evaluations = Subject::find(1)->evaluations->load('types');
+
+        return view('Notas.evaluations', compact('users', 'subject'));
     }
 
     /**

@@ -18,7 +18,7 @@ class Type extends Model
     }
 
     public function evaluations(){
-        return $this->belongsToMany(Type::class, 'percentages', 'type_id', 'evaluation_id')->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+        return $this->belongsToMany(Evaluation::class)->withPivot('percentage','nota_min','nota_media')->withTimestamps();
     }
 
     public function misbehaviors()
@@ -28,9 +28,5 @@ class Type extends Model
     public function items()
     {
         return $this->hasMany('App\Models\Item');
-    }
-
-    public function percentages(){
-        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePercentagesTable extends Migration
+class CreateEvaluationTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePercentagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('percentages', function (Blueprint $table) {
+        Schema::create('evaluation_type', function (Blueprint $table) {
             $table->integer('evaluation_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->integer('percentage')->unsigned();
@@ -34,6 +34,6 @@ class CreatePercentagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('percentages');
+        Schema::dropIfExists('evaluation_type');
     }
 }

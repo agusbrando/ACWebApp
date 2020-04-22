@@ -72,7 +72,7 @@ class PorcentajesController extends Controller
         $porcentaje->save();
 
         $subjects = Subject::all();
-        return view('Notas.index', compact('subjects'));
+        return view('Notas.', compact('subjects'));
 
     }
 
