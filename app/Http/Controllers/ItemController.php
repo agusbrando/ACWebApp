@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Classroom;
 use App\Models\Type;
+use App\Models\State;
 use App\Models\Item;
 
 class ItemController extends Controller
@@ -16,24 +17,47 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id=null)
+    public function index()
     {
-        if($id == null){
-            $items = Item::all();
-        }else{
-            $types = Type::all()->where('model', Item::class);
-        }
+        
         //Cojo todas las aulas que exiten para mostrarlas en el desplegable
         // para elegir a que aula pertenece el Item
 
+        $types = Type::all()->where('model', Item::class);
         $classrooms = Classroom::all();
+        $states = State::all();
+        $items = Item::all();
+        return view('items.index', compact('classrooms', 'items', 'types', 'states'));
+    }
+    public function filter(Request $request)
+    {
+        $query = DB::table('items');
+        
+        $idClass = $request->get('idClass');
+        $idState = $request->get('idState');
+        $idType = $request->get('idType');
+
+        if($idClass != ""){
+            $query = $query->where('classroom_id', $idClass);
+            
+        }
+        if($idState != ""){
+            $query = $query->where('state_id', $idState);
+        }
+        if($idType != ""){
+            $query = $query->where('type_id', $idType);
+        }
+        $items = $query->get();
+        
 
         //Filtro para coger solo los typos del modelo Item
-        // $types = Type::all()->where('model','Item');
-        $items = Item::all();
-        return view('items.index', compact('classrooms', 'items'));
+        $types = Type::all()->where('model', Item::class);
+        $classrooms = Classroom::all();
+        $states = State::all();
+        
+        return view('items.index', compact('classrooms', 'items', 'types', 'states'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -41,11 +65,12 @@ class ItemController extends Controller
      */
     public function create()
     {
+        $states = State::all();
         $classrooms = Classroom::all();
         //Filtro para coger solo los typos del modelo Item
-        $types = Type::all()->where('model','Item');
+        $types = Type::all()->where('model',Item::class);
         
-        return view('items.create', compact('classrooms', 'types'));
+        return view('items.create', compact('classrooms', 'types', 'states'));
     }
 
     /**

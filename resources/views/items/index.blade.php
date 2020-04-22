@@ -8,24 +8,45 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="display-4">Material del Aula </h1>
-            
-            <div class="dropdown">
-                <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Aula
-                </button>
-                
-                <!-- Enlace al form create -->
-                <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a>
-
-                <!-- DropDown Aulas -->
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @foreach($classrooms as $classroom)
-                    <a class="dropdown-item" type="submit" name="aulaSeleccionada" value="{{$classroom->id}}" href="/items/filter/{{$classroom->id}}">{{$classroom->name}}</a>
-                    <!-- <option value="{{$classroom->id}}">{{$classroom->name}}</option> -->
-                    @endforeach
-
+            <form method="post" action="{{ url('items/filter') }}">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="formControlSelect1">Aulas</label>
+                    <select class="form-control" id="classroom_id" name="idClass">
+                        <option value="" selected>Todas</option>
+                        <!--Hace la funcion de un placeholder-->
+                        @foreach($classrooms as $classroom)
+                        <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <label for="formControlSelect1">Tipo</label>
+                    <select class="form-control" id="type_id" name="idType">
+                        <option value="" selected>Todos</option>
+                        <!--Hace la funcion de un placeholder-->
+                        @foreach($types as $type)
+                            <option value="{{$type->id}}">{{$type->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="formControlSelect1">Estado</label>
+                    <select class="form-control" id="state_id" name="idState">
+                        <option  value="" selected>Todos</option>
+                        <!--Hace la funcion de un placeholder-->
+                        @foreach($states as $state)
+                        <option value="{{$state->id}}">{{$state->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
+            
+            
+            <!-- Enlace al form create -->
+            <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a>
             <hr>
             <div class="d-flex flex-row bd-highlight mb-3">
                 <div class="container-fluid">
@@ -70,49 +91,49 @@
             </div>
         </div>
     </div>
-    
+
     </div>
     <script>
-    // $(document).ready(function() {
-    //     $('#datepicker').datepicker({
-    //         language: 'es'
-    //     });
-    // });
-    $(document).ready(function() {
-        $('#tabla').DataTable({
-            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-            buttons: [{
-                    extend: 'excel',
-                    className: 'btn-outline-success mr-2'
-                },
-                {
-                    extend: 'pdf',
-                    className: 'btn-outline-danger mr-2'
+        // $(document).ready(function() {
+        //     $('#datepicker').datepicker({
+        //         language: 'es'
+        //     });
+        // });
+        $(document).ready(function() {
+            $('#tabla').DataTable({
+                dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
+                buttons: [{
+                        extend: 'excel',
+                        className: 'btn-outline-success mr-2'
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'btn-outline-danger mr-2'
+                    }
+                ],
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
+                    "infoEmpty": "No hay informacion",
+                    "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "No se han encontrado resultados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
                 }
-            ],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
+            });
         });
-    });
-</script>
+    </script>
 
 
 </main>

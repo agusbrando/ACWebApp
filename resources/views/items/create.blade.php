@@ -29,12 +29,28 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="formControlSelect1">Estado del objeto</label>
+            <select class="form-control" id="state_id" name="state_id">
+                <option  disable >Selecciona un estado</option>
+                <!--Hace la funcion de un placeholder-->
+                @foreach($states as $state)
+                @if($state->id == 1)
+                    <option selected value="{{$state->id}}">{{$state->name}}</option>
+                @else
+                    <option value="{{$state->id}}">{{$state->name}}</option>
+                
+                @endif
+                
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="formControlSelect1">Tipo de objeto</label>
             <select class="form-control" id="type_id" name="type_id">
                 <option disabled selected>Selecciona un tipo</option>
                 <!--Hace la funcion de un placeholder-->
                 @foreach($types as $type)
-                <option value="{{$classroom->id}}">{{$type->name}}</option>
+                <option value="{{$type->id}}">{{$type->name}}</option>
                 @endforeach
             </select>
         </div>

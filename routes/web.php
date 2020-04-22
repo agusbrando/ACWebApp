@@ -46,6 +46,5 @@ Route::get('/models', function () {
 
 });
 
-
+Route::post('/items/filter', 'ItemController@filter');
 Route::resource('items', 'ItemController');
-Route::get('/items/filter/{id}', 'ItemController@index');
