@@ -2,8 +2,10 @@
 
 @section('main')
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- Tonggle -->
 <link href="{{ asset('css/toggle.css') }}" rel="stylesheet" type="text/css" />
+<!-- Jquery -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- Tabla -->
 <script>
@@ -13,9 +15,18 @@
             scrollY: 500,
             scrollCollapse: true,
             buttons: [{
+                label: 'Create',
+                text: 'Comportamiento',
+                action: function(nButton, oConfig, oFlash) {
+
+                    window.location = "http://127.0.0.1:8000/comportamiento"
+
+                },
+                className: 'btn btn-outline-primary mr-1'
+            }, {
                 extend: 'excel',
                 className: 'btn-outline-success'
-            }],
+            }, ],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -47,8 +58,6 @@
         });
     });
 </script>
-<!-- ApiGoogle -->
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
@@ -57,21 +66,26 @@
     <hr>
     <!-- DatePicker -->
     <h5>Fecha:</h5>
-    <input type="text" id="datepicker" placeholder="- Seleccionar fecha -" class="form-control">
-    <div class="form-group">
-        <select class="form-control mt-3 mb-3" id="exampleFormControlSelect1">
-            <option>8:35 - 9:25 1ºHora</option>
-            <option>9:25 - 10:20 2ºHora</option>
-            <option>10:20 - 11:35 3ºHora</option>
-            <option>11:35 - 12:25 4ºHora</option>
-            <option>12:25 - 13:15 5ºHora</option>
-            <option>13:15 - 14:15 6ºHora</option>
-        </select>
+    <form action="{{ url('asistencia/filter') }}" method="post">
+        <div class="contenedor">
+            <input type="text" id="datepicker" placeholder="- Seleccionar fecha -" class="form-control col-6">
+            <div class="espacio"> </div>
+            <div class="form-group select-iz">
+                <select class="form-control pl-1" id="horarios" name="horario">
+                    <option>8:35 - 9:25 1ºHora</option>
+                    <option>9:25 - 10:20 2ºHora</option>
+                    <option>10:20 - 11:35 3ºHora</option>
+                    <option>11:35 - 12:25 4ºHora</option>
+                    <option>12:25 - 13:15 5ºHora</option>
+                    <option>13:15 - 14:15 6ºHora</option>
+                </select>
 
+            </div>
+        </div>
         <!-- Grupo -->
         <h5>Grupo:</h5>
         <div class="form-group">
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select class="form-control" id="cursos" name="curso">
                 <option>DAM:1</option>
                 <option>DAM:2</option>
                 <option>SMR:1</option>
@@ -84,62 +98,49 @@
         <!-- Asignatura -->
         <h5>Asignatura:</h5>
         <div class="form-group">
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select class="form-control" id="asignaturas" name="asignatura">
                 <option>PMM-Programación multimedia y dispositivos móviles</option>
-                <option></option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option>AD-Acceso a datos</option>
+                <option>DI-Diseño de interfaces</option>
+                <option>EIE-Empresa e iniciativa emprenderora</option>
+                <option>PSP-Programación de servicios y procesos</option>
+                <option>SGE-Sistema de gestión empresarial</option>
+                <option>INGLÉS</option>
+
             </select>
         </div>
+    </form>
+    <!-- Tabla -->
+    <table id="alumnos" class="table table-striped" style="width:100%;">
+        <thead class="cabezeraTabla">
+            <tr>
+                <td>Apellidos, Nombre</td>
+                <td>Número de Faltas</td>
 
-        <!-- Tabla -->
-        <table id="alumnos" class="table table-striped" style="width:100%;">
-            <thead class="cabezeraTabla">
-                <tr>
-                    <td>Apellidos, Nombre</td>
-                    <td>Número de Faltas</td>
-                    <td>Ausente</td>
-                    <td>Presente</td>
-                    <td>Faltas de Comportamiento</td>
-                </tr>
-            </thead>
+                <td>Presente</td>
+                <td>Faltas de Comportamiento</td>
+                <td>Action</td>
+            </tr>
+        </thead>
 
-            <tbody>
-                @foreach ($users as $user)
-                <tr>
-                    <td>{{$user ->first_name}}</td>
-                    <td>15</td>
-                    <td></td>
-                    <td><label class="switch">
-                            <input type="checkbox" checked data-toggle="toggle">
-                            <span class="slider round"></span>
-                        </label></td>
-                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Falta Grave</button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Falta Comportamiento</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <textarea class="form-control" rows="3" placeholder="-Breve descripción-"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Guardar cambios</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
+        <tbody>
+            @foreach ($users as $user)
+            <tr>
+                <td>{{$user ->first_name}}, {{$user ->last_name}}</td>
+                <td>15</td>
 
-        </table>
+                <td><label class="switch">
+                        <input type="checkbox" checked data-toggle="toggle">
+                        <span class="slider round"></span>
+                    </label></td>
+                <td>
+
+                </td>
+                <td> <a type="button" class="btn btn-primary mr-2" href="/faltas/{{$user->id}}">Más Info.</a></td>
+            </tr>
+            @endforeach
+        </tbody>
+
+    </table>
 </main>
 @endsection

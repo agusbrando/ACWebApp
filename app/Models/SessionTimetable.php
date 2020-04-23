@@ -13,7 +13,7 @@ class SessionTimetable extends Pivot
     protected $guarded = [];
 
     
-    public function subjects(){
+    public function subject(){
         return $this->belongsTo('App\Models\Subject');
     }
     
