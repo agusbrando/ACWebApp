@@ -10,10 +10,10 @@ class Message extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function sends()
-    {
-        return $this->hasMany('App\Models\Send');
-    }
+    // public function sends()
+    //{
+    //  return $this->hasMany('App\Models\Send');
+    // }
 
     public function user()
     {
@@ -24,7 +24,9 @@ class Message extends Model
     {
         return $this->morphMany('App\Models\Attachment', 'attachmentable');
     }
-
-
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User')->withPivot('read')->withTimeStamps();
+    }
     
 }
