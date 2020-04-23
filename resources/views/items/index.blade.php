@@ -56,9 +56,9 @@
 
                 {{ csrf_field() }}
 
-                <div class="form-group float-left">
+                <div class="form-group float-left mr-3">
                     <label for="formControlSelect1">Aulas</label>
-                    <select class="form-control" id="classroom_id" name="idClass">
+                    <select class="form-control " id="classroom_id" name="idClass">
                         <option value="" selected>Todas</option>
                         <!--Hace la funcion de un placeholder-->
                         @foreach($classrooms as $classroom)
@@ -67,7 +67,7 @@
                     </select>
                 </div>
 
-                <div class="form-group float-left">
+                <div class="form-group float-left mr-3">
                     <label for="formControlSelect1">Tipo</label>
                     <select class="form-control" id="type_id" name="idType">
                         <option value="" selected>Todos</option>
@@ -78,7 +78,7 @@
                     </select>
                 </div>
 
-                <div class="form-group float-left">
+                <div class="form-group float-left mr-3">
                     <label for="formControlSelect1">Estado</label>
                     <select class="form-control" id="state_id" name="idState">
                         <option  value="" selected>Todos</option>
@@ -88,13 +88,18 @@
                         @endforeach
                     </select>
                 </div>
-                <button  class="btn btn-primary " type="submit" >Filtrar</button>
+                <div class="d-flex flex-row">
+                    <button  class="btn btn-primary " type="submit" >Filtrar</button>
+                    <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a>
+                </div>
+                
             </form>
             
             
             <!-- Enlace al form create -->
-            <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a>
+            <br>
             <hr>
+
             <div class="d-flex flex-row bd-highlight mb-3">
                 <div class="container-fluid">
                     <table id='mytable' class="table table-striped table-bordered">
