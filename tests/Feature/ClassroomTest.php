@@ -9,15 +9,11 @@ use App\Models\Role;
 use App\Models\State;
 use App\Models\Type;
 use App\Models\Classroom;
-use App\Models\Item;
 use App\Models\Session;
 use App\Models\User;
 use App\Models\Event;
 use Carbon\Carbon;
-
-
-
-
+use App\Models\Item;
 class ClassroomTest extends TestCase
 {
     /**
@@ -81,13 +77,14 @@ class ClassroomTest extends TestCase
             ['id'=>$session2->id]
         ])->pluck('id');
 
-        $this->assertEquals($sessions,$expected_sessions_ids);
+        $this->assertEquals($sessions, $expected_sessions_ids);
         $event->destroy($event);
         $user->destroy($user);
         $session->destroy($session);
         $classroom->destroy($classroom);
         $type->destroy($type);
-        $role->destroy($role);  
+        $role->destroy($role);
+    }
 
         
     }

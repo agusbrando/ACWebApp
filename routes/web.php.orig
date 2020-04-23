@@ -28,7 +28,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+<<<<<<< HEAD
+});
 Route::get('/stock', function () {
     return view('stock');
 });
+=======
 Route::get('/', 'HomeController@index');
+>>>>>>> master
