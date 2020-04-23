@@ -14,7 +14,10 @@ use App\Models\Event;
 use Carbon\Carbon;
 
 use App\Models\Item;
+<<<<<<< HEAD
 
+=======
+>>>>>>> master_roby
 class ClassroomTest extends TestCase
 {
     /**
@@ -78,14 +81,20 @@ class ClassroomTest extends TestCase
             ['id'=>$session2->id]
         ])->pluck('id');
 
-        $this->assertEquals($sessions,$expected_sessions_ids);
+        $this->assertEquals($sessions, $expected_sessions_ids);
         $event->destroy($event);
         $user->destroy($user);
         $session->destroy($session);
         $classroom->destroy($classroom);
         $type->destroy($type);
+<<<<<<< HEAD
         $role->destroy($role);  
     }
+=======
+        $role->destroy($role);
+    }
+
+>>>>>>> master_roby
     public function testItem()
     {
         $classroom = Classroom::create([
