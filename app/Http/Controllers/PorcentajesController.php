@@ -93,9 +93,14 @@ class PorcentajesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($subject_id, $evaluation_id, $type_id)
     {
-        //
+        $subject = Subject::find($subject_id);
+        $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
+        $porcentaje = Percentage::where('evaluation_id', $evaluation_id)->where('type_id', $type_id)->get();
+        $types = Type::all()->where('model', Percentage::class);
+
+        return view('Notas.editPorcentaje', compact('porcentaje', 'evaluaciones', 'types', 'subject'));
     }
 
     /**

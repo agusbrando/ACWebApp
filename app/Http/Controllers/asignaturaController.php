@@ -67,32 +67,35 @@ class AsignaturaController extends Controller
             switch ($eval->name) {
                 case "1Eval":
                     foreach ($types as $type) {
-                        array_push($eval1, array(
-                            $type->name,
-                            $type->pivot->percentage,
-                            $type->pivot->nota_min,
-                            $type->pivot->nota_media,
-                        ));
+                        array_push($eval1, new Percentage([
+                            "evaluacion_id" => $type->pivot->evaluation_id,
+                            "type_id" => $type->pivot->type_id,
+                            "porcentaje" =>$type->pivot->percentage,
+                            "nota_min" =>$type->pivot->nota_min,
+                            "nota_media" =>$type->pivot->nota_media,
+                        ]));
                     }
                     break;
                 case "2Eval":
                     foreach ($types as $type) {
-                        array_push($eval2, array(
-                            $type->name,
-                            $type->pivot->percentage,
-                            $type->pivot->nota_min,
-                            $type->pivot->nota_media,
-                        ));
+                        array_push($eval2, new Percentage([
+                            "evaluacion_id" => $type->pivot->evaluation_id,
+                            "type_id" => $type->pivot->type_id,
+                            "porcentaje" =>$type->pivot->percentage,
+                            "nota_min" =>$type->pivot->nota_min,
+                            "nota_media" =>$type->pivot->nota_media,
+                        ]));
                     }
                     break;
                 case "3Eval":
                     foreach ($types as $type) {
-                        array_push($eval3, array(
-                            $type->name,
-                            $type->pivot->percentage,
-                            $type->pivot->nota_min,
-                            $type->pivot->nota_media,
-                        ));
+                        array_push($eval3, new Percentage([
+                            "evaluacion_id" => $type->pivot->evaluation_id,
+                            "type_id" => $type->pivot->type_id,
+                            "porcentaje" =>$type->pivot->percentage,
+                            "nota_min" =>$type->pivot->nota_min,
+                            "nota_media" =>$type->pivot->nota_media,
+                        ]));
                     }
                     break;
             }

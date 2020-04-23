@@ -211,12 +211,14 @@
                                 @if($eval->name == '1Eval')
                                 @foreach($eval1 as $porcentaje)
                                 <tbody>
-                                    <tr>@foreach($porcentaje as $p)
-                                        <td>{{$p}}</td>
-                                        @endforeach
+                                    <tr>
+                                        <td></td>
+                                        <td>{{$porcentaje->porcentaje}}</td>
+                                        <td>{{$porcentaje->nota_min}}</td>
+                                        <td>{{$porcentaje->nota_media}}</td>
                                         <td>
                                             <div class="d-flex flex-row">
-                                                <a href="#" class="mr-3 icon"><i class="fas fa-edit"></i></a>
+                                                <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
                                                 <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </td>
@@ -226,12 +228,14 @@
                                 @elseif($eval->name == '2Eval')
                                 @foreach($eval2 as $porcentaje)
                                 <tbody>
-                                    <tr>@foreach($porcentaje as $p)
-                                        <td>{{$p}}</td>
-                                        @endforeach
+                                    <tr>
+                                        <td></td>
+                                        <td>{{$porcentaje->porcentaje}}</td>
+                                        <td>{{$porcentaje->nota_min}}</td>
+                                        <td>{{$porcentaje->nota_media}}</td>
                                         <td>
                                             <div class="d-flex flex-row">
-                                                <a href="#" class="mr-3 icon"><i class="fas fa-edit"></i></a>
+                                                <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
                                                 <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </td>
@@ -241,12 +245,14 @@
                                 @elseif($eval->name == '3Eval')
                                 @foreach($eval3 as $porcentaje)
                                 <tbody>
-                                    <tr>@foreach($porcentaje as $p)
-                                        <td>{{$p}}</td>
-                                        @endforeach
+                                    <tr>
+                                        <td></td>
+                                        <td>{{$porcentaje->porcentaje}}</td>
+                                        <td>{{$porcentaje->nota_min}}</td>
+                                        <td>{{$porcentaje->nota_media}}</td>
                                         <td>
                                             <div class="d-flex flex-row">
-                                                <a href="#" class="mr-3 icon"><i class="fas fa-edit"></i></a>
+                                                <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
                                                 <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </td>
