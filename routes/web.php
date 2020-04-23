@@ -22,9 +22,12 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::resource('horarios', 'TimetableController');
-Route::get('Calendar/tracking/{mes}','CalendarController@index_month');
-Route::get('Calendar/tracking','CalendarController@index');
+Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
+Route::resource('seguimiento', 'TrackingController');
+Route::get('seguimiento','TrackingController@index');
+Route::post('seguimiento','TrackingController@store')->name('seguimiento.store');
 Route::get('/models', function () {
 
     $role = 1;

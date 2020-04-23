@@ -40,130 +40,75 @@
 <link href="{{ asset('css/timetable.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="display-3">Horarios </h1>
+    <div class="">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="display-2">Horarios </h1>
+                <form action="{{ route('horarios.create')}}" method="get">
+                @csrf
+
+                <button class="btn btn-primary" type="submit">Añadir Horario</button>
+            </form>
 
 
-
-        </div>
-
-        <div class="d-flex flex-row bd-highlight mb-3 tablaTimetable">
-            <div class="tablaTimetable">
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#add">
-                    Añadir Horario
-                    
-                </button>
-                <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Añadir horario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
-            <div class="modal-body">
-                <form method="post" action="{{ route('horarios.store') }}">
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control" id="name" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="date_start">Fecha de inicio del horario</label>
-                        <input type="date" class="form-control" id="date_start" name="date_start">
-                    </div>
-                    <div class="form-group">
-                        <label for="date_end">Fecha de fin del horario</label>
-                        <input type="date" class="form-control" id="date_end" name="date_end">
-                    </div>
+            
+        
+            <div class="d-flex flex-row bd-highlight mb-3 tablaTimetable">
+                <div class="tablaTimetable">
+                
 
+                    <table class="table table-striped" id="mytable">
+                        <thead class="cabezeraTabla">
+                            <tr>
+                                <td>ID</td>
+                                <td>Nombre</td>
+                                <td>Fecha Inicio</td>
+                                <td>Fecha Fin</td>
+                                <td>Editar</td>
+                                <td>Borrar</td>
+                                <td>Ver</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($timetables as $timetable)
+                            <tr>
+                                <td>{{$timetable->id}}</td>
+                                <td>{{$timetable->name}}</td>
+                                <td>{{$timetable->date_start}}</td>
+                                <td>{{$timetable->date_end}}</td>
+                                <td>
 
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary" value="Guardar Cambios">
-                    </div>
-                </form>
+                                    <form action="{{ route('horarios.edit', $timetable->id)}}" method="get">
+                                        @csrf
+
+                                        <button class="btn btn-primary" type="submit">Editar</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ route('horarios.destroy', $timetable->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ route('Ind', $timetable->id)}}" method="get">
+                                        @csrf
+
+                                        <button class="btn btn-warning" type="submit">Ver</button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                            @endforeach
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-                <table class="table table-striped" id="mytable">
-                    <thead class="cabezeraTabla">
-                        <tr>
-                            <td>ID</td>
-                            <td>Nombre</td>
-                            <td>Fecha Inicio</td>
-                            <td>Fecha Fin</td>
-                            <td>Editar</td>
-                            <td>Borrar</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($timetables as $timetable)
-                        <tr>
-                            <td>{{$timetable->id}}</td>
-                            <td>{{$timetable->name}}</td>
-                            <td>{{$timetable->date_start}}</td>
-                            <td>{{$timetable->date_end}}</td>
-                            <td>
-                                <a  class="btn btn-primary" data-toggle="modal" data-target="#edit">Editar</a>
-                                <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Editar horario</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="post" action="{{ route('horarios.update',$timetable->id) }}">
-                                                    @method('patch')
-                                                    @csrf
 
-                                                    <div class="form-group">
-                                                        <label for="name">Nombre</label>
-                                                        <input type="text" class="form-control" id="name" name="name" value="{{$timetable->name}}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="date_start">Fecha de inicio del horario</label>
-                                                        <input type="date" class="form-control" id="date_start" name="date_start" value="{{$timetable->date_start}}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="date_end">Fecha de fin del horario</label>
-                                                        <input type="date" class="form-control" id="date_end" name="date_end" value="{{$timetable->date_end}}">
-                                                    </div>
-
-
-                                                    <div class="modal-footer">
-                                                        <input type="submit" class="btn btn-primary" value="Guardar Cambios">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <form action="{{ route('horarios.destroy', $timetable->id)}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div>
-        </div>
-        <div class="col-sm-12">
 </main>
 @endsection
-
-
-

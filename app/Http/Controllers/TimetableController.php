@@ -54,7 +54,11 @@ class TimetableController extends Controller
     {
         //
     }
-
+    public function horario($id)
+    {
+        $timetable = Timetable::find($id);
+        return view('Timetable.horario', compact('timetable')); 
+    }
     /**
      * Show the form for editing the specified resource.
      *
