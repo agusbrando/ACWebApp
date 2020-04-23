@@ -15,9 +15,12 @@ use Carbon\Carbon;
 
 use App\Models\Item;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> master_roby
+=======
+>>>>>>> feat_controladores_carloscu
 class ClassroomTest extends TestCase
 {
     /**
@@ -89,12 +92,16 @@ class ClassroomTest extends TestCase
         $type->destroy($type);
 <<<<<<< HEAD
         $role->destroy($role);  
+<<<<<<< HEAD
     }
 =======
         $role->destroy($role);
     }
 
 >>>>>>> master_roby
+=======
+        }
+>>>>>>> feat_controladores_carloscu
     public function testItem()
     {
         $classroom = Classroom::create([

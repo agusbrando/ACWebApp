@@ -1,0 +1,51 @@
+h1{
+    padding: 10px;
+}
+.dropdown{
+    padding: 10px;
+    padding-bottom: 20px;
+}
+table.dataTable thead th{
+    background-color: #4d5358;
+    border-color: #454d55;
+    color: #fff;
+
+}
+.boton button {
+    background-color:white;
+    
+
+}
+.botones{
+    display:flex;
+    flex-direction: row;
+}
+.botones *{
+    padding-left: 10px;
+}
+
+.cabezeraTabla{
+    color: #fff;
+    background-color: #4d5358;
+    border-color: #454d55;
+}
+
+
+table.dataTable thead {
+    background-color: #4d5358;
+    border-color: #454d55;
+    color: #fff;
+
+}
+.tablaTimetable{
+    width: 95%;
+    
+}
+
+.marginado{
+    
+    width: 100%;
+}
+.header{
+    height: 100px;
+}
