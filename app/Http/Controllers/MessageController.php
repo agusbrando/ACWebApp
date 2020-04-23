@@ -56,6 +56,7 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'users'=>'required',
             'title'=>'required',
             'text'=>'required'
@@ -69,11 +70,19 @@ class MessageController extends Controller
         $message->save();
         $users=$request->get('users');
        
-
         foreach ($users as $user) {
             User::find($user)->messagesReceive()->attach($message->id);
 
         }
+if($request->hasfile('image')){
+        $imageName = time().'.'.$request->image->extension();  
+   
+
+        $request->image->move(storage_path("app/messages/$message->id"), $imageName);
+    }
+
+//storage/app/messages/id_messages/files
+
         return redirect('/messages')->with('success', 'Message Send!');
     }
 
