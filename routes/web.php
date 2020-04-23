@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,3 +33,9 @@ Route::get('/stock', function () {
     return view('stock');
 });
 Route::get('/', 'HomeController@index');
+    
+
+
+
+Route::post('/items/filter', 'ItemController@filter');
+Route::resource('items', 'ItemController');
