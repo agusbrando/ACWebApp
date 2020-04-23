@@ -45,3 +45,5 @@ Route::get('/models', function () {
     echo $user->role->name;
 
 });
+
+Route::resource('messages', 'MessageController');
