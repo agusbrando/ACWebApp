@@ -10,6 +10,6 @@ class Role extends Model
     protected $guarded = [];
 
     public function users(){
-        return $this->hasMany('App\Models\User');
+        return $this->belongsToMany(Type::class)->withPivot('permissions','role_permissions','roles')->withTimestamps();;
     }
 }

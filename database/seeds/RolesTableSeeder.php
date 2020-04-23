@@ -31,5 +31,10 @@ class RolesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('roles')->insert([
+            'name' => 'Invitado',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }
