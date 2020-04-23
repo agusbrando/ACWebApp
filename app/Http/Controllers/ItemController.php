@@ -24,7 +24,7 @@ class ItemController extends Controller
         // para elegir a que aula pertenece el Item
 
         $types = Type::all()->where('model', Item::class);
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
         $items = Item::all();
         return view('items.index', compact('classrooms', 'items', 'types', 'states'));
@@ -44,7 +44,6 @@ class ItemController extends Controller
         //Los resultados de cada consulta se va concatenando en $query
         if($idClass != ""){
             $query = $query->where('classroom_id', $idClass);
-            
         }
         if($idState != ""){
             $query = $query->where('state_id', $idState);
