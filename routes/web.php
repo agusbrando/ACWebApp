@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,17 +40,11 @@ Route::get('/models', function () {
     }
 
     echo'<br>';
+});
 
-// Route::get('/login', function () {
-//     return view('login');
-// });
-//  Route::get('/', function () {   
-//      return view('auth.login');
-//  });
 
 Route::resource('permissions','PermissionController');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
