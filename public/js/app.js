@@ -86,6 +86,20 @@
 /************************************************************************/
 /******/ ({
 
+<<<<<<< HEAD
+=======
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+>>>>>>> master
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -104,8 +118,13 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 !(function webpackMissingModule() { var e = new Error("Cannot find module 'C:\\Users\\jesus\\Documents\\aulacampus-laravel\\resources\\js\\app.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 module.exports = __webpack_require__(/*! C:\Users\jesus\Documents\aulacampus-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\Users\Roby\Documents\aulacampus-laravel_bueno\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Roby\Documents\aulacampus-laravel_bueno\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> master
 
 
 /***/ })

@@ -77,14 +77,20 @@ class ClassroomTest extends TestCase
             ['id'=>$session2->id]
         ])->pluck('id');
 
-        $this->assertEquals($sessions,$expected_sessions_ids);
+        $this->assertEquals($sessions, $expected_sessions_ids);
         $event->destroy($event);
         $user->destroy($user);
         $session->destroy($session);
         $classroom->destroy($classroom);
         $type->destroy($type);
+<<<<<<< HEAD
         $role->destroy($role);  
         }
+=======
+        $role->destroy($role);
+    }
+
+>>>>>>> master
     public function testItem()
     {
         $classroom = Classroom::create([
