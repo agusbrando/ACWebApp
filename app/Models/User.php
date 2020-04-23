@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable 
 {
-    
+    use Notifiable;
+
     protected $table = 'users';
 
     protected $primaryKey = 'id';
@@ -15,8 +18,10 @@ class User extends Model
      *
      * @var array
      */
-    protected $guarded = [];
-    
+    protected $fillable = [
+        'first_name', 'last_name', 'email', 'password','role_id'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -24,6 +29,9 @@ class User extends Model
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+    protected $casts = [
+        'email_verified_ad'=>'datetime',
     ];
 
     public function events()
@@ -36,7 +44,7 @@ class User extends Model
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-    
+
     public function responsables()
     {
         return $this->belongsToMany('App\Models\Item', 'item_user', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
@@ -56,18 +64,22 @@ class User extends Model
         return $this->belongsTo('App\Models\Timetable');
     }
 
-    public function tasks(){
+    public function tasks()
+    {
         return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
     }
-    public function programs_responsable(){
+    public function programs_responsable()
+    {
         return $this->hasMany(Program::class, 'user_id');
     }
-   
-    public function programs_professor(){
+
+    public function programs_professor()
+    {
         return $this->hasMany(Program::class, 'professor_id');
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany('App\Models\Comment');
     }
     

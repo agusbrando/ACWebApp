@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             RolesPermissionsTableSeeder::class,
             MisbehaviorsTableSeeder::class,
             PostsTableSeeder::class,
+            CommentsTableSeeder::class,
             MessagesTableSeeder::class,
             MessagesUsersTableSeeder::class,
             CommentsTableSeeder::class,
