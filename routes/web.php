@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Misbehavior;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,26 +24,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/models', function () {
+Route::get('/prueba', function () {
 
-    $role = 1;
+    $user_id=1;
+    $typeFaltaAsistencia = 1;
+    $faltas = Misbehavior::all()->where('user_id',$user_id)->where('type_id',$typeFaltaAsistencia);
 
-    echo '*Usuarios con el id_role '.$role.'*<br>';
-    $users = App\Models\Role::find($role)->users;
+    
+    $lista = [];
 
-    foreach ($users as $user) {
-        echo ($user->first_name).'<br>';
+    foreach($subjects as $subject){
+
+        $timetables = $subject->timetables;
+        $count = 0;
+        foreach($timetables as $timetable){
+            $misbehaviours= Misbehavior::all()->where('session_timetable_id',$timetable->id);
+            if($misbehaviours!=null){
+                foreach($misbehaviours as $misbehaviour){
+                    if($misbehaviour->user_id == $user_id){
+                        $count = $count + 1;
+                    }
+                }
+
+            }
+            
+        }
+        $elemento = ['asignatura'=> $subject->name, 'faltas'=>$count, 'max'=>$subject->maxFaltas];
+
+        array_push($lista, $elemento);
+
     }
 
-    echo'<br>';
-
-    $idUser = 3;
-
-    echo '*Rol del usuario con id '.$idUser.'*<br>';
-
-    $user = App\Models\User::find($idUser);
-
-    echo $user->role->name;
+    echo $lista;
 
 });
 
@@ -55,4 +68,3 @@ Route::patch('programs/{program_id}/unit/{id}','ProgramController@updateUnit')->
 Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspecto')->name('programs.updateAspecto');
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
-

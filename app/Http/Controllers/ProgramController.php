@@ -34,7 +34,11 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        //
+        $editar=false;
+        $programs = Program::all();
+        $profesores = DB::table('users')->where('role_id', 2)->get();
+        $subjects = Subject::all();
+        return view('programs.create',compact('programs','profesores','subjects','editar'));
     }
 
     /**
@@ -48,7 +52,8 @@ class ProgramController extends Controller
         $request->validate([
             'professor_id'=>'required',
             'user_id'=>'required',
-            'subject_id'=>'required'
+            'subject_id'=>'required',
+            'name'=>'required'
         ]);
 
         $profesor = User::find($request->get('professor_id'));
@@ -56,8 +61,7 @@ class ProgramController extends Controller
         $asignatura = Subject::find($request->get('subject_id'));
 
         $program = new Program([
-            'date_check'=>now(),
-            'notes'=>'Introduce tus observaciones aqui.'
+            'name'=> $request->get('name')
         ]);
         $program->professor()->associate($profesor);
         $program->responsable()->associate($responsable);
@@ -174,7 +178,12 @@ class ProgramController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editar=true;
+        $programacion = Program::find($id);
+        $programs = Program::all();
+        $profesores = DB::table('users')->where('role_id', 2)->get();
+        $subjects = Subject::all();
+        return view('programs.create',compact('programs','profesores','subjects','editar','programacion'));
     }
 
     /**
@@ -186,7 +195,28 @@ class ProgramController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $request->validate([
+            'professor_id'=>'required',
+            'user_id'=>'required',
+            'subject_id'=>'required',
+            'name'=>'required'
+        ]);
+
+        $profesor = User::find($request->get('professor_id'));
+        $responsable = User::find($request->get('user_id'));
+        $asignatura = Subject::find($request->get('subject_id'));
+
+        $program = Program::find($id);
+
+        $program->name = $request->get('name');
+        $program->professor()->associate($profesor);
+        $program->responsable()->associate($responsable);
+        $program->subject()->associate($asignatura);
+
+        $program->save();
+        return redirect('/programs');
+
     }
 
     /**
@@ -197,7 +227,10 @@ class ProgramController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $program = Program::find($id);
+        $program->delete();
+
+        return redirect('/programs');
     }
 
     public function destroyUnit($program_id, $id)

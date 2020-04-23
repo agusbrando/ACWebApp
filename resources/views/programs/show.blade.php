@@ -118,13 +118,13 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Principal</a></li>
                 <li class="breadcrumb-item"><a href="/programs">Programaciones</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{$program->id}} - {{$program->subject->name}} ({{date("Y", strtotime($program->created_at))}})</li>
+                <li class="breadcrumb-item active" aria-current="page">{{$program->id}} - {{$program->name}}</li>
             </ol>
         </nav>
         
         <div class="bd-highlight mb-3 tablas col-12 center">
             
-            <h1 class="display-5 text-center">{{$program->subject->name}} ({{date("Y", strtotime($program->created_at))}})</h1>
+            <h1 class="display-5 text-center">{{$program->id}} - {{$program->name}}</h1>
             <div class="card text-center">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
