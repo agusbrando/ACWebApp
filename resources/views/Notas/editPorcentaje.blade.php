@@ -19,7 +19,7 @@
             @csrf
             <div class="form-group">
                 <label for="Porcentaje">Porcentaje</label>
-                <select class="form-control" name="porcentaje" value={{ $porcentaje->percentage }}>
+                <select class="form-control" name="porcentaje" value={{$porcentaje->percentage}}>
                     <option value="0">0%</option>
                     <option value="10">10%</option>
                     <option value="20">20%</option>
