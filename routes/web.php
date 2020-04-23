@@ -13,14 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/calendar/{mes}','CalendarController@index_month');
-Route::get('/calendar','CalendarController@index');
+// Route::get('/calendar/{mes}','CalendarController@index_month');
+// Route::get('/calendar','CalendarController@index');
 
-Route::post('/event/store','CalendarController@store');
-Route::post('/event/create','CalendarController@create');
-Route::put('/event/destroy/{id}','CalendarController@destroy');
-Route::put('/event/update','CalendarController@update');
-Route::get('/event/details/{id}','CalendarController@details');
+Route::resource('calendar', 'CalendarController');
+
+// Route::post('/event/store','CalendarController@store');
+// Route::post('/event/create','CalendarController@create');
+// Route::put('/event/destroy/{id}','CalendarController@destroy');
+// Route::put('/event/update','CalendarController@update');
+// Route::get('/event/details/{id}','CalendarController@details');
+
+
+ Route::resource('event', 'CalendarController');
+
 
 Route::get('/login', function () {
     return view('welcome');
