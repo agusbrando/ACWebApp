@@ -3,54 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-
+use App\Models\Timetable;
 class TimetableController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-=======
-use App\Models\Timetable;
 
-class TimetableController extends Controller
-{
-    
-    
 
-    /**
+
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
->>>>>>> feat_controladores_carloscu
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-<<<<<<< HEAD
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-=======
         $timetables=Timetable::all();
         return view('Timetable.index',compact('timetables'));
     }
@@ -75,7 +43,6 @@ class TimetableController extends Controller
         ]);
         $timetable->save();
         return redirect('/horarios')->with('exito', 'Horario creado!');
->>>>>>> feat_controladores_carloscu
     }
 
     /**
@@ -88,15 +55,12 @@ class TimetableController extends Controller
     {
         //
     }
-<<<<<<< HEAD
 
-=======
     public function horario($id)
     {
         $timetable = Timetable::find($id);
         return view('Timetable.horario', compact('timetable')); 
     }
->>>>>>> feat_controladores_carloscu
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,12 +69,9 @@ class TimetableController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
-        //
-=======
+        
         $timetable = Timetable::find($id);
         return view('Timetable.edit', compact('timetable'));        
->>>>>>> feat_controladores_carloscu
     }
 
     /**
@@ -122,9 +83,6 @@ class TimetableController extends Controller
      */
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
-        //
-=======
         $request->validate([
             'name'=>'required',
             'date_start'=>'required',
@@ -138,7 +96,6 @@ class TimetableController extends Controller
         $timetable->save();
 
         return redirect('/horarios')->with('exito', 'Horario editado!');
->>>>>>> feat_controladores_carloscu
     }
 
     /**
@@ -149,11 +106,6 @@ class TimetableController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
-        //
-    }
-}
-=======
         $timetable = Timetable::find($id);
         $timetable->delete();
 
@@ -162,4 +114,3 @@ class TimetableController extends Controller
 }
 
    
->>>>>>> feat_controladores_carloscu
