@@ -19,9 +19,9 @@
         <div id="espacio" class="bg-primary w-100"></div>
         <h3>Eventos</h3>
         <div id="buttons">
-          <button type="button" class="btn btn-primary btn-block">Evento 1</button>
-          <button type="button" class="btn btn-primary btn-block">Evento 2</button>
-          <button type="button" class="btn btn-primary btn-block">Evento 3</button>
+          @foreach($types as $type)
+            <button type="button" class="btn btn-primary btn-block">{{ $type->name }}</button>      
+          @endforeach
         </div>
       </div>
 
