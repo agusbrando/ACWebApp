@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,12 +40,16 @@ Route::get('/models', function () {
 
     echo'<br>';
 
-    $idUser = 3;
+// Route::get('/login', function () {
+//     return view('login');
+// });
+//  Route::get('/', function () {   
+//      return view('auth.login');
+//  });
 
-    echo '*Rol del usuario con id '.$idUser.'*<br>';
+Route::resource('permissions','PermissionController');
 
-    $user = App\Models\User::find($idUser);
+Auth::routes();
 
-    echo $user->role->name;
-
-});
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
