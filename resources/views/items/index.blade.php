@@ -14,7 +14,7 @@
         $('#mytable').DataTable({
             dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
-            scrollCollapse: true,
+            scrollCollapse: true, 
             buttons: [{
                     extend: 'excel',
                     className: 'btn-outline-success mr-2'
