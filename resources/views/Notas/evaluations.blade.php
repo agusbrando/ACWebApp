@@ -197,41 +197,66 @@
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                         <div class="tab-pane fade" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
+                            @foreach($evaluaciones as $eval)
                             <table class="table table-striped mt-5">
                                 <thead class="cabezeraTabla">
                                     <tr>
-                                        <!-- <td></td>
+                                        <td>{{$eval->name}}</td>
                                         <td>Porcentaje</td>
                                         <td>Nota Minima</td>
                                         <td>Nota Media</td>
-                                        <td>Actions</td> -->
-                                        <td>Nota Minima</td>
-                                        <td>Nota Media</td>
+                                        <td>Actions</td>
                                     </tr>
                                 </thead>
+                                @if($eval->name == '1Eval')
+                                @foreach($eval1 as $porcentaje)
                                 <tbody>
-                                    <!-- @foreach($percentages as $percentage)
-                                    <tr>
-                                        <td>{{$percentage->percentage}}</td>
-                                        <td>{{$percentage->nota_min}}</td>
-                                        <td>{{$percentage->nota_media}}</td>
+                                    <tr>@foreach($porcentaje as $p)
+                                        <td>{{$p}}</td>
+                                        @endforeach
                                         <td>
-                                            <a class="btn btn-primary btn-sm text-white">Editar</a>
+                                            <div class="d-flex flex-row">
+                                                <a href="#" class="mr-3 icon"><i class="fas fa-edit"></i></a>
+                                                <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
+                                            </div>
                                         </td>
                                     </tr>
-                                    @endforeach -->
-                                    @foreach($evaluations as $eval)
-                                    <tr>
-                                        <td>{{$eval->name}}</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm text-white">Editar</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
                                 </tbody>
+                                @endforeach
+                                @elseif($eval->name == '2Eval')
+                                @foreach($eval2 as $porcentaje)
+                                <tbody>
+                                    <tr>@foreach($porcentaje as $p)
+                                        <td>{{$p}}</td>
+                                        @endforeach
+                                        <td>
+                                            <div class="d-flex flex-row">
+                                                <a href="#" class="mr-3 icon"><i class="fas fa-edit"></i></a>
+                                                <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+                                @elseif($eval->name == '3Eval')
+                                @foreach($eval3 as $porcentaje)
+                                <tbody>
+                                    <tr>@foreach($porcentaje as $p)
+                                        <td>{{$p}}</td>
+                                        @endforeach
+                                        <td>
+                                            <div class="d-flex flex-row">
+                                                <a href="#" class="mr-3 icon"><i class="fas fa-edit"></i></a>
+                                                <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+                                @endif
                             </table>
+                            @endforeach
                             <a class="btn btn-outline-primary" href="{{ url('/porcentajes/create', $subject->id) }}">Añadir</a>
-                        
                         </div>
                         <div class="tab-pane fade show active" id="nav-eval1" role="tabpanel" aria-labelledby="nav-eval1-tab">
                             <table id="evaluacion1" class="table table-striped" style="width:100%">

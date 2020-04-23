@@ -56,18 +56,49 @@ class AsignaturaController extends Controller
     {
         $users = User::all()->where('role_id', '=', 4);
         $subject = Subject::find($id);
-        
-        foreach($subject->evaluations as $eval){
-            $aux = $eval->types;
-            foreach($aux as $type){
-                $name = $type->name;
-                $percentage = $type->pivot->percentage;
+
+        $evaluaciones = $subject->evaluations;
+        $eval1 = array();
+        $eval2 = array();
+        $eval3 = array();
+
+        foreach ($subject->evaluations as $eval) {
+            $types = $eval->types;
+            switch ($eval->name) {
+                case "1Eval":
+                    foreach ($types as $type) {
+                        array_push($eval1, array(
+                            $type->name,
+                            $type->pivot->percentage,
+                            $type->pivot->nota_min,
+                            $type->pivot->nota_media,
+                        ));
+                    }
+                    break;
+                case "2Eval":
+                    foreach ($types as $type) {
+                        array_push($eval2, array(
+                            $type->name,
+                            $type->pivot->percentage,
+                            $type->pivot->nota_min,
+                            $type->pivot->nota_media,
+                        ));
+                    }
+                    break;
+                case "3Eval":
+                    foreach ($types as $type) {
+                        array_push($eval3, array(
+                            $type->name,
+                            $type->pivot->percentage,
+                            $type->pivot->nota_min,
+                            $type->pivot->nota_media,
+                        ));
+                    }
+                    break;
             }
         }
 
-        // $evaluations = Subject::find(1)->evaluations->load('types');
-
-        return view('Notas.evaluations', compact('users', 'subject'));
+        return view('Notas.evaluations', compact('users', 'subject', 'eval1', 'eval2', 'eval3', 'evaluaciones'));
     }
 
     /**
