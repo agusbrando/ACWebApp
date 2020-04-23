@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,33 +27,18 @@ Route::resource('calendar', 'CalendarController');
  Route::resource('event', 'CalendarController');
 
 
-Route::get('/login', function () {
-    return view('welcome');
-});
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
+//  Route::get('/', function () {   
+//      return view('auth.login');
+//  });
 
-Route::get('/models', function () {
+Route::resource('permissions','PermissionController');
 
-    $role = 1;
+Auth::routes();
 
-    echo '*Usuarios con el id_role '.$role.'*<br>';
-    $users = App\Models\Role::find($role)->users;
+Route::get('/home', 'HomeController@index')->name('home');
 
-    foreach ($users as $user) {
-        echo ($user->first_name).'<br>';
-    }
-
-    echo'<br>';
-
-    $idUser = 3;
-
-    echo '*Rol del usuario con id '.$idUser.'*<br>';
-
-    $user = App\Models\User::find($idUser);
-
-    echo $user->role->name;
-
-});
+Route::get('/', 'HomeController@index');
