@@ -25,11 +25,6 @@ class Event extends Model
         return $this->belongsTo('App\Models\Session', 'session_id');
     }
 
-    public function type()
-    {
-        return $this->belongsTo('App\Models\Type', 'type_id');
-    }
-
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');

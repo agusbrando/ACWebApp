@@ -13,7 +13,6 @@ class Session extends Model
     protected $fillable = [
         'id',
         'classroom_id',
-        'model',
         'time_start',
         'time_end'
     ];
@@ -32,6 +31,12 @@ class Session extends Model
     public function event()
     {
         return $this->hasOne('App\Models\Event');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Type', 'type_id');
+        // return $this->belongsTo('App\Models\Type', 'type_id')->where('model', 'App\Models\Session');
     }
 
 }

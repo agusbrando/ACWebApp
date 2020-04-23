@@ -20,5 +20,10 @@ class Type extends Model
     {
         return $this->hasMany('App\Models\Item' , 'type_id');
     }
+
+    public function sessions()
+    {
+        return $this->hasMany('App\Models\Session' , 'type_id');
+    }
     
 }

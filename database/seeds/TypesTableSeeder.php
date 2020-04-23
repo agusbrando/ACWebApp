@@ -12,31 +12,18 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('types')->insert([
-            'name' => 'Reunión',
+            'name' => 'Tutorias',
             'model' => 'App\Models\Percentage',
 	        'created_at' => now(),
             'updated_at' => now()      
         ]);
         
         DB::table('types')->insert([
-            'name' => 'Examen',
+            'name' => 'Reserva de aulas',
             'model' => 'App\Models\Event',
 	        'created_at' => now(),
             'updated_at' => now()      
         ]);
 
-	    DB::table('types')->insert([
-            'name' => 'Claustro',
-            'model' => 'App\Models\Item',	    
-            'created_at' => now(),
-            'updated_at' => now()      
-        ]);
-	
-	    DB::table('types')->insert([
-            'name' => 'Charla',
-            'model' => 'App\Models\Misbehaviors',
-	        'created_at' => now(),
-            'updated_at' => now()            
-        ]);
     }
 }
