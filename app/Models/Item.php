@@ -26,7 +26,11 @@ class Item extends Model
         return $this->belongsTo('App\Models\Classroom');
         
     }
-
+    public function state()
+    {
+        return $this->belongsTo('App\Models\State');
+        
+    }
     public function type()
     {
         return $this->belongsTo('App\Models\Type')->where('model', Item::class);
