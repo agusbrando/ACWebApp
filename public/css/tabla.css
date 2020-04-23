@@ -1,0 +1,56 @@
+.tablaPorcentajes {
+    margin: 2% 0 0;
+}
+
+.porcentajes {
+    width: 40%;
+}
+
+.porcentajes td {
+    text-align: center;
+}
+
+.alumnos {
+    margin-left: 10%;
+    width: 50%;
+}
+
+.tituloAlumnos {
+    text-align: center;
+}
+
+.cabezeraTabla {
+    color: #fff;
+    background-color: #4d5358;
+    border-color: #454d55;
+}
+
+.dropdown {
+    margin: 2% 0 0;
+}
+
+.evaluaciones {
+    height: 10%;
+    margin: 2% 1% 0;
+}
+
+.evaluaciones a {
+    text-decoration: none;
+    color: white;
+}
+.evaluaciones a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.boton button {
+    background-color: white;
+}
+
+.examenes td {
+    text-align: center;
+}
+
+.tr{
+    width: auto;
+}

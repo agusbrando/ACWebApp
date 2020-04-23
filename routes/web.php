@@ -3,8 +3,8 @@
 use App\Models\Misbehavior;
 use App\Models\Subject;
 use App\Models\SessionTimetable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,25 +57,10 @@ Route::get('/prueba', function () {
 
     echo var_dump($lista);
 });
+Route::resource('permissions','PermissionController');
 
-Route::get('/models', function () {
+Auth::routes();
 
-    $role = 1;
+Route::get('/home', 'HomeController@index')->name('home');
 
-    echo '*Usuarios con el id_role ' . $role . '*<br>';
-    $users = App\Models\Role::find($role)->users;
-
-    foreach ($users as $user) {
-        echo ($user->first_name) . '<br>';
-    }
-
-    echo '<br>';
-
-    $idUser = 3;
-
-    echo '*Rol del usuario con id ' . $idUser . '*<br>';
-
-    $user = App\Models\User::find($idUser);
-
-    echo $user->role->name;
-});
+Route::get('/', 'HomeController@index');
