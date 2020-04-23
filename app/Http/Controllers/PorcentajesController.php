@@ -37,7 +37,7 @@ class PorcentajesController extends Controller
 
         $types = Type::all()->where('model', Percentage::class);
 
-        return view('Notas.crearPorcentaje', compact('evaluaciones', 'types'));
+        return view('Notas.crearPorcentaje', compact('evaluaciones', 'types', 'subject'));
     }
 
     /**

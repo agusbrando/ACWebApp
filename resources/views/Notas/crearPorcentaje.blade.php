@@ -12,7 +12,7 @@
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
     <div class="container">
-        <h1 class="display-4 pr-5">Crear Porcentaje</h1>
+        <h1 class="display-4 pr-5">Crear Porcentaje para {{$subject->name}}</h1>
         <hr>
         <form action="{{ route('porcentajes.store') }}" method="post">
             @csrf

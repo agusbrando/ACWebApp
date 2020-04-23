@@ -12,14 +12,14 @@
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
     <div class="container">
-        <h1 class="display-4 pr-5">Crear Porcentaje</h1>
+        <h1 class="display-4 pr-5">Editar Porcentaje para {{$subject->name}}</h1>
         <hr>
         <form action="" method="post">
             @method('PATCH') 
             @csrf
             <div class="form-group">
                 <label for="Porcentaje">Porcentaje</label>
-                <select class="form-control" name="porcentaje" value={{$porcentaje->percentage}}>
+                <select class="form-control" name="porcentaje">
                     <option value="0">0%</option>
                     <option value="10">10%</option>
                     <option value="20">20%</option>
