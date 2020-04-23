@@ -13,8 +13,10 @@ use App\Models\User;
 use App\Models\Event;
 use Carbon\Carbon;
 use App\Models\Item;
+<<<<<<< HEAD
 
-use App\Models\Item;
+=======
+>>>>>>> master
 class ClassroomTest extends TestCase
 {
     /**
@@ -85,6 +87,8 @@ class ClassroomTest extends TestCase
         $classroom->destroy($classroom);
         $type->destroy($type);
         $role->destroy($role);
+    }
+
     }
 
     public function testItem()
