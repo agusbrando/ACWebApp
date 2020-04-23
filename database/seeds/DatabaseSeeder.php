@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             MisbehaviorsTableSeeder::class,
             PostsTableSeeder::class,
             MessagesTableSeeder::class,
-            SendsTableSeeder::class,
+            MessagesUsersTableSeeder::class,
             CommentsTableSeeder::class,
             AttachmentsTableSeeder::class
 	    
