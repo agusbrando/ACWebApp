@@ -70,4 +70,14 @@ class User extends Model
     public function comments() {
         return $this->hasMany('App\Models\Comment');
     }
+    
+    public function messagesReceive()
+    {
+        return $this->belongsToMany('App\Models\Message')->withPivot('read')->withTimeStamps();
+    }
+
+    public function messagesSent()
+    {
+        return $this->hasMany('App\Models\Message');
+    }
 }
