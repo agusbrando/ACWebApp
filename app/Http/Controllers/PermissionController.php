@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -15,7 +16,9 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::all();
-        return view('permissions.index',compact('permissions'));
+        $roles = Role::all();
+        //$permissions->pivot;
+        return view('permissions.index', compact('permissions','roles') );
     }
 
     /**
@@ -37,12 +40,12 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_permission'=>'required',
+            'id'=>'required',
             'name'=>'required'
         ]);
 
         $permission = new Permission([
-            'id_permission' => $request->get('id'),
+            'id' => $request->get('id'),
             'name' => $request->get('name')
         ]);
         $permission->save();

@@ -7,142 +7,13 @@
 
     <title>AulaCampus Site</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.veen-2 .log').click(function() {
-                $('.check').addClass('check-2')
-                var name = $('.veen-2 .tada .name input').val();
-                var mail = $('.veen-2 .tada .mail input').val();
-                var uid = $('.veen-2 .tada .uid input').val();
-                var pwd = $('.veen-2 .tada .pwd input').val();
-                var chkname = /^[A-Za-z0-9 ]{3,40}$/;
-                var chkmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-                var chkuid = /^[A-Za-z0-9_]{3,20}$/;
-                var chkpwd = /^[A-Za-z0-9!@#$%^&*()_]{6,20}$/;
-                if ((!chkname.test(name) || !chkmail.test(mail) || !chkuid.test(uid) || !chkpwd.test(pwd)) || ($('.veen-2 .in-1 input[type="radio"]').is(":not(:checked)") && $('.veen-2 .in-2 input[type="radio"]').is(":not(:checked)"))) {
-                    $('.check .p1,.check .p2,.check .p3,.check .p4,.check .p5,p').empty();
-                    if (!chkname.test(name)) {
-                        $('.check .p1').text('Enter Valid Name');
-                    }
-                    if (!chkmail.test(mail)) {
-                        $('.check .p2').text('Enter Valid Mail');
-                    }
-                    if (!chkuid.test(uid)) {
-                        $('.check .p3').text('Enter Valid User Name');
-                    }
-                    if (!chkpwd.test(pwd)) {
-                        $('.check .p4').text('Enter Password');
-                    }
-                    if ($('.veen-2 .in-1 input[type="radio"]').is(":not(:checked)") && $('.veen-2 .in-2 input[type="radio"]').is(":not(:checked)")) {
-                        $('.check .p5').text('Select Gender');
-                    }
-                } else {
-                    $('.check .p1,.check .p2,.check .p3,.check .p4,.check .p5').empty();
-                    $('.check').html('<p style="color:#1ec303;line-height:50px;">Youe Registration Is Successful...... ! Please Wait......!</p>', 3000);
-                    $('.veen-2 .tada input').val('');
-                    $('.veen-2 .tada input').removeAttr('checked');
-                    /*setTimeout(function(){
-			window.location.reload();
-		}, 3000);*/
-                }
-            });
-            $('.main-wrapper').mousemove(function(e) {
-                var offset = $(this).offset();
-                var relativeX = e.pageX - offset.left;
-                var relativeY = e.pageY - offset.top;
-                var movex = (-relativeX / 5);
-                var movey = (-relativeY / 5);
-                $(this).css({
-                    'background-position-x': movex,
-                    'background-position-y': movey
-                });
-            });
-            $('.tada').mousemove(function(e) {
-                var offset = $(this).offset();
-                var relativeX = e.pageX - offset.left;
-                var relativeY = e.pageY - offset.top;
-                var movex = (-relativeX / 5);
-                var movey = (-relativeY / 5);
-                $(this).css({
-                    'background-position-x': movex,
-                    'background-position-y': movey
-                });
-            });
-            $('.okati').click(function() {
-                $('.veen').css({
-                    'top': 0
-                });
-                $('.main-wrapper').css({
-                    'transform': 'scale(.9)'
-                });
-                $('.veen .tada').css({
-                    'left': 0
-                });
-            });
 
-            $('.tada a.close-x').click(function() {
-                $('body').find('*').removeAttr('style');
-                $('.veen-2 .tada input').removeAttr('checked');
-            });
-
-
-
-
-            $('.rendu').click(function() {
-                $('.veen-2').css({
-                    'top': 0
-                });
-                $('.main-wrapper').css({
-                    'transform': 'scale(.9)'
-                });
-                $('.veen-2 .tada').css({
-                    'left': 0
-                });
-            });
-            $('.veen-2 .tada a.close-x-2').click(function() {
-                $('body').find('*').removeAttr('style');
-                $('.check').removeClass('check-2');
-                $('.check').eampty();
-                $('.veen-2 .tada input').removeAttr('checked');
-            });
-
-
-            $('input, textarea, select').each(function() {
-                var tmpval = $(this).val();
-                if (tmpval != '') {
-                    $(this).prev().addClass('trans');
-                }
-            });
-            $('input, textarea, select').focus(function() {
-                $(this).prev().addClass('trans');
-
-            }).blur(function() {
-                if ($(this).val() == '') {
-                    $(this).prev().removeClass('trans');
-                }
-            });
-
-            $.fn.toggleAttr = function(attr, attr1, attr2) {
-                return this.each(function() {
-                    var self = $(this);
-                    if (self.attr(attr) == attr1)
-                        self.attr(attr, attr2);
-                    else
-                        self.attr(attr, attr1);
-                });
-            };
-            $('.show-pass').click(function() {
-                $(this).toggleClass('go');
-                $('.pwd input').toggleAttr('type', 'text', 'password');
-            });
-        });
-    </script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/base.css') }}" rel="stylesheet" type="text/css" />
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/datatables.min.css" />
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/datatables.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
@@ -152,15 +23,14 @@
 </head>
 
 <body>
-    @if (\Request::is('login'))
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css" />
-    <div class="container-fluid">
-        <div class="row">
+    @guest
+    <div class="principal  fondo">
+        <div class="row container-fluid">
             @yield('login')
         </div>
     </div>
-
     @else
+    
     @include('header')
     <div class="container-fluid">
         <div class="row">
@@ -168,11 +38,7 @@
             @yield('main')
         </div>
     </div>
-    @endif
-
-
-
-
+    @endguest
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>

@@ -50,7 +50,7 @@
           <td>Accion</td>
         </tr>
       </thead>
-      @foreach($permissions ?? '' as $permission)
+      @foreach($permissions as $permission)
       <tbody>
         <tr>
           <td>{{$permission->id }}</td>
