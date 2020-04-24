@@ -16,12 +16,12 @@ class Attachment extends Model
     protected $fillable = [
         'id',
         'name',
-        'attachable_type',
-        'attachable_id'
+        'attachmentable_id',
+        'attachmentable_type'
     ];
 
     //Relaciones
-    public function attachable() {
+    public function attachmentable() {
         return $this->morphTo();
     }
 }
