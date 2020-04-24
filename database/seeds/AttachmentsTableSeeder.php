@@ -13,11 +13,11 @@ class AttachmentsTableSeeder extends Seeder
     {
         for ($i = 1; $i < 5; $i++) {
             DB::table('attachments')->insert([
-                'name'         =>  'name ' .  $i,
-                'attachmentable_id'         =>     $i,
+                'name' => 'Attachment '.$i,
+                'attachmentable_id' => $i,
+                'attachmentable_type' => 'Post '.$i,
                 'created_at' => now(),
-                'updated_at' => now(),
-                'attachmentable_type' =>  Message::class
+                'updated_at' => now()
             ]);
         }
     }

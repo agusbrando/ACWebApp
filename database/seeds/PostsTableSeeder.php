@@ -14,7 +14,8 @@ class PostsTableSeeder extends Seeder
         for ($i = 1; $i < 5; $i++) {
             DB::table('posts')->insert([
                 'user_id' => $i,
-                'text' => 'Post '.$i,
+                'title' => 'Título '.$i,
+                'text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.',
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
