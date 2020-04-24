@@ -1,11 +1,67 @@
 .bootstrap-datetimepicker-widget table td.day {
-    height: 40px;
-    line-height: 30px;
+    height: 50px;
+    line-height: 45px;
     width: 20px;
+}
+
+.day old, day old weekend{
+    background-color: black;
 }
 
 .timepicker{
     display: none;
+}
+
+.bootstrap-datetimepicker-widget table th.prev {
+    height: 40px;
+    line-height: 40px;
+    width: 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 0px;
+}
+
+.bootstrap-datetimepicker-widget table th.picker-switch {
+    height: 40px;
+    line-height: 40px;
+    width: 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 0px;
+}
+
+.bootstrap-datetimepicker-widget table th.next {
+    height: 40px;
+    line-height: 40px;
+    width: 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 0px;
+}
+
+.bootstrap-datetimepicker-widget table td.old, .bootstrap-datetimepicker-widget table td.new {
+    color: #868e96;
+    background-color: #F8F9FA;
+}
+
+.dow{
+    background-color: #F8F9FA;
+    border-radius: 0px;
+}
+
+.picker-switch table{
+    display: none;
+}
+
+.form-group{
+    margin-bottom: 0px;
+}
+
+.table tbody{
+    height: 100%;
 }
 
 h3{

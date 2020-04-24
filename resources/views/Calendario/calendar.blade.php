@@ -4,17 +4,17 @@
 <link href="{{ asset('css/calendar.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class=" col-md-10 ml-sm-auto col-lg-10">
 
-  <div class="container-fluid">
-    <div class="space"></div>
-    <p class="lead">
-      <h1 class="display-4 pr-3">Calendario</h1>
-      <br>
-
-      <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#formModal">
-        Crear un evento
-      </button>
-      <hr>
-      <div class="row">
+  <div class="space"></div>
+  <p class="lead">
+  <h1 class="display-4 pr-3">Calendario</h1>
+  <br>
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#formModal">
+    Crear un evento
+  </button>
+  <hr>
+  <br>
+  <div class="calendar">
+      <div class="row d-flex justify-content-center">
         <div class="col-md-2 bg-light border-right p-0 border-primary">
           <div id="espacio" class="bg-primary w-100"></div>
           <h3>Eventos</h3>
@@ -25,8 +25,8 @@
           </div>
         </div>
 
-        <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-8 w-100">
-          <div class="col-12" style="overflow:hidden;">
+        <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-4 w-100">
+          <div class="col-12 p-0" style="overflow:hidden;">
             <div class="form-group">
               <div class="row">
                 <div class="col-12">
@@ -55,10 +55,6 @@
           </div>
         </div>
       </div>
-
-  </div>
-
-
   </div> <!-- /container -->
 
 
