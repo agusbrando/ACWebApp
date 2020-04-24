@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,22 +22,17 @@ use Illuminate\Support\Facades\Auth;
 //      return view('auth.login');
 //  });
 
-Route::resource('posts', 'PostController');
-Route::resource('comments', 'CommentController');
-Route::resource('attachments', 'AttachmentController');
 Route::resource('permissions','PermissionController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+<<<<<<< HEAD
+});
 Route::get('/stock', function () {
     return view('stock');
 });
+=======
 Route::get('/', 'HomeController@index');
-    
-
-
-
-Route::post('/items/filter', 'ItemController@filter');
-Route::resource('items', 'ItemController');
+>>>>>>> master
