@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Models\Misbehavior;
 
-=======
->>>>>>> master
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +16,6 @@ use App\Models\Misbehavior;
 
 
 
-<<<<<<< HEAD
 Route::get('/login', function () {
     return view('welcome');
 });
@@ -72,14 +68,6 @@ Route::patch('programs/{program_id}/unit/{id}','ProgramController@updateUnit')->
 Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspecto')->name('programs.updateAspecto');
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
-=======
-
-// Route::get('/login', function () {
-//     return view('login');
-// });
-//  Route::get('/', function () {   
-//      return view('auth.login');
-//  });
 
 Route::resource('permissions','PermissionController');
 
@@ -88,4 +76,3 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'HomeController@index');
->>>>>>> master
