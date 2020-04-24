@@ -5,9 +5,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="display-3">Comentarios</h1>
-            @foreach($comments as comment)
-                <p>{{$comment->text}}</p>
-            @endforeach
+            <p>{{$comment->text}}</p>
         </div>
     </div>
 </main>
