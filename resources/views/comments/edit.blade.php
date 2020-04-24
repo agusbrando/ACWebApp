@@ -24,6 +24,7 @@
                         <div class="form-group">
                             <label for="post_id">Id Post</label>
                             <input type="number" class="form-control" name="post_id" value="{{ $comment->post_id }}"/>
+                        </div>
                         <div class="form-group">
                             <label for="text">Texto</label>
                             <input type="text" class="form-control" name="text" value="{{ $comment->text }}"/>
