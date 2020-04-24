@@ -30,7 +30,7 @@
                         <tr>
                             <td>{{$comment->id}}</td>
                             <!--<td>{{$comment->user_id}}</td>-->
-                            <!--<td>{{$comment->post_id}}</td>-->
+                            <<!--td>{{$comment->post_id}}</td>-->
                             <td style="text-align:justify;">{{$comment->text}}</td>
                             <td>{{$comment->created_at}}</td>
                             <td>{{$comment->updated_at}}</td>
@@ -53,7 +53,11 @@
     <div>
         <a style="margin: 19px;" href="{{ route('comments.create')}}" class="btn btn-primary">Nuevo Comentario</a>
         <a href="{{ route('comments.edit', $comment->id)}}" class="btn btn-primary">Editar</a>
-        <a href="{{ route('comments.destroy', $comment->id)}}" class="btn btn-danger">Eliminar</a>
+        <form action="{{ route('comments.destroy', $comment->id)}}" method="post">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger" type="submit">Eliminar</button>
+        </form>
     </div>
     <script>
         // $(document).ready(function() {

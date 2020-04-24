@@ -45,7 +45,11 @@
     <div>
         <a style="margin: 19px;" href="{{ route('posts.create')}}" class="btn btn-primary">Nuevo Post</a>
         <a href="{{ route('posts.edit', $post->id)}}" class="btn btn-primary">Editar</a>
-        <a href="{{ route('posts.destroy', $post->id)}}" class="btn btn-danger">Eliminar</a>
+        <form action="{{ route('posts.destroy', $post->id)}}" method="post">
+            @csrf
+            @method('DELETE')
+                <button class="btn btn-danger">Eliminar</button>
+        </form>
     </div>
     <script>
         // $(document).ready(function() {

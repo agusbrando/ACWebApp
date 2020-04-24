@@ -23,6 +23,10 @@
                             <input type="number" class="form-control" name="user_id"/>
                         </div>
                         <div class="form-group">
+                            <label for="title">Título:</label>
+                            <input type="text" class="form-control" name="title"/>
+                        </div>
+                        <div class="form-group">
                             <label for="text">Texto:</label>
                             <input type="text" class="form-control" name="text"/>
                         </div>
