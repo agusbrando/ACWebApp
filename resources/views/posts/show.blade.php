@@ -4,7 +4,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div>
         <div>
-            <img src="{{ asset('images/logo.jpg') }}" alt="">
+            <img src="{{ asset('img/logoAdpesan.jpg') }}" alt="">
         </div>
         <div>
             <p>{{$post->text}}</p>
@@ -66,11 +66,11 @@
                 dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
                 buttons: [{
                         extend: 'excel',
-                        className: 'btn-outline-success mr-2'
+                        className: 'btn-outline-success mr-2 boton'
                     },
                     {
                         extend: 'pdf',
-                        className: 'btn-outline-danger mr-2'
+                        className: 'btn-outline-danger mr-2 boton'
                     }
                 ],
                 language: {
