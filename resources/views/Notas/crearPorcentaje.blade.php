@@ -44,6 +44,7 @@
                 <label for="nota_med">Nota Media</label>
                 <input type="porcentaje" class="form-control" name="nota_media" aria-describedby="porcentaje">
             </div>
+            <input type="hidden" name="subject" value={{$subject->id}}>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
     </div>

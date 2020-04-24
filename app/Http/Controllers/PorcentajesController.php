@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Subject;
 use App\Models\Percentage;
 use App\Models\Type;
+use App\Models\Evaluation;
 use Illuminate\Support\Facades\DB;
 
 class PorcentajesController extends Controller
@@ -54,25 +55,23 @@ class PorcentajesController extends Controller
             'type' => 'required',
             'nota_min' => 'required',
             'nota_media' => 'required',
+            'subject' => 'required'
         ]);
 
         $evaluaciones = $request->get('evaluaciones');
 
         foreach($evaluaciones as $eval){
-            $porcentaje = Percentage::create([
-                'evaluation_id' => $eval,
-                'type_id' => $request->get('type'),
+            $evaluacion = Evaluation::find($eval);
+            $evaluacion->types()->attach(intval($request->get('type')),[
                 'percentage' => $request->get('porcentaje'),
                 'nota_min' => $request->get('nota_min'),
                 'nota_media' => $request->get('nota_media'),
             ]);
         }
-        
 
-        $porcentaje->save();
 
         $subjects = Subject::all();
-        return view('Notas.index', compact('subjects'));
+        return redirect('asignaturas/'.$request->get('subject'));
 
     }
 
@@ -93,7 +92,7 @@ class PorcentajesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($subject_id, $evaluation_id, $type_id)
+    public function edit($subject_id, $evaluation_id, $type_id )
     {
         $subject = Subject::find($subject_id);
         $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
@@ -110,9 +109,28 @@ class PorcentajesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'porcentaje' => 'required',
+            'subject' => 'required',
+            'evaluation_id' => 'required',
+            'type_id' => 'required',
+            'nota_min' => 'required',
+            'nota_media' => 'required',
+        ]);
+
+        $idS= $request->get('subject');
+
+        $evaluacion = Evaluation::find($request->get('evaluation_id'));
+        $evaluacion->types()->updateExistingPivot(intval($request->get('type_id')),[
+            'percentage' => $request->get('porcentaje'),
+            'nota_min' => $request->get('nota_min'),
+            'nota_media' => $request->get('nota_media'),
+        ]);
+
+        return redirect('asignaturas/'.$request->get('subject'));
+        
     }
 
     /**
@@ -121,8 +139,12 @@ class PorcentajesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($subject_id, $evaluation_id, $type_id)
     {
-        //
+
+        $evaluacion = Evaluation::find($evaluation_id);
+        $evaluacion->types()->detach(intval($type_id));
+
+        return redirect('asignaturas/'.$subject_id);
     }
 }

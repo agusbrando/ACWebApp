@@ -220,7 +220,7 @@
                                         <td>
                                             <div class="d-flex flex-row">
                                                 <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
-                                                <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
+                                                <a href="{{url('porcentajes/destroy',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="icon"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -237,7 +237,7 @@
                                         <td>
                                             <div class="d-flex flex-row">
                                                 <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
-                                                <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
+                                                <a href="{{url('porcentajes/destroy',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="icon"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -254,7 +254,7 @@
                                         <td>
                                             <div class="d-flex flex-row">
                                                 <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
-                                                <a href="#" class="icon"><i class="fas fa-trash-alt"></i></a>
+                                                <a href="{{url('porcentajes/destroy',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="icon"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </td>
                                     </tr>

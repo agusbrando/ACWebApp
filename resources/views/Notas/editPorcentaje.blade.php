@@ -14,7 +14,7 @@
     <div class="container">
         <h1 class="display-4 pr-5">Editar Porcentaje para {{$subject->name}}</h1>
         <hr>
-        <form action="" method="post">
+        <form method="post" action="{{ url('porcentajes/update') }}">
             @method('PATCH') 
             @csrf
             <div class="form-group">
@@ -22,20 +22,12 @@
                 <input type="porcentaje" class="form-control" name="porcentaje" aria-describedby="porcentaje" value={{$porcentaje->percentage}}>
             </div>
             <div class="form-group">
-                <label for="Porcentaje">Evaluaciones</label>
-                <select class="selectpicker w-100 mt-n1" title="Selecciona Evaluacion" multiple data-actions-box="true" name="evaluaciones[]" value={{$porcentaje->evaluation_id}}>
-                    @foreach($evaluaciones as $eval)
-                    <option value="{{$eval->id}}">{{$eval->name}}</option>
-                    @endforeach
-                </select>
+                <label for="Porcentaje">Evaluacion</label>
+                <input type="porcentaje" disabled class="form-control" name="porcentaje" aria-describedby="porcentaje" value={{$evaluaciones[$porcentaje->evaluation_id-1]->name}}>
             </div>
             <div class="form-group">
                 <label for="Porcentaje">Tipos</label>
-                <select class="form-control" name="type" value={{$porcentaje->type_id}}>
-                    @foreach($types as $type)
-                    <option value="{{$type->id}}">{{$type->name}}</option>
-                    @endforeach
-                </select>
+                <input type="porcentaje" disabled class="form-control" name="porcentaje" aria-describedby="porcentaje" value={{$types[$porcentaje->type_id-1]->name}}>
             </div>
             <div class="form-group">
                 <label for="nota_min">Nota Minima</label>
@@ -45,7 +37,12 @@
                 <label for="nota_med">Nota Media</label>
                 <input type="porcentaje" class="form-control" name="nota_media" aria-describedby="porcentaje" value={{$porcentaje->nota_media}}>
             </div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+
+            <input type="hidden" name="subject" value={{$subject->id}}>
+            <input type="hidden" name="evaluation_id" value={{$porcentaje->evaluation_id}}>
+            <input type="hidden" name="type_id" value={{$porcentaje->type_id}}>
+            <button class="btn btn-primary text-white" type="submit">Guardar</button>
+
         </form>
     </div>
 </main>
