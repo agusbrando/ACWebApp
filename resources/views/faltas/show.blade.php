@@ -126,25 +126,6 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Prueba -->
-            <!-- <table id="pruebas" class="table table-striped" style="width:100%">
-                <thead class="cabezeraTabla">
-                    <tr>
-                        @foreach($lista as $subject)
-                        <td>{{$subject['asignatura']}}</td>
-                        @endforeach
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-
-                        @foreach($lista as $subject)
-
-                        <td>{{$subject['faltas']}}/{{$subject['max']}}</td>
-                        @endforeach
-                    </tr>
-                </tbody>
-            </table> -->
 
             <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
                 <table id="alumnos1" class="table table-striped evaluation">

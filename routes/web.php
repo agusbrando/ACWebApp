@@ -57,7 +57,7 @@ Route::get('/prueba', function () {
 
     echo var_dump($lista);
 });
-Route::resource('permissions','PermissionController');
+Route::resource('permissions', 'PermissionController');
 
 Auth::routes();
 

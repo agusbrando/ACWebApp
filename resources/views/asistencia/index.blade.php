@@ -68,7 +68,7 @@
     <h5>Fecha:</h5>
     <form action="{{ url('asistencia/filter') }}" method="post">
         <div class="contenedor">
-            <input type="text" id="datepicker" placeholder="- Seleccionar fecha -" class="form-control col-6">
+            <input type="text" id="datepicker" placeholder="- Seleccionar fecha -" class="form-control col-6" name="data">
             <div class="espacio"> </div>
             <div class="form-group select-iz">
                 <select class="form-control pl-1" id="horarios" name="horario">
