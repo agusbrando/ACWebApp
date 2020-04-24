@@ -49,9 +49,9 @@
           <div id="espacio" class="bg-primary w-100"></div>
           <h3>Horas</h3>
           <div id="buttons">
-            <button type="button" class="btn btn-primary btn-block">10:00</button>
-            <button type="button" class="btn btn-primary btn-block">11:30</button>
-            <button type="button" class="btn btn-primary btn-block">13:30</button>
+           @foreach($sessions as $session)
+            <button type="button" class="btn btn-primary btn-block">{{ $session->time_start }}</button>
+            @endforeach
           </div>
         </div>
       </div>
