@@ -14,8 +14,8 @@ class CommentsTableSeeder extends Seeder
         for ($i = 1; $i < 5; $i++) {
             DB::table('comments')->insert([
                 'user_id' => $i,
-                'text' => 'Comment '.$i,
                 'post_id' => $i,
+                'text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.',
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
