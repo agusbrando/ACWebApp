@@ -29,5 +29,23 @@ class PercentagesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('evaluation_type')->insert([
+            'evaluation_id' => 4,
+            'type_id' => 2,
+            'percentage' => 30,
+            'nota_min' => 4,
+            'nota_media' => 5,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('evaluation_type')->insert([
+            'evaluation_id' => 5,
+            'type_id' => 2,
+            'percentage' => 30,
+            'nota_min' => 4,
+            'nota_media' => 5,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

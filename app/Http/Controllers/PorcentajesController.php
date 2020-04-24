@@ -49,11 +49,11 @@ class PorcentajesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required',
             'porcentaje' => 'required',
             'evaluaciones' => 'required',
+            'type' => 'required',
             'nota_min' => 'required',
-            'nota_med' => 'required',
+            'nota_media' => 'required',
         ]);
 
         $evaluaciones = $request->get('evaluaciones');
@@ -64,7 +64,7 @@ class PorcentajesController extends Controller
                 'type_id' => $request->get('type'),
                 'percentage' => $request->get('porcentaje'),
                 'nota_min' => $request->get('nota_min'),
-                'nota_media' => $request->get('nota_med'),
+                'nota_media' => $request->get('nota_media'),
             ]);
         }
         
@@ -97,7 +97,7 @@ class PorcentajesController extends Controller
     {
         $subject = Subject::find($subject_id);
         $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
-        $porcentaje = Percentage::where('evaluation_id', $evaluation_id)->where('type_id', $type_id)->get();
+        $porcentaje = Percentage::where('evaluation_id', $evaluation_id)->where('type_id', $type_id)->first();
         $types = Type::all()->where('model', Percentage::class);
 
         return view('Notas.editPorcentaje', compact('porcentaje', 'evaluaciones', 'types', 'subject'));

@@ -177,6 +177,7 @@
         });
     });
 </script>
+<link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <section id="tabs">
         <div class="container-fluid">
@@ -212,8 +213,8 @@
                                 @foreach($eval1 as $porcentaje)
                                 <tbody>
                                     <tr>
-                                        <td></td>
-                                        <td>{{$porcentaje->porcentaje}}</td>
+                                        <td>{{$porcentaje->type}}</td>
+                                        <td>{{$porcentaje->porcentaje}}%</td>
                                         <td>{{$porcentaje->nota_min}}</td>
                                         <td>{{$porcentaje->nota_media}}</td>
                                         <td>
@@ -229,8 +230,8 @@
                                 @foreach($eval2 as $porcentaje)
                                 <tbody>
                                     <tr>
-                                        <td></td>
-                                        <td>{{$porcentaje->porcentaje}}</td>
+                                        <td>{{$porcentaje->type}}</td>
+                                        <td>{{$porcentaje->porcentaje}}%</td>
                                         <td>{{$porcentaje->nota_min}}</td>
                                         <td>{{$porcentaje->nota_media}}</td>
                                         <td>
@@ -246,8 +247,8 @@
                                 @foreach($eval3 as $porcentaje)
                                 <tbody>
                                     <tr>
-                                        <td></td>
-                                        <td>{{$porcentaje->porcentaje}}</td>
+                                        <td>{{$porcentaje->type}}</td>
+                                        <td>{{$porcentaje->porcentaje}}%</td>
                                         <td>{{$porcentaje->nota_min}}</td>
                                         <td>{{$porcentaje->nota_media}}</td>
                                         <td>

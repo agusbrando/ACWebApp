@@ -34,6 +34,7 @@
         });
     });
 </script>
+<link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="container-fluid">
         <h1 class="display-4 pr-5">Asignaturas</h1>

@@ -8,7 +8,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-
+<link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
     <div class="container">
@@ -19,23 +19,11 @@
             @csrf
             <div class="form-group">
                 <label for="Porcentaje">Porcentaje</label>
-                <select class="form-control" name="porcentaje">
-                    <option value="0">0%</option>
-                    <option value="10">10%</option>
-                    <option value="20">20%</option>
-                    <option value="30">30%</option>
-                    <option value="40">40%</option>
-                    <option value="50">50%</option>
-                    <option value="60">60%</option>
-                    <option value="70">70%</option>
-                    <option value="80">80%</option>
-                    <option value="90">90%</option>
-                    <option value="100">100%</option>
-                </select>
+                <input type="porcentaje" class="form-control" name="porcentaje" aria-describedby="porcentaje" value={{$porcentaje->percentage}}>
             </div>
             <div class="form-group">
                 <label for="Porcentaje">Evaluaciones</label>
-                <select class="selectpicker w-100" title="Selecciona Evaluacion" multiple data-actions-box="true" name="evaluaciones[]">
+                <select class="selectpicker w-100 mt-n1" title="Selecciona Evaluacion" multiple data-actions-box="true" name="evaluaciones[]" value={{$porcentaje->evaluation_id}}>
                     @foreach($evaluaciones as $eval)
                     <option value="{{$eval->id}}">{{$eval->name}}</option>
                     @endforeach
@@ -43,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label for="Porcentaje">Tipos</label>
-                <select class="form-control" name="type">
+                <select class="form-control" name="type" value={{$porcentaje->type_id}}>
                     @foreach($types as $type)
                     <option value="{{$type->id}}">{{$type->name}}</option>
                     @endforeach
@@ -51,30 +39,11 @@
             </div>
             <div class="form-group">
                 <label for="nota_min">Nota Minima</label>
-                <select class="form-control" name="nota_min">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                <input type="porcentaje" class="form-control" name="nota_min" aria-describedby="porcentaje" value={{$porcentaje->nota_min}}>
             </div>
             <div class="form-group">
                 <label for="nota_med">Nota Media</label>
-                <select class="form-control" name="nota_med">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
+                <input type="porcentaje" class="form-control" name="nota_media" aria-describedby="porcentaje" value={{$porcentaje->nota_media}}>
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
