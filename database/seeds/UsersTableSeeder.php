@@ -51,5 +51,15 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id'=>1
         ]);
+        DB::table('users')->insert([
+            'first_name' => 'Default',
+            'last_name' => 'User',
+            'email' => 'user@default.com',
+            'password' => bcrypt('default'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
     }
 }
