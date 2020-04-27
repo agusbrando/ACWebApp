@@ -6,9 +6,10 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <h1 class="display-4">Editar Objeto </h1>
     <hr>
-    <form method="post" action="{{ route('items.store') }}">   
+    <form method="put" action="{{ route('items.update', $item->id) }}">   
         <!-- Proteccion contra consultas no deseadas -->
-        {{ csrf_field() }} 
+        @csrf
+        @method('PUT')
 
         <div class="form-group">
             <label for="nombre">Nombre</label>
@@ -34,7 +35,7 @@
                 <option  disable >Selecciona un estado</option>
                 <!--Hace la funcion de un placeholder-->
                 @foreach($states as $state)
-                @if({{$item->state_id}}  == $state->id)
+                @if($state->id == 1)
                     <option selected value="{{$state->id}}">{{$state->name}}</option>
                 @else
                     <option value="{{$state->id}}">{{$state->name}}</option>
@@ -59,7 +60,7 @@
         <div class="form-group">
             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
             <a class="btn btn-primary" href="/items" role="button">Volver</a>
-            <button type="submit" class="btn btn-primary">Crear</button>
+            <button type="submit" class="btn btn-primary">Modificar</button>
         </div>
     </form>
 

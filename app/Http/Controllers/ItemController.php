@@ -132,8 +132,9 @@ class ItemController extends Controller
         $types = Type::all()->where('model', Item::class);
         $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
-        $item = DB::table('items')->where('id', $id)->get();
-        return view('items.edit', compact('item', 'classrooms', 'types', 'states'));
+        $items = DB::table('items')->where('id', $id)->get();
+        
+        return view('items.edit', compact('items', 'classrooms', 'types', 'states'));
     }
 
     /**
@@ -145,7 +146,24 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'date_pucharse'=>'required',
+            'classroom_id'=>'required',
+            'type_id'=>'required',
+        ]);
+
+        $item = new Item([
+            'name' => $request->get('name'),
+            'date_pucharse'=>$request->get('date_pucharse'),
+            'classroom_id'=>$request->get('classroom_id'),
+            'state_id'=>'1',
+            'type_id'=>$request->get('type_id'),
+            
+
+        ]);
+        $item->where('id', $id)->update();
+        return redirect('/items')->with('exito', 'Item editado!');
     }
 
     /**
