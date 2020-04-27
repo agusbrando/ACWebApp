@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <h5 class="card-header">{{$message->title}}</h5>
+                <h5 class="card-header">{{$message->subject}}</h5>
                 <div class="card-body">
                     <h5 class="card-title">{{$message->user_id}}</h5>
-                    <p class="card-text">{{$message->text}}</p>
+                    <p class="card-text">{{$message->message}}</p>
                 </div>
             </div>
         </div>
