@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
+use App\Models\Type;
+use App\Models\Task;
 use Illuminate\Support\Facades\DB; 
 
 
@@ -47,7 +49,11 @@ class EvaluacionesController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::all();
+        $subject = Subject::find($id);
+        $tasks = Type::all()->where('model', Task::class);
+
+        return view('Notas.desglose', compact('users', 'subject', 'types'));
     }
 
     /**

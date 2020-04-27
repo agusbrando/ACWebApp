@@ -2,22 +2,6 @@
 
 @section('main')
 <script>
-    function agregarColumna() {
-        document.getElementById("examenes").insertRow(-1).innerHTML = '<tr></td><td></td><td></td><td></td>';
-    }
-
-    function eliminarFila() {
-        var table = document.getElementById("examenes");
-        var rowCount = table.rows.length;
-        //console.log(rowCount);
-
-        if (rowCount <= 1)
-            alert('No se puede eliminar el encabezado');
-        else
-            table.deleteRow(rowCount - 1);
-    }
-</script>
-<script>
     $(document).ready(function() {
         $("#nuevaColumna").click(function() {
             $("#columna").append('<td>Action</td>');
@@ -104,7 +88,7 @@
     <div class="container-fluid">
         <div class="d-flex flex-row mb-4">
             <a href="javascript:history.go(-1)" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
-            <h1 class="display-4 pr-3">Desglose</h1>
+            <h1 class="display-4 pr-3">Desglose {{$subject->name}}</h1>
         </div>
         <div class="row">
             <div class="col mt-4">
@@ -157,8 +141,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-primary mr-2" onclick="agregarFila()">Agregar Fila</button>
-                        <button type="button" class="btn btn-danger" onclick="eliminarFila()">Eliminar Fila</button>
                     </div>
                     <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
 

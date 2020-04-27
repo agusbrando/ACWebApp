@@ -14,6 +14,7 @@
                 {
                     label: 'Create',
                     text: 'Desglose',
+                    href: 'www.google.es',
                     action: function(nButton, oConfig, oFlash) {
 
                         window.location = "http://127.0.0.1:8000/desglose"
@@ -189,15 +190,15 @@
                 <div class="col mt-4">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link" id="nav-base-tab" data-toggle="tab" href="#nav-base" role="tab" aria-controls="nav-base" aria-selected="false">Base</a>
-                            <a class="nav-item nav-link active" id="nav-eval1-tab" data-toggle="tab" href="#nav-eval1" role="tab" aria-controls="nav-eval1" aria-selected="true">Evaluacion 1</a>
-                            <a class="nav-item nav-link" id="nav-eval2-tab" data-toggle="tab" href="#nav-eval2" role="tab" aria-controls="nav-eval2" aria-selected="false">Evaluacion 2</a>
-                            <a class="nav-item nav-link" id="nav-eval3-tab" data-toggle="tab" href="#nav-eval3" role="tab" aria-controls="nav-eval3" aria-selected="false">Evaluacion 3</a>
-                            <a class="nav-item nav-link" id="nav-evalF-tab" data-toggle="tab" href="#nav-evalF" role="tab" aria-controls="nav-evalF" aria-selected="false">Evaluacion Final</a>
+                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-base" role="tab" aria-controls="nav-base" aria-selected="true">Base</a>
+                            @foreach($evaluaciones as $eval)
+                            <a class="nav-item nav-link" data-toggle="tab" href="#{{$eval->name}}" role="tab" aria-controls="{{$eval->name}}" aria-selected="false">{{$eval->name}}</a>
+                            @endforeach
+                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-eval2" role="tab" aria-controls="nav-eval2" aria-selected="false">Evaluacion 2</a>
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                        <div class="tab-pane fade" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
+                        <div class="tab-pane fade show active" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
                             @foreach($evaluaciones as $eval)
                             <table class="table table-striped mt-5">
                                 <thead class="cabezeraTabla">
@@ -265,7 +266,8 @@
                             @endforeach
                             <a class="btn btn-outline-primary" href="{{ url('/porcentajes/create', $subject->id) }}">Añadir</a>
                         </div>
-                        <div class="tab-pane fade show active" id="nav-eval1" role="tabpanel" aria-labelledby="nav-eval1-tab">
+                        @foreach($evaluaciones as $eval)
+                        <div class="tab-pane fade" id="{{$eval->name}}" role="tabpanel">
                             <table id="evaluacion1" class="table table-striped" style="width:100%">
                                 <thead class="cabezeraTabla">
                                     <tr>
@@ -294,7 +296,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <a href="{{ route('evaluaciones.show', $subject->id) }}" class="btn btn-secondary col mt-2">Desglose</a>
                         </div>
+                        @endforeach
                         <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
                             <table id="evaluacion2" class="table table-striped evaluation">
                                 <thead class="cabezeraTabla">
@@ -324,66 +328,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="tab-pane fade" id="nav-eval3" role="tabpanel" aria-labelledby="nav-eval3-tab">
-                            <table id="evaluacion3" class="table table-striped" style="width:100%">
-                                <thead class="cabezeraTabla">
-                                    <tr>
-                                        <td>Nº</td>
-                                        <td>Apellidos, Nombre</td>
-                                        <td>%Trabajos</td>
-                                        <td>%Examen</td>
-                                        <td>%Actitud</td>
-                                        <td>%NOTA FINAL</td>
-                                        <td>%Recuperacion</td>
-                                        <td>%BOLETIN</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($users as $user)
-                                    <tr>
-                                        <td>{{$user->id}}</td>
-                                        <td>{{$user->last_name}} {{$user->first_name}}</td>
-                                        <td>No</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade" id="nav-evalF" role="tabpanel" aria-labelledby="nav-eval-tab">
-                            <table id="evaluacionF" class="table table-striped" style="width:100%">
-                                <thead class="cabezeraTabla">
-                                    <tr>
-                                        <td>Nº</td>
-                                        <td>Apellidos, Nombre</td>
-                                        <td>%Trabajos</td>
-                                        <td>%Examen</td>
-                                        <td>%Actitud</td>
-                                        <td>%NOTA FINAL</td>
-                                        <td>%Recuperacion</td>
-                                        <td>%BOLETIN</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($users as $user)
-                                    <tr>
-                                        <td>{{$user->id}}</td>
-                                        <td>{{$user->last_name}} {{$user->first_name}}</td>
-                                        <td>No</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <a href="{{ route('evaluaciones.show', $subject->id) }}" class="btn btn-secondary col mt-2">Desglose</a>
                         </div>
                     </div>
                 </div>
