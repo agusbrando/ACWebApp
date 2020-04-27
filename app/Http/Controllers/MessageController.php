@@ -54,14 +54,14 @@ class MessageController extends Controller
         $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'users' => 'required',
-            'title' => 'required',
-            'text' => 'required'
+            'subject' => 'required',
+            'message' => 'required'
         ]);
 
         $message = new Message([
             'user_id' => $this->user->id,
-            'title' => $request->get('title'),
-            'text' => $request->get('text')
+            'subject' => $request->get('subject'),
+            'message' => $request->get('message')
         ]);
         $message->save();
         $users = $request->get('users');
