@@ -11,6 +11,7 @@ class Tracking extends Model
    protected $primaryKey ='id';
 
    protected $fillable = [
+    'signature',
     'user_id',
     'datetime_start',
     'datetime_end',

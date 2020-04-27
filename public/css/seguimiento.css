@@ -1,27 +1,4 @@
-@media (max-width:575px) {
-    .display-4 {
-        font-size: 1.5rem;
-    }
-    .day h5 {
-        background-color: #f8f9fa;
-        padding: 3px 5px 5px;
-        margin: -8px -8px 8px -8px;
-    }
-    .date {
-        padding-left: 4px;
-    }
-    .calendar{
-        padding-top: 2000px;
 
-    }
-}
-
-@media (min-width:575px) {
-    .day {
-        height: 100px;
-    }
-    
-}
 
 #header{
  position:relative;
@@ -51,3 +28,102 @@
   .custom-file-label.rounded-pill::after {
     border-radius: 0 50rem 50rem 0;
   }
+  .calendar{
+      margin-left: 300px;
+      margin-top: 100px;
+  }
+
+  .bootstrap-datetimepicker-widget table td.day {
+    height: 50px;
+    line-height: 45px;
+    width: 20px;
+}
+
+.day old, day old weekend{
+    background-color: black;
+}
+
+.timepicker{
+    display: none;
+}
+
+.bootstrap-datetimepicker-widget table th.prev {
+    height: 40px;
+    line-height: 40px;
+    width: 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 0px;
+}
+
+.bootstrap-datetimepicker-widget table th.picker-switch {
+    height: 40px;
+    line-height: 40px;
+    width: 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 0px;
+}
+
+.bootstrap-datetimepicker-widget table th.next {
+    height: 40px;
+    line-height: 40px;
+    width: 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 0px;
+}
+.margin{
+    margin-left: 240px;
+}
+.bootstrap-datetimepicker-widget table td.old, .bootstrap-datetimepicker-widget table td.new {
+    color: #868e96;
+    background-color: #F8F9FA;
+}
+
+.dow{
+    background-color: #F8F9FA;
+    border-radius: 0px;
+}
+
+.picker-switch table{
+    display: none;
+}
+
+.form-group{
+    margin-bottom: 0px;
+}
+
+.table tbody{
+    height: 100%;
+}
+
+h3{
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#espacio{
+    height: 48px;
+}
+
+#header{
+    position: relative;
+    left: 15px;
+}
+
+#buttons{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.center{
+ text-align: center;
+}
+.calendario{
+    height: 700px;
+}
