@@ -14,10 +14,10 @@ class MessagesTableSeeder extends Seeder
         for ($i = 1; $i < 5; $i++) {
             DB::table('messages')->insert([
                 'user_id'         =>     $i,
-                'title'         =>  'title ' .  $i,
+                'subject'         =>  'subject ' .  $i,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'text'         =>  'text ' .  $i
+                'message'         =>  'message ' .  $i
             ]);
         }
     }
