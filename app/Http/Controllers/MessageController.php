@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Message;
+use App\Models\Attachment;
 use App\Models\User;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
@@ -51,15 +52,16 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'filenames' => 'required',
             'users' => 'required',
             'subject' => 'required',
             'message' => 'required'
         ]);
 
         $message = new Message([
-            'user_id' => $this->user->id,
+            'user_id' => $user->id,
             'subject' => $request->get('subject'),
             'message' => $request->get('message')
         ]);
@@ -69,18 +71,28 @@ class MessageController extends Controller
         foreach ($users as $user) {
             User::find($user)->messagesReceive()->attach($message->id);
         }
-        if ($request->hasfile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
 
+            if($request->hasfile('filenames'))
+             {
+                foreach($request->file('filenames') as $file)
+                {
+                    $name = time().'.'.$file->extension();
+                    $file->move(storage_path("app/messages/$message->id"), $name);
 
-            $request->image->move(storage_path("app/messages/$message->id"), $imageName);
-        }
+                   $attachment = new Attachment([
+                    'name' => $name,
+                    'attachmentable_id' => $message->id,
+                    'attachmentable_type' => Message::class
+
+                   ]);
+                    $attachment->save();
+                }
+             }
 
 
 
         return redirect('/messages')->with('success', 'Message Send!');
     }
-
     /**
      * Display the specified resource.
      *
@@ -89,7 +101,7 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        $message = Message::find($id);
+        $message = Message::all()->load('attachments');
 
         return view('messages.show', compact('message'));
     }
