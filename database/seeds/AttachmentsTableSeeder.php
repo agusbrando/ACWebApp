@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use  App\Models\Message;
 
 class AttachmentsTableSeeder extends Seeder
 {
@@ -15,9 +16,9 @@ class AttachmentsTableSeeder extends Seeder
             DB::table('attachments')->insert([
                 'name'         =>  'name ' .  $i,
                 'attachmentable_id'         =>     $i,
+                'attachmentable_type' =>  Message::class,
                 'created_at' => now(),
-                'updated_at' => now(),
-                'attachmentable_type' =>  Message::class
+                'updated_at' => now()
             ]);
         }
     }
