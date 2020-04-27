@@ -17,5 +17,30 @@ class TasksTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('tasks')->insert([
+            'evaluation_id' => 1,
+            'name' => 'Parcial 1',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('tasks')->insert([
+            'evaluation_id' => 1,
+            'name' => 'Parcial 2',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('tasks')->insert([
+            'evaluation_id' => 1,
+            'name' => 'Parcial 3',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('tasks')->insert([
+            'evaluation_id' => 1,
+            'name' => 'Practica 2',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }

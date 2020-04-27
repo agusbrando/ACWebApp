@@ -14,50 +14,64 @@ class TypesTableSeeder extends Seeder
         DB::table('types')->insert([
             'name' => 'Trabajos',
             'model' => 'App\Models\Percentage',
-	    'created_at' => now(),
-            'updated_at' => now()      
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('types')->insert([
             'name' => 'Examenes',
             'model' => 'App\Models\Percentage',
-	    'created_at' => now(),
-            'updated_at' => now()      
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('types')->insert([
             'name' => 'Practicas',
             'model' => 'App\Models\Percentage',
-	    'created_at' => now(),
-            'updated_at' => now()      
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('types')->insert([
             'name' => 'Actitud',
             'model' => 'App\Models\Percentage',
-	    'created_at' => now(),
-            'updated_at' => now()      
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
-        
+
         DB::table('types')->insert([
             'name' => 'default2',
             'model' => 'App\Models\Event',
-	    'created_at' => now(),
-            'updated_at' => now()      
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
-	    DB::table('types')->insert([
+        DB::table('types')->insert([
             'name' => 'Portatil',
-            'model' => 'App\Models\Item',	    
+            'model' => 'App\Models\Item',
             'created_at' => now(),
-            'updated_at' => now()      
+            'updated_at' => now()
         ]);
-	
-	    DB::table('types')->insert([
+
+        DB::table('types')->insert([
             'name' => 'default3',
             'model' => 'App\Models\Misbehaviors',
-	    'created_at' => now(),
-            'updated_at' => now()            
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Parcial',
+            'model' => 'App\Models\Task',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('types')->insert([
+            'name' => 'Practica',
+            'model' => 'App\Models\Task',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
