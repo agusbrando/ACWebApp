@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\User;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
+
 
 class MessageController extends Controller
 {
-    private $user;
 
-    public function __construct(){
-
-        $this->user = User::find(1);
-
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,17 +19,16 @@ class MessageController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
 
-        
-       
+        if (URL::current() == url("/messages_send")) {
 
-        $messages = $this->user->messagesSent;
-        
-        //TODO review afterlogin
-        //$user = User::find(1);
-        // $messages = $user-> Nombre de la funcion que los conecte
-        //  $messages = Message::all();
-        return view('messages.index',compact('messages'));
+            $messages = $user->messagesSent;
+        } else {
+            $messages = $user->messagesReceive;
+        }
+
+        return view('messages.index', compact('messages'));
     }
 
     /**
@@ -42,9 +38,9 @@ class MessageController extends Controller
      */
     public function create()
     {
-        $users=User::all();
+        $users = User::all();
 
-        return view('messages.create',compact('users'));
+        return view('messages.create', compact('users'));
     }
 
     /**
@@ -57,9 +53,9 @@ class MessageController extends Controller
     {
         $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'users'=>'required',
-            'title'=>'required',
-            'text'=>'required'
+            'users' => 'required',
+            'title' => 'required',
+            'text' => 'required'
         ]);
 
         $message = new Message([
@@ -68,20 +64,19 @@ class MessageController extends Controller
             'text' => $request->get('text')
         ]);
         $message->save();
-        $users=$request->get('users');
-       
+        $users = $request->get('users');
+
         foreach ($users as $user) {
             User::find($user)->messagesReceive()->attach($message->id);
-
         }
-if($request->hasfile('image')){
-        $imageName = time().'.'.$request->image->extension();  
-   
+        if ($request->hasfile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
 
-        $request->image->move(storage_path("app/messages/$message->id"), $imageName);
-    }
 
-//storage/app/messages/id_messages/files
+            $request->image->move(storage_path("app/messages/$message->id"), $imageName);
+        }
+
+
 
         return redirect('/messages')->with('success', 'Message Send!');
     }
@@ -96,8 +91,7 @@ if($request->hasfile('image')){
     {
         $message = Message::find($id);
 
-        return view('messages.show',compact('message'));
-
+        return view('messages.show', compact('message'));
     }
 
     /**
