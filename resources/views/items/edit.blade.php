@@ -4,7 +4,7 @@
 
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <h1 class="display-4">Crear Objeto </h1>
+    <h1 class="display-4">Editar Objeto </h1>
     <hr>
     <form method="post" action="{{ route('items.store') }}">   
         <!-- Proteccion contra consultas no deseadas -->
@@ -34,7 +34,7 @@
                 <option  disable >Selecciona un estado</option>
                 <!--Hace la funcion de un placeholder-->
                 @foreach($states as $state)
-                @if($state->id == 1)
+                @if({{$item->state_id}}  == $state->id)
                     <option selected value="{{$state->id}}">{{$state->name}}</option>
                 @else
                     <option value="{{$state->id}}">{{$state->name}}</option>

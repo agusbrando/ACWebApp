@@ -39,4 +39,5 @@ Route::get('/', 'HomeController@index');
 
 //RUTAS ITEMs
 Route::post('/items/filter', 'ItemController@filter');
+// Route::post('/items/edit', 'ItemController@edit');
 Route::resource('items', 'ItemController');

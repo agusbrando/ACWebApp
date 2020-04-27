@@ -141,12 +141,12 @@
                                 <td>{{$item->updated_at}}</td>
                                 <td class="botones">
                                     <!-- <a href="{{ route('items.edit', $item->id)}}" class="btn btn-primary">Edit</a> -->
-                                    <form method="post" action="{{ route('items.destroy', $item->id)}}">
+                                    <form method="get" action="{{ route('items.edit', $item->id)}}">
                                         @csrf
                                         @method('GET')
                                         <button class="btn btn-primary" type="submit">Edit</button>
                                     </form>
-                                    <form method="post" action="{{ route('items.edit', $item->id)}}">
+                                    <form method="post" action="{{ route('items.destroy', $item->id)}}">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit">Delete</button>
