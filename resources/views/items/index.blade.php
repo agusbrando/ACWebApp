@@ -54,7 +54,7 @@
             <h1 class="display-4">Material del Aula </h1>
             <form method="post" action="{{ url('items/filter') }}">
 
-                {{ csrf_field() }}
+            @csrf
 
                 <div class="form-group float-left mr-3">
                     <label for="formControlSelect1">Aulas</label>

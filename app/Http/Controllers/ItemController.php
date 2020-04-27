@@ -132,9 +132,9 @@ class ItemController extends Controller
         $types = Type::all()->where('model', Item::class);
         $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
-        $items = DB::table('items')->where('id', $id)->get();
+        $item = Item::find($id);
         
-        return view('items.edit', compact('items', 'classrooms', 'types', 'states'));
+        return view('items.edit', compact('item', 'classrooms', 'types', 'states'));
     }
 
     /**
@@ -146,18 +146,21 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $request->validate([
             'name'=>'required',
             'date_pucharse'=>'required',
             'classroom_id'=>'required',
+            'state_id'=>'required',
             'type_id'=>'required',
         ]);
 
         $item = new Item([
+            'id' => $id,
             'name' => $request->get('name'),
             'date_pucharse'=>$request->get('date_pucharse'),
             'classroom_id'=>$request->get('classroom_id'),
-            'state_id'=>'1',
+            'state_id'=>$request->get('state_id'),
             'type_id'=>$request->get('type_id'),
             
 

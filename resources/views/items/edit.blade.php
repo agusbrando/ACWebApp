@@ -6,18 +6,18 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <h1 class="display-4">Editar Objeto </h1>
     <hr>
-    <form method="put" action="{{ route('items.update', $item->id) }}">   
+    <form method="PATCH" action="{{ route('items.update', $item->id) }}">   
         <!-- Proteccion contra consultas no deseadas -->
         @csrf
-        @method('PUT')
+        @method('PATCH')
 
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" placeholder="Nombre del objeto">
+            <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" placeholder="{{$item->name}}">
         </div>
         <div class="form-group">
             <label for="nombre">Fecha de Compra</label>
-            <input type="date" id="date_pucharse" name="date_pucharse" placeholder="- Seleccionar fecha -" class="form-control">
+            <input type="date" id="date_pucharse" name="date_pucharse" value="{{$item->date_pucharse}}" placeholder="- Seleccionar fecha -" class="form-control">
         </div>
         <div class="form-group">
             <label for="formControlSelect1">¿En que Aula va a estar?</label>
@@ -25,8 +25,15 @@
                 <option disabled selected>Selecciona un Aula</option>
                 <!--Hace la funcion de un placeholder-->
                 @foreach($classrooms as $classroom)
-                <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                @if($classroom->id == $item->classroom_id)
+                        <option selected value="{{$classroom->id}}">{{$classroom->name}}</option>
+                    @else
+                    <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                    
+                    @endif
+                
                 @endforeach
+                
             </select>
         </div>
         <div class="form-group">
@@ -35,30 +42,39 @@
                 <option  disable >Selecciona un estado</option>
                 <!--Hace la funcion de un placeholder-->
                 @foreach($states as $state)
-                @if($state->id == 1)
-                    <option selected value="{{$state->id}}">{{$state->name}}</option>
-                @else
-                    <option value="{{$state->id}}">{{$state->name}}</option>
-                
-                @endif
+                    @if($state->id == $item->state_id)
+                        <option selected value="{{$state->id}}">{{$state->name}}</option>
+                    @else
+                        <option value="{{$state->id}}">{{$state->name}}</option>
+                    
+                    @endif
                 
                 @endforeach
             </select>
         </div>
         <div class="form-group">
             <label for="formControlSelect1">Tipo de objeto</label>
+            
             <select class="form-control" id="type_id" name="type_id">
-                <option disabled selected>Selecciona un tipo</option>
+                <option disabled selected>Selecciona un Aula</option>
                 <!--Hace la funcion de un placeholder-->
                 @foreach($types as $type)
-                <option value="{{$type->id}}">{{$type->name}}</option>
+                @if($type->id == $item->type_id)
+                        <option selected value="{{$type->id}}">{{$type->name}}</option>
+                        <option value="{{$type->id}}">{{$type->name}}</option>
+                    @else
+                    <option value="{{$type->id}}">{{$type->name}}</option>
+                    
+                    @endif
+                
                 @endforeach
+                
             </select>
         </div>
 
 
         <div class="form-group">
-            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+            
             <a class="btn btn-primary" href="/items" role="button">Volver</a>
             <button type="submit" class="btn btn-primary">Modificar</button>
         </div>

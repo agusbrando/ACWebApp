@@ -8,7 +8,7 @@
     <hr>
     <form method="post" action="{{ route('items.store') }}">   
         <!-- Proteccion contra consultas no deseadas -->
-        {{ csrf_field() }} 
+        @csrf
 
         <div class="form-group">
             <label for="nombre">Nombre</label>
