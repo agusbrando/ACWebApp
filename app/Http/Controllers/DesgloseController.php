@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\Models\Type;
 use App\Models\Subject;
 use App\Models\Evaluation;
+use App\Models\Calification;
 use Illuminate\Support\Facades\DB; 
 
 class DesgloseController extends Controller
@@ -96,14 +97,29 @@ class DesgloseController extends Controller
         //
     }
 
+    public function eliminar($id)
+    {
+        $tasks = Task::all();
+
+        $subject = Subject::find($id);
+
+        return view('Notas.eliminarTarea', compact('tasks', 'subject'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $subject_id)
     {
-        //
+        $task = Task::find($id);
+        $task->users()->detach(1);
+        $task->delete();
+
+        $subject = Subject::find($subject_id);
+
+        return redirect('evaluaciones/'.$subject->id);
     }
 }

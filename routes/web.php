@@ -21,14 +21,18 @@ Route::get('/', function () {
 });
 
 Route::resource('asignaturas', 'AsignaturaController');
-Route::resource('porcentajes', 'PorcentajesController');
 Route::resource('evaluaciones', 'EvaluacionesController');
 Route::resource('desglose', 'DesgloseController');
+
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
 Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
 Route::get('porcentajes/edit/{id_subject}/{id_eval}/{id_type}', 'PorcentajesController@edit');
 Route::get('porcentajes/destroy/{id_subject}/{id_eval}/{id_type}', 'PorcentajesController@destroy');
+
 Route::get('evaluaciones/desglose/{id}', 'DesgloseController@create');
+
+Route::get('tareas/{id}', 'DesgloseController@eliminar');
+Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
 
 Route::resource('permissions','PermissionController');
 Auth::routes();

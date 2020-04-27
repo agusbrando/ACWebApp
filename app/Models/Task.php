@@ -21,4 +21,9 @@ class Task extends Model
     {
         return $this->belongsTo('App\Models\Type');
     }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Type');
+    }
 }

@@ -8,10 +8,9 @@
             scrollY: 500,
             scrollCollapse: true,
             buttons: [{
-                    extend: 'excel',
-                    className: 'btn-outline-success'
-                }
-            ],
+                extend: 'excel',
+                className: 'btn-outline-success'
+            }],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -110,6 +109,7 @@
             <a href="javascript:history.go(-1)" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
             <h1 class="display-4 pr-3">Desglose {{$subject->name}}</h1>
             <a href="{{ url('/evaluaciones/desglose', $subject->id) }}" class="btn btn-primary ml-2 mt-4 h-100">Crear Tarea</a>
+            <a href="{{ url('tareas', $subject->id) }}" class="btn btn-primary ml-2 mt-4 h-100">Eliminar Tarea</a>
         </div>
         <div class="row">
             <div class="col mt-4">
@@ -162,15 +162,13 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
-                    <table id="trabajos" class="table table-striped examenes" style="width:100%">
+                        <table id="trabajos" class="table table-striped examenes" style="width:100%">
                             <thead class="cabezeraTabla">
                                 <tr id='columna'>
                                     <td>Apellidos, Nombre</td>
                                     @foreach($trabajos as $trabajo)
                                     <td>{{$trabajo->name}}</td>
                                     @endforeach
-                                    <td>Nota Examenes</td>
-                                    <td>Comentarios</td>
                                     <td>Action</td>
                                 </tr>
                             </thead>
@@ -186,12 +184,6 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        <td>6</td>
-                                        <td>
-                                            <div class="input-group col-10">
-                                                <input type="text" class="form-control w" placeholder="">
-                                            </div>
-                                        </td>
                                         <td>
                                             <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
                                         </td>
