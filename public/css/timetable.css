@@ -49,3 +49,23 @@ table.dataTable thead {
 .header{
     height: 100px;
 }
+
+
+th{
+    border: solid 2px black;
+    width: 500px;
+    text-align: center;
+    background-color:black;
+    color: white;
+}
+.td{
+    
+    background-color:gray;
+    text-align: center;
+    color: white;
+    height: 50px;
+}
+.tabla{
+    text-align: center;
+    background-color: whitesmoke;
+}
