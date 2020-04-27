@@ -14,7 +14,7 @@
                 <thead class="cabezeraTabla">
                     <tr>
                         <td>ID</td>
-                        <td>Titulo</td>
+                        <td>Asunto</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
@@ -22,7 +22,7 @@
                     @foreach ($messages as $message)
                     <tr>
                         <td>{{$message->id}}</td>
-                        <td>{{$message->title}}</td>
+                        <td>{{$message->subject}}</td>
                         <td>
                         <a href="/messages/{{$message->id}}" class="btn btn-primary">Ver</a>
 
