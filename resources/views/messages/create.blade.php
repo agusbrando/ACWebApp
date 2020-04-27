@@ -22,12 +22,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Asunto</label>
-                    <input type="text" class="form-control" id="title" name="title">
+                    <label for="subject">Asunto</label>
+                    <input type="text" class="form-control" id="subject" name="subject">
                 </div>
                 <div class="form-group">
-                    <label for="text">Mensaje</label>
-                    <textarea class="form-control" id="text" rows="3" name="text"></textarea>
+                    <label for="message">Mensaje</label>
+                    <textarea class="form-control" id="message" rows="3" name="message"></textarea>
                 </div>
 
                 <div class="row mb-2">
