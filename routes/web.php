@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('evaluaciones', 'EvaluacionesController');
+Route::resource('porcentajes', 'PorcentajesController');
 Route::resource('desglose', 'DesgloseController');
 
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
@@ -38,3 +39,4 @@ Route::resource('permissions','PermissionController');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
+
