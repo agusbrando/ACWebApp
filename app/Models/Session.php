@@ -13,8 +13,11 @@ class Session extends Model
     protected $fillable = [
         'id',
         'classroom_id',
+        'type_id',
+        'day',
         'time_start',
         'time_end'
+        
     ];
 
     public function classroom()
