@@ -38,11 +38,12 @@ class CalendarController extends Controller
       'date' =>  'required'
     ]);
 
-    $day = $request->get('date');
-
+    $dayStr = $request->get('date');
+    $dayDate = $dayStr->strtotime();
+    $dayNum = $dayDate->dayOfWeek;  
 
     $type = Type::find($id);
-    $sessions = $type->sessions()->where('day', $day);
+    $sessions = $type->sessions()->where('day', $dayNum);
 
     return view('/Calendario/calendar', compact('types', 'sessions'));
   }
