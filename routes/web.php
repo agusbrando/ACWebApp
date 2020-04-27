@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +19,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/login', function () {
 //     return view('login');
 // });
-//  Route::get('/', function () {   
+//  Route::get('/', function () {
 //      return view('auth.login');
 //  });
+
+
+
 
 Route::resource('permissions','PermissionController');
 
@@ -28,5 +32,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('messages', 'MessageController');
+Route::resource('messages', 'MessageController')->middleware('auth');
+
+Route::get('messages_send', 'MessageController@index')->middleware('auth')->name('messagesSend.index');
+
 Route::get('/', 'HomeController@index');
+
