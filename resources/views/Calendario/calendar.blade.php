@@ -54,9 +54,9 @@
           <div id="espacio" class="bg-primary w-100"></div>
           <h3>Horas</h3>
           <div id="buttons">
-           @foreach($sessions as $session)
-            <button type="button" class="btn btn-primary btn-block">{{ $session->time_start }}</button>
-            @endforeach
+            @foreach($sessions as $session)
+              <button type="button" class="btn btn-primary btn-block">{{ $session->time_start }}</button>
+            @endforeach 
           </div>
         </div>
       </div>

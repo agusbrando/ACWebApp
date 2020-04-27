@@ -32,20 +32,26 @@ class CalendarController extends Controller
   public function getTime(Request $request, $id)
   {
 
+    $sessions = [];
+
     $this->validate($request, [
       'date' =>  'required'
     ]);
 
+    $day = $request->get('date');
+
+
     $type = Type::find($id);
-    $sessions = $type->sessions()->where('day', );
+    $sessions = $type->sessions()->where('day', $day);
 
     return view('/Calendario/calendar', compact('types', 'sessions'));
   }
 
   public function index()
   {
+    $sessions = [];
     $types = Type::all();
-    return view('/Calendario/calendar', compact('types'));
+    return view('/Calendario/calendar', compact('types', 'sessions'));
   }
 
   /**
