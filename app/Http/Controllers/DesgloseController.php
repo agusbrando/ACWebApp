@@ -115,7 +115,7 @@ class DesgloseController extends Controller
     public function destroy($id, $subject_id)
     {
         $task = Task::find($id);
-        $task->users()->detach(1);
+        $task->users()->delete();
         $task->delete();
 
         $subject = Subject::find($subject_id);
