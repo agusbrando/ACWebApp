@@ -27,8 +27,8 @@ Route::resource('desglose', 'DesgloseController');
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
 Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
 Route::get('porcentajes/edit/{id_subject}/{id_eval}/{id_type}', 'PorcentajesController@edit');
-// Route::patch('porcentajes/update/{id_subject}/{id_eval}/{id_type}', 'PorcentajesController@update');
 Route::get('porcentajes/destroy/{id_subject}/{id_eval}/{id_type}', 'PorcentajesController@destroy');
+Route::get('evaluaciones/desglose/{id}', 'DesgloseController@create');
 
 Route::resource('permissions','PermissionController');
 Auth::routes();

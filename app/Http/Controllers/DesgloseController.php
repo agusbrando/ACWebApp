@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Task;
+use App\Models\Type;
+use App\Models\Subject;
+use App\Models\Evaluation;
 use Illuminate\Support\Facades\DB; 
 
 class DesgloseController extends Controller
@@ -20,9 +24,13 @@ class DesgloseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $subject = Subject::find($id);
+        $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
+        $tipos = Type::all()->where('model', Task::class);
+
+        return view('Notas.crearTarea', compact('subject', 'evaluaciones', 'tipos'));
     }
 
     /**
@@ -33,7 +41,25 @@ class DesgloseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'evaluaciones' => 'required',
+            'type' => 'required',
+            'subject' => 'required'
+        ]);
+
+        $evaluaciones = $request->get('evaluaciones');
+
+        foreach($evaluaciones as $eval){
+            $type = new Task([
+                'evaluation_id' => $eval,
+                'type_id' => $request->get('type'),
+                'name' => $request->get('name')
+            ]);
+            $type->save();
+        }
+
+        return redirect('evaluaciones/'.$request->get('subject'));
     }
 
     /**

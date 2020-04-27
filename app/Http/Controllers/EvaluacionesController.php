@@ -51,9 +51,25 @@ class EvaluacionesController extends Controller
     {
         $users = User::all();
         $subject = Subject::find($id);
-        $tasks = Type::all()->where('model', Task::class);
+        $tasksType = Type::all()->where('model', Task::class);
 
-        return view('Notas.desglose', compact('users', 'subject', 'types'));
+        $parciales = null;
+        $trabajos = null;
+
+        foreach($tasksType as $task){
+            $id = $task->id;
+            switch($id){
+                case 8:
+                    $parciales = Task::all()->where('type_id', $task->id);
+                    break;
+                case 9:
+                    $trabajos = Task::all()->where('type_id', $task->id);
+                    break;
+            }
+            
+        }
+
+        return view('Notas.desglose', compact('users', 'subject', 'parciales', 'trabajos'));
     }
 
     /**

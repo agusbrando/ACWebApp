@@ -70,7 +70,7 @@ class PorcentajesController extends Controller
         }
 
 
-        $subjects = Subject::all();
+        // $subjects = Subject::all();
         return redirect('asignaturas/'.$request->get('subject'));
 
     }
