@@ -42,3 +42,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'HomeController@index');
+
+Route::put('/calendarTime/{id}', 'CalendarController@getTime');

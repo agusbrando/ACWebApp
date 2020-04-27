@@ -15,35 +15,40 @@
   <br>
   <div class="calendar">
       <div class="row d-flex justify-content-center">
-        <div class="col-md-2 bg-light border-right p-0 border-primary">
-          <div id="espacio" class="bg-primary w-100"></div>
-          <h3>Eventos</h3>
-          <div id="buttons">
-            @foreach($types as $type)
-            <button type="button" class="btn btn-primary btn-block">{{ $type->name }}</button>
-            @endforeach
-          </div>
-        </div>
-
+        
+      <form>
         <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-4 w-100">
           <div class="col-12 p-0" style="overflow:hidden;">
             <div class="form-group">
               <div class="row">
                 <div class="col-12">
-                  <div id="datetimepicker13"></div>
+                  <input class="form-control" type="date" value="2020-04-270" id="date" name="date">
+                  <!-- <div id="datetimepicker13"></div> -->
                 </div>
               </div>
             </div>
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
               $(function() {
                 $('#datetimepicker13').datetimepicker({
                   inline: true,
                   sideBySide: false
                 });
               });
-            </script>
+            </script> -->
           </div>
         </div>
+            
+        <div class="col-md-2 bg-light border-right p-0 border-primary">
+          <div id="espacio" class="bg-primary w-100"></div>
+          <h3>Eventos</h3>
+          <div id="buttons">
+            @foreach($types as $type)
+            <a href="/calendarTime/{{ $type->id }}" class="btn btn-primary btn-block">{{ $type->name }}</a>
+            @endforeach
+          </div>
+        </div>
+
+      </form>
 
         <div class="col-md-2 bg-light border-left p-0 border-primary">
           <div id="espacio" class="bg-primary w-100"></div>

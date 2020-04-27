@@ -17,6 +17,7 @@ class CreateSessionsTable extends Migration
             $table->increments('id');
             $table->integer('classroom_id')->unsigned();
             $table->integer('type_id')->unsigned();
+            $table->integer('day');
             $table->dateTime('time_start', 0);
             $table->dateTime('time_end', 0);
             $table->timestamps();

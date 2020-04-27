@@ -17,6 +17,8 @@ class CalendarController extends Controller
    * @return \Illuminate\Http\Response
    */
 
+
+
   public function details($id)
   {
 
@@ -27,29 +29,23 @@ class CalendarController extends Controller
     ]);
   }
 
+  public function getTime(Request $request, $id)
+  {
+
+    $this->validate($request, [
+      'date' =>  'required'
+    ]);
+
+    $type = Type::find($id);
+    $sessions = $type->sessions()->where('day', );
+
+    return view('/Calendario/calendar', compact('types', 'sessions'));
+  }
+
   public function index()
   {
     $types = Type::all();
-    $sessions = null;
-
-    foreach ($types as $type) {
-      $sessions = $type->sessions;
-    }
-
-    // $sessionsTurorias = null;
-    // $sessionsResevaAulas = null;
-
-    // if ($types->type_id == 1) {
-    //   foreach ($types as $type) {
-    //     $sessions = $type->sessionsTurorias;
-    //   }
-    // } else {
-    //   foreach ($types as $type) {
-    //     $sessions = $type->sessionsResevaAulas;
-    //   }
-    // }
-
-    return view('/Calendario/calendar', compact('types', 'sessions'));
+    return view('/Calendario/calendar', compact('types'));
   }
 
   /**
