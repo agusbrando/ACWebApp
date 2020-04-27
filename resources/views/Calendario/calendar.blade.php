@@ -48,7 +48,7 @@
 
           <hr>
 
-          <input class="form-control" type="date" value="2020-04-270" id="date" name="date">
+          <input id="diaElegido" class="form-control" type="date" value="<?php echo date("Y-m-d");?>" id="date" name="date">
 
           </form>
         </div>
