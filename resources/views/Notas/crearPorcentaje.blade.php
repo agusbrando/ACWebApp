@@ -14,7 +14,7 @@
     <div class="container">
         <h1 class="display-4 pr-5">Crear Porcentaje para {{$subject->name}}</h1>
         <hr>
-        <form action="{{ route('porcentajes.store') }}" method="post">
+        <form action="{{ url('porcentajes.store') }}" method="post">
             @csrf
             <div class="form-group">
                 <label for="Porcentaje">Porcentaje</label>

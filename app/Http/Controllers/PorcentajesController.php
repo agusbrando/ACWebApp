@@ -69,8 +69,6 @@ class PorcentajesController extends Controller
             ]);
         }
 
-
-        // $subjects = Subject::all();
         return redirect('asignaturas/'.$request->get('subject'));
 
     }

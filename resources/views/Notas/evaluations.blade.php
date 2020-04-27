@@ -10,17 +10,6 @@
             buttons: [{
                     extend: 'excel',
                     className: 'btn-outline-success'
-                },
-                {
-                    label: 'Create',
-                    text: 'Desglose',
-                    href: 'www.google.es',
-                    action: function(nButton, oConfig, oFlash) {
-
-                        window.location = "http://127.0.0.1:8000/desglose"
-
-                    },
-                    className: 'btn btn-outline-primary ml-1'
                 }
             ],
             language: {
@@ -55,16 +44,6 @@
             buttons: [{
                     extend: 'excel',
                     className: 'btn-outline-success'
-                },
-                {
-                    label: 'Create',
-                    text: 'Desglose',
-                    action: function(nButton, oConfig, oFlash) {
-
-                        window.location = "http://127.0.0.1:8000/desglose"
-
-                    },
-                    className: 'btn btn-outline-primary ml-1'
                 }
             ],
             language: {
@@ -99,16 +78,6 @@
             buttons: [{
                     extend: 'excel',
                     className: 'btn-outline-success'
-                },
-                {
-                    label: 'Create',
-                    text: 'Desglose',
-                    action: function(nButton, oConfig, oFlash) {
-
-                        window.location = "http://127.0.0.1:8000/desglose"
-
-                    },
-                    className: 'btn btn-outline-primary ml-1'
                 }
             ],
             language: {
@@ -143,16 +112,6 @@
             buttons: [{
                     extend: 'excel',
                     className: 'btn-outline-success'
-                },
-                {
-                    label: 'Create',
-                    text: 'Desglose',
-                    action: function(nButton, oConfig, oFlash) {
-
-                        window.location = "http://127.0.0.1:8000/desglose"
-
-                    },
-                    className: 'btn btn-outline-primary ml-1'
                 }
             ],
             language: {
