@@ -16,4 +16,9 @@ class Task extends Model
     public function users(){
         return $this->belongsToMany(User::class,'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\Type');
+    }
 }

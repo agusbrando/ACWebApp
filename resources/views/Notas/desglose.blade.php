@@ -2,6 +2,22 @@
 
 @section('main')
 <script>
+    function agregarColumna() {
+        document.getElementById("examenes").insertRow(-1).innerHTML = '<tr></td><td></td><td></td><td></td>';
+    }
+
+    function eliminarFila() {
+        var table = document.getElementById("examenes");
+        var rowCount = table.rows.length;
+        //console.log(rowCount);
+
+        if (rowCount <= 1)
+            alert('No se puede eliminar el encabezado');
+        else
+            table.deleteRow(rowCount - 1);
+    }
+</script>
+<script>
     $(document).ready(function() {
         $("#nuevaColumna").click(function() {
             $("#columna").append('<td>Action</td>');
@@ -24,7 +40,8 @@
 
                     },
                     className: 'btn btn-outline-primary ml-1'
-                }],
+                }
+            ],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -140,6 +157,8 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <button type="button" class="btn btn-primary mr-2" onclick="agregarFila()">Agregar Fila</button>
+                        <button type="button" class="btn btn-danger" onclick="eliminarFila()">Eliminar Fila</button>
                     </div>
                     <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
 

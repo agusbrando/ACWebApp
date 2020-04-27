@@ -29,4 +29,9 @@ class Type extends Model
     {
         return $this->hasMany('App\Models\Item');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Models\Task');
+    }
 }
