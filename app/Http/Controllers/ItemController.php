@@ -129,7 +129,11 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $types = Type::all()->where('model', Item::class);
+        $classrooms = Classroom::all();    //->load('name', Classroom::class)
+        $states = State::all();
+        $item = DB::table('items')->where('id', $id)->get();
+        return view('items.edit', compact('item', 'classrooms', 'types', 'states'));
     }
 
     /**
