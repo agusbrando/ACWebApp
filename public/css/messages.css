@@ -54,3 +54,11 @@
 .tr{
     width: auto;
 }
+
+.containerAttachment{
+
+    display: flex;
+    flex-flow: row wrap;
+
+
+}
