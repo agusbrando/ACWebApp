@@ -68,9 +68,9 @@
                     @foreach($trackings as $tracking)
                       @if($tracking->user_id == $user->id)
                       <tr>
-                          <td>{{$tracking->datetime_start}}</td>
-                          <td>8:30</td>
-                          <td>14:30</td>
+                          <td>{{$tracking->date_signature}}</td>
+                          <td>{{$tracking->time_start}}</td>
+                          <td>{{$tracking->time_end}}</td>
                           <td>{{$tracking->num_hours}}</td>
                           <td><img src="{{$tracking->signature}}"></td>
                       </tr>

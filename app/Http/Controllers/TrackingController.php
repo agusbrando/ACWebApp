@@ -57,19 +57,24 @@ class TrackingController extends Controller
         list($hora_fin_3,$hora_fin_4) = explode(":",$request->get('time_end2'));
         $suma=(($hora_fin_1-$hora_ini_1)*60)+($hora_fin_2-$hora_ini_2)+((($hora_fin_3-$hora_ini_3)*60)+($hora_fin_4-$hora_ini_4));
         
-        
+        if($request->get('time_end')<$request->get('time_end2')){
+            $hora_fin=$request->get('time_end2');
+        }else{
+          $hora_fin=$request->get('time_end');
+        }
         
         $num_hours=$suma/60;
         $tracking = new Tracking([
             'signature'=>$file,
             'user_id' => $user->id,
-            'datetime_start' =>$request->get('date_start'),
-            'datetime_end' =>$request->get('date_start'),
+            'date_signature'=>$request->get('date_start'),
+            'time_start' =>$request->get('time_start'),
+            'time_end' =>$hora_fin,
             'num_hours'=>$num_hours,
             
         ]);
         $tracking->save();
-        return redirect('/seguimiento')->with('exito', 'Horario creado!')->compact('user');
+        return redirect('/seguimiento')->with('exito', 'Horario creado!');
     }
     
 }

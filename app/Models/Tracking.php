@@ -13,8 +13,9 @@ class Tracking extends Model
    protected $fillable = [
     'signature',
     'user_id',
-    'datetime_start',
-    'datetime_end',
+    'date_signature',
+    'time_start',
+    'time_end',
     'num_hours'
     
 
