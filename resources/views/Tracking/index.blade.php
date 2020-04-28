@@ -52,6 +52,34 @@
 
 
   <div class="row col-12 container-fluid calendar">
+  <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-6 calendario w-100">
+      
+      <table class="table table-striped" id="tabla">
+                  <thead class="cabezeraTabla">
+                      <tr>
+                          <td>Fecha Firma</td>
+                          <td>Hora Inicio</td>
+                          <td>Hora Final</td>
+                          <td>Suma Horas</td>
+                          <td>Firma</td>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($trackings as $tracking)
+                      <tr>
+                          <td>{{$tracking->datetime_start}}</td>
+                          <td>8:30</td>
+                          <td>14:30</td>
+                          <td>{{$tracking->num_hours}}</td>
+                          <td>{{$tracking->signature}}</td>
+                      </tr>
+                      @endforeach
+                      
+                  </tbody>
+
+              </table>
+                                        
+</div>
     <div class="col-md-6 bg-light border-right">
 
       <form method="post" action="{{ route('seguimiento.store') }}">
@@ -112,34 +140,7 @@
     </div>
 
 
-    <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-6 calendario w-100">
-      
-            <table class="table table-striped" id="tabla">
-                        <thead class="cabezeraTabla">
-                            <tr>
-                                <td>Fecha Firma</td>
-                                <td>Hora Inicio</td>
-                                <td>Hora Final</td>
-                                <td>Suma Horas</td>
-                                <td>Firma</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($trackings as $tracking)
-                            <tr>
-                                <td>{{$tracking->datetime_start}}</td>
-                                <td>8:30</td>
-                                <td>14:30</td>
-                                <td>{{$tracking->num_hours}}</td>
-                                <td>{{$tracking->signature}}</td>
-                            </tr>
-                            @endforeach
-                            
-                        </tbody>
-
-                    </table>
-                                              
-    </div>
+    
 
   </div>
 
