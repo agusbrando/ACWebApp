@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+    protected $with = ['attachments'];
       protected $table = 'messages';
     protected $primaryKey = 'id';
     protected $guarded = [];
@@ -28,5 +29,5 @@ class Message extends Model
     {
         return $this->belongsToMany('App\Models\User')->withPivot('read')->withTimeStamps();
     }
-    
+
 }
