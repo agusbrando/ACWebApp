@@ -3,6 +3,13 @@
 @section('main')
 <script>
     $(document).ready(function() {
+        $('#examenForm').submit(function() {
+
+            var sData = oTable.$('input').serialize();
+
+            return false;
+
+        });
         $('#examenes').DataTable({
             dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
@@ -41,10 +48,9 @@
             scrollY: 500,
             scrollCollapse: true,
             buttons: [{
-                    extend: 'excel',
-                    className: 'btn-outline-success'
-                }
-            ],
+                extend: 'excel',
+                className: 'btn-outline-success'
+            }],
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -122,27 +128,28 @@
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-eval1" role="tabpanel" aria-labelledby="nav-eval1-tab">
-                        <table id="examenes" class="table table-striped examenes" style="width:100%">
-                            <thead class="cabezeraTabla">
-                                <tr id='columna'>
-                                    <td>Apellidos, Nombre</td>
-                                    @foreach($parciales as $parcial)
-                                    <td>{{$parcial->name}}</td>
-                                    @endforeach
-                                    <td>Nota Examenes</td>
-                                    <td>Comentarios</td>
-                                    <td>Action</td>
-                                </tr>
-                            </thead>
-                            <tbody id="fila">
-                                @foreach($users as $user)
-                                <form action="#" method="post">
+                        <form id="examenForm" action="{{ route('desglose.storeNotes') }}" method="post">
+                            @csrf
+                            <table id="examenes" class="table table-striped examenes" style="width:100%">
+                                <thead class="cabezeraTabla">
+                                    <tr id='columna'>
+                                        <td>Apellidos, Nombre</td>
+                                        @foreach($parciales as $parcial)
+                                        <td>{{$parcial->name}}</td>
+                                        @endforeach
+                                        <td>Nota Examenes</td>
+                                        <td>Comentarios</td>
+                                        <td>Action</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="fila">
+                                    @foreach($users as $user)
                                     <tr>
                                         <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
                                         @foreach($parciales as $parcial)
                                         <td>
                                             <div class="input-group col-10">
-                                                <input type="text" class="form-control w" placeholder="">
+                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
                                             </div>
                                         </td>
                                         @endforeach
@@ -155,11 +162,12 @@
                                         <td>
                                             <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
                                         </td>
+
                                     </tr>
-                                </form>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
                         <table id="trabajos" class="table table-striped examenes" style="width:100%">
@@ -174,20 +182,20 @@
                             </thead>
                             <tbody id="fila">
                                 @foreach($users as $user)
-                                <form action="#" method="post">
-                                    <tr>
-                                        <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                        @foreach($trabajos as $trabajo)
-                                        <td>
-                                            <div class="input-group col-10">
-                                                <input type="text" class="form-control w" placeholder="">
-                                            </div>
-                                        </td>
-                                        @endforeach
-                                        <td>
-                                            <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
-                                        </td>
-                                    </tr>
+
+                                <tr>
+                                    <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                                    @foreach($trabajos as $trabajo)
+                                    <td>
+                                        <div class="input-group col-10">
+                                            <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w">
+                                        </div>
+                                    </td>
+                                    @endforeach
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
+                                    </td>
+                                </tr>
                                 </form>
                                 @endforeach
                             </tbody>

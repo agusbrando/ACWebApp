@@ -20,7 +20,7 @@ class CreateCalificationsTable extends Migration
             $table->timestamps();
 
             $table->primary(['task_id', 'user_id']);
-            $table->foreign('task_id')->references('id')->on('tasks');
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

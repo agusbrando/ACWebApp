@@ -63,6 +63,14 @@ class DesgloseController extends Controller
         return redirect('evaluaciones/'.$request->get('subject'));
     }
 
+    public function storeNotes(Request $request)
+    {
+
+        $aux = $request->all();
+
+        return redirect('evaluaciones/'.$request->get('subject'));
+    }
+
     /**
      * Display the specified resource.
      *
@@ -115,13 +123,8 @@ class DesgloseController extends Controller
     public function destroy($id, $subject_id)
     {
         $task = Task::find($id);
-        // foreach($task->users as $user){
-        //     $id = $user->pivot->user_id;
-        // }
-        // $user = User::where('id', $id)->first();
-        // $user->delete();
-        // $task->users()->delete();
-        // $task->delete();
+
+        $task->delete();
 
         $subject = Subject::find($subject_id);
 
