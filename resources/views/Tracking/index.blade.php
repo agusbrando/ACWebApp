@@ -71,7 +71,7 @@
                           <td>8:30</td>
                           <td>14:30</td>
                           <td>{{$tracking->num_hours}}</td>
-                          <td>{{$tracking->signature}}</td>
+                          <td><img src="{{$tracking->signature}}"></td>
                       </tr>
                       @endforeach
                       
@@ -86,7 +86,7 @@
         @csrf
         <div class="form-group">
           <label for="date_start">Fecha de firma</label>
-          <input type="datetime-local" class="form-control w-50" id="date_start" name="date_start" value="">
+          <input type="date" class="form-control w-50" id="date_start" name="date_start" value="">
         </div>
         <label class="center">Mañana</label>
         <div class="form-group ">
