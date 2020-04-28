@@ -18,7 +18,6 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('adminPass'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 1,
             'timetable_id'=>1
         ]);
         DB::table('users')->insert([
@@ -28,7 +27,6 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 4,
             'timetable_id'=>1
         ]);
         DB::table('users')->insert([
@@ -38,7 +36,6 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 2,
             'timetable_id'=>1
         ]);
         DB::table('users')->insert([
@@ -48,7 +45,6 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 3,
             'timetable_id'=>1
         ]);
         DB::table('users')->insert([
@@ -58,8 +54,41 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('default'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 3,
             'timetable_id'=>1
         ]);
     }
 }
+// public function run()
+//     {
+//         $userRole = config('roles.models.role')::where('name', '=', 'User')->first();
+//         $adminRole = config('roles.models.role')::where('name', '=', 'Admin')->first();
+//         $permissions = config('roles.models.permission')::all();
+
+//         /*
+//          * Add Users
+//          *
+//          */
+//         if (config('roles.models.defaultUser')::where('email', '=', 'admin@admin.com')->first() === null) {
+//             $newUser = config('roles.models.defaultUser')::create([
+//                 'name'     => 'Admin',
+//                 'email'    => 'admin@admin.com',
+//                 'password' => bcrypt('password'),
+//             ]);
+
+//             $newUser->attachRole($adminRole);
+//             foreach ($permissions as $permission) {
+//                 $newUser->attachPermission($permission);
+//             }
+//         }
+
+//         if (config('roles.models.defaultUser')::where('email', '=', 'user@user.com')->first() === null) {
+//             $newUser = config('roles.models.defaultUser')::create([
+//                 'name'     => 'User',
+//                 'email'    => 'user@user.com',
+//                 'password' => bcrypt('password'),
+//             ]);
+
+//             $newUser;
+//             $newUser->attachRole($userRole);
+//         }
+//     }
