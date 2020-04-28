@@ -32,20 +32,7 @@
 
                 <div class="row mb-2">
 
-
-
-
-
-
-
-
-
-
-                    <input type="file" name="filenames[]" class="myfrm form-control" multiple='multiple'>
-
-
-
-
+                    <input type="file" name="filenames[]" class="myfrm form-control mb-3" multiple='multiple'>
 
                     <div class="col-md-6">
                         <button type="submit" class="file btn btn-lg btn-primary">Enviar</button>
