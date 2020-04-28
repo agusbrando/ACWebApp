@@ -36,5 +36,7 @@ Route::resource('messages', 'MessageController')->middleware('auth');
 
 Route::get('messages_send', 'MessageController@index')->middleware('auth')->name('messagesSend.index');
 
+Route::get('download_attachment_message/{idm}/{nameAttach}','MessageController@download')->name('downloadmessagefile');
+
 Route::get('/', 'HomeController@index');
 
