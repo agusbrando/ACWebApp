@@ -52,10 +52,21 @@ class UsersTableSeeder extends Seeder
             'timetable_id'=>1
         ]);
 
+        DB::table('users')->insert([
+            'first_name' => 'Prueba',
+            'last_name' => 'Usuario Prueba',
+            'email' => 'prueba.usuario@campusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 4,
+            'timetable_id'=>1
+        ]);
+
         for ($i = 1; $i <= 10; $i++) {
             DB::table('users')->insert([
-                'first_name' => 'Marcelo',
-                'last_name' => 'Malonda Pellicer',
+                'first_name' => 'Prueba'.$i,
+                'last_name' => 'Malonda Pellicer'.$i,
                 'email' => 'marcelo.malonda@campusaula.com'.$i,
                 'password' => bcrypt('password'),
                 'created_at' => now(),

@@ -34,7 +34,7 @@
         });
     });
 </script>
-<!-- <script>
+<script>
     $(document).ready(function() {
         $('#trabajos').DataTable({
             dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
@@ -67,7 +67,7 @@
             }
         });
     });
-</script> -->
+</script>
 <script>
     $(document).ready(function() {
         $('#actitud').DataTable({
