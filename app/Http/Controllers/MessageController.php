@@ -21,12 +21,14 @@ class MessageController extends Controller
     public function index()
     {
         $user = Auth::user();
-
+        // $messages = Message::all()->load('attachments');
         if (URL::current() == url("/messages_send")) {
 
-            $messages = $user->messagesSent;
+            $messages = $user->messagesSent->load('attachments','users');
+
         } else {
-            $messages = $user->messagesReceive;
+            $messages = $user->messagesReceive->load('attachments','user');
+
         }
 
         return view('messages.index', compact('messages'));
@@ -54,10 +56,10 @@ class MessageController extends Controller
     {
         $user = Auth::user();
         $request->validate([
-            'filenames' => 'required',
+            'filenames'=> 'nullable',
             'users' => 'required',
             'subject' => 'required',
-            'message' => 'required'
+            'message' => 'nullable'
         ]);
 
         $message = new Message([
@@ -76,7 +78,7 @@ class MessageController extends Controller
              {
                 foreach($request->file('filenames') as $file)
                 {
-                    $name = time().'.'.$file->extension();
+                    $name = $file->getClientOriginalName();
                     $file->move(storage_path("app/messages/$message->id"), $name);
 
                    $attachment = new Attachment([
@@ -101,7 +103,8 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        $message = Message::all()->load('attachments');
+        $message = Message::find($id)->loadMissing('attachments');
+
 
         return view('messages.show', compact('message'));
     }
@@ -139,4 +142,13 @@ class MessageController extends Controller
     {
         //
     }
+
+    public function download($idm,$nameAttach)
+    {
+
+
+return response()->download(storage_path("app/messages/$idm/$nameAttach"));
+    }
+
+
 }
