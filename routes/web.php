@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 //      return view('auth.login');
 //  });
 
-Route::resource('permissions','PermissionController');
+// Route::resource('permissions','PermissionController');
 
 Auth::routes();
 
