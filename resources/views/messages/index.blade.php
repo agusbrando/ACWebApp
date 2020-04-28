@@ -13,21 +13,39 @@
             <table id="alumnos" class="table table-striped" style="width:100%">
                 <thead class="cabezeraTabla">
                     <tr>
-                        <td>ID</td>
+                        <td>Usuario</td>
                         <td>Asunto</td>
+                        <td>Adjuntos</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
+
                     @foreach ($messages as $message)
+                    @if (isset($message->users))
+                    @foreach ($message->users as $user)
+
                     <tr>
-                        <td>{{$message->id}}</td>
+                        <td>{{$user->first_name}} {{$user->last_name}}</td>
                         <td>{{$message->subject}}</td>
+                        <td>{{count($message->attachments)}}</td>
                         <td>
                         <a href="/messages/{{$message->id}}" class="btn btn-primary">Ver</a>
 
                         </td>
                     </tr>
+                    @endforeach
+                    @else
+                    <tr>
+                        <td>{{$message->user->first_name}} {{$message->user->last_name}}</td>
+                        <td>{{$message->subject}}</td>
+                        <td>{{count($message->attachments)}}</td>
+                        <td>
+                        <a href="/messages/{{$message->id}}" class="btn btn-primary">Ver</a>
+
+                        </td>
+                    </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
