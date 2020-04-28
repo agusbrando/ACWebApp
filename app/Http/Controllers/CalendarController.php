@@ -29,6 +29,16 @@ class CalendarController extends Controller
     ]);
   }
 
+
+  public function crearEvento($fecha, $hora){
+
+
+
+    return view("/Calendario/crearEvento", compact('fecha', 'hora'));
+  }
+
+
+  
   public function getTime(Request $request)
   {
 
@@ -40,12 +50,12 @@ class CalendarController extends Controller
 
     $type = Type::where('name', $request->get('tipo'))->first();  
 
-    $day = date($request->get('date'));
-    $day = date('w', strtotime($day));
+    $dia = date($request->get('date'));
+    $day = date('w', strtotime($dia));
 
     $sessions = $type->sessions()->where('day', $day)->get();
     $types = Type::all();
-    return view('/Calendario/calendar', compact('types', 'sessions'));
+    return view('/Calendario/calendar', compact('types', 'sessions', 'dia'));
   }
 
   public function index()
@@ -76,7 +86,8 @@ class CalendarController extends Controller
     $this->validate($request, [
       'titulo' => 'required',
       'descripcion'  =>  'required',
-      'fecha' =>  'required'
+      'fecha' =>  'required',
+      'hora' =>  'required'
     ]);
 
     //guardar en la base de datos
@@ -86,11 +97,11 @@ class CalendarController extends Controller
       'user_id' => 1,
       'title' => $request->input("titulo"),
       'description'  => $request->input("descripcion"),
-      'date'        => $request->input("fecha")
+      'date'        => $request->input("fecha"." "."hora")
     ]);
 
     //devuelve el mensaje con exito
-    return back()->with('success', 'Enviado exitosamente!');
+    return back()->with('success', 'Guardado exitosamente!');
   }
 
   /**

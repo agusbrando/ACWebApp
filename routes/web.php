@@ -44,3 +44,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
 
 Route::post('/calendarTime', 'CalendarController@getTime');
+
+Route::get('/crearEvento/{fecha}/{hora}','CalendarController@crearEvento')->name('crearEvento');
+Route::post('/crearEvento','CalendarController@store');
