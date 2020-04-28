@@ -4,12 +4,7 @@
 
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 <script>
-        // <link href="{{ asset('resources/js/tabla.css') }}"  type="text/js" />
-        // $(document).ready(function() {
-        //     $('#datepicker').datepicker({
-        //         language: 'es'
-        //     });
-        // });
+        
         $(document).ready(function() {
         $('#mytable').DataTable({
             dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
