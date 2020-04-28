@@ -1,5 +1,8 @@
 @extends('base')
 
+@section('login')
+@include('auth.login')
+@endsection
 @section('main')
 
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
@@ -44,14 +47,14 @@
     </script>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <!-- Listado de Items -->
-    <div class="row">
+    <div class="row d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <div class="col-sm-12">
             <h1 class="display-4">Material del Aula </h1>
             <form method="post" action="{{ url('items/filter') }}">
 
             @csrf
 
-                <div class="form-group float-left mr-3">
+                <div class="form-group float-left mr-3 ">
                     <label for="formControlSelect1">Aulas</label>
                     <select class="form-control " id="classroom_id" name="idClass">
                         <option value="" selected>Todas</option>
@@ -140,7 +143,7 @@
                                         @method('GET')
                                         <button class="btn btn-primary" type="submit">Ver</button>
                                     </form>
-                                    <form method="get" action="{{ route('items.edit', $item->id)}}">
+                                    <!-- <form method="get" action="{{ route('items.edit', $item->id)}}">
                                         @csrf
                                         @method('GET')
                                         <button class="btn btn-primary" type="submit">Edit</button>
@@ -150,7 +153,7 @@
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit">Delete</button>
                                     </form>
-                                </td>
+                                </td> -->
                             </tr>
                             @endforeach
                         </tbody>

@@ -61,7 +61,6 @@
                 @foreach($types as $type)
                     @if($type->id == $item->type_id)
                         <option selected value="{{$type->id}}">{{$type->name}}</option>
-                        <option value="{{$type->id}}">{{$type->name}}</option>
                     @else
                     <option value="{{$type->id}}">{{$type->name}}</option>
                     
