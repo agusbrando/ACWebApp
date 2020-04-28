@@ -3,6 +3,10 @@
 @section('main')
 <main role="main" class=" col-md-10 ml-sm-auto col-lg-10">
 
+    <h1 class="display-4 pr-3">Calendario</h1>
+    <br>
+    <hr>
+
     <div class="container">
         <p class="lead">
             @if (count($errors) > 0)
@@ -25,27 +29,36 @@
 
             <div class="col-md-12">
                 <form action="{{ asset('/crearEvento') }}" method="post">
-                    @csrf                   
+                    @csrf
+
                     <div class="fomr-group">
-                        <label>Titulo</label>
+                        <h5>Evento</h5>
+                        <input type="text" value="{{$tipo}}" class="form-control" disabled name="evento">
+                    </div>
+
+                    <div class="fomr-group">
+                        <h5>Titulo</h5>
                         <input type="text" class="form-control" name="titulo">
                     </div>
                     <div class="fomr-group">
-                        <label>Descripcion del Evento</label>
-                        <input type="text" class="form-control" name="descripcion">
+                        <h5>Descripcion del Evento</h5>
+                        <input type="text" maxlength="30" class="form-control" name="descripcion">
                     </div>
                     <div class="fomr-group">
-                        <label>Hora</label>
-                        <input type="text" value="{{$hora}}" class="form-control" name="hora">
+                        <h5>Hora</h5>
+                        <input type="text" value="{{$hora}}" class="form-control" disabled name="hora">
                     </div>
                     <div class="fomr-group">
-                        <label>Fecha</label>
-                        <input type="date" value="{{$fecha}}" class="form-control" name="fecha">
+                        <h5>Fecha</h5>
+                        <input type="date" value="{{$fecha}}" class="form-control" disabled name="fecha">
                     </div>
                     <br>
-                    <input type="submit" class="btn btn-info" value="Guardar">                
-                    <input type="submit"  class="btn btn-success" onclick="history.back()" name="Volver" value="Volver ">
+                    <input type="submit" class="btn btn-info" value="Guardar">
+                    <input type="submit" class="btn btn-success" onclick="history.back()" name="Volver" value="Volver ">
                 </form>
+
+                <a></a>
+
             </div>
     </div>
 </main>

@@ -30,11 +30,15 @@ class CalendarController extends Controller
   }
 
 
-  public function crearEvento($fecha, $hora){
+  public function crearEvento($fecha, $hora, $type){
 
+    if($type == 2){
+        $tipo = 'Tutoria';
+    }else{
+      $tipo = 'Reserva de aula';
+    }
 
-
-    return view("/Calendario/crearEvento", compact('fecha', 'hora'));
+    return view("/Calendario/crearEvento", compact('fecha', 'hora', 'tipo'));
   }
 
 
@@ -85,14 +89,13 @@ class CalendarController extends Controller
     //validacion
     $this->validate($request, [
       'titulo' => 'required',
-      'descripcion'  =>  'required',
-      'fecha' =>  'required',
-      'hora' =>  'required'
+      'descripcion'  =>  'required'
+      
     ]);
 
     //guardar en la base de datos
     Event::insert([
-      'type_id' => 1,
+      'type_id' => $request->input("tipo"),
       'session_id' => 1,
       'user_id' => 1,
       'title' => $request->input("titulo"),
