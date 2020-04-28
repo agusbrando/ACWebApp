@@ -12,8 +12,10 @@ class TrackingController extends Controller
   
   public function index()
   {
+    $user = Auth::user();
     $trackings=Tracking::all();
-        return view('Tracking.index',compact('trackings'));
+    
+        return view('Tracking.index',compact('trackings','user'));
     
   }
 
@@ -67,7 +69,7 @@ class TrackingController extends Controller
             
         ]);
         $tracking->save();
-        return redirect('/seguimiento')->with('exito', 'Horario creado!');
+        return redirect('/seguimiento')->with('exito', 'Horario creado!')->compact('user');
     }
     
 }

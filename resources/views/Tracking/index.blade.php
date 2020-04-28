@@ -65,7 +65,8 @@
                       </tr>
                   </thead>
                   <tbody>
-                  @foreach($trackings as $tracking)
+                    @foreach($trackings as $tracking)
+                      @if($tracking->user_id == $user->id)
                       <tr>
                           <td>{{$tracking->datetime_start}}</td>
                           <td>8:30</td>
@@ -73,8 +74,9 @@
                           <td>{{$tracking->num_hours}}</td>
                           <td><img src="{{$tracking->signature}}"></td>
                       </tr>
-                      @endforeach
-                      
+                      @endif
+                    @endforeach
+                   
                   </tbody>
 
               </table>
@@ -126,7 +128,7 @@
           <br />
           <button id="clear" class="btn btn-danger btn-sm">Borrar Firma</button>
           <textarea id="signature64" name="firma" style="display: none"></textarea>
-
+          
         </div>
         <br />
         <div class="custom-file overflow-hidden rounded-pill mb-5">
