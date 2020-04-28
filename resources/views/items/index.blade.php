@@ -135,7 +135,11 @@
                                 <td>{{$item->created_at}}</td>
                                 <td>{{$item->updated_at}}</td>
                                 <td class="botones">
-                                    <!-- <a href="{{ route('items.edit', $item->id)}}" class="btn btn-primary">Edit</a> -->
+                                    <form method="get" action="{{ route('items.show', $item->id)}}">
+                                        @csrf
+                                        @method('GET')
+                                        <button class="btn btn-primary" type="submit">Ver</button>
+                                    </form>
                                     <form method="get" action="{{ route('items.edit', $item->id)}}">
                                         @csrf
                                         @method('GET')
