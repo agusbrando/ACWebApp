@@ -119,7 +119,10 @@ class ItemController extends Controller
     public function show($id)
     {
         $item = Item::find($id);
-        return view('items.show', compact('item'));
+        $type = Type::find($item->type_id);
+
+
+        return view('items.show', compact('item', 'type'));
     }
 
     /**

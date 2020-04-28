@@ -83,7 +83,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="d-flex flex-row">
+                <div class="d-flex flex-row botones">
                     <button  class="btn btn-primary " type="submit" >Filtrar</button>
                     <a class="btn btn-primary" href="/items/create" role="button">Añadir Material</a>
                 </div>
