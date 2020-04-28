@@ -18,8 +18,8 @@ class CreateSessionsTable extends Migration
             $table->integer('classroom_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->integer('day');
-            $table->dateTime('time_start', 0);
-            $table->dateTime('time_end', 0);
+            $table->timestamp('time_start')->nullable();
+            $table->timestamp('time_end')->nullable();
             $table->timestamps();
 
             $table->foreign('classroom_id')->references('id')->on('classrooms');

@@ -29,22 +29,22 @@ class CalendarController extends Controller
     ]);
   }
 
-  public function getTime(Request $request, $id)
+  public function getTime(Request $request)
   {
 
     $sessions = [];
-
     $this->validate($request, [
-      'date' =>  'required'
+      'date' =>  'required',
+      'tipo' => 'required'
     ]);
 
-    $dayStr = $request->get('date');
-    $dayDate = $dayStr->strtotime();
-    $dayNum = $dayDate->dayOfWeek;  
+    $type = Type::where('name', $request->get('tipo'))->first();  
 
-    $type = Type::find($id);
-    $sessions = $type->sessions()->where('day', $dayNum);
+    $day = date($request->get('date'));
+    $day = date('w', strtotime($day));
 
+    $sessions = $type->sessions()->where('day', $day)->get();
+    $types = Type::all();
     return view('/Calendario/calendar', compact('types', 'sessions'));
   }
 
