@@ -31,15 +31,15 @@
         <div id="accordion">
 
           <div class="card" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-            <div class="card-header list-group-item d-flex justify-content-between align-items-center" id="heading1">
+            <div class="card-header list-group-item d-flex justify-content-between align-items-center" id="heading1" >
               <h5 class="mb-0">
-                <button class="btn collapsed">
+                <button class="btn collapsed" >
                   2019 - 2020
                 </button>
               </h5>
               <span class="badge badge-primary badge-pill">4</span>
             </div>
-
+            <!-- collapse show lo muestra abierto por defecto --> 
             <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordion">
               <div class="card-body">
               truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf mh hered npiente ea proident. Ad vegan excepteur butcher vice lomo.
@@ -74,6 +74,21 @@
               <span class="badge badge-primary badge-pill">2</span>
             </div>
             <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
+              <div class="card-body">
+              truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf mh hered npiente ea proident. Ad vegan excepteur butcher vice lomo.
+              </div>
+            </div>
+          </div>
+          <div class="card" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+            <div class="card-header list-group-item d-flex justify-content-between align-items-center" id="heading4">
+              <h5 class="mb-0">
+                <button class="btn collapsed" >
+                  2017 - 2018
+                </button>
+              </h5>
+              <span class="badge badge-primary badge-pill">2</span>
+            </div>
+            <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
               <div class="card-body">
               truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf mh hered npiente ea proident. Ad vegan excepteur butcher vice lomo.
               </div>
