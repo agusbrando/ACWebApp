@@ -58,20 +58,13 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="row">
     <div class="col-sm-12">
-        <h1 class="display-4">Programación didáctica </h1>
-        <div class="dropdown">
-            Selecciona la programacion
-            <button class=" btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Cursos
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            @foreach($programs as $program)
-                <a class="dropdown-item" href="/programs/{{$program->id}}">{{$program->id}} - {{$program->name}}</a>
-            @endforeach
-            </div>
-            <a class="btn btn-outline-primary" href="/programs/create">Crear</a>
-        </div>  
+        <h1 class="display-3">Programación didáctica </h1>
         
+        <p class="display-4 text-center">Lista de programaciones</p>
+
+        <a href="/misProgramaciones" class="btn btn-outline-success btn-sm mb-5">Mis Programaciones</a>
+        <a href="/programs" class="btn btn-outline-primary btn-sm mb-5">Lista</a>
+
         <!-- <input type="text" id="tags"> -->
         <table id='tabla' class="table table-striped table-bordered">
                     <thead>
@@ -89,11 +82,44 @@
                             <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
                             <td>{{$program->responsable->first_name}} {{$program->responsable->last_name}}</td>
                             <td class="botones">
-                                <a href="{{route('programs.edit',$program->id)}}" class="btn btn-primary">Edit</a>
+                                <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
+                                <a href="{{route('programs.edit',$program->id)}}" class="btn btn-primary btn-sm">Edit</a>
                                 <form action="{{route('programs.destroy',$program->id)}}" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    @foreach($programs_professor as $program)
+                        <tr>
+                            <td>{{$program->name}}</td>
+                            <td style="color:blue;">{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
+                            <td>{{$program->responsable->first_name}} {{$program->responsable->last_name}}</td>
+                            <td class="botones">
+                                <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
+                                <a href="{{route('programs.edit',$program->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                                <form action="{{route('programs.destroy',$program->id)}}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    @foreach($programs_responsable as $program)
+                        <tr>
+                            <td>{{$program->name}}</td>
+                            <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
+                            <td style="color:red;">{{$program->responsable->first_name}} {{$program->responsable->last_name}}</td>
+                            <td class="botones">
+                                <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
+                                <a href="{{route('programs.edit',$program->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                                <form action="{{route('programs.destroy',$program->id)}}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                                 </form>
                             </td>
                         </tr>

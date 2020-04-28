@@ -22,7 +22,6 @@ table.dataTable thead th{
 }
 .botones *{
     padding-left: 10px;
-
 }
 
 .tablas{
@@ -35,4 +34,8 @@ ul.ui-autocomplete {
 }
 .espacio{
     width: 10px;
+}
+
+.card{
+    margin-bottom: 30px;
 }

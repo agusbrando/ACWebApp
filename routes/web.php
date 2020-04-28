@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Misbehavior;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,40 +27,18 @@ Route::get('/', function () {
 
 Route::get('/prueba', function () {
 
-    $user_id=1;
-    $typeFaltaAsistencia = 1;
-    $faltas = Misbehavior::all()->where('user_id',$user_id)->where('type_id',$typeFaltaAsistencia);
+    echo $user = Auth::user();
 
-    
-    $lista = [];
-
-    foreach($subjects as $subject){
-
-        $timetables = $subject->timetables;
-        $count = 0;
-        foreach($timetables as $timetable){
-            $misbehaviours= Misbehavior::all()->where('session_timetable_id',$timetable->id);
-            if($misbehaviours!=null){
-                foreach($misbehaviours as $misbehaviour){
-                    if($misbehaviour->user_id == $user_id){
-                        $count = $count + 1;
-                    }
-                }
-
-            }
-            
-        }
-        $elemento = ['asignatura'=> $subject->name, 'faltas'=>$count, 'max'=>$subject->maxFaltas];
-
-        array_push($lista, $elemento);
-
-    }
-
-    echo $lista;
 
 });
 
+Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
+
 Route::resource('units', 'UnitController');
+Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
+Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
+Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
+
 Route::resource('notesPercentages', 'NotesPercentagesController');
 Route::resource('programs', 'ProgramController');
 Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
@@ -68,6 +47,7 @@ Route::patch('programs/{program_id}/unit/{id}','ProgramController@updateUnit')->
 Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspecto')->name('programs.updateAspecto');
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
+Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
 
 Route::resource('permissions','PermissionController');
 

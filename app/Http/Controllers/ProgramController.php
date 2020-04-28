@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Evaluable;
 use App\Models\Evaluated;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProgramController extends Controller
@@ -24,7 +25,19 @@ class ProgramController extends Controller
         $programs = Program::all();
         $profesores = DB::table('users')->where('role_id', 2)->get();
         $subjects = Subject::all();
-        return view('programs.index',compact('programs','profesores','subjects'));
+        $programs_responsable =[];
+        $programs_professor=[];
+        return view('programs.index',compact('programs','profesores','subjects','programs_responsable','programs_professor'));
+    }
+
+    public function myPrograms(){
+        $user = Auth::user();
+        $programs = [];
+        $programs_professor = Program::all()->where('professor_id',$user->id);
+        $programs_responsable = Program::all()->where('user_id',$user->id);
+        $profesores = DB::table('users')->where('role_id', 2)->get();
+        $subjects = Subject::all();
+        return view('programs.index',compact('programs','profesores','subjects','programs_responsable','programs_professor'));
     }
 
     /**
@@ -141,17 +154,17 @@ class ProgramController extends Controller
     public function updateAspecto(Request $request, $program_id, $id){
 
         $request->validate([
-            'name'=>'required',
+            //'name'=>'required',
             'description'=>'required'
         ]);
-        $name = $request->get('name');
+       // $name = $request->get('name');
         $description = $request->get('description');
 
         $aspecto = Evaluated::find($id);
         
-        $evaluable = Evaluable::find($aspecto->evaluable_id);
+        /*$evaluable = Evaluable::find($aspecto->evaluable_id);
         $evaluable->name = $name;
-        $evaluable->save();
+        $evaluable->save();*/
         $aspecto->description = $description;
         $aspecto->save();
         
@@ -167,9 +180,45 @@ class ProgramController extends Controller
     {
         $program = Program::findorfail($id);
         $evaluables = Evaluable::all();
-        return view('programs.show',compact('program','evaluables'));
+        $evaluadoEditar_id = -1;
+        $editar=false;
+        $MisEvaluables = $program->evaluables;
+        $listaEvaluables=[];
+        foreach($evaluables as $evaluable){
+            $encontrado = false;
+            foreach($MisEvaluables as $MiEvaluable){
+                if($evaluable->id == $MiEvaluable->id){
+                    $encontrado=true;
+                    break;
+                }
+            }
+            if(!$encontrado){
+                array_push($listaEvaluables,$evaluable);
+            }
+        }
+        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables'));
     }
-
+    public function editarAspecto($program_id, $id){
+        $program = Program::findorfail($program_id);
+        $evaluables = Evaluable::all();
+        $evaluadoEditar_id = $id;
+        $editar=true;
+        $MisEvaluables = $program->evaluables;
+        $listaEvaluables=[];
+        foreach($evaluables as $evaluable){
+            $encontrado = false;
+            foreach($MisEvaluables as $MiEvaluable){
+                if($evaluable->id == $MiEvaluable->id){
+                    $encontrado=true;
+                    break;
+                }
+            }
+            if(!$encontrado){
+                array_push($listaEvaluables,$evaluable);
+            }
+        }
+        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id','listaEvaluables'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -244,10 +293,8 @@ class ProgramController extends Controller
     }
     public function destroyAspecto($program_id,$id)
     {
+
         $aspecto = Evaluated::find($id);
-        
-
-
         $aspecto->delete();
         return redirect('/programs/'.$program_id);
 

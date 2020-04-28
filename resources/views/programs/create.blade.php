@@ -82,7 +82,7 @@
                                 </div>
                             </form>
                         @else
-                            <form method="post" action="{{ route('programs.update',$programacion->id) }}">
+                            <form method="post" action="{{ route('programs.update',$programacion->id) }}" class="col-8">
                                 @method('patch')
                                     @csrf
                                     <div class="input-group mb-3">
@@ -127,7 +127,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-5">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Nombre</span>
                                         </div>
@@ -137,9 +137,9 @@
 
                                     </div>
                                     <div class="row justify-content-center">
-                                        <a type="button" class="btn btn-outline-secondary" href="/programs">Cerrar</a>
+                                        <a type="button" class="btn btn-outline-secondary" href="/programs">Descartar</a>
                                         <div class="espacio"></div>
-                                        <button type="submit" class="btn btn-outline-primary pl-10">Guardar Cambios</button>
+                                        <button type="submit" class="btn btn-outline-primary pl-10">Guardar</button>
                                     </div>
                                 </form>
                             </div>

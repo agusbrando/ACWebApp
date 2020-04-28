@@ -10,7 +10,7 @@
                 { extend: 'pdf', className: 'btn-outline-danger mr-2' },
                 {text: 'Añadir Unidad', className: 'btn-outline-primary', 
                     action: function () {
-                        $('#crearUnidad').modal('show');
+                        window.location="{{route('units.create',$program->id)}}";
                         
                 }} 
             ],
@@ -141,9 +141,8 @@
                 </div>
                 <div class="card-body">
                     
-                
             <div class="row justify-content-center">
-                <div class="collapse multi-collapse"  id="multiCollapseExample1">
+                <div class="collapse multi-collapse col-10"  id="multiCollapseExample1">
                     <table id='tabla' class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -154,8 +153,7 @@
                                 <th>F. inicio</th>
                                 <th>F. final</th>
                                 <th>Eval.</th>
-                                <th>Observaciones</th>
-                                <th>Mejoras</th>
+                
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -169,141 +167,11 @@
                                 <td>{{$unidad->date_start}}</td>
                                 <td>{{$unidad->date_end}}</td>
                                 <td>{{$unidad->eval}}</td>
-                                <td>
-                                    <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#observaciones/{{$unidad->id}}">Mostrar</button>
-                                    <!-- Modal Observaciones-->
-                                    <div class="modal fade" id="observaciones/{{$unidad->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Observaciones</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    
-                                                {{$unidad->notes}}
-                                                
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#mejoras/{{$unidad->id}}">Mostrar</button>
-                                    <div class="modal fade" id="mejoras/{{$unidad->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Mejoras</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    
-                                                {{$unidad->improvements}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="botones">
-                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarUnidad/{{$unidad->id}}">Edit</button>
-                                    <!-- Modal form Unidad Editar -->
-                                        <div class="modal fade" id="editarUnidad/{{$unidad->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Unidad Nueva</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                            <form method="POST" action="{{ route('programs.updateUnit', ['program_id'=>$unidad->program->id, 'id'=>$unidad->id]) }}">
-                                                            @method('PATCH')  
-                                                            @csrf
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Contenido</span>
-                                                                    </div>
-                                                                    <input class="form-control" type="text" name="name" value="{{$unidad->name}}">
-                                                                </div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Fecha Inicio Prevista</span>
-                                                                    </div>
-                                                                    <input class="form-control" type="date" name="expected_date_start" value="{{$unidad->expected_date_start}}">
-                                                                </div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Fecha Fin Prevista</span>
-                                                                    </div>
-                                                                    <input class="form-control" type="date" name="expected_date_end" value="{{$unidad->expected_date_end}}">
-                                                                </div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Evaluacion Prevista</span>
-                                                                    </div>
-                                                                    <select class="form-control" name="expected_eval" value="{{$unidad->expected_eval}}">
-                                                                        <option value="1EVAL">1EVAL</option>
-                                                                        <option value="2EVAL">2EVAL</option>
-                                                                        <option value="3EVAL">3EVAL</option>
-                                                                    </select>
-                                                                </div>
-                                                        
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Fecha Inicio</span>
-                                                                    </div>
-                                                                    <input class="form-control" type="date" name="date_start" value="{{$unidad->date_start}}">
-                                                                </div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Fecha Fin</span>
-                                                                    </div>
-                                                                    <input class="form-control" type="date" name="date_end" value="{{$unidad->date_end}}">
-                                                                </div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Evaluacion</span>
-                                                                    </div>
-                                                                    <select class="form-control" name="eval" value="{{$unidad->eval}}">
-                                                                        <option value="1EVAL">1EVAL</option>
-                                                                        <option value="2EVAL">2EVAL</option>
-                                                                        <option value="3EVAL">3EVAL</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Observaciones</span>
-                                                                    </div>
-                                                                    <textarea name="notes" rows="3" class="form-control">{{$unidad->notes}}</textarea>
-                                                                </div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="basic-addon1">Acciones de mejora</span>
-                                                                    </div>
-                                                                    <textarea name="improvements" rows="3" class="form-control">{{$unidad->improvements}}</textarea>
-                                                                </div>
+                                
+                                <td class="botones justify-content-center">
+                                    
+                                    <a type="button" class="btn btn-warning btn-sm"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}">Show</a>
 
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Descartar</button>
-                                                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                                                </div>
-                                                        </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>  
-                                    <form  action="{{ route('programs.destroyUnit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
-                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -312,96 +180,105 @@
                     
                     
                 </div> 
-                <div class="collapse multi-collapse col-8"  id="multiCollapseExample2">
-                    <table id='tablaAspectos' class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Aspecto Evaluado</th>
-                                <th>Observaciones</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($program->evaluables as $evaluable)
-                            <tr>
-                                <td>{{$evaluable->name}}</td>
-                                <td>
-                                    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#descripcion/{{$evaluable->id}}">Mostrar</button><!-- Modal Observaciones-->
-                                    <div class="modal fade" id="descripcion/{{$evaluable->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Descripcion</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                
-                                            {{$evaluable->pivot->description}}
+                <div class="collapse multi-collapse col-10"  id="multiCollapseExample2">
+                        @if(!$editar)
+                        <table id='tablaAspectos' class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Aspecto Evaluado</th>
+                                    <th>Observaciones</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($program->evaluables as $evaluable)
+                                    <tr>
+                                        <td>{{$evaluable->name}}</td>
+                                        <td>
                                             
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </td>
-                                <td class="botones">
-                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarAspecto/{{$evaluable->pivot->id}}">Edit</button>
-                                    <!-- Modal form Aspecto Editar -->
-                                        <div class="modal fade" id="editarAspecto/{{$evaluable->pivot->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modificar Aspecto</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                        <form method="POST" action="{{ route('programs.updateAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] ) }}">
-                                                            @method('PATCH')  
-                                                            @csrf
-                                                                
-                                                                    <div class="input-group mb-3">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text" id="basic-addon1">Aspecto evaluado</span>
-                                                                        </div>
-                                                                        <input class="form-control" type="text" name="name" id="evaluables" value="{{$evaluable->name}}">
-                                                                    </div>
-                                                                    <div class="input-group mb-3">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text" id="basic-addon1">Descripcion</span>
-                                                                        </div>
-                                                                        <textarea name="description" rows="3" class="form-control">{{$evaluable->pivot->description}}</textarea>
-                                                                    </div>
+                                            {{$evaluable->pivot->description}}
+                                        </td>
+                                        <td class="botones justify-content-center">
+                                            <a type="button" class="btn btn-sm btn-primary mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}">Editar</a>
+        
 
+                                            <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirm-delete/{{$evaluable->pivot->id}}">Delete</a>
+                                                    
+                                                     <!-- Modal Confirmacion Borrar-->
+                                                    <div class="modal fade" id="confirm-delete/{{$evaluable->pivot->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    Confirmación de borrar
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ¿Estas seguro de que deseas borrar este aspecto evaluado de la programacion?
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Descartar</button>
-                                                                    <button type="submit" class="btn btn-primary">Cambiar</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                    <form  action="{{ route('programs.destroyAspecto',  ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)]) }}" method="post">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button class="btn btn-danger btn-sm" type="submit">Borrar</button>
+                                                                    </form>
                                                                 </div>
-                                                        </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-
-                                    <form  action="{{ route('programs.destroyAspecto',  ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)]) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                        </td>
+                                    </tr>  
+                                @endforeach
+                            </tbody>
+                        </table>
+                        @else
+                        <form method="POST" action="{{ route('programs.updateAspecto', ['program_id'=> ($program->id), 'id'=> $evaluadoEditar_id] ) }}">
+                            @method('PATCH')  
+                            @csrf
+                            <table id='tablaAspectos' class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Aspecto Evaluado</th>
+                                            <th>Observaciones</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($program->evaluables as $evaluable)
+                                        @if($evaluable->pivot->id != $evaluadoEditar_id)
+                                            <tr>
+                                                <td>{{$evaluable->name}}</td>
+                                                <td>
+                                                    
+                                                    {{$evaluable->pivot->description}}
+                                                </td>
+                                                <td class="botones justify-content-center align-items-center">
+                                                    <a type="button" class="btn btn-sm btn-primary mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}">Editar</a>
+                                                </td>
+                                            </tr>
+                                        @else
+                                            
+                                            <tr>
+                                               
+                                                    <td>{{$evaluable->name}}</td>
+                                                    <td><textarea rows="1" name="description" class="form-control" >{{$evaluable->pivot->description}}</textarea></td>
+                                                    <td class="botones justify-content-center">
+                                                        <button class="btn btn-success btn-sm" type="submit">Guardar</button>
+                                                        <a type="button" class="btn btn-sm btn-secondary ml-2" href="{{route('programs.show',$program->id)}}">Descartar</a>
+                                                    </td>
+                                                
+                                            </tr>
+                                                
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                        </form>
+                        @endif
                 </div> 
             </div>
             
             <div class="row justify-content-center">
-                    <div class="input-group col-6 pt-5">
+                    <div class="input-group col-8 pt-5">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Profesor</span>
                         </div>
@@ -423,62 +300,6 @@
         
 </main>
 
-        <!-- Modal form Unidad -->
-        <div class="modal fade" id="crearUnidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Unidad Nueva</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                            <form method="post" action="{{ route('programs.storeUnit', $program->id) }}">
-                                @csrf
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Contenido</span>
-                                    </div>
-                                    <input class="form-control" type="text" name="name" value="Unidad">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Fecha Inicio Prevista</span>
-                                    </div>
-                                    <input class="form-control" type="date" name="expected_date_start">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Fecha Fin Prevista</span>
-                                    </div>
-                                    <input class="form-control" type="date" name="expected_date_end">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Evaluacion Prevista</span>
-                                    </div>
-                                    <select class="form-control" name="expected_eval">
-                                        <option value="1EVAL">1EVAL</option>
-                                        <option value="2EVAL">2EVAL</option>
-                                        <option value="3EVAL">3EVAL</option>
-                                    </select>
-                                </div>
-                                
-                                
-                                
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary">Añadir Programación</button>
-                                </div>
-                        </form>
-                </div>
-            </div>
-        </div>
-        </div>    
-
         <!-- Modal form Aspecto -->
         <div class="modal fade" id="crearAspecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -496,7 +317,11 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">Aspecto evaluado</span>
                                 </div>
-                                <input class="form-control" type="text" name="name" id="evaluables">
+                                <select class="form-control" id="exampleFormControlSelect1" name="name">
+                                @foreach($listaEvaluables as $evaluable)
+                                    <option value="{{$evaluable->name}}">{{$evaluable->name}}</option>
+                                @endforeach
+                                </select>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -516,6 +341,7 @@
             </div>
         </div>
         </div>  
+
 
 
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subject;
+use App\Models\Program;
+use App\Models\Unit;
 
 class UnitController extends Controller
 {
@@ -23,9 +25,11 @@ class UnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+    public function create($program_id)
     {
-        //
+        $program = Program::find($program_id);
+        return view('units.create', compact('program'));
     }
 
     /**
@@ -61,9 +65,15 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($program_id, $id)
     {
-        //
+       
+
+         $program =Program::find($program_id);
+        $unidad = Unit::find($id);
+        return view('units.show',compact('program','unidad'));
+
+
     }
 
     /**
@@ -72,9 +82,14 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($program_id, $id)
     {
-        //
+        
+        $program =Program::find($program_id);
+        $unidad = Unit::find($id);
+        return view('units.edit',compact('program','unidad'));
+
+        
     }
 
     /**
