@@ -29,6 +29,9 @@ Route::resource('comments', 'CommentController');
 Route::resource('attachments', 'AttachmentController');
 Route::resource('permissions','PermissionController');
 
+Route::get('attachments', 'AttachmentController@create');
+Route::post('attachments', 'AttachmentController@store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
