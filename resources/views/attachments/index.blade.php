@@ -11,10 +11,9 @@
                         <td>Id</td>
                         <td>Nombre</td>
                         <td>Id Attachmentable</td>
-                        <td>Attachmentable Type</td>
-                        <td>Editar</td>
-                        <td>Eliminar</td>
-                        <td>Ver</td>
+                        <td>Tipo Attachmentable</td>
+                        <td>Fecha Creado</td>
+                        <td>Fecha Actualizado</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,15 +23,8 @@
                             <td>{{$attachment->name}}</td>
                             <td>{{$attachment->attachmentable_id}}</td>
                             <td>{{$attachment->attachmentable_type}}</td>
-                            <td>
-                                <a href="{{ route('attachments.edit', $attachment->id)}}" class="btn btn-primary">Editar</a>
-                            </td>
-                            <td>
-                                <a href="{{ route('attachments.destroy', $attachment->id)}}" class="btn btn-danger">Eliminar</a>
-                            </td>
-                            <td>
-                                <a href="{{ route('attachments.show', $attachment->id)}}" class="btn btn-primary">Ver</a>
-                            </td>
+                            <td>{{$attachment->created_at}}</td>
+                            <td>{{$attachment->updated_at}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -42,12 +34,12 @@
     <div class="col-sm-12">
         @if(session()->get('success'))
             <div class="alert alert-success">
-                {{ session()->get('success') }}
+                {{session()->get('success')}}
             </div>
         @endif
     </div>
     <div>
-        <a style="margin: 19px;" href="{{ route('attachments.create')}}" class="btn btn-primary">Nuevo Attachment</a>
+        <a style="margin: 19px;" href="{{ route('attachments.create')}}" class="btn btn-primary">Subir archivos</a>
     </div>
     <script>
         // $(document).ready(function() {
@@ -91,4 +83,3 @@
         });
     </script>
 </main>
-@endsection
