@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use App\Models\Classroom;
 use App\Models\Type;
@@ -117,8 +118,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $items = DB::table('items')->where('classroom_id', $id)->get();
-        return view('items.index', compact('items'));
+        $item = Item::find($id);
+        return view('items.show', compact('item'));
     }
 
     /**
@@ -134,6 +135,8 @@ class ItemController extends Controller
         $states = State::all();
         $item = Item::find($id);
         
+        $item->date_pucharse = Carbon::parse($item->date_pucharse)->format('Y-m-d');
+
         return view('items.edit', compact('item', 'classrooms', 'types', 'states'));
     }
 
@@ -146,7 +149,8 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $all = $request->all();
+
         $request->validate([
             'name'=>'required',
             'date_pucharse'=>'required',
@@ -154,18 +158,15 @@ class ItemController extends Controller
             'state_id'=>'required',
             'type_id'=>'required',
         ]);
+        $item = Item::find($id);
+        $item->name = $request->get('name');
+        $item->date_pucharse = $request->get('date_pucharse');
+        $item->classroom_id = $request->get('classroom_id');
+        $item->state_id = $request->get('state_id');
+        $item->type_id = $request->get('type_id');
+       
 
-        $item = new Item([
-            'id' => $id,
-            'name' => $request->get('name'),
-            'date_pucharse'=>$request->get('date_pucharse'),
-            'classroom_id'=>$request->get('classroom_id'),
-            'state_id'=>$request->get('state_id'),
-            'type_id'=>$request->get('type_id'),
-            
-
-        ]);
-        $item->where('id', $id)->update();
+        $item->save();
         return redirect('/items')->with('exito', 'Item editado!');
     }
 

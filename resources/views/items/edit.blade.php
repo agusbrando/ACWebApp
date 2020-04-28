@@ -6,18 +6,18 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <h1 class="display-4">Editar Objeto </h1>
     <hr>
-    <form method="PATCH" action="{{ route('items.update', $item->id) }}">   
+    <form method="POST" action="{{ route('items.update', $item->id) }}">   
         <!-- Proteccion contra consultas no deseadas -->
         @csrf
         @method('PATCH')
 
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" placeholder="{{$item->name}}">
+            <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" value="{{$item->name}}" placeholder="Cambia el nombre">
         </div>
         <div class="form-group">
             <label for="nombre">Fecha de Compra</label>
-            <input type="date" id="date_pucharse" name="date_pucharse" value="{{$item->date_pucharse}}" placeholder="- Seleccionar fecha -" class="form-control">
+            <input type="date" id="date_pucharse" name="date_pucharse" value="{{date($item->date_pucharse)}}" placeholder="- Seleccionar fecha -" class="form-control">
         </div>
         <div class="form-group">
             <label for="formControlSelect1">¿En que Aula va a estar?</label>
@@ -25,7 +25,7 @@
                 <option disabled selected>Selecciona un Aula</option>
                 <!--Hace la funcion de un placeholder-->
                 @foreach($classrooms as $classroom)
-                @if($classroom->id == $item->classroom_id)
+                    @if($classroom->id == $item->classroom_id)
                         <option selected value="{{$classroom->id}}">{{$classroom->name}}</option>
                     @else
                     <option value="{{$classroom->id}}">{{$classroom->name}}</option>
@@ -59,7 +59,7 @@
                 <option disabled selected>Selecciona un Aula</option>
                 <!--Hace la funcion de un placeholder-->
                 @foreach($types as $type)
-                @if($type->id == $item->type_id)
+                    @if($type->id == $item->type_id)
                         <option selected value="{{$type->id}}">{{$type->name}}</option>
                         <option value="{{$type->id}}">{{$type->name}}</option>
                     @else
