@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\SubjectsUsers;
 
 class Subject extends Model
 {
@@ -25,6 +26,10 @@ class Subject extends Model
     public function timetables()
     {
         return $this->hasMany('App\Models\SessionTimetable');
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class,'subjects_users')->using(SubjectsUsers::class)->withTimestamps();
     }
 
 }

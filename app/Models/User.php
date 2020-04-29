@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use App\SubjectsUsers;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -68,6 +70,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');
+    }
+
+    public function subjects(){
+        return $this->belongsToMany(Subject::class,'subjects_users')->using(SubjectsUsers::class)->withTimestamps();
     }
      
 }
