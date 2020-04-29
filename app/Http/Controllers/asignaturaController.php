@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Evaluation;
 use App\Models\Role;
 use App\Models\Percentage;
+use App\Models\SubjectsUsers;
 use Illuminate\Support\Facades\DB;
 
 class AsignaturaController extends Controller
@@ -54,8 +55,9 @@ class AsignaturaController extends Controller
      */
     public function show($id)
     {
-        $users = User::all()->where('role_id', '=', 4);
+        
         $subject = Subject::find($id);
+        $users = $subject->users;
 
         $evaluaciones = $subject->evaluations;
         $eval1 = array();

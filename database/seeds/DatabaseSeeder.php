@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             MessagesTableSeeder::class,
             SendsTableSeeder::class,
             AttachmentsTableSeeder::class,
-            SubjectUserSeeder::class
+            EvaluationsUserTableSeeder::class
 	    
 	    
             

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\SubjectsUsers;
+use App\Models\SubjectsUsers;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
