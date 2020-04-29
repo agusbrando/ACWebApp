@@ -52,10 +52,11 @@
           <h3>Horas</h3>
           <div id="buttons">
             @foreach($sessions as $session)
-            <button type="submit" onclick="window.location.href='{{route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $type])}}'" class="btn btn-primary btn-block">{{ $session->time_start->format('H:i') }}</button>
+            <button type="submit" onclick="window.location.href='{{route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $type->id])}}'" class="btn btn-primary btn-block">{{ $session->time_start->format('H:i') }}</button>
             @endforeach
           </div>
         </div>
+        
       </div>
     </div>   
 

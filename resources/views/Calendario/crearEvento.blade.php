@@ -33,7 +33,7 @@
 
                     <div class="fomr-group">
                         <h5>Evento</h5>
-                        <input type="text" value="{{$tipo}}" class="form-control" disabled name="evento">
+                        <input type="text" value="{{$tipo}}" class="form-control" readonly name="evento">
                     </div>
 
                     <div class="fomr-group">
@@ -46,11 +46,11 @@
                     </div>
                     <div class="fomr-group">
                         <h5>Hora</h5>
-                        <input type="text" value="{{$hora}}" class="form-control" disabled name="hora">
+                        <input type="text" value="{{$hora}}" class="form-control" readonly name="hora">
                     </div>
                     <div class="fomr-group">
                         <h5>Fecha</h5>
-                        <input type="date" value="{{$fecha}}" class="form-control" disabled name="fecha">
+                        <input type="date" value="{{$fecha}}" class="form-control" readonly name="fecha">
                     </div>
                     <br>
                     <input type="submit" class="btn btn-info" value="Guardar">
