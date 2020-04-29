@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use App\Models\Classroom;
+use App\Models\Course;
 use App\Models\Type;
 use App\Models\State;
 use App\Models\Item;
+use App\Models\User;
 
 class ItemController extends Controller
 {
@@ -120,9 +122,10 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         $type = Type::find($item->type_id);
+        $users = User::all();
+        $courses = Course::all();
 
-
-        return view('items.show', compact('item', 'type'));
+        return view('items.show', compact('item', 'type', 'users'));
     }
 
     /**
