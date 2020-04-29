@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Attachment;
+use App\Models\Post;
 
 class AttachmentController extends Controller
 {
@@ -14,8 +15,8 @@ class AttachmentController extends Controller
      */
     public function index()
     {
-        $attachments = Attachment::all();
-        return view('attachments.index', compact('attachments'));
+        //$attachments = Attachment::all();
+        //return view('attachments.index', compact('attachments'));
     }
 
     /**
@@ -36,6 +37,8 @@ class AttachmentController extends Controller
      */
     public function store(Request $request)
     {
+        $post = new Post();
+        
         $this->validate($request, [
             'name' => 'required',
             'name.*' => 'mimes:doc,pdf,docx,zip'
@@ -43,15 +46,19 @@ class AttachmentController extends Controller
 
         if($request->hasfile('name'))
         {
-            foreach($request->file('name') as $attachment)
+            foreach($request->file('name') as $file)
             {
-                $name = time().'.'.$attachment->extension();
-                $attachment->move(public_path().'/files/',$name);
+                $name = $file->getClientOriginalName();
+                $file->move(storage_path("app/attachments/".$post->id),$name);
                 $data[] = $name;
             }
         }
 
-        $attachment = new Attachment();
+        $attachment = new Attachment([
+            'name' => $request->get('name'),
+            'attachmentable_id' => $request->get('attachmentable_id'),
+            'attachmentable_type' => $request->get('attachmentable_type')
+        ]);
         $attachment->name=json_encode($data);
         $attachment->save();
 
