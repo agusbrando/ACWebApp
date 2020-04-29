@@ -125,7 +125,7 @@ class ItemController extends Controller
         $users = User::all();
         $courses = Course::all();
 
-        return view('items.show', compact('item', 'type', 'users'));
+        return view('items.show', compact('item', 'type', 'users', 'courses'));
     }
 
     /**
