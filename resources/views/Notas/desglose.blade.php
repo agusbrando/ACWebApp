@@ -143,7 +143,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="fila">
-                                    @foreach($users as $user)
+                                    @foreach($usersEval1 as $user)
                                     <tr>
                                         <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
                                         @foreach($parciales as $parcial)
@@ -181,7 +181,7 @@
                                 </tr>
                             </thead>
                             <tbody id="fila">
-                                @foreach($users as $user)
+                                @foreach($usersEval1 as $user)
 
                                 <tr>
                                     <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
@@ -210,7 +210,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $user)
+                                @foreach($usersEval1 as $user)
                                 <tr>
                                     <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
                                     <td>
