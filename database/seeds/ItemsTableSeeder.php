@@ -14,7 +14,7 @@ class ItemsTableSeeder extends Seeder
     {
         DB::table('items')->insert([
             'number' => 322,
-            'name' => 'Portatil HP',
+            'name' => 'HP en-df4w43fd',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => 1,
             'state_id' => 1,
@@ -24,7 +24,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'number' => 243,
-            'name' => 'All in One Lenovo',
+            'name' => 'Lenovo f4d-4f',
             'date_pucharse' => Carbon::create('2020','02','23'),
             'classroom_id' => 2,
             'state_id' => 1,
@@ -34,7 +34,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'number' => 163,
-            'name' => 'Teclado Logitech',
+            'name' => 'Logitech g903',
             'date_pucharse' => Carbon::create('2015','01','10'),
             'classroom_id' => 2,
             'state_id' => 1,
