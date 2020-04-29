@@ -104,13 +104,12 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Número</th>
                                 <th>Nombre</th>
                                 <th>Fecha Compra</th>
                                 <th>Id clase</th>
                                 <th>Estado</th>
                                 <th>Tipo</th>
-                                <th>Fecha creación</th>
-                                <th>Fecha actualización</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -118,6 +117,7 @@
                             @foreach($items as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
+                                <td>{{$item->number}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->date_pucharse}}</td>
                                 @foreach($classrooms as $classroom)
@@ -135,25 +135,14 @@
                                         <td>{{$type->name}}</td>
                                     @endif
                                 @endforeach
-                                <td>{{$item->created_at}}</td>
-                                <td>{{$item->updated_at}}</td>
+                                
                                 <td class="botones">
                                     <form method="get" action="{{ route('items.show', $item->id)}}">
                                         @csrf
                                         @method('GET')
                                         <button class="btn btn-primary" type="submit">Ver</button>
                                     </form>
-                                    <!-- <form method="get" action="{{ route('items.edit', $item->id)}}">
-                                        @csrf
-                                        @method('GET')
-                                        <button class="btn btn-primary" type="submit">Edit</button>
-                                    </form>
-                                    <form method="post" action="{{ route('items.destroy', $item->id)}}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
-                                    </form>
-                                </td> -->
+                                   
                             </tr>
                             @endforeach
                         </tbody>
