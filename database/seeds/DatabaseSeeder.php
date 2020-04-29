@@ -42,7 +42,8 @@ class DatabaseSeeder extends Seeder
             CommentsTableSeeder::class,
             MessagesTableSeeder::class,
             SendsTableSeeder::class,
-            AttachmentsTableSeeder::class
+            AttachmentsTableSeeder::class,
+            SubjectUserSeeder::class
 	    
 	    
             
