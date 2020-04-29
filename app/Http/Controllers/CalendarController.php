@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Type;
 use App\Models\Session;
 use App\Models\Event;
+use Carbon\Carbon;
+
 
 use function PHPSTORM_META\type;
 
@@ -32,8 +34,10 @@ class CalendarController extends Controller
 
   public function crearEvento($fecha, $hora, $type){
 
-    if($type->id == 1){
-        $tipo = $type->name;
+    if($type == 1){
+      $tipo = 'Tutorias';
+    }else{
+      $tipo = 'Reserva de aulas';
     }
 
     return view("/Calendario/crearEvento", compact('fecha', 'hora', 'tipo'));
@@ -50,14 +54,14 @@ class CalendarController extends Controller
       'tipo' => 'required'
     ]);
 
-    $type = Type::where('name', $request->get('tipo'))->first();  
+    $tipo = Type::where('name', $request->get('tipo'))->first();  
 
     $dia = date($request->get('date'));
     $day = date('w', strtotime($dia));
 
-    $sessions = $type->sessions()->where('day', $day)->get();
+    $sessions = $tipo->sessions()->where('day', $day)->get();
     $types = Type::all();
-    return view('/Calendario/calendar', compact('types', 'sessions', 'dia'));
+    return view('/Calendario/calendar', compact('types', 'sessions', 'dia', 'tipo'));
   }
 
   public function index()
@@ -94,14 +98,18 @@ class CalendarController extends Controller
       
     ]);
 
+    
+    $tipoId = Type::where('name', $request->get('evento'))->first()->id;      
+    
+
     //guardar en la base de datos
     Event::insert([
-      'type_id' => $request->get("evento"),
+      'type_id' => $tipoId,
       'session_id' => 1,
       'user_id' => 1,
-      'title' => $request->get("titulo"),
-      'description'  => $request->get("descripcion"),
-      'date' => $request->get("fecha"." "."hora")
+      'title' => $request->get('titulo'),
+      'description'  => $request->get('descripcion'),
+      'date' => $request->get('fecha'.''.'hora')
     ]);
 
     //devuelve el mensaje con exito
