@@ -20,7 +20,7 @@ class EvaluationsUserTableSeeder extends Seeder
             ]);
         }
 
-        for ($i = 8; $i <= 16; $i++) {
+        for ($i = 11; $i <= 16; $i++) {
             DB::table('evaluations_users')->insert([
                 'user_id' => $i,
                 'evaluation_id' => 2,

@@ -140,7 +140,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $user)
+                                    @foreach($eval->users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->last_name}} {{$user->first_name}}</td>

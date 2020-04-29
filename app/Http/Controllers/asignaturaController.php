@@ -55,9 +55,7 @@ class AsignaturaController extends Controller
      */
     public function show($id)
     {
-        
         $subject = Subject::find($id);
-        $users = $subject->users;
 
         $evaluaciones = $subject->evaluations;
         $eval1 = array();
@@ -109,7 +107,7 @@ class AsignaturaController extends Controller
             }
         }
 
-        return view('Notas.evaluations', compact('users', 'subject', 'eval1', 'eval2', 'eval3', 'evaluaciones'));
+        return view('Notas.evaluations', compact('subject', 'eval1', 'eval2', 'eval3', 'evaluaciones'));
     }
 
     /**
