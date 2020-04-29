@@ -3,10 +3,11 @@
 @section('main')
 <main role="main" class=" col-md-10 ml-sm-auto col-lg-10">
 
-    <h1 class="display-4 pr-3">Calendario</h1>
-    <br>
+<div class="space"></div>
+  <p class="lead">
+    <h1 class="display-4 pr-3">Calendario</h1>   
     <hr>
-
+    <br>
     <div class="container">
         <p class="lead">
             @if (count($errors) > 0)
