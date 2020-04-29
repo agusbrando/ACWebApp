@@ -43,6 +43,7 @@
         <textarea style="width:56%">Añadir un comentario</textarea>
         <button style="width:10%;" class="btn btn-danger">Enviar</button>
       </div>
+      <a href="{{route('comments.create')}}" class="btn btn-primary">Nuevo Comentario</a>
     </div>
   </div>
 </main>

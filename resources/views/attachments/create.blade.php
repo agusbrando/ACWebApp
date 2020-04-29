@@ -22,8 +22,8 @@
                             {{session('success')}}
                         </div>
                     @endif
-                    <form method="post" action="{{url('attachment')}}" enctype="multipart/form-data">
-                        {{csrf_field()}}
+                    <form method="post" action="{{route('attachments.store')}}" enctype="multipart/form-data">
+                        @csrf
                         <div class="input-group hdtuto control-group lst increment">
                             <input type="file" name="name[]" class="myfrm form-control">
                             <div class="input-group-btn">
