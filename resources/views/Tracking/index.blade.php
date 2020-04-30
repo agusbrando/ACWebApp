@@ -40,8 +40,7 @@
 
 
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+
 
 
 
@@ -52,9 +51,9 @@
 
 
   <div class="row col-12 container-fluid calendar">
-    <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-6 calendario w-100">
+    <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-8 calendario w-100">
 
-      <table class="table table-striped" id="tabla">
+      <table class="table table-striped col-12" id="tabla">
         <thead class="cabezeraTabla">
           <tr>
             <td>Fecha Firma</td>
@@ -72,7 +71,7 @@
             <td>{{$tracking->time_start}}</td>
             <td>{{$tracking->time_end}}</td>
             <td>{{$tracking->num_hours}}</td>
-            <td><img src="{{$tracking->signature}}"></td>
+            <td><img src="{{ url($tracking->signature) }}"></td>
           </tr>
           @endif
           @endforeach
@@ -82,7 +81,7 @@
       </table>
 
     </div>
-    <div class="col-md-6 bg-light border-right">
+    <div class="col-md-4 bg-light border-left">
 
       <form method="post" action="{{ route('seguimiento.store') }}">
         @csrf
@@ -92,48 +91,31 @@
         </div>
 
         <div class="form-group ">
-          <div class="row">
-            <label for="time_start" class="w-50 center">hora inicio de jornada</label>
-            <label for="time_end" class="w-50 center">hora fin de jornada</label>
-          </div>
-          <div class="row">
+          
+            <label for="time_start" class="w-50">hora inicio de jornada</label>
             <input type="time" class="form-control w-50" id="time_start" name="time_start">
-
+            <label for="time_end" class="w-50">hora fin de jornada</label>
             <input type="time" class="form-control w-50" id="time_end" name="time_end">
-          </div>
+            </div>
+            
 
-        </div>
+        
 
         <br>
 
         @if($user->signature!=null)
+        <img src="{{ url($user->signature) }}"><br>
         <label>Firma introducida,¿Quieres cambiar?</label>
         @endif
-  
-          <div class="col-md-12">
+<input type="submit" class="btn btn-success w-50" value="firmar">
 
-            <label class="" for="">Firma:</label>
-
-            <br />
-
-            <div id="sig"></div>
-            <br />
-            <button id="clear" class="btn btn-danger btn-sm">Borrar Firma</button>
-            <textarea id="signature64" name="firma" style="display: none"></textarea>
-
-
-          </div>
-
-          <br />
-          <div class="custom-file overflow-hidden rounded-pill mb-5">
-            <input id="customFile" type="file" class="custom-file-input rounded-pill" w-50>
-            <label for="customFile" class="custom-file-label rounded-pill">Elige archivo</label>
-          </div>
-
-          <input type="submit" class="btn btn-success" value="firmar">
-        
       </form>
+      <div class="cosis"></div>
+      <form action="{{ route('seguimiento.edit', $user->id)}}" method="get">
+        @csrf
 
+        <button class="btn btn-primary float-right" type="submit">Editar Firma</button>
+      </form>
 
     </div>
 
@@ -148,17 +130,6 @@
 
 
 </main>
-<script type="text/javascript">
-  var sig = $('#sig').signature({
-    syncField: '#signature64',
-    syncFormat: 'PNG',
 
-  });
-  $('#clear').click(function(e) {
-    e.preventDefault();
-    sig.signature('clear');
-    $("#signature64").val('');
-  });
-</script>
 
 @endsection
