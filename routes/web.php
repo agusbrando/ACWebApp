@@ -28,35 +28,18 @@ Route::get('/', function () {
 
 Route::resource('asistencia', 'AsistenciaController');
 Route::resource('comportamiento', 'ComportamientoController');
+Route::get('faltas/create/{id}', 'FaltasController@create');
+Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
+Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
-Route::get('/prueba', function () {
+// Route::get('/prueba', function () {
+//     $lista = Misbehavior::all();
+//     foreach($lista as $misbehavior){
+//         echo ($misbehavior->id);
+//     }
 
-    $user_id = 1;
-    $typeFaltaAsistencia = 1;
-    $faltas = Misbehavior::all()->where('user_id', $user_id)->where('type_id', $typeFaltaAsistencia);
-    $subjects = Subject::all();
-
-    $lista = [];
-
-    foreach ($subjects as $subject) {
-        $timetables = $subject->timetables;
-        $count = 0;
-        foreach ($timetables as $timetable) {
-            $misbehaviours = Misbehavior::all()->where('session_timetable_id', $timetable->id);
-            if ($misbehaviours != null) {
-                foreach ($misbehaviours as $misbehaviour) {
-                    if ($misbehaviour->user_id == $user_id) {
-                        $count = $count + 1;
-                    }
-                }
-            }
-        }
-        $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->maxFaltas];
-        array_push($lista, $elemento);
-    }
-
-    echo var_dump($lista);
-});
+// });
+// Route::get('faltas/{id}/', 'FaltasController@indexFaltas')->name('faltas.indexFaltas');
 Route::resource('permissions', 'PermissionController');
 
 Auth::routes();

@@ -6,6 +6,7 @@ use App\Models\Misbehavior;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FaltasController extends Controller
 {
@@ -16,7 +17,16 @@ class FaltasController extends Controller
      */
     public function index()
     {
-        //
+        // $lista = Misbehavior::all();
+        // return view('', compact('lista'));
+        // $users = User::all();
+        // $misbehaviors = null;
+
+        // foreach ($users as $user) {
+        //     $misbehaviors = $user->misbehaviors;
+        // }
+
+        // return view('faltas.show', compact('users','misbehaviors'));
     }
 
     /**
@@ -24,9 +34,10 @@ class FaltasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $user = User::find($id);
+       return view('faltas.create', compact('user')); 
     }
 
     /**
@@ -35,9 +46,18 @@ class FaltasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $user_id)
     {
-        //
+        $request->validate([
+            'date' => 'required',
+            'type' => 'required',
+            'description' => 'required'
+           
+        ]);
+        Misbehavior::create($request->all());
+        return redirect()->route('faltas.index')
+                        ->with('success','Falta añadida!');
+        // $misbehaviors =Misbehavior::all()->
     }
 
     /**
@@ -50,6 +70,7 @@ class FaltasController extends Controller
     //ID del USUARIO
     public function show($id)
     {
+        $misbehaviors=Misbehavior::all();
         $user = User::find($id);
         $user_id = $id;
         $subjects = Subject::all();
@@ -72,7 +93,7 @@ class FaltasController extends Controller
             $elemento = ['asignatura' => $subject->abbreviation, 'faltas' => $count, 'max' => $subject->max];
             array_push($lista, $elemento);
         }
-        return view('faltas.show', compact('user', 'lista'));
+        return view('faltas.show', compact('user', 'lista', 'misbehaviors'));
     }
 
 
@@ -105,8 +126,11 @@ class FaltasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $user_id)
     {
-        //
+        $misbehavior = Misbehavior::findOrFail($id);
+        $misbehavior->delete();
+
+        return redirect('/faltas/'.$user_id)->with('success', 'Falta eliminada');
     }
 }

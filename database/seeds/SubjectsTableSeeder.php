@@ -67,5 +67,13 @@ class SubjectsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('subjects')->insert([
+            'course_id' => 1,
+            'name' => 'Comportamiento',
+            'abbreviation'=>'Comportamiento',
+            'max'=>99,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }
