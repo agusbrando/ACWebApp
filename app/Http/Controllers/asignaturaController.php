@@ -21,9 +21,8 @@ class AsignaturaController extends Controller
      */
     public function index()
     {
-        $users = User::all();
         $subjects = Subject::all();
-        return view('Notas.index', compact('users', 'subjects'));
+        return view('Notas.index', compact('subjects'));
     }
 
     /**

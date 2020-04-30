@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evaluation;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
@@ -47,30 +48,13 @@ class EvaluacionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($subject_id, $evaluation_id)
     {
         $users = User::all();
-        $subject = Subject::find($id);
+        $subject = Subject::find($subject_id);
         $tasksType = Type::all()->where('model', Task::class);
-        $evaluations = $subject->evaluations;
-
-        $usersEval1 = array();
-        $usersEval2 = array();
-        $usersEval3 = array();
-
-        foreach ($subject->evaluations as $eval) {
-            switch ($eval->name) {
-                case "1Eval":
-                    $usersEval1 = $eval->users;
-                    break;
-                case "2Eval":
-                    $usersEval2 = $eval->users;
-                    break;
-                case "3Eval":
-                    $usersEval3 = $eval->users;
-                    break;
-            }
-        }
+        $evaluation = Evaluation::find($evaluation_id);
+        $users = $evaluation->users;
 
         $parciales = null;
         $trabajos = null;
@@ -88,7 +72,7 @@ class EvaluacionesController extends Controller
             
         }
 
-        return view('Notas.desglose', compact('usersEval1', 'usersEval2', 'usersEval3', 'subject', 'parciales', 'trabajos', 'evaluations'));
+        return view('Notas.desglose', compact('users', 'subject', 'parciales', 'trabajos'));
     }
 
     /**

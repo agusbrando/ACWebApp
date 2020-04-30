@@ -154,7 +154,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <a href="{{ route('evaluaciones.show', $subject->id) }}" class="btn btn-secondary col mt-2">Desglose</a>
+                            <a href="{{ url('evaluaciones/desglose', ['subject_id'=> ($subject->id), 'evaluation_id'=> ($eval->id)]) }}" class="btn btn-secondary col mt-2">Desglose</a>
                         </div>
                         @endforeach
                     </div>

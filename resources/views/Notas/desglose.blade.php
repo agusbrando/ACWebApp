@@ -112,7 +112,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="container-fluid">
         <div class="d-flex flex-row mb-4">
-            <a href="javascript:history.go(-1)" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
+            <a href="{{ url('asignaturas', $subject->id) }}" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
             <h1 class="display-4 pr-3">Desglose {{$subject->name}}</h1>
             <a href="{{ url('/evaluaciones/desglose', $subject->id) }}" class="btn btn-primary ml-2 mt-4 h-100">Crear Tarea</a>
             <a href="{{ url('tareas', $subject->id) }}" class="btn btn-primary ml-2 mt-4 h-100">Eliminar Tarea</a>
@@ -143,7 +143,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="fila">
-                                    @foreach($usersEval1 as $user)
+                                    @foreach($users as $user)
                                     <tr>
                                         <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
                                         @foreach($parciales as $parcial)
@@ -181,7 +181,7 @@
                                 </tr>
                             </thead>
                             <tbody id="fila">
-                                @foreach($usersEval1 as $user)
+                                @foreach($users as $user)
 
                                 <tr>
                                     <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
@@ -210,7 +210,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($usersEval1 as $user)
+                                @foreach($users as $user)
                                 <tr>
                                     <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
                                     <td>
