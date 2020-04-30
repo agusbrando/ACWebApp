@@ -138,8 +138,6 @@
                                         <td>{{$parcial->name}}</td>
                                         @endforeach
                                         <td>Nota Examenes</td>
-                                        <td>Comentarios</td>
-                                        <td>Action</td>
                                     </tr>
                                 </thead>
                                 <tbody id="fila">
@@ -154,19 +152,13 @@
                                         </td>
                                         @endforeach
                                         <td>6</td>
-                                        <td>
-                                            <div class="input-group col-10">
-                                                <input type="text" class="form-control w" placeholder="">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
-                                        </td>
-
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            <input type="hidden" name="subject" value={{$subject->id}}>
+                            <input type="hidden" name="evaluacion" value={{$evaluation->id}}>
+                            <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
@@ -207,6 +199,7 @@
                                 <tr>
                                     <td>Apellidos, Nombre</td>
                                     <td>Nota Media Actitud</td>
+                                    <td>Action</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -216,10 +209,10 @@
                                     <td>
                                         <div class="input-group col-10">
                                             <input type="text" class="form-control w" placeholder="">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-outline-secondary" type="button" id="button-addon1">Guardar</button>
-                                            </div>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
                                     </td>
                                 </tr>
                                 @endforeach

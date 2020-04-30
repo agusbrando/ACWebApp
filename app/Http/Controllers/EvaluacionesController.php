@@ -72,7 +72,7 @@ class EvaluacionesController extends Controller
             
         }
 
-        return view('Notas.desglose', compact('users', 'subject', 'parciales', 'trabajos'));
+        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos'));
     }
 
     /**

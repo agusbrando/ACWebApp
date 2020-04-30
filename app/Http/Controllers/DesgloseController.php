@@ -9,17 +9,18 @@ use App\Models\Type;
 use App\Models\Subject;
 use App\Models\Evaluation;
 use App\Models\Calification;
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\DB;
 
 class DesgloseController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $titulo = "Examenes";
         $users = DB::table('users')->where('role_id', '=', 4)->get();
-        return view('Notas.desglose', compact('users','titulo'));
+        return view('Notas.desglose', compact('users', 'titulo'));
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -51,7 +52,7 @@ class DesgloseController extends Controller
 
         $evaluaciones = $request->get('evaluaciones');
 
-        foreach($evaluaciones as $eval){
+        foreach ($evaluaciones as $eval) {
             $type = new Task([
                 'evaluation_id' => $eval,
                 'type_id' => $request->get('type'),
@@ -60,15 +61,32 @@ class DesgloseController extends Controller
             $type->save();
         }
 
-        return redirect('evaluaciones/'.$request->get('subject'));
+        return redirect('asignaturas/'.$request->get('subject'));
     }
 
     public function storeNotes(Request $request)
     {
+        $request->validate([
+            'examenes' => 'required',
+            'subject' => 'required',
+            'evaluacion' => 'required'
+        ]);
 
-        $aux = $request->all();
+        $examenes = $request->get('examenes');
 
-        return redirect('evaluaciones/'.$request->get('subject'));
+
+        foreach ($examenes as $user_id => $tasks) {
+            foreach ($tasks as $task_id => $task_value) {
+                $calification = new Calification([
+                    'user_id' => $user_id,
+                    'task_id' => $task_id,
+                    'value' => $task_value
+                ]);
+                $calification->save();
+            }
+        }
+
+        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
     }
 
     /**
@@ -128,6 +146,6 @@ class DesgloseController extends Controller
 
         $subject = Subject::find($subject_id);
 
-        return redirect('evaluaciones/'.$subject->id);
+        return redirect('evaluaciones/' . $subject->id);
     }
 }
