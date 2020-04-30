@@ -51,7 +51,7 @@
           <br>
           </form>
         </div>
-        <div class="col-md-4 bg-light border-left p-0 ">
+        <div class="col-md-3 bg-light border-left p-0 ">
           <div id="espacio" class="bg-dark w-100">
             <h3>Horas</h3>
           </div>
@@ -60,6 +60,16 @@
             @foreach($sessions as $session)
             <button type="submit" onclick="window.location.href='{{route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $tipo])}}'" class="btn btn-info btn-block">{{ $session->time_start->format('H:i') }}</button>
             @endforeach
+          </div>
+          <br>
+        </div>        
+        <div class="col-md-3 bg-light border-left p-0 ">
+          <div id="espacio" class="bg-dark w-100">
+            <h3>Reservas</h3>
+          </div>
+          <br>
+          <div id="buttons">
+          <button type="submit"class="btn btn-info btn-block">Reservas</button>
           </div>
         </div>
 

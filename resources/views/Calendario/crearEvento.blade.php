@@ -54,8 +54,10 @@
                         <input type="date" value="{{$fecha}}" class="form-control" readonly name="fecha">
                     </div>
                     <br>
-                    <input type="submit" class="btn btn-info" value="Guardar">
-                    <input type="submit" class="btn btn-success" onclick="history.back()" name="Volver" value="Volver ">
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                   
+                    <input type="submit" class="btn btn-info" onclick="history.back()" name="Volver" value="Volver ">
+                    
                 </form>
 
                 <a></a>
