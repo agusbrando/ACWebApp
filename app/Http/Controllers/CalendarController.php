@@ -100,6 +100,7 @@ class CalendarController extends Controller
 
     
     $tipoId = Type::where('name', $request->get('evento'))->first()->id;      
+    $fechaFormateada = Carbon::createFromFormat('YY-mm-dd', 'fecha');
     
 
     //guardar en la base de datos
@@ -109,7 +110,7 @@ class CalendarController extends Controller
       'user_id' => 1,
       'title' => $request->get('titulo'),
       'description'  => $request->get('descripcion'),
-      'date' => $request->get('fecha'.''.'hora')
+      'date' =>  $fechaFormateada
     ]);
 
     //devuelve el mensaje con exito
