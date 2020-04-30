@@ -98,9 +98,10 @@ class CalendarController extends Controller
       
     ]);
 
-    
+    $fechaStr = $request->get('fecha');
+    $horaStr = $request->get('hora');
     $tipoId = Type::where('name', $request->get('evento'))->first()->id;      
-    $fechaFormateada = Carbon::createFromFormat('YY-mm-dd', 'fecha');
+    $fechaFormateada = Carbon::createFromFormat('Y-m-d H:i', $fechaStr.' '.$horaStr);
     
 
     //guardar en la base de datos
@@ -114,7 +115,7 @@ class CalendarController extends Controller
     ]);
 
     //devuelve el mensaje con exito
-    return back()->with('success', 'Guardado exitosamente!');
+    return back()->with('success', '¡Guardado exitosamente!');
   }
 
   /**

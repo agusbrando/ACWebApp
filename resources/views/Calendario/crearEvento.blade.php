@@ -43,7 +43,7 @@
                     </div>
                     <div class="fomr-group">
                         <h5>Descripcion del Evento</h5>
-                        <input type="text" maxlength="30" class="form-control" name="descripcion">
+                        <textarea type="text" rows="3" maxlength="30" style="resize:none;" class="form-control" name="descripcion"></textarea>
                     </div>
                     <div class="fomr-group">
                         <h5>Hora</h5>
