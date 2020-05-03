@@ -1,10 +1,7 @@
 h1{
     padding: 10px;
 }
-.dropdown{
-    padding: 10px;
-    padding-bottom: 20px;
-}
+
 table.dataTable thead th{
     background-color: #4d5358;
     border-color: #454d55;
@@ -29,13 +26,22 @@ table.dataTable thead th{
     flex-direction: column;
 
 }
-ul.ui-autocomplete {
-    z-index: 1100;
-}
+
 .espacio{
     width: 10px;
 }
 
 .card{
     margin-bottom: 30px;
+}
+
+.anchuraselect{
+    text-overflow:ellipsis;
+    display: inline;
+    width: 100%;
+}
+select{
+    text-overflow:ellipsis;
+    display: inline;
+    width: 30px;
 }

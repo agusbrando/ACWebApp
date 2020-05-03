@@ -4,7 +4,7 @@
 <script>
     $(document).ready(function() {
         $('#tabla').DataTable( {
-            dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-6 boton'B><'col-sm-6'>>",
+            dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'>>",
             buttons: [
                 { extend: 'excel', className: 'btn-outline-success mr-2' }, 
                 { extend: 'pdf', className: 'btn-outline-danger mr-2' },
@@ -47,21 +47,7 @@
                 {text: 'Añadir Aspecto Evaluado', className: 'btn-outline-primary', 
                     action: function () {
                         $('#crearAspecto').modal('show');
-                        $('#crearAspecto').ready(function() {
-                            let datos = [];
-                            @foreach($evaluables as $ev)
-                                datos.push("{{$ev->name}}")
-                            @endforeach
-                            $( "#evaluables" ).autocomplete({
-                            source: function( request, response ) {
-                                    var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
-                                    response( $.grep( datos, function( item ){
-                                        return matcher.test( item );
-                                    }) );
-                                }
-                            },"option", "appendTo", "#crearAspecto");
-
-                        });
+                        
                         
                 }} 
             ],
@@ -302,7 +288,7 @@
 
         <!-- Modal form Aspecto -->
         <div class="modal fade" id="crearAspecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Aspecto Nuevo</h5>
@@ -317,9 +303,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">Aspecto evaluado</span>
                                 </div>
-                                <select class="form-control" id="exampleFormControlSelect1" name="name">
+                                <select class="form-control custom-select" id="exampleFormControlSelect1" name="name">
                                 @foreach($listaEvaluables as $evaluable)
-                                    <option value="{{$evaluable->name}}">{{$evaluable->name}}</option>
+                                    <option class="form-control anchuraselect" value="{{$evaluable->name}}">{{$evaluable->name}}</option>
                                 @endforeach
                                 </select>
                             </div>

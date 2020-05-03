@@ -40,6 +40,12 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fechas Inicio/Fin Previstas</span>
+                                    </div>
+                                    <input id="daterangepicker" class="form-control" type="text" name="expected_date_start" value="{{$unidad->expected_date_start}} - {{$unidad->expected_date_end}}">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Fecha Inicio Prevista</span>
                                     </div>
                                     <input class="form-control" type="date" name="expected_date_start" value="{{$unidad->expected_date_start}}">
@@ -54,7 +60,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Evaluacion Prevista</span>
                                     </div>
-                                    <select class="form-control" name="expected_eval" value="{{$unidad->expected_eval}}">
+                                    <select class="form-control custom-select" name="expected_eval" value="{{$unidad->expected_eval}}">
                                         <option value="1EVAL">1EVAL</option>
                                         <option value="2EVAL">2EVAL</option>
                                         <option value="3EVAL">3EVAL</option>
@@ -77,7 +83,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Evaluacion</span>
                                     </div>
-                                    <select class="form-control" name="eval" value="{{$unidad->eval}}">
+                                    <select class="form-control custom-select" name="eval" value="{{$unidad->eval}}">
                                         <option value="1EVAL">1EVAL</option>
                                         <option value="2EVAL">2EVAL</option>
                                         <option value="3EVAL">3EVAL</option>

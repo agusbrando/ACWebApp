@@ -15,7 +15,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
+use Illuminate\Http\Request;
+use App\Models\Subject;
+use App\Models\Program;
+use App\Models\Unit;
+use App\Models\User;
+use App\Models\Evaluable;
+use App\Models\Evaluated;
+use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/login', function () {
     return view('welcome');
@@ -25,12 +33,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/prueba', function () {
+Route::get('/prueba', function (Request $request) {
 
-    echo $user = Auth::user();
+    $request->validate([
+        'name'=>'required',
+        'expected_date'=>'required',
+        'expected_date_start'=>'required',
+        'expected_date_end'=>'required',
+        'expected_eval'=>'required'
+    ]);
+
+    $unit = new Unit();
+
+    $unit->fill($request->all());
+
+   
+    echo var_dump($unit);
 
 
-});
+})->name('prueba');
 
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 
