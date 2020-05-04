@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 bg-light border-right p-0">
+        <div class="col-md-3 bg-light border-right p-0">
           <div id="espacio" class="bg-dark w-100">
             <h3>Eventos</h3>
           </div>
@@ -51,7 +51,7 @@
           <br>
           </form>
         </div>
-        <div class="col-md-3 bg-light border-left p-0 ">
+        <div class="col-md-3 bg-light border-left border-right p-0 ">
           <div id="espacio" class="bg-dark w-100">
             <h3>Horas</h3>
           </div>
@@ -62,7 +62,7 @@
             @endforeach
           </div>
           <br>
-        </div>        
+        </div>
         <div class="col-md-3 bg-light border-left p-0 ">
           <div id="espacio" class="bg-dark w-100">
             <h3>Reservas</h3>
@@ -70,10 +70,13 @@
           <br>
           <div id="buttons">
             @foreach($events as $event)
-              <h5>{{ substr($event->date, -8, 5) }}</h4>
-              <a>{{ $event->title }}</a>
+            <h5>{{ substr($event->date, -8, 5) }}</h4>
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <a>{{ $event->title }}</a>
+                <a id="info" type="submit" href="{{ url('/detallesEvento/'.$event->id) }}" class="btn btn-primary btn-sm">Detalles</a>
+              </div>
               <hr>
-            @endforeach
+              @endforeach
           </div>
         </div>
 

@@ -47,3 +47,4 @@ Route::post('/calendarTime', 'CalendarController@getTime');
 Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
 
 Route::post('/crearEvento','CalendarController@store');
+Route::get('/detallesEvento/{id}','CalendarController@details');

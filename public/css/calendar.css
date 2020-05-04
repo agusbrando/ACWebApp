@@ -74,11 +74,16 @@ h3{
     padding-top: 5px;
     padding-left: 15px;
     padding-right: 15px;
+    text-align: center;
 }
 
 #espacio{
     height: 48px;
 }
+
+#info{
+   width: 80px;
+  }
 
 #header{
     position: relative;
