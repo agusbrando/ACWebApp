@@ -60,31 +60,40 @@ class EvaluacionesController extends Controller
         $media = null;
         $aux = 0;
 
-        foreach ($califications as $calification) {
+        foreach($califications as $calification){
             $calificationsArray[$calification->user_id][$calification->task_id] = $calification->value;
         }
 
-        if ($calificationsArray != null) {
+        if($calificationsArray != null){
             foreach ($calificationsArray as $user_id => $tasks) {
-                foreach ($tasks as $task_id => $nota) {
-                    $aux += $nota;
-                    $media[$user_id] = $aux / count($tasks);
-                }
-                $aux = 0;
+            foreach ($tasks as $task_id => $nota) {
+                $aux += $nota;
+                $media[$user_id] = $aux/count($tasks);
             }
+            $aux = 0;
+        }
         }
 
         foreach ($tasksType as $task) {
             $id = $task->id;
             switch ($id) {
                 case 8:
-                    $parciales = Task::all()->where('type_id', $task->id)->where('evaluation_id', $evaluation->id);
+                    $parciales = Task::where('type_id', $task->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    // $calificaciones = $parciales->with('users')->get();
+                    // $calificaciones = $parciales->load('users');
+
+                    foreach($parciales as $parcial){
+                        foreach($parcial->users as $nota){
+                            $calificaciones = $nota->pivot->value;
+                        }
+
+                    }
                     break;
                 case 9:
-                    $trabajos = Task::all()->where('type_id', $task->id)->where('evaluation_id', $evaluation->id);;
+                    $trabajos = Task::where('type_id', $task->id)->where('evaluation_id', $evaluation->id);
                     break;
                 case 10:
-                    $actitud = Task::all()->where('type_id', $task->id)->where('evaluation_id', $evaluation->id);;
+                    $actitud = Task::where('type_id', $task->id)->where('evaluation_id', $evaluation->id);
                     break;
             }
         }

@@ -189,6 +189,7 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if ($calificationsArray != null)
+                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$calificationsArray[$user->id][$trabajo->id]}}">
                                                 @else
                                                 <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
                                                 @endif

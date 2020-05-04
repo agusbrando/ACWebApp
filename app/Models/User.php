@@ -7,10 +7,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use AjCastro\EagerLoadPivotRelations\EagerLoadPivotTrait;
 
 class User extends Authenticatable 
 {
     use Notifiable;
+    use EagerLoadPivotTrait;
 
     protected $table = 'users';
 
@@ -55,7 +57,7 @@ class User extends Authenticatable
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
+        return $this->belongsToMany(Task::class, 'califications')->withPivot('value')->withTimestamps();
     }
     public function programs_responsable()
     {
