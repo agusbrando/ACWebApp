@@ -38,7 +38,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
+            'name' => 'required',
             'user_id' => 'required',
             'title' => 'required',
             'text' => 'required'
@@ -51,7 +52,27 @@ class PostController extends Controller
         ]);
 
         $post->save();
-        return redirect('/posts')->with('success', '¡Post guardado!');
+
+        $attachment = null;
+
+        if($request->hasfile('name'))
+        {
+            foreach($request->file('name') as $file)
+            {
+                $name = $file->getClientOriginalName();
+                $file->move(storage_path("app/attachments/".$post->id),$name);
+                $attachment = new Attachment([
+                    'name' => $request->get('name'),
+                    'attachmentable_id' => $post->id,
+                    'attachmentable_type' => Post::class
+                ]);
+            }
+        }
+        
+        if($attachment != null) {
+            $attachment->save();
+        }
+        return back()->with('success', 'Archivos subidos correctamente');
     }
 
     /**

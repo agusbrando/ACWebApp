@@ -15,8 +15,8 @@ class AttachmentController extends Controller
      */
     public function index()
     {
-        //$attachments = Attachment::all();
-        //return view('attachments.index', compact('attachments'));
+        $attachments = Attachment::all();
+        return view('attachments.index', compact('attachments'));
     }
 
     /**
@@ -36,13 +36,21 @@ class AttachmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $post = new Post();
-        
+    {   
         $this->validate($request, [
             'name' => 'required',
-            'name.*' => 'mimes:doc,pdf,docx,zip'
+            'user_id' => 'required',
+            'title' => 'required',
+            'text' => 'required'
         ]);
+
+        $post = new Post([
+            'user_id' => $request->get('user_id'),
+            'title' => $request->get('title'),
+            'text' => $request->get('text')
+        ]);
+
+        $post->save();
 
         if($request->hasfile('name'))
         {
@@ -50,18 +58,15 @@ class AttachmentController extends Controller
             {
                 $name = $file->getClientOriginalName();
                 $file->move(storage_path("app/attachments/".$post->id),$name);
-                $data[] = $name;
+                $attachment = new Attachment([
+                    'name' => $request->get('name'),
+                    'attachmentable_id' => $post->id,
+                    'attachmentable_type' => Post::class
+                ]);
             }
         }
-
-        $attachment = new Attachment([
-            'name' => $request->get('name'),
-            'attachmentable_id' => $request->get('attachmentable_id'),
-            'attachmentable_type' => $request->get('attachmentable_type')
-        ]);
-        $attachment->name=json_encode($data);
+        
         $attachment->save();
-
         return back()->with('success', 'Archivos subidos correctamente');
     }
 
@@ -107,6 +112,9 @@ class AttachmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $attachment = Attachment::find($id);
+        $attachment->delete();
+
+        return redirect('/attachments')->with('success', '¡Attachment eliminado!');
     }
 }
