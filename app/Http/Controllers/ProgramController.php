@@ -89,9 +89,11 @@ class ProgramController extends Controller
             'name'=>'required',
             'expected_date_start'=>'required',
             'expected_date_end'=>'required',
-            'expected_eval'=>'required'
+            'expected_eval'=>'required',
+            'expected_date'=>'required'
         ]);
 
+      //  $expected_date_start=
         $unit = new Unit([
             'name' => $request->get('name'),
             'expected_date_start' => $request->get('expected_date_start'),
