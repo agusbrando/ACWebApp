@@ -12,14 +12,27 @@ class AttachmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 5; $i++) {
-            DB::table('attachments')->insert([
-                'name'         =>  'name ' .  $i,
-                'attachmentable_id'         =>     $i,
-                'attachmentable_type' =>  Message::class,
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
-        }
+        DB::table('attachments')->insert([
+            'name'=>'noticia-gato-bano-mascota-casa-unas-gatito.jpg',
+            'attachmentable_id'=>1,
+            'attachmentable_type'=> Message::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('attachments')->insert([
+            'name'=>'noticia-gato-bano-mascota-casa-unas-gatito.jpg',
+            'attachmentable_id'=>4,
+            'attachmentable_type'=> Message::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('attachments')->insert([
+            'name'=>'doggo.jpg',
+            'attachmentable_id'=>4,
+            'attachmentable_type'=> Message::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }
