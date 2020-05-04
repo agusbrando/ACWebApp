@@ -57,9 +57,19 @@ class EvaluacionesController extends Controller
         $users = $evaluation->users;
         $califications = Calification::all();
         $calificationsArray = null;
+        $media = null;
+        $aux = 0;
 
         foreach($califications as $calification){
             $calificationsArray[$calification->user_id][$calification->task_id] = $calification->value;
+        }
+
+        foreach ($calificationsArray as $user_id => $tasks) {
+            foreach ($tasks as $task_id => $nota) {
+                $aux += $nota;
+                $media[$user_id] = $aux/count($tasks);
+            }
+            $aux = 0;
         }
 
         foreach ($tasksType as $task) {
@@ -77,7 +87,7 @@ class EvaluacionesController extends Controller
             }
         }
 
-        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'calificationsArray'));
+        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'calificationsArray', 'media'));
     }
 
     /**

@@ -151,7 +151,7 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        <td>6</td>
+                                        <td>{{$media[$user->id]}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
