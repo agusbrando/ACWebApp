@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Subject;
 use App\Models\Type;
 use App\Models\Task;
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\DB;
 
 
 class EvaluacionesController extends Controller
@@ -20,7 +20,7 @@ class EvaluacionesController extends Controller
         return view('Notas.evaluations', compact('users', 'nombre'));
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,29 +50,31 @@ class EvaluacionesController extends Controller
      */
     public function show($subject_id, $evaluation_id)
     {
-        $users = User::all();
         $subject = Subject::find($subject_id);
         $tasksType = Type::all()->where('model', Task::class);
         $evaluation = Evaluation::find($evaluation_id);
         $users = $evaluation->users;
 
-        $parciales = null;
-        $trabajos = null;
+        $parciales = array();
+        $trabajos = array();
+        $actitud = array();
 
-        foreach($tasksType as $task){
+        foreach ($tasksType as $task) {
             $id = $task->id;
-            switch($id){
+            switch ($id) {
                 case 8:
-                    $parciales = Task::all()->where('type_id', $task->id);
+                    $parciales = Task::all()->where('type_id', $task->id)->where('evaluation_id', $evaluation->id);
                     break;
                 case 9:
-                    $trabajos = Task::all()->where('type_id', $task->id);
+                    $trabajos = Task::all()->where('type_id', $task->id)->where('evaluation_id', $evaluation->id);;
+                    break;
+                case 10:
+                    $actitud = Task::all()->where('type_id', $task->id)->where('evaluation_id', $evaluation->id);;
                     break;
             }
-            
         }
 
-        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos'));
+        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud'));
     }
 
     /**

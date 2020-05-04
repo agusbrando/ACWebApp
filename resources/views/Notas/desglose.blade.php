@@ -113,7 +113,7 @@
     <div class="container-fluid">
         <div class="d-flex flex-row mb-4">
             <a href="{{ url('asignaturas', $subject->id) }}" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
-            <h1 class="display-4 pr-3">Desglose {{$subject->name}}</h1>
+            <h1 class="display-4 pr-3">Desglose {{$subject->name}} {{$evaluation->name}}</h1>
             <a href="{{ url('/evaluaciones/desglose', $subject->id) }}" class="btn btn-primary ml-2 mt-4 h-100">Crear Tarea</a>
             <a href="{{ url('tareas', $subject->id) }}" class="btn btn-primary ml-2 mt-4 h-100">Eliminar Tarea</a>
         </div>
@@ -162,62 +162,68 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
-                        <table id="trabajos" class="table table-striped examenes" style="width:100%">
-                            <thead class="cabezeraTabla">
-                                <tr id='columna'>
-                                    <td>Apellidos, Nombre</td>
-                                    @foreach($trabajos as $trabajo)
-                                    <td>{{$trabajo->name}}</td>
+                        <form id="examenForm" action="{{ route('desglose.storeTrabajos') }}" method="post">
+                            @csrf
+                            <table id="trabajos" class="table table-striped examenes" style="width:100%">
+                                <thead class="cabezeraTabla">
+                                    <tr id='columna'>
+                                        <td>Apellidos, Nombre</td>
+                                        @foreach($trabajos as $trabajo)
+                                        <td>{{$trabajo->name}}</td>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody id="fila">
+                                    @foreach($users as $user)
+                                    <tr>
+                                        <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                                        @foreach($trabajos as $trabajo)
+                                        <td>
+                                            <div class="input-group col-10">
+                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w">
+                                            </div>
+                                        </td>
+                                        @endforeach
+                                    </tr>
                                     @endforeach
-                                    <td>Action</td>
-                                </tr>
-                            </thead>
-                            <tbody id="fila">
-                                @foreach($users as $user)
-
-                                <tr>
-                                    <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                    @foreach($trabajos as $trabajo)
-                                    <td>
-                                        <div class="input-group col-10">
-                                            <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w">
-                                        </div>
-                                    </td>
-                                    @endforeach
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
-                                    </td>
-                                </tr>
-                                </form>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="subject" value={{$subject->id}}>
+                            <input type="hidden" name="evaluacion" value={{$evaluation->id}}>
+                            <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="nav-eval3" role="tabpanel" aria-labelledby="nav-eval3-tab">
-                        <table id="actitud" class="table table-striped examenes" style="width:100%">
-                            <thead class="cabezeraTabla">
-                                <tr>
-                                    <td>Apellidos, Nombre</td>
-                                    <td>Nota Media Actitud</td>
-                                    <td>Action</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($users as $user)
-                                <tr>
-                                    <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                    <td>
-                                        <div class="input-group col-10">
-                                            <input type="text" class="form-control w" placeholder="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <form id="examenForm" action="{{ route('desglose.storeTrabajos') }}" method="post">
+                            @csrf
+                            <table id="actitud" class="table table-striped examenes" style="width:100%">
+                                <thead class="cabezeraTabla">
+                                    <tr>
+                                        <td>Apellidos, Nombre</td>
+                                        @foreach($actitud as $act)
+                                        <td>{{$act->name}}</td>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($users as $user)
+                                    <tr>
+                                        <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                                        @foreach($actitud as $act)
+                                        <td>
+                                            <div class="input-group col-10">
+                                                <input type="text" class="form-control w" placeholder="">
+                                            </div>
+                                        </td>
+                                        @endforeach
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="subject" value={{$subject->id}}>
+                            <input type="hidden" name="evaluacion" value={{$evaluation->id}}>
+                            <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
+                        </form>
                     </div>
                 </div>
             </div>

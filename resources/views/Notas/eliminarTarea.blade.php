@@ -20,6 +20,7 @@
                 <tr id='columna'>
                     <td>Tipo</td>
                     <td>Nombre</td>
+                    <td>Evaluacion</td>
                     <td>Action</td>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
             <tbody>
                 <td>{{$task->type->name}}</td>
                 <td>{{$task->name}}</td>
+                <td>{{$task->evaluation->name}}</td>
                 <td>
                     <a href="{{url('/tareas/eliminar', ['task_id'=> ($task->id), 'subject_id'=> ($subject->id)])}}" class="btn btn-danger text-white"><i class="fas fa-trash-alt"></i></a>
                 </td>
