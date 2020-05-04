@@ -11,6 +11,7 @@ use App\Models\Classroom;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Type;
+use App\Models\Role;
 use App\Models\State;
 use App\Models\Role;
 use App\Models\Timetable;
@@ -31,6 +32,7 @@ class ItemTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        
         $classroom = Classroom::create([
             'name' => '6',
             'number' => 6,
@@ -44,60 +46,87 @@ class ItemTest extends TestCase
             'updated_at' => now()
         ]);
 
-        $role = Role::create([
-            'name' => 'Alumno',
+        $type = Type::create([
+            'name' => 'alumno',
+            'model' => 'defaultModel'
+        ]);
+
+        $item = Item::create([
+            'name' => 'Portatil Asus',
+            'date_pucharse' => Carbon::create('2020', '03', '30'),
+            'classroom_id' => $classroom->id,
+            'state_id' => $state->id,
+            'type_id' => $type->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
+        //CREACION USER
+        $rol = Role::create([
+            'name' => 'default',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $timetable = Timetable::create([
+            'name' => '2ASIR2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $user = User::create([
             'first_name' => 'user',
-            'email' => 'usertesting@campusaula.com',
             'last_name' => 'user',
+            'email' => 'user23424@campusaula.com',
             'password' => bcrypt('userPass'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => $role->id,
-            'timetable_id'=>$timetable->id
+            'role_id' => $rol->id,
+            'timetable_id' => $timetable->id
         ]);
 
         $user2 = User::create([
-            'first_name' => 'user2',
-            'email' => 'usertesting2@campusaula.com',
-            'last_name' => 'user2',
+            'first_name' => 'user223',
+            'last_name' => 'user223',
+            'email' => 'user23323@campusaula.com',
             'password' => bcrypt('user2Pass'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' =>  $role->id,
-            'timetable_id'=>$timetable->id
+            'role_id' => $rol->id,
+            'timetable_id' => $timetable->id
         ]);
-        
-        
+
 
         //Creacion de la tabla intermedia con los datos extra que no son los id
-        $user->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','09','16'),'date_fin' => Carbon::create('2020','06','12')]);
-        $user2->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','04','16'),'date_fin' => Carbon::create('2020','06','12')]);
-        
-        //Array de Items recuperados
-        $users = $itemuser->users->pluck('id');
+        $item->users()->attach($user, ['date_inicio' => Carbon::create('2019', '09', '16'), 'date_fin' => Carbon::create('2020', '06', '12')]);
+        $item->users()->attach($user2, ['date_inicio' => Carbon::create('2018', '04', '16'), 'date_fin' => Carbon::create('2019', '06', '12')]);
 
+        //Creamos un array de todos los id de los users creados en la DB
+        $users = $item->users->pluck('id');
+
+        //Array de Items recuperados    
         $expectedUsersIds = collect([
-            ['id'=> $user->id],
-            ['id'=> $user2->id]
+            ['id' => $user->id],
+            ['id' => $user2->id]
         ])->pluck('id');
 
         $this->assertEquals($users, $expectedUsersIds);
 
-        $user->itemUser()->detach($itemuser);  
-        $user2->itemUser()->detach($itemuser); 
+        $item->users()->detach($user);
+        $item->users()->detach($user2);
+
+
+        
         $user->delete();
         $user2->delete();
-        $role->delete();
-        $state->delete();
-        $classroom->delete();     
+        $rol->delete();
         $timetable->delete();
-        
-
+        $item->delete();
+        $classroom->delete();
+        $type->delete();
+        $state->delete();
     }
     //faltan los otros dos metodos
 }

@@ -15,6 +15,7 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('number')->unique();
             $table->string('name')->unique();
             $table->DateTime('date_pucharse');
             $table->integer('classroom_id')->unsigned(); //Clava ajena
