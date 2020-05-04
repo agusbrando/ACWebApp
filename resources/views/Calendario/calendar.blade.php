@@ -69,7 +69,11 @@
           </div>
           <br>
           <div id="buttons">
-          <button type="submit"class="btn btn-info btn-block">Reservas</button>
+            @foreach($events as $event)
+              <h5>{{ substr($event->date, -8, 5) }}</h4>
+              <a>{{ $event->title }}</a>
+              <hr>
+            @endforeach
           </div>
         </div>
 

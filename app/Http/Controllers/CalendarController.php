@@ -49,6 +49,8 @@ class CalendarController extends Controller
   {
 
     $sessions = [];
+    $events = [];
+
     $this->validate($request, [
       'date' =>  'required',
       'tipo' => 'required'
@@ -61,14 +63,22 @@ class CalendarController extends Controller
 
     $sessions = $tipo->sessions()->where('day', $day)->get();
     $types = Type::all();
-    return view('/Calendario/calendar', compact('types', 'sessions', 'dia', 'tipo'));
+
+    if($request->get('tipo') == 'Tutorias'){
+      $events = Event::all()->where('type_id', 1);
+    }else{
+      $events = Event::all()->where('type_id', 2);
+    }
+
+    return view('/Calendario/calendar', compact('types', 'sessions', 'dia', 'tipo', 'events'));
   }
 
   public function index()
   {
     $sessions = [];
+    $events = [];
     $types = Type::all();
-    return view('/Calendario/calendar', compact('types', 'sessions'));
+    return view('/Calendario/calendar', compact('types', 'sessions', 'events'));
   }
 
   /**
