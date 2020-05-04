@@ -147,7 +147,7 @@
                                         @foreach($parciales as $parcial)
                                         <td>
                                             <div class="input-group col-10">
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
+                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$calificationsArray[$user->id][$parcial->id]}}">
                                             </div>
                                         </td>
                                         @endforeach
@@ -180,7 +180,7 @@
                                         @foreach($trabajos as $trabajo)
                                         <td>
                                             <div class="input-group col-10">
-                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w">
+                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$calificationsArray[$user->id][$parcial->id]}}">
                                             </div>
                                         </td>
                                         @endforeach
@@ -212,7 +212,7 @@
                                         @foreach($actitud as $act)
                                         <td>
                                             <div class="input-group col-10">
-                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w">
+                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$calificationsArray[$user->id][$parcial->id]}}">
                                             </div>
                                         </td>
                                         @endforeach

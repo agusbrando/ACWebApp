@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Calification;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -54,10 +55,12 @@ class EvaluacionesController extends Controller
         $tasksType = Type::all()->where('model', Task::class);
         $evaluation = Evaluation::find($evaluation_id);
         $users = $evaluation->users;
+        $califications = Calification::all();
+        $calificationsArray = null;
 
-        $parciales = array();
-        $trabajos = array();
-        $actitud = array();
+        foreach($califications as $calification){
+            $calificationsArray[$calification->user_id][$calification->task_id] = $calification->value;
+        }
 
         foreach ($tasksType as $task) {
             $id = $task->id;
@@ -74,7 +77,7 @@ class EvaluacionesController extends Controller
             }
         }
 
-        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud'));
+        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'calificationsArray'));
     }
 
     /**
