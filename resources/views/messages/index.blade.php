@@ -16,33 +16,51 @@
                         <td>Usuario</td>
                         <td>Asunto</td>
                         <td>Adjuntos</td>
+                        @if ($sitio == 0)
+                        <td>Visto</td>
+                        @endif
                         <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
 
                     @foreach ($messages as $message)
-                    @if (isset($message->users))
+                    @if ($sitio == 0)
                     @foreach ($message->users as $user)
-
+                    {{-- Envidados --}}
                     <tr>
                         <td>{{$user->first_name}} {{$user->last_name}}</td>
                         <td>{{$message->subject}}</td>
                         <td>{{count($message->attachments)}}</td>
+                        @if ($user->pivot->read == 0)
+                        <td>No se ha visto</td>
+                        @else
+                        <td>Ha sido visto</td>
+                        @endif
                         <td>
-                        <a href="/messages/{{$message->id}}" class="btn btn-primary">Ver</a>
-
+                        <a href="/sended/{{$message->id}}" class="btn btn-primary">Ver</a>
+                        <form action="{{ route('messages.destroy', $message->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                          </form>
                         </td>
                     </tr>
                     @endforeach
                     @else
+                {{-- Recibidos --}}
                     <tr>
                         <td>{{$message->user->first_name}} {{$message->user->last_name}}</td>
                         <td>{{$message->subject}}</td>
                         <td>{{count($message->attachments)}}</td>
+
                         <td>
                         <a href="/messages/{{$message->id}}" class="btn btn-primary">Ver</a>
-
+                        <form action="{{ route('messages.destroy', $message->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                          </form>
                         </td>
                     </tr>
                     @endif
