@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -20,20 +19,16 @@ class MessageController extends Controller
      */
     public function index()
     {
+        $sitio = 0;
         $user = Auth::user();
-        // $messages = Message::all()->load('attachments');
         if (URL::current() == url("/messages_send")) {
-
-            $messages = $user->messagesSent->load('attachments','users');
-
+            $messages = $user->messagesSent->load('attachments', 'users');
         } else {
-            $messages = $user->messagesReceive->load('attachments','user');
-
+            $messages = $user->messagesReceive->load('attachments', 'user');
+            $sitio = 1;
         }
-
-        return view('messages.index', compact('messages'));
+        return view('messages.index', compact('messages', 'sitio'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -42,10 +37,8 @@ class MessageController extends Controller
     public function create()
     {
         $users = User::all();
-
         return view('messages.create', compact('users'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -56,12 +49,11 @@ class MessageController extends Controller
     {
         $user = Auth::user();
         $request->validate([
-            'filenames'=> 'nullable',
+            'filenames' => 'nullable',
             'users' => 'required',
             'subject' => 'required',
-            'message' => 'nullable'
+            'message' => 'required'
         ]);
-
         $message = new Message([
             'user_id' => $user->id,
             'subject' => $request->get('subject'),
@@ -69,30 +61,22 @@ class MessageController extends Controller
         ]);
         $message->save();
         $users = $request->get('users');
-
         foreach ($users as $user) {
             User::find($user)->messagesReceive()->attach($message->id);
         }
+        if ($request->hasfile('filenames')) {
+            foreach ($request->file('filenames') as $file) {
+                $name = $file->getClientOriginalName();
+                $file->move(storage_path("app/messages/$message->id"), $name);
 
-            if($request->hasfile('filenames'))
-             {
-                foreach($request->file('filenames') as $file)
-                {
-                    $name = $file->getClientOriginalName();
-                    $file->move(storage_path("app/messages/$message->id"), $name);
-
-                   $attachment = new Attachment([
+                $attachment = new Attachment([
                     'name' => $name,
                     'attachmentable_id' => $message->id,
                     'attachmentable_type' => Message::class
-
-                   ]);
-                    $attachment->save();
-                }
-             }
-
-
-
+                ]);
+                $attachment->save();
+            }
+        }
         return redirect('/messages')->with('success', 'Message Send!');
     }
     /**
@@ -104,11 +88,17 @@ class MessageController extends Controller
     public function show($id)
     {
         $message = Message::find($id)->loadMissing('attachments');
-
-
-        return view('messages.show', compact('message'));
+        $user = $message->users->first();
+        $message->users()->updateExistingPivot($user->id, array('read' => 1));
+        $sitio = 0;
+        return view('messages.show', compact('message', 'sitio'));
     }
-
+    public function showSended($id)
+    {
+        $message = Message::find($id)->loadMissing('attachments');
+        $sitio = 1;
+        return view('messages.show', compact('message', 'sitio'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -140,15 +130,16 @@ class MessageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $message = Message::find($id);
+        $message->delete();
+
+        return redirect('/messages')->with('success', 'Message deleted!');
     }
 
-    public function download($idm,$nameAttach)
+    public function download($idm, $nameAttach)
     {
 
 
-return response()->download(storage_path("app/messages/$idm/$nameAttach"));
+        return response()->download(storage_path("app/messages/$idm/$nameAttach"));
     }
-
-
 }
