@@ -15,6 +15,10 @@
             <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" placeholder="Nombre del objeto">
         </div>
         <div class="form-group">
+            <label for="number">Number</label>
+            <input type="text" class="form-control" id="numberItem" name="number" aria-describedby="nombreHelp" placeholder="Numero del objeto">
+        </div>
+        <div class="form-group">
             <label for="nombre">Fecha de Compra</label>
             <input type="date" id="date_pucharse" name="date_pucharse" placeholder="- Seleccionar fecha -" class="form-control">
         </div>

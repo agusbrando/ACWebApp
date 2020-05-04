@@ -16,6 +16,10 @@
             <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" value="{{$item->name}}" placeholder="Cambia el nombre">
         </div>
         <div class="form-group">
+            <label for="number">Number</label>
+            <input type="text" class="form-control" id="numberItem" name="number" aria-describedby="nombreHelp" value="{{$item->number}}" placeholder="Numero del objeto">
+        </div>
+        <div class="form-group">
             <label for="nombre">Fecha de Compra</label>
             <input type="date" id="date_pucharse" name="date_pucharse" value="{{date($item->date_pucharse)}}" placeholder="- Seleccionar fecha -" class="form-control">
         </div>

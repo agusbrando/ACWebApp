@@ -94,6 +94,7 @@ class ItemController extends Controller
 
         $request->validate([
             'name'=>'required',
+            'number'=>'required',
             'date_pucharse'=>'required',
             'classroom_id'=>'required',
             'type_id'=>'required',
@@ -101,6 +102,7 @@ class ItemController extends Controller
 
         $item = new Item([
             'name' => $request->get('name'),
+            'number' => $request->get('number'),
             'date_pucharse'=>$request->get('date_pucharse'),
             'classroom_id'=>$request->get('classroom_id'),
             'state_id'=>'1',
@@ -159,6 +161,7 @@ class ItemController extends Controller
 
         $request->validate([
             'name'=>'required',
+            'number'=>'required',
             'date_pucharse'=>'required',
             'classroom_id'=>'required',
             'state_id'=>'required',
@@ -166,6 +169,7 @@ class ItemController extends Controller
         ]);
         $item = Item::find($id);
         $item->name = $request->get('name');
+        $item->number = $request->get('number');
         $item->date_pucharse = $request->get('date_pucharse');
         $item->classroom_id = $request->get('classroom_id');
         $item->state_id = $request->get('state_id');

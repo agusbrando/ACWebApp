@@ -61,8 +61,6 @@
     <!-- <script src="{{ resource_path('js/dashboard.js') }}" type="text/js"></script>-->
     </body>
 
-
- <!-- Bootstrap 4 -->
      
 </body>
 
