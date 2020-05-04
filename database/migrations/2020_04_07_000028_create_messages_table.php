@@ -20,7 +20,7 @@ class CreateMessagesTable extends Migration
             $table->string('subject');
             $table->string('message');
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
 
         });
