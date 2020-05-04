@@ -23,7 +23,7 @@ class YearUnionsTable extends Migration
             $table->integer('program_id')->unsigned();
             $table->integer('responsable_id')->unsigned();
             $table->string('notes');
-            $table->string('date_check');
+            $table->date('date_check');
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
