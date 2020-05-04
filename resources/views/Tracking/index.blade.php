@@ -71,7 +71,8 @@
             <td>{{$tracking->time_start}}</td>
             <td>{{$tracking->time_end}}</td>
             <td>{{$tracking->num_hours}}</td>
-            <td><img src="{{ url($tracking->signature) }}"></td>
+            <td><img src="{{url($tracking->signature)}}" />
+          </td>
           </tr>
           @endif
           @endforeach
@@ -104,7 +105,7 @@
         <br>
 
         @if($user->signature!=null)
-        <img src="{{ url($user->signature) }}"><br>
+        <img src="{{url($user->signature)}}"><br>
         <label>Firma introducida,¿Quieres cambiar?</label>
         @endif
 <input type="submit" class="btn btn-success w-50" value="firmar">

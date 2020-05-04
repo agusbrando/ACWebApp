@@ -22,7 +22,7 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('seguimiento', 'TrackingController@fileStorageServe');
 Route::resource('horarios', 'TimetableController');
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 Route::resource('seguimiento', 'TrackingController');

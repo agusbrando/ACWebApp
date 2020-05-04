@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Tracking;
-use Dotenv\Store\File\Paths;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+
 
 class TrackingController extends Controller
 {
@@ -29,13 +32,12 @@ class TrackingController extends Controller
       'time_start' => 'required',
 
       'date_start' => 'required',
-     
+
 
     ]);
 
 
     $user = Auth::user();
-
 
     
 
@@ -61,52 +63,66 @@ class TrackingController extends Controller
       'num_hours' => $num_hours,
 
     ]);
-    
-        
+
+
     $tracking->save();
     return redirect('/seguimiento')->with('exito', 'Horario creado!');
   }
-  
-    
 
 
-  
+
+
+
 
   public function edit($id)
-    {
-        
-      $user = Auth::user();
-        return view('Tracking.edit', compact('user'));        
+  {
+
+    $user = Auth::user();
+    return view('Tracking.edit', compact('user'));
+  }
+
+
+  public function update(Request $request, $id)
+  {
+    $request->validate([
+      'firma' => 'required',
+
+    ]);
+
+    $user = Auth::user();
+
+    $image_parts = explode(";base64,", $request->get('firma'));
+
+    $image_type_aux = explode("image/", $image_parts[0]);
+
+    $image_type = $image_type_aux[1];
+    $uniq = uniqid();
+    $image_base64 = base64_decode($image_parts[1]);
+    $ruta = "public/signatures/" . $user->id;
+    $micarpeta = "../storage" . $ruta;
+    if (!file_exists($micarpeta)) {
+      //mkdir($micarpeta, 777, true);
+      Storage::disk("local")->put("/" . $ruta . "/" . $uniq . '.' . $image_type, $image_base64);
     }
-
-    
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'firma'=>'required',
-            
-        ]);
-        $user = Auth::user();
-        $image_parts = explode(";base64,", $request->get('firma'));
-    
-        $image_type_aux = explode("image/", $image_parts[0]);
-    
-        $image_type = $image_type_aux[1];
-    
-        $image_base64 = base64_decode($image_parts[1]);
-        $micarpeta = "..\storage\app\public\signatures\'" . $user->id;
-        if (!file_exists($micarpeta)) {
-          mkdir($micarpeta, 777, true);
-        }
-        $file = $micarpeta . "\'" . uniqid() . '.' . $image_type;
-        file_put_contents($file, $image_base64);
+    //$file = $micarpeta . "\\" . uniqid() . '.' . $image_type;
+    //file_put_contents($file, $image_base64);
 
 
-        
-        $user->signature = $file;
-        
-        $user->save();
 
-        return redirect('/seguimiento')->with('exito', 'Horario editado!');
-    }
+    $user->signature = Storage::url("app/" . $ruta . "/" . $uniq . '.' . $image_type);
+
+    $user->save();
+
+    return redirect('/seguimiento')->with('exito', 'Horario editado!');
+  }
+  public function fileStorageServe($file) {
+    
+    if (!Storage::disk('local')->exists($file)){ 
+        abort('404'); 
+    } 
+    //$file=DIRECTORY_SEPARATOR.($file);
+    //return view('Tracking.index', compact('file')); 
+    return response()->file(DIRECTORY_SEPARATOR.($file));
+  
+}
 }
