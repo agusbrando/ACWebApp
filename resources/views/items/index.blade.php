@@ -142,7 +142,7 @@
                                         @method('GET')
                                         <button class="btn btn-primary" type="submit">Ver</button>
                                     </form>
-                                   
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
