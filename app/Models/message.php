@@ -3,18 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Message extends Model
 {
+    use SoftDeletes;
+
     protected $with = ['attachments'];
-      protected $table = 'messages';
+    protected $table = 'messages';
     protected $primaryKey = 'id';
     protected $guarded = [];
+    protected $dates = ['deleted_at'];
 
-    // public function sends()
-    //{
-    //  return $this->hasMany('App\Models\Send');
-    // }
 
     public function user()
     {
