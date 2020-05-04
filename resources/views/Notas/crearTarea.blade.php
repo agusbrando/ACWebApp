@@ -38,7 +38,6 @@
             </div>
 
             <input type="hidden" name="subject" value={{$subject->id}}>
-            <input type="hidden" name="subject" value={{$evaluation->id}}>
             <button class="btn btn-primary text-white" type="submit">Guardar</button>
 
         </form>

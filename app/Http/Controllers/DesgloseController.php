@@ -61,7 +61,7 @@ class DesgloseController extends Controller
             $type->save();
         }
 
-        // return redirect('evaluaciones/desglose/'.$subject->id.'/'.$evaluation->id)->with('evaluation', $evaluation, 'users', $users, 'subject', $subject, 'parciales', $parciales, 'trabajos', $trabajos, 'actitud',  $actitud);
+        return redirect('asignaturas/'.$request->get('subject'));
 
     }
 
@@ -102,6 +102,31 @@ class DesgloseController extends Controller
 
 
         foreach ($trabajos as $user_id => $tasks) {
+            foreach ($tasks as $task_id => $task_value) {
+                $calification = new Calification([
+                    'user_id' => $user_id,
+                    'task_id' => $task_id,
+                    'value' => $task_value
+                ]);
+                $calification->save();
+            }
+        }
+
+        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+    }
+
+    public function storeActitud(Request $request)
+    {
+        $request->validate([
+            'actitud' => 'required',
+            'subject' => 'required',
+            'evaluacion' => 'required'
+        ]);
+
+        $actitud = $request->get('actitud');
+
+
+        foreach ($actitud as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
                 $calification = new Calification([
                     'user_id' => $user_id,

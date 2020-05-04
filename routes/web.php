@@ -34,6 +34,7 @@ Route::get('porcentajes/destroy/{id_subject}/{id_eval}/{id_type}', 'PorcentajesC
 Route::get('evaluaciones/desglose/{id}', 'DesgloseController@create');
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
 Route::post('desglose/storeTrabajos', 'DesgloseController@storeTrabajos')->name('desglose.storeTrabajos');
+Route::post('desglose/storeActitud', 'DesgloseController@storeActitud')->name('desglose.storeActitud');
 
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');

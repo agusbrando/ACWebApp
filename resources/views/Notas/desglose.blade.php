@@ -194,7 +194,7 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="nav-eval3" role="tabpanel" aria-labelledby="nav-eval3-tab">
-                        <form id="examenForm" action="{{ route('desglose.storeTrabajos') }}" method="post">
+                        <form id="examenForm" action="{{ route('desglose.storeActitud') }}" method="post">
                             @csrf
                             <table id="actitud" class="table table-striped examenes" style="width:100%">
                                 <thead class="cabezeraTabla">
@@ -212,7 +212,7 @@
                                         @foreach($actitud as $act)
                                         <td>
                                             <div class="input-group col-10">
-                                                <input type="text" class="form-control w" placeholder="">
+                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w">
                                             </div>
                                         </td>
                                         @endforeach
