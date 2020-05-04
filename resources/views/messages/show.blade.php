@@ -29,6 +29,10 @@
             </div>
         </div>
     </div>
-    <a href="{{ route('messages.index')}}" class="btn btn-primary m-3">Volver</a>
+    @if ($sitio == 0)
+    <a href="{{ url('messages')}}" class="btn btn-primary m-3">Volver</a>
+    @else
+    <a href="{{ url('messages_send')}}" class="btn btn-primary m-3">Volver</a>
+    @endif
 </main>
 @endsection
