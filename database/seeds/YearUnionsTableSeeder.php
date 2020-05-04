@@ -20,8 +20,6 @@ class YearUnionsTableSeeder extends Seeder
             'responsable_id' => '5',
             'notes' => 'Programacion confirmada',
             'date_check' => '2016/09/25',
-            'date_start' => '2016/09/09',
-            'date_end' => '2017/06/15',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
