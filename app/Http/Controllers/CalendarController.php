@@ -158,7 +158,43 @@ class CalendarController extends Controller
    */
   public function update(Request $request, $id)
   {
+     $event = $request->all();
+
+     $request->validate([
+      'evento' => 'required',
+      'titulo'  =>  'required',
+      'descripcion' => 'required',
+      'hora'  =>  'required',
+      'fecha' => 'required'
+     ]);
+
+    $fechaStr = $request->get('fecha');
+    $horaStr = $request->get('hora');
+    $tipoId = Type::where('name', $request->get('evento'))->first()->id;      
+    $fechaFormateada = Carbon::createFromFormat('Y-m-d H:i', $fechaStr.' '.$horaStr);
+
+     Event::insert([
+      'type_id' => $tipoId,
+      'session_id' => 1,
+      'user_id' => 1,
+      'title' => $request->get('titulo'),
+      'description'  => $request->get('descripcion'),
+      'date' =>  $fechaFormateada
+    ]);
+     
+    // $event = Item::find($id);
+    // $event->name = $request->get('name');
+    // $event->number = $request->get('number');
+    // $item->date_pucharse = $request->get('date_pucharse');
+    // $item->classroom_id = $request->get('classroom_id');
+    // $item->state_id = $request->get('state_id');
+    // $item->type_id = $request->get('type_id');
+
+
+    $event->save();
+    return redirect('/calendar')->with('Exito', 'Evento editado!');
   }
+
 
   /**
    * Remove the specified resource from storage.
