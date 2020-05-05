@@ -167,6 +167,7 @@ class ItemController extends Controller
             'state_id'=>'required',
             'type_id'=>'required',
         ]);
+        
         $item = Item::find($id);
         $item->name = $request->get('name');
         $item->number = $request->get('number');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateYearUnionsTable extends Migration
+class CreateYearUnionTable extends Migration
 {
     /**
      * Run the migrations.
