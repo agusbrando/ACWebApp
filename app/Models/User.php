@@ -5,12 +5,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 
 class User extends Authenticatable 
 {
     use Notifiable;
-    use HasRoleAndPermission;
 
     protected $table = 'users';
 

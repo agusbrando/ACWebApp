@@ -22,10 +22,17 @@ use Illuminate\Support\Facades\Route;
 //      return view('auth.login');
 //  });
 
-// Route::resource('permissions','PermissionController');
+
 
 Auth::routes();
 
+Route::get('/permissions', 'PermissionController@index')->name('permissions');
+
+
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/user', 'UserController@index')->name('user');
+Route::get('profile/{id}',['as' => 'users.show', 'uses' => 'UserController@show']);
 
 Route::get('/', 'HomeController@index');

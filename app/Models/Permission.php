@@ -4,16 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use jeremykenedy\LaravelRoles\Contracts\PermissionHasRelations as PermissionHasRelationsContract;
-use jeremykenedy\LaravelRoles\Traits\DatabaseTraits;
-use jeremykenedy\LaravelRoles\Traits\PermissionHasRelations;
-use jeremykenedy\LaravelRoles\Traits\Slugable;
 
 class Permission extends Model
 {
-    use DatabaseTraits;
-    use PermissionHasRelations;
-    use Slugable;
     use SoftDeletes;
 
     protected $table = 'permissions';
