@@ -20,8 +20,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\Program;
-use App\Models\Unit;
 use App\Models\User;
+
+use App\Models\Unit;
 use App\Models\Evaluable;
 use App\Models\Evaluated;
 use Symfony\Component\Console\Input\Input;
@@ -38,13 +39,13 @@ Route::get('/', function () {
 Route::get('/prueba', function (Request $request) {
 
    
-    $prueba = Task::find(1)->users;
+    $prueba = User::find(2)->yearUnions;
 
     foreach($prueba as $p){
-        echo var_dump($p->pivot);
+        echo var_dump($p);
         
     }
-   
+
 
 
 })->name('prueba');

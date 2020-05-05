@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,8 +32,13 @@ class YearUnion extends Model
     public function responsable(){
         return $this->belongsTo(User::class);
     }
-    //** lista de todos los year unions user que tengan este year union*/
+    //** lista de todos los year unions user que tengan este year union */
     public function yearUnionUsers(){
         return $this->hasMany(YearUnionUser::class,'year_union_id');
+    }
+
+    //** lista de usuarios con ese year union (compañeros de clase) */
+    public function users(){
+        return $this->belongsToMany(User::class, 'yearUnionUsers', 'year_union_id', 'user_id')->using(yearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
     }
 }
