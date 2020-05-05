@@ -23,5 +23,12 @@ class YearUnionUser extends Pivot
         return $this->belongsTo(User::class);
     }
     */
-    
+    /**listado con todos los items de ese year union user (usuario, en asignatura determinada) */
+    public function items(){
+        return $this->belongsToMany(Item::class, 'ItemYear', 'year_user_id', 'item_id')->using(ItemYear::class)->withTimeStamps()->withPivot('id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

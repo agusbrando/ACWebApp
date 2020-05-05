@@ -39,6 +39,6 @@ class YearUnion extends Model
 
     //** lista de usuarios con ese year union (compañeros de clase) */
     public function users(){
-        return $this->belongsToMany(User::class, 'yearUnionUsers', 'year_union_id', 'user_id')->using(yearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
+        return $this->belongsToMany(User::class, 'yearUnionUsers', 'year_union_id', 'user_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
     }
 }

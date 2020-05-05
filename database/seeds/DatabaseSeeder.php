@@ -45,7 +45,8 @@ class DatabaseSeeder extends Seeder
             AttachmentsTableSeeder::class,
             YearsTableSeeder::class,
             YearUnionsTableSeeder::class,
-            YearUnionUserTableSeeder::class
+            YearUnionUserTableSeeder::class,
+            ItemYearTableSeeder::class
         ]);
     }
 }
