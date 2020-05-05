@@ -21,6 +21,8 @@ use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\Program;
 use App\Models\User;
+use App\Models\Item;
+use App\Models\ItemYear;
 
 use App\Models\Unit;
 use App\Models\Evaluable;
@@ -41,7 +43,7 @@ Route::get('/prueba', function (Request $request) {
     $item = Item::find(1);
     
     foreach($item->yearUnionUsers as $yearUnion){
-        echo ($yearUnion->user->first_name);
+        echo ($yearUnion->user->first_name).'<br>';
         
     }
     
