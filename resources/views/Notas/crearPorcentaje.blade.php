@@ -18,7 +18,7 @@
             @csrf
             <div class="form-group">
                 <label for="Porcentaje">Porcentaje</label>
-                <input type="porcentaje" class="form-control" name="porcentaje" aria-describedby="porcentaje">
+                <input type="porcentaje" class="form-control" name="porcentaje" aria-describedby="porcentaje" placeholder="%">
             </div>
             <div class="form-group">
                 <label for="Porcentaje">Evaluaciones</label>
