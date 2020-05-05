@@ -172,7 +172,7 @@
           </div>
           <div class="modal-footer">
             <form action="{{ url('/detallesEvento/delete/'.$event->id) }}" method="get">
-              <a type="submit" class="btn btn-primary">Eliminar</a>
+              <button type="submit" class="btn btn-danger">Eliminar</button>
             </form>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           </div>
