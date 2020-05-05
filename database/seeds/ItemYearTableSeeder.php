@@ -13,31 +13,31 @@ class ItemYearTableSeeder extends Seeder
     {
         DB::table('itemYear')->insert([
             'item_id' => '1',
-            'year_union_user_id' => '1',
+            'year_user_id' => '1',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('itemYear')->insert([
             'item_id' => '2',
-            'year_union_user_id' => '2',
+            'year_user_id' => '2',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('itemYear')->insert([
             'item_id' => '3',
-            'year_union_user_id' => '3',
+            'year_user_id' => '3',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('itemYear')->insert([
             'item_id' => '1',
-            'year_union_user_id' => '2',
+            'year_user_id' => '2',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('itemYear')->insert([
             'item_id' => '2',
-            'year_union_user_id' => '1',
+            'year_user_id' => '1',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
