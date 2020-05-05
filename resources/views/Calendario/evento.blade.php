@@ -21,7 +21,6 @@
     </div>
     <hr>
   <div class="text-center">
-    <form action="{{ asset('/event/update')}}/{{ $event->id }}" method="put">
       <div class="calendar">
         <div class="col-md-12">
           <div class="row border-right-0 border-top-0 border-bottom-0 col-12 w-100">
@@ -44,7 +43,7 @@
 
             <div class="col-md-4 bg-light border-left border-right p-0">
               <div id="espacio" class="bg-dark w-100">
-                <h3>Titulo</h3>
+                <h3>Título</h3>
               </div>
               <br>
               <div id="buttons">
@@ -89,10 +88,11 @@
       </div>
       </div>
       <div class="from-group text-center">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#formModal" type="submit">Editar</button>
-          <button class="btn btn-outline-danger" type="submit" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
+        <form action="{{ asset('/event/update')}}/{{ $event->id }}" method="put">
+            <button id="edit" class="btn btn-primary" data-toggle="modal" data-target="#formModal" type="submit">Editar</button>
+        </form>
+          <button id="delete" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
       </div>
-    </form>
     
 </div>
 
@@ -171,7 +171,9 @@
             <p>¿Esta usted seguro que quieres eliminar este evento?</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Eliminar</button>
+            <form action="{{ url('/detallesEvento/delete/'.$event->id) }}" method="get">
+              <a type="submit" class="btn btn-primary">Eliminar</a>
+            </form>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           </div>
         </div>

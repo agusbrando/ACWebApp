@@ -12,6 +12,10 @@
     display: none;
 }
 
+.card-body{
+    padding: 0px;
+}
+
 .bootstrap-datetimepicker-widget table th.prev {
     height: 40px;
     line-height: 40px;
@@ -74,7 +78,12 @@ h3{
     padding-top: 5px;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+p{
+    color: #C4C8CB;
     text-align: center;
+    vertical-align: 50%;
 }
 
 #espacio{

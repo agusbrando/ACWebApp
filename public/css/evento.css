@@ -18,7 +18,17 @@ h3{
   padding-top: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  text-align: center;
+  text-align: left;
+}
+
+#edit{
+  float: left;
+  margin-left: 15px;
+}
+
+#delete{
+  float: left;
+  margin-left: 5px;
 }
 
 #espacio{

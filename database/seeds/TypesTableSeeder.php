@@ -12,7 +12,7 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('types')->insert([
-            'name' => 'Tutorias',
+            'name' => 'Tutorías',
             'model' => 'App\Models\Percentage',
 	        'created_at' => now(),
             'updated_at' => now()      

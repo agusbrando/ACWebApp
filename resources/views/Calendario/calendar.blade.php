@@ -40,7 +40,7 @@
           </div>
           <br>
           <div id="calendario">
-            <input id="diaElegido" class="form-control" type="date" id="date" name="date">
+            <input id="diaElegido" value="<?php echo date("Y-m-d");?>" class="form-control" type="date" id="date" name="date">
           </div>
           <hr>
           <div id="buttons">
@@ -57,9 +57,13 @@
           </div>
           <br>
           <div id="buttons">
-            @foreach($sessions as $session)
-            <button type="submit" onclick="window.location.href='{{route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $tipo])}}'" class="btn btn-info btn-block">{{ $session->time_start->format('H:i') }}</button>
-            @endforeach
+            @if(!empty($events))
+              @foreach($sessions as $session)
+              <button type="submit" onclick="window.location.href='{{route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $tipo])}}'" class="btn btn-info btn-block">{{ $session->time_start->format('H:i') }}</button>
+              @endforeach
+            @else
+              <p>Selecciona un tipo de evento.</p>
+            @endif
           </div>
           <br>
         </div>
@@ -69,14 +73,18 @@
           </div>
           <br>
           <div id="buttons">
-            @foreach($events as $event)
-            <h5>{{ substr($event->date, -8, 5) }}</h4>
-            <div class="card-body d-flex justify-content-between align-items-center">
-                <a>{{ $event->title }}</a>
-                <a id="info" type="submit" href="{{ url('/detallesEvento/'.$event->id) }}" class="btn btn-primary btn-sm">Detalles</a>
+            @if(!empty($events))
+              @foreach($events->sortBy('date') as $event)
+              <h5>{{ substr($event->date, -8, 5) }}</h4>
+              <div class="card-body d-flex justify-content-between align-items-center">
+                  <a>{{ $event->title }}</a>
+                  <a id="info" type="submit" href="{{ url('/detallesEvento/'.$event->id) }}" class="btn btn-info btn-sm">Detalles</a>
               </div>
               <hr>
               @endforeach
+            @else
+              <p>No existen reservas.</p>
+            @endif
           </div>
         </div>
 
