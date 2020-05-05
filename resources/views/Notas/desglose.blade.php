@@ -141,7 +141,7 @@
                                             @foreach($parciales as $parcial)
                                             <td>{{$parcial->name}}</td>
                                             @endforeach
-                                            <td>Nota Examenes</td>
+                                            <td>Media Examenes</td>
                                         </tr>
                                     </thead>
                                     <tbody id="fila">
@@ -187,6 +187,7 @@
                                             @foreach($trabajos as $trabajo)
                                             <td>{{$trabajo->name}}</td>
                                             @endforeach
+                                            <td>Media Trabajos</td>
                                         </tr>
                                     </thead>
                                     <tbody id="fila">
@@ -204,6 +205,11 @@
                                                 </div>
                                             </td>
                                             @endforeach
+                                            @if ($mediaTrabajos != null)
+                                            <td>{{$mediaTrabajos[$user->id]}}</td>
+                                            @else
+                                            <td>0</td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -227,6 +233,7 @@
                                             @foreach($actitud as $act)
                                             <td>{{$act->name}}</td>
                                             @endforeach
+                                            <td>Media Actitud</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -244,6 +251,11 @@
                                                 </div>
                                             </td>
                                             @endforeach
+                                            @if ($mediaActitud != null)
+                                            <td>{{$mediaActitud[$user->id]}}</td>
+                                            @else
+                                            <td>0</td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                     </tbody>
