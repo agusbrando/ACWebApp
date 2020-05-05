@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Model;
 
-class YearUnionUser extends Model
+class YearUnionUser extends Pivot
 {
     protected $table = 'yearUnionUsers';
 
