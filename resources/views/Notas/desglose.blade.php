@@ -147,16 +147,16 @@
                                         @foreach($parciales as $parcial)
                                         <td>
                                             <div class="input-group col-10">
-                                                @if ($calificationsArray != null)
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$calificationsArray[$user->id][$parcial->id]}}">
+                                                @if ($notaParciales != null)
+                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$notaParciales[$user->id][$parcial->id]}}">
                                                 @else
                                                 <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
                                                 @endif
                                             </div>
                                         </td>
                                         @endforeach
-                                        @if ($media != null)
-                                        <td>{{$media[$user->id]}}</td>
+                                        @if ($mediaParciales != null)
+                                        <td>{{$mediaParciales[$user->id]}}</td>
                                         @else
                                         <td>0</td>
                                         @endif
@@ -188,10 +188,10 @@
                                         @foreach($trabajos as $trabajo)
                                         <td>
                                             <div class="input-group col-10">
-                                                @if ($calificationsArray != null)
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$calificationsArray[$user->id][$trabajo->id]}}">
+                                                @if ($notaTrabajos != null)
+                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$notaTrabajos[$user->id][$trabajo->id]}}">
                                                 @else
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
+                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w">
                                                 @endif
                                             </div>
                                         </td>
@@ -224,9 +224,10 @@
                                         @foreach($actitud as $act)
                                         <td>
                                             <div class="input-group col-10">
-                                                @if ($calificationsArray != null)
+                                                @if ($notaActitud != null)
+                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$notaActitud[$user->id][$act->id]}}">
                                                 @else
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
+                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w">
                                                 @endif
                                             </div>
                                         </td>

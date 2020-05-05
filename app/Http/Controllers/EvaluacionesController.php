@@ -52,53 +52,60 @@ class EvaluacionesController extends Controller
     public function show($subject_id, $evaluation_id)
     {
         $subject = Subject::find($subject_id);
-        $tasksType = Type::all()->where('model', Task::class);
+        $tasksTypes = Type::all()->where('model', Task::class);
         $evaluation = Evaluation::find($evaluation_id);
         $users = $evaluation->users;
-        $califications = Calification::all();
-        $calificationsArray = null;
-        $media = null;
+
+        $notaParciales = null;
+        $notaTrabajos = null;
+        $notaActitud = null;
+
+        $mediaParciales = null;
+        $mediaTrabajos = null;
+        $mediaActitud = null;
+
         $aux = 0;
 
-        foreach($califications as $calification){
-            $calificationsArray[$calification->user_id][$calification->task_id] = $calification->value;
-        }
-
-        if($calificationsArray != null){
-            foreach ($calificationsArray as $user_id => $tasks) {
-            foreach ($tasks as $task_id => $nota) {
-                $aux += $nota;
-                $media[$user_id] = $aux/count($tasks);
-            }
-            $aux = 0;
-        }
-        }
-
-        foreach ($tasksType as $task) {
-            $id = $task->id;
+        foreach ($tasksTypes as $task_type) {
+            $id = $task_type->id;
             switch ($id) {
                 case 8:
-                    $parciales = Task::where('type_id', $task->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
-                    // $calificaciones = $parciales->with('users')->get();
-                    // $calificaciones = $parciales->load('users');
-
-                    foreach($parciales as $parcial){
-                        foreach($parcial->users as $nota){
-                            $calificaciones = $nota->pivot->value;
+                    $parciales = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    foreach ($parciales as $parcial) {
+                        foreach ($parcial->users as $user) {
+                            $notaParciales[$user->id][$parcial->id] = $user->pivot->value;
                         }
-
+                    }
+                    if ($notaParciales != null) {
+                        foreach ($notaParciales as $user_id => $examenes) {
+                            foreach ($examenes as $nota) {
+                                $aux += $nota;
+                                $mediaParciales[$user_id] = $aux / count($parciales);
+                            }
+                            $aux = 0;
+                        }
                     }
                     break;
                 case 9:
-                    $trabajos = Task::where('type_id', $task->id)->where('evaluation_id', $evaluation->id);
+                    $trabajos = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    foreach ($trabajos as $trabajo) {
+                        foreach ($trabajo->users as $user) {
+                            $notaTrabajos[$user->id][$trabajo->id] = $user->pivot->value;
+                        }
+                    }
                     break;
                 case 10:
-                    $actitud = Task::where('type_id', $task->id)->where('evaluation_id', $evaluation->id);
+                    $actitud = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    foreach ($actitud as $act) {
+                        foreach ($act->users as $user) {
+                            $notaActitud[$user->id][$act->id] = $user->pivot->value;
+                        }
+                    }
                     break;
             }
         }
 
-        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'calificationsArray', 'media'));
+        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'notaParciales', 'notaTrabajos', 'notaActitud', 'mediaParciales'));
     }
 
     /**
