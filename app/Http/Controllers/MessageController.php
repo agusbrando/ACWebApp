@@ -8,6 +8,8 @@ use App\Models\Attachment;
 use App\Models\User;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MessageMail;
 
 
 class MessageController extends Controller
@@ -61,9 +63,15 @@ class MessageController extends Controller
         ]);
         $message->save();
         $users = $request->get('users');
-        foreach ($users as $user) {
-            User::find($user)->messagesReceive()->attach($message->id);
+        foreach ($users as $userid) {
+            $user = User::find($userid);
+            $user->messagesReceive()->attach($message->id);
+            Mail::to($user->email)->send(new MessageMail($message));
+
         }
+
+
+
         if ($request->hasfile('filenames')) {
             foreach ($request->file('filenames') as $file) {
                 $name = $file->getClientOriginalName();
@@ -77,6 +85,7 @@ class MessageController extends Controller
                 $attachment->save();
             }
         }
+
         return redirect('/messages')->with('success', 'Message Send!');
     }
     /**
