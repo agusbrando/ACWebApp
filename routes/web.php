@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Misbehavior;
+use App\Models\Task;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -35,20 +37,14 @@ Route::get('/', function () {
 
 Route::get('/prueba', function (Request $request) {
 
-    $request->validate([
-        'name'=>'required',
-        'expected_date'=>'required',
-        'expected_date_start'=>'required',
-        'expected_date_end'=>'required',
-        'expected_eval'=>'required'
-    ]);
-
-    $unit = new Unit();
-
-    $unit->fill($request->all());
-
    
-    echo var_dump($unit);
+    $prueba = Task::find(1)->users;
+
+    foreach($prueba as $p){
+        echo var_dump($p->pivot);
+        
+    }
+   
 
 
 })->name('prueba');

@@ -13,4 +13,14 @@ class YearUnionUser extends Model
     public $timestamps = true;
     
     protected $guarded =[];
+
+    public function yearUnion(){
+        return $this->belongsTo(YearUnionUser::class,'year_union_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    
 }
