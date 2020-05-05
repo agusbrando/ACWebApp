@@ -170,7 +170,7 @@ class CalendarController extends Controller
 
     $fechaStr = $request->get('fecha');
     $horaStr = $request->get('hora');
-    $tipoId = Type::where('name', $request->get('evento'))->first()->id;
+    $tipoId = Type::where('name', $request->get('evento'))->first()->id;      
     $fechaFormateada = Carbon::createFromFormat('Y-m-d H:i', $fechaStr.' '.$horaStr);
 
      Event::insert([
@@ -181,7 +181,7 @@ class CalendarController extends Controller
       'description'  => $request->get('descripcion'),
       'date' =>  $fechaFormateada
     ]);
-
+     
     // $event = Item::find($id);
     // $event->name = $request->get('name');
     // $event->number = $request->get('number');
@@ -194,6 +194,7 @@ class CalendarController extends Controller
     $event->save();
     return redirect('/calendar')->with('Exito', 'Evento editado!');
   }
+
 
   /**
    * Remove the specified resource from storage.
