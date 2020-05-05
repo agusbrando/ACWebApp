@@ -88,7 +88,7 @@
       </div>
       </div>
       <div class="from-group text-center">
-        <form action="{{ asset('/event/update')}}/{{ $event->id }}" method="put">
+        <form action="{{ asset('/event/update')}}/{{ $event->id }}" method="put"  class="text-center">
             <button id="edit" class="btn btn-primary" data-toggle="modal" data-target="#formModal" type="submit">Editar</button>
         </form>
           <button id="delete" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>

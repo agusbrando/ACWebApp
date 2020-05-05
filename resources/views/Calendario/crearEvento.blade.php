@@ -56,7 +56,7 @@
                     <br>
                     <input type="submit" class="btn btn-success" value="Guardar">
                    
-                    <input type="submit" class="btn btn-info" onclick="history.back()" name="Volver" value="Volver ">
+                    <input type="submit" onclick="history.back()" class="btn btn-info"  name="Volver" value="Volver ">
                     
                 </form>
 
