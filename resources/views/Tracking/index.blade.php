@@ -51,9 +51,29 @@
 
 
   <div class="row col-12 container-fluid calendar">
-    <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-8 calendario w-100">
 
-      <table class="table table-striped col-12" id="tabla">
+    <div class="row border-right-0 border-top-0 border-bottom-0 col-12 col-md-8 calendario w-100">
+      
+      <br>
+      <div class="filtro">
+        <form method="get" action="{{ route('seguimiento.filtrar') }}">
+        
+          @csrf
+          <input type="date" name="fecha">
+          <input type="week" name="semana">
+          <input type="month" name="mes">
+
+
+          <input class="quantity" type="number" name="anyo">
+
+
+          <input type="submit" value="Filtrar">
+        </form>
+
+      </div>
+
+
+      <table class="table table-striped w-100" id="tabla">
         <thead class="cabezeraTabla">
           <tr>
             <td>Fecha Firma</td>
@@ -71,14 +91,25 @@
             <td>{{$tracking->time_start}}</td>
             <td>{{$tracking->time_end}}</td>
             <td>{{$tracking->num_hours}}</td>
-            <td><img src="{{url($tracking->signature)}}" />
-          </td>
+            <td><img class="border"src="{{url($tracking->signature)}}" />
+            </td>
           </tr>
           @endif
           @endforeach
 
         </tbody>
-
+        <thead class="cabezeraTabla">
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Suma Horas Total:</td>
+          
+            <td>{{$horas}}</td>
+            
+          
+            <td></td>
+          </tr>
+        </thead>
       </table>
 
     </div>
@@ -88,30 +119,34 @@
         @csrf
         <div class="form-group">
           <label for="date_start">Fecha de firma</label>
-          <input type="date" class="form-control w-50" id="date_start" name="date_start" value="">
+          <input type="date" class="form-control w-100" id="date_start" name="date_start" value="">
         </div>
 
-        <div class="form-group ">
-          
-            <label for="time_start" class="w-50">hora inicio de jornada</label>
-            <input type="time" class="form-control w-50" id="time_start" name="time_start">
-            <label for="time_end" class="w-50">hora fin de jornada</label>
-            <input type="time" class="form-control w-50" id="time_end" name="time_end">
-            </div>
-            
 
-        
+        <div class="form-group ">
+
+          <label for="time_start" class="w-50"></label>
+          <input type="time" class="form-control w-100" id="time_start" name="time_start">
+          <label for="time_end" class="w-50">hora fin de jornada</label>
+          <input type="time" class="form-control w-100" id="time_end" name="time_end">
+        </div>
+
+
+
 
         <br>
 
         @if($user->signature!=null)
-        <img src="{{url($user->signature)}}"><br>
-        <label>Firma introducida,¿Quieres cambiar?</label>
+        <img class="border" src="{{url($user->signature)}}"><br>
+       
         @endif
-<input type="submit" class="btn btn-success w-50" value="firmar">
+        <br>
+        <input type="submit" class="btn btn-success w-50" value="firmar">
 
       </form>
+      <label>Firma introducida,¿Quieres cambiar?</label>
       <div class="cosis"></div>
+
       <form action="{{ route('seguimiento.edit', $user->id)}}" method="get">
         @csrf
 

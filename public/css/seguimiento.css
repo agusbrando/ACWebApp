@@ -204,9 +204,13 @@ th{
     height: 300px;
 }
 img{
-width: 300px;
+width: 350px;
 }
+
 .cosis{
     height: 200px;
     
+}
+.filtro{
+    margin-bottom: 20px;
 }
