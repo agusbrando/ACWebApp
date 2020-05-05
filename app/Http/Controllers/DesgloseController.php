@@ -173,6 +173,71 @@ class DesgloseController extends Controller
     {
         //
     }
+    public function updateActitud(Request $request)
+    {
+        $request->validate([
+            'actitud' => 'required',
+            'subject' => 'required',
+            'evaluacion' => 'required'
+        ]);
+
+        $actitud = $request->get('actitud');        
+
+        foreach ($actitud as $user_id => $tasks) {
+            foreach ($tasks as $task_id => $task_value) {
+                $task = Task::find($task_id);
+                $task->users()->updateExistingPivot($user_id,[
+                    'value' => $task_value
+                ]);
+            }
+        }
+
+        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+    }
+
+    public function updateNotes(Request $request)
+    {
+        $request->validate([
+            'examenes' => 'required',
+            'subject' => 'required',
+            'evaluacion' => 'required'
+        ]);
+
+        $examenes = $request->get('examenes');        
+
+        foreach ($examenes as $user_id => $tasks) {
+            foreach ($tasks as $task_id => $task_value) {
+                $task = Task::find($task_id);
+                $task->users()->updateExistingPivot($user_id,[
+                    'value' => $task_value
+                ]);
+            }
+        }
+
+        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+    }
+
+    public function updateTrabajos(Request $request)
+    {
+        $request->validate([
+            'trabajos' => 'required',
+            'subject' => 'required',
+            'evaluacion' => 'required'
+        ]);
+
+        $trabajos = $request->get('trabajos');        
+
+        foreach ($trabajos as $user_id => $tasks) {
+            foreach ($tasks as $task_id => $task_value) {
+                $task = Task::find($task_id);
+                $task->users()->updateExistingPivot($user_id,[
+                    'value' => $task_value
+                ]);
+            }
+        }
+
+        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+    }
 
     public function eliminar($id)
     {

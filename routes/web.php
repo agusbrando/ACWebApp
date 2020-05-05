@@ -35,6 +35,9 @@ Route::get('evaluaciones/desglose/{id}', 'DesgloseController@create');
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
 Route::post('desglose/storeTrabajos', 'DesgloseController@storeTrabajos')->name('desglose.storeTrabajos');
 Route::post('desglose/storeActitud', 'DesgloseController@storeActitud')->name('desglose.storeActitud');
+Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
+Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->name('desglose.updateTrabajos');
+Route::post('desglose/updateActitud', 'DesgloseController@updateActitud')->name('desglose.updateActitud');
 
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
