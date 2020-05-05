@@ -38,14 +38,13 @@ Route::get('/', function () {
 
 Route::get('/prueba', function (Request $request) {
 
-   
-    $prueba = User::find(2)->yearUnions;
-
-    foreach($prueba as $p){
-        echo var_dump($p);
+    $item = Item::find(1);
+    
+    foreach($item->yearUnionUsers as $yearUnion){
+        echo ($yearUnion->user->first_name);
         
     }
-
+    
 
 
 })->name('prueba');

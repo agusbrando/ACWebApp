@@ -16,11 +16,11 @@ class Item extends Model
     protected $guarded =[]; //En vez de poner fillable y todos los atributos,
                             //con esto se anaden todos los atributos directamente.
     //Relaciones
-    public function users()
+    /*public function users()
     {
         return $this->belongsToMany('App\Models\User', 'items-users', 'item_id', 'user_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
         
-    }
+    }*/
     public function classroom()
     {
         return $this->belongsTo('App\Models\Classroom');
@@ -36,5 +36,7 @@ class Item extends Model
         return $this->belongsTo('App\Models\Type')->where('model', Item::class);
         
     }
-
+    public function yearUnionUsers(){
+        return $this->belongsToMany(yearUnionUser::class, 'ItemYear', 'item_id', 'year_user_id')->using(ItemYear::class)->withTimeStamps()->withPivot('id');
+    }
 }

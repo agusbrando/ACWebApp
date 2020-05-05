@@ -85,6 +85,6 @@ class User extends Authenticatable
     
     //** lista de year unions (asignaturas por cada evaluacion) en las que esta matriculado el alumno */
     public function yearUnions(){
-        return $this->belongsToMany(YearUnion::class, 'yearUnionUsers', 'user_id', 'year_union_id')->using(yearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
+        return $this->belongsToMany(YearUnion::class, 'yearUnionUsers', 'user_id', 'year_union_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
     }
 }
