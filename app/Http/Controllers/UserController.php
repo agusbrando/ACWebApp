@@ -35,23 +35,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
-            $request->validate([
-                'first_name'=>'required',
-                'last_name'=>'required',
-                'email' => 'required',
-                'password' => 'required'
 
-            ]);
-    
-            $user = new User([
-                'first_name' => $request->get('first_name'),
-                'last_name' => $request->get('last_name'),
-                'email' => $request->get('email'),
-                'password' => $request->get('password')
-            ]);
-            $user->save();
-            return redirect('users')->with('success', 'Contact saved!');
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+
+        ]);
+
+        $user = new User([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
+        ]);
+        $user->save();
+        return redirect('users')->with('success', 'Contact saved!');
     }
 
     /**
@@ -63,7 +63,6 @@ class UserController extends Controller
     public function show($user_id)
     {
         $user = User::find($user_id);
-        $user = User::all();
 
         return view('users.show', compact('user'));
     }
@@ -89,7 +88,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $all = $request->all();
+
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required'
+        ]);
+        $user = User::find($id);
+        $user->first_name = $request->get('first_name');
+        $user->last_name = $request->get('last_name');
+        $user->email = $request->get('email');
+
+
+        $user->save();
+        return redirect('/users')->with('Succes', 'Usuario editado!');
     }
 
     /**

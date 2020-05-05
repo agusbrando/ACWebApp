@@ -1,56 +1,47 @@
-.tablaPorcentajes {
-    margin: 2% 0 0;
+h1 {
+    padding: 10px;
 }
 
-.porcentajes {
-    width: 40%;
-}
-
-.porcentajes td {
-    text-align: center;
-}
-
-.alumnos {
-    margin-left: 10%;
-    width: 50%;
-}
-
-.tituloAlumnos {
-    text-align: center;
-}
-
-.cabezeraTabla {
-    color: #fff;
+table.dataTable thead th {
     background-color: #4d5358;
     border-color: #454d55;
-}
-
-.dropdown {
-    margin: 2% 0 0;
-}
-
-.evaluaciones {
-    height: 10%;
-    margin: 2% 1% 0;
-}
-
-.evaluaciones a {
-    text-decoration: none;
-    color: white;
-}
-.evaluaciones a:hover {
-    text-decoration: none;
-    color: white;
+    color: #fff;
 }
 
 .boton button {
     background-color: white;
 }
 
-.examenes td {
-    text-align: center;
+.botones {
+    display: flex;
+    flex-direction: row;
 }
 
-.tr{
-    width: auto;
+.botones * {
+    padding-left: 10px;
+}
+
+.tablas {
+    display: flex;
+    flex-direction: column;
+}
+
+.espacio {
+    width: 10px;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.anchuraselect {
+    text-overflow: ellipsis;
+    display: inline;
+    width: 100%;
+}
+
+select {
+    text-overflow: ellipsis;
+    display: inline;
+    width: 30px;
 }

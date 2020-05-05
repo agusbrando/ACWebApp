@@ -4,7 +4,7 @@
 <!-- Script tabla de user -->
 <script>
     $(document).ready(function() {
-        $('#alumnos').DataTable({
+        $('#users').DataTable({
             dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             scrollY: 500,
             scrollCollapse: true,
@@ -20,7 +20,6 @@
                 "infoFiltered": "(Filtrado de un total de MAX entradas)",
                 "infoPostFix": "",
                 "thousands": ",",
-                "lengthMenu": "Mostrar MENU Entradas",
                 "loadingRecords": "Cargando...",
                 "processing": "Procesando...",
                 "search": "Buscar:",
@@ -36,9 +35,9 @@
     });
 </script>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <link href="{{ asset('css/table .css') }}" rel="stylesheet" type="text/css" />
-
-    <table id="alumnos" class="table table-striped" style="width:100%">
+    <link href="{{ asset('css/tabla.css') }}" rel="stylesheet" type="text/css" />
+    <h1>Usuarios</h1>
+    <table id="users" class="table table-striped " style="width:100%">
 
         <thead class="cabezeraTabla">
             <tr>
