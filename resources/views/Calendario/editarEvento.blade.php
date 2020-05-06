@@ -29,34 +29,19 @@
 
 
             <div class="col-md-12">
-                <form action="{{ asset('/crearEvento') }}" method="post">
+                <form action="{{ asset('/editarEvento/update/'.$event->id) }}" method="get">
                     @csrf
+                    <div class="fomr-group">
+                        <h5>Título</h5>
+                        <input type="text" value="{{$titulo}}" class="form-control" name="titulo">
+                    </div>
+                    <br>
+                    <div class="fomr-group">
+                        <h5>Descripción del Evento</h5>
+                        <textarea type="text" rows="3" maxlength="30" style="resize:none;" class="form-control" name="descripcion">{{$descripcion}}</textarea>
+                    </div>
+                    <br>
 
-                    <div class="fomr-group">
-                        <h5>Evento</h5>
-                        <input type="text" value="{{$tipo}}" class="form-control" readonly name="evento">
-                    </div>
-                    <br>
-                    <div class="fomr-group">
-                        <h5>Titulo</h5>
-                        <input type="text" class="form-control" name="titulo">
-                    </div>
-                    <br>
-                    <div class="fomr-group">
-                        <h5>Descripcion del Evento</h5>
-                        <textarea type="text" rows="3" maxlength="30" style="resize:none;" class="form-control" name="descripcion"></textarea>
-                    </div>
-                    <br>
-                    <div class="fomr-group">
-                        <h5>Hora</h5>
-                        <input type="text" value="{{$hora}}" class="form-control" readonly name="hora">
-                    </div>
-                    <br>
-                    <div class="fomr-group">
-                        <h5>Fecha</h5>
-                        <input type="date" value="{{$fecha}}" class="form-control" readonly name="fecha">
-                    </div>
-                    <br>
                     <input type="submit" class="btn btn-success" value="Guardar">
                    
                     <input type="submit" class="btn btn-info" onclick="history.back()" name="Volver" value="Volver ">

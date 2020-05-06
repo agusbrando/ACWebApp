@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use App\Models\Type;
-use App\Models\Session;
+use App\Models\User;
 use App\Models\Event;
 use Carbon\Carbon;
 
@@ -21,14 +22,15 @@ class CalendarController extends Controller
 
 
 
-  public function details($id)
+
+
+  public function editarEvento($id)
   {
-
     $event = Event::find($id);
+    $titulo = $event->title;
+    $descripcion = $event->description;
 
-    return view("/Calendario/evento", [
-      "event" => $event
-    ]);
+    return view("/Calendario/editarEvento", compact('id', 'event', 'titulo', 'descripcion'));
   }
 
 
@@ -125,7 +127,7 @@ class CalendarController extends Controller
     ]);
 
     //devuelve el mensaje con exito
-    return back()->with('success', '¡Guardado exitosamente!');
+    return redirect('/calendar')->with('Exito', '¡Evento borrado!');
   }
 
   /**
@@ -136,7 +138,12 @@ class CalendarController extends Controller
    */
   public function show($id)
   {
-    //
+    $event = Event::find($id);
+        $edit = false;
+        if(URL::current() == url("/events/edit/".$event)){
+            $edit = true;
+        }
+        return view('calendario.evento', compact('event','edit'));
   }
 
   /**
@@ -158,41 +165,18 @@ class CalendarController extends Controller
    */
   public function update(Request $request, $id)
   {
-     $event = $request->all();
+     $event = Event::find($id);
 
      $request->validate([
-      'evento' => 'required',
       'titulo'  =>  'required',
-      'descripcion' => 'required',
-      'hora'  =>  'required',
-      'fecha' => 'required'
+      'descripcion' => 'required'
      ]);
 
-    $fechaStr = $request->get('fecha');
-    $horaStr = $request->get('hora');
-    $tipoId = Type::where('name', $request->get('evento'))->first()->id;      
-    $fechaFormateada = Carbon::createFromFormat('Y-m-d H:i', $fechaStr.' '.$horaStr);
-
-     Event::insert([
-      'type_id' => $tipoId,
-      'session_id' => 1,
-      'user_id' => 1,
-      'title' => $request->get('titulo'),
-      'description'  => $request->get('descripcion'),
-      'date' =>  $fechaFormateada
-    ]);
-     
-    // $event = Item::find($id);
-    // $event->name = $request->get('name');
-    // $event->number = $request->get('number');
-    // $item->date_pucharse = $request->get('date_pucharse');
-    // $item->classroom_id = $request->get('classroom_id');
-    // $item->state_id = $request->get('state_id');
-    // $item->type_id = $request->get('type_id');
-
-
+    $event->title = $request->get('titulo');
+    $event->description = $request->get('descripcion');
     $event->save();
-    return redirect('/calendar')->with('Exito', 'Evento editado!');
+
+    return redirect('/calendar')->with('Exito', '¡Evento editado!');
   }
 
 

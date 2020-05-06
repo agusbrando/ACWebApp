@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/calendar/{mes}','CalendarController@index_month');
 // Route::get('/calendar','CalendarController@index');
-
-Route::resource('calendar', 'CalendarController');
-
 // Route::post('/event/store','CalendarController@store');
 // Route::post('/event/create','CalendarController@create');
 // Route::put('/event/destroy/{id}','CalendarController@destroy');
@@ -24,7 +21,8 @@ Route::resource('calendar', 'CalendarController');
 // Route::get('/event/details/{id}','CalendarController@details');
 
 
- Route::resource('event', 'CalendarController');
+Route::resource('events', 'CalendarController');
+Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
 
 
 
@@ -47,5 +45,3 @@ Route::post('/calendarTime', 'CalendarController@getTime');
 Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
 
 Route::post('/crearEvento','CalendarController@store');
-Route::get('/detallesEvento/{id}','CalendarController@details');
-Route::get('/detallesEvento/delete/{id}','CalendarController@destroy');
