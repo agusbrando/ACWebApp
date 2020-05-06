@@ -14,20 +14,17 @@ class ProgramsTableSeeder extends Seeder
         DB::table('programs')->insert([
             'professor_id' => 3,
             'name'=> 'DAM - Programacion multimedia y dispositivos moviles (2020)',
-            'user_id' => 4,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('programs')->insert([
             'professor_id' => 3,
-            'user_id' => 4,
             'name'=> 'DAW - Bases de Datos (2020)',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('programs')->insert([
             'professor_id' => 3,
-            'user_id' => 4,
             'name'=>'DAM semipresencial - Programacion multimedia y dispositivos moviles (2020)',
             'created_at' => now(),
             'updated_at' => now()
