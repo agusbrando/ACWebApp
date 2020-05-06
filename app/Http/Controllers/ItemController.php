@@ -157,8 +157,6 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $all = $request->all();
-
         $request->validate([
             'name'=>'required',
             'number'=>'required',

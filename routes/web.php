@@ -43,6 +43,7 @@ Route::get('/prueba', function (Request $request) {
     $item = Item::find(1);
     
     foreach($item->yearUnionUsers as $yearUnionUser){
+        
         echo ($yearUnionUser->yearUnion->subject).'<br>';
         
     }
