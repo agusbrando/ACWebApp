@@ -10,42 +10,50 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
-    <div class="container">
-        <h1 class="display-4 pr-5">Crear Porcentaje para {{$subject->name}}</h1>
-        <hr>
-        <form action="{{ route('porcentajes.store') }}" method="post">
-            @csrf
-            <div class="form-group">
-                <label for="Porcentaje">Porcentaje</label>
-                <input type="porcentaje" class="form-control" name="porcentaje" aria-describedby="porcentaje" placeholder="%">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="card shadow">
+        <div class="card-header row m-0 justify-content-between">
+            <h3>Crear Porcentaje para {{$subject->name}}</h3>
+        </div>
+        <div class="card-body row no-gutters">
+            <div class="container">
+                <form action="{{ route('porcentajes.store') }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="Porcentaje">Porcentaje</label>
+                        <input type="porcentaje" class="form-control" name="porcentaje" aria-describedby="porcentaje" placeholder="%">
+                    </div>
+                    <div class="form-group">
+                        <label for="Porcentaje">Evaluaciones</label>
+                        <select class="selectpicker w-100 mt-n1" title="Selecciona Evaluacion" multiple data-actions-box="true" name="evaluaciones[]">
+                            @foreach($evaluaciones as $eval)
+                            <option value="{{$eval->id}}">{{$eval->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Porcentaje">Tipos</label>
+                        <select class="form-control" name="type">
+                            @foreach($types as $type)
+                            <option value="{{$type->id}}">{{$type->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nota_min">Nota Minima</label>
+                        <input type="porcentaje" class="form-control" name="nota_min" aria-describedby="porcentaje">
+                    </div>
+                    <div class="form-group">
+                        <label for="nota_med">Nota Media</label>
+                        <input type="porcentaje" class="form-control" name="nota_media" aria-describedby="porcentaje">
+                    </div>
+                    <input type="hidden" name="subject" value={{$subject->id}}>
             </div>
-            <div class="form-group">
-                <label for="Porcentaje">Evaluaciones</label>
-                <select class="selectpicker w-100 mt-n1" title="Selecciona Evaluacion" multiple data-actions-box="true" name="evaluaciones[]">
-                    @foreach($evaluaciones as $eval)
-                    <option value="{{$eval->id}}">{{$eval->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Porcentaje">Tipos</label>
-                <select class="form-control" name="type">
-                    @foreach($types as $type)
-                    <option value="{{$type->id}}">{{$type->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="nota_min">Nota Minima</label>
-                <input type="porcentaje" class="form-control" name="nota_min" aria-describedby="porcentaje">
-            </div>
-            <div class="form-group">
-                <label for="nota_med">Nota Media</label>
-                <input type="porcentaje" class="form-control" name="nota_media" aria-describedby="porcentaje">
-            </div>
-            <input type="hidden" name="subject" value={{$subject->id}}>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+        <div class=" card-footer col-12">
+            <button class="btn btn-outline-primary float-right" type="submit">Guardar</button>
+            <button class="btn btn-outline-warning float-right mr-2" href="asignaturas/{{$subject->id}}">Cancelar</button>
+        </div>
         </form>
     </div>
 </main>

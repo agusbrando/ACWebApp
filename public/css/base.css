@@ -18,6 +18,11 @@
     vertical-align: text-bottom;
 }
 
+body {
+    background-color: #E6E6E6;
+    margin-top: 30px;
+}
+
 
 /*
  * Sidebar

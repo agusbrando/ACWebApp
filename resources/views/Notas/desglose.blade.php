@@ -4,14 +4,18 @@
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="container-fluid">
-        <div class="d-flex flex-row mb-4">
-            <a href="{{ url('asignaturas', $subject->id) }}" class="atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
-            <h1 class="display-4 pr-3">Desglose {{$subject->name}} {{$evaluation->name}}</h1>
-            <a href="{{ url('/evaluaciones/desglose', $subject->id) }}" class="btn btn-primary ml-2 mt-4 h-100">Crear Tarea</a>
-            <a href="{{ url('tareas', $subject->id) }}" class="btn btn-primary ml-2 mt-4 h-100">Eliminar Tarea</a>
+    <div class="card shadow">
+        <div class="card-header row m-0 justify-content-between">
+            <div class="d-flex flex-row">
+                <a href="{{ url('asignaturas', $subject->id) }}" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3 class="m-auto">Desglose {{$subject->name}} {{$evaluation->name}}</h3>
+            </div>
+            <div>
+                <a href="{{ url('/evaluaciones/desglose', $subject->id) }}" class="btn btn-primary ">Crear Tarea</a>
+                <a href="{{ url('tareas', $subject->id) }}" class="btn btn-primary ">Eliminar Tarea</a>
+            </div>
         </div>
-        <div class="row">
+        <div class="card-body row no-gutters">
             <div class="col mt-4">
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -171,4 +175,5 @@
         </div>
     </div>
 </main>
+
 @endsection
