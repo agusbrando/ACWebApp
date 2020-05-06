@@ -41,4 +41,12 @@ class YearUnion extends Model
     public function users(){
         return $this->belongsToMany(User::class, 'yearUnionUsers', 'year_union_id', 'user_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
     }
+
+    //acceso a types de ese year union (asignatura, en una determinada evaluacion) con sus porcentajes (por cada tipo)
+    public function types(){
+        return $this->belongsToMany(Type::class, 'percentages', 'year_union_id', 'type_id')->using(Percentage::class)->withPivot('percentage','min_grade','average_grade')->withTimestamps();
+    }
+
+
+
 }

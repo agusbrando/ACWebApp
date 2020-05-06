@@ -33,15 +33,8 @@ class YearUnionUserTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('yearUnionUsers')->insert([
-            'year_union_id' => '6',
+            'year_union_id' => '4',
             'user_id' => '2',
-            'assistance' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('yearUnionUsers')->insert([
-            'year_union_id' => '5',
-            'user_id' => '3',
             'assistance' => true,
             'created_at' => now(),
             'updated_at' => now(),
