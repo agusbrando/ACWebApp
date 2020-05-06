@@ -114,6 +114,7 @@
                                         <td>X</td>
                                         <td>X</td>
                                         <td>X</td>
+                                        
                                     </tr>
                                     @endforeach
                                 </tbody>
