@@ -94,8 +94,8 @@ class EvaluacionesController extends Controller
                         }
                     }
                     if ($notaTrabajos != null) {
-                        foreach ($notaTrabajos as $user_id => $trabajos) {
-                            foreach ($trabajos as $nota) {
+                        foreach ($notaTrabajos as $user_id => $trabajosNotas) {
+                            foreach ($trabajosNotas as $nota) {
                                 $aux += $nota;
                                 $mediaTrabajos[$user_id] = $aux / count($trabajos);
                             }
@@ -111,8 +111,8 @@ class EvaluacionesController extends Controller
                         }
                     }
                     if ($notaActitud != null) {
-                        foreach ($notaActitud as $user_id => $actitud) {
-                            foreach ($actitud as $nota) {
+                        foreach ($notaActitud as $user_id => $actitudNotas) {
+                            foreach ($actitudNotas as $nota) {
                                 $aux += $nota;
                                 $mediaActitud[$user_id] = $aux / count($actitud);
                             }
@@ -122,8 +122,7 @@ class EvaluacionesController extends Controller
                     break;
             }
         }
-
-        // return redirect('evaluaciones/desglose/'.$subject->id.'/'.$evaluation->id);
+        
         return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'notaParciales', 'notaTrabajos', 'notaActitud', 'mediaParciales', 'mediaTrabajos', 'mediaActitud'));
     }
 

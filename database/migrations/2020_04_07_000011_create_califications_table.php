@@ -16,7 +16,7 @@ class CreateCalificationsTable extends Migration
         Schema::create('califications', function (Blueprint $table) {
             $table->integer('task_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->decimal('value');
+            $table->decimal('value')->nullable();
             $table->timestamps();
 
             $table->primary(['task_id', 'user_id']);
