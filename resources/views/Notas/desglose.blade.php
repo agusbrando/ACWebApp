@@ -1,112 +1,6 @@
 @extends('base')
 
 @section('main')
-<script>
-    $(document).ready(function() {
-        $('#examenForm').submit(function() {
-
-            var sData = oTable.$('input').serialize();
-
-            return false;
-
-        });
-        $('#examenes').DataTable({
-            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-            scrollY: 500,
-            scrollCollapse: true,
-            buttons: [{
-                extend: 'excel',
-                className: 'btn-outline-success'
-            }],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#trabajos').DataTable({
-            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-            scrollY: 500,
-            scrollCollapse: true,
-            buttons: [{
-                extend: 'excel',
-                className: 'btn-outline-success'
-            }],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#actitud').DataTable({
-            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-            scrollY: 500,
-            scrollCollapse: true,
-            buttons: [{
-                extend: 'excel',
-                className: 'btn-outline-success'
-            }],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        });
-    });
-</script>
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -128,46 +22,49 @@
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-eval1" role="tabpanel" aria-labelledby="nav-eval1-tab">
+
                         @if ($notaParciales != null)
                         <form action="{{ route('desglose.updateNotes') }}" method="post">
                             @else
                             <form action="{{ route('desglose.storeNotes') }}" method="post">
                                 @endif
                                 @csrf
-                                <table id="examenes" class="table table-striped examenes" style="width:100%">
-                                    <thead class="cabezeraTabla">
-                                        <tr id='columna'>
-                                            <td>Apellidos, Nombre</td>
-                                            @foreach($parciales as $parcial)
-                                            <td>{{$parcial->name}}</td>
+                                <div class="table-responsive">
+                                    <table id="examenes" class="table table-striped examenes" style="width:100%">
+                                        <thead class="cabezeraTabla">
+                                            <tr id='columna'>
+                                                <td>Apellidos, Nombre</td>
+                                                @foreach($parciales as $parcial)
+                                                <td>{{$parcial->name}}</td>
+                                                @endforeach
+                                                <td>Media Examenes</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fila">
+                                            @foreach($users as $user)
+                                            <tr>
+                                                <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                                                @foreach($parciales as $parcial)
+                                                <td>
+                                                    <div class="input-group col-10">
+                                                        @if ($notaParciales != null)
+                                                        <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$notaParciales[$user->id][$parcial->id]}}">
+                                                        @else
+                                                        <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                                @endforeach
+                                                @if ($mediaParciales != null)
+                                                <td>{{$mediaParciales[$user->id]}}</td>
+                                                @else
+                                                <td>0</td>
+                                                @endif
+                                            </tr>
                                             @endforeach
-                                            <td>Media Examenes</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="fila">
-                                        @foreach($users as $user)
-                                        <tr>
-                                            <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                            @foreach($parciales as $parcial)
-                                            <td>
-                                                <div class="input-group col-10">
-                                                    @if ($notaParciales != null)
-                                                    <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$notaParciales[$user->id][$parcial->id]}}">
-                                                    @else
-                                                    <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
-                                                    @endif
-                                                </div>
-                                            </td>
-                                            @endforeach
-                                            @if ($mediaParciales != null)
-                                            <td>{{$mediaParciales[$user->id]}}</td>
-                                            @else
-                                            <td>0</td>
-                                            @endif
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <input type="hidden" name="subject" value={{$subject->id}}>
                                 <input type="hidden" name="evaluacion" value={{$evaluation->id}}>
                                 <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
@@ -180,40 +77,42 @@
                             <form action="{{ route('desglose.storeTrabajos') }}" method="post">
                                 @endif
                                 @csrf
-                                <table id="trabajos" class="table table-striped examenes" style="width:100%">
-                                    <thead class="cabezeraTabla">
-                                        <tr id='columna'>
-                                            <td>Apellidos, Nombre</td>
-                                            @foreach($trabajos as $trabajo)
-                                            <td>{{$trabajo->name}}</td>
+                                <div class="table-responsive">
+                                    <table id="trabajos" class="table table-striped examenes" style="width:100%">
+                                        <thead class="cabezeraTabla">
+                                            <tr id='columna'>
+                                                <td>Apellidos, Nombre</td>
+                                                @foreach($trabajos as $trabajo)
+                                                <td>{{$trabajo->name}}</td>
+                                                @endforeach
+                                                <td>Media Trabajos</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fila">
+                                            @foreach($users as $user)
+                                            <tr>
+                                                <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                                                @foreach($trabajos as $trabajo)
+                                                <td>
+                                                    <div class="input-group col-10">
+                                                        @if ($notaTrabajos != null)
+                                                        <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$notaTrabajos[$user->id][$trabajo->id]}}">
+                                                        @else
+                                                        <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w">
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                                @endforeach
+                                                @if ($mediaTrabajos != null)
+                                                <td>{{$mediaTrabajos[$user->id]}}</td>
+                                                @else
+                                                <td>0</td>
+                                                @endif
+                                            </tr>
                                             @endforeach
-                                            <td>Media Trabajos</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="fila">
-                                        @foreach($users as $user)
-                                        <tr>
-                                            <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                            @foreach($trabajos as $trabajo)
-                                            <td>
-                                                <div class="input-group col-10">
-                                                    @if ($notaTrabajos != null)
-                                                    <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$notaTrabajos[$user->id][$trabajo->id]}}">
-                                                    @else
-                                                    <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w">
-                                                    @endif
-                                                </div>
-                                            </td>
-                                            @endforeach
-                                            @if ($mediaTrabajos != null)
-                                            <td>{{$mediaTrabajos[$user->id]}}</td>
-                                            @else
-                                            <td>0</td>
-                                            @endif
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <input type="hidden" name="subject" value={{$subject->id}}>
                                 <input type="hidden" name="evaluacion" value={{$evaluation->id}}>
                                 <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
@@ -226,40 +125,42 @@
                             <form action="{{ route('desglose.storeActitud') }}" method="post">
                                 @endif
                                 @csrf
-                                <table id="actitud" class="table table-striped examenes" style="width:100%">
-                                    <thead class="cabezeraTabla">
-                                        <tr>
-                                            <td>Apellidos, Nombre</td>
-                                            @foreach($actitud as $act)
-                                            <td>{{$act->name}}</td>
+                                <div class="table-responsive">
+                                    <table id="actitud" class="table table-striped examenes" style="width:100%">
+                                        <thead class="cabezeraTabla">
+                                            <tr>
+                                                <td>Apellidos, Nombre</td>
+                                                @foreach($actitud as $act)
+                                                <td>{{$act->name}}</td>
+                                                @endforeach
+                                                <td>Media Actitud</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($users as $user)
+                                            <tr>
+                                                <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                                                @foreach($actitud as $act)
+                                                <td>
+                                                    <div class="input-group col-10">
+                                                        @if ($notaActitud != null)
+                                                        <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$notaActitud[$user->id][$act->id]}}">
+                                                        @else
+                                                        <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w">
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                                @endforeach
+                                                @if ($mediaActitud != null)
+                                                <td>{{$mediaActitud[$user->id]}}</td>
+                                                @else
+                                                <td>0</td>
+                                                @endif
+                                            </tr>
                                             @endforeach
-                                            <td>Media Actitud</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($users as $user)
-                                        <tr>
-                                            <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                            @foreach($actitud as $act)
-                                            <td>
-                                                <div class="input-group col-10">
-                                                    @if ($notaActitud != null)
-                                                    <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$notaActitud[$user->id][$act->id]}}">
-                                                    @else
-                                                    <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w">
-                                                    @endif
-                                                </div>
-                                            </td>
-                                            @endforeach
-                                            @if ($mediaActitud != null)
-                                            <td>{{$mediaActitud[$user->id]}}</td>
-                                            @else
-                                            <td>0</td>
-                                            @endif
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <input type="hidden" name="subject" value={{$subject->id}}>
                                 <input type="hidden" name="evaluacion" value={{$evaluation->id}}>
                                 <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>

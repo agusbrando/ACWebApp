@@ -1,42 +1,6 @@
 @extends('base')
 
 @section('main')
-@foreach($evaluaciones as $eval)
-<script>
-    $(document).ready(function() {
-        var table = $('#{{$eval->name}}').DataTable({
-            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row mt-3'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-            scrollY: 500,
-            scrollCollapse: true,
-            buttons: [{
-                extend: 'excel',
-                className: 'btn-outline-success'
-            }],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        });
-    });
-</script>
-@endforeach
-
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <section id="tabs">
@@ -126,7 +90,7 @@
                         </div>
                         @foreach($evaluaciones as $eval)
                         <div class="tab-pane fade" id="a{{$eval->name}}" role="tabpanel">
-                            <table id="{{$eval->name}}" class="table table-striped" style="width:100%">
+                            <table class="table table-striped" style="width:100%">
                                 <thead class="cabezeraTabla">
                                     <tr>
                                         <td>Nº</td>
@@ -154,7 +118,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <a href="{{ url('evaluaciones/desglose', ['subject_id'=> ($subject->id), 'evaluation_id'=> ($eval->id)]) }}" class="btn btn-secondary col mt-2">Desglose</a>
+                            <a href="{{ url('evaluaciones/desglose', ['subject_id'=> ($subject->id), 'evaluation_id'=> ($eval->id)]) }}" class="btn btn-secondary mt-2">Desglose</a>
                         </div>
                         @endforeach
                     </div>

@@ -65,6 +65,7 @@ class EvaluacionesController extends Controller
         $mediaActitud = null;
 
         $aux = 0;
+        $aux2 = 0;
 
         foreach ($tasksTypes as $task_type) {
             $id = $task_type->id;
@@ -79,12 +80,23 @@ class EvaluacionesController extends Controller
                     if ($notaParciales != null) {
                         foreach ($notaParciales as $user_id => $examenes) {
                             foreach ($examenes as $nota) {
+                                if($aux2 == count($parciales)){
+                                    $aux2 = 0;
+                                }
+                                if ($nota != null) {
+                                    $aux2 ++;
+                                }
+                                if($aux2 == 0){
+                                    $aux2 = count($parciales);
+                                }
                                 $aux += $nota;
-                                $mediaParciales[$user_id] = $aux / count($parciales);
+                                $mediaParciales[$user_id] = bcdiv($aux / $aux2, '1', 2);
                             }
                             $aux = 0;
+                            $aux2 = 0;
                         }
                     }
+                    
                     break;
                 case 9:
                     $trabajos = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
@@ -96,10 +108,20 @@ class EvaluacionesController extends Controller
                     if ($notaTrabajos != null) {
                         foreach ($notaTrabajos as $user_id => $trabajosNotas) {
                             foreach ($trabajosNotas as $nota) {
+                                if($aux2 == count($parciales)){
+                                    $aux2 = 0;
+                                }
+                                if ($nota != null) {
+                                    $aux2 ++;
+                                }
+                                if($aux2 == 0){
+                                    $aux2 = count($parciales);
+                                }
                                 $aux += $nota;
-                                $mediaTrabajos[$user_id] = $aux / count($trabajos);
+                                $mediaTrabajos[$user_id] = bcdiv($aux / $aux2, '1', 2);
                             }
                             $aux = 0;
+                            $aux2 = 0;
                         }
                     }
                     break;
@@ -113,16 +135,26 @@ class EvaluacionesController extends Controller
                     if ($notaActitud != null) {
                         foreach ($notaActitud as $user_id => $actitudNotas) {
                             foreach ($actitudNotas as $nota) {
+                                if($aux2 == count($parciales)){
+                                    $aux2 = 0;
+                                }
+                                if ($nota != null) {
+                                    $aux2 ++;
+                                }
+                                if($aux2 == 0){
+                                    $aux2 = count($parciales);
+                                }
                                 $aux += $nota;
-                                $mediaActitud[$user_id] = $aux / count($actitud);
+                                $mediaActitud[$user_id] = bcdiv($aux / $aux2, '1', 2);
                             }
                             $aux = 0;
+                            $aux2 = 0;
                         }
                     }
                     break;
             }
         }
-        
+
         return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'notaParciales', 'notaTrabajos', 'notaActitud', 'mediaParciales', 'mediaTrabajos', 'mediaActitud'));
     }
 
