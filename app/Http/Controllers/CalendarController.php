@@ -127,7 +127,7 @@ class CalendarController extends Controller
     ]);
 
     //devuelve el mensaje con exito
-    return redirect('/calendar')->with('Exito', '¡Evento borrado!');
+    return redirect('/events')->with('Exito', '¡Evento borrado!');
   }
 
   /**
@@ -140,10 +140,10 @@ class CalendarController extends Controller
   {
     $event = Event::find($id);
         $edit = false;
-        if(URL::current() == url("/events/edit/".$event)){
+        if(URL::current() == url("/events/edit/".$id)){
             $edit = true;
         }
-        return view('calendario.evento', compact('event','edit'));
+        return view('calendario.show', compact('event','edit'));
   }
 
   /**
@@ -176,7 +176,7 @@ class CalendarController extends Controller
     $event->description = $request->get('descripcion');
     $event->save();
 
-    return redirect('/calendar')->with('Exito', '¡Evento editado!');
+    return redirect('/events')->with('Exito', '¡Evento editado!');
   }
 
 
@@ -191,6 +191,6 @@ class CalendarController extends Controller
     $event = Event::find($id);
     $event->delete();
 
-    return redirect('/calendar')->with('Exito', '¡Evento borrado!');
+    return redirect('/events')->with('Exito', '¡Evento borrado!');
   }
 }

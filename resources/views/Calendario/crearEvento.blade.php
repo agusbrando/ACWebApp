@@ -1,32 +1,18 @@
 @extends('base')
 
 @section('main')
+
 <main role="main" class=" col-md-10 ml-sm-auto col-lg-10">
-
-<div class="space"></div>
-  <p class="lead">
-    <h1 class="display-4 pr-3">Calendario</h1>   
-    <hr>
     <br>
-    <div class="container">
-        <p class="lead">
-            @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+    <div class="card shadow">
+        <div class="card-header row m-0 justify-content-between">
+            <h3>Calendario</h3>
+            <div>
+                <input type="submit" class="btn btn-outline-success" value="Guardar">
+                <input type="submit" onclick="history.back()" class="btn btn-outline-info" name="Volver" value="Volver ">
             </div>
-            @endif
-            @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>{{ $message }}</strong>
-            </div>
-            @endif
-
+        </div>
+        <div class="card-body row no-gutters">
 
             <div class="col-md-12">
                 <form action="{{ asset('/crearEvento') }}" method="post">
@@ -57,16 +43,13 @@
                         <input type="date" value="{{$fecha}}" class="form-control" readonly name="fecha">
                     </div>
                     <br>
-                    <input type="submit" class="btn btn-success" value="Guardar">
-                   
-                    <input type="submit" onclick="history.back()" class="btn btn-info"  name="Volver" value="Volver ">
-                    
+
+
                 </form>
 
-                <a></a>
-
             </div>
-    </div>
+        </div>
+
 </main>
 
 @endsection
