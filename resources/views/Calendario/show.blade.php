@@ -2,84 +2,7 @@
 
 @section('main')
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
-  <!-- <div class="container-fluid">
-    <img class="card-img-top" src="holder.js/100px180/" alt="">
-  </div>
-  <p class="lead">
-    <div class="d-flex flex-row">
-      <a href="/calendar" class=" atras mt-3 mr-3"><i class="fas fa-arrow-left"></i></a>
-      <h1 class="display-4 pr-3">Detalles Evento</h1>
-    </div>
-    <hr>
-    <div class="text-center">
-      <div class="calendar">
-        <div class="col-md-12">
-          <div class="row border-right-0 border-top-0 border-bottom-0 col-12 w-100">
-
-            <div class="col-md-4 bg-light border-left border-right p-0">
-              <div id="espacio" class="bg-dark w-100">
-                <h3>Título</h3>
-              </div>
-              <br>
-              <div id="buttons">
-                {{ $event->title }}
-              </div>
-              <br>
-            </div>
-
-            <div class="col-md-4 bg-light border-left border-right p-0 ">
-              <div id="espacio" class="bg-dark w-100">
-                <h3>Descripción</h3>
-              </div>
-              <br>
-              <div id="buttons">
-                {{ $event->description }}
-              </div>
-            </div>
-
-            <div class="col-md-4 bg-light border-left border-right p-0 ">
-              <div id="espacio" class="bg-dark w-100">
-                <h3>Fecha</h3>
-              </div>
-              <br>
-              <div id="buttons">
-                {{ $event->date }}
-              </div>
-            </div>
-             <div class="col-md-3 bg-light border-left border-right p-0 ">
-              <div id="espacio" class="bg-dark w-100">
-                <h3>Opciones</h3>
-              </div>
-              <br>
-              <div id="buttons">
-                
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <br />
-       
-      </div>
-      </div>
-      <div class="from-group text-center">
-        <form action="{{ asset('/event/update')}}/{{ $event->id }}" method="put"  class="text-center">
-            <button id="edit" class="btn btn-primary" data-toggle="modal" data-target="#formModal" type="submit">Editar</button>
-        </form>
-          <button id="delete" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
-      </div>
-    </div>
-    <div class="from-group text-center">
-      <a id="edit" href="/editarEvento/{{ $event->id }}" class="btn btn-primary" type="submit">Editar</a>
-      <button id="delete" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
-    </div>
-
-    </div> -->
-
-    
-
-
+  <br>
       <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
           <h3>Detalles Evento</h3>
@@ -139,31 +62,6 @@
       </div>
 
     </main>
-
-    <!-- Modal Delete -->
-
-    <!--     <div class="modal" tabindex="-1" role="dialog" id="deleteModal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Eliminar evento</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>¿Esta usted seguro que quieres eliminar este evento?</p>
-          </div>
-          <div class="modal-footer">
-            <form action="{{ url('/detallesEvento/delete/'.$event->id) }}" method="get">
-              <button type="submit" class="btn btn-danger">Eliminar</button>
-            </form>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
- -->
 
 
 @endsection

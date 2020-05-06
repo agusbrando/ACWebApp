@@ -3,7 +3,6 @@
 @section('main')
 <link href="{{ asset('css/calendar.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class=" col-md-10 ml-sm-auto col-lg-10">
-  <br>
   <div class="card shadow">
     <div class="card-header row m-0 justify-content-between">
       <h3>Calendario</h3>
@@ -57,9 +56,10 @@
           @if(!empty($events))
           @foreach($events->sortBy('date') as $event)
           <h5>{{ substr($event->date, -8, 5) }}</h4>
+          <a>{{ substr($event->date, -30, 10) }}</a>
             <div class="card-body d-flex justify-content-between align-items-center">
-              <a>{{ $event->title }}</a>
-              <a id="info" type="submit" href="{{ url('/events/'.$event->id) }}" class="btn btn-info btn-sm">Detalles</a>
+              <a>{{ $event->title }}</a>            
+              <a id="info" type="submit" href="{{ url('/detallesEvento/'.$event->id) }}" class="btn btn-info btn-sm">Detalles</a>
             </div>
             <hr>
             @endforeach
@@ -67,7 +67,6 @@
             <p>No existen reservas.</p>
             @endif
         </div>
-
       </div>
     </div>
 
