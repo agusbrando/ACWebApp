@@ -93,15 +93,15 @@ class EvaluacionesController extends Controller
                             $notaTrabajos[$user->id][$trabajo->id] = $user->pivot->value;
                         }
                     }
-                    // if ($notaTrabajos != null) {
-                    //     foreach ($notaTrabajos as $user_id => $trabajos) {
-                    //         foreach ($trabajos as $nota) {
-                    //             $aux += $nota;
-                    //             $mediaTrabajos[$user_id] = $aux / count($trabajos);
-                    //         }
-                    //         $aux = 0;
-                    //     }
-                    // }
+                    if ($notaTrabajos != null) {
+                        foreach ($notaTrabajos as $user_id => $trabajos) {
+                            foreach ($trabajos as $nota) {
+                                $aux += $nota;
+                                $mediaTrabajos[$user_id] = $aux / count($trabajos);
+                            }
+                            $aux = 0;
+                        }
+                    }
                     break;
                 case 10:
                     $actitud = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
@@ -110,19 +110,20 @@ class EvaluacionesController extends Controller
                             $notaActitud[$user->id][$act->id] = $user->pivot->value;
                         }
                     }
-                    // if ($notaActitud != null) {
-                    //     foreach ($notaActitud as $user_id => $actitud) {
-                    //         foreach ($actitud as $nota) {
-                    //             $aux += $nota;
-                    //             $mediaActitud[$user_id] = $aux / count($actitud);
-                    //         }
-                    //         $aux = 0;
-                    //     }
-                    // }
+                    if ($notaActitud != null) {
+                        foreach ($notaActitud as $user_id => $actitud) {
+                            foreach ($actitud as $nota) {
+                                $aux += $nota;
+                                $mediaActitud[$user_id] = $aux / count($actitud);
+                            }
+                            $aux = 0;
+                        }
+                    }
                     break;
             }
         }
 
+        // return redirect('evaluaciones/desglose/'.$subject->id.'/'.$evaluation->id);
         return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'notaParciales', 'notaTrabajos', 'notaActitud', 'mediaParciales', 'mediaTrabajos', 'mediaActitud'));
     }
 
