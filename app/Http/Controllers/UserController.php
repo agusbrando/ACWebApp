@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+
 
 class UserController extends Controller
 {
@@ -25,6 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        
     }
 
     /**
@@ -35,7 +39,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
+        $store = false;
+        if(URL::current() == url("/users/store/".$request)){
+            $store = true;
+        }
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -51,7 +58,7 @@ class UserController extends Controller
             'password' => $request->get('password')
         ]);
         $user->save();
-        return redirect('users')->with('success', 'Contact saved!');
+        return redirect('users.index')->with('success', 'Contact saved!');
     }
 
     /**
@@ -63,9 +70,15 @@ class UserController extends Controller
     public function show($user_id)
     {
         $user = User::find($user_id);
-
-        return view('users.show', compact('user'));
+        $edit = false;
+        $roles = null;
+        if(URL::current() == url("/users/edit/".$user_id)){
+            $edit = true;
+            $roles = Role::all();
+        }
+        return view('users.show', compact('user','edit','roles'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -88,7 +101,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $all = $request->all();
 
         $request->validate([
             'first_name' => 'required',
@@ -102,7 +114,7 @@ class UserController extends Controller
 
 
         $user->save();
-        return redirect('/users')->with('Succes', 'Usuario editado!');
+        return redirect('/users/'.$id)->with('Succes', 'Usuario editado!');
     }
 
     /**

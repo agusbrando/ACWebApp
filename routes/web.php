@@ -26,13 +26,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/permissions', 'PermissionController@index')->name('permissions');
-
-
+Route::resource('permissions','PermissionController');
+// Route::get('/permissions', 'PermissionController@index')->name('permissions');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/user', 'UserController@index')->name('user');
-Route::get('profile/{id}',['as' => 'users.show', 'uses' => 'UserController@show']);
+Route::resource('users','UserController');
+Route::get('users/edit/{id}',['as' => 'users.showedit', 'uses' => 'UserController@show']);
+Route::get('users/store/{id}',['as' => 'users.store', 'uses' => 'UserController@store']);
 
 Route::get('/', 'HomeController@index');
