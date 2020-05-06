@@ -59,7 +59,7 @@
             <br>
             <hr>
 
-            <div class="d-flex flex-row bd-highlight mb-3">
+            <div class="d-flex flex-row ">
                 <div class="table-states container-fluid">
                     <table id='mytable' class="table table-striped table-bordered">
                         <thead>
@@ -88,8 +88,22 @@
                     </table>
 
                 </div>
-                <div>    
-                    cacahuete
+                <div class="add-form">
+                    <h1 class="display-4">Crear Estado </h1>
+                    <hr>
+                    <form method="post" action="{{ route('items.store') }}">
+                        <!-- Proteccion contra consultas no deseadas -->
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" placeholder="Nombre del estado">
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Crear</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
