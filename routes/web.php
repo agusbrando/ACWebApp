@@ -32,7 +32,5 @@ Route::resource('permissions','PermissionController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users','UserController');
-Route::get('users/edit/{id}',['as' => 'users.showedit', 'uses' => 'UserController@show']);
-Route::get('users/store/{id}',['as' => 'users.store', 'uses' => 'UserController@store']);
 
 Route::get('/', 'HomeController@index');

@@ -6,6 +6,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
+
 class PermissionController extends Controller
 {
     /**
@@ -15,10 +16,11 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        $data = Permission::paginate(1);
         $permissions = Permission::all();
-        $roles = Role::all();
-        //$permissions->pivot;
-        return view('permissions.index', compact('permissions','roles') );
+        return view('permissions.index', compact('permissions'));
+        
+        
     }
 
     /**
@@ -28,7 +30,10 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('permissions.create');
+        // $permissions = Permission::all();
+        // return view('permissions.create', compact('permissions'));
+        $roles = Role::all();
+        return view('permissions.create', compact('roles'));
     }
 
     /**
@@ -40,16 +45,22 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id'=>'required',
-            'name'=>'required'
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'model' => 'required'
+
+
         ]);
 
-        $permission = new Permission([
-            'id' => $request->get('id'),
-            'name' => $request->get('name')
+        $permissions = Permission::create([
+            'name' => $request->get('name'),
+            'slug' => $request->get('slug'),
+            'description' => $request->get('description'),
+            'model' => $request->get('model')
+
         ]);
-        $permission->save();
-        return redirect('permissions')->with('success', 'Contact saved!');
+        return redirect('permissions.index')->with('success', 'Permission saved!');
     }
 
     /**
@@ -58,10 +69,15 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($permission_id)
     {
-        //
+        $permissions = Permission::find($permission_id);
+        $roles = Role::all();
+        $permissions->role = $permissions->role;
+
+        return view('permissions.show', compact('permissions'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -71,8 +87,9 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        $permission = Permission::find($id);
-        return view('permissions.edit', compact('permissions'));
+        $permissions = Permission::find($id);
+        $roles = Role::all();
+        return view('permissions.edit', compact('permissions','roles'));
     }
 
     /**
@@ -84,7 +101,23 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'model' => 'required'
+
+        ]);
+        $permission = Role::find($id);
+        $permission->name = $request->get('name');
+        $permission->description = $request->get('description');
+        $permission->slug = $request->get('slug');
+        $permission->model = $request->get('model');
+
+
+        $permission->save();
+        return redirect('/permissions/' . $id)->with('Succes', 'Permission edited!');
     }
 
     /**
@@ -98,6 +131,6 @@ class PermissionController extends Controller
         $permission = Permission::find($id);
         $permission->delete();
 
-        return redirect('permissions')->with('success', 'Contact deleted!');
+        return redirect('/permissions/')->with('success', 'Permission deleted!');
     }
 }

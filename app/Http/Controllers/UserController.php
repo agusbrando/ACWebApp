@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 
 
 class UserController extends Controller
@@ -19,6 +19,7 @@ class UserController extends Controller
     {
         $users = User::all();
         return view('users.index', compact('users'));
+        
     }
 
     /**
@@ -28,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+        $roles = Role::all();
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -39,25 +41,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $store = false;
-        if(URL::current() == url("/users/store/".$request)){
-            $store = true;
-        }
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role_id' => 'required'
+
 
         ]);
 
-        $user = new User([
+        $user = User::create([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
-            'password' => $request->get('password')
+            'password' =>Hash::make($request->get('password')),
+            'role_id' => $request->get('role')
+
         ]);
-        $user->save();
         return redirect('users.index')->with('success', 'Contact saved!');
     }
 
@@ -70,15 +71,11 @@ class UserController extends Controller
     public function show($user_id)
     {
         $user = User::find($user_id);
-        $edit = false;
-        $roles = null;
-        if(URL::current() == url("/users/edit/".$user_id)){
-            $edit = true;
-            $roles = Role::all();
-        }
-        return view('users.show', compact('user','edit','roles'));
+        $user->role = $user->role;
+
+        return view('users.show', compact('user'));
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -89,7 +86,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('user.edit', compact('user'));
+        $roles = Role::all();
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -114,7 +112,7 @@ class UserController extends Controller
 
 
         $user->save();
-        return redirect('/users/'.$id)->with('Succes', 'Usuario editado!');
+        return redirect('/users/' . $id)->with('Succes', 'Usuario editado!');
     }
 
     /**
@@ -128,6 +126,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect('user')->with('success', 'User deleted!');
+        return redirect('/users/')->with('success', 'User deleted!');
     }
 }
