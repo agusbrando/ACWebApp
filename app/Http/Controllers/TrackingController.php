@@ -17,17 +17,23 @@ class TrackingController extends Controller
   public function index()
   {
     $user = Auth::user();
-    $horas=0;
-    $trackings = Tracking::all();
-    foreach ($trackings as $tracking) {
-      if($tracking->user_id==$user->id){
+    $horas = 0;
+    $horasbien=array();
+    $trackings=array();
+    $trackingsuser = Tracking::all();
+    foreach ($trackingsuser as $tracking) {
+      if ($tracking->user_id == $user->id) {
         $horas += $tracking->num_hours;
+        array_push($trackings,$tracking);
+        //$horabien1= explode(".",$tracking->num_hours);
+        //$horabien=$horabien1[0].":".(($horabien1[1]*60)/100);
+        //array_push($horasbien,$horabien);
       }
     }
-    
-    
-      
-    return view('Tracking.index', compact('trackings', 'user','horas'));
+
+
+
+    return view('Tracking.index', compact('trackings', 'user', 'horas','horasbien'));
   }
 
 
@@ -68,7 +74,7 @@ class TrackingController extends Controller
       'date_signature' => $request->get('date_start'),
       'time_start' => $request->get('time_start'),
       'time_end' => $hora_fin,
-      'num_hours' => $num_hours,
+      'num_hours' => (double)$num_hours,
 
     ]);
 
@@ -138,18 +144,18 @@ class TrackingController extends Controller
     $user = Auth::user();
     $dia = $request->get('fecha');
     $semana = $request->get('semana');
-    $mes = explode("-",$request->get('mes'));
+    $mes = explode("-", $request->get('mes'));
     $anyo = $request->get('anyo');
     $trackings = array();
     $horas = 0;
     $trackingstodos = Tracking::all();
-    $trackingsuser=array();
+    $trackingsuser = array();
     foreach ($trackingstodos as $tracking) {
-      if($tracking->user_id==$user->id){
-          array_push($trackingsuser, $tracking);
+      if ($tracking->user_id == $user->id) {
+        array_push($trackingsuser, $tracking);
       }
     }
-    
+
     if ($dia != null) {
       foreach ($trackingsuser as $tracking) {
         if ($tracking->date_signature == $dia) {
@@ -157,90 +163,42 @@ class TrackingController extends Controller
           $horas += $tracking->num_hours;
         }
       }
-    }else if($semana != null){
-      
-    }else if($mes != null){
+    } else if ($semana != null) {
+      $semanapartes = explode("-", $semana);
+      $fechapartes = explode("-", $tracking->date_signature);
       foreach ($trackingsuser as $tracking) {
-        $fechapartes=explode("-",$tracking->date_signature);
-        if ($fechapartes[0] == $mes[0]) {
-            switch($mes[0]){
-              case 1:
-                if((int)$fechapartes[1]==1){
-                  array_push($trackings, $tracking);
-                }
-                
-              break;
-              case 2:
-                if((int)$fechapartes[1]==2){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 3:
-                if((int)$fechapartes[1]==3){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 4:
-                if((int)$fechapartes[1]==4){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 5:
-                if((int)$fechapartes[1]==5){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 6:
-                if((int)$fechapartes[1]==6){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 7:
-                if((int)$fechapartes[1]==7){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 8:
-                if((int)$fechapartes[1]==8){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 9:
-                if((int)$fechapartes[1]==9){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 10:
-                if((int)$fechapartes[1]==10){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 11:
-                if((int)$fechapartes[1]==11){
-                  array_push($trackings, $tracking);
-                }
-              break;
-              case 12:
-                if((int)$fechapartes[1]==12){
-                  array_push($trackings, $tracking);
-                }
-              break;
-            }
+        if ((int) $semanapartes[0] == $fechapartes[0]) {
+          $semanafirm="W".date("W", strtotime($tracking->date_signature));
+          if ($semanapartes[1] ==$semanafirm ) {
+            array_push($trackings, $tracking);
+            $horas += $tracking->num_hours;
+          }
+        }
+      }
+    } else if ($anyo != null) {
+      foreach ($trackingsuser as $tracking) {
+        $fechapartes = explode("-", $tracking->date_signature);
+        if ((int) $fechapartes[0] == $anyo) {
           array_push($trackings, $tracking);
           $horas += $tracking->num_hours;
         }
       }
-    }else if($anyo != null){
+    } else if ($mes != null) {
       foreach ($trackingsuser as $tracking) {
-        $fechapartes=explode("-",$tracking->date_signature);
-        if ($fechapartes[0] == $anyo) {
-          array_push($trackings, $tracking);
-          $horas +=$tracking->num_hours;
+        $fechapartes = explode("-", $tracking->date_signature);
+        if ($fechapartes[0] == $mes[0]) {
+
+          if ((int) $fechapartes[1] == $mes[1]) {
+            array_push($trackings, $tracking);
+            $horas += $tracking->num_hours;
+          }
+
+         
         }
       }
     }
 
 
-    return view('Tracking.index', compact('trackings', 'horas','user'));
+    return view('Tracking.index', compact('trackings', 'horas', 'user'));
   }
 }
