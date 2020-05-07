@@ -1,9 +1,6 @@
 @extends('base')
-
 @section('main')
-
 <link href="{{ asset('css/messages.css') }}" rel="stylesheet" type="text/css" />
-
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="row">
         <div class="col-sm-12">
@@ -23,7 +20,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     @foreach ($messages as $message)
                     @if ($sitio == 0)
                     @foreach ($message->users as $user)
@@ -38,29 +34,31 @@
                         <td>Ha sido visto</td>
                         @endif
                         <td>
+                            <div class="containerAttachment">
                         <a href="/sended/{{$message->id}}" class="btn btn-primary">Ver</a>
                         <form action="{{ route('messages.destroy', $message->id)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit">Delete</button>
                           </form>
+                        </div>
                         </td>
                     </tr>
                     @endforeach
                     @else
-                {{-- Recibidos --}}
                     <tr>
                         <td>{{$message->user->first_name}} {{$message->user->last_name}}</td>
                         <td>{{$message->subject}}</td>
                         <td>{{count($message->attachments)}}</td>
-
                         <td>
+                            <div class="containerAttachment">
                         <a href="/messages/{{$message->id}}" class="btn btn-primary">Ver</a>
                         <form action="{{ route('messages.destroy', $message->id)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" type="submit">Delete</button>
                           </form>
+                        </div>
                         </td>
                     </tr>
                     @endif
@@ -71,5 +69,4 @@
         </div>
     </div>
 </main>
-
 @endsection
