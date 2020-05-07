@@ -51,7 +51,9 @@
                                                 @foreach($parciales as $parcial)
                                                 <td>
                                                     <div class="input-group col-10">
-                                                        @if ($notaParciales != null)
+                                                        @if (empty($notaParciales[$user->id][$parcial->id]))
+                                                        <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
+                                                        @elseif($notaParciales != null)
                                                         <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$notaParciales[$user->id][$parcial->id]}}">
                                                         @else
                                                         <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
@@ -59,7 +61,9 @@
                                                     </div>
                                                 </td>
                                                 @endforeach
-                                                @if ($mediaParciales != null)
+                                                @if (empty($mediaParciales[$user->id]))
+                                                <td>0</td>
+                                                @elseif($mediaParciales != null)
                                                 <td>{{$mediaParciales[$user->id]}}</td>
                                                 @else
                                                 <td>0</td>

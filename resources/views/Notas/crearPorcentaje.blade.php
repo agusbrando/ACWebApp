@@ -52,7 +52,7 @@
         </div>
         <div class=" card-footer col-12">
             <button class="btn btn-outline-primary float-right" type="submit">Guardar</button>
-            <button class="btn btn-outline-warning float-right mr-2" href="asignaturas/{{$subject->id}}">Cancelar</button>
+            <a class="btn btn-outline-warning float-right mr-2" href="asignaturas/{{$subject->id}}">Cancelar</a>
         </div>
         </form>
     </div>
