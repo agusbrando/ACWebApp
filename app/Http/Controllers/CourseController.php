@@ -4,6 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
+use App\Models\Classroom;
+use App\Models\Course;
+use App\Models\Type;
+use App\Models\State;
+use App\Models\Item;
+use App\Models\User;
+
 class CourseController extends Controller
 {
     /**
@@ -13,7 +22,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();   
+        return view('courses.index', compact('courses'));
     }
 
     /**
