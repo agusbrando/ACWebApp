@@ -34,6 +34,9 @@ Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarCon
 //  });
 
 Route::resource('permissions','PermissionController');
+Route::resource('classrooms','ClassroomController');
+Route::resource('evaluations','EvaluationController');
+Route::resource('states','StateController');
 
 Auth::routes();
 
