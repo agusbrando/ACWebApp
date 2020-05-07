@@ -21,7 +21,8 @@ class CreateItemYearTable extends Migration
             $table->timestamps();
             $table->foreign('item_id')->references('id')->on('users');
             $table->foreign('year_user_id')->references('id')->on('yearUnions');
-           
+            $table->unique(['year_user_id', 'item_id']);
+
 
         });
     }

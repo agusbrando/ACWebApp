@@ -22,7 +22,8 @@ class CreateYearUnionUserTable extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('year_union_id')->references('id')->on('yearUnions');
-           
+            $table->unique(['year_union_id', 'user_id']);
+
 
         });
     }
