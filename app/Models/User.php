@@ -68,9 +68,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
     }
-    public function programs_responsable()
+    //todas las year unions en las que haya un responsable
+    public function yearUnionsResponsable()
     {
-        return $this->hasMany(Program::class, 'user_id');
+        return $this->hasMany(YearUnion::class, 'user_id');
     }
 
     public function programs_professor()

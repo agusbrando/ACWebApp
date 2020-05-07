@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTasksTable extends Migration
+class CreateProgramsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('evaluation_id')->unsigned();
+            
             $table->string('name');
+            $table->integer('professor_id')->unsigned();
+            $table->foreign('professor_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreign('evaluation_id')->references('id')->on('evaluations');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('programs');
     }
 }

@@ -72,5 +72,17 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id'=>1
         ]);
+        for ($i = 1; $i <= 15; $i++) {
+            DB::table('users')->insert([
+                'first_name' => 'Alumno'.$i,
+                'last_name' => 'Apellido'.$i,
+                'email' => 'user'.$i.'@campusaula.com',
+                'password' => bcrypt('password'),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'role_id' => 4,
+                'timetable_id'=>1
+            ]);
+        }
     }
 }

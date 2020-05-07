@@ -9,7 +9,8 @@ class Course extends Model
     protected $table = 'courses';
     protected $guarded = [];
 
-    public function subjects(){
-        return $this->hasMany('App\Models\Subject');
+    //todas las yearUnion de ese curso, una por evaluacion y asignatura
+    public function yearUnion(){
+        return $this->hasMany(YearUnion::class);
     }
 }

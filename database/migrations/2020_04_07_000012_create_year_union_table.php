@@ -22,8 +22,10 @@ class CreateYearUnionTable extends Migration
             $table->integer('year_id')->unsigned();
             $table->integer('program_id')->unsigned();
             $table->integer('responsable_id')->unsigned();
-            $table->string('notes');
-            $table->date('date_check');
+            $table->string('notes')->nullable();
+            $table->date('date_check')->nullable();
+            $table->date('date_start');
+            $table->date('date_end');
             $table->timestamps();
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('course_id')->references('id')->on('courses');

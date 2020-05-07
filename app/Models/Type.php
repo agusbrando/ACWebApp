@@ -17,8 +17,8 @@ class Type extends Model
         return $this->hasMany('App\Models\Event');
     }
 
-    public function evaluations(){
-        return $this->belongsToMany(Type::class, 'percentages', 'type_id', 'evaluation_id')->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+    public function yearUnions(){
+        return $this->belongsToMany(YearUnion::class, 'percentages', 'type_id', 'year_union_id')->using(Percentage::class)->withPivot('percentage','min_grade','average_grade')->withTimestamps();
     }
     
     public function misbehaviors()
