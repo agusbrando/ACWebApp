@@ -16,6 +16,7 @@ class YearUnionUserTableSeeder extends Seeder
             DB::table('yearUnionUsers')->insert([
                 'user_id' => $i,
                 'year_union_id' => 1,
+                'assistance' =>true,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
@@ -25,6 +26,7 @@ class YearUnionUserTableSeeder extends Seeder
             DB::table('yearUnionUsers')->insert([
                 'user_id' => $i,
                 'year_union_id' => 2,
+                'assistance' =>true,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
