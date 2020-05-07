@@ -27,9 +27,7 @@
   <div class="row">
     <div class="col-sm-12">
       <div>
-        <a style="margin: 19px;" href="#" class="btn btn-primary">Muro</a>
-        <a style="margin: 19px;" href="#" class="btn btn-primary">Publicar</a>
-        <a style="margin: 19px;" href="{{route('posts.index')}}" class="btn btn-primary">Admin</a>
+        <a style="margin: 19px; width: 100%;" href="#" class="btn btn-primary">Publicar</a>
       </div>
       <br/>
       <div>
@@ -37,13 +35,14 @@
         <h4>Prueba de welcome</h4>
       </div>
       <br/>
-      <img src="{{asset('img/dinantia.png')}}" alt="">
-      <p style="text-align:justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p>
+      <img src="{{asset('img/dinantia.png')}}" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
+      <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p>
       <div>
-        <textarea style="width:56%">Añadir un comentario</textarea>
-        <button style="width:10%;" class="btn btn-danger">Enviar</button>
+        <textarea style="width: 90%; float: left;">Añadir un comentario</textarea>
+        <button style="width: 10%;" class="btn btn-danger">Enviar</button>
       </div>
-      <a href="{{route('comments.create')}}" class="btn btn-primary">Nuevo Comentario</a>
+      </br>
+      <a href="{{route('comments.create')}}" style="text-decoration: none; color: black;">Nuevo Comentario</a>
     </div>
   </div>
 </main>
