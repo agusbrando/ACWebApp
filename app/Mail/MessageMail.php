@@ -18,10 +18,13 @@ class messageMail extends Mailable
      */
 
     protected $message;
+    protected $url;
 
     public function __construct(Message $message)
     {
         $this->message = $message;
+
+        $this->url = url("/messages/$message->id");
     }
 
     /**
@@ -34,7 +37,8 @@ class messageMail extends Mailable
         //TODO change to gobal variable
         return $this->view('emails/message')->with([
             'messageSubject' => $this->message->subject,
-
+            'url' => $this->url,
         ]);
+
     }
 }
