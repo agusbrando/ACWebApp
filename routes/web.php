@@ -41,14 +41,28 @@ Route::get('/', function () {
 Route::get('/prueba', function (Request $request) {
 
     $item = Item::find(1);
-    
-    foreach($item->yearUnionUsers as $yearUnionUser){
-        
-        echo ($yearUnionUser->yearUnion->subject).'<br>';
-        
-    }
-    
+    $subject = Subject::find(1);
+    $user = User::find(9);
 
+    /*
+    foreach($user->yearUnions as $yearUnion){
+        
+        if($yearUnion->subject_id == 1){
+            foreach($yearUnion->pivot->misbehavours as $falta){
+                echo ($yearUnion->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
+            }
+        }
+
+    }*/
+    foreach($user->yearUnions as $yearUnion){
+        
+        if($yearUnion->subject_id == 1){
+            foreach($yearUnion->pivot->tasks as $tarea){
+                echo ($yearUnion->subject->name).' - '.($tarea->name).' - '.($tarea->pivot->value).'<br>';
+            }
+        }
+
+    }
 
 })->name('prueba');
 
