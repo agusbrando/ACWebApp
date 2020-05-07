@@ -7,6 +7,9 @@
             <h1 class="display-3">Posts</h1>
             <table id="tabla" class="table table-striped table-bordered">
                 <thead class="cabezeraTabla">
+                <div>
+                    <a style="float: right;" href="{{ route('posts.create')}}" class="btn btn-primary">Nuevo Post</a>
+                </div>
                     <tr>
                         <td>Número</td>
                         <!--<td>Id Usuario</td>-->
@@ -41,15 +44,6 @@
                 {{ session()->get('success') }}
             </div>
         @endif
-    </div>
-    <div>
-        <a style="margin: 19px;" href="{{ route('posts.create')}}" class="btn btn-primary">Nuevo Post</a>
-        <a href="{{ route('posts.edit', $post->id)}}" class="btn btn-primary">Editar</a>
-        <form action="{{ route('posts.destroy', $post->id)}}" method="post">
-            @csrf
-            @method('DELETE')
-                <button class="btn btn-danger">Eliminar</button>
-        </form>
     </div>
     <script>
         // $(document).ready(function() {
