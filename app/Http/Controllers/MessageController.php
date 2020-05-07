@@ -19,10 +19,12 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $sitio = 0;
         $user = Auth::user();
+
         if (URL::current() == url("/messages_send")) {
             $messages = $user->messagesSent->load('attachments', 'users');
         } else {
@@ -36,10 +38,10 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($response = null)
     {
         $users = User::all();
-        return view('messages.create', compact('users'));
+        return view('messages.create', compact('users','response'));
     }
     /**
      * Store a newly created resource in storage.
@@ -63,6 +65,7 @@ class MessageController extends Controller
         ]);
         $message->save();
         $users = $request->get('users');
+
         foreach ($users as $userid) {
             $user = User::find($userid);
             $user->messagesReceive()->attach($message->id);
