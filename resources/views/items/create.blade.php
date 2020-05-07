@@ -1,12 +1,32 @@
 @extends('base')
-
+@section('login')
+@include('auth.login')
+@endsection
 @section('main')
 
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <h1 class="display-4">Crear Objeto </h1>
-    <hr>
-    <form method="post" action="{{ route('items.store') }}">   
+    <div class="card shadow">
+        <div class="card-header row m-0 justify-content-between">
+            <h3>Editar Item</h3>
+
+            <div>
+                <td class="botones">
+                    <form method="get" action="{{ route('items.index')}}">
+                        @csrf
+                        @method('GET')
+                        <button class="btn btn-primary" type="submit">Volver</button>
+                    </form>
+                </td>
+            </div>
+        </div>
+        <div class="card-body row no-gutters">
+            <div class="col-sm-12">
+
+                <div class="container">
+
+
+                <form method="post" action="{{ route('items.store') }}">   
         <!-- Proteccion contra consultas no deseadas -->
         @csrf
 
@@ -66,6 +86,13 @@
             <button type="submit" class="btn btn-primary">Crear</button>
         </div>
     </form>
-
+                </div>
+            </div>
+            <div class=" card-footer col-12">
+                <a class="btn btn-outline-warning float-right" href="#" aria-disabled="true">Cancelar</a>
+            </div>
+            </form>
+        </div>
 </main>
+
 @endsection
