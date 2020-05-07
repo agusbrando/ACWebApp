@@ -11,6 +11,32 @@ class YearUnionUserTableSeeder extends Seeder
      */
     public function run()
     {
+
+        for ($i = 5; $i <= 11; $i++) {
+            DB::table('yearUnionUsers')->insert([
+                'user_id' => $i,
+                'year_union_id' => 1,
+                'assistance' =>true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
+
+        for ($i = 11; $i <= 16; $i++) {
+            DB::table('yearUnionUsers')->insert([
+                'user_id' => $i,
+                'year_union_id' => 2,
+                'assistance' =>true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
+
+
+
+
+
+
         DB::table('yearUnionUsers')->insert([
             'year_union_id' => '2',
             'user_id' => '2',

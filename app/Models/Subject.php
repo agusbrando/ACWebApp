@@ -9,22 +9,15 @@ class Subject extends Model
     protected $table = 'subjects';
     protected $guarded = [];
 
-    public function course(){
-        return $this->belongsTo('App\Models\Course');
-    }
-
-    public function evaluations(){
-        return $this->hasMany('App\Models\Evaluation');
-    }
-
-   public function programs(){
-        return $this->hasMany(Program::class);
-   }
-
-    
+    //posible union con year union y sesion timetable
     public function timetables()
     {
         return $this->hasMany('App\Models\SessionTimetable');
+    }
+
+    /**todas las yearUnion con esa asignatura, una por evaluacion y por curso (si se repiten)*/
+    public function yearUnion(){
+        return $this->hasMany(YearUnion::class);
     }
 
 }

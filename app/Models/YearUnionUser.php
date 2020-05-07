@@ -28,7 +28,19 @@ class YearUnionUser extends Pivot
         return $this->belongsToMany(Item::class, 'ItemYear', 'year_user_id', 'item_id')->using(ItemYear::class)->withTimeStamps()->withPivot('id');
     }
 
+    /** Devuelve el usuario */
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    /** Devuelve el yearUnion */
+    public function yearUnion(){
+        return $this->belongsTo(YearUnion::class);
+    }
+
+    //todas las faltas de ese alumno, en esa asignatura, en esa evaluacion
+    public function misbehavours(){
+        return $this->hasMany(Misbehavior::class,'year_user_id');
+    }
+
 }

@@ -14,14 +14,14 @@ class CreateCalificationsTable extends Migration
     public function up()
     {
         Schema::create('califications', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('task_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('year_user_id')->unsigned();
             $table->decimal('value');
             $table->timestamps();
-
-            $table->primary(['task_id', 'user_id']);
+            $table->unique(['task_id', 'year_user_id']);
             $table->foreign('task_id')->references('id')->on('tasks');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('year_user_id')->references('id')->on('yearUnionUsers');
         });
     }
 

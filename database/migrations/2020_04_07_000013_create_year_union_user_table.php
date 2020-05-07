@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateYearUnionUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
+        Schema::create('yearUnionUsers', function (Blueprint $table) {
 
-        Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('title');
-            $table->string('text');
+            $table->integer('year_union_id')->unsigned();
+            $table->boolean('assistance');
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
-            
+            $table->foreign('year_union_id')->references('id')->on('yearUnions');
+            $table->unique(['year_union_id', 'user_id']);
+
+
         });
     }
 
@@ -33,6 +35,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('yearUnionUsers');
     }
 }

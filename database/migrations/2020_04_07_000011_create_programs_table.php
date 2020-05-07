@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemYearTable extends Migration
+class CreateProgramsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateItemYearTable extends Migration
      */
     public function up()
     {
-        Schema::create('itemYear', function (Blueprint $table) {
-
+        Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('item_id')->unsigned();
-            $table->integer('year_user_id')->unsigned();
+            
+            $table->string('name');
+            $table->integer('professor_id')->unsigned();
+            $table->foreign('professor_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
-            $table->foreign('item_id')->references('id')->on('items');
-            $table->foreign('year_user_id')->references('id')->on('yearUnionUsers');
-           
-
         });
     }
 
@@ -33,6 +30,6 @@ class CreateItemYearTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('itemYear');
+        Schema::dropIfExists('programs');
     }
 }
