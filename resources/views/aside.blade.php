@@ -76,6 +76,13 @@
             Stock
         </a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/courses">
+            <span data-feather="file-text"></span>
+            Cursos
+        </a>
+        </li>
+        
     </ul>
     </div>
 </nav>
