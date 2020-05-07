@@ -16,9 +16,6 @@ class Classroom extends Model
     *
     * @var string
     */
-  
-    protected $primaryKey = 'id';
-
 
     /**
     * Indicates if the IDs are auto-incrementing.
