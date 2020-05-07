@@ -9,6 +9,8 @@ use App\Models\Course;
 use App\Models\Evaluation;
 use App\Models\Role;
 use App\Models\Percentage;
+use App\Models\Task;
+use App\Models\Type;
 use App\Models\SubjectsUsers;
 use Illuminate\Support\Facades\DB;
 
@@ -69,9 +71,9 @@ class AsignaturaController extends Controller
                         $percentage = new Percentage([
                             "evaluacion_id" => $type->pivot->evaluation_id,
                             "type_id" => $type->pivot->type_id,
-                            "porcentaje" =>$type->pivot->percentage,
-                            "nota_min" =>$type->pivot->nota_min,
-                            "nota_media" =>$type->pivot->nota_media,
+                            "porcentaje" => $type->pivot->percentage,
+                            "nota_min" => $type->pivot->nota_min,
+                            "nota_media" => $type->pivot->nota_media,
                         ]);
                         $percentage->type = $type->name;
                         array_push($eval1, $percentage);
@@ -82,9 +84,9 @@ class AsignaturaController extends Controller
                         $percentage = new Percentage([
                             "evaluacion_id" => $type->pivot->evaluation_id,
                             "type_id" => $type->pivot->type_id,
-                            "porcentaje" =>$type->pivot->percentage,
-                            "nota_min" =>$type->pivot->nota_min,
-                            "nota_media" =>$type->pivot->nota_media,
+                            "porcentaje" => $type->pivot->percentage,
+                            "nota_min" => $type->pivot->nota_min,
+                            "nota_media" => $type->pivot->nota_media,
                         ]);
                         $percentage->type = $type->name;
                         array_push($eval2, $percentage);
@@ -95,9 +97,9 @@ class AsignaturaController extends Controller
                         $percentage = new Percentage([
                             "evaluacion_id" => $type->pivot->evaluation_id,
                             "type_id" => $type->pivot->type_id,
-                            "porcentaje" =>$type->pivot->percentage,
-                            "nota_min" =>$type->pivot->nota_min,
-                            "nota_media" =>$type->pivot->nota_media,
+                            "porcentaje" => $type->pivot->percentage,
+                            "nota_min" => $type->pivot->nota_min,
+                            "nota_media" => $type->pivot->nota_media,
                         ]);
                         $percentage->type = $type->name;
                         array_push($eval3, $percentage);
@@ -108,6 +110,32 @@ class AsignaturaController extends Controller
 
         return view('Notas.evaluations', compact('subject', 'eval1', 'eval2', 'eval3', 'evaluaciones'));
     }
+
+    // protected function calculateDataShow($id)
+    // {
+    //     $subject = Subject::find($id);
+    //     $taskTypes = Type::all()->where('model', Task::class);
+    //     $evaluaciones = $subject->evaluations;
+
+
+    //     foreach ($evaluaciones as $eval) {
+    //         $percentages = $eval->types;
+    //         foreach ($eval->users as $user) {
+    //             foreach ($taskTypes as $task_type) {
+    //                 $tasks =  $user->tasks()->where('evaluation_id', $eval->id)->where('type_id', $task_type->id)->get();
+    //                 $suma = 0;
+    //                 foreach ($tasks as $task) {
+    //                     $suma += $task->pivot->value;
+                        
+    //                 }
+    //                 foreach($percentages as $percentage){
+    //                     if($percentage->type_id = )
+    //                 }
+    //                 $user->$task_type->name = 0;
+    //             }
+    //         }
+    //     }
+    // }
 
     /**
      * Show the form for editing the specified resource.
