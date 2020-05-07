@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Tracking;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-
+use Barryvdh\DomPDF\PDF;
 class TrackingController extends Controller
 {
 
@@ -19,21 +18,18 @@ class TrackingController extends Controller
     $user = Auth::user();
     $horas = 0;
     $horasbien=array();
-    $trackings=array();
-    $trackingsuser = Tracking::all();
-    foreach ($trackingsuser as $tracking) {
-      if ($tracking->user_id == $user->id) {
-        $horas += $tracking->num_hours;
-        array_push($trackings,$tracking);
-        //$horabien1= explode(".",$tracking->num_hours);
-        //$horabien=$horabien1[0].":".(($horabien1[1]*60)/100);
-        //array_push($horasbien,$horabien);
+    $trackings = DB::table('trackings')->paginate(5);
+    //$trackings = Tracking::all();
+    foreach ($trackings as $trackingsuser) {
+      if ($trackingsuser->user_id == $user->id) {
+        $horas += $trackingsuser->num_hours;
+        
       }
     }
 
 
-
-    return view('Tracking.index', compact('trackings', 'user', 'horas','horasbien'));
+    
+    return view('Tracking.index', compact('trackings', 'user', 'horas'));
   }
 
 
@@ -44,10 +40,7 @@ class TrackingController extends Controller
     $request->validate([
       'time_end' => 'required',
       'time_start' => 'required',
-
       'date_start' => 'required',
-
-
     ]);
 
 
@@ -197,8 +190,23 @@ class TrackingController extends Controller
         }
       }
     }
-
+    
 
     return view('Tracking.index', compact('trackings', 'horas', 'user'));
+  }
+  public function imprimir(){
+    $user = Auth::user();
+    $trackingsuser=array();
+    $trackings = Tracking::all();
+    foreach ($trackings as $trackinguser) {
+      if ($trackinguser->user_id == $user->id) {
+        
+        array_push($trackingsuser, $trackinguser);
+            
+      }
+    }
+
+    $pdf = PDF::loadView('pdf', compact('trackings'));
+    return $pdf->download('ejemplo.pdf');
   }
 }

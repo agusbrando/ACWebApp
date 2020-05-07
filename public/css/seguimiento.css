@@ -17,7 +17,9 @@
  
  
   
-  
+  .card-body{
+      padding:0px;
+  }
 
 .form-group{
     margin-bottom: 0px;
@@ -136,6 +138,7 @@ width: 350px;
     
 }
 .filtro{
+    
     margin-bottom: 20px;
 }
 .boton{

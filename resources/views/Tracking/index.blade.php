@@ -3,6 +3,7 @@
 @section('main')
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+
     <link href="{{ asset('css/seguimiento.css') }}" rel="stylesheet" type="text/css" />
 
     <div class="card shadow">
@@ -10,63 +11,58 @@
             <h3>Firmas de docente</h3>
             <div>
 
-                <a class="btn btn-outline-info" >Editar</a>
-                <form class="float-right"  method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger ml-1">Eliminar</button>
-                </form>
+
 
             </div>
         </div>
         <div class="card-body row no-gutters">
             <div class=" col-12 col-md-8">
 
-                <br>
+
                 <div class="filtro w-100">
                     <form method="get" action="{{ route('seguimiento.filtrar') }}">
 
                         @csrf
-                        
-                            <table class="tabla w-100">
 
-                                <tr>
-                                    <td class="class20">Filtrar por fecha:</td>
-                                    <td class="class20">Filtrar por semana:</td>
-                                    <td class="class20">Filtrar por mes:</td>
-                                    <td class="class20">Filtrar por año:</td>
-                                    <td class="class20"></td>
-                                </tr>
-                                <tr>
-                                    <td class="class20"><input type="date" class="rounded class20" name="fecha"></td>
-                                    <td class="class20"><input type="week" class="rounded class20" name="semana"></td>
-                                    <td class="class20"><input type="month" class="rounded class20" name="mes"></td>
-                                    <td class="class20"><input class="quantity rounded class20" type="number" name="anyo"></td>
-                                    <td class="class20"><input type="submit" class="btn btn-success boton class20" value="Filtrar"></td>
-                                </tr>
-                            </table>
-                        
+                        <table class="tabla w-100">
+
+                            <tr>
+                                <td class="class20">Filtrar por fecha:</td>
+                                <td class="class20">Filtrar por semana:</td>
+                                <td class="class20">Filtrar por mes:</td>
+                                <td class="class20">Filtrar por año:</td>
+                                <td class="class20"></td>
+                            </tr>
+                            <tr>
+                                <td class="class20"><input type="date" class="rounded class20" name="fecha"></td>
+                                <td class="class20"><input type="week" class="rounded class20" name="semana"></td>
+                                <td class="class20"><input type="month" class="rounded class20" name="mes"></td>
+                                <td class="class20"><input class="quantity rounded class20" type="number" name="anyo"></td>
+                                <td class="class20"><input type="submit" class="btn btn-success boton class20" value="Filtrar"></td>
+                            </tr>
+                        </table>
+
                     </form>
 
                 </div>
 
 
-                <table class="tabla table-striped w-100" id="tabla">
+                <table class="tabla table-striped w-100">
                     <thead class="cabezeraTabla">
                         <tr>
-                            <td >Fecha Firma</td>
-                            <td >Hora Inicio</td>
+                            <td>Fecha Firma</td>
+                            <td>Hora Inicio</td>
                             <td>Hora Final</td>
                             <td>Suma Horas</td>
                             <td>Firma</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                         @foreach($trackings as $tracking)
                         @if($tracking->user_id == $user->id)
                         <tr>
-                            <td >{{$tracking->date_signature}}</td>
-                            <td >{{$tracking->time_start}}</td>
+                            <td>{{$tracking->date_signature}}</td>
+                            <td>{{$tracking->time_start}}</td>
                             <td>{{$tracking->time_end}}</td>
 
                             <td>{{$tracking->num_hours}}</td>
@@ -94,14 +90,14 @@
 
                 <form method="post" action="{{ route('seguimiento.store') }}">
                     @csrf
-                    
-                        <label for="date_start">Fecha de firma</label>
-                        <input type="date" class="form-control w-100" id="date_start" name="date_start" value="">
-                        <label for="time_start" class="w-100">hora inicio de firma</label>
-                        <input type="time" class="form-control w-100" id="time_start" name="time_start">
-                        <label for="time_end" class="w-100">hora fin de firma</label>
-                        <input type="time" class="form-control w-100" id="time_end" name="time_end">
-                    
+
+                    <label for="date_start">Fecha de firma</label>
+                    <input type="date" class="form-control w-100" id="date_start" name="date_start" value="">
+                    <label for="time_start" class="w-100">hora inicio de firma</label>
+                    <input type="time" class="form-control w-100" id="time_start" name="time_start">
+                    <label for="time_end" class="w-100">hora fin de firma</label>
+                    <input type="time" class="form-control w-100" id="time_end" name="time_end">
+
 
                     <br>
 
@@ -120,33 +116,53 @@
             </div>
         </div>
         <div class=" card-footer col-12">
-            <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
-            <a class="btn btn-outline-warning float-right"  tabindex="-1" aria-disabled="true">Cancelar</a>
+            <div class="col-md-12 text-center">
+                <ul class="pagination pagination-lg pager" id="developer_page"></ul>
+            </div>
+            <a class="btn btn-outline-success"> Descargar Excel </a>
+            <a href="{{ route('print')}}" class="btn btn-outline-danger"> Descargar PDF </a>
+
+
 
         </div>
         </form>
-        
+
     </div>
 
 </main>
-@endsection
 
 
-<!-- Rutas -->
+<script class="text/javascript">
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
-<!-- Route::resource('users','UserController');
-Route::get('users/edit/{id}',['as' => 'users.showedit', 'uses' => 'UserController@show']); -->
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
 
-<!-- Controller -->
+        // Create download link element
+        downloadLink = document.createElement("a");
 
-<!-- public function show($user_id)
-    {
-        $user = User::find($user_id);
-        $edit = false;
-        if(URL::current() == url("/users/edit/".$user_id)){
-            $edit = true;
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
         }
-        return view('users.show', compact('user','edit'));
-    } -->
-<!-- Import de URL -->
-<!-- use Illuminate\Support\Facades\URL; -->
+    }
+</script>
+
+@endsection
