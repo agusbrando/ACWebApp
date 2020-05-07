@@ -88,3 +88,5 @@ Route::post('/items/filter', 'ItemController@filter');
 Route::resource('items', 'ItemController');
 //RUTAS STATESs
 Route::resource('states', 'StateController');
+//RUTAS COURSEs
+Route::resource('courses', 'CourseController');
