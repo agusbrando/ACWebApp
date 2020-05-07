@@ -7,6 +7,11 @@
             <img src="{{ asset('img/logoAdpesan.jpg') }}" alt="">
         </div>
         <div>
+            <a href="#" class="btn btn-primary">Editar</a>
+            <a href="#" class="btn btn-danger">Eliminar</a>
+        </div>
+        </br>
+        <div>
             <p>{{$post->text}}</p>
         </div>
     </div>
@@ -22,7 +27,9 @@
                         <td>Texto</td>
                         <td>Fecha Creado</td>
                         <td>Fecha Actualizado</td>
-                        <td>Ver</td>
+                        <!--<td>Ver</td>-->
+                        <td>Editar</td>
+                        <td>Eliminar</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,8 +41,18 @@
                             <td style="text-align:justify;">{{$comment->text}}</td>
                             <td>{{$comment->created_at}}</td>
                             <td>{{$comment->updated_at}}</td>
-                            <td>
+                            <!--<td>
                                 <a href="{{ route('comments.show', $comment->id)}}" class="btn btn-primary">Ver</a>
+                            </td>-->
+                            <td>
+                                <a href="{{ route('comments.edit', $comment->id)}}" class="btn btn-primary">Editar</a>
+                            </td>
+                            <td>
+                                <form action="{{ route('comments.destroy', $comment->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -49,15 +66,6 @@
                 {{ session()->get('success') }}
             </div>
         @endif
-    </div>
-    <div>
-        <a style="margin: 19px;" href="{{ route('comments.create')}}" class="btn btn-primary">Nuevo Comentario</a>
-        <a href="{{ route('comments.edit', $comment->id)}}" class="btn btn-primary">Editar</a>
-        <form action="{{ route('comments.destroy', $comment->id)}}" method="post">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-danger" type="submit">Eliminar</button>
-        </form>
     </div>
     <script>
         // $(document).ready(function() {
