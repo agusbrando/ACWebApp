@@ -15,11 +15,13 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('evaluation_id')->unsigned();
+            $table->integer('year_union_id')->unsigned();
             $table->string('name');
-            $table->timestamps();
+            $table->integer('type_id')->unsigned();
 
-            $table->foreign('evaluation_id')->references('id')->on('evaluations');
+            $table->timestamps();
+            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('year_union_id')->references('id')->on('yearUnions');
         });
     }
 
