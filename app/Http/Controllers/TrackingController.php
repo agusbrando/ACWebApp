@@ -20,19 +20,35 @@ class TrackingController extends Controller
     $horasbien=array();
     $trackings = DB::table('trackings')->paginate(5);
     //$trackings = Tracking::all();
+    $suma=0;
     foreach ($trackings as $trackingsuser) {
       if ($trackingsuser->user_id == $user->id) {
-        $horas += $trackingsuser->num_hours;
+        list($hora, $min) = explode(":",$trackingsuser->num_hours);
         
+        $suma += ($hora * 60) + $min;
+
+    
+
+    
       }
     }
-
+    $num_hours = $suma / 60;
+    $hora=floor($num_hours);
+    $minutos=($num_hours-$hora)*60;
+    
+    $horas=$hora.':'.$minutos;
 
     
     return view('Tracking.index', compact('trackings', 'user', 'horas'));
   }
 
+  public function create()
+  {
 
+    $user = Auth::user();
+    return view('Tracking.create', compact('user'));
+    
+  }
 
   public function store(Request $request)
   {
@@ -53,21 +69,20 @@ class TrackingController extends Controller
     list($hora_fin_1, $hora_fin_2) = explode(":", $request->get('time_end'));
 
     $suma = (($hora_fin_1 - $hora_ini_1) * 60) + ($hora_fin_2 - $hora_ini_2);
-
-    if ($request->get('time_end') < $request->get('time_end2')) {
-      $hora_fin = $request->get('time_end2');
-    } else {
-      $hora_fin = $request->get('time_end');
-    }
-
+    
     $num_hours = $suma / 60;
+    $hora=floor($num_hours);
+    $minutos=($num_hours-$hora)*60;
+    
+    $horas=$hora.':'.$minutos;
+
     $tracking = new Tracking([
       'signature' => $user->signature,
       'user_id' => $user->id,
       'date_signature' => $request->get('date_start'),
       'time_start' => $request->get('time_start'),
-      'time_end' => $hora_fin,
-      'num_hours' => (double)$num_hours,
+      'time_end' => $request->get('time_end'),
+      'num_hours' => $horas,
 
     ]);
 
@@ -128,10 +143,12 @@ class TrackingController extends Controller
     if (!Storage::disk('local')->exists($file)) {
       abort('404');
     }
-    //$file=DIRECTORY_SEPARATOR.($file);
-    //return view('Tracking.index', compact('file')); 
+    
     return response()->file(DIRECTORY_SEPARATOR . ($file));
   }
+
+
+
   public function filtrar(Request $request)
   {
     $user = Auth::user();
@@ -141,72 +158,54 @@ class TrackingController extends Controller
     $anyo = $request->get('anyo');
     $trackings = array();
     $horas = 0;
-    $trackingstodos = Tracking::all();
-    $trackingsuser = array();
-    foreach ($trackingstodos as $tracking) {
-      if ($tracking->user_id == $user->id) {
-        array_push($trackingsuser, $tracking);
-      }
-    }
-
+    
     if ($dia != null) {
-      foreach ($trackingsuser as $tracking) {
-        if ($tracking->date_signature == $dia) {
-          array_push($trackings, $tracking);
-          $horas += $tracking->num_hours;
-        }
-      }
+      $trackings=$user->trackings()->whereDate('date_signature',$dia)->get();
+     
     } else if ($semana != null) {
+      
+      $trackings=$user->trackings;
       $semanapartes = explode("-", $semana);
-      $fechapartes = explode("-", $tracking->date_signature);
-      foreach ($trackingsuser as $tracking) {
+      foreach ($trackings as $tracking) {
+        $fechapartes = explode("-", $tracking->date_signature);
         if ((int) $semanapartes[0] == $fechapartes[0]) {
           $semanafirm="W".date("W", strtotime($tracking->date_signature));
-          if ($semanapartes[1] ==$semanafirm ) {
+          if ($semanapartes[1] ==$semanafirm) {
             array_push($trackings, $tracking);
-            $horas += $tracking->num_hours;
           }
         }
       }
+      
     } else if ($anyo != null) {
-      foreach ($trackingsuser as $tracking) {
-        $fechapartes = explode("-", $tracking->date_signature);
-        if ((int) $fechapartes[0] == $anyo) {
-          array_push($trackings, $tracking);
-          $horas += $tracking->num_hours;
-        }
-      }
+      $trackings=$user->trackings()->whereYear('date_signature',$anyo)->get();
+      
     } else if ($mes != null) {
-      foreach ($trackingsuser as $tracking) {
-        $fechapartes = explode("-", $tracking->date_signature);
-        if ($fechapartes[0] == $mes[0]) {
-
-          if ((int) $fechapartes[1] == $mes[1]) {
-            array_push($trackings, $tracking);
-            $horas += $tracking->num_hours;
-          }
-
-         
-        }
+      $trackings=$user->trackings()->whereYear('date_signature',$mes[0])->wheremonth('date_signature',$mes[1])->get();
+      
+    }
+    $suma=0;
+    foreach ($trackings as $trackingsuser) {
+      if ($trackingsuser->user_id == $user->id) {
+        list($hora, $min) = explode(":",$trackingsuser->num_hours);
+        $suma += ($hora * 60) + $min;
       }
     }
+    $num_hours = $suma / 60;
+    $hora=floor($num_hours);
+    $minutos=($num_hours-$hora)*60;
     
-
+    $horas=$hora.':'.$minutos;
+    
     return view('Tracking.index', compact('trackings', 'horas', 'user'));
   }
-  public function imprimir(){
-    $user = Auth::user();
-    $trackingsuser=array();
-    $trackings = Tracking::all();
-    foreach ($trackings as $trackinguser) {
-      if ($trackinguser->user_id == $user->id) {
-        
-        array_push($trackingsuser, $trackinguser);
-            
-      }
-    }
 
-    $pdf = PDF::loadView('pdf', compact('trackings'));
-    return $pdf->download('ejemplo.pdf');
+  
+  public function imprimir(Request $request){
+    $user = Auth::user();
+    $trackings=$user->trackings;
+    //$trackings=$request->get('trackings');
+    
+    $pdf = \PDF::loadView('pdf', compact('trackings','user'))->setPaper('a4','landscape');
+    return $pdf->download('trackings.pdf');
   }
 }

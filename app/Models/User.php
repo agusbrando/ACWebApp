@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function trackings()
     {
-        return $this->hasMany('App\Models\Trackings');
+        return $this->hasMany('App\Models\Tracking');
     }
     public function misbehaviors()
     {

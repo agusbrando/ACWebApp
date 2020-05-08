@@ -15,11 +15,13 @@
   }
   
  
- 
+.padding{
+    padding-left: 37%;
+}
   
-  .card-body{
-      padding:0px;
-  }
+li{
+    list-style: none;
+}
 
 .form-group{
     margin-bottom: 0px;

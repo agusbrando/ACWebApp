@@ -22,7 +22,7 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-Route::name('print')->get('/imprimir', 'TrackingController@imprimir');
+Route::post('/imprimir', 'TrackingController@imprimir')->name('print');
 Route::get('seguimiento/filtrar','TrackingController@filtrar')->name('seguimiento.filtrar');
 Route::get('seguimiento','TrackingController@fileStorageServe');
 Route::resource('horarios', 'TimetableController');
