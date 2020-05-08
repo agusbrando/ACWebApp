@@ -31,7 +31,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="nombre">Nombre</label>
+                            <label for="nombre">Crear Estado</label>
                             <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" placeholder="Nombre del estado">
                         </div>
 
