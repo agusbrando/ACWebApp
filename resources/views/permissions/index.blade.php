@@ -16,45 +16,39 @@
         <table class="table col-12 ">
           <thead id="developers" class="thead-dark col-12 col-md-8 col-lg-10 p-3">
             <tr>
-              <th scope="col">Nº</th>
               <th scope="col">Permiso</th>
-              <th scope="col">Rol</th>
-              <th scope="col">Accion</th>
+              @foreach($roles as $role)
+              <th scope="col">
+                {{$role->name}}
+              </th>
+              @endforeach
+              <th scope="col">Ver</th>
             </tr>
           </thead>
           @foreach($permissions as $permission)
           <tbody>
             <tr>
-              <td>{{$permission->id }}</td>
               <td>{{$permission->name }}</td>
-              <td>
-                <select name="role">
-                  <option value="1">Administrador</option>
-                  <option value="2">Direccion</option>
-                  <option value="3">Profesor</option>
-                  <option value="10">Gestion</option>
-                  <option value="11">Alumno</option>
-              </td>
+              @foreach($roles as $role)
               <td>
                 <label class="switch">
                   <input type="checkbox">
                   <span class="slider round"></span>
                 </label>
               </td>
+              @endforeach
+              <td class="botones">
+                <a class="btn btn-outline-primary" href="{{ route('permissions.show',$permission->id)}}">Ver</a>
+              </td>
             </tr>
           </tbody>
           @endforeach
         </table>
-        {!! $data->links() !!}
-
-        <div class="col-sm-6">
-          <a href="/permissions/create" class="btn btn-success"> <span>Añadir permisos</span></a>
-          <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><span>Modificar permisos</span></a>
-        </div>
-
       </div>
 
       <div class=" card-footer col-12">
+        <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
+
         <nav class="col-5" aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item">

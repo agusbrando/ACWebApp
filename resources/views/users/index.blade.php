@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="card-body row no-gutters table-responsive">
-            <table class="table col-12 ">
-                <thead id="developers"class="thead-dark col-12 col-md-8 col-lg-10 p-3">
+            <table id="dtBasicExample" class="table col-12 ">
+                <thead id="developers" class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
@@ -27,7 +27,7 @@
                         <td>{{$user->first_name }}</td>
                         <td>{{$user->last_name }}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->role_id }}</td>
+                        <td>{{$user->role_name }}</td>
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('users.show',$user->id)}}">Ver</a>
                         </td>
@@ -36,8 +36,9 @@
                 </tbody>
                 @endforeach
             </table>
-            
+
         </div>
+        
 
         <div class=" card-footer col-12">
             <nav class="col-5" aria-label="Page navigation example">

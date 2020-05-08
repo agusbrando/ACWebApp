@@ -10,6 +10,7 @@
             <h3>Perfil de usuario</h3>
             <form action="{{ route('users.update',$user->id)}}" method="POST">
                 @method('PATCH')
+                @csrf
                 <div>
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">

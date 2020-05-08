@@ -59,9 +59,15 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="/permissions/index">
+        <a class="nav-link" href="/permissions">
             <span data-feather="file-text"></span>
             Permisos
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/users">
+            <span data-feather="file-text"></span>
+            Usuarios
         </a>
         </li>
         <li class="nav-item">

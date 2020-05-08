@@ -16,9 +16,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $data = Permission::paginate(1);
         $permissions = Permission::all();
-        return view('permissions.index', compact('permissions'));
+        $roles = Role::all();
+        return view('permissions.index', compact('permissions','roles'));
         
         
     }
@@ -30,8 +30,6 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        // $permissions = Permission::all();
-        // return view('permissions.create', compact('permissions'));
         $roles = Role::all();
         return view('permissions.create', compact('roles'));
     }
@@ -47,7 +45,7 @@ class PermissionController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'description' => ['required', 'string', 'max:255'],
             'model' => 'required'
 
 
@@ -60,7 +58,7 @@ class PermissionController extends Controller
             'model' => $request->get('model')
 
         ]);
-        return redirect('permissions.index')->with('success', 'Permission saved!');
+        return redirect('/permissions')->with('success', 'Permission saved!');
     }
 
     /**

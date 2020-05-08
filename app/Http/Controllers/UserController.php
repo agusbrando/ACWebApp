@@ -17,10 +17,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        $roles = Role::all();
         $users = User::all();
-        return view('users.index', compact('users'));
+        return view('users.index', compact('users','roles'));
         
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -46,7 +48,6 @@ class UserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role_id' => 'required'
 
 
         ]);
@@ -56,10 +57,9 @@ class UserController extends Controller
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'password' =>Hash::make($request->get('password')),
-            'role_id' => $request->get('role')
 
         ]);
-        return redirect('users.index')->with('success', 'Contact saved!');
+        return redirect('/users')->with('success', 'Contact saved!');
     }
 
     /**
