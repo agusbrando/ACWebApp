@@ -19,51 +19,77 @@
             <div class="col-sm-12">
 
                 <div class="d-flex flex-row bd-highlight mb-3">
-                    <div id="accordion">
+                    <div id="accordion" class="w-100 h-100">
 
-                        @foreach($courses as $course)
-                        @if(($course->level % 2) != 0)
+                        @foreach($years as $year)
                         <div class="card">
-                            <div class="card-header list-group-item d-flex justify-content-between align-items-center" id="heading{{$course->id}}" data-toggle="collapse" data-target="#collapse{{$course->id}}" aria-expanded="false" aria-controls="collapse{{$course->id}}">
+                            <div class="card-header list-group-item d-flex justify-content-between align-items-center" id="heading{{$year->id}}" data-toggle="collapse" data-target="#collapse{{$year->id}}" aria-expanded="false" aria-controls="collapse{{$year->id}}">
 
                                 <h5 class="mb-0">
                                     <button class="btn collapsed">
-                                        {{$course->name}}
+                                        {{$year->name}}
                                     </button>
                                 </h5>
-                               
+
                             </div>
                             <!-- collapse show lo muestra abierto por defecto -->
-                            <div id="collapse{{$course->id}}" class="collapse" aria-labelledby="heading{{$course->id}}" data-parent="#accordion">
+                            <div id="collapse{{$year->id}}" class="collapse" aria-labelledby="heading{{$year->id}}" data-parent="#accordion">
                                 <div class="card-body">
                                     <ul class="list-group list-group-flush">
 
                                         <div class="card">
 
-                                            <div class="card-header list-group-item d-flex justify-content-between align-items-center" id="heading{{$course->id.$course->level}}" data-toggle="collapse" data-target="#collapse{{$course->id.$course->level}}" aria-expanded="false" aria-controls="collapse{{$course->id.$course->level}}">
+                                            <div class="w-100" id="heading{{$year->id}}" data-toggle="collapse" data-target="#collapse{{$year->id}}" aria-expanded="false" aria-controls="collapse{{$year->id}}">
 
-                                                <h5 class="mb-0">
-                                                    <button class="btn collapsed">
-                                                        {{$course->level.'º de '.$course->name}}
-                                                    </button>
-                                                </h5>
+                                                
+                                                    <table id='mytable' class="table w-100">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th>Año</th>
+                                                                <th>Nombre</th>
+                                                                <th>Numero de Alumnos</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                @foreach($courses as $course)
+                                                                <tr>
+                                                                    <td>{{$course->id}}</td>
+                                                                    <td>{{$course->level}}</td>
+                                                                    <td>{{$course->name}}</td>
+                                                                    <td>{{$course->num_students}}</td>
+
+
+                                                                    <td class="botones">
+                                                                        <form method="get" action="{{ route('courses.show', $course->id)}}">
+                                                                            @csrf
+                                                                            @method('GET')
+                                                                            <button class="btn btn-primary" type="submit">Ver</button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                        </tbody>
+                                                    </table>
+
+                                                
                                             </div>
                                             <!-- collapse show lo muestra abierto por defecto -->
-                                            
+
                                         </div>
-                                        
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        @endif
                         @endforeach
                     </div>
 
                 </div>
             </div>
         </div>
-        
+
         </form>
     </div>
 </main>

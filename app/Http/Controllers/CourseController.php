@@ -12,6 +12,8 @@ use App\Models\Type;
 use App\Models\State;
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Year;
+use App\Models\YearUnion;
 
 class CourseController extends Controller
 {
@@ -22,8 +24,10 @@ class CourseController extends Controller
      */
     public function index()
     {
+        $years = Year::all();
+        $yearUnions = YearUnion::all();
         $courses = Course::all();   
-        return view('courses.index', compact('courses'));
+        return view('courses.index', compact('courses', 'years', 'yearUnions'));
     }
 
     /**
