@@ -30,16 +30,9 @@
                                 <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Añadir</button>
                             </div>
                         </div>
-                        <div class="clone hide">
-                            <div class="hdtuto control-group lst input-group" style="margin-top:10px">
-                                <input type="file" name="name[]" class="myfrm form-control">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i>Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
                         <button type="submit" class="btn btn-success" style="margin-top:10px">Subir</button>
                     </form>
+                    <a href="{{route('attachments.destroy')" class="btn btn-danger">Eliminar Attachment</a>
                 </div>
             </body>
         </div>
