@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('events', 'CalendarController');
-Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
+Route::get('events/edit/{id}',['as' => 'events.shohwedit', 'uses' => 'CalendarController@show']);
 
-
+Route::resource('sessions','SessionController');
 
 // Route::get('/login', function () {
 //     return view('login');
