@@ -3,7 +3,7 @@
 @section('main')
 
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
-<!-- <script>
+<script>
     $(document).ready(function() {
         $('#tabla').DataTable( {
             dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'>>",
@@ -11,6 +11,7 @@
                 { extend: 'excel', className: 'btn-outline-success mr-2' }, 
                 { extend: 'pdf', className: 'btn-outline-danger mr-2' }
             ],
+            responsive : 'true',
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -33,7 +34,7 @@
             }
         } );
     } );
-</script> -->
+</script>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
                 
@@ -45,14 +46,14 @@
                         <a class="btn btn-outline-success" href="{{ route('programs.create')}}">Añadir</a>
                     </div>
                 </div>
-                <div class="card-body row no-gutters table-responsive">
+                <div class="card-body row no-gutters">
                 
                     <div class="row justify-content-center col-12">
 
-                        <table id='tabla' class="table table-striped table-bordered" width="100%">
-                            <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
+                        <table id='tabla' class="table table-striped table-bordered nowrap dt-responsive" width="100%">
+                            <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Profesor</th>
                                     <th>Actions</th>
@@ -61,7 +62,7 @@
                             <tbody>
                             @foreach($programs as $i=>$program)
                                 <tr>
-                                    <td>Programacion {{$i}}</td>
+                                    <td>{{$i}}</td>
                                     <td>{{$program->name}}</td>
                                     <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
                                     <td class="botones">
