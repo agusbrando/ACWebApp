@@ -38,6 +38,7 @@ Route::resource('classrooms','ClassroomController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('states','StateController');
 Route::resource('sessions','SessionController');
+Route::resource('subjects','SubjectController');
 
 Auth::routes();
 
