@@ -57,85 +57,111 @@ class AsignaturaController extends Controller
     public function show($id)
     {
         $subject = Subject::find($id);
-
+        $taskTypes = Type::all()->where('model', Task::class);
         $evaluaciones = $subject->evaluations;
-        $eval1 = array();
-        $eval2 = array();
-        $eval3 = array();
 
-        foreach ($subject->evaluations as $eval) {
-            $types = $eval->types;
-            switch ($eval->name) {
-                case "1Eval":
-                    foreach ($types as $type) {
-                        $percentage = new Percentage([
-                            "evaluacion_id" => $type->pivot->evaluation_id,
-                            "type_id" => $type->pivot->type_id,
-                            "porcentaje" => $type->pivot->percentage,
-                            "nota_min" => $type->pivot->nota_min,
-                            "nota_media" => $type->pivot->nota_media,
-                        ]);
-                        $percentage->type = $type->name;
-                        array_push($eval1, $percentage);
+        foreach ($evaluaciones as $eval) {
+            $eval->percentages = $eval->types;
+            $eval->users = $eval->users;
+            $eval->tareas = $taskTypes;
+            foreach ($eval->users as $user) {
+                if (count($taskTypes) > 0) {
+                    $sumaFinal = 0;
+                    $recuperado = 0;
+                    foreach ($taskTypes as $task_type) {
+                        $tasks =  $user->tasks()->where('evaluation_id', $eval->id)->where('type_id', $task_type->id)->get();
+                        $suma = 0;
+                        $tareas[$task_type->name] = 0;
+                        $user->tareas = $tareas;
+                        if (count($tasks) > 0) {
+                            foreach ($tasks as $task) {
+                                $suma += $task->pivot->value;
+                            }
+                            $suma = $suma / count($tasks);
+                            foreach ($eval->percentages as $percentage) {
+                                if ($percentage->id == $task_type->id) {
+                                    $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
+                                    $user->tareas = $tareas;
+                                }
+                            }
+                            if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
+                                $user->nota_final = $user->tareas[$task_type->name];
+                                break;
+                            } else {
+                                $sumaFinal += $task->pivot->value;
+                            }
+                            
+                        }
                     }
-                    break;
-                case "2Eval":
-                    foreach ($types as $type) {
-                        $percentage = new Percentage([
-                            "evaluacion_id" => $type->pivot->evaluation_id,
-                            "type_id" => $type->pivot->type_id,
-                            "porcentaje" => $type->pivot->percentage,
-                            "nota_min" => $type->pivot->nota_min,
-                            "nota_media" => $type->pivot->nota_media,
-                        ]);
-                        $percentage->type = $type->name;
-                        array_push($eval2, $percentage);
-                    }
-                    break;
-                case "3Eval":
-                    foreach ($types as $type) {
-                        $percentage = new Percentage([
-                            "evaluacion_id" => $type->pivot->evaluation_id,
-                            "type_id" => $type->pivot->type_id,
-                            "porcentaje" => $type->pivot->percentage,
-                            "nota_min" => $type->pivot->nota_min,
-                            "nota_media" => $type->pivot->nota_media,
-                        ]);
-                        $percentage->type = $type->name;
-                        array_push($eval3, $percentage);
-                    }
-                    break;
+                    //Restamos -1 para que no cuente recuperado
+                    $user->nota_final = round($sumaFinal / (count($taskTypes)-1), 2);
+                } else {
+                    //TODO: Controlar Error
+                    return view('Notas.evaluations');
+                }
             }
         }
 
-        return view('Notas.evaluations', compact('subject', 'eval1', 'eval2', 'eval3', 'evaluaciones'));
+        return view('Notas.evaluations', compact('subject', 'evaluaciones'));
+
+        // $subject = Subject::find($id);
+
+        // $evaluaciones = $subject->evaluations;
+        // $eval1 = array();
+        // $eval2 = array();
+        // $eval3 = array();
+
+        // foreach ($subject->evaluations as $eval) {
+        //     $types = $eval->types;
+        //     switch ($eval->name) {
+        //         case "1Eval":
+        //             foreach ($types as $type) {
+        //                 $percentage = new Percentage([
+        //                     "evaluacion_id" => $type->pivot->evaluation_id,
+        //                     "type_id" => $type->pivot->type_id,
+        //                     "porcentaje" => $type->pivot->percentage,
+        //                     "nota_min" => $type->pivot->nota_min,
+        //                     "nota_media" => $type->pivot->nota_media,
+        //                 ]);
+        //                 $percentage->type = $type->name;
+        //                 array_push($eval1, $percentage);
+        //             }
+        //             break;
+        //         case "2Eval":
+        //             foreach ($types as $type) {
+        //                 $percentage = new Percentage([
+        //                     "evaluacion_id" => $type->pivot->evaluation_id,
+        //                     "type_id" => $type->pivot->type_id,
+        //                     "porcentaje" => $type->pivot->percentage,
+        //                     "nota_min" => $type->pivot->nota_min,
+        //                     "nota_media" => $type->pivot->nota_media,
+        //                 ]);
+        //                 $percentage->type = $type->name;
+        //                 array_push($eval2, $percentage);
+        //             }
+        //             break;
+        //         case "3Eval":
+        //             foreach ($types as $type) {
+        //                 $percentage = new Percentage([
+        //                     "evaluacion_id" => $type->pivot->evaluation_id,
+        //                     "type_id" => $type->pivot->type_id,
+        //                     "porcentaje" => $type->pivot->percentage,
+        //                     "nota_min" => $type->pivot->nota_min,
+        //                     "nota_media" => $type->pivot->nota_media,
+        //                 ]);
+        //                 $percentage->type = $type->name;
+        //                 array_push($eval3, $percentage);
+        //             }
+        //             break;
+        //     }
+        // }
+
+
     }
 
-    // protected function calculateDataShow($id)
-    // {
-    //     $subject = Subject::find($id);
-    //     $taskTypes = Type::all()->where('model', Task::class);
-    //     $evaluaciones = $subject->evaluations;
-
-
-    //     foreach ($evaluaciones as $eval) {
-    //         $percentages = $eval->types;
-    //         foreach ($eval->users as $user) {
-    //             foreach ($taskTypes as $task_type) {
-    //                 $tasks =  $user->tasks()->where('evaluation_id', $eval->id)->where('type_id', $task_type->id)->get();
-    //                 $suma = 0;
-    //                 foreach ($tasks as $task) {
-    //                     $suma += $task->pivot->value;
-                        
-    //                 }
-    //                 foreach($percentages as $percentage){
-    //                     if($percentage->type_id = )
-    //                 }
-    //                 $user->$task_type->name = 0;
-    //             }
-    //         }
-    //     }
-    // }
+    protected function calculateDataShow($id)
+    {
+    }
 
     /**
      * Show the form for editing the specified resource.

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Subject;
 use App\Models\Percentage;
 use App\Models\Type;
+use App\Models\Task;
 use App\Models\Evaluation;
 use Illuminate\Support\Facades\DB;
 
@@ -36,7 +37,7 @@ class PorcentajesController extends Controller
         $subject = Subject::find($id);
         $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
 
-        $types = Type::all()->where('model', Percentage::class);
+        $types = Type::all()->where('model', Task::class);
 
         return view('Notas.crearPorcentaje', compact('evaluaciones', 'types', 'subject'));
     }
@@ -95,7 +96,7 @@ class PorcentajesController extends Controller
         $subject = Subject::find($subject_id);
         $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
         $porcentaje = Percentage::where('evaluation_id', $evaluation_id)->where('type_id', $type_id)->first();
-        $types = Type::all()->where('model', Percentage::class);
+        $types = Type::all()->where('model', Task::class);
 
         return view('Notas.editPorcentaje', compact('porcentaje', 'evaluaciones', 'types', 'subject'));
     }

@@ -9,6 +9,7 @@
                 <a href="/asignaturas" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3 class="m-auto">{{$subject->course->name}} - {{$subject->name}}</h3>
             </div>
+            <a class="btn btn-outline-info float-right" href="{{ url('/porcentajes/create', $subject->id) }}">Añadir Porcentaje</a>
         </div>
         <div class="card-body row no-gutters">
             <div class="col">
@@ -33,61 +34,24 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            @if($eval->name == '1Eval')
-                            @foreach($eval1 as $porcentaje)
+                            @foreach($eval->percentages as $porcentaje)
                             <tbody>
                                 <tr>
-                                    <td>{{$porcentaje->type}}</td>
-                                    <td>{{$porcentaje->porcentaje}}%</td>
-                                    <td>{{$porcentaje->nota_min}}</td>
-                                    <td>{{$porcentaje->nota_media}}</td>
+                                    <td>{{$porcentaje->name}}</td>
+                                    <td>{{$porcentaje->pivot->percentage}}%</td>
+                                    <td>{{$porcentaje->pivot->nota_min}}</td>
+                                    <td>{{$porcentaje->pivot->nota_media}}</td>
                                     <td>
                                         <div class="d-flex flex-row">
-                                            <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
-                                            <a href="{{url('porcentajes/destroy',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="icon"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($eval->id), 'type_id'=> ($porcentaje->id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
+                                            <a href="{{url('porcentajes/destroy',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($eval->id), 'type_id'=> ($porcentaje->id)])}}" class="icon"><i class="fas fa-trash-alt"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                             @endforeach
-                            @elseif($eval->name == '2Eval')
-                            @foreach($eval2 as $porcentaje)
-                            <tbody>
-                                <tr>
-                                    <td>{{$porcentaje->type}}</td>
-                                    <td>{{$porcentaje->porcentaje}}%</td>
-                                    <td>{{$porcentaje->nota_min}}</td>
-                                    <td>{{$porcentaje->nota_media}}</td>
-                                    <td>
-                                        <div class="d-flex flex-row">
-                                            <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
-                                            <a href="{{url('porcentajes/destroy',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="icon"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            @endforeach
-                            @elseif($eval->name == '3Eval')
-                            @foreach($eval3 as $porcentaje)
-                            <tbody>
-                                <tr>
-                                    <td>{{$porcentaje->type}}</td>
-                                    <td>{{$porcentaje->porcentaje}}%</td>
-                                    <td>{{$porcentaje->nota_min}}</td>
-                                    <td>{{$porcentaje->nota_media}}</td>
-                                    <td>
-                                        <div class="d-flex flex-row">
-                                            <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
-                                            <a href="{{url('porcentajes/destroy',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($porcentaje->evaluacion_id), 'type_id'=> ($porcentaje->type_id)])}}" class="icon"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            @endforeach
-                            @endif
                         </table>
                         @endforeach
-                        <a class="btn btn-outline-primary float-right" href="{{ url('/porcentajes/create', $subject->id) }}">Añadir</a>
                     </div>
                     @foreach($evaluaciones as $eval)
                     <div class="tab-pane fade table-responsive" id="a{{$eval->name}}" role="tabpanel">
@@ -96,11 +60,10 @@
                                 <tr>
                                     <th>Nº</th>
                                     <th>Apellidos, Nombre</th>
-                                    <th>%Trabajos</th>
-                                    <th>%Examen</th>
-                                    <th>%Actitud</th>
+                                    @foreach($eval->tareas as $tarea)
+                                    <th>{{$tarea->name}}</th>
+                                    @endforeach
                                     <th>NOTA FINAL</th>
-                                    <th>%Recuperacion</th>
                                     <th>BOLETIN</th>
                                 </tr>
                             </thead>
@@ -109,13 +72,11 @@
                                 <tr>
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->last_name}} {{$user->first_name}}</td>
-                                    <td>X</td>
-                                    <td>X</td>
-                                    <td>X</td>
-                                    <td>X</td>
-                                    <td>X</td>
-                                    <td>X</td>
-
+                                    @foreach($user->tareas as $tarea)
+                                    <td>{{$tarea}}%</td>
+                                    @endforeach
+                                    <td>{{$user->nota_final}}</td>
+                                    <td>{{$user->nota_final}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

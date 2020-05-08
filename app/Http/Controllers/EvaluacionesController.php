@@ -68,9 +68,9 @@ class EvaluacionesController extends Controller
         $aux2 = 0;
 
         foreach ($tasksTypes as $task_type) {
-            $id = $task_type->id;
-            switch ($id) {
-                case 8:
+            $name = $task_type->name;
+            switch ($name) {
+                case 'Examenes':
                     $parciales = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
                     foreach ($parciales as $parcial) {
                         foreach ($parcial->users as $user) {
@@ -90,7 +90,7 @@ class EvaluacionesController extends Controller
                                     $aux2 = count($parciales);
                                 }
                                 $aux += $nota;
-                                $mediaParciales[$user_id] = bcdiv($aux / $aux2, '1', 2);
+                                $mediaParciales[$user_id] = round($aux / $aux2, 2);
                             }
                             $aux = 0;
                             $aux2 = 0;
@@ -98,7 +98,7 @@ class EvaluacionesController extends Controller
                     }
                     
                     break;
-                case 9:
+                case 'Trabajos':
                     $trabajos = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
                     foreach ($trabajos as $trabajo) {
                         foreach ($trabajo->users as $user) {
@@ -108,24 +108,24 @@ class EvaluacionesController extends Controller
                     if ($notaTrabajos != null) {
                         foreach ($notaTrabajos as $user_id => $trabajosNotas) {
                             foreach ($trabajosNotas as $nota) {
-                                if($aux2 == count($parciales)){
+                                if($aux2 == count($trabajos)){
                                     $aux2 = 0;
                                 }
                                 if ($nota != null) {
                                     $aux2 ++;
                                 }
                                 if($aux2 == 0){
-                                    $aux2 = count($parciales);
+                                    $aux2 = count($trabajos);
                                 }
                                 $aux += $nota;
-                                $mediaTrabajos[$user_id] = bcdiv($aux / $aux2, '1', 2);
+                                $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
                             }
                             $aux = 0;
                             $aux2 = 0;
                         }
                     }
                     break;
-                case 10:
+                case 'Actitud':
                     $actitud = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
                     foreach ($actitud as $act) {
                         foreach ($act->users as $user) {
@@ -135,17 +135,17 @@ class EvaluacionesController extends Controller
                     if ($notaActitud != null) {
                         foreach ($notaActitud as $user_id => $actitudNotas) {
                             foreach ($actitudNotas as $nota) {
-                                if($aux2 == count($parciales)){
+                                if($aux2 == count($actitud)){
                                     $aux2 = 0;
                                 }
                                 if ($nota != null) {
                                     $aux2 ++;
                                 }
                                 if($aux2 == 0){
-                                    $aux2 = count($parciales);
+                                    $aux2 = count($actitud);
                                 }
                                 $aux += $nota;
-                                $mediaActitud[$user_id] = bcdiv($aux / $aux2, '1', 2);
+                                $mediaActitud[$user_id] = round($aux / $aux2, 2);
                             }
                             $aux = 0;
                             $aux2 = 0;

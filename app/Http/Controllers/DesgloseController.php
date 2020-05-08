@@ -15,9 +15,7 @@ class DesgloseController extends Controller
 {
     public function index()
     {
-        $titulo = "Examenes";
-        $users = DB::table('users')->where('role_id', '=', 4)->get();
-        return view('Notas.desglose', compact('users', 'titulo'));
+        //
     }
 
 

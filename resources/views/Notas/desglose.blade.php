@@ -11,8 +11,8 @@
                 <h3 class="m-auto">Desglose {{$subject->name}} {{$evaluation->name}}</h3>
             </div>
             <div>
-                <a href="{{ url('/evaluaciones/desglose', $subject->id) }}" class="btn btn-primary ">Crear Tarea</a>
-                <a href="{{ url('tareas', $subject->id) }}" class="btn btn-primary ">Eliminar Tarea</a>
+                <a href="{{ url('/evaluaciones/desglose', $subject->id) }}" class="btn btn-outline-info">Crear Tarea</a>
+                <a href="{{ url('tareas', $subject->id) }}" class="btn btn-outline-danger ">Eliminar Tarea</a>
             </div>
         </div>
         <div class="card-body row no-gutters">
@@ -53,9 +53,7 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        @if (empty($mediaParciales[$user->id]))
-                                        <td>0</td>
-                                        @elseif($mediaParciales != null)
+                                        @if($mediaParciales != null)
                                         <td>{{$mediaParciales[$user->id]}}</td>
                                         @else
                                         <td>0</td>
@@ -97,9 +95,7 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        @if (empty($mediaTrabajos[$user->id]))
-                                        <td>0</td>
-                                        @elseif($mediaTrabajos != null)
+                                        @if($mediaTrabajos != null)
                                         <td>{{$mediaTrabajos[$user->id]}}</td>
                                         @else
                                         <td>0</td>
@@ -141,9 +137,7 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        @if (empty($mediaActitud[$user->id]))
-                                        <td>0</td>
-                                        @elseif($mediaActitud != null)
+                                        @if($mediaActitud != null)
                                         <td>{{$mediaActitud[$user->id]}}</td>
                                         @else
                                         <td>0</td>

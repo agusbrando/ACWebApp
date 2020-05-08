@@ -11,14 +11,16 @@
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="card shadow">
-        <div class="card-header row m-0 justify-content-between">
-            <h3>Crear Tarea</h3>
-        </div>
-        <div class="card-body row no-gutters">
-            <div class="container">
-                <form action="{{ route('desglose.store') }}" method="post">
-                    @csrf
+    <form action="{{ route('desglose.store') }}" method="post">
+        @csrf
+        <div class="card shadow">
+            <div class="card-header row m-0 justify-content-between">
+                <h3>Crear Tarea</h3>
+                <button class="btn btn-outline-primary float-right" type="submit">Guardar</button>
+            </div>
+            <div class="card-body row no-gutters">
+                <div class="container">
+
                     <div class="form-group">
                         <label for="Porcentaje">Nombre Tarea</label>
                         <input type="porcentaje" class="form-control" name="name">
@@ -40,12 +42,12 @@
                         </select>
                     </div>
                     <input type="hidden" name="subject" value={{$subject->id}}>
+                </div>
             </div>
-        </div>
-        <div class=" card-footer col-12">
-            <button class="btn btn-outline-primary float-right" type="submit">Guardar</button>
-        </div>
-        </form>
+            <div class=" card-footer col-12">
+                <button class="btn btn-outline-warning float-right" type="submit">Cancelar</button>
+            </div>
+    </form>
     </div>
 </main>
 @endsection
