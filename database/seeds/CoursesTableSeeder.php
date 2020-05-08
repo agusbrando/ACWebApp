@@ -14,6 +14,7 @@ class CoursesTableSeeder extends Seeder
         DB::table('courses')->insert([
             'level' => 1,
             'name' => 'Desarrollo de Aplicaciones Multiplataforma',
+            'abbreviation' =>'DAM',
             'num_students' => 30,
             'created_at' => now(),
             'updated_at' => now()
@@ -21,6 +22,7 @@ class CoursesTableSeeder extends Seeder
         DB::table('courses')->insert([
             'level' => 2,
             'name' => 'Desarrollo de Aplicaciones Multiplataforma',
+            'abbreviation' =>'DAM',
             'num_students' => 24,
             'created_at' => now(),
             'updated_at' => now()
@@ -29,6 +31,7 @@ class CoursesTableSeeder extends Seeder
         DB::table('courses')->insert([
             'level' => 1,
             'name' => 'Desarrollo de Aplicaciones Web',
+            'abbreviation' =>'DAW',
             'num_students' => 22,
             'created_at' => now(),
             'updated_at' => now()
@@ -36,6 +39,7 @@ class CoursesTableSeeder extends Seeder
         DB::table('courses')->insert([
             'level' => 2,
             'name' => 'Desarrollo de Aplicaciones Web',
+            'abbreviation' =>'DAW',
             'num_students' => 20,
             'created_at' => now(),
             'updated_at' => now()
@@ -44,13 +48,15 @@ class CoursesTableSeeder extends Seeder
         DB::table('courses')->insert([
             'level' => 1,
             'name' => 'Sistemas Microinformaticos y Redes',
+            'abbreviation' =>'SMR',
             'num_students' => 25,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('courses')->insert([
             'level' => 2,
-            'name' => 'Desarrollo de Aplicaciones Multiplataforma',
+            'name' => 'Sistemas Microinformaticos y Redes',
+            'abbreviation' =>'SMR',
             'num_students' => 19,
             'created_at' => now(),
             'updated_at' => now()

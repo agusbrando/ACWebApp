@@ -23,21 +23,15 @@ class ProgramController extends Controller
     public function index()
     {
         $programs = Program::all();
-        $profesores = DB::table('users')->where('role_id', 2)->get();
-        $subjects = Subject::all();
-        $programs_responsable =[];
-        $programs_professor=[];
-        return view('programs.index',compact('programs','profesores','subjects','programs_responsable','programs_professor'));
+        return view('programs.index',compact('programs'));
     }
 
     public function myPrograms(){
         $user = Auth::user();
         $programs = [];
         $programs_professor = Program::all()->where('professor_id',$user->id);
-        $programs_responsable = Program::all()->where('user_id',$user->id);
-        $profesores = DB::table('users')->where('role_id', 2)->get();
-        $subjects = Subject::all();
-        return view('programs.index',compact('programs','profesores','subjects','programs_responsable','programs_professor'));
+       
+        return view('programs.index',compact('programs','programs_professor'));
     }
 
     /**
@@ -64,22 +58,22 @@ class ProgramController extends Controller
     {
         $request->validate([
             'professor_id'=>'required',
-            'user_id'=>'required',
+            'course_id'=>'required',
             'subject_id'=>'required',
-            'name'=>'required'
+            'year_id'=>'required'
         ]);
 
         $profesor = User::find($request->get('professor_id'));
-        $responsable = User::find($request->get('user_id'));
+        $curso = Course::find($request->get('course_id'));
         $asignatura = Subject::find($request->get('subject_id'));
+        $anyo = Year::find($request->get('subject_id'));
 
+        foreach(YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id) as $evaluation)
         $program = new Program([
-            'name'=> $request->get('name')
+            'name'=> $anyo->name.' - '.$curso->.' - '.
         ]);
         $program->professor()->associate($profesor);
-        $program->responsable()->associate($responsable);
-        $program->subject()->associate($asignatura);
-
+        
         $program->save();
         return redirect('/programs');
     }

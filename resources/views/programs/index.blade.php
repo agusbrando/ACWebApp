@@ -1,23 +1,7 @@
 @extends('base')
 
 @section('main')
-<script>
-    $(document).ready(function() {
-        let datos = [];
-        @foreach($subjects as $subject)
-            datos.push("{{$subject->name}}")
-        @endforeach
-        $( "#tags" ).autocomplete({
-        source: function( request, response ) {
-                var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
-                response( $.grep( datos, function( item ){
-                    return matcher.test( item );
-                }) );
-            }
-        });
-        
-    } );
-</script>
+
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 <script>
     $(document).ready(function() {
@@ -71,7 +55,6 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Profesor</th>
-                            <th>Responsable</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -80,7 +63,6 @@
                         <tr>
                             <td>{{$program->name}}</td>
                             <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
-                            <td>{{$program->responsable->first_name}} {{$program->responsable->last_name}}</td>
                             <td class="botones">
                                 <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
                                 <a href="{{route('programs.edit',$program->id)}}" class="btn btn-primary btn-sm">Edit</a>
@@ -92,38 +74,7 @@
                             </td>
                         </tr>
                     @endforeach
-                    @foreach($programs_professor as $program)
-                        <tr>
-                            <td>{{$program->name}}</td>
-                            <td style="color:blue;">{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
-                            <td>{{$program->responsable->first_name}} {{$program->responsable->last_name}}</td>
-                            <td class="botones">
-                                <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
-                                <a href="{{route('programs.edit',$program->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                                <form action="{{route('programs.destroy',$program->id)}}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    @foreach($programs_responsable as $program)
-                        <tr>
-                            <td>{{$program->name}}</td>
-                            <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
-                            <td style="color:red;">{{$program->responsable->first_name}} {{$program->responsable->last_name}}</td>
-                            <td class="botones">
-                                <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
-                                <a href="{{route('programs.edit',$program->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                                <form action="{{route('programs.destroy',$program->id)}}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
+                   
                     </tbody>
         </table>
 </main>
