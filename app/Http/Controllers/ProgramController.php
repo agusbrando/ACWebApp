@@ -68,9 +68,9 @@ class ProgramController extends Controller
         $asignatura = Subject::find($request->get('subject_id'));
         $anyo = Year::find($request->get('subject_id'));
 
-        foreach(YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id) as $evaluation)
+        foreach(YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',$anyo->id) as $evaluation)
         $program = new Program([
-            'name'=> $anyo->name.' - '.$curso->.' - '.
+            'name'=> $anyo->name.' - '.$curso->abbreviation.' - '.$asignatura->name
         ]);
         $program->professor()->associate($profesor);
         
