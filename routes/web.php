@@ -28,6 +28,7 @@ Route::resource('posts', 'PostController');
 Route::resource('comments', 'CommentController');
 Route::resource('attachments', 'AttachmentController');
 Route::resource('permissions','PermissionController');
+//Route::resource('users', 'UserController');
 
 Auth::routes();
 
