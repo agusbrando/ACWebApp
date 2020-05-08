@@ -11,14 +11,15 @@
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="card shadow">
-        <div class="card-header row m-0 justify-content-between">
-            <h3>Crear Porcentaje para {{$subject->name}}</h3>
-        </div>
-        <div class="card-body row no-gutters">
-            <div class="container">
-                <form action="{{ route('porcentajes.store') }}" method="post">
-                    @csrf
+    <form action="{{ route('porcentajes.store') }}" method="post">
+        @csrf
+        <div class="card shadow">
+            <div class="card-header row m-0 justify-content-between">
+                <h3>Crear Porcentaje para {{$subject->name}}</h3>
+                <button class="btn btn-outline-primary float-right" type="submit">Guardar</button>
+            </div>
+            <div class="card-body row no-gutters">
+                <div class="container">
                     <div class="form-group">
                         <label for="Porcentaje">Porcentaje</label>
                         <input type="porcentaje" class="form-control" name="porcentaje" aria-describedby="porcentaje" placeholder="%">
@@ -48,13 +49,12 @@
                         <input type="porcentaje" class="form-control" name="nota_media" aria-describedby="porcentaje">
                     </div>
                     <input type="hidden" name="subject" value={{$subject->id}}>
+                </div>
             </div>
-        </div>
-        <div class=" card-footer col-12">
-            <button class="btn btn-outline-primary float-right" type="submit">Guardar</button>
-            <a class="btn btn-outline-warning float-right mr-2" href="asignaturas/{{$subject->id}}">Cancelar</a>
-        </div>
-        </form>
+            <div class=" card-footer col-12">
+                <a class="btn btn-outline-warning float-right mr-2" href="asignaturas/{{$subject->id}}">Cancelar</a>
+            </div>
+    </form>
     </div>
 </main>
 @endsection

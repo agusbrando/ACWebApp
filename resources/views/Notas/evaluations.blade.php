@@ -24,7 +24,7 @@
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active table-responsive" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
                         @foreach($evaluaciones as $eval)
-                        <table class="table col-12">
+                        <table class="table col-12 centro">
                             <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                 <tr>
                                     <th>{{$eval->name}}</th>
@@ -54,7 +54,7 @@
                         @endforeach
                     </div>
                     @foreach($evaluaciones as $eval)
-                    <div class="tab-pane fade table-responsive" id="a{{$eval->name}}" role="tabpanel">
+                    <div class="tab-pane fade table-responsive centro" id="a{{$eval->name}}" role="tabpanel">
                         <table class="table col-12">
                             <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                 <tr>

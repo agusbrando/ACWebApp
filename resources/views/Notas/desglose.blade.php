@@ -19,16 +19,17 @@
             <div class="col mt-4">
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-eval1-tab" data-toggle="tab" href="#nav-eval1" role="tab" aria-controls="nav-eval1" aria-selected="true">Examenes</a>
-                        <a class="nav-item nav-link" id="nav-eval2-tab" data-toggle="tab" href="#nav-eval2" role="tab" aria-controls="nav-eval2" aria-selected="false">Trabajos</a>
-                        <a class="nav-item nav-link" id="nav-eval3-tab" data-toggle="tab" href="#nav-eval3" role="tab" aria-controls="nav-eval3" aria-selected="false">Actitud</a>
+                        <a class="nav-item nav-link active" id="nav-eval1-tab" data-toggle="tab" href="#nav-parciales" role="tab" aria-controls="nav-parciales" aria-selected="true">Examenes</a>
+                        <a class="nav-item nav-link" id="nav-eval2-tab" data-toggle="tab" href="#nav-trabajos" role="tab" aria-controls="nav-trabajos" aria-selected="false">Trabajos</a>
+                        <a class="nav-item nav-link" id="nav-eval3-tab" data-toggle="tab" href="#nav-actitud" role="tab" aria-controls="nav-actitud" aria-selected="false">Actitud</a>
+                        <a class="nav-item nav-link" id="nav-eval3-tab" data-toggle="tab" href="#nav-recuperacion" role="tab" aria-controls="nav-recuperacion" aria-selected="false">Recuperacion</a>
                     </div>
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                    <div class="tab-pane fade show active table-responsive" id="nav-eval1" role="tabpanel" aria-labelledby="nav-eval1-tab">
+                    <div class="tab-pane fade show active table-responsive" id="nav-parciales" role="tabpanel" aria-labelledby="nav-eval1-tab">
                         <form action="{{ route('desglose.updateNotes') }}" method="post">
                             @csrf
-                            <table class="table col-12">
+                            <table class="table col-12 centro">
                                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                     <tr id='columna'>
                                         <th>Apellidos, Nombre</th>
@@ -67,10 +68,10 @@
                             <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade table-responsive" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
+                    <div class="tab-pane fade table-responsive" id="nav-trabajos" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
                         <form action="{{ route('desglose.updateTrabajos') }}" method="post">
                             @csrf
-                            <table class="table col-12">
+                            <table class="table col-12 centro">
                                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                     <tr id='columna'>
                                         <th>Apellidos, Nombre</th>
@@ -109,10 +110,10 @@
                             <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade table-responsive" id="nav-eval3" role="tabpanel" aria-labelledby="nav-eval3-tab">
+                    <div class="tab-pane fade table-responsive" id="nav-actitud" role="tabpanel" aria-labelledby="nav-eval3-tab">
                         <form action="{{ route('desglose.updateActitud') }}" method="post">
                             @csrf
-                            <table class="table col-12">
+                            <table class="table col-12 centro">
                                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                     <tr>
                                         <th>Apellidos, Nombre</th>
@@ -139,6 +140,48 @@
                                         @endforeach
                                         @if($mediaActitud != null)
                                         <td>{{$mediaActitud[$user->id]}}</td>
+                                        @else
+                                        <td>0</td>
+                                        @endif
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="subject" value={{$subject->id}}>
+                            <input type="hidden" name="evaluacion" value={{$evaluation->id}}>
+                            <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade table-responsive" id="nav-recuperacion" role="tabpanel" aria-labelledby="nav-eval3-tab">
+                        <form action="{{ route('desglose.updateRecuperacion') }}" method="post">
+                            @csrf
+                            <table class="table col-12 centro">
+                                <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
+                                    <tr>
+                                        <th>Apellidos, Nombre</th>
+                                        @foreach($recuperacion as $rec)
+                                        <th>{{$rec->name}}</th>
+                                        @endforeach
+                                        <th>Media Recuperacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($users as $user)
+                                    <tr>
+                                        <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
+                                        @foreach($recuperacion as $rec)
+                                        <td>
+                                            <div class="input-group col-10">
+                                                @if($notaRecuperacion != null)
+                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w" value="{{$notaRecuperacion[$user->id][$rec->id]}}">
+                                                @else
+                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w">
+                                                @endif
+                                            </div>
+                                        </td>
+                                        @endforeach
+                                        @if($mediaRecuperacion != null)
+                                        <td>{{$mediaRecuperacion[$user->id]}}</td>
                                         @else
                                         <td>0</td>
                                         @endif

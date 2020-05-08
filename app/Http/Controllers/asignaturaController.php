@@ -90,11 +90,10 @@ class AsignaturaController extends Controller
                             } else {
                                 $sumaFinal += $task->pivot->value;
                             }
-                            
                         }
+                        //Restamos -1 para que no cuente recuperado
+                        $user->nota_final = round($sumaFinal / (count($taskTypes) - 1), 2);
                     }
-                    //Restamos -1 para que no cuente recuperado
-                    $user->nota_final = round($sumaFinal / (count($taskTypes)-1), 2);
                 } else {
                     //TODO: Controlar Error
                     return view('Notas.evaluations');

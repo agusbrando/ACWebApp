@@ -59,10 +59,12 @@ class EvaluacionesController extends Controller
         $notaParciales = null;
         $notaTrabajos = null;
         $notaActitud = null;
+        $notaRecuperacion = null;
 
         $mediaParciales = null;
         $mediaTrabajos = null;
         $mediaActitud = null;
+        $mediaRecuperacion = null;
 
         $aux = 0;
         $aux2 = 0;
@@ -152,10 +154,37 @@ class EvaluacionesController extends Controller
                         }
                     }
                     break;
+                    case 'Recuperacion':
+                        $recuperacion = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                        foreach ($recuperacion as $rec) {
+                            foreach ($rec->users as $user) {
+                                $notaRecuperacion[$user->id][$rec->id] = $user->pivot->value;
+                            }
+                        }
+                        if ($notaRecuperacion != null) {
+                            foreach ($notaRecuperacion as $user_id => $recuperacionNotas) {
+                                foreach ($recuperacionNotas as $nota) {
+                                    if($aux2 == count($recuperacion)){
+                                        $aux2 = 0;
+                                    }
+                                    if ($nota != null) {
+                                        $aux2 ++;
+                                    }
+                                    if($aux2 == 0){
+                                        $aux2 = count($recuperacion);
+                                    }
+                                    $aux += $nota;
+                                    $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
+                                }
+                                $aux = 0;
+                                $aux2 = 0;
+                            }
+                        }
+                        break;
             }
         }
 
-        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'notaParciales', 'notaTrabajos', 'notaActitud', 'mediaParciales', 'mediaTrabajos', 'mediaActitud'));
+        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'recuperacion', 'notaParciales', 'notaTrabajos', 'notaActitud', 'notaRecuperacion' ,'mediaRecuperacion', 'mediaParciales', 'mediaTrabajos', 'mediaActitud'));
     }
 
     /**

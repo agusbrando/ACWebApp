@@ -40,6 +40,10 @@
     text-align: center;
 }
 
+.centro th{
+    text-align: center;
+}
+
 .tr{
     width: auto;
 }

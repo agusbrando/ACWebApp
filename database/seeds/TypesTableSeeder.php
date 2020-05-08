@@ -24,14 +24,7 @@ class TypesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
-        DB::table('types')->insert([
-            'name' => 'Practicas',
-            'model' => 'App\Models\Task',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
+        
         DB::table('types')->insert([
             'name' => 'Actitud',
             'model' => 'App\Models\Task',

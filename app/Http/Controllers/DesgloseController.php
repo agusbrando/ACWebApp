@@ -159,6 +159,29 @@ class DesgloseController extends Controller
     {
         //
     }
+
+    public function updateRecuperacion(Request $request)
+    {
+        $request->validate([
+            'recuperacion' => 'required',
+            'subject' => 'required',
+            'evaluacion' => 'required'
+        ]);
+
+        $recuperacion = $request->get('recuperacion');        
+
+        foreach ($recuperacion as $user_id => $tasks) {
+            foreach ($tasks as $task_id => $task_value) {
+                $task = Task::find($task_id);
+                $task->users()->updateExistingPivot($user_id,[
+                    'value' => $task_value
+                ]);
+            }
+        }
+
+        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+    }
+
     public function updateActitud(Request $request)
     {
         $request->validate([
