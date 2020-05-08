@@ -72,6 +72,9 @@ Route::get('/prueba', function (Request $request) {
                 echo ($yearUnion->subject->name).' - '.($tarea->name).' - '.($tarea->pivot->value).'<br>';
             }
        
+Route::get('events/edit/{id}',['as' => 'events.shohwedit', 'uses' => 'CalendarController@show']);
+
+Route::resource('sessions','SessionController');
 
     }
 
@@ -110,9 +113,7 @@ Route::post('/calendarTime', 'CalendarController@getTime');
 
 Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
 
-<<<<<<< HEAD
 Route::post('/crearEvento','CalendarController@store');
-=======
 Route::get('/stock', function () {
     return view('stock');
 });
@@ -124,4 +125,3 @@ Route::get('/', 'HomeController@index');
 Route::post('/items/filter', 'ItemController@filter');
 // Route::post('/items/edit', 'ItemController@edit');
 Route::resource('items', 'ItemController');
->>>>>>> feat_migrations_updated

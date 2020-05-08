@@ -20,25 +20,12 @@ class CalendarController extends Controller
    * @return \Illuminate\Http\Response
    */
 
-
-
-
-
-  public function editarEvento($id)
+  public function crearEvento($fecha, $hora, $type)
   {
-    $event = Event::find($id);
-    $titulo = $event->title;
-    $descripcion = $event->description;
 
-    return view("/Calendario/editarEvento", compact('id', 'event', 'titulo', 'descripcion'));
-  }
-
-
-  public function crearEvento($fecha, $hora, $type){
-
-    if($type == 1){
+    if ($type == 1) {
       $tipo = 'Tutorias';
-    }else{
+    } else {
       $tipo = 'Reserva de aulas';
     }
 
@@ -46,7 +33,7 @@ class CalendarController extends Controller
   }
 
 
-  
+
   public function getTime(Request $request)
   {
 
@@ -58,7 +45,7 @@ class CalendarController extends Controller
       'tipo' => 'required'
     ]);
 
-    $tipo = Type::where('name', $request->get('tipo'))->first();  
+    $tipo = Type::where('name', $request->get('tipo'))->first();
 
     $dia = date($request->get('date'));
     $day = date('w', strtotime($dia));
@@ -66,9 +53,9 @@ class CalendarController extends Controller
     $sessions = $tipo->sessions()->where('day', $day)->get();
     $types = Type::all();
 
-    if($request->get('tipo') == 'Tutorias'){
+    if ($request->get('tipo') == 'Tutorias') {
       $events = Event::all()->where('type_id', 1);
-    }else{
+    } else {
       $events = Event::all()->where('type_id', 2);
     }
 
@@ -107,14 +94,14 @@ class CalendarController extends Controller
       'descripcion' => 'required',
       'hora'  =>  'required',
       'fecha' => 'required'
-      
+
     ]);
 
     $fechaStr = $request->get('fecha');
     $horaStr = $request->get('hora');
-    $tipoId = Type::where('name', $request->get('evento'))->first()->id;      
-    $fechaFormateada = Carbon::createFromFormat('Y-m-d H:i', $fechaStr.' '.$horaStr);
-    
+    $tipoId = Type::where('name', $request->get('evento'))->first()->id;
+    $fechaFormateada = Carbon::createFromFormat('Y-m-d H:i', $fechaStr . ' ' . $horaStr);
+
 
     //guardar en la base de datos
     Event::insert([
@@ -139,11 +126,11 @@ class CalendarController extends Controller
   public function show($id)
   {
     $event = Event::find($id);
-        $edit = false;
-        if(URL::current() == url("/events/edit/".$id)){
-            $edit = true;
-        }
-        return view('calendario.show', compact('event','edit'));
+    $edit = false;
+    if (URL::current() == url("/events/edit/" . $id)) {
+      $edit = true;
+    }
+    return view('calendario.show', compact('event', 'edit'));
   }
 
   /**
@@ -154,6 +141,11 @@ class CalendarController extends Controller
    */
   public function edit($id)
   {
+    $event = Event::find($id);
+    $titulo = $event->title;
+    $descripcion = $event->description;
+
+    return view("/Calendario/edit", compact('id', 'event', 'titulo', 'descripcion'));
   }
 
   /**
@@ -165,12 +157,12 @@ class CalendarController extends Controller
    */
   public function update(Request $request, $id)
   {
-     $event = Event::find($id);
+    $event = Event::find($id);
 
-     $request->validate([
+    $request->validate([
       'titulo'  =>  'required',
       'descripcion' => 'required'
-     ]);
+    ]);
 
     $event->title = $request->get('titulo');
     $event->description = $request->get('descripcion');
