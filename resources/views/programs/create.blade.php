@@ -4,43 +4,41 @@
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="row">
-    <div class="col-sm-12">
-        <h1 class="display-4">Programación didáctica </h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Principal</a></li>
-                <li class="breadcrumb-item"><a href="/programs">Programaciones</a></li>
-                @if($editar)
-                <li class="breadcrumb-item active" aria-current="page">{{$programacion->id}} - {{$programacion->name}}</li>
-                @else
-                <li class="breadcrumb-item active" aria-current="page">Nueva Programación</li>
-                @endif
-            </ol>
-        </nav>
-        
-        
-        <div class="row justify-content-center">
-        <div class="col-10">
-        <div class="card text-center">
-                <div class="card-header">
-                @if($editar)
-                <h1 class="display-5 text-center">{{$programacion->name}}</h1>
-                @else
-                <h1 class="display-5 text-center">Nueva programación</h1>
-                @endif
+
+    @if($editar)
+    <form method="post" action="{{ route('programs.update',$programacion->id) }}" class="col-8">
+        @method('patch')
+        @csrf 
+    @else
+    <form method="post" action="{{ route('programs.store') }}">
+        @csrf    
+    @endif  
+        <div class="card shadow">
+            
+            <div class="card-header row m-0 justify-content-between">
+                    @if($editar)
+                    <h3>{{$programacion->name}}</h3>
+                    @else
+                    <h3>Nueva programación</h3>
+                    @endif
+                <div class="float-right">
+                    <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
+                    <a class="btn btn-outline-warning float-right" href="{{ route('programs.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
-                <div class="card-body">
+            </div>
+            <div class="card-body row no-gutters">
+               
+                <div class="row justify-content-center col-12 p-3">
+
+                    @if(!$editar)
+
+                        <fieldset>
                         
-                        <div class="row justify-content-center">
-                        @if(!$editar)
-                            <form method="post" action="{{ route('programs.store') }}">
-                                @csrf
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Profesor</span>
                                     </div>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="professor_id">
+                                        <select class="form-control custom-select" id="exampleFormControlSelect1" name="professor_id">
                                             @foreach($profesores as $profesor)
                                             <option value="{{$profesor->id}}">{{$profesor->first_name}} {{$profesor->last_name}}</option>
                                             @endforeach
@@ -48,11 +46,11 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Responsable</span>
+                                        <span class="input-group-text" id="basic-addon1">Curso</span>
                                     </div>
-                                    <select class="form-control" id="exampleFormControlSelect1" name="user_id">
-                                        @foreach($profesores as $profesor)
-                                        <option value="{{$profesor->id}}">{{$profesor->first_name}} {{$profesor->last_name}}</option>
+                                    <select class="form-control custom-select" id="exampleFormControlSelect1" name="course_id">
+                                        @foreach($courses as $course)
+                                        <option value="{{$course->id}}">{{$course->level}}º {{$course->abbreviation}} ({{$course->name}})</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -60,7 +58,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Asignaturas</span>
                                     </div>
-                                    <select class="form-control" id="exampleFormControlSelect1" name="subject_id">
+                                    <select class="form-control custom-select" id="exampleFormControlSelect1" name="subject_id">
                                         @foreach($subjects as $subject)
                                         <option value="{{$subject->id}}">{{$subject->name}}</option>
                                         @endforeach
@@ -68,23 +66,25 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Nombre</span>
+                                        <span class="input-group-text" id="basic-addon1">Año</span>
                                     </div>
-                                    <input type="text" name="name" class="form-control">
+                                    <select class="form-control custom-select" id="exampleFormControlSelect1" name="year_id">
+                                        @foreach($years as $year)
+                                        <option value="{{$year->id}}">{{$year->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 
 
                                 </div>
-                                <div class="row justify-content-center">
-                                    <a type="button" class="btn btn-outline-secondary" href="/programs">Cerrar</a>
-                                    <div class="espacio"></div>
-                                    <button type="submit" class="btn btn-outline-primary pl-10">Añadir Programación</button>
-                                </div>
-                            </form>
-                        @else
-                            <form method="post" action="{{ route('programs.update',$programacion->id) }}" class="col-8">
-                                @method('patch')
-                                    @csrf
+                                
+                            
+                        </fieldset>
+                        
+                    @else
+                    
+                        <fieldset>
+                            
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Profesor</span>
@@ -136,20 +136,20 @@
                                     
 
                                     </div>
-                                    <div class="row justify-content-center">
-                                        <a type="button" class="btn btn-outline-secondary" href="/programs">Descartar</a>
-                                        <div class="espacio"></div>
-                                        <button type="submit" class="btn btn-outline-primary pl-10">Guardar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        @endif
+                                   
+                            
+                        </fieldset>
+                    
+                    
+                    @endif
+                    
                 </div>
             </div>
-        </div>   
+            
+          
         </div>
         
-            
+    </form>          
   
     
         

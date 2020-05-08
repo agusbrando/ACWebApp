@@ -9,6 +9,9 @@ use App\Models\Unit;
 use App\Models\User;
 use App\Models\Evaluable;
 use App\Models\Evaluated;
+use App\Models\Course;
+use App\Models\Year;
+use App\Models\YearUnion;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,9 +46,12 @@ class ProgramController extends Controller
     {
         $editar=false;
         $programs = Program::all();
+        $usuario = Auth::user();
         $profesores = DB::table('users')->where('role_id', 2)->get();
         $subjects = Subject::all();
-        return view('programs.create',compact('programs','profesores','subjects','editar'));
+        $courses = Course::all();
+        $years = Year::all();
+        return view('programs.create',compact('programs','profesores','usuario','subjects','years','courses','editar'));
     }
 
     /**
@@ -56,6 +62,7 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'professor_id'=>'required',
             'course_id'=>'required',
@@ -63,19 +70,40 @@ class ProgramController extends Controller
             'year_id'=>'required'
         ]);
 
-        $profesor = User::find($request->get('professor_id'));
-        $curso = Course::find($request->get('course_id'));
-        $asignatura = Subject::find($request->get('subject_id'));
-        $anyo = Year::find($request->get('subject_id'));
-
-        foreach(YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',$anyo->id) as $evaluation)
-        $program = new Program([
-            'name'=> $anyo->name.' - '.$curso->abbreviation.' - '.$asignatura->name
-        ]);
-        $program->professor()->associate($profesor);
+        $profesor = User::findorfail($request->get('professor_id'));
+        $curso = Course::findorfail($request->get('course_id'));
+        $asignatura = Subject::findorfail($request->get('subject_id'));
+        $anyo = Year::findorfail($request->get('year_id'));
         
-        $program->save();
-        return redirect('/programs');
+        $evaluations = YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',$anyo->id)->get();
+
+
+        if($evaluations!=null){
+            if($evaluations->first()->program_id==null){
+
+                $program = new Program([
+                    'name'=> $anyo->name.' - '.$curso->abbreviation.' - '.$asignatura->name
+                ]);
+                $program->professor()->associate($profesor);
+                $program->save();
+    
+                $program->yearUnions()->saveMany($evaluations);
+                      
+                return redirect('/programs');
+    
+            }else{
+                echo 'error, ya existe';
+            }
+            
+        }else{
+
+
+        }
+        
+        
+        
+        
+
     }
     public function storeUnit(Request $request, $id){
         $program = Program::findorfail($id);
