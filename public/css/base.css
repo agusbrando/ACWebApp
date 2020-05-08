@@ -22,7 +22,9 @@ body {
     height: 16px;
     vertical-align: text-bottom;
 }
-
+#navbarDropdown{
+    color: white;
+}
 
 /*
  * Sidebar

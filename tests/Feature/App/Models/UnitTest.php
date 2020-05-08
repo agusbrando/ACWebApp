@@ -83,6 +83,7 @@ class UnitTest extends TestCase
         ]);
         $unit = Unit::create([
             'program_id' => $program_one->id,
+            'name'=>'unidad 0',
             'expected_date_start' => '2019-09-12',	
             'expected_date_end' => '2019-09-12',	
             'date_start' => '2019-09-12',	

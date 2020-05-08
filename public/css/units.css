@@ -1,0 +1,46 @@
+h1{
+    padding: 10px;
+}
+table.dataTable thead th{
+    background-color: #4d5358;
+    border-color: #454d55;
+    color: #fff;
+
+}
+.boton button {
+    background-color:white;
+    
+
+}
+.botones{
+    display:flex;
+    flex-direction: row;
+}
+.botones *{
+    padding-left: 10px;
+}
+
+.tablas{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.espacio{
+    width: 10px;
+}
+
+.card{
+    margin-bottom: 30px;
+}
+
+.anchuraselect{
+    text-overflow:ellipsis;
+    display: inline;
+    width: 100%;
+}
+select{
+    text-overflow:ellipsis;
+    display: inline;
+    width: 30px;
+}

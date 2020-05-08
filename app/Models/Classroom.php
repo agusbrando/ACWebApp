@@ -16,7 +16,7 @@ class Classroom extends Model
     *
     * @var string
     */
-
+  
     /**
     * Indicates if the IDs are auto-incrementing.
     * Por defecto Eloquent asume que la clave primaria 

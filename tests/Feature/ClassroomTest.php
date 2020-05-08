@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Role;
+use App\Models\State;
 use App\Models\Type;
 use App\Models\Classroom;
 use App\Models\Session;
@@ -86,8 +87,9 @@ class ClassroomTest extends TestCase
         $session->destroy($session);
         $classroom->destroy($classroom);
         $type->destroy($type);
-        $role->destroy($role);
-    }
+        $role->destroy($role);  
+        }
+
 
     public function testItem()
     {
@@ -97,13 +99,26 @@ class ClassroomTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        $state = State::create([
+            'name' => 'Roto',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $type = Type::create([
+            'model' => 'Item', 
+            'name' => ' movil',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+      
 
         $item1 = Item::create([
             'name' => 'Portatil Asus',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => $classroom->id,
-            'state_id' => 2,
-            'type_id' => 1,
+            'state_id' => $state->id,
+            'type_id' => $type->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -111,8 +126,8 @@ class ClassroomTest extends TestCase
             'name' => 'Portatil MSI',
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => $classroom->id,
-            'state_id' => 2,
-            'type_id' => 1,
+            'state_id' => $state->id,
+            'type_id' => $type->id,
             'created_at' => now(),
             'updated_at' => now()
         ]);
