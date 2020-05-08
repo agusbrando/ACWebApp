@@ -52,6 +52,12 @@
             Posts 
         </a>
         </li>
+        <!--<li class="nav-item">
+        <a class="nav-link" href="users">
+            <span data-feather="file-text"></span>
+            Usuarios
+        </a>
+        </li>-->
         <li class="nav-item">
         <a class="nav-link" href="/">
             <span data-feather="file-text"></span>
