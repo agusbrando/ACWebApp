@@ -2,7 +2,15 @@
 
 @section('main')
 
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/r-2.2.3/datatables.min.css"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/r-2.2.3/datatables.min.js"></script>
+
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
+
 <script>
     $(document).ready(function() {
         $('#tabla').DataTable( {
@@ -11,7 +19,7 @@
                 { extend: 'excel', className: 'btn-outline-success mr-2' }, 
                 { extend: 'pdf', className: 'btn-outline-danger mr-2' }
             ],
-            responsive : 'true',
+            responsive : true,
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -46,11 +54,9 @@
                         <a class="btn btn-outline-success" href="{{ route('programs.create')}}">Añadir</a>
                     </div>
                 </div>
-                <div class="card-body row no-gutters">
+                <div class="card-body">
                 
-                    <div class="row justify-content-center col-12">
-
-                        <table id='tabla' class="table table-striped table-bordered nowrap dt-responsive" width="100%">
+                <table id='tabla' class="table table-striped table-bordered dt-responsive nowrap compact" style="width:100%">>
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -62,8 +68,8 @@
                             <tbody>
                             @foreach($programs as $i=>$program)
                                 <tr>
-                                    <td>{{$i}}</td>
-                                    <td>{{$program->name}}</td>
+                                    <td>Programacion {{$i}}</td>
+                                    <td class="wrap">{{$program->name}}</td>
                                     <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
                                     <td class="botones">
                                         <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
@@ -79,8 +85,6 @@
                         
                             </tbody>
                         </table>
-                        
-                    </div>
                 
                 </div>
                 
