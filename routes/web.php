@@ -54,13 +54,13 @@ Route::get('/prueba', function (Request $request) {
         }
 
     }*/
-    foreach($user->yearUnions as $yearUnion){
+    foreach($user->yearUnions->where('subject_id',1)->where('evaluation_id',1) as $yearUnion){
         
-        if($yearUnion->subject_id == 1){
-            foreach($yearUnion->pivot->tasks as $tarea){
+       
+            foreach($yearUnion->pivot->tasks->where('type_id',8) as $tarea){
                 echo ($yearUnion->subject->name).' - '.($tarea->name).' - '.($tarea->pivot->value).'<br>';
             }
-        }
+       
 
     }
 
