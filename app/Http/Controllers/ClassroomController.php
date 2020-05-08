@@ -51,7 +51,7 @@ class ClassroomController extends Controller
 
         ]);
         $classroom->save();
-        return redirect('classrooms.index')->with('success', 'Aula saved!');
+        return redirect('classrooms')->with('success', 'Aula saved!');
     }
 
     /**
@@ -62,8 +62,7 @@ class ClassroomController extends Controller
      */
     public function show($classroom_id)
     {
-        $classroom = Classroom::find($classroom_id);
-        //$user->role = $user->role;
+        $classroom = Classroom::find($classroom_id);        
 
         return view('classrooms.show', compact('classroom'));
     }
@@ -102,7 +101,7 @@ class ClassroomController extends Controller
       
 
         $classroom->save();
-        return redirect('/classrooms' . $id)->with('Succes', 'Aula editado!');
+        return redirect('/classrooms')->with('Succes', 'Aula editado!');
     }
 
     /**

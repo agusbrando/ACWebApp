@@ -4,7 +4,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Usuarios</h3>
+            <h3>Evaluación</h3>
             <div>
             <a class="btn btn-outline-success" href="{{ route('evaluations.create')}}">Añadir</a>
             </div>
@@ -13,16 +13,17 @@
             <table class="table col-12 ">
                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                     <tr>
-                        <th scope="col">Subject_ID</th>
-                        <th scope="col">Nombre</th>                        
+                       
+                        <th scope="col">Nombre</th>   
+                        <th scope="col">Subject_ID</th>                     
                         <th scope="col">Accion</th>
                     </tr>
                 </thead>
                 @foreach($evaluations as $evaluation)
                 <tbody>
-                    <tr>
-                        <td>{{$evaluation->subject_id }}</td>
-                        <td>{{$evaluation->name }}</td>                      
+                    <tr>                        
+                        <td>{{$evaluation->name }}</td>       
+                        <td>{{$evaluation->subject_id }}</td>               
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('evaluations.show',$evaluation->id)}}">Ver</a>
                         </td>

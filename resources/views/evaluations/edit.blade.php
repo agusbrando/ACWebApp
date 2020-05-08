@@ -7,12 +7,13 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Perfil de usuario</h3>
+            <h3>Detalles Evaluaciones</h3>
             <form action="{{ route('evaluations.update',$evaluation->id)}}" method="POST">
                 @method('PATCH')
                 <div>
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
+                        @csrf
                         <a class="btn btn-outline-warning float-right" href="{{ route('evaluations.show',$evaluation->id)}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
                 </div>
@@ -24,15 +25,15 @@
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
 
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="subject_id">Nombre</label>
-                            <input value="{{$evaluation->subject_id}}" name="subject_id" id="subject_id" type="text" class="@error('subject_id') is-invalid @enderror form-control">
-                        </div>
+                    <fieldset>                        
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input value="{{$evaluation->name}}" name="name" id="name" type="text" class="@error('name') is-invalid @enderror form-control">
-                        </div>                       
+                        </div>     
+                        <div class="form-group">
+                            <label for="subject_id">Subject_ID</label>
+                            <input value="{{$evaluation->subject_id}}" name="subject_id" id="subject_id" type="text" class="@error('subject_id') is-invalid @enderror form-control">
+                        </div>                  
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>

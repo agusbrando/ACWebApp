@@ -6,7 +6,7 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Detalles del estado</h3>
+        <h3>Detalles Estados</h3>
             <div>
 
                 <a class="btn btn-outline-info" href="{{ route('states.edit',$state->id)}}">Editar</a>
@@ -24,6 +24,7 @@
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
+                    <br>
                     <h5 class="card-title">{{($state->name)}}</h5>
                    
                 </div>

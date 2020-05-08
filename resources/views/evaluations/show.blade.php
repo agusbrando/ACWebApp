@@ -7,7 +7,7 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Perfil de usuario</h3>
+            <h3>Detalles Evaluaciones</h3>
             <div>
 
                 <a class="btn btn-outline-info" href="{{ route('evaluations.edit',$evaluation->id)}}">Editar</a>

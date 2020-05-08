@@ -6,7 +6,7 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Detalles de aulas</h3>
+            <h3>Detalles Aulas</h3>
             <div>
 
                 <a class="btn btn-outline-info" href="{{ route('classrooms.edit',$classroom->id)}}">Editar</a>

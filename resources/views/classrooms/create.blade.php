@@ -4,11 +4,12 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Nuevo Usuario</h3>
+            <h3>Nueva Aula</h3>
             <form action="{{ route('classrooms.store')}}" method="POST">
                 @method('POST')
                 <div class="col-12">
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
+                    @csrf
                     <a class="btn btn-outline-warning float-right" href="{{ route('classrooms.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
         </div>

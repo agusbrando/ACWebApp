@@ -50,7 +50,7 @@ class EvaluationController extends Controller
         ]);
 
         $evaluation->save();
-        return redirect('evaluations.index')->with('success', 'Evaluación saved!');
+        return redirect('evaluations')->with('success', 'Evaluación saved!');
     }
 
     /**
@@ -61,9 +61,8 @@ class EvaluationController extends Controller
      */
     public function show($evaluation_id)
     {
-        $evaluacion = Evaluation::find($evaluation_id);
-       // $user->role = $user->role;
-        return view('users.show', compact('evaluacion'));
+        $evaluation = Evaluation::find($evaluation_id);
+        return view('evaluations.show', compact('evaluation'));
     }
 
 
@@ -76,8 +75,7 @@ class EvaluationController extends Controller
     public function edit($id)
     {
         $evaluation = Evaluation::find($id);
-        // $roles = Role::all();
-        return view('users.edit', compact('evaluation'));
+        return view('evaluations.edit', compact('evaluation'));
     }
 
     /**
@@ -102,7 +100,7 @@ class EvaluationController extends Controller
 
 
         $evaluation->save();
-        return redirect('/evaluations' . $id)->with('Succes', 'Evaluación editado!');
+        return redirect('/evaluations')->with('Succes', 'Evaluación editado!');
     }
 
     /**

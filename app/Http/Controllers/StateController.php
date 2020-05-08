@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+
 use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -48,7 +48,7 @@ class StateController extends Controller
             'name' => $request->get('name')
         ]);
         $state->save();
-        return redirect('states.index')->with('Success', 'State saved!');
+        return redirect('/states')->with('Success', 'State saved!');
     }
 
     /**
@@ -97,7 +97,7 @@ class StateController extends Controller
 
 
         $state->save();
-        return redirect('/states' . $id)->with('Succes', 'Usuario editado!');
+        return redirect('/states')->with('Succes', 'Usuario editado!');
     }
 
     /**
