@@ -21,16 +21,16 @@
                     </div>
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
+                    <div class="tab-pane fade show active table-responsive" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
                         @foreach($evaluaciones as $eval)
-                        <table class="table table-striped">
-                            <thead class="cabezeraTabla">
+                        <table class="table col-12">
+                            <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                 <tr>
-                                    <td>{{$eval->name}}</td>
-                                    <td>Porcentaje</td>
-                                    <td>Nota Minima</td>
-                                    <td>Nota Media</td>
-                                    <td>Actions</td>
+                                    <th>{{$eval->name}}</th>
+                                    <th>Porcentaje</th>
+                                    <th>Nota Minima</th>
+                                    <th>Nota Media</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             @if($eval->name == '1Eval')
@@ -91,17 +91,17 @@
                     </div>
                     @foreach($evaluaciones as $eval)
                     <div class="tab-pane fade table-responsive" id="a{{$eval->name}}" role="tabpanel">
-                        <table class="table table-striped" style="width:100%">
-                            <thead class="cabezeraTabla">
+                        <table class="table col-12">
+                            <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                 <tr>
-                                    <td>Nº</td>
-                                    <td>Apellidos, Nombre</td>
-                                    <td>%Trabajos</td>
-                                    <td>%Examen</td>
-                                    <td>%Actitud</td>
-                                    <td>NOTA FINAL</td>
-                                    <td>%Recuperacion</td>
-                                    <td>BOLETIN</td>
+                                    <th>Nº</th>
+                                    <th>Apellidos, Nombre</th>
+                                    <th>%Trabajos</th>
+                                    <th>%Examen</th>
+                                    <th>%Actitud</th>
+                                    <th>NOTA FINAL</th>
+                                    <th>%Recuperacion</th>
+                                    <th>BOLETIN</th>
                                 </tr>
                             </thead>
                             <tbody>

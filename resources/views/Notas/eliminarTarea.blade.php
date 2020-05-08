@@ -16,14 +16,14 @@
             <h3>Eliminar Tarea</h3>
         </div>
         <div class="card-body row no-gutters">
-            <div class="table-responsive col">
-                <table id="trabajos" class="table table-striped examenes" style="width:100%">
-                    <thead class="cabezeraTabla">
+            <div class="table-responsive">
+                <table class="table col-12 centro">
+                    <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                         <tr id='columna'>
-                            <td>Tipo</td>
-                            <td>Nombre</td>
-                            <td>Evaluacion</td>
-                            <td>Action</td>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            <th>Evaluacion</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     @foreach($tasks as $task)
