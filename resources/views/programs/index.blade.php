@@ -59,27 +59,22 @@
                 <table id='tabla' class="table table-striped table-bordered dt-responsive nowrap compact" style="width:100%">>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Profesor</th>
                                     <th>Actions</th>
+
+                                    <th>Profesor</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($programs as $i=>$program)
                                 <tr>
-                                    <td>Programacion {{$i}}</td>
-                                    <td class="wrap">{{$program->name}}</td>
-                                    <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
+                                    <td>{{$program->name}}</td>
                                     <td class="botones">
                                         <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
-                                        <a href="{{route('programs.edit',$program->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                                        <form action="{{route('programs.destroy',$program->id)}}" method="post">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                        </form>
+                                        
                                     </td>
+                                    <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
+                                    
                                 </tr>
                             @endforeach
                         
