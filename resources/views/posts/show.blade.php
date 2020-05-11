@@ -6,6 +6,7 @@
         <div class="card-header row m-0 justify-content-between">
             <h3>Comentarios</h3>
             <div>
+                <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                 <a class="btn btn-outline-info" href="{{ route('posts.edit',$post->id)}}">Editar</a>
                 <form class="float-right" action="{{ route('posts.destroy',$post->id)}}" method="POST">
                     @csrf
@@ -16,7 +17,7 @@
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">
-                <img src="{{asset('img/default_post.jpg" class="img-thumbnail" alt="...">
+                <img src="{{asset('img/default_post.jpg')}}" class="img-thumbnail" alt="...">
             </div>
         </div>
         <div class="card-body row no-gutters table-responsive">
@@ -83,46 +84,5 @@
             </div>
         @endif
     </div>
-    <script>
-        // $(document).ready(function() {
-        //     $('#datepicker').datepicker({
-        //         language: 'es'
-        //     });
-        // });
-        $(document).ready(function() {
-            $('#tabla').DataTable({
-                dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-                buttons: [{
-                        extend: 'excel',
-                        className: 'btn-outline-success mr-2 boton'
-                    },
-                    {
-                        extend: 'pdf',
-                        className: 'btn-outline-danger mr-2 boton'
-                    }
-                ],
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                    "infoEmpty": "No hay informacion",
-                    "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "No se han encontrado resultados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            });
-        });
-    </script>
 </main>
 @endsection

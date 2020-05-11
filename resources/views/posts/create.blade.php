@@ -8,6 +8,7 @@
             <form action="{{ route('posts.store')}}" method="POST">
                 @method('POST')
                 <div class="col-12">
+                    <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     <a class="btn btn-outline-warning float-right" href="{{ route('posts.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
@@ -15,6 +16,13 @@
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">
                 <img src="{{asset('img/default_post.jpg')}}" class="img-thumbnail" alt="...">
+                </br>
+                </br>
+                <div class="input-group hdtuto control-group lst increment">
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Añadir</button>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
@@ -34,9 +42,6 @@
                         </br>
                         <div class="input-group hdtuto control-group lst increment">
                             <input type="file" name="name[]" class="myfrm form-control">
-                            <div class="input-group-btn">
-                                <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Añadir</button>
-                            </div>
                         </div>
                     </fieldset>
                     @error('email', 'login')
