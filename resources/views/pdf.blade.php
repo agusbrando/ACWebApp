@@ -25,11 +25,31 @@
         #tercero {
             text-decoration: line-through;
         }
+        .border{
+            border: 1px solid black;
+        }
+        thead{
+            color:white;
+            background-color: #2F2F2F;
+            text-align: center;
+            
+        }
+        td{
+           width: 200px;
+           text-align: center;
+           border:2px solid #2F2F2F;
+        }
+        img{
+            width:200px;
+        }
+        
+        
     </style>
     
 </head>
 
 <body>
+
     <h1>Trackings de {{$user->first_name}}, {{$user->last_name}}</h1>
     <hr>
     <div class="contenido">

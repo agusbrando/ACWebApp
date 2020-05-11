@@ -23,6 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::post('/imprimir', 'TrackingController@imprimir')->name('print');
+Route::post('/excel', 'TrackingController@excel')->name('excel');
 Route::get('seguimiento/filtrar','TrackingController@filtrar')->name('seguimiento.filtrar');
 Route::get('seguimiento','TrackingController@fileStorageServe');
 Route::resource('horarios', 'TimetableController');

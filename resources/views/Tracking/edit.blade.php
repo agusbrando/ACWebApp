@@ -43,7 +43,7 @@
             <br />
             <div class="custom-file overflow-hidden rounded-pill mb-5">
 
-              <input id="customFile" type="file" class="custom-file-input rounded-pill" w-50>
+              <input id="customFile" name="archivo" type="file" class="custom-file-input rounded-pill" w-50>
               <label for="customFile" class="custom-file-label rounded-pill">Elige archivo</label>
             </div>
 

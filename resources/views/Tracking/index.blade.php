@@ -27,15 +27,15 @@
                         <table class="tabla w-100">
 
                             <tr>
-                                <td class="class20">Filtrar por fecha:</td>
-                                <td class="class20">Filtrar por semana:</td>
+                                <td class="class20">Filtrar por fecha inicial:</td>
+                                <td class="class20">Filtrar por fecha final:</td>
                                 <td class="class20">Filtrar por mes:</td>
                                 <td class="class20">Filtrar por año:</td>
                                 <td class="class20"></td>
                             </tr>
                             <tr>
                                 <td class="class20"><input type="date" class="rounded class20" name="fecha"></td>
-                                <td class="class20"><input type="week" class="rounded class20" name="semana"></td>
+                                <td class="class20"><input type="date" class="rounded class20" name="fecha_fin"></td>
                                 <td class="class20"><input type="month" class="rounded class20" name="mes"></td>
                                 <td class="class20"><input class="quantity rounded class20" type="number" name="anyo"></td>
                                 <td class="class20"><input type="submit" class="btn btn-success boton class20" value="Filtrar"></td>
@@ -57,46 +57,65 @@
                             <td>Firma</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($trackings as $tracking)
-                        @if($tracking->user_id == $user->id)
-                        <tr>
-                            <td>{{$tracking->date_signature}}</td>
-                            <td>{{$tracking->time_start}}</td>
-                            <td>{{$tracking->time_end}}</td>
-                            <td>{{$tracking->num_hours}}</td>
-                            <td><img class="border" src="{{url($tracking->signature)}}"/></td>
-                        </tr>
-                        @endif
-                        @endforeach
+                    <form class="float-right" action="{{ route('print')}}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <tbody>
+                        
+                            @foreach($trackings as $tracking)
+                            <input type="hidden" value={{$tracking}} name="trackings[]">
+                            
+                            <tr>
+                                <td>{{$tracking->date_signature}}</td>
+                                <td>{{$tracking->time_start}}</td>
+                                <td>{{$tracking->time_end}}</td>
+                                <td>{{$tracking->num_hours}}</td>
+                                <td><img class="border" src="{{url($tracking->signature)}}" /></td>
+                            </tr>
+                            
+                            @endforeach
 
-                    </tbody>
-                    <thead class="cabezeraTabla">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>Suma Horas Total:</td>
-                            <td>{{$horas}}</td>
-                            <td></td>
-                        </tr>
-                    </thead>
+                        </tbody>
+                        <thead class="cabezeraTabla">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Suma Horas Total:</td>
+                                <td>{{$horas}}</td>
+                                <td></td>
+                            </tr>
+                        </thead>
                 </table>
 
             </div>
 
         </div>
         <div class=" card-footer col-12">
+
             
-            <a class="btn btn-outline-success float-left "> Descargar Excel </a>
-            <div class="row float-left padding"><input type="hidden" value={{$trackings}}></div>
-            <form class="float-right" action="{{ route('print')}}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-outline-danger ml-1 float-left" >Descargar PDF</button>
+
+
+            
+            <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar PDF</button>
+            </form>
+            <form class="float-right" action="{{ route('excel')}}" method="POST">
+                        @csrf
+                        @method('POST')
+                        
+                        
+                            @foreach($trackings as $tracking)
+                            <input type="hidden" value={{$tracking}} name="trackings[]">
+                            @endforeach
+                           
+
+
+            
+            <button type="submit" class="btn btn-outline-success ml-1 float-right"> Descargar Excel </button>
             </form>
 
-
+            <input type="hidden" value={{$trackings}}>
         </div>
-        </form>
+        
 
     </div>
 
