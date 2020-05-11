@@ -103,6 +103,7 @@ Route::resource('evaluations','EvaluationController');
 Route::resource('states','StateController');
 Route::resource('sessions','SessionController');
 Route::resource('subjects','SubjectController');
+Route::resource('types','TypeController');
 
 Auth::routes();
 
