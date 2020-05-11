@@ -51,7 +51,7 @@ class CalendarController extends Controller
     $day = date('w', strtotime($dia));
 
     $sessions = $tipo->sessions()->where('day', $day)->get();
-    $types = Type::all();
+    $types = Type::all();$types = Type::all()->where('model', Event::class);
 
     if ($request->get('tipo') == 'Tutorias') {
       $events = Event::all()->where('type_id', 1);
@@ -66,7 +66,7 @@ class CalendarController extends Controller
   {
     $sessions = [];
     $events = [];
-    $types = Type::all();
+    $types = Type::all();$types = Type::all()->where('model', Event::class);
     return view('/Calendario/calendar', compact('types', 'sessions', 'events'));
   }
 

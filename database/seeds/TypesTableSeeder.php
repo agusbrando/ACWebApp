@@ -18,7 +18,7 @@ class TypesTableSeeder extends Seeder
     {
         DB::table('types')->insert([
             'name' => 'Tutorías',
-            'model' => 'App\Models\Percentage',
+            'model' => 'App\Models\Event',
 	        'created_at' => now(),
             'updated_at' => now()      
         ]);
@@ -28,14 +28,7 @@ class TypesTableSeeder extends Seeder
             'model' => 'App\Models\Event',
 	        'created_at' => now(),
             'updated_at' => now()      
-        ]);
-        
-        DB::table('types')->insert([
-            'name' => 'default2',
-            'model' => Event::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        ]);                
 
         DB::table('types')->insert([
             'name' => 'Portatil',
