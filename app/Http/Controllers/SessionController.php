@@ -59,7 +59,7 @@ class SessionController extends Controller
 
         ]);
         $session->save();
-        return redirect('sessions.index')->with('success', 'Contact saved!');
+        return redirect('sessions')->with('success', 'Contact saved!');
     }
 
     /**
@@ -128,6 +128,6 @@ class SessionController extends Controller
         $session = Session::find($id);
         $session->delete();
 
-        return redirect('Sessions')->with('success', 'Sesión Eliminado!');
+        return redirect('sessions')->with('success', 'Sesión Eliminado!');
     }
 }

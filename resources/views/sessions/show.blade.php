@@ -7,7 +7,10 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Detalles Sesiones</h3>
+            <div class="d-flex flex-row">
+                <a href="/sessions" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3>Detalles Sesión</h3>
+            </div>
             <div>
 
                 <a class="btn btn-outline-info" href="{{ route('sessions.edit',$session->id)}}">Editar</a>
