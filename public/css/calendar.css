@@ -83,8 +83,14 @@ p{
     height: 48px;
 }
 
-#añadir{
+#añadirHora{
     margin-left: 370px;
+    width: 27px;
+    height: 31px;
+}
+
+#añadirEvento{
+    margin-left: 350px;
     width: 27px;
     height: 31px;
 }

@@ -15,8 +15,11 @@
       </div>
 
       <div class="col-md-4 bg-light border-right p-0">
-        <div id="espacio" class="bg-dark w-100">
+        <div id="espacio" class="bg-dark d-flex w-100">
           <h3 class="text-white pt-2 pl-3 pr-3">Eventos</h3>
+          <div id="añadirEvento" class="float-right mt-2 pt-1">
+            <a class="btn btn-outline-light text-light float-right w-100 h-100 p-0 pb-1" type='submit' href="{{ url('/types') }}">+</a>
+          </div>
         </div>
         <br>
         <div id="calendario">
@@ -34,14 +37,14 @@
       <div class="col-md-4 bg-light border-left border-right p-0 ">
         <div id="espacio" class="bg-dark d-flex w-100">
           <h3 class="text-white pt-2 pl-3 pr-3">Horas</h3>
-          <div id="añadir" class="float-right mt-2 pt-1">
+          <div id="añadirHora" class="float-right mt-2 pt-1">
             <a class="btn btn-outline-light text-light float-right w-100 h-100 p-0 pb-1" type='submit' href="{{ url('/sessions') }}">+</a>
           </div>
         </div>
         <br>
         <div id="buttons">
           @if(!empty($events))
-          @foreach($sessions as $session)
+          @foreach($sessions->sortBy('time_start') as $session)
           <button type="submit" onclick="window.location.href='{{route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $tipo])}}'" class="btn btn-info btn-block">{{ $session->time_start->format('H:i') }}</button>
           @endforeach
           @else
