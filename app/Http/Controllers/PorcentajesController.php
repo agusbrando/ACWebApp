@@ -15,15 +15,15 @@ class PorcentajesController extends Controller
 {
     public function index($id = null)
     {
-        if($id != null){
+        if ($id != null) {
             $percentages = Percentage::all()->where('evaluation_id', $id);
-        }else{
+        } else {
             $percentages = Percentage::all();
         }
 
         $users = User::all()->where('role_id', '=', 4);
         $subjects = Subject::all();
-        
+
         return view('Notas.porcentajes', compact('users', 'subjects', 'percentages'));
     }
 
@@ -61,17 +61,16 @@ class PorcentajesController extends Controller
 
         $evaluaciones = $request->get('evaluaciones');
 
-        foreach($evaluaciones as $eval){
+        foreach ($evaluaciones as $eval) {
             $evaluacion = Evaluation::find($eval);
-            $evaluacion->types()->attach(intval($request->get('type')),[
+            $evaluacion->types()->attach(intval($request->get('type')), [
                 'percentage' => $request->get('porcentaje'),
                 'nota_min' => $request->get('nota_min'),
                 'nota_media' => $request->get('nota_media'),
             ]);
         }
 
-        return redirect('asignaturas/'.$request->get('subject'));
-
+        return redirect('asignaturas/' . $request->get('subject'));
     }
 
     /**
@@ -91,14 +90,30 @@ class PorcentajesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($subject_id, $evaluation_id, $type_id )
+    public function edit($subject_id, $evaluation_id, $type_id)
     {
         $subject = Subject::find($subject_id);
         $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
+        $eval = Evaluation::find($evaluation_id);
         $porcentaje = Percentage::where('evaluation_id', $evaluation_id)->where('type_id', $type_id)->first();
+        $porcentajes = $eval->types;
         $types = Type::all()->where('model', Task::class);
 
-        return view('Notas.editPorcentaje', compact('porcentaje', 'evaluaciones', 'types', 'subject'));
+        $sumaPorcentajes = 0;
+        $resto = 0;
+
+
+        foreach ($porcentajes as $por) {
+            if ($por->name != 'Recuperacion') {
+                $sumaPorcentajes += $por->pivot->percentage;
+            }
+        }
+
+        if ($sumaPorcentajes < 100) {
+            $resto =  (100 - $sumaPorcentajes) + $porcentaje->percentage;
+        }
+
+        return view('Notas.editPorcentaje', compact('porcentaje', 'evaluaciones', 'types', 'subject', 'resto'));
     }
 
     /**
@@ -111,25 +126,66 @@ class PorcentajesController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'porcentaje' => 'required',
-            'subject' => 'required',
-            'evaluation_id' => 'required',
-            'type_id' => 'required',
-            'nota_min' => 'required',
-            'nota_media' => 'required',
+            'porcentajes' => 'required',
+            'subject' => 'required'
         ]);
 
-        $idS= $request->get('subject');
+        $porcentajes = $request->get('porcentajes');
+        $comprobacionPorcentajes = $this->comprobacion($porcentajes);
 
-        $evaluacion = Evaluation::find($request->get('evaluation_id'));
-        $evaluacion->types()->updateExistingPivot(intval($request->get('type_id')),[
-            'percentage' => $request->get('porcentaje'),
-            'nota_min' => $request->get('nota_min'),
-            'nota_media' => $request->get('nota_media'),
-        ]);
+        if ($comprobacionPorcentajes == true) {
+            foreach ($porcentajes as $eval_id => $types) {
+                foreach ($types as $type_id => $values) {
+                    $evaluacion = Evaluation::find($eval_id);
+                    if ($type_id == 4) {
+                        $evaluacion->types()->updateExistingPivot(intval($type_id), [
+                            'nota_min' => $values['nota_min'],
+                            'nota_media' => $values['nota_media']
+                        ]);
+                    } else {
+                        $evaluacion->types()->updateExistingPivot(intval($type_id), [
+                            'percentage' => $values['porcentaje'],
+                            'nota_min' => $values['nota_min'],
+                            'nota_media' => $values['nota_media']
+                        ]);
+                    }
+                }
+            }
 
-        return redirect('asignaturas/'.$request->get('subject'));
-        
+            return redirect('asignaturas/' . $request->get('subject'));
+        } else {
+            return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100%');
+        }
+    }
+
+    public function comprobacion($porcentajes)
+    {
+        $sumaEval1 = 0;
+        $sumaEval2 = 0;
+        $sumaEval3 = 0;
+
+        foreach ($porcentajes as $eval_id => $types) {
+            foreach ($types as $type_id => $values) {
+                if ($type_id == 4) {
+                    break;
+                }
+                if ($type_id != 4 && $eval_id == 1) {
+                    $sumaEval1 += $values['porcentaje'];
+                } else if ($type_id != 4 && $eval_id == 2) {
+                    $sumaEval2 += $values['porcentaje'];
+                } else {
+                    $sumaEval3 += $values['porcentaje'];
+                }
+            }
+        }
+
+        if ($sumaEval1 < 100 && $sumaEval2 < 100 && $sumaEval3 < 100) {
+            $comprobacion = true;
+        } else {
+            $comprobacion = false;
+        }
+
+        return $comprobacion;
     }
 
     /**
@@ -144,6 +200,6 @@ class PorcentajesController extends Controller
         $evaluacion = Evaluation::find($evaluation_id);
         $evaluacion->types()->detach(intval($type_id));
 
-        return redirect('asignaturas/'.$subject_id);
+        return redirect('asignaturas/' . $subject_id);
     }
 }

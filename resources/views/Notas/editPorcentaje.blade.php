@@ -21,16 +21,23 @@
                     @method('PATCH')
                     @csrf
                     <div class="form-group">
-                        <label for="Porcentaje">Porcentaje</label>
-                        <input type="porcentaje" class="form-control" name="porcentaje" aria-describedby="porcentaje" value={{$porcentaje->percentage}}>
+                        <label for="porcentaje">Porcentaje</label>
+                        <div class="form-group">
+                            <input class="form-control" name="porcentaje" value={{$porcentaje->percentage}}>
+                            @if($resto == 0)
+                            <span id="helpResetPasswordEmail" class="form-text small text-muted">Porcentaje maximo {{$resto}}%. La suma de los porcentajes es 100%</span>
+                            @elseif($porcentaje->type_id != 4)
+                            <span id="helpResetPasswordEmail" class="form-text small text-muted">Porcentaje maximo {{$resto}}%</span>
+                            @endif
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="Porcentaje">Evaluacion</label>
-                        <input type="porcentaje" disabled class="form-control" name="porcentaje" aria-describedby="porcentaje" value={{$evaluaciones[$porcentaje->evaluation_id-1]->name}}>
+                        <input type="porcentaje" disabled class="form-control" value={{$evaluaciones[$porcentaje->evaluation_id-1]->name}}>
                     </div>
                     <div class="form-group">
                         <label for="Porcentaje">Tipos</label>
-                        <input type="porcentaje" disabled class="form-control" name="porcentaje" aria-describedby="porcentaje" value={{$types[$porcentaje->type_id-1]->name}}>
+                        <input type="porcentaje" disabled class="form-control" value={{$types[$porcentaje->type_id-1]->name}}>
                     </div>
                     <div class="form-group">
                         <label for="nota_min">Nota Minima</label>

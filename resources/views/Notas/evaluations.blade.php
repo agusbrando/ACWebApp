@@ -9,7 +9,7 @@
                 <a href="/asignaturas" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3 class="m-auto">{{$subject->course->name}} - {{$subject->name}}</h3>
             </div>
-            <a class="btn btn-outline-info float-right" href="{{ url('/porcentajes/create', $subject->id) }}">Añadir Porcentaje</a>
+            <!-- <a class="btn btn-outline-info float-right" href="{{ url('/porcentajes/create', $subject->id) }}">Añadir Porcentaje</a> -->
         </div>
         <div class="card-body row no-gutters">
             <div class="col">
@@ -23,35 +23,45 @@
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active table-responsive" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
-                        @foreach($evaluaciones as $eval)
-                        <table class="table col-12 centro">
-                            <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
-                                <tr>
-                                    <th>{{$eval->name}}</th>
-                                    <th>Porcentaje</th>
-                                    <th>Nota Minima</th>
-                                    <th>Nota Media</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            @foreach($eval->percentages as $porcentaje)
-                            <tbody>
-                                <tr>
-                                    <td>{{$porcentaje->name}}</td>
-                                    <td>{{$porcentaje->pivot->percentage}}%</td>
-                                    <td>{{$porcentaje->pivot->nota_min}}</td>
-                                    <td>{{$porcentaje->pivot->nota_media}}</td>
-                                    <td>
-                                        <div class="d-flex flex-row">
-                                            <a href="{{url('porcentajes/edit',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($eval->id), 'type_id'=> ($porcentaje->id)])}}" class="mr-3 icon"><i class="fas fa-edit"></i></a>
-                                            <a href="{{url('porcentajes/destroy',  ['subject_id'=> ($subject->id) ,'evaluation_id'=> ($eval->id), 'type_id'=> ($porcentaje->id)])}}" class="icon"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        @if(session()->get('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error!</strong> {{ session()->get('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        <form action="{{ route('porcentajes.update') }}" method="post">
+                            @csrf
+                            @foreach($evaluaciones as $eval)
+                            <table class="table col-12">
+                                <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
+                                    <tr>
+                                        <th>{{$eval->name}}</th>
+                                        <th>Porcentaje%</th>
+                                        <th>Nota Minima</th>
+                                        <th>Nota Media</th>
+                                    </tr>
+                                </thead>
+                                @foreach($eval->percentages as $porcentaje)
+                                <tbody>
+                                    <tr>
+                                        <td>{{$porcentaje->name}}</td>
+                                        @if($porcentaje->name == 'Recuperacion')
+                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][porcentaje]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}" disabled></td>
+                                        @else
+                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][porcentaje]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}"></td>
+                                        @endif
+                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][nota_min]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->nota_min}}"></td>
+                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][nota_media]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->nota_media}}"></td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+                            </table>
                             @endforeach
-                        </table>
-                        @endforeach
+                            <input type="hidden" name="subject" value={{$subject->id}}>
+                            <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
+                        </form>
                     </div>
                     @foreach($evaluaciones as $eval)
                     <div class="tab-pane fade table-responsive centro" id="a{{$eval->name}}" role="tabpanel">
@@ -88,6 +98,9 @@
             </div>
         </div>
     </div>
+
 </main>
+
+
 
 @endsection

@@ -103,63 +103,6 @@ class AsignaturaController extends Controller
 
         return view('Notas.evaluations', compact('subject', 'evaluaciones'));
 
-        // $subject = Subject::find($id);
-
-        // $evaluaciones = $subject->evaluations;
-        // $eval1 = array();
-        // $eval2 = array();
-        // $eval3 = array();
-
-        // foreach ($subject->evaluations as $eval) {
-        //     $types = $eval->types;
-        //     switch ($eval->name) {
-        //         case "1Eval":
-        //             foreach ($types as $type) {
-        //                 $percentage = new Percentage([
-        //                     "evaluacion_id" => $type->pivot->evaluation_id,
-        //                     "type_id" => $type->pivot->type_id,
-        //                     "porcentaje" => $type->pivot->percentage,
-        //                     "nota_min" => $type->pivot->nota_min,
-        //                     "nota_media" => $type->pivot->nota_media,
-        //                 ]);
-        //                 $percentage->type = $type->name;
-        //                 array_push($eval1, $percentage);
-        //             }
-        //             break;
-        //         case "2Eval":
-        //             foreach ($types as $type) {
-        //                 $percentage = new Percentage([
-        //                     "evaluacion_id" => $type->pivot->evaluation_id,
-        //                     "type_id" => $type->pivot->type_id,
-        //                     "porcentaje" => $type->pivot->percentage,
-        //                     "nota_min" => $type->pivot->nota_min,
-        //                     "nota_media" => $type->pivot->nota_media,
-        //                 ]);
-        //                 $percentage->type = $type->name;
-        //                 array_push($eval2, $percentage);
-        //             }
-        //             break;
-        //         case "3Eval":
-        //             foreach ($types as $type) {
-        //                 $percentage = new Percentage([
-        //                     "evaluacion_id" => $type->pivot->evaluation_id,
-        //                     "type_id" => $type->pivot->type_id,
-        //                     "porcentaje" => $type->pivot->percentage,
-        //                     "nota_min" => $type->pivot->nota_min,
-        //                     "nota_media" => $type->pivot->nota_media,
-        //                 ]);
-        //                 $percentage->type = $type->name;
-        //                 array_push($eval3, $percentage);
-        //             }
-        //             break;
-        //     }
-        // }
-
-
-    }
-
-    protected function calculateDataShow($id)
-    {
     }
 
     /**
