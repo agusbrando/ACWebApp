@@ -14,6 +14,7 @@ class AttachmentsTableSeeder extends Seeder
     {
         DB::table('attachments')->insert([
             'name'=>'noticia-gato-bano-mascota-casa-unas-gatito.jpg',
+            'extension'=>'jpg',
             'attachmentable_id'=>1,
             'attachmentable_type'=> Message::class,
             'created_at' => now(),
@@ -22,6 +23,7 @@ class AttachmentsTableSeeder extends Seeder
 
         DB::table('attachments')->insert([
             'name'=>'noticia-gato-bano-mascota-casa-unas-gatito.jpg',
+            'extension'=>'jpg',
             'attachmentable_id'=>4,
             'attachmentable_type'=> Message::class,
             'created_at' => now(),
@@ -29,6 +31,7 @@ class AttachmentsTableSeeder extends Seeder
         ]);
         DB::table('attachments')->insert([
             'name'=>'doggo.jpg',
+            'extension'=>'jpg',
             'attachmentable_id'=>4,
             'attachmentable_type'=> Message::class,
             'created_at' => now(),
