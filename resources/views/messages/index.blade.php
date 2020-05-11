@@ -2,30 +2,32 @@
 @section('main')
 <link href="{{ asset('css/messages.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="display-4 mb-0">Mensajes</h1>
-            <a href="{{ route('messages.create')}}" class="btn btn-primary m-3">Nuevo mensaje</a>
-
-            <table id="alumnos" class="table table-striped" style="width:100%">
-                <thead class="cabezeraTabla">
+    <div class="card shadow">
+        <div class="card-header row m-0 justify-content-between">
+            <h3>Usuarios</h3>
+            <div>
+            <a class="btn btn-outline-success" href="{{ route('messages.create')}}">Añadir</a>
+            </div>
+        </div>
+        <div class="card-body row no-gutters table-responsive">
+            <table class="table col-12 ">
+                <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                     <tr>
-                        <td>Usuario</td>
-                        <td>Asunto</td>
-                        <td>Adjuntos</td>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Asunto</th>
+                        <th scope="col">Adjuntos</th>
                         @if ($sitio == 0)
-                        <td>Visto</td>
+                        <th scope="col">Visto</th>
                         @endif
-                        <td>Acciones</td>
+                        <th scope="col">Accion</th>
                     </tr>
                 </thead>
+                @foreach($messages as $message)
+                @if ($sitio == 0)
+                @foreach ($message->users as $user)
                 <tbody>
-                    @foreach ($messages as $message)
-                    @if ($sitio == 0)
-                    @foreach ($message->users as $user)
-                    {{-- Envidados --}}
                     <tr>
-                        <td>{{$user->first_name}} {{$user->last_name}}</td>
+                        <td>{{$message->user->first_name}} {{$message->user->last_name}}</td>
                         <td>{{$message->subject}}</td>
                         <td>{{count($message->attachments)}}</td>
                         @if ($user->pivot->read == 0)
@@ -33,39 +35,42 @@
                         @else
                         <td>Ha sido visto</td>
                         @endif
-                        <td>
-                            <div class="containerAttachment">
-                        <a href="/sended/{{$message->id}}" class="btn btn-primary">Ver</a>
-                        <form action="{{ route('messages.destroy', $message->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                          </form>
-                        </div>
+                        <td class="botones">
+                            <a class="btn btn-outline-primary" href="{{ route('messages.show',$message->id)}}">Ver</a>
                         </td>
                     </tr>
-                    @endforeach
-                    @else
-                    <tr>
-                        <td>{{$message->user->first_name}} {{$message->user->last_name}}</td>
-                        <td>{{$message->subject}}</td>
-                        <td>{{count($message->attachments)}}</td>
-                        <td>
-                            <div class="containerAttachment">
-                        <a href="/messages/{{$message->id}}" class="btn btn-primary">Ver</a>
-                        <form action="{{ route('messages.destroy', $message->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                          </form>
-                        </div>
-                        </td>
-                    </tr>
-                    @endif
-                    @endforeach
                 </tbody>
+                @endforeach
+                @else
+                    <td>{{$message->user->first_name}} {{$message->user->last_name}}</td>
+                    <td>{{$message->subject}}</td>
+                    <td>{{count($message->attachments)}}</td>
+                    <td class="botones">
+                        <a class="btn btn-outline-primary" href="{{ route('messages.show',$message->id)}}">Ver</a>
+                    </td>
+                </tbody>
+                @endif
+                @endforeach
             </table>
-
+        </div>
+        <div class=" card-footer col-12">
+            <nav class="col-5" aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </main>
