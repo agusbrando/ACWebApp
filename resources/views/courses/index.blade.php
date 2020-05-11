@@ -55,21 +55,22 @@
                                                         <tbody>
                                                         
                                                                 @foreach($year->yearUnions as $course)
-                                                                <tr>
-                                                                    <td>{{$course->course_id}}</td>
-                                                                    <td>{{$course->level}}</td>
-                                                                    <td>{{$course->name}}</td>
-                                                                    <td>{{$course->num_students}}</td>
+                                                                        <tr>
+                                                                            <td>{{$course->course_id}}</td>
+                                                                            <td>{{$course->level}}</td>
+                                                                            <td>{{$course->name}}</td>
+                                                                            <td>{{$course->num_students}}</td>
 
 
-                                                                    <td class="botones">
-                                                                        <form method="get" action="{{ route('courses.show', $course->course_id)}}">
-                                                                            @csrf
-                                                                            @method('GET')
-                                                                            <button class="btn btn-primary" type="submit">Ver</button>
-                                                                        </form>
-                                                                    </td>
-                                                                </tr>
+                                                                            <td class="botones">
+                                                                            <form method="get" action="{{ route('courses.show', '$course->course_id')}}">
+                                                                                @csrf
+                                                                                @method('GET')
+                                                                                <button class="btn btn-primary" type="submit" name="year_id" value="{{$year->year_id}}">Ver</button>
+                                                                            </form>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
                                                                 @endforeach
                                                             
                                                         </tbody>

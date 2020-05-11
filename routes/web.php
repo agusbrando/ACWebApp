@@ -103,4 +103,5 @@ Route::resource('items', 'ItemController');
 //RUTAS STATESs
 Route::resource('states', 'StateController');
 //RUTAS COURSEs
+Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 Route::resource('courses', 'CourseController');

@@ -26,7 +26,7 @@ class CourseController extends Controller
     {
         $years = Year::orderBy("date_start", "DESC")->get(); //Ordeno los años para que salga el más reciente primero
         foreach($years as $year){
-            $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+            $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
         }
   
         return view('courses.index', compact( 'years'));
@@ -59,9 +59,16 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        
+        $course = YearUnion::all()->where('course_id', $id)->where('year_id','year_id'); 
+        
+
+
+  
+        return view('courses.show', compact( 'course'));
+
     }
 
     /**
