@@ -8,6 +8,7 @@
             <form action="{{ route('comments.store')}}" method="POST">
                 @method('POST')
                 <div class="col-12">
+                    <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     <a class="btn btn-outline-warning float-right" href="{{ route('comments.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
