@@ -2,11 +2,14 @@
 
 @section('main')
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">    
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Detalles Aulas</h3>
+            <div class="d-flex flex-row">
+                <a href="/classrooms" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3>Detalles Aula</h3>
+            </div>
             <div>
 
                 <a class="btn btn-outline-info" href="{{ route('classrooms.edit',$classroom->id)}}">Editar</a>
@@ -26,7 +29,7 @@
                 <div>
                     <h5 class="card-title">{{($classroom->name)}}</h5>
                     <p class="card-text">{{($classroom->number)}}</p>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
