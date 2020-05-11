@@ -40,5 +40,7 @@ Route::get('download_attachment_message/{idm}/{nameAttach}','MessageController@d
 
 Route::get('sended/{id}', 'MessageController@showSended')->middleware('auth');
 
+Route::get('response/{id}', 'MessageController@create')->middleware('auth');
+
 Route::get('/', 'HomeController@index');
 
