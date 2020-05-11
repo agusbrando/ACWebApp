@@ -11,7 +11,7 @@
             @endif
             <div>
                 @if ($sitio == 0)
-                    <a class="btn btn-outline-success" href="">Responder</a>
+                    <a class="btn btn-outline-success" href="/response/{{$message->id}}">Responder</a>
                 @endif
                 @if ($sitio == 0)
                     <a class="btn btn-outline-info" href="{{ url('messages')}}">Volver</a>
@@ -42,16 +42,25 @@
     <div class="m-4">
         <h3>Adjuntos</h3>
         @foreach($message->attachments as $attachment)
-        <div class="card-body row no-gutters">
-            <div class="col-12 col-md-3 col-lg-1 p-3">
-                <img class="img-thumbnail" src="/img/iconfiles.png" alt="">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-1 p-2">
+                {{-- <img class="img-thumbnail img-size" src="/img/iconfiles.png" alt=""> --}}
+                @if ($attachment->extension == 'jpg')
+                <i class="fas fa-file-image icon-size"></i>
+                @endif
+                @if ($attachment->extension == 'pdf')
+                <i class="fas fa-file-pdf icon-size"></i>
+                @endif
+                @if ($attachment->extension == 'zip' or $attachment->extension == 'rar')
+                <i class="fas fa-file-archive icon-size"></i>
+                @endif
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
-                 <a class="btn btn-outline-info" href="{{url('download_attachment_message',array($message->id,$attachment->name))}}"><h5 class="card-title">{{$attachment->name}}</h5></a>
+                 <a class="" href="{{url('download_attachment_message',array($message->id,$attachment->name))}}"><h5 class="card-title">{{$attachment->name}}</h5></a>
                  </div>
              </div>
-        </div>
+            </div>
         @endforeach
     </div>
 </div>
