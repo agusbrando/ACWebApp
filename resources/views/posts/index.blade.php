@@ -6,8 +6,9 @@
         <div class="card-header row m-0 justify-content-between">
             <h3>Posts</h3>
             <div>
-            <a class="btn btn-outline-success" href="{{ route('posts.create')}}">Añadir</a>
-        </div>
+                <a href="/home" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
+                <a class="btn btn-outline-success" href="{{ route('posts.create')}}">Añadir</a>
+            </div>
         </div>
         <div class="card-body row no-gutters table-responsive">
             <table id="tabla" class="table col-12 ">
@@ -67,46 +68,5 @@
             </div>
         @endif
     </div>
-    <script>
-        // $(document).ready(function() {
-        //     $('#datepicker').datepicker({
-        //         language: 'es'
-        //     });
-        // });
-        $(document).ready(function() {
-            $('#tabla').DataTable({
-                dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
-                buttons: [{
-                        extend: 'excel',
-                        className: 'btn-outline-success mr-2 boton'
-                    },
-                    {
-                        extend: 'pdf',
-                        className: 'btn-outline-danger mr-2 boton'
-                    }
-                ],
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                    "infoEmpty": "No hay informacion",
-                    "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "No se han encontrado resultados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            });
-        });
-    </script>
 </main>
 @endsection

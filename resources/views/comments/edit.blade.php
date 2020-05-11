@@ -8,10 +8,11 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <h3>Editar Comentario</h3>
-            <form action="{{ route('comments.update',$post->id)}}" method="POST">
+            <form action="{{ route('comments.update',$comment->id)}}" method="POST">
                 @method('PATCH')
                 <div>
                     <div class="col-12">
+                        <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                         <a class="btn btn-outline-warning float-right" href="{{ route('comments.show',$comment->id)}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
