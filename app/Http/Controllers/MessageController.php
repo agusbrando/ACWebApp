@@ -38,10 +38,19 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($response = null)
+    public function create($id = null)
     {
-        $users = User::all();
-        return view('messages.create', compact('users','response'));
+        $isResponse = false;
+        if($id != null){
+
+            $isResponse = true;
+            $message = Message::find($id);
+            $user = User::find($message->user_id);
+            return view('messages.create', compact('user','message','isResponse'));
+        }else{
+            $users = User::all();
+            return view('messages.create', compact('users','isResponse'));
+    }
     }
     /**
      * Store a newly created resource in storage.
@@ -72,16 +81,14 @@ class MessageController extends Controller
             Mail::to($user->email)->send(new MessageMail($message));
 
         }
-
-
-
         if ($request->hasfile('filenames')) {
             foreach ($request->file('filenames') as $file) {
                 $name = $file->getClientOriginalName();
                 $file->move(storage_path("app/messages/$message->id"), $name);
-
+                $extension = $file->getClientOriginalExtension();
                 $attachment = new Attachment([
                     'name' => $name,
+                    'extension' => $extension,
                     'attachmentable_id' => $message->id,
                     'attachmentable_type' => Message::class
                 ]);
@@ -150,8 +157,6 @@ class MessageController extends Controller
 
     public function download($idm, $nameAttach)
     {
-
-
         return response()->download(storage_path("app/messages/$idm/$nameAttach"));
     }
 }
