@@ -17,7 +17,7 @@
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">
-                <img src="{{asset('img/default_type.jpg')}}" class="img-thumbnail" alt="...">
+                <img src="{{asset('img/default_type.png')}}" class="img-thumbnail" alt="...">
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
@@ -25,11 +25,11 @@
                     <fieldset>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input value="{{$user->name}}" name="name" id="name" type="text" class="@error('name') is-invalid @enderror form-control">
+                            <input value="{{$type->name}}" name="name" id="name" type="text" class="@error('name') is-invalid @enderror form-control">
                         </div>
                         <div class="form-group">
                             <label for="model">Model</label>
-                            <input value="{{$user->model}}" name="model" id="model" type="text" class="@error('model') is-invalid @enderror form-control">
+                            <input value="{{$type->model}}" name="model" id="model" type="text" class="@error('model') is-invalid @enderror form-control">
                         </div>
                     </fieldset>
                     @error('email', 'login')

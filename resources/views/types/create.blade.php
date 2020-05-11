@@ -14,7 +14,7 @@
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">
-                <img src="{{asset('img/default_type.jpg')}}" class="img-thumbnail" alt="...">
+                <img src="{{asset('img/default_type.png')}}" class="img-thumbnail" alt="...">
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>

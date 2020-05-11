@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\Type;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -17,8 +18,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = Type::all();
-        return view('users.index', compact('types'));
+        $types = Type::all()->where('model', Event::class);
+        return view('types.index', compact('types'));
     }
 
     /**
@@ -28,8 +29,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        $types = Type::all();
-        return view('users.create', compact('types'));
+        $types = Type::all()->where('model', Event::class);
+        return view('types.create', compact('types'));
     }
 
     /**
@@ -45,7 +46,7 @@ class TypeController extends Controller
             'model' => 'required'
         ]);
 
-        $type = new User([
+        $type = new Type([
             'name' => $request->get('name'),
             'model' => $request->get('model')   
         ]);
