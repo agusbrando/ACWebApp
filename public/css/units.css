@@ -44,3 +44,6 @@ select{
     display: inline;
     width: 30px;
 }
+.profesor{
+    width: fit-content;
+}

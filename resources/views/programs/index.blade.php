@@ -56,7 +56,7 @@
                 </div>
                 <div class="card-body">
                 
-                <table id='tabla' class="table table-striped table-bordered dt-responsive nowrap compact" style="width:100%">>
+                <table id='tabla' class="table table-striped table-bordered dt-responsive nowrap compact text-center" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>

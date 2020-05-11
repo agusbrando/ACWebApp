@@ -109,17 +109,27 @@ class ProgramController extends Controller
         $program = Program::findorfail($id);
         $request->validate([
             'name'=>'required',
-            'expected_date_start'=>'required',
-            'expected_date_end'=>'required',
             'expected_eval'=>'required',
             'expected_date'=>'required'
         ]);
 
-      //  $expected_date_start=
+        $fechas = explode(' - ',$request->get('expected_date'),2);
+        $fechaInicio = str_replace('/', '-', $fechas[0]);
+        $fechaFin  = str_replace('/', '-', $fechas[1]);
+
+        $fechaInicio = date("Y-m-d",strtotime($fechaInicio));
+        $fechaFin = date("Y-m-d",strtotime($fechaFin));
+        /*
+         'expected_date_start' => $request->get('expected_date_start'),
+            'expected_date_end' => $request->get('expected_date_end'),
+        */
+      
+        //  $expected_date_start=
+
         $unit = new Unit([
             'name' => $request->get('name'),
-            'expected_date_start' => $request->get('expected_date_start'),
-            'expected_date_end' => $request->get('expected_date_end'),
+            'expected_date_start' =>  $fechaInicio,
+            'expected_date_end' =>  $fechaFin,
             'expected_eval'=>$request->get('expected_eval')
         ]);
         
@@ -148,7 +158,7 @@ class ProgramController extends Controller
         $unit->improvements = $request->get('improvements');
         $unit->save();
         
-        $program_id = $unit->program->id;
+       
 
         return redirect('/programs/'.$program_id);
     }
@@ -191,7 +201,7 @@ class ProgramController extends Controller
         $evaluable->save();*/
         $aspecto->description = $description;
         $aspecto->save();
-        
+        $mostrarAspecto = true;
         return redirect('/programs/'.$program_id);
     }
     /**
