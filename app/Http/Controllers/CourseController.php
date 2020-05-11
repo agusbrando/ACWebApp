@@ -24,10 +24,12 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $years = Year::all();
-        $yearUnions = YearUnion::all();
-        $courses = Course::all();   
-        return view('courses.index', compact('courses', 'years', 'yearUnions'));
+        $years = Year::orderBy("date_start", "DESC")->get(); //Ordeno los años para que salga el más reciente primero
+        foreach($years as $year){
+            $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+        }
+  
+        return view('courses.index', compact( 'years'));
     }
 
     /**

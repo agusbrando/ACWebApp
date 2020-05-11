@@ -40,7 +40,7 @@
                                         <div class="card">
 
                                             <div class="w-100" id="heading{{$year->id}}" data-toggle="collapse" data-target="#collapse{{$year->id}}" aria-expanded="false" aria-controls="collapse{{$year->id}}">
-
+                                                @if(count($year->yearUnions) > 0)
                                                 
                                                     <table id='mytable' class="table w-100">
                                                         <thead class="thead-dark">
@@ -53,16 +53,17 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                                @foreach($courses as $course)
+                                                        
+                                                                @foreach($year->yearUnions as $course)
                                                                 <tr>
-                                                                    <td>{{$course->id}}</td>
+                                                                    <td>{{$course->course_id}}</td>
                                                                     <td>{{$course->level}}</td>
                                                                     <td>{{$course->name}}</td>
                                                                     <td>{{$course->num_students}}</td>
 
 
                                                                     <td class="botones">
-                                                                        <form method="get" action="{{ route('courses.show', $course->id)}}">
+                                                                        <form method="get" action="{{ route('courses.show', $course->course_id)}}">
                                                                             @csrf
                                                                             @method('GET')
                                                                             <button class="btn btn-primary" type="submit">Ver</button>
@@ -70,9 +71,10 @@
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach
+                                                            
                                                         </tbody>
                                                     </table>
-
+                                                @endif
                                                 
                                             </div>
                                             <!-- collapse show lo muestra abierto por defecto -->
