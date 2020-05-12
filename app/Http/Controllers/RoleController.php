@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 
@@ -15,8 +16,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $permissions = Permission::all();
         $roles = Role::all();
-        return view('roles.index', compact('roles'));
+        return view('roles.index', compact('roles','permissions'));
         
     }
 
@@ -42,7 +44,7 @@ class RoleController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'description' => ['required', 'string', 'max:255'],
             'level' => 'required'
 
 

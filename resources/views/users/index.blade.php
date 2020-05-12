@@ -17,7 +17,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Role id</th>
+                        <th scope="col">Rol</th>
                         <th scope="col">Accion</th>
                     </tr>
                 </thead>

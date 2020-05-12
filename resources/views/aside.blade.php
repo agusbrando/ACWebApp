@@ -71,6 +71,12 @@
         </a>
         </li>
         <li class="nav-item">
+        <a class="nav-link" href="/roles">
+            <span data-feather="file-text"></span>
+            Roles
+        </a>
+        </li>
+        <li class="nav-item">
         <a class="nav-link" href="#">
             <span data-feather="file-text"></span>
             Reserva de aulas

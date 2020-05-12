@@ -28,6 +28,7 @@ Auth::routes();
 
 Route::resource('permissions','PermissionController');
 // Route::get('/permissions', 'PermissionController@index')->name('permissions');
+Route::resource('roles','RoleController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

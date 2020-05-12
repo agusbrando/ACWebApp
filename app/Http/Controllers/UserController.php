@@ -71,9 +71,10 @@ class UserController extends Controller
     public function show($user_id)
     {
         $user = User::find($user_id);
+        $roles = Role::all();
         $user->role = $user->role;
 
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user','roles'));
     }
 
 
