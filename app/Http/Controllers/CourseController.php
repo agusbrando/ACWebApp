@@ -54,7 +54,7 @@ class CourseController extends Controller
     }
 
     /**
-     * redirigimos un curso al show para mostrar los detalles
+     * Redirigimos un curso al show para mostrar los detalles
      *
      * @param  int  $courseId
      * @param  int  $yearId
@@ -69,8 +69,12 @@ class CourseController extends Controller
         $states = State::all();
         $items = Item::all();
         $users = User::all();
+
+        // $responsables = $yearUnion
+        
+        // $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
   
-        return view('courses.show', compact( 'yearUnion', 'classrooms', 'items', 'types', 'states', 'users'));
+        return view('courses.show', compact( 'yearUnion', 'classrooms', 'items', 'types', 'states', 'users', 'yearUnionUsers'));
 
     }
 
