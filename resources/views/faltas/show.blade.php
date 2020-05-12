@@ -12,7 +12,10 @@
   <div class="card shadow">
     <div class="card-header row m-0 justify-content-between">
       <div class="col-12">
-        <h1>{{$user->first_name}} {{$user->last_name}}</h1>
+        <div class="d-flex flex-row">
+          <a href="/asistencia" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+          <h1>{{$user->first_name}} {{$user->last_name}}</h1>
+        </div>
         <hr>
         <!-- Tabla -->
         <div class="col mt-4">
@@ -100,7 +103,7 @@
                   <div class="card-header" id="headingOne" style="background-color: #EAEAEA">
                     <h5 class="mb-0">
                       <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <h7 style="color:grey;font-size:large">Faltas Leves</h7>
+                        <h7 style="color:grey;font-size:large">Faltas Leves</h7>
                       </button>
                     </h5>
                   </div>
@@ -140,7 +143,7 @@
                   <div class="card-header" id="headingTwo" style="background-color: #EAEAEA">
                     <h5 class="mb-0">
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      <h7 style="color:grey;font-size:large">Faltas Graves</h7>
+                        <h7 style="color:grey;font-size:large">Faltas Graves</h7>
                       </button>
                     </h5>
                   </div>
