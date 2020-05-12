@@ -13,8 +13,7 @@
             <table class="table col-12 ">
                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                     <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Course_id</th>   
+                        <th scope="col">Nombre</th>  
                         <th scope="col">Action</th>                     
                     </tr>
                 </thead>
@@ -22,7 +21,6 @@
                 <tbody>
                     <tr>
                         <td>{{$subject->name }}</td>
-                        <td>{{$subject->course_id }}</td>
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
                         </td>

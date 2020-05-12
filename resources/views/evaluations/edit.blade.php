@@ -29,11 +29,7 @@
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input value="{{$evaluation->name}}" name="name" id="name" type="text" class="@error('name') is-invalid @enderror form-control">
-                        </div>     
-                        <div class="form-group">
-                            <label for="subject_id">Subject_ID</label>
-                            <input value="{{$evaluation->subject_id}}" name="subject_id" id="subject_id" type="text" class="@error('subject_id') is-invalid @enderror form-control">
-                        </div>                  
+                        </div> 
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>

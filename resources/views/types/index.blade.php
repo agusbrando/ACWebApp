@@ -25,7 +25,7 @@
                 <tbody>
                     <tr>
                         <td>{{$type->name }}</td>
-                        <td>{{$type->mode }}</td>                    
+                        <td>{{$type->model }}</td>                    
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('types.show',$type->id)}}">Ver</a>
                         </td>

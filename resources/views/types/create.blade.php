@@ -7,6 +7,7 @@
             <h3>Nuevo Tipo</h3>
             <form action="{{ route('types.store')}}" method="POST">
                 @method('POST')
+                @csrf
                 <div class="col-12">
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     <a class="btn btn-outline-warning float-right" href="{{ route('types.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
@@ -25,8 +26,13 @@
                         </div>
                         <div class="form-group">
                             <label for="model">Model</label>
-                            <input value="" name="model" id="model" type="text" class="@error('model') is-invalid @enderror form-control">
-                        </div>                                              
+                            <select name="model" id="model" class="form-control">
+                                @foreach($types as $type)
+                                <option value="{{$type->model}}">{{$type->model}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>

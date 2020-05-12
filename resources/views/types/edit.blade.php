@@ -8,6 +8,7 @@
             <h3>Detalles de Tipos</h3>
             <form action="{{ route('types.update',$type->id)}}" method="POST">
                 @method('PATCH')
+                @csrf
                 <div>
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
@@ -30,7 +31,7 @@
                         <div class="form-group">
                             <label for="model">Model</label>
                             <input value="{{$type->model}}" name="model" id="model" type="text" class="@error('model') is-invalid @enderror form-control">
-                        </div>
+                        </div>                        
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>

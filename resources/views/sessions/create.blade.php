@@ -34,11 +34,11 @@
                         </div>  
                         <div class="form-group">
                             <label for="time_start">Hora de Inicio</label>
-                            <input value="" name="time_start" id="time_start" type="text" class="@error('time_start') is-invalid @enderror form-control">                            
+                            <input id="horaSession" value="<?php echo date("H:i"); ?>" class="form-control @error('time_start') is-invalid @enderror form-control" type="time" id="time_start" name="time_start">                            
                         </div>  
                         <div class="form-group">
                             <label for="time_end">Hora de Fin</label>
-                            <input value="" name="time_end" id="time_end" type="text" class="@error('time_end') is-invalid @enderror form-control">
+                            <input id="horaSession" value="<?php echo date("H:i"); ?>" class="form-control @error('time_end') is-invalid @enderror form-control" type="time" id="time_end" name="time_end">                            
                         </div>                     
                     </fieldset>
                     @error('email', 'login')

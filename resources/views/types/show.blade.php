@@ -28,7 +28,7 @@
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
                     <h5 class="card-title">{{($type->name)}}</h5>
-                    <p class="card-text">{{($type->model)}}</p>
+                    <p class="card-text">Model: {{($type->model)}}</p>
                 </div>
             </div>
         </div>

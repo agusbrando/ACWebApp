@@ -28,7 +28,7 @@
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
                     <h5 class="card-title">{{($classroom->name)}}</h5>
-                    <p class="card-text">{{($classroom->number)}}</p>
+                    <p class="card-text">Número: {{($classroom->number)}}</p>
                 </div>
             </div>
         </div>

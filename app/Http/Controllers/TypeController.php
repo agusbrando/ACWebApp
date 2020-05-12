@@ -18,7 +18,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = Type::all()->where('model', Event::class);
+        $types = Type::all();
         return view('types.index', compact('types'));
     }
 
@@ -29,7 +29,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        $types = Type::all()->where('model', Event::class);
+        $types = Type::select('model')->distinct()->get();
         return view('types.create', compact('types'));
     }
 
@@ -51,7 +51,7 @@ class TypeController extends Controller
             'model' => $request->get('model')   
         ]);
         $type->save();
-        return redirect('types.index')->with('success', 'Type saved!');
+        return redirect('types')->with('success', 'Type saved!');
     }
 
     /**
@@ -76,7 +76,7 @@ class TypeController extends Controller
      */
     public function edit($id)
     {
-        $type = Type::find($id);       
+        $type = Type::find($id);
         return view('types.edit', compact('type'));
     }
 

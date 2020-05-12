@@ -27,8 +27,7 @@
                 <img src="{{asset('img/default_evaluation.jpg')}}" class="img-thumbnail" alt="...">
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
-                <div>
-                    <h5 class="card-title">{{$evaluation->subject_id }}</h5>
+                <div>                    
                     <p class="card-text">{{($evaluation->name)}}</p>
                 </div>
             </div>

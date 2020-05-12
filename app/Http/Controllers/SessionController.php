@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\Session;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -17,8 +18,9 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions = Session::all();
-        return view('sessions.index', compact('sessions'));
+        $sessions = Session::paginate(10)->load('type','classroom');
+        $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+        return view('sessions.index', compact('sessions','days'));
     }
 
     /**
@@ -28,6 +30,7 @@ class SessionController extends Controller
      */
     public function create()
     {
+        date_default_timezone_set('Europe/Madrid');
         $sessions = Session::all();
         return view('sessions.create', compact('sessions'));
     }

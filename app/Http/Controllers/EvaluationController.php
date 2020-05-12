@@ -40,13 +40,12 @@ class EvaluationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'subject_id' => 'required',
-            'name' => 'required', 
+            'name' => 'required'
         ]);
 
         $evaluation = new Evaluation([
-            'subject_id' => $request->get('subject_id'),
-            'name' => $request->get('name'),  
+           
+            'name' => $request->get('name'),
         ]);
 
         $evaluation->save();
@@ -89,14 +88,14 @@ class EvaluationController extends Controller
     {
 
         $request->validate([
-            'subject_id' => 'required',
-            'name' => 'required'
            
+            'name' => 'required'
+
         ]);
         $evaluation = Evaluation::find($id);
-        $evaluation->subject_id = $request->get('subject_id');
+      
         $evaluation->name = $request->get('name');
-        
+
 
 
         $evaluation->save();

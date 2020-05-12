@@ -24,7 +24,7 @@ class CalendarController extends Controller
   {
 
     if ($type == 1) {
-      $tipo = 'Tutorias';
+      $tipo = 'Tutorías';
     } else {
       $tipo = 'Reserva de aulas';
     }
@@ -53,7 +53,7 @@ class CalendarController extends Controller
     $sessions = $tipo->sessions()->where('day', $day)->get();
     $types = Type::all()->where('model', Event::class);
 
-    if ($request->get('tipo') == 'Tutorias') {
+    if ($request->get('tipo') == 'Tutorías') {
       $events = Event::all()->where('type_id', 1);
     } else {
       $events = Event::all()->where('type_id', 2);

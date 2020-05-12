@@ -41,13 +41,11 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'course_id' => 'required'
+            'name' => 'required'
         ]);
 
         $subject = new Subject([
             'name' => $request->get('name'),
-            'course_id' => $request->get('course_id')
             ]);
         $subject->save();
         return redirect('/courses')->with('success', 'Subject saved!');
@@ -90,12 +88,10 @@ class SubjectController extends Controller
     {
 
         $request->validate([
-            'name' => 'required',
-            'course_id' => 'required'
+            'name' => 'required'
         ]);
         $subject = Subject::find($id);
-        $subject->name = $request->get('name');
-        $subject->course_id = $request->get('course_id');       
+        $subject->name = $request->get('name');  
 
         $subject->save();
         return redirect('/subjects')->with('Succes', 'Subject editado!');

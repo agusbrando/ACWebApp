@@ -16,8 +16,8 @@
             <table class="table col-12 ">
                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                     <tr>
-                        <th scope="col">Classroom_id</th>
-                        <th scope="col">Type_id</th>
+                        <th scope="col">Classroom</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col">Dia</th>
                         <th scope="col">Hora de Inicio</th>
                         <th scope="col">Hora de Fin</th>
@@ -27,11 +27,11 @@
                 @foreach($sessions as $session)
                 <tbody>
                     <tr>
-                        <td>{{$session->classroom_id }}</td>
-                        <td>{{$session->type_id }}</td>
-                        <td>{{$session->day}}</td>
-                        <td>{{$session->time_start }}</td>
-                        <td>{{$session->time_end }}</td>
+                        <td>{{$session->classroom->name }}</td>
+                        <td>{{$session->type->name }}</td>
+                        <td>{{$days[$session->day]}}</td>
+                        <td>{{$session->time_start->format('H:i') }}</td>
+                        <td>{{$session->time_end->format('H:i') }}</td>
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('sessions.show',$session->id)}}">Ver</a>
                         </td>
