@@ -14,13 +14,15 @@ class CreatePercentagesTable extends Migration
     public function up()
     {
         Schema::create('percentages', function (Blueprint $table) {
-            $table->integer('evaluation_id')->unsigned();
+            $table->integer('year_union_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->integer('percentage')->unsigned();
+            $table->integer('min_grade')->unsigned();
+            $table->integer('average_grade')->unsigned();
             $table->timestamps();
 
-            $table->primary(['evaluation_id', 'type_id']);
-            $table->foreign('evaluation_id')->references('id')->on('evaluations');
+            $table->primary(['year_union_id', 'type_id']);
+            $table->foreign('year_union_id')->references('id')->on('yearUnions');
             $table->foreign('type_id')->references('id')->on('types');
         });
     }

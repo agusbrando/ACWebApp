@@ -6,13 +6,18 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Carbon\Carbon;
+
 use App\Models\Role;
 use App\Models\Type;
+use App\Models\State;
 use App\Models\Classroom;
+use App\Models\Item;
 use App\Models\Session;
 use App\Models\User;
 use App\Models\Event;
-use App\Models\Item;
+
+
 
 class TypeTest extends TestCase
 {
@@ -94,18 +99,31 @@ class TypeTest extends TestCase
     
     public function testItem()
     {
+        $classroom = Classroom::create([
+            'name' => 'Aula_5',
+            'number' => 5,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        
+        $state = State::create([
+            'name' => 'Roto',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
         $type = Type::create([
             'model' => 'Item', 
             'name' => ' movil',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        
+
         $item1 = Item::create([
             'name' => 'Portatil Asus',
             'date_pucharse' => Carbon::create('2020','03','30'),
-            'classroom_id' => 1,
-            'state_id' => 2,
+            'classroom_id' => $classroom->id,
+            'state_id' => $state->id,
             'type_id' => $type->id,
             'created_at' => now(),
             'updated_at' => now()
@@ -113,8 +131,8 @@ class TypeTest extends TestCase
         $item2 = Item::create([
             'name' => 'Portatil MSI',
             'date_pucharse' => Carbon::create('2020','03','30'),
-            'classroom_id' => 1,
-            'state_id' => 2,
+            'classroom_id' => $classroom->id,
+            'state_id' => $state->id,
             'type_id' => $type->id,
             'created_at' => now(),
             'updated_at' => now()

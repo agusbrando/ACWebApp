@@ -15,14 +15,10 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('date_check');	
-            $table->text('notes');
-            $table->integer('subject_id')->unsigned();
+            
+            $table->string('name');
             $table->integer('professor_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('professor_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

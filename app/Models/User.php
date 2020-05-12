@@ -44,10 +44,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-
-    public function responsables()
+    
+    public function items()
     {
-        return $this->belongsToMany('App\Models\Item', 'item_user', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
+        return $this->belongsToMany('App\Models\Item', 'items-users', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
     }
 
     public function trackings()
@@ -68,9 +68,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
     }
-    public function programs_responsable()
+    //todas las year unions en las que haya un responsable
+    public function yearUnionsResponsable()
     {
-        return $this->hasMany(Program::class, 'user_id');
+        return $this->hasMany(YearUnion::class, 'user_id');
     }
 
     public function programs_professor()
@@ -82,5 +83,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Comment');
     }
-     
+    
+    //** lista de year unions (asignaturas por cada evaluacion) en las que esta matriculado el alumno */
+    public function yearUnions(){
+        return $this->belongsToMany(YearUnion::class, 'yearUnionUsers', 'user_id', 'year_union_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
+    }
 }

@@ -24,6 +24,11 @@ class Misbehavior extends Model
     }
     public function type()
     {
-       return $this->BelongsTo(Type::class);
+        return $this->BelongsTo(Type::class);
+    }
+
+    public function yearUnionUser()
+    {
+        return $this->BelongsTo(YearUnionUser::class);
     }
 }

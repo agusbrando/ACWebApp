@@ -1,0 +1,7 @@
+.botones{
+    display:flex;
+    flex-direction: row;
+}
+.botones *{
+    padding-left: 10px;
+}

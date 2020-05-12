@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCalificationsTable extends Migration
+class CreateYearUnionUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,18 @@ class CreateCalificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('califications', function (Blueprint $table) {
-            $table->integer('task_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->decimal('value');
-            $table->timestamps();
+        Schema::create('yearUnionUsers', function (Blueprint $table) {
 
-            $table->primary(['task_id', 'user_id']);
-            $table->foreign('task_id')->references('id')->on('tasks');
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('year_union_id')->unsigned();
+            $table->boolean('assistance');
+            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('year_union_id')->references('id')->on('yearUnions');
+            $table->unique(['year_union_id', 'user_id']);
+
+
         });
     }
 
@@ -32,6 +35,6 @@ class CreateCalificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('califications');
+        Schema::dropIfExists('yearUnionUsers');
     }
 }

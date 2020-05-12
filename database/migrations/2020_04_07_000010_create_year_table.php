@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateYearTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
+        Schema::create('years', function (Blueprint $table) {
 
-        Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->string('title');
-            $table->string('text');
+            $table->string('name');
+            $table->date('date_start');
+            $table->date('date_end');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            
         });
     }
 
@@ -33,6 +31,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('years');
     }
 }

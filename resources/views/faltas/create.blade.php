@@ -18,7 +18,7 @@
         <div class="card-header row m-0 justify-content-between">
             <div class="col-12">
                 <div class="d-flex flex-row">
-                    <a href="/asistencia/{id}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                    <a href="/faltas/{{$user->id}}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                     <h1>Añadir Falta</h1>
                 </div>
                 <hr>
@@ -46,7 +46,7 @@
                     </label>
                     <textarea class="form-control" name="description" rows="3"></textarea>
                 </div>
-
+                </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
                 </form>

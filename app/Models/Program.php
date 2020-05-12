@@ -9,11 +9,8 @@ class Program extends Model
     protected $table = 'Programs';
     protected $guarded = [];
 
-    public function subject(){
-        return $this->belongsTo(Subject::class);
-    }
-    public function responsable(){
-        return $this->belongsTo(User::class, 'user_id');
+    public function yearUnions(){
+        return $this->hasMany(YearUnion::class);
     }
     public function professor(){
         return $this->belongsTo(User::class, 'professor_id');
@@ -23,7 +20,7 @@ class Program extends Model
     }
     public function evaluables(){
         return $this->belongsToMany(Evaluable::class, 'evaluateds', 'program_id', 'evaluable_id')->using(Evaluated::class)
-        ->withTimeStamps()->withPivot('description');
+        ->withTimeStamps()->withPivot('description','id');
     }
 
 }

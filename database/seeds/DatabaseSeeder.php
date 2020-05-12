@@ -22,12 +22,15 @@ class DatabaseSeeder extends Seeder
             CoursesTableSeeder::class,
             SubjectsTableSeeder::class,
             EvaluationsTableSeeder::class,
+            ProgramsTableSeeder::class,
+            YearsTableSeeder::class,
+            YearUnionsTableSeeder::class,
+            YearUnionUserTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,
             PercentagesTableSeeder::class,
             TrackingsTableSeeder::class,
             SessionsTableSeeder::class,
-            ProgramsTableSeeder::class,
             UnitsTableSeeder::class,
             EvaluablesTableSeeder::class,
             EvaluatedsTableSeeder::class,
@@ -42,12 +45,8 @@ class DatabaseSeeder extends Seeder
             CommentsTableSeeder::class,
             MessagesTableSeeder::class,
             SendsTableSeeder::class,
-            AttachmentsTableSeeder::class
-	    
-	    
-            
-	    
-	    
+            AttachmentsTableSeeder::class,
+            ItemYearTableSeeder::class
         ]);
     }
 }
