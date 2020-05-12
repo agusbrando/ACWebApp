@@ -17,7 +17,7 @@
 
       <div class="col-12 border-left bg-light">
         <div class="col-12 col-md-8 col-lg-10 p-3">
-          <form method="post" action="{{ route('seguimiento.update',$user->id) }}">
+          <form method="post" action="{{ route('seguimiento.update',$user->id) }}" enctype="multipart/form-data">
             @method('patch')
             @csrf
 

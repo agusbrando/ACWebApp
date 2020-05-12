@@ -48,6 +48,7 @@ table.dataTable thead {
 }
 .header{
     height: 100px;
+    
 }
 
 
@@ -68,4 +69,9 @@ th{
 .tabla{
     text-align: center;
     background-color: whitesmoke;
+}
+.container{
+    padding-left:170px;
+    width: 99%;
+    min-width: 1140px;
 }

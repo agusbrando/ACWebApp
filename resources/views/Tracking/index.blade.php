@@ -61,18 +61,19 @@
                         @csrf
                         @method('POST')
                         <tbody>
-                        
+
                             @foreach($trackings as $tracking)
                             <input type="hidden" value={{$tracking}} name="trackings[]">
-                            
+
                             <tr>
                                 <td>{{$tracking->date_signature}}</td>
                                 <td>{{$tracking->time_start}}</td>
                                 <td>{{$tracking->time_end}}</td>
                                 <td>{{$tracking->num_hours}}</td>
-                                <td><img class="border" src="{{url($tracking->signature)}}" /></td>
+                                <td><img class="border" src="{{url($tracking->signature)}}" />
+                                </td>
                             </tr>
-                            
+
                             @endforeach
 
                         </tbody>
@@ -92,30 +93,30 @@
         </div>
         <div class=" card-footer col-12">
 
-            
 
 
-            
+
+
             <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar PDF</button>
             </form>
             <form class="float-right" action="{{ route('excel')}}" method="POST">
-                        @csrf
-                        @method('POST')
-                        
-                        
-                            @foreach($trackings as $tracking)
-                            <input type="hidden" value={{$tracking}} name="trackings[]">
-                            @endforeach
-                           
+                @csrf
+                @method('POST')
 
 
-            
-            <button type="submit" class="btn btn-outline-success ml-1 float-right"> Descargar Excel </button>
+                @foreach($trackings as $tracking)
+                <input type="hidden" value={{$tracking}} name="trackings[]">
+                @endforeach
+
+
+
+
+                <button type="submit" class="btn btn-outline-success ml-1 float-right"> Descargar Excel </button>
             </form>
 
             <input type="hidden" value={{$trackings}}>
         </div>
-        
+
 
     </div>
 
