@@ -27,11 +27,15 @@
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input value="{{$type->name}}" name="name" id="name" type="text" class="@error('name') is-invalid @enderror form-control">
-                        </div>
+                        </div>                         
                         <div class="form-group">
                             <label for="model">Model</label>
-                            <input value="{{$type->model}}" name="model" id="model" type="text" class="@error('model') is-invalid @enderror form-control">
-                        </div>                        
+                            <select name="model" id="model" class="form-control @error('model') is-invalid @enderror">
+                                @foreach($types as $type)
+                                <option value="{{$type->model}}">{{$type->model}}</option>
+                                @endforeach
+                            </select>
+                        </div>                    
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>

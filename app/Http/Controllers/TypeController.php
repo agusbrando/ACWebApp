@@ -77,7 +77,8 @@ class TypeController extends Controller
     public function edit($id)
     {
         $type = Type::find($id);
-        return view('types.edit', compact('type'));
+        $types = Type::select('model')->distinct()->get();
+        return view('types.edit', compact('type', 'types'));
     }
 
     /**

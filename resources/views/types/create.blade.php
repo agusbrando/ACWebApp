@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="model">Model</label>
-                            <select name="model" id="model" class="form-control">
+                            <select name="model" id="model" class="form-control @error('model') is-invalid @enderror">
                                 @foreach($types as $type)
                                 <option value="{{$type->model}}">{{$type->model}}</option>
                                 @endforeach

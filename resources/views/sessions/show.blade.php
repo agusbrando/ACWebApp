@@ -28,11 +28,11 @@
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
-                    <h5 class="card-title">{{($session->day)}} {{($session->time_end)}}</h5>
-                    <p class="card-text">{{($session->classroom_id)}}</p>
-                    <p class="card-text">{{($session->type_id)}}</p>
-                    <p class="card-text">{{($session->time_start)}}</p>
-                    <p class="card-text">{{($session->time_end)}}</p>
+                    <h5 class="card-title">Aula: {{$session->classroom->name }}</h5>
+                    <p class="card-text">Tipo: {{$session->type->name }}</p>
+                    <p class="card-text">Dia de la semana:{{$days[$session->day]}}</p>
+                    <p class="card-text">Hora de inicio: {{$session->time_start->format('H:i') }}</p>
+                    <p class="card-text">Hora de fin: {{$session->time_end->format('H:i') }}</p>
                 </div>
             </div>
         </div>

@@ -20,26 +20,38 @@
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
                     <fieldset>
-                        <div class="form-group">
-                            <label for="classroom_id">Classroom_id</label>
-                            <input value="" name="classroom_id" id="classroom_id" type="text" class="@error('classroom_id') is-invalid @enderror form-control">
+                    <div class="form-group">
+                            <label for="formControlSelect1">Aula</label>
+                            <select class="form-control @error('classroom') is-invalid @enderror" id="classroom" name="classroom">                                                               
+                                @foreach($classrooms as $classroom)
+                                <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="type_id">Type_id</label>
-                            <input value="" name="type_id" id="type_id" type="text" class="@error('type_id') is-invalid @enderror form-control">
+                            <label for="type">Tipo</label>
+                            <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                @foreach($types as $type)
+                                <option value="{{$type->id }}">{{$type->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="day">Dia</label>
-                            <input value="" name="day" id="day" type="text" class="@error('day') is-invalid @enderror form-control">
-                        </div>  
+                            <label for="day">Dia de la semana</label>
+                            <select name="day" id="day" class="form-control @error('day') is-invalid @enderror">
+                                @foreach($days as $key=>$day)
+                                <option value="{{$key}}">{{$day}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="time_start">Hora de Inicio</label>
-                            <input id="horaSession" value="<?php echo date("H:i"); ?>" class="form-control @error('time_start') is-invalid @enderror form-control" type="time" id="time_start" name="time_start">                            
-                        </div>  
+                            <input value="<?php echo date("H:i"); ?>" class="form-control @error('time_start') is-invalid @enderror form-control" type="time" id="time_start" name="time_start">
+                        </div>
                         <div class="form-group">
                             <label for="time_end">Hora de Fin</label>
-                            <input id="horaSession" value="<?php echo date("H:i"); ?>" class="form-control @error('time_end') is-invalid @enderror form-control" type="time" id="time_end" name="time_end">                            
-                        </div>                     
+                            <input value="<?php echo date("H:i"); ?>" class="form-control @error('time_end') is-invalid @enderror form-control" type="time" id="time_end" name="time_end">
+                        </div>
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>

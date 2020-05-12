@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\Session;
 use App\Models\Type;
+use App\Models\Classroom;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -30,9 +32,14 @@ class SessionController extends Controller
      */
     public function create()
     {
-        date_default_timezone_set('Europe/Madrid');
-        $sessions = Session::all();
-        return view('sessions.create', compact('sessions'));
+        date_default_timezone_set('Europe/Madrid');      
+
+        $sessions = Session::all();       
+        $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];        
+        $classrooms = Classroom::all();        
+        $types = Type::all()->where('model', Event::class);;  
+
+        return view('sessions.create', compact('sessions', 'days', 'types', 'classrooms'));
     }
 
     /**
@@ -44,8 +51,8 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'classroom_id' => 'required',
-            'type_id' => 'required',
+            'classroom' => 'required',
+            'type' => 'required',
             'day' => 'required',
             'time_start' => 'required',
             'time_end' => 'required'
@@ -54,8 +61,8 @@ class SessionController extends Controller
         ]);
 
         $session = new Session([
-            'classroom_id' => $request->get('classroom_id'),
-            'type_id' => $request->get('type_id'),
+            'classroom_id' => $request->get('classroom'),
+            'type_id' => $request->get('type'),
             'day' => $request->get('day'),
             'time_start' => $request->get('time_start'),
             'time_end' => $request->get('time_end')
@@ -74,8 +81,9 @@ class SessionController extends Controller
     public function show($id)
     {
         $session = Session::find($id);
+        $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
 
-        return view('sessions.show', compact('session'));
+        return view('sessions.show', compact('session','days'));
     }
 
 
