@@ -9,15 +9,17 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="card shadow">
     <div class="card-header row m-0 justify-content-between">
-      <h3>Material del Aula</h3>
-
+      
+      <div class="d-flex flex-row">
+          <a href="/items" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+          <h3>Material del Aula</h3>
+      </div>
       <div >
       
         <form method="get" action="{{ route('items.edit', $item->id) }}">
           @csrf
           @method('GET')
           <button class="btn btn-outline-info" role="button">Editar Material</button>
-          <a class="btn btn-primary" href="/items" role="button">Volver</a>
         </form>
         
       </div>

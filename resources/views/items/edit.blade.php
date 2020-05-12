@@ -10,17 +10,16 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Editar Item</h3>
-
-            <div>
-                <td class="botones">
-                    <form method="get" action="{{ route('items.show', $item->id)}}">
-                        @csrf
-                        @method('GET')
-                        <button class="btn btn-primary" type="submit">Volver</button>
-                    </form>
-                </td>
-            </div>
+            <form method="get" >    
+                <div class="d-flex flex-row">
+                    @csrf
+                    @method('GET')
+                    <a href="{{ route('items.show', $item->id)}}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                    
+                    <h3>Editar Item</h3>
+                </div>
+            </form>
+            
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
@@ -105,7 +104,8 @@
                 </div>
             </div>
             <div class=" card-footer col-12">
-                <a class="btn btn-outline-warning float-right" href="#" aria-disabled="true">Cancelar</a>
+            
+                <a class="btn btn-outline-warning float-right" href="{{ route('items.show', $item->id)}}" aria-disabled="true">Cancelar</a>
             </div>
             </form>
         </div>

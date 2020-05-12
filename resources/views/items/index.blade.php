@@ -9,8 +9,10 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Material del Aula</h3>
-
+            <div class="d-flex flex-row">
+                <a href="/" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3>Material del Aula</h3>
+            </div>
             <div>
                 <a class="btn btn-outline-info" href="/items/create" role="button">Añadir Material</a>
 
@@ -55,7 +57,7 @@
                         </select>
                     </div>
                     <div class="d-flex flex-row botones">
-                        <button class="btn btn-primary " type="submit">Filtrar</button>
+                        <button class="btn btn-outline-primary " type="submit">Filtrar</button>
                     </div>
 
                 </form>
@@ -103,7 +105,7 @@
                                         <form method="get" action="{{ route('items.show', $item->id)}}">
                                             @csrf
                                             @method('GET')
-                                            <button class="btn btn-primary" type="submit">Ver</button>
+                                            <button class="btn btn-outline-primary" type="submit">Ver</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -116,10 +118,7 @@
                 </div>
             </div>
         </div>
-        <div class=" card-footer col-12">
-            <a class="btn btn-outline-warning float-right" href="#" aria-disabled="true">Cancelar</a>
-        </div>
-        </form>
+        
     </div>
 </main>
 
