@@ -12,16 +12,16 @@
                 <div class="d-flex flex-row">
                     @csrf
                     @method('GET')
-                    <a href="{{ route('items.index')}}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                    <a href="{{ route('courses.index')}}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
 
-                    <h3>Crear Item</h3>
+                    <h3>Crear Curso</h3>
                 </div>
             </form>
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
                 <div class="container">
-                    <form method="post" action="{{ route('items.store') }}">
+                    <form method="post" >
                         <!-- Proteccion contra consultas no deseadas -->
                         @csrf
 
@@ -42,9 +42,7 @@
                             <select class="form-control" id="classroom_id" name="classroom_id">
                                 <option disabled selected>Selecciona un Aula</option>
                                 <!--Hace la funcion de un placeholder-->
-                                @foreach($classrooms as $classroom)
-                                <option value="{{$classroom->id}}">{{$classroom->name}}</option>
-                                @endforeach
+                                
                             </select>
                         </div>
                         <div class="form-group">
@@ -52,15 +50,7 @@
                             <select class="form-control" id="state_id" name="state_id">
                                 <option disable>Selecciona un estado</option>
                                 <!--Hace la funcion de un placeholder-->
-                                @foreach($states as $state)
-                                @if($state->id == 1)
-                                <option selected value="{{$state->id}}">{{$state->name}}</option>
-                                @else
-                                <option value="{{$state->id}}">{{$state->name}}</option>
-
-                                @endif
-
-                                @endforeach
+                               
                             </select>
                         </div>
                         <div class="form-group">
@@ -68,9 +58,7 @@
                             <select class="form-control" id="type_id" name="type_id">
                                 <option disabled selected>Selecciona un tipo</option>
                                 <!--Hace la funcion de un placeholder-->
-                                @foreach($types as $type)
-                                <option value="{{$type->id}}">{{$type->name}}</option>
-                                @endforeach
+                                
                             </select>
                         </div>
 
@@ -86,7 +74,7 @@
 
         </div>
         <div class=" card-footer w-100">
-            <a class="btn btn-outline-warning float-right" href="/items" aria-disabled="true">Cancelar</a>
+            <a class="btn btn-outline-warning float-right" href="/courses" aria-disabled="true">Cancelar</a>
         </div>
 </main>
 

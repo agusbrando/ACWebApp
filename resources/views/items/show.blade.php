@@ -154,10 +154,7 @@
         </div>
       </div>
     </div>
-    <div class=" card-footer col-12">
-      <a class="btn btn-outline-warning float-right" href="#" aria-disabled="true">Cancelar</a>
-    </div>
-    </form>
+    
   </div>
 </main>
 

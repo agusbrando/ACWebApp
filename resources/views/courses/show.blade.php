@@ -13,10 +13,7 @@
                 <a href="/courses" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3>Curso {{$yearUnion->course->name}}</h3>
             </div>
-            <div>
-                <a class="btn btn-outline-info" href="/courses/create" role="button">Añadir Curso</a>
-
-            </div>
+            
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
@@ -40,47 +37,33 @@
                             <table id='mytable' class="table table-striped table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Id</th>
                                         <th>Número</th>
                                         <th>Nombre</th>
-                                        <th>Fecha Compra</th>
-                                        <th>Id clase</th>
-                                        <th>Estado</th>
-                                        <th>Tipo</th>
-                                        <th>Actions</th>
+                                        <th>Responsables</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($items as $item)
-                                    <tr>
-                                        <td>{{$item->id}}</td>
-                                        <td>{{$item->number}}</td>
-                                        <td>{{$item->name}}</td>
-                                        <td>{{$item->date_pucharse}}</td>
-                                        @foreach($classrooms as $classroom)
-                                            @if($item->classroom_id == $classroom->id)
-                                            <td>{{$classroom->name}}</td>
-                                            @endif
-                                        @endforeach
-                                        @foreach($states as $state)
-                                            @if($item->state_id == $state->id)
-                                            <td>{{$state->name}}</td>
-                                            @endif
-                                        @endforeach
-                                        @foreach($types as $type)
-                                            @if($item->type_id == $type->id)
-                                            <td>{{$type->name}}</td>
-                                            @endif
-                                        @endforeach
+                                    <form method="get" action=""> 
+                                        @csrf
+                                        @method('GET')
+                                        <tr>
+                                            
+                                            <td>{{$item->number}}</td>
+                                            <td>{{$item->name}}</td>
+                                        
 
-                                        <td class="botones">
-                                            <form method="get" action="{{ route('items.show', $item->id)}}">
-                                                @csrf
-                                                @method('GET')
-                                                <button class="btn btn-outline-primary" type="submit">Ver Responsables</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                            <td class="botones d-flex flex-wrap">
+                                                @foreach($users as $user)
+                                                <!-- Esto llevará al usuario -->
+                                                
+                                                    <button class="btn btn-outline-primary m-1" type="submit">{{$user->first_name}}</button>
+                                                
+                                                @endforeach
+                                                
+                                            </td>
+                                        </tr>
+                                    </form>
                                     @endforeach
                                 </tbody>
                             </table>

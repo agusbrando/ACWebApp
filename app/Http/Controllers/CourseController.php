@@ -39,7 +39,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('courses.create');
     }
 
     /**
@@ -68,8 +68,9 @@ class CourseController extends Controller
         $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
         $items = Item::all();
+        $users = User::all();
   
-        return view('courses.show', compact( 'yearUnion', 'classrooms', 'items', 'types', 'states'));
+        return view('courses.show', compact( 'yearUnion', 'classrooms', 'items', 'types', 'states', 'users'));
 
     }
 
