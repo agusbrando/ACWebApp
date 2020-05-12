@@ -39,6 +39,7 @@ Route::resource('faltas', 'FaltasController');
 //     }
 
 // });
+
 // Route::get('faltas/{id}/', 'FaltasController@indexFaltas')->name('faltas.indexFaltas');
 Route::resource('permissions', 'PermissionController');
 

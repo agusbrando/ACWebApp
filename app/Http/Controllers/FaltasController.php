@@ -90,7 +90,7 @@ class FaltasController extends Controller
                     }
                 }
             }
-            $elemento = ['asignatura' => $subject->abbreviation, 'faltas' => $count, 'max' => $subject->max];
+            $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->max];
             array_push($lista, $elemento);
         }
         return view('faltas.show', compact('user', 'lista', 'misbehaviors'));
