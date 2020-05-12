@@ -54,20 +54,22 @@ class CourseController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * redirigimos un curso al show para mostrar los detalles
      *
-     * @param  int  $id
+     * @param  int  $courseId
+     * @param  int  $yearId
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($courseId, $yearId)
     {
-        
-        $course = YearUnion::all()->where('course_id', $id)->where('year_id','year_id'); 
-        
-
-
+        $yearUnion = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->first(); 
+        $types = Type::all()->where('model', Item::class);
+        $classrooms = Classroom::all();    //->load('name', Classroom::class)
+        $states = State::all();
+        $items = Item::all();
   
-        return view('courses.show', compact( 'course'));
+        return view('courses.show', compact( 'yearUnion', 'classrooms', 'items', 'types', 'states'));
 
     }
 
