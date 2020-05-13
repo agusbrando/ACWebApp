@@ -19,7 +19,16 @@
                     <h3>Editar Item</h3>
                 </div>
             </form>
-            
+            <form  method="post" action="{{ route('courses.destroy', $yearUnion->course->id)}}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-outline-danger ml-2" type="submit">Delete</button>
+            </form>
+            <form  method="get" action="{{ route('courses.edit', array($yearUnion->course->id,$yearUnion->year_id) ) }}">
+                @csrf
+                @method('GET')
+                <button class="btn btn-outline-info" role="button">Editar Material</button>
+            </form>
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
@@ -84,12 +93,12 @@
                                 <option disabled selected>Selecciona un Aula</option>
                                 <!--Hace la funcion de un placeholder-->
                                 @foreach($types as $type)
-                                @if($type->id == $item->type_id)
-                                <option selected value="{{$type->id}}">{{$type->name}}</option>
-                                @else
-                                <option value="{{$type->id}}">{{$type->name}}</option>
+                                    @if($type->id == $item->type_id)
+                                        <option selected value="{{$type->id}}">{{$type->name}}</option>
+                                    @else
+                                        <option value="{{$type->id}}">{{$type->name}}</option>
 
-                                @endif
+                                    @endif
 
                                 @endforeach
 

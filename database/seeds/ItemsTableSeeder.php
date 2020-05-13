@@ -42,7 +42,21 @@ class ItemsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        for($i = 1; $i<=20; $i++){
 
+            DB::table('items')->insert([
+                'number' => $i,
+                'name' => 'Logitech '.$i,
+                'date_pucharse' => Carbon::create('2015','01','10'),
+                'classroom_id' => 2,
+                'state_id' => 1,
+                'type_id' => 5,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+    
+
+        }
        
     }
 }

@@ -5,7 +5,7 @@
 @endsection
 @section('main')
 
-<link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
@@ -30,7 +30,7 @@
                             <option value="" selected>Todas</option>
                             <!--Hace la funcion de un placeholder-->
                             @foreach($classrooms as $classroom)
-                            <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                <option value="{{$classroom->id}}">{{$classroom->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -41,7 +41,7 @@
                             <option value="" selected>Todos</option>
                             <!--Hace la funcion de un placeholder-->
                             @foreach($types as $type)
-                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                <option value="{{$type->id}}">{{$type->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -52,7 +52,7 @@
                             <option value="" selected>Todos</option>
                             <!--Hace la funcion de un placeholder-->
                             @foreach($states as $state)
-                            <option value="{{$state->id}}">{{$state->name}}</option>
+                                <option value="{{$state->id}}">{{$state->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -112,14 +112,22 @@
                                 @endforeach
                             </tbody>
                         </table>
-
+                        
                     </div>
 
                 </div>
             </div>
+            
         </div>
-        
+        <div class="card-footer col-12">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <input type="hidden" value={{$items}}>
+                </ul>
+            </nav>
+        </div>
     </div>
+    
 </main>
 
 @endsection
