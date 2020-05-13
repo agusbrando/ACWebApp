@@ -218,7 +218,7 @@
                   </div>
                 </div>
               </div>
-              <a href="{{ url('faltas/create', $user->id) }}" class="btn btn-outline-primary mb-3 mt-4">Añadir</a>
+              <a href="{{ url('faltas/create', $user->id) }}" class="btn btn-outline-success mb-3 mt-4">Añadir</a>
             </div>
           </div>
         </div>

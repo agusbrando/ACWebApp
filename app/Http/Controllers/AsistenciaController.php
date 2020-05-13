@@ -12,6 +12,7 @@ class AsistenciaController extends Controller
         return view('asistencia.index', compact('users'));
     }
 
+    //FILTROS
     public function filter(Request $request)
     {
         //Definimos que obtendrá objetos de la tabla items

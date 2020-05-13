@@ -37,7 +37,7 @@ class FaltasController extends Controller
     public function create($id)
     {
         $user = User::find($id);
-       return view('faltas.create', compact('user')); 
+        return view('faltas.create', compact('user'));
     }
 
     /**
@@ -52,11 +52,11 @@ class FaltasController extends Controller
             'date' => 'required',
             'type' => 'required',
             'description' => 'required'
-           
+
         ]);
         Misbehavior::create($request->all());
         return redirect()->route('faltas.index')
-                        ->with('success','Falta añadida!');
+            ->with('success', 'Falta añadida!');
         // $misbehaviors =Misbehavior::all()->
     }
 
@@ -70,7 +70,7 @@ class FaltasController extends Controller
     //ID del USUARIO
     public function show($id)
     {
-        $misbehaviors=Misbehavior::all();
+        $misbehaviors = Misbehavior::all();
         $user = User::find($id);
         $user_id = $id;
         $subjects = Subject::all();
@@ -93,12 +93,12 @@ class FaltasController extends Controller
             $count = 0;
 
             //Año actual
-            $year= 1; 
-            foreach($user->yearUnions->where('subject_id', $subject->id)->where('year_id', $year) as $yearunions_faltas){
-                foreach($yearunions_faltas->pivot->misbehavours as $falta){
+            $year = 1;
+            foreach ($user->yearUnions->where('subject_id', $subject->id)->where('year_id', $year) as $yearunions_faltas) {
+                foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
                     // echo ($yearunions_faltas->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
-                     //Hacer if para comprobar si es asistencia/comportamiento
-                    $count = $count +1;  
+                    //Hacer if para comprobar si es asistencia/comportamiento
+                    $count = $count + 1;
                 }
             }
 
@@ -143,6 +143,6 @@ class FaltasController extends Controller
         $misbehavior = Misbehavior::findOrFail($id);
         $misbehavior->delete();
 
-        return redirect('/faltas/'.$user_id)->with('success', 'Falta eliminada');
+        return redirect('/faltas/' . $user_id)->with('success', 'Falta eliminada');
     }
 }
