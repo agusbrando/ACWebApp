@@ -59,7 +59,7 @@ class CalendarController extends Controller
       $events = Event::all()->where('type_id', 2);
     }
 
-    return view('/Calendario/calendar', compact('types', 'sessions', 'dia', 'tipo', 'events'));
+    return view('/Calendario/time', compact('types', 'sessions', 'dia', 'tipo', 'events'));
   }
 
   public function index()

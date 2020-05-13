@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 1,
             'timetable_id'=>1
         ]);
+        
         DB::table('users')->insert([
             'first_name' => 'Alumno',
             'last_name' => 'Apellido',

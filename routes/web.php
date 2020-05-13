@@ -110,7 +110,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
 
-Route::post('/calendarTime', 'CalendarController@getTime');
+Route::get('/time', 'CalendarController@getTime');
 
 Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
 
