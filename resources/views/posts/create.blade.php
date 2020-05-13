@@ -6,12 +6,14 @@
         <div class="card-header row m-0 justify-content-between">
             <h3>Nuevo Post</h3>
             <form action="{{ route('posts.store')}}" method="POST">
+                @csrf
                 @method('POST')
                 <div class="col-12">
                     <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     <a class="btn btn-outline-warning float-right" href="{{ route('posts.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
+            </form>
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">
