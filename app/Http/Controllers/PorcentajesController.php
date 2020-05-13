@@ -135,7 +135,7 @@ class PorcentajesController extends Controller
         $porcentajes = $request->get('porcentajes');
         $comprobacionPorcentajes = $this->comprobacion($porcentajes);
 
-        if ($comprobacionPorcentajes == true) {
+        if ($comprobacionPorcentajes == 0) {
             foreach ($porcentajes as $eval_id => $types) {
                 foreach ($types as $type_id => $values) {
                     $evaluacion = Evaluation::find($eval_id);
@@ -157,8 +157,12 @@ class PorcentajesController extends Controller
             }
 
             return redirect('asignaturas/' . $request->get('subject'));
-        } else {
-            return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100%');
+        } else if ($comprobacionPorcentajes == 1) {
+            return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 1');
+        } else if ($comprobacionPorcentajes == 2) {
+            return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 2');
+        } else if ($comprobacionPorcentajes == 3) {
+            return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 3');
         }
     }
 
@@ -183,11 +187,16 @@ class PorcentajesController extends Controller
             }
         }
 
-        if ($sumaEval1 <= 100 && $sumaEval2 <= 100 && $sumaEval3 <= 100) {
-            $comprobacion = true;
+        if ($sumaEval1 > 100) {
+            $comprobacion = 1;
+        } else if ($sumaEval2 > 100) {
+            $comprobacion = 2;
+        } else if ($sumaEval3 > 100) {
+            $comprobacion = 3;
         } else {
-            $comprobacion = false;
+            $comprobacion = 0;
         }
+
 
         return $comprobacion;
     }
