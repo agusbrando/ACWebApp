@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Timetable;
+use App\Models\Evaluation;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -120,5 +121,65 @@ class SubjectTest extends TestCase
         $subject->delete();
         $timetable->delete();
         $course->delete();
+    }
+    public function testCourse()
+    {
+        $course = Course::create([
+            'level' => 1,
+            'name' => 'Primero',
+            'num_students' => 30
+        ]);
+
+        $subject = Subject::create([
+            'course_id' => $course->id,
+            'name' => 'Ejemplo5'
+        ]);
+
+        $course = Course::find($subject->course_id);
+
+        $this->assertEquals($subject->course, $course);
+
+        $subject->delete();
+        $course->delete();
+    }
+
+    /**@test */
+    public function testEvaluation()
+    {
+        $course = Course::create([
+            'level' => 1,
+            'name' => 'Primero',
+            'num_students' => 30
+        ]);
+
+        $subject = Subject::create([
+            'course_id' => $course->id,
+            'name' => 'Ejemplo6'
+        ]);
+
+         $evaluation = Evaluation::create([
+             'subject_id' => $subject->id,
+             'name' => '1Eval'
+         ]);
+
+         $evaluation2 = Evaluation::create([
+            'subject_id' => $subject->id,
+            'name' => '2Eval'
+        ]);
+
+        $evaluations = $subject->evaluations->pluck('id');
+        
+        $expected_evaluations_ids = collect([
+            ['id' => $evaluation->id],
+            ['id' => $evaluation2->id]
+        ])->pluck('id');
+
+        $this->assertEquals($evaluations, $expected_evaluations_ids);
+
+        $evaluation->delete();
+        $evaluation2->delete();
+        $subject->delete();
+        $course->delete();
+        
     }
 }

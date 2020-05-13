@@ -51,7 +51,7 @@ class MessageTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+            //falta timetable
         $user = User::create([
             'first_name' => 'Pruebas',
             'last_name' => 'Tests',

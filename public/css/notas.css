@@ -1,0 +1,32 @@
+.tablaPorcentajes{
+    margin: 2% 0 0;
+}
+
+.porcentajes{
+    width: 40%;
+}
+
+.alumnos{
+    margin-left: 10%;
+    width: 50%;
+}
+
+.tituloAlumnos{
+    text-align: center;
+}
+
+.cabezeraTabla{
+    color: #fff;
+    background-color: #4d5358;
+    border-color: #454d55;
+}
+
+.dropdown{
+    margin: 2% 0 0;
+}
+table.dataTable thead {
+    background-color: #4d5358;
+    border-color: #454d55;
+    color: #fff;
+
+}

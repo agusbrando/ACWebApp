@@ -9,6 +9,16 @@ use App\Models\Comment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Carbon\Carbon;
+use App\Models\Type;
+use App\Models\Classroom;
+use App\Models\Session;
+use App\Models\Event;
+use App\Models\Item;
+use App\Models\State;
+use App\Models\Timetable;
+
+
 
 class UserTest extends TestCase
 {

@@ -17,8 +17,14 @@
     height: 16px;
     vertical-align: text-bottom;
 }
+#navbarDropdown{
+    color: white;
+}
 
-
+body {
+    background-color: #E6E6E6;
+    margin-top: 30px;
+}
 /*
  * Sidebar
  */

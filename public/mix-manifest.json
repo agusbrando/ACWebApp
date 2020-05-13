@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
+    "/js/datatable.js": "/js/datatable.js?id=5aae612d96b62cdb2bd1"
+=======
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css"
+>>>>>>> master
 }
