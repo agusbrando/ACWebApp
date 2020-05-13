@@ -16,6 +16,7 @@ use App\Models\Year;
 use App\Models\Evaluation;
 use App\Models\Subject;
 use App\Models\YearUnion;
+use App\Models\YearUnionUser;
 
 class CourseController extends Controller
 {
@@ -72,15 +73,37 @@ class CourseController extends Controller
      */
     public function show($courseId, $yearId)
     {
-        $yearUnion = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->first(); 
-        $types = Type::all()->where('model', Item::class);
+
+        $yearUnions = YearUnion::select('id','evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation'); 
+        foreach($yearUnions as $yearUnion){
+            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->get()->load('items', 'user');
+            $registrados = array();
+            foreach($yearUnion->yearUnionUsers as $yearUnionUser){
+
+
+                //Aseguramos que no se repitan los usuarios
+                if( !in_array($yearUnionUser->user_id, $registrados) ){
+                    array_push($registrados, $yearUnionUser->user_id);
+                    $yearUnionUser->items = $yearUnionUser->items;
+                    $yearUnionUser->user = $yearUnionUser->user;
+                }else{
+                    $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
+                }
+                
+            }
+        }
+        
+
+        $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();  
-        $states = State::all();
-        $items = Item::all();
-        $users = User::all();
-        $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
-  
-        return view('courses.show', compact( 'yearUnion', 'classrooms', 'items', 'types', 'states', 'users', 'yearUnionUsers'));
+        
+        // $items = Item::all();
+        // $users = User::all();
+        // $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
+        
+        
+
+        return view('courses.show', compact( 'classrooms', 'types','yearUnions'));
 
     }
 
@@ -90,7 +113,7 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($courseId, $yearId)
     {
         //
     }
