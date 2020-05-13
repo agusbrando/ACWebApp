@@ -3,7 +3,6 @@
 @section('main')
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <link href="{{ asset('css/user.css') }}" rel="stylesheet" type="text/css" />
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
