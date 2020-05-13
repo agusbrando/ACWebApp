@@ -15,19 +15,20 @@ class TrackingsTableSeeder extends Seeder
             [
                 'signature'=>'',
                 'user_id' => '3',
-                'datetime_start' =>  now(),
-                'datetime_end' => now(),
+                'date_signature'=>  now(),
+                'time_start'=>'8:30',
+                'time_end'=>'14:30',
                 'num_hours'=>'4',
                 'created_at' => now(),
                 'updated_at' => now(),
-                
                 
             ],
             [
                 'signature'=>'',
                 'user_id' => '4',
-                'datetime_start' =>  now(),
-                'datetime_end' =>  now(),
+                'date_signature'=>  now(),
+                'time_start'=>'8:30',
+                'time_end'=>'14:30',
                 'num_hours'=>'3',
                 'created_at' => now(),
                 'updated_at' => now(),
