@@ -83,10 +83,7 @@ class AsignaturaController extends Controller
                                 if ($percentage->id == $task_type->id) {
                                     $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
                                     $user->tareas = $tareas;
-                                    // if ($tareas[$task_type->name] > round(($percentage->pivot->nota_min * $percentage->pivot->percentage) / 100, 2)) {
-                                    //     $user->nota_final = "No llega a la nota media";
-                                    //     break;
-                                    // }
+                                    
                                 }
                             }
                             if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {

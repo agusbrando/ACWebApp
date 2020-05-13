@@ -83,7 +83,7 @@ class EvaluacionesController extends Controller
                     if ($evaluation->notaParciales != null) {
                         foreach ($evaluation->notaParciales as $user_id => $examenes) {
                             foreach ($examenes as $nota) {
-                                if ($nota < $task_type->pivot->nota_min && $nota != null) {
+                                if ($nota < $task_type->pivot->nota_min_tarea && $nota != null) {
                                     $mediaParciales[$user_id] = "No llega a la nota minima tarea";
                                     $evaluation->mediaParciales = $mediaParciales;
                                     break;
@@ -119,7 +119,7 @@ class EvaluacionesController extends Controller
                     if ($evaluation->notaTrabajos != null) {
                         foreach ($evaluation->notaTrabajos as $user_id => $trabajosNotas) {
                             foreach ($trabajosNotas as $nota) {
-                                if ($nota < $task_type->pivot->nota_min && $nota != null) {
+                                if ($nota < $task_type->pivot->nota_min_tarea && $nota != null) {
                                     $mediaTrabajos[$user_id] = "No llega a la nota minima tarea";
                                     $evaluation->mediaTrabajos = $mediaTrabajos;
                                     break;
@@ -154,7 +154,7 @@ class EvaluacionesController extends Controller
                     if ($evaluation->notaActitud != null) {
                         foreach ($evaluation->notaActitud as $user_id => $actitudNotas) {
                             foreach ($actitudNotas as $nota) {
-                                if ($nota < $task_type->pivot->nota_min && $nota != null) {
+                                if ($nota < $task_type->pivot->nota_min_tarea && $nota != null) {
                                     $mediaActitud[$user_id] = "No llega a la nota minima tarea";
                                     $evaluation->mediaActitud = $mediaActitud;
                                     break;
@@ -189,7 +189,7 @@ class EvaluacionesController extends Controller
                     if ($evaluation->notaRecuperacion != null) {
                         foreach ($evaluation->notaRecuperacion as $user_id => $recuperacionNotas) {
                             foreach ($recuperacionNotas as $nota) {
-                                if ($nota < $task_type->pivot->nota_min && $nota != null) {
+                                if ($nota < $task_type->pivot->nota_min_tarea && $nota != null) {
                                     $mediaRecuperacion[$user_id] = "No llega a la nota minima tarea";
                                     $evaluation->mediaRecuperacion = $mediaRecuperacion;
                                     break;

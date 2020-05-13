@@ -39,8 +39,9 @@
                                     <tr>
                                         <th>{{$eval->name}}</th>
                                         <th>Porcentaje%</th>
-                                        <th>Nota Minima</th>
-                                        <th>Nota Media</th>
+                                        <th>Nota Minima Tarea</th>
+                                        <th>Nota Media Tarea</th>
+                                        <th>Nota Media Minima</th>
                                     </tr>
                                 </thead>
                                 @foreach($eval->percentages as $porcentaje)
@@ -52,8 +53,9 @@
                                         @else
                                         <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][porcentaje]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}"></td>
                                         @endif
-                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][nota_min]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->nota_min}}"></td>
-                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][nota_media]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->nota_media}}"></td>
+                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][nota_min_tarea]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->nota_min_tarea}}"></td>
+                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][nota_media_tarea]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->nota_media_tarea}}"></td>
+                                        <td><input name="porcentajes[{{$eval->id}}][{{$porcentaje->id}}][nota_media_minima]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->nota_media_minima}}"></td>
                                     </tr>
                                 </tbody>
                                 @endforeach
@@ -68,7 +70,6 @@
                         <table class="table col-12">
                             <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                 <tr>
-                                    <th>Nº</th>
                                     <th>Apellidos, Nombre</th>
                                     @foreach($eval->tareas as $tarea)
                                     <th>{{$tarea->name}}</th>
@@ -80,7 +81,6 @@
                             <tbody>
                                 @foreach($eval->users as $user)
                                 <tr>
-                                    <td>{{$user->id}}</td>
                                     <td>{{$user->last_name}} {{$user->first_name}}</td>
                                     @foreach($user->tareas as $tarea)
                                     <td>{{$tarea}}</td>

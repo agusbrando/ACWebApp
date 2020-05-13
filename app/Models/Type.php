@@ -18,7 +18,7 @@ class Type extends Model
     }
 
     public function evaluations(){
-        return $this->belongsToMany(Evaluation::class)->withPivot('percentage','nota_min','nota_media')->withTimestamps();
+        return $this->belongsToMany(Evaluation::class)->withPivot('percentage','nota_min_tarea','nota_media_tarea', 'nota_media_minima')->withTimestamps();
     }
 
     public function misbehaviors()

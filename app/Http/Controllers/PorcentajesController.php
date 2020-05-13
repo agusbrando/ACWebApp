@@ -54,8 +54,9 @@ class PorcentajesController extends Controller
             'porcentaje' => 'required',
             'evaluaciones' => 'required',
             'type' => 'required',
-            'nota_min' => 'required',
-            'nota_media' => 'required',
+            'nota_min_tarea' => 'required',
+            'nota_media_tarea' => 'required',
+            'nota_media_minima' => 'required',
             'subject' => 'required'
         ]);
 
@@ -65,8 +66,9 @@ class PorcentajesController extends Controller
             $evaluacion = Evaluation::find($eval);
             $evaluacion->types()->attach(intval($request->get('type')), [
                 'percentage' => $request->get('porcentaje'),
-                'nota_min' => $request->get('nota_min'),
-                'nota_media' => $request->get('nota_media'),
+                'nota_min_tarea' => $request->get('nota_min_tarea'),
+                'nota_media_tarea' => $request->get('nota_media_tarea'),
+                'nota_media_minima' => $request->get('nota_media_minima'),
             ]);
         }
 
@@ -139,14 +141,16 @@ class PorcentajesController extends Controller
                     $evaluacion = Evaluation::find($eval_id);
                     if ($type_id == 4) {
                         $evaluacion->types()->updateExistingPivot(intval($type_id), [
-                            'nota_min' => $values['nota_min'],
-                            'nota_media' => $values['nota_media']
+                            'nota_min_tarea' => $values['nota_min_tarea'],
+                            'nota_media_tarea' => $values['nota_media_tarea'],
+                            'nota_media_minima' => $values['nota_media_minima']
                         ]);
                     } else {
                         $evaluacion->types()->updateExistingPivot(intval($type_id), [
                             'percentage' => $values['porcentaje'],
-                            'nota_min' => $values['nota_min'],
-                            'nota_media' => $values['nota_media']
+                            'nota_min_tarea' => $values['nota_min_tarea'],
+                            'nota_media_tarea' => $values['nota_media_tarea'],
+                            'nota_media_minima' => $values['nota_media_minima']
                         ]);
                     }
                 }

@@ -17,8 +17,9 @@ class CreateEvaluationTypeTable extends Migration
             $table->integer('evaluation_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->integer('percentage')->unsigned();
-            $table->integer('nota_min')->unsigned();
-            $table->integer('nota_media')->unsigned();
+            $table->integer('nota_min_tarea')->unsigned();
+            $table->integer('nota_media_tarea')->unsigned();
+            $table->integer('nota_media_minima')->unsigned();
             $table->timestamps();
 
             $table->primary(['evaluation_id', 'type_id']);
