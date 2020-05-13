@@ -12,7 +12,7 @@ class Timetable extends Model
 
     public function sessionTimetables()
     {
-        return $this->belongsToMany(Session::class, 'session_timetables')->using(SessionTimetable::class)->withPivot('')->withTimestamps();
+        return $this->belongsToMany(Session::class,'session_timetables')->withTimestamps();
     }
     public function users()
     {

@@ -5,13 +5,13 @@
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-<link href="{{ asset('css/timetable.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/timetable.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-        <a href="/horarios" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
+            <a href="/horarios" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Horario {{$timetable->name}}</h3>
             <div class="row">
-                
+
                 <td>
 
                     <form action="{{ route('horarios.edit', $timetable->id)}}" method="get">
@@ -42,17 +42,16 @@
                     <th>VIERNES</th>
                 </tr>
                 <tr>
-
+               
+                   
                     <td class="td">8:30-9:25</td>
-                    @foreach(sessions as session)
-                        @if(session->time_start=='8:30')
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                        @elseif
-                    @endforeach
+                
+
                 </tr>
                 <tr>
 

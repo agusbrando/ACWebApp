@@ -22,7 +22,7 @@ class TrackingController extends Controller
     $user = Auth::user();
     $horas = 0;
     $horasbien = array();
-    $trackings = $user->trackings()->paginate(3);
+    $trackings = $user->trackings()->paginate(1);
     //$trackings = DB::table('trackings')->paginate(5);
     //$trackings = Tracking::all();
     $suma = 0;

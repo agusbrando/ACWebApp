@@ -8,9 +8,9 @@
     <div class="container-fluid container">
         <div class="card shadow">
             
-            <div class="card-header row m-0 justify-content-between">
-            <a href="/horarios" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
-                <h3>Horario {{$timetable->name}}</h3>
+            <div class="card-header row m-0 justify-content-between float-right">
+            <a href="/horarios" class="my-auto mx-2 h5"><i class="fas fa-arrow-left "></i></a>
+                <h3 class="float-left">Horario {{$timetable->name}}</h3>
                 
             </div>
             <div class="card-body row no-gutters">

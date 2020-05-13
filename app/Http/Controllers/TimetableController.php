@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SessionTimetable;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\Timetable;
 class TimetableController extends Controller
@@ -59,9 +61,16 @@ class TimetableController extends Controller
     public function horario($id)
     {
         $timetable = Timetable::find($id);
-        $subjects=$timetable->subjects;
-        $sessions=$timetable->sessions;
-        return view('Timetable.horario', compact('timetable','subjects','sessions')); 
+        $timetable->sessions=$timetable->sessionTimetables;
+        
+        $session_timetables=SessionTimetable::all();
+        foreach($session_timetables as $session_timetable){
+            if($session_timetable->timetable_id == $id){
+                $subject = Subject::find($session_timetable->subject_id);
+                $timetable->sessions->subjects=$subject;
+            }
+        }
+        return view('Timetable.horario', compact('timetable')); 
     }
     /**
      * Show the form for editing the specified resource.
