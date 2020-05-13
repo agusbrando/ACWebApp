@@ -282,7 +282,7 @@
                                             <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
         
 
-                                            <a type="button" class="btn" data-toggle="modal" data-target="#confirm-delete/{{$evaluable->pivot->id}}"><i class="fas fa-trash-alt"></i></a>
+                                            <a type="button" class="btn" data-toggle="modal" data-target="#confirm-delete/{{$evaluable->pivot->id}}"><i class="fas fa-trash-alt text-warning"></i></a>
                                                     
                                                      <!-- Modal Confirmacion Borrar-->
                                                     <div class="modal fade" id="confirm-delete/{{$evaluable->pivot->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -291,7 +291,7 @@
                                                                 <div class="modal-header">
                                                                     Confirmación de borrar
                                                                 </div>
-                                                                <div class="modal-body">
+                                                                <div class="modal-body wrap">
                                                                     ¿Estas seguro de que deseas borrar este aspecto evaluado de la programacion?
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -405,49 +405,48 @@
                             </tbody>
                         </table>
                         @if($notas[$i] == '')
-                        <form action="">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Notas</span>
+                            <form method="post" action="{{route('programs.storeEvaluacion', $program->id)}}">
+                            @csrf
+                                <input type="hidden" name="eval" value="{{$i}}">
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Notas</span>
+                                    </div>
+                                    <textarea class="form-control" name="notes" rows='3'></textarea>
                                 </div>
-                                <textarea class="form-control" name="notes{{$i}}" rows='3'></textarea>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
+                                    </div>
+                                    <input class="form-control" type="date" name="date_check">
                                 </div>
-                                <input class="form-control" type="date" name="check_date{{$i}}">
-                            </div>
-                            <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Responsable</span>
-                                    <select class="form-control custom-select" id="exampleFormControlSelect1" name="responsable_{{$i}}">
-                                        @foreach($responsables as $responsable)
-                                        <option value="{{$responsable->id}}">{{$responsable->first_name}} {{$responsable->last_name}}</option>
-                                        @endforeach
-                                    </select>
-                            </div>
-                        </form>
+                                <div class="row justify-content-center">
+                                    <input class="btn btn-outline-success" type='submit' value="Guardar">
+                                </div>
+                            </form>
                         @else
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Notas</span>
                             </div>
-                            <textarea class="form-control" name="notes{{$i}}" rows='3' readonly>{{$notas[$i]}}</textarea>
+                            <textarea class="form-control" name="notes" rows='3' readonly>{{$notas[$i]}}</textarea>
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
+                        <div class="row justify-content-center">
+                            <div class="input-group mb-3 col-12">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
+                                </div>
+                                <input class="form-control" type="date" name="date_check" value="{{$fechas[$i]}}" readonly>
+                                <div class="espacio"></div>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Responsable</span>
+                                </div>
+                                <div class="form-control profesor  text-truncate">{{$responsable[$i]->first_name}} {{$responsable[$i]->last_name}}</div>
                             </div>
-                            <input class="form-control" type="date" name="check_date{{$i}}" value="{{$fechas[$i]}}" readonly>
                         </div>
-                        <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Responsable</span>
-                                <select class="form-control custom-select" id="exampleFormControlSelect1" name="responsable_{{$i}}" disabled>
-                                    @foreach($responsables as $respons)
-                                    <option value="{{$respons->id}}" {{$responsable[$i]->id == $respons->id ? 'selected' : ''}}>{{$respons->first_name}} {{$respons->last_name}}</option>
-                                    @endforeach
-                                </select>
-                        </div>
+                        
+                       
                         @endif
 
                     </div>

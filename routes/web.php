@@ -23,6 +23,7 @@ use App\Models\Program;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\ItemYear;
+use App\Models\YearUnion;
 
 use App\Models\Unit;
 use App\Models\Evaluable;
@@ -40,9 +41,47 @@ Route::get('/', function () {
 
 Route::get('/prueba', function (Request $request) {
 
-    $item = Item::find(1);
-    $subject = Subject::find(1);
-    $user = User::find(9);
+    
+    $yearUnions =YearUnion::where('course_id',3)->where('year_id',1);
+    /*
+    $elemento =['usuario'=>''];
+    $elemento =["usuario"=>"", 'items'=>["evaluation"=> "", "objetos"=> ""]];
+
+    foreach($yearUnions as $yearUnion){
+        $elemento["items"]["evaluation"] =  $yearUnion->evaluation->name;
+        foreach($yearUnion->users as $user){
+            $elemento["usuario"]=($user->first_name.' '.$user->last_name);
+            $elemento["items"]["objetos"] =[];
+            foreach($user->pivot->items as $item){
+                echo ($item->name).' - '.($yearUnion->evaluation->name).'<br>';
+                array_push(($item->name), $elemento["items"]["objetos"] =[]);
+            }
+            array_push()
+        }
+    }
+    */
+    $items = Item::all();
+    $course_id =1;
+    $year_id=1;
+    $lista=[];
+    foreach($items as $item){
+        $elemento = [];
+        foreach($item->yearUnionUsers as $yearUnionUser){
+            if($yearUnionUser->yearUnion->course_id == $course_id && $yearUnionUser->yearUnion->year_id == $year_id){
+                $elemento = ["responsable"=>($yearUnionUser->user->first_name.' '. $yearUnionUser->user->last_name), 
+                            "evaluacion"=>$yearUnionUser->yearUnion->evaluation->name, 
+                            "item"=> $item->name,
+                ];
+                array_push($lista,$elemento);
+
+            }
+             
+        }
+    }
+    
+    foreach($lista as $objeto){
+        echo $objeto['item'].'  ----  '.$objeto['responsable'].' - '.$objeto['evaluacion'].'<br>';
+    }
 
     /*
     foreach($user->yearUnions as $yearUnion){
@@ -54,7 +93,7 @@ Route::get('/prueba', function (Request $request) {
         }
 
     }*/
-    foreach($user->yearUnions->where('subject_id',1)->where('evaluation_id',1) as $yearUnion){
+   /* foreach($user->yearUnions->where('subject_id',1)->where('evaluation_id',1) as $yearUnion){
         
        
             foreach($yearUnion->pivot->tasks->where('type_id',8) as $tarea){
@@ -62,7 +101,7 @@ Route::get('/prueba', function (Request $request) {
             }
        
 
-    }
+    }*/
 
 })->name('prueba');
 
@@ -76,6 +115,7 @@ Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('uni
 Route::resource('notesPercentages', 'NotesPercentagesController');
 Route::resource('programs', 'ProgramController');
 Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
+Route::post('programs/{id}/evaluar','ProgramController@storeEvaluacion')->name('programs.storeEvaluacion');
 Route::post('programs/{id}/aspecto','ProgramController@storeAspecto')->name('programs.storeAspecto');
 Route::patch('programs/{program_id}/unit/{id}','ProgramController@updateUnit')->name('programs.updateUnit');
 Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspecto')->name('programs.updateAspecto');

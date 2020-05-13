@@ -10,7 +10,7 @@ class Course extends Model
     protected $guarded = [];
 
     //todas las yearUnion de ese curso, una por evaluacion y asignatura
-    public function yearUnion(){
+    public function yearUnions(){
         return $this->hasMany(YearUnion::class);
     }
 }
