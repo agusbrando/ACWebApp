@@ -230,7 +230,25 @@ class ProgramController extends Controller
                 array_push($listaEvaluables,$evaluable);
             }
         }
-        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables'));
+        for($i=1;$i<=3;$i++){
+            $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
+            if($yearUnion != null){
+                $notas[$i]=$yearUnion->notes;
+                $fechas[$i]=$yearUnion->date_check;
+                $responsable[$i]=$yearUnion->responsable_id;
+                $responsable[$i]=User::find($responsable[$i]);
+                if($notas[$i]==null){
+                    $notas[$i]='';
+                }
+            }else{
+                $notas[$i]='';
+            }
+            
+            
+        }
+        if($notas)
+        $responsables = User::all();
+        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables','responsables','responsable','fechas','notas'));
     }
     public function editarAspecto($program_id, $id){
         $program = Program::findorfail($program_id);
