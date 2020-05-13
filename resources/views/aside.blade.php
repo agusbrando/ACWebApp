@@ -80,6 +80,9 @@
         <a class="nav-link" href="/sessions">
             <span data-feather="file-text"></span>
             Sessions 
+        <a class="nav-link" href="/courses">
+            <span data-feather="file-text"></span>
+            Cursos
         </a>
         </li>
         <li class="nav-item">

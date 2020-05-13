@@ -9,6 +9,9 @@ use App\Models\Unit;
 use App\Models\User;
 use App\Models\Evaluable;
 use App\Models\Evaluated;
+use App\Models\Course;
+use App\Models\Year;
+use App\Models\YearUnion;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,9 +46,12 @@ class ProgramController extends Controller
     {
         $editar=false;
         $programs = Program::all();
+        $usuario = Auth::user();
         $profesores = DB::table('users')->where('role_id', 2)->get();
         $subjects = Subject::all();
-        return view('programs.create',compact('programs','profesores','subjects','editar'));
+        $courses = Course::all();
+        $years = Year::all();
+        return view('programs.create',compact('programs','profesores','usuario','subjects','years','courses','editar'));
     }
 
     /**
@@ -56,6 +62,7 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'professor_id'=>'required',
             'course_id'=>'required',
@@ -63,35 +70,66 @@ class ProgramController extends Controller
             'year_id'=>'required'
         ]);
 
-        $profesor = User::find($request->get('professor_id'));
-        $curso = Course::find($request->get('course_id'));
-        $asignatura = Subject::find($request->get('subject_id'));
-        $anyo = Year::find($request->get('subject_id'));
-
-        foreach(YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',$anyo->id) as $evaluation)
-        $program = new Program([
-            'name'=> $anyo->name.' - '.$curso->abbreviation.' - '.$asignatura->name
-        ]);
-        $program->professor()->associate($profesor);
+        $profesor = User::findorfail($request->get('professor_id'));
+        $curso = Course::findorfail($request->get('course_id'));
+        $asignatura = Subject::findorfail($request->get('subject_id'));
+        $anyo = Year::findorfail($request->get('year_id'));
         
-        $program->save();
-        return redirect('/programs');
+        $evaluations = YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',$anyo->id)->get();
+
+
+        if($evaluations!=null){
+            if($evaluations->first()->program_id==null){
+
+                $program = new Program([
+                    'name'=> $anyo->name.' - '.$curso->abbreviation.' - '.$asignatura->name
+                ]);
+                $program->professor()->associate($profesor);
+                $program->save();
+    
+                $program->yearUnions()->saveMany($evaluations);
+                      
+                return redirect('/programs');
+    
+            }else{
+                echo 'error, ya existe';
+            }
+            
+        }else{
+
+
+        }
+        
+        
+        
+        
+
     }
     public function storeUnit(Request $request, $id){
         $program = Program::findorfail($id);
         $request->validate([
             'name'=>'required',
-            'expected_date_start'=>'required',
-            'expected_date_end'=>'required',
             'expected_eval'=>'required',
             'expected_date'=>'required'
         ]);
 
-      //  $expected_date_start=
+        $fechas = explode(' - ',$request->get('expected_date'),2);
+        $fechaInicio = str_replace('/', '-', $fechas[0]);
+        $fechaFin  = str_replace('/', '-', $fechas[1]);
+
+        $fechaInicio = date("Y-m-d",strtotime($fechaInicio));
+        $fechaFin = date("Y-m-d",strtotime($fechaFin));
+        /*
+         'expected_date_start' => $request->get('expected_date_start'),
+            'expected_date_end' => $request->get('expected_date_end'),
+        */
+      
+        //  $expected_date_start=
+
         $unit = new Unit([
             'name' => $request->get('name'),
-            'expected_date_start' => $request->get('expected_date_start'),
-            'expected_date_end' => $request->get('expected_date_end'),
+            'expected_date_start' =>  $fechaInicio,
+            'expected_date_end' =>  $fechaFin,
             'expected_eval'=>$request->get('expected_eval')
         ]);
         
@@ -120,7 +158,7 @@ class ProgramController extends Controller
         $unit->improvements = $request->get('improvements');
         $unit->save();
         
-        $program_id = $unit->program->id;
+       
 
         return redirect('/programs/'.$program_id);
     }
@@ -163,7 +201,7 @@ class ProgramController extends Controller
         $evaluable->save();*/
         $aspecto->description = $description;
         $aspecto->save();
-        
+        $mostrarAspecto = true;
         return redirect('/programs/'.$program_id);
     }
     /**
@@ -192,7 +230,25 @@ class ProgramController extends Controller
                 array_push($listaEvaluables,$evaluable);
             }
         }
-        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables'));
+        for($i=1;$i<=3;$i++){
+            $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
+            if($yearUnion != null){
+                $notas[$i]=$yearUnion->notes;
+                $fechas[$i]=$yearUnion->date_check;
+                $responsable[$i]=$yearUnion->responsable_id;
+                $responsable[$i]=User::find($responsable[$i]);
+                if($notas[$i]==null){
+                    $notas[$i]='';
+                }
+            }else{
+                $notas[$i]='';
+            }
+            
+            
+        }
+        if($notas)
+        $responsables = User::all();
+        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables','responsables','responsable','fechas','notas'));
     }
     public function editarAspecto($program_id, $id){
         $program = Program::findorfail($program_id);

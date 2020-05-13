@@ -14,7 +14,7 @@ class Evaluation extends Model
 
 
      //todas las yearUnion de esa evaluacion, una por curso y asignatura
-     public function yearUnion(){
+     public function yearUnions(){
         return $this->hasMany(YearUnion::class);
     }
 }

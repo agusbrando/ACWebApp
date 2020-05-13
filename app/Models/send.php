@@ -20,5 +20,5 @@ class Send extends Model
         return $this->belongsTo('App\Models\Message');
     }
 
-
+    //TODO delete
 }

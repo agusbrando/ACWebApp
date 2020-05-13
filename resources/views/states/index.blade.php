@@ -40,4 +40,6 @@
         </div>
     </div>
 </main>
-@endsection
+@section('login')
+@include('auth.login')
+@endsection 

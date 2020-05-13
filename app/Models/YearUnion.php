@@ -11,7 +11,7 @@ class YearUnion extends Model
     protected $primaryKey = 'id';
 
     public $timestamps = true;
-    
+
     protected $guarded =[];
 
     public function year(){
@@ -32,10 +32,11 @@ class YearUnion extends Model
     public function responsable(){
         return $this->belongsTo(User::class);
     }
-    //** lista de todos los year unions user que tengan este year union */
-    public function yearUnionUsers(){
-        return $this->hasMany(YearUnionUser::class,'year_union_id');
-    }
+    //TODO Revisar si se usa
+//     //** lista de todos los year unions user que tengan este year union */
+//    public function yearUnionUsers(){
+//         return $this->hasMany(YearUnionUser::class,'year_union_id');
+//     }
 
     //** lista de usuarios con ese year union (compañeros de clase) */
     public function users(){
@@ -47,6 +48,10 @@ class YearUnion extends Model
         return $this->belongsToMany(Type::class, 'percentages', 'year_union_id', 'type_id')->using(Percentage::class)->withPivot('percentage','min_grade','average_grade')->withTimestamps();
     }
 
-
+    //posible union con year union y sesion timetable
+    public function timetables()
+    {
+        return $this->hasMany('App\Models\SessionTimetable');
+    }
 
 }

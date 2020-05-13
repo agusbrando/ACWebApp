@@ -12,6 +12,8 @@ class ItemYear extends Pivot
     protected $primaryKey = 'id';
 
     public $timestamps = true;
-    
+
     protected $guarded =[];
+
+    //TODO deleted?
 }

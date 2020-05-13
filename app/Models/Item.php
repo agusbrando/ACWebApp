@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Item extends Model
 {
+    use SoftDeletes;
     protected $table = 'items';
 
     protected $primaryKey = 'id';
@@ -21,6 +24,9 @@ class Item extends Model
         return $this->belongsToMany('App\Models\User', 'items-users', 'item_id', 'user_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
         
     }*/
+
+    protected $dates = ['deleted_at'];
+
     public function classroom()
     {
         return $this->belongsTo('App\Models\Classroom');
