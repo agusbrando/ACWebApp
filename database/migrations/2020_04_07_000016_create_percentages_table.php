@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEvaluationTypeTable extends Migration
+class CreatePercentagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,9 +17,9 @@ class CreateEvaluationTypeTable extends Migration
             $table->integer('year_union_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->integer('percentage')->unsigned();
-            $table->integer('min_grade')->unsigned();
-            $table->integer('average_grade')->unsigned();
-            $table->integer('min_average_grade')->unsigned();
+            $table->integer('min_grade_task')->unsigned();
+            $table->integer('average_grade_task')->unsigned();
+            $table->integer('min_average_grade_task')->unsigned();
             $table->timestamps();
 
             $table->primary(['year_union_id', 'type_id']);

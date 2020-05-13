@@ -11,125 +11,125 @@ class PercentagesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 1,
+        DB::table('percentages')->insert([
+            'year_union_id' => 1,
             'type_id' => 1,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 1,
+        DB::table('percentages')->insert([
+            'year_union_id' => 1,
             'type_id' => 2,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 1,
+        DB::table('percentages')->insert([
+            'year_union_id' => 1,
             'type_id' => 3,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 1,
+        DB::table('percentages')->insert([
+            'year_union_id' => 1,
             'type_id' => 4,
             'percentage' => 100,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 2,
+        DB::table('percentages')->insert([
+            'year_union_id' => 2,
             'type_id' => 1,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 2,
+        DB::table('percentages')->insert([
+            'year_union_id' => 2,
             'type_id' => 2,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 2,
+        DB::table('percentages')->insert([
+            'year_union_id' => 2,
             'type_id' => 3,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 2,
+        DB::table('percentages')->insert([
+            'year_union_id' => 2,
             'type_id' => 4,
             'percentage' => 100,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 3,
+        DB::table('percentages')->insert([
+            'year_union_id' => 3,
             'type_id' => 1,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 3,
+        DB::table('percentages')->insert([
+            'year_union_id' => 3,
             'type_id' => 2,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 3,
+        DB::table('percentages')->insert([
+            'year_union_id' => 3,
             'type_id' => 3,
             'percentage' => 30,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('evaluation_type')->insert([
-            'evaluation_id' => 3,
+        DB::table('percentages')->insert([
+            'year_union_id' => 3,
             'type_id' => 4,
             'percentage' => 100,
-            'nota_min_tarea' => 4,
-            'nota_media_tarea' => 5,
-            'nota_media_minima' => 5,
+            'min_grade_task' => 4,
+            'average_grade_task' => 5,
+            'min_average_grade_task' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

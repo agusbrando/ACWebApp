@@ -58,18 +58,18 @@ class AsignaturaController extends Controller
     {
         $subject = Subject::find($id);
         $taskTypes = Type::all()->where('model', Task::class);
-        $evaluaciones = $subject->evaluations;
+        $yearUnions = $subject->yearUnions()->evaluation;
 
-        foreach ($evaluaciones as $eval) {
-            $eval->percentages = $eval->types;
-            $eval->users = $eval->users;
-            $eval->tareas = $taskTypes;
-            foreach ($eval->users as $user) {
+        foreach ($yearUnions as $yearUnion) {
+            $yearUnion->percentages = $yearUnion->types;
+            $yearUnion->users = $yearUnion->users;
+            $yearUnion->tareas = $taskTypes;
+            foreach ($yearUnion->users as $user) {
                 if (count($taskTypes) > 0) {
                     $sumaFinal = 0;
                     $recuperado = 0;
                     foreach ($taskTypes as $task_type) {
-                        $tasks =  $user->tasks()->where('evaluation_id', $eval->id)->where('type_id', $task_type->id)->get();
+                        $tasks =  $user->tasks()->where('evaluation_id', $yearUnion->id)->where('type_id', $task_type->id)->get();
                         $suma = 0;
                         $tareas[$task_type->name] = 0;
                         $user->tareas = $tareas;
@@ -80,7 +80,7 @@ class AsignaturaController extends Controller
                                 $suma += $task->pivot->value;
                             }
                             $suma = $suma / count($tasks);
-                            foreach ($eval->percentages as $percentage) {
+                            foreach ($yearUnion->percentages as $percentage) {
                                 if ($percentage->id == $task_type->id) {
                                     $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
                                     $user->tareas = $tareas;
