@@ -3,7 +3,7 @@
 @section('main')
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="card shadow">
+    <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <h3>Detalles Sesiones</h3>
             <form action="{{ route('sessions.update',$session->id)}}" method="POST">
@@ -22,32 +22,51 @@
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
-
                     <fieldset>
                         <div class="form-group">
-                            <label for="classromm_id">Classroom_id</label>
-                            <input value="{{$session->classromm_id}}" name="classromm_id" id="classromm_id" type="text" class="@error('classromm_id') is-invalid @enderror form-control">
+                            <label for="formControlSelect1">Aula</label>
+                            <select class="form-control @error('classroom') is-invalid @enderror" id="classroom" name="classroom">
+                                @foreach($classrooms as $classroom)
+                                    @if($classroom->id == $session->classroom_id)
+                                        <option selected value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                    @else
+                                        <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="type_id">Type_id</label>
-                            <input value="{{$session->type_id}}" name="type_id" id="type_id" type="text" class="@error('type_id') is-invalid @enderror form-control">
+                            <label for="type">Tipo</label>
+                            <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                @foreach($types as $type)
+                                    @if($type->id == $session->type_id)
+                                        <option selected value="{{$type->id}}">{{$type->name}}</option>
+                                    @else
+                                        <option value="{{$type->id}}">{{$type->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="day">Dia</label>
-                            <input value="{{$session->day}}" name="day" id="day" type="text" class="@error('day') is-invalid @enderror form-control">
-                        </div>     
+                            <label for="day">Dia de la semana</label>
+                            <select name="day" id="day" class="form-control @error('day') is-invalid @enderror">                                
+                                @foreach($days as $key=>$day)
+                                    @if($day == $days[$session->day])
+                                        <option selected value="{{$days[$session->day]}}">{{$days[$session->day]}}</option>
+                                    @else
+                                        <option value="{{$day}}">{{$day}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
-                            <label for="time_start">Hora de Inicio</label>
-                            <input value="{{$session->time_start}}" name="time_start" id="time_start" type="text" class="@error('time_start') is-invalid @enderror form-control">
-                            
-                        </div>  
+                            <label for="time_start">Hora de Fin</label>
+                            <input value="{{$session->time_start->format('H:i') }}" class="form-control @error('time_start') is-invalid @enderror form-control" type="time" id="time_start" name="time_start">
+                        </div>
                         <div class="form-group">
                             <label for="time_end">Hora de Fin</label>
-                            <input value="{{$session->time_end}}" name="time_end" id="time_end" type="text" class="@error('time_end') is-invalid @enderror form-control">
-                            
-                            
-
-                        </div>                     
+                            <input value="{{$session->time_end->format('H:i') }}" class="form-control @error('time_end') is-invalid @enderror form-control" type="time" id="time_end" name="time_end">
+                        </div>
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -61,23 +80,3 @@
 </main>
 @endsection
 
-
-<!-- Rutas -->
-
-<!-- Route::resource('users','UserController');
-Route::get('users/edit/{id}',['as' => 'users.showedit', 'uses' => 'UserController@show']); -->
-
-<!-- Controller -->
-
-<!-- public function show($user_id)
-    {
-        $user = User::find($user_id);
-        $edit = false;
-        if(URL::current() == url("/users/edit/".$user_id)){
-            $edit = true;
-        }
-        return view('users.show', compact('user','edit'));
-    } -->
-<!-- Import de URL -->
-<!-- use Illuminate\Support\Facades\URL; -->
-<!--  -->

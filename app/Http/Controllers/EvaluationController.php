@@ -16,7 +16,7 @@ class EvaluationController extends Controller
      */
     public function index()
     {
-        $evaluations = Evaluation::all();
+        $evaluations = Evaluation::paginate(10);
         return view('evaluations.index', compact('evaluations'));
     }
 
