@@ -14,9 +14,13 @@
           <a href="/items" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
           <h3>Material del Aula</h3>
       </div>
-      <div >
-      
-        <form method="get" action="{{ route('items.edit', $item->id) }}">
+      <div class="d-flex flex-row-reverse">
+        <form  method="post" action="{{ route('items.destroy', $item->id)}}">
+          @csrf
+          @method('DELETE')
+          <button class="btn btn-outline-danger ml-2" type="submit">Delete</button>
+        </form>
+        <form  method="get" action="{{ route('items.edit', $item->id) }}">
           @csrf
           @method('GET')
           <button class="btn btn-outline-info" role="button">Editar Material</button>

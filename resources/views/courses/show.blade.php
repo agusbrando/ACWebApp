@@ -13,7 +13,19 @@
                 <a href="/courses" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3>Curso {{$yearUnion->course->name}}</h3>
             </div>
-            
+            <div class="d-flex flex-row-reverse">
+                <form  method="post" action="{{ route('courses.destroy', $yearUnion->course->id)}}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-outline-danger ml-2" type="submit">Delete</button>
+                </form>
+                <form  method="get" action="{{ route('courses.edit', $yearUnion->course->id) }}">
+                @csrf
+                @method('GET')
+                <button class="btn btn-outline-info" role="button">Editar Material</button>
+                </form>
+                
+            </div>
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
