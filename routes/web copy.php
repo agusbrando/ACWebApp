@@ -1,9 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
+=======
 use App\Models\Misbehavior;
 use App\Models\Task;
+
 use Illuminate\Support\Facades\Auth;
+>>>>>>> master
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +26,7 @@ use App\Models\Program;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\ItemYear;
+
 use App\Models\Unit;
 use App\Models\Evaluable;
 use App\Models\Evaluated;
@@ -36,11 +41,49 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/prueba', function (Request $request) {
+
+    $item = Item::find(1);
+    $subject = Subject::find(1);
+    $user = User::find(9);
+
+    /*
+    foreach($user->yearUnions as $yearUnion){
+        
+        if($yearUnion->subject_id == 1){
+            foreach($yearUnion->pivot->misbehavours as $falta){
+                echo ($yearUnion->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
+            }
+        }
+
+    }*/
+    foreach($user->yearUnions->where('subject_id',1)->where('evaluation_id',1) as $yearUnion){
+        
+       
+            foreach($yearUnion->pivot->tasks->where('type_id',8) as $tarea){
+                echo ($yearUnion->subject->name).' - '.($tarea->name).' - '.($tarea->pivot->value).'<br>';
+            }
+       
+
+<<<<<<< HEAD
+// Route::get('/login', function () {
+//     return view('login');
+// });
+//  Route::get('/', function () {
+//      return view('auth.login');
+//  });
+=======
+    }
+
+})->name('prueba');
+
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
+
 Route::resource('units', 'UnitController');
 Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
 Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
 Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
+
 Route::resource('notesPercentages', 'NotesPercentagesController');
 Route::resource('programs', 'ProgramController');
 Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
@@ -50,13 +93,9 @@ Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspec
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
+>>>>>>> master
 
-// Route::get('/login', function () {
-//     return view('login');
-// });
-//  Route::get('/', function () {
-//      return view('auth.login');
-//  });
+
 
 
 Route::resource('permissions','PermissionController');
@@ -65,6 +104,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+<<<<<<< HEAD
 Route::resource('messages', 'MessageController')->middleware('auth');
 
 Route::get('messages_send', 'MessageController@index')->middleware('auth')->name('messagesSend.index');
@@ -77,11 +117,12 @@ Route::get('response/{id}', 'MessageController@create')->middleware('auth');
 
 Route::get('/', 'HomeController@index');
 
+=======
 Route::get('/stock', function () {
     return view('stock');
 });
 Route::get('/', 'HomeController@index');
-
+    
 
 
 //RUTAS ITEMs
@@ -93,3 +134,4 @@ Route::resource('states', 'StateController');
 //RUTAS COURSEs
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 Route::resource('courses', 'CourseController');
+>>>>>>> master
