@@ -46,21 +46,21 @@
         </table> -->
 
               <div id="accordion" class="accordion">
-                @foreach($lista as $subject)
+                @foreach($lista as $falta)
 
                 <div class="card" style="background-color: #EAEAEA">
-                  <div class="card-header" id="headingOne/{{$subject['asignatura']}}">
+                  <div class="card-header" id="headingOne/{{$falta['asignatura']}}">
                     <h7 class="mb-0">
-                      <button class="btn btn-link hover color-red" data-toggle="collapse" data-target="#collapseOne/{{$subject['asignatura']}}" aria-expanded="true" aria-controls="collapseOne/{{$subject['asignatura']}}">
-                        <h7 style="color:grey;font-size:large">{{$subject['asignatura']}}</h7>
+                      <button class="btn btn-link hover color-red" data-toggle="collapse" data-target="#collapseOne/{{$falta['asignatura']}}" aria-expanded="true" aria-controls="collapseOne/{{$subject['asignatura']}}">
+                        <h7 style="color:grey;font-size:large">{{$falta['asignatura']}}</h7>
                       </button>
                       <div style="float: right; color: grey;">
-                        {{$subject['faltas']}}/{{$subject['max']}}
+                        {{$falta['faltas']}}/{{$falta['max']}}
                       </div>
                     </h7>
                   </div>
 
-                  <div id="collapseOne/{{$subject['asignatura']}}" class="collapse" aria-labelledby="headingOne/{{$subject['asignatura']}}" data-parent="#accordion">
+                  <div id="collapseOne/{{$falta['asignatura']}}" class="collapse" aria-labelledby="headingOne/{{$falta['asignatura']}}" data-parent="#accordion">
                     <div class="card-body" style="background-color: #fff">
                       <table class="table">
                         <thead class="thead-dark">

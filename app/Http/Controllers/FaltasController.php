@@ -78,18 +78,30 @@ class FaltasController extends Controller
         $lista = [];
 
         foreach ($subjects as $subject) {
-            $timetables = $subject->timetables;
+            // $timetables = $subject->timetables;
+            // $count = 0;
+            // foreach ($timetables as $timetable) {
+            //     $misbehaviours = Misbehavior::all()->where('session_timetable_id', $timetable->id);
+            //     if ($misbehaviours != null) {
+            //         foreach ($misbehaviours as $misbehaviour) {
+            //             if ($misbehaviour->user_id == $user_id) {
+            //                 $count = $count + 1;
+            //             }
+            //         }
+            //     }
+            // }
             $count = 0;
-            foreach ($timetables as $timetable) {
-                $misbehaviours = Misbehavior::all()->where('session_timetable_id', $timetable->id);
-                if ($misbehaviours != null) {
-                    foreach ($misbehaviours as $misbehaviour) {
-                        if ($misbehaviour->user_id == $user_id) {
-                            $count = $count + 1;
-                        }
-                    }
+
+            //Año actual
+            $year= 1; 
+            foreach($user->yearUnions->where('subject_id', $subject->id)->where('year_id', $year) as $yearunions_faltas){
+                foreach($yearunions_faltas->pivot->misbehavours as $falta){
+                    // echo ($yearunions_faltas->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
+                     //Hacer if para comprobar si es asistencia/comportamiento
+                    $count = $count +1;  
                 }
             }
+
             $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->max];
             array_push($lista, $elemento);
         }

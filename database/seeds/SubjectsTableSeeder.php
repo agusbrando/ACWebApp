@@ -12,6 +12,7 @@ class SubjectsTableSeeder extends Seeder
     public function run()
     {
         DB::table('subjects')->insert([
+            'course_id'=>1,
             'name' => 'Acceso a Datos',
             'abbreviation' =>'AD',
             'max'=>16,
@@ -43,6 +44,7 @@ class SubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
+            'course_id' => 1,
             'name' => 'Programacion multimedia y dispositivos moviles',
             'abbreviation'=>'PMM',
             'max'=>18,

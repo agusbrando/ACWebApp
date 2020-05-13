@@ -25,6 +25,18 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('asistencia', 'AsistenciaController');
+Route::resource('comportamiento', 'ComportamientoController');
+Route::get('faltas/create/{id}', 'FaltasController@create');
+Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
+Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
+Route::resource('faltas', 'FaltasController');
+Route::get('/prueba', function () {
+    $lista = Misbehavior::all();
+    foreach ($lista as $misbehavior) {
+        echo ($misbehavior->id);
+    }
+});
 
 Route::get('/prueba', function (Request $request) {
 
@@ -32,37 +44,23 @@ Route::get('/prueba', function (Request $request) {
     $subject = Subject::find(1);
     $user = User::find(9);
 
-    /*
-    foreach($user->yearUnions as $yearUnion){
-        
-        if($yearUnion->subject_id == 1){
-            foreach($yearUnion->pivot->misbehavours as $falta){
-                echo ($yearUnion->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
+    foreach ($user->yearUnions as $yearUnion) {
+
+        if ($yearUnion->subject_id == 1) {
+            foreach ($yearUnion->pivot->misbehavours as $falta) {
+                echo ($yearUnion->subject->name) . ' - ' . ($falta->description) . ' - ' . ($falta->date) . '<br>';
             }
         }
 
-Route::get('/login', function () {
-    return view('welcome');
-});
+        Route::get('/login', function () {
+            return view('welcome');
+        });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+        Route::get('/', function () {
+            return view('welcome');
+        });
+    }
 
-Route::resource('asistencia', 'AsistenciaController');
-Route::resource('comportamiento', 'ComportamientoController');
-Route::get('faltas/create/{id}', 'FaltasController@create');
-Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
-Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
-Route::resource('faltas', 'FaltasController');
-// Route::get('/prueba', function () {
-//     $lista = Misbehavior::all();
-//     foreach($lista as $misbehavior){
-//         echo ($misbehavior->id);
-//     }
-
-// });
-    }*/
     foreach ($user->yearUnions->where('subject_id', 1)->where('evaluation_id', 1) as $yearUnion) {
 
 

@@ -121,9 +121,8 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Apellidos, Nombre</th>
-                        <th scope="col">Número de Faltas</th>
-
                         <th scope="col">Presente</th>
+                        <th scope="col">Número de Faltas</th>
                         <th scope="col">Faltas de Comportamiento</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -133,14 +132,13 @@
                     @foreach ($users as $user)
                     <tr>
                         <td>{{$user ->first_name}}, {{$user ->last_name}}</td>
-                        <td>15</td>
-
                         <td><label class="switch">
                                 <input type="checkbox" checked data-toggle="toggle">
                                 <span class="slider round"></span>
                             </label></td>
+                        <td>15</td>
                         <td>
-
+                        <i class="fas fa-exclamation-triangle"></i>
                         </td>
                         <td> <a type="button" class="btn btn-primary mr-2 float-right" href="/faltas/{{$user->id}}">Más Info.</a></td>
                     </tr>
