@@ -98,5 +98,28 @@ class YearUnionsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        /*
+            for($i = 1; $i<=3; $i++){
+
+                DB::table('yearUnions')->insert([
+                    'subject_id' => '1',
+                    'course_id' => '4',
+                    'evaluation_id' => $i,
+                    'year_id' => '3',
+                    'date_start'=> '2019-09-22',
+                    'date_end'=> '2019-12-01',		
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+        
+
+            }
+        */
+
+        
+
+
+
     }
 }
