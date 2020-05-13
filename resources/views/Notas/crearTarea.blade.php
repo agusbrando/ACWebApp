@@ -42,6 +42,7 @@
                         </select>
                     </div>
                     <input type="hidden" name="subject" value={{$subject->id}}>
+                    <input type="hidden" name="evaluation" value={{$evaluation->id}}>
                 </div>
             </div>
             <div class=" card-footer col-12">

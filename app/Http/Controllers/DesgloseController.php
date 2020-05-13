@@ -24,13 +24,14 @@ class DesgloseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($id, $eval_id)
     {
         $subject = Subject::find($id);
         $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
         $tipos = Type::all()->where('model', Task::class);
+        $evaluation = Evaluation::find($eval_id);
 
-        return view('Notas.crearTarea', compact('subject', 'evaluaciones', 'tipos'));
+        return view('Notas.crearTarea', compact('subject', 'evaluaciones', 'tipos', 'evaluation'));
     }
 
     /**
@@ -44,6 +45,7 @@ class DesgloseController extends Controller
         $request->validate([
             'name' => 'required',
             'evaluaciones' => 'required',
+            'evaluation' => 'required',
             'type' => 'required',
             'subject' => 'required'
         ]);
@@ -60,7 +62,7 @@ class DesgloseController extends Controller
             $this->storeNotes(Evaluation::find($eval), $task);
         }
 
-        return redirect('asignaturas/'.$request->get('subject'));
+        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluation'));
 
     }
 
@@ -76,55 +78,7 @@ class DesgloseController extends Controller
         }
     }
 
-    // public function storeTrabajos(Request $request)
-    // {
-    //     $request->validate([
-    //         'trabajos' => 'required',
-    //         'subject' => 'required',
-    //         'evaluacion' => 'required'
-    //     ]);
-
-    //     $trabajos = $request->get('trabajos');
-
-
-    //     foreach ($trabajos as $user_id => $tasks) {
-    //         foreach ($tasks as $task_id => $task_value) {
-    //             $calification = new Calification([
-    //                 'user_id' => $user_id,
-    //                 'task_id' => $task_id,
-    //                 'value' => $task_value
-    //             ]);
-    //             $calification->save();
-    //         }
-    //     }
-
-    //     return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
-    // }
-
-    // public function storeActitud(Request $request)
-    // {
-    //     $request->validate([
-    //         'actitud' => 'required',
-    //         'subject' => 'required',
-    //         'evaluacion' => 'required'
-    //     ]);
-
-    //     $actitud = $request->get('actitud');
-
-
-    //     foreach ($actitud as $user_id => $tasks) {
-    //         foreach ($tasks as $task_id => $task_value) {
-    //             $calification = new Calification([
-    //                 'user_id' => $user_id,
-    //                 'task_id' => $task_id,
-    //                 'value' => $task_value
-    //             ]);
-    //             $calification->save();
-    //         }
-    //     }
-
-    //     return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
-    // }
+    
 
     /**
      * Display the specified resource.
