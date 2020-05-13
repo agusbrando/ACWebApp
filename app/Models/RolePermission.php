@@ -12,4 +12,6 @@ class RolePermission extends Pivot
         'role_id',
         'id_permission'
     ];
+
+    //TODO delete?
 }
