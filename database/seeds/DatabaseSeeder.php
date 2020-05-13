@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+
         $this->call([
             RolesTableSeeder::class,
             PermissionsTableSeeder::class,
@@ -37,7 +37,6 @@ class DatabaseSeeder extends Seeder
 	        StatesTableSeeder::class,
             ItemsTableSeeder::class,
             EventsTableSeeder::class,
-            ItemsUsersTableSeeder::class,
             SessionTimetableTableSeeder::class,
             RolesPermissionsTableSeeder::class,
             MisbehaviorsTableSeeder::class,

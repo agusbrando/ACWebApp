@@ -8,4 +8,6 @@ class Percentage extends Pivot
 {
     protected $table = 'percentages';
     protected $guarded = [];
+
+    //TODO deleted
 }

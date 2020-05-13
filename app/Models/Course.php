@@ -13,7 +13,7 @@ class Course extends Model
     protected $dates = ['deleted_at'];
 
     //todas las yearUnion de ese curso, una por evaluacion y asignatura
-    public function yearUnion(){
+    public function yearUnions(){
         return $this->hasMany(YearUnion::class);
     }
 }
