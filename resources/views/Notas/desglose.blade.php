@@ -47,7 +47,11 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($notaParciales != null)
+                                                @if($notaParciales[$user->id][$parcial->id] < 4)
+                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w text-danger" value="{{$notaParciales[$user->id][$parcial->id]}}">
+                                                @else
                                                 <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$notaParciales[$user->id][$parcial->id]}}">
+                                                @endif
                                                 @else
                                                 <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
                                                 @endif
@@ -89,7 +93,11 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($notaTrabajos != null)
+                                                @if($notaTrabajos[$user->id][$trabajo->id] < 4)
+                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w text-danger" value="{{$notaTrabajos[$user->id][$trabajo->id]}}">
+                                                @else
                                                 <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$notaTrabajos[$user->id][$trabajo->id]}}">
+                                                @endif
                                                 @else
                                                 <input name="trabajos[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
                                                 @endif
@@ -131,7 +139,11 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($notaActitud != null)
+                                                @if($notaActitud[$user->id][$act->id] < 4)
+                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w text-danger" value="{{$notaActitud[$user->id][$act->id]}}">
+                                                @else
                                                 <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$notaActitud[$user->id][$act->id]}}">
+                                                @endif
                                                 @else
                                                 <input name="actitud[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
                                                 @endif
@@ -173,7 +185,11 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($notaRecuperacion != null)
+                                                @if($notaRecuperacion[$user->id][$rec->id] < 4)
+                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w text-danger" value="{{$notaRecuperacion[$user->id][$rec->id]}}">
+                                                @else
                                                 <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w" value="{{$notaRecuperacion[$user->id][$rec->id]}}">
+                                                @endif
                                                 @else
                                                 <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w">
                                                 @endif
