@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\DB;
 class AsignaturaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra una lista de las Asignaturas
      *
-     * @return \Illuminate\Http\Response
+     * @return Notas.Index
      */
     public function index()
     {
@@ -49,10 +49,10 @@ class AsignaturaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra la vista de evaluaciones, con los porcentajes cargados y la los usuarios con las notas de cada uno de ellos.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Notas.Evaluations
      */
     public function show($id)
     {
@@ -83,7 +83,10 @@ class AsignaturaController extends Controller
                                 if ($percentage->id == $task_type->id) {
                                     $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
                                     $user->tareas = $tareas;
-                                    
+                                    $aux = round(($percentage->pivot->nota_media_minima * $percentage->pivot->percentage) / 100, 2);
+                                    if($tareas[$task_type->name] < $aux && $tareas[$task_type->name] != 0 && $suspendido == false){
+                                        $suspendido = true;
+                                    }
                                 }
                             }
                             if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
@@ -95,8 +98,12 @@ class AsignaturaController extends Controller
                         }
                         if($suspendido == false){
                             $user->nota_final = $sumaFinal;
+                        }else{
+                            $user->nota_final = "suspendido media minima".$sumaFinal;
+                            
                         }
                     }
+                    $suspendido = false;
                 } else {
                     //TODO: Controlar Error
                     return view('Notas.evaluations');
