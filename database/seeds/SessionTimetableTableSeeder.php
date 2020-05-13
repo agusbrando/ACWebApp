@@ -15,7 +15,7 @@ class SessionTimetableTableSeeder extends Seeder
             'id'=>1,
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 1,
+            'year_union_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
