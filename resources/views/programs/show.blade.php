@@ -1,68 +1,7 @@
 @extends('base')
 
 @section('main')
-<script>
-    $(document).ready(function() {
-        $('#tabla').DataTable( {
-            dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'>>",
-            buttons: [
-                { extend: 'excel', className: 'btn-outline-success mr-2' }, 
-                { extend: 'pdf', className: 'btn-outline-danger mr-2' }
-            ],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        } );
-    } );
-</script>
-<script>
-    $(document).ready(function() {
-        $('#tablaAspectos').DataTable( {
-            dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'>>",
-            buttons: [
-                { extend: 'excel', className: 'btn-outline-success mr-2' }, 
-                { extend: 'pdf', className: 'btn-outline-danger mr-2' }
-                ],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        } );
-    } );
-</script>
+
 <!-- <script type="text/javascript">
 	$(document).ready(function()
 	    {  
@@ -140,39 +79,6 @@
         @endfor
     });
 </script>
-@for($i=1;$i<=3;$i++)
-<script>
-    $(document).ready(function() {
-        $('#tablaEval{{$i}}').DataTable( {
-            dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'><'col-sm-4'><'col-sm-4'>>",
-            buttons: [
-                { extend: 'excel', className: 'btn-outline-success mr-2' }, 
-                { extend: 'pdf', className: 'btn-outline-danger mr-2' }
-                ],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de un total de _TOTAL_ Entradas",
-                "infoEmpty": "No hay informacion",
-                "infoFiltered": "(Filtrado de un total de _MAX_ entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "No se han encontrado resultados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        } );
-    } );
-</script>
-@endfor
 
 @if($editar || ($mostrarAspecto ?? '') )
 <script type="text/javascript">
@@ -186,6 +92,22 @@
         
 </script>
 @endif
+
+<script>
+    $(document).ready(function(){ 
+        @for($i=0;$i<=($program->units->count());$i++)
+        $('#masInfo{{$i}}').hide();
+        $('#cabFecha').hide();
+        $('#fechaPrevista{{$i}}').hide();
+        $("#btnMasInfo{{$i}}").on( "click", function() {	 
+                $('#masInfo{{$i}}').toggle();
+                $('#cabFecha').toggle();
+                $('#fechaPrevista{{$i}}').toggle();
+
+            });
+        @endfor
+    });
+</script>
 
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
 
@@ -220,11 +142,11 @@
                     </li>
                     </ul>
                 </div>
-                <div class="card-body"> 
+                <div class="card-body row no-gutters table-responsive"> 
             <div class="row justify-content-center">
-                <div class="collapse multi-collapse col-sm-12"  id="multiCollapseExample1">
-                    <table id='tabla' class="table table-striped table-bordered nowrap dt-responsive compact text-truncate"  style="width:100%">
-                        <thead>
+                <div class="collapse multi-collapse col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample1">
+                    <table class="table col-12">
+                        <thead class="thead-dark col-12">
                             <tr>
                                 <th>Contenido</th>
                                 <th>F. inicio prevista</th>
@@ -260,10 +182,10 @@
                     
                     
                 </div> 
-                <div class="collapse multi-collapse col-lg-12 col-sm-12"  id="multiCollapseExample2">
+                <div class="collapse multi-collapse col-lg-12 col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample2">
                         @if(!$editar)
-                        <table id='tablaAspectos' class="table table-striped table-bordered nowrap dt-responsive compact"  style="width:100%">
-                            <thead>
+                        <table class="table col-12" >
+                            <thead class="thead-dark col-12">
                                 <tr>
                                     <th>Aspecto Evaluado</th>
                                     <th>Observaciones</th>
@@ -314,8 +236,8 @@
                         <form method="POST" action="{{ route('programs.updateAspecto', ['program_id'=> ($program->id), 'id'=> $evaluadoEditar_id] ) }}">
                             @method('PATCH')  
                             @csrf
-                            <table id='tablaAspectos' class="table table-striped table-bordered  nowrap dt-responsive compact"  style="width:100%">
-                                    <thead>
+                            <table class="table col-12" >
+                                    <thead class="thead-dark col-12">
                                         <tr>
                                             <th>Aspecto Evaluado</th>
                                             <th>Observaciones</th>
@@ -354,7 +276,7 @@
                         </form>
                         @endif
                 </div> 
-                <div class="collapse multi-collapse col-sm-12"  id="multiCollapseExample3">
+                <div class="collapse multi-collapse col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample3">
                     <div class="dropdown justify-content-start">
                     
                             <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -370,36 +292,49 @@
                     </div>
 
                     @for($i=1;$i<=3;$i++)
-                    <div id='divTablaEval{{$i}}' class="mt-5">
+                    <div id='divTablaEval{{$i}}' class="mt-5 row no-gutters table-responsive">
                         <span class="badge badge-primary float-left"> {{$i}}º Evaluacion </span>
-                        <a type="button" href="#" class="btn btn-sm btn-outline-primary">Mostrar/ocultar fechas previstas</a>
-                        <table id='tablaEval{{$i}}' class="table table-striped table-bordered nowrap dt-responsive compact text-truncate"  style="width:100%">
-                            <thead>
+                        <table id='tablaEval{{$i}}' class="table col-12 text-left table-striped" >
+                            <thead class="thead-dark col-12">
                                 <tr>
+                                    <th></th>
                                     <th>Contenido</th>
-                                    <th>F. inicio prevista</th>
-                                    <th>F. final prevista</th>
-                                    <th>Eval. prevista</th>
-                                    <th>F. inicio</th>
-                                    <th>F. final</th>                
-                                    <th>Actions</th>
+                                    <th></th>
+                                    <th>Estado</th>
+                                    <th>Fechas</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($program->units->where('eval',$i) as $unidad)
+                                @foreach($program->units->where('eval',$i) as $k=>$unidad)
                                 <tr>
-                                    <td>{{$unidad->name}}</td>
-                                    <td>{{$unidad->expected_date_start}}</td>
-                                    <td>{{$unidad->expected_date_end}}</td>
-                                    <td>{{$unidad->expected_eval}}</td>
-                                    <td>{{$unidad->date_start}}</td>
-                                    <td>{{$unidad->date_end}}</td>
+                                    <td><a type="button" id="btnMasInfo{{$k}}" class="btn text-warning" href="#"><i class="fas fa-plus"></i></a></td>
+                                    <td> {{$unidad->name}}</td>
+                                    <td></td>
+                                    @if(strtotime($unidad->expected_date_end) < strtotime($unidad->date_end))
+                                    <td class="text-danger">Fuera de Plazo</td>
+                                    @else
+                                    <td class="text-success">Dentro de Plazo</td>
+                                    @endif
                                     
-                                    <td class="botones justify-content-center">
+                                    <td class="text-nowrap">{{date('d/m/Y',strtotime($unidad->date_start))}} - {{date('d/m/Y',strtotime($unidad->date_end))}}</td>
+                                    <td  id="fechaPrevista{{$k}}">({{date('d/m/Y',strtotime($unidad->expected_date_start))}} - {{date('d/m/Y',strtotime($unidad->expected_date_end))}})</td>
+                                    <td class="text-right" colspan="2">
                                         
                                         <a type="button" class="btn"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-eye"></i></a>
 
                                     </td>
+                                </tr>
+                                <tr id="masInfo{{$k}}">
+                                    <th>Observaciones</th>
+                                    
+                                    
+                                    <td  colspan="3" class="text-justify">{{$unidad->notes}}</td>
+                                    <th>Acciones de mejora</th>
+                                    <td class="text-justify">{{$unidad->improvements}}</td>
+
+                                    
                                 </tr>
                                 @endforeach    
                             </tbody>
@@ -445,8 +380,6 @@
                                 <div class="form-control profesor  text-truncate">{{$responsable[$i]->first_name}} {{$responsable[$i]->last_name}}</div>
                             </div>
                         </div>
-                        
-                       
                         @endif
 
                     </div>
