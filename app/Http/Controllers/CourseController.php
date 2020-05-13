@@ -93,7 +93,7 @@ class CourseController extends Controller
             }
         }
         
-
+        $items = Item::all();
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();  
         
@@ -103,7 +103,7 @@ class CourseController extends Controller
         
         
 
-        return view('courses.show', compact( 'classrooms', 'types','yearUnions'));
+        return view('courses.show', compact( 'classrooms', 'types','yearUnions', 'items'));
 
     }
 
