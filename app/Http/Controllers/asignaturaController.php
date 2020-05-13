@@ -59,7 +59,6 @@ class AsignaturaController extends Controller
         $subject = Subject::find($id);
         $taskTypes = Type::all()->where('model', Task::class);
         $evaluaciones = $subject->evaluations;
-        $suspendido = false;
 
         foreach ($evaluaciones as $eval) {
             $eval->percentages = $eval->types;
@@ -74,6 +73,8 @@ class AsignaturaController extends Controller
                         $suma = 0;
                         $tareas[$task_type->name] = 0;
                         $user->tareas = $tareas;
+                        $resultados[$task_type->name] = false;
+                        $user->suspendido = $resultados;
                         if (count($tasks) > 0) {
                             foreach ($tasks as $task) {
                                 $suma += $task->pivot->value;
@@ -84,26 +85,28 @@ class AsignaturaController extends Controller
                                     $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
                                     $user->tareas = $tareas;
                                     $aux = round(($percentage->pivot->nota_media_minima * $percentage->pivot->percentage) / 100, 2);
-                                    if($tareas[$task_type->name] < $aux && $tareas[$task_type->name] != 0 && $suspendido == false){
-                                        $suspendido = true;
+                                    if ($tareas[$task_type->name] < $aux && $tareas[$task_type->name] != 0) {
+                                        $resultados[$task_type->name] = true;
+                                    }
+                                    if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
+                                        $user->nota_final = $user->tareas[$task_type->name];
+                                        break;
+                                    } else {
+                                        $sumaFinal += $tareas[$task_type->name];
                                     }
                                 }
                             }
-                            if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
-                                $user->nota_final = $user->tareas[$task_type->name];
-                                break;
-                            } else {
-                                $sumaFinal += $tareas[$task_type->name];
+                            $user->suspendido = $resultados;
+                            foreach ($user->suspendido as $suspendido) {
+                                if ($suspendido == false) {
+                                    $user->nota_final = $sumaFinal;
+                                } else {
+                                    $user->nota_final = "No llega nota media minima " . $sumaFinal;
+                                    break;
+                                }
                             }
                         }
-                        if($suspendido == false){
-                            $user->nota_final = $sumaFinal;
-                        }else{
-                            $user->nota_final = "suspendido media minima".$sumaFinal;
-                            
-                        }
                     }
-                    $suspendido = false;
                 } else {
                     //TODO: Controlar Error
                     return view('Notas.evaluations');
