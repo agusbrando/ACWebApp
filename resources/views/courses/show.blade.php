@@ -11,19 +11,11 @@
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
                 <a href="/courses" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
-                <h3>Curso {{$yearUnion->course->name}}</h3>
+                <h3>Curso </h3>
+                
             </div>
             <div class="d-flex flex-row-reverse">
-                <form  method="post" action="{{ route('courses.destroy', $yearUnion->course->id)}}">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-outline-danger ml-2" type="submit">Delete</button>
-                </form>
-                <form  method="get" action="{{ route('courses.edit', $yearUnion->course->id) }}">
-                @csrf
-                @method('GET')
-                <button class="btn btn-outline-info" role="button">Editar Material</button>
-                </form>
+                
                 
             </div>
         </div>
@@ -35,7 +27,7 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">General</a>
                             <a class="nav-item nav-link" id="nav-asignaturas-tab" data-toggle="tab" href="#nav-asignaturas" role="tab" aria-controls="nav-asignaturas" aria-selected="false">Asignaturas</a>
-                            <a class="nav-item nav-link" id="nav-items-tab" data-toggle="tab" href="#nav-items" role="tab" aria-controls="nav-items" aria-selected="false">Items</a>
+                            <a class="nav-item nav-link" id="nav-items-tab" data-toggle="tab" href="#nav-items" role="tab" aria-controls="nav-items" aria-selected="false">Responsables</a>
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -46,39 +38,40 @@
                             Aquí iran las asignaturas
                         </div>
                         <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
+                        @foreach($yearUnions as $yearUnion)    
+                            <h3>{{$yearUnion->evaluation->name}}</h3>
                             <table id='mytable' class="table table-striped table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Número</th>
                                         <th>Nombre</th>
-                                        <th>Responsables</th>
+                                        <th>Evaluación</th>
+                                        <th>Items</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($items as $item)
-                                    <form method="get" action=""> 
-                                        @csrf
-                                        @method('GET')
-                                        <tr>
-                                            
-                                            <td>{{$item->number}}</td>
-                                            <td>{{$item->name}}</td>
-                                        
+                                    
+                                    @foreach($yearUnion->yearUnionUsers as $yearUnionUser)
+                                       
+                                            <form method="get" action=""> 
+                                                @csrf
+                                                @method('GET')
+                                                <tr>
+                                                    
+                                                    <td>{{$yearUnionUser->user->first_name}}</td>
+                                                    <td>{{$yearUnion->evaluation->name}}</td>
 
-                                            <td class="botones d-flex flex-wrap">
-                                                @foreach($users as $user)
-                                                <!-- Esto llevará al usuario -->
-                                                
-                                                    <button class="btn btn-outline-primary m-1" type="submit">{{$user->first_name}}</button>
-                                                
-                                                @endforeach
-                                                
-                                            </td>
-                                        </tr>
-                                    </form>
+                                                    <td class="botones d-flex flex-wrap">
+                                                        @foreach($yearUnionUser->items as $item)
+                                                            <button class="btn btn-outline-primary m-1" type="submit">{{$item->number." ".$item->name}}</button>
+                                                        @endforeach
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        
                                     @endforeach
                                 </tbody>
                             </table>
+                        @endforeach
                         </div>
                     </div>
                 </div>
