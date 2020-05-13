@@ -16,18 +16,16 @@
       <div class="col-md-12 bg-light border-right p-0">
         <br>
         <img id="snippet" src="{{asset('img/snippet2.jpg')}}" alt="...">
-        <h3 class="text-center mt-2 mb-1">Selecciona el tipo de evento y la fecha</h3>
+        <h3 class="text-center mt-2 mb-1">Selecciona una hora disponible</h3>
         <hr class="w-75">
-        <br>
-        <div id="calendario">
-          <input id="diaElegido" value="<?php echo date("Y-m-d"); ?>" class="form-control w-25" type="date" id="date" name="date">
-        </div>
         <br>
         <div id="buttons">
           @if(!empty($events))
             @foreach($sessions->sortBy('time_start') as $session)
             <button type="submit" onclick="window.location.href='{{route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $tipo])}}'" class="btn btn-info btn-block">{{ $session->time_start->format('H:i') }}</button>
             @endforeach
+          @else
+            <p>No hay horas disponibles.</p>
           @endif
         </div>
         <br>

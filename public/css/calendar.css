@@ -108,6 +108,11 @@ p{
     left: 15px;
 }
 
+#form{
+    width: 50%;
+    margin-left: 25%;
+}
+
 #buttons{
     width: 50%;
     margin-left: 25%;

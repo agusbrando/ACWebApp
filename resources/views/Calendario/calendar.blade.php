@@ -17,7 +17,7 @@
       <div class="col-md-12 bg-light border-right p-0">
         <br>
         <img id="snippet" src="{{asset('img/snippet1.jpg')}}" alt="...">
-        <h3 class="text-center mt-2 mb-1">Selecciona el tipo de evento</h3>
+        <h3 class="text-center mt-2 mb-1">Selecciona el tipo de evento y fecha</h3>
         <hr class="w-75">
         <br>
         <div id="calendario">
