@@ -37,69 +37,98 @@
                             Aquí iran las asignaturas
                         </div>
                         <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
-                            @foreach($yearUnions as $yearUnion)
-                                <h3>{{$yearUnion->evaluation->name}}</h3>
-                                <table id='mytable' class="table table-striped table-bordered">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Evaluación</th>
-                                            <th>Items</th>
-                                            <th>Responsabilizar Item</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <div id="accordion">
+                                @foreach($yearUnions as $yearUnion)
 
-                                        @foreach($yearUnion->yearUnionUsers as $yearUnionUser)
+                                <div class="card">
+                                    <div class="card-header list-group-item d-flex justify-content-between align-items-center m-0" id="heading{{$yearUnion->evaluation->name}}" data-toggle="collapse" data-target="#collapse{{$yearUnion->evaluation->name}}" aria-expanded="false" aria-controls="collapse{{$yearUnion->evaluation->name}}">
+                                        <h5 class="mb-0">
+                                            <button class="btn collapsed">
+                                                {{$yearUnion->evaluation->name}}
+                                            </button>
+                                        </h5>
+                                        <span class="badge badge-primary badge-pill"> {{$yearUnion->yearUnionUsers->count()}}</span>
+                                    </div>
+                                    
 
-                                        <form method="get" action="">
-                                            @csrf
-                                            @method('GET')
-                                            <tr>
+                                    <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse" aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                <div class="card">
 
-                                                <td>{{$yearUnionUser->user->first_name}}</td>
-                                                <td>{{$yearUnion->evaluation->name}}</td>
+                                                    
+                                                        <table id='mytable' class="table w-100">
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th>Nombre</th>
+                                                                    <th>Apellido</th>
+                                                                    <th>Items</th>
+                                                                    <th>Responsabilizar Item</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
 
-                                                <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
-                                                    @foreach($yearUnionUser->items as $item)
-                                                        <button class="btn btn-outline-primary m-1 " type="submit">{{$item->number." ".$item->name}}</button>
-                                                    @endforeach
-                                                </td>
-                                                
-                                                <td>
-                                                    <div class="form-group ">
-                                                        <form class="botones d-flex flex-wrap" method="get" action="#">
-                                                            @csrf
-                                                            @method('GET')
-                                                            <label for="formControlSelect1">Items</label>
+                                                                @foreach($yearUnion->yearUnionUsers as $yearUnionUser)
 
-                                                            <select class="form-control " id="type_id" name="type_id">
-                                                                <option disabled selected>Selecciona un Item</option>
-                                                                <!--Hace la funcion de un placeholder-->
-                                                                @foreach($items as $item)
-                                                                    @if($item->id == $item->item_id)
-                                                                        <option selected value="{{$item->id}}">{{$item->name}}</option>
-                                                                    @else
-                                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                <form method="get" action="">
+                                                                    @csrf
+                                                                    @method('GET')
+                                                                    <tr>
 
-                                                                    @endif
+                                                                        <td>{{$yearUnionUser->user->first_name}}</td>
+                                                                        <td>{{$yearUnionUser->user->last_name}}</td>
+
+                                                                        <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
+                                                                            @foreach($yearUnionUser->items as $item)
+                                                                            <form method="get" action="{{ route('courses.showItem', $item->id)}}">
+                                                                                @csrf
+                                                                                @method('GET')
+                                                                                <button class="btn btn-outline-primary m-1 " type="submit">{{"Nº ".$item->number." - ".$item->name}}</button>
+                                                                            </form>
+
+                                                                            @endforeach
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <div class="form-group ">
+                                                                                <form class="botones d-flex flex-wrap" method="get" action="#">
+                                                                                    @csrf
+                                                                                    @method('GET')
+
+                                                                                    <select class="form-control " id="type_id" name="type_id">
+                                                                                        <option disabled selected>Selecciona un Item</option>
+                                                                                        <!--Hace la funcion de un placeholder-->
+                                                                                        @foreach($items as $item)
+                                                                                        @if($item->id == $item->item_id)
+                                                                                        <option selected value="{{$item->id}}">{{$item->name}}</option>
+                                                                                        @else
+                                                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+
+                                                                                        @endif
+
+                                                                                        @endforeach
+
+                                                                                    </select>
+
+
+                                                                                    <button class="btn btn-outline-info mt-2" role="button">Asignar Item</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </form>
 
                                                                 @endforeach
-
-                                                            </select>
-                                                        
-
-                                                            <button class="btn btn-outline-info mt-1" role="button">Asignar Item</button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </form>
-
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
