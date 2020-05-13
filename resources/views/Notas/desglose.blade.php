@@ -33,24 +33,24 @@
                                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                     <tr id='columna'>
                                         <th>Apellidos, Nombre</th>
-                                        @foreach($parciales as $parcial)
+                                        @foreach($evaluation->parciales as $parcial)
                                         <th>{{$parcial->name}}</th>
                                         @endforeach
                                         <th>Media Examenes</th>
                                     </tr>
                                 </thead>
                                 <tbody id="fila">
-                                    @foreach($users as $user)
+                                    @foreach($evaluation->users as $user)
                                     <tr>
                                         <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                        @foreach($parciales as $parcial)
+                                        @foreach($evaluation->parciales as $parcial)
                                         <td>
                                             <div class="input-group col-10">
-                                                @if($notaParciales != null)
-                                                @if($notaParciales[$user->id][$parcial->id] < 4)
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w text-danger" value="{{$notaParciales[$user->id][$parcial->id]}}">
+                                                @if($evaluation->notaParciales != null)
+                                                @if($evaluation->notaParciales[$user->id][$parcial->id] < 4)
+                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaParciales[$user->id][$parcial->id]}}">
                                                 @else
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$notaParciales[$user->id][$parcial->id]}}">
+                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$evaluation->notaParciales[$user->id][$parcial->id]}}">
                                                 @endif
                                                 @else
                                                 <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
@@ -58,8 +58,8 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        @if($mediaParciales != null)
-                                        <td>{{$mediaParciales[$user->id]}}</td>
+                                        @if($evaluation->mediaParciales != null)
+                                        <td>{{$evaluation->mediaParciales[$user->id]}}</td>
                                         @else
                                         <td>0</td>
                                         @endif
@@ -79,24 +79,24 @@
                                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                     <tr id='columna'>
                                         <th>Apellidos, Nombre</th>
-                                        @foreach($trabajos as $trabajo)
+                                        @foreach($evaluation->trabajos as $trabajo)
                                         <th>{{$trabajo->name}}</th>
                                         @endforeach
                                         <th>Media Trabajos</th>
                                     </tr>
                                 </thead>
                                 <tbody id="fila">
-                                    @foreach($users as $user)
+                                    @foreach($evaluation->users as $user)
                                     <tr>
                                         <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                        @foreach($trabajos as $trabajo)
+                                        @foreach($evaluation->trabajos as $trabajo)
                                         <td>
                                             <div class="input-group col-10">
-                                                @if($notaTrabajos != null)
-                                                @if($notaTrabajos[$user->id][$trabajo->id] < 4)
-                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w text-danger" value="{{$notaTrabajos[$user->id][$trabajo->id]}}">
+                                                @if($evaluation->notaTrabajos != null)
+                                                @if($evaluation->notaTrabajos[$user->id][$trabajo->id] < 4)
+                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaTrabajos[$user->id][$trabajo->id]}}">
                                                 @else
-                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$notaTrabajos[$user->id][$trabajo->id]}}">
+                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$evaluation->notaTrabajos[$user->id][$trabajo->id]}}">
                                                 @endif
                                                 @else
                                                 <input name="trabajos[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
@@ -104,8 +104,8 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        @if($mediaTrabajos != null)
-                                        <td>{{$mediaTrabajos[$user->id]}}</td>
+                                        @if($evaluation->mediaTrabajos != null)
+                                        <td>{{$evaluation->mediaTrabajos[$user->id]}}</td>
                                         @else
                                         <td>0</td>
                                         @endif
@@ -125,24 +125,24 @@
                                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                     <tr>
                                         <th>Apellidos, Nombre</th>
-                                        @foreach($actitud as $act)
+                                        @foreach($evaluation->actitud as $act)
                                         <th>{{$act->name}}</th>
                                         @endforeach
                                         <th>Media Actitud</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $user)
+                                    @foreach($evaluation->users as $user)
                                     <tr>
                                         <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                        @foreach($actitud as $act)
+                                        @foreach($evaluation->actitud as $act)
                                         <td>
                                             <div class="input-group col-10">
-                                                @if($notaActitud != null)
-                                                @if($notaActitud[$user->id][$act->id] < 4)
-                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w text-danger" value="{{$notaActitud[$user->id][$act->id]}}">
+                                                @if($evaluation->notaActitud != null)
+                                                @if($evaluation->notaActitud[$user->id][$act->id] < 4)
+                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaActitud[$user->id][$act->id]}}">
                                                 @else
-                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$notaActitud[$user->id][$act->id]}}">
+                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$evaluation->notaActitud[$user->id][$act->id]}}">
                                                 @endif
                                                 @else
                                                 <input name="actitud[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
@@ -150,8 +150,8 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        @if($mediaActitud != null)
-                                        <td>{{$mediaActitud[$user->id]}}</td>
+                                        @if($evaluation->mediaActitud != null)
+                                        <td>{{$evaluation->mediaActitud[$user->id]}}</td>
                                         @else
                                         <td>0</td>
                                         @endif
@@ -171,24 +171,24 @@
                                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                     <tr>
                                         <th>Apellidos, Nombre</th>
-                                        @foreach($recuperacion as $rec)
+                                        @foreach($evaluation->recuperacion as $rec)
                                         <th>{{$rec->name}}</th>
                                         @endforeach
                                         <th>Media Recuperacion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $user)
+                                    @foreach($evaluation->users as $user)
                                     <tr>
                                         <td class="text-left">{{$user->last_name}} {{$user->first_name}}</td>
-                                        @foreach($recuperacion as $rec)
+                                        @foreach($evaluation->recuperacion as $rec)
                                         <td>
                                             <div class="input-group col-10">
-                                                @if($notaRecuperacion != null)
-                                                @if($notaRecuperacion[$user->id][$rec->id] < 4)
-                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w text-danger" value="{{$notaRecuperacion[$user->id][$rec->id]}}">
+                                                @if($evaluation->notaRecuperacion != null)
+                                                @if($evaluation->notaRecuperacion[$user->id][$rec->id] < 4)
+                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaRecuperacion[$user->id][$rec->id]}}">
                                                 @else
-                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w" value="{{$notaRecuperacion[$user->id][$rec->id]}}">
+                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w" value="{{$evaluation->notaRecuperacion[$user->id][$rec->id]}}">
                                                 @endif
                                                 @else
                                                 <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w">
@@ -196,8 +196,8 @@
                                             </div>
                                         </td>
                                         @endforeach
-                                        @if($mediaRecuperacion != null)
-                                        <td>{{$mediaRecuperacion[$user->id]}}</td>
+                                        @if($evaluation->mediaRecuperacion != null)
+                                        <td>{{$evaluation->mediaRecuperacion[$user->id]}}</td>
                                         @else
                                         <td>0</td>
                                         @endif

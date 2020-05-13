@@ -54,7 +54,7 @@ class EvaluacionesController extends Controller
         $subject = Subject::find($subject_id);
         $evaluation = Evaluation::find($evaluation_id);
         $evaluation->tasksTypes = $evaluation->types;
-        $users = $evaluation->users;
+        $evaluation->users = $evaluation->users;
 
         $notaParciales = null;
         $notaTrabajos = null;
@@ -73,30 +73,33 @@ class EvaluacionesController extends Controller
             $name = $task_type->name;
             switch ($name) {
                 case 'Examenes':
-                    $parciales = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
-                    foreach ($parciales as $parcial) {
+                    $evaluation->parciales = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    foreach ($evaluation->parciales as $parcial) {
                         foreach ($parcial->users as $user) {
                             $notaParciales[$user->id][$parcial->id] = $user->pivot->value;
+                            $evaluation->notaParciales = $notaParciales;
                         }
                     }
-                    if ($notaParciales != null) {
-                        foreach ($notaParciales as $user_id => $examenes) {
+                    if ($evaluation->notaParciales != null) {
+                        foreach ($evaluation->notaParciales as $user_id => $examenes) {
                             foreach ($examenes as $nota) {
                                 if ($nota < $task_type->pivot->nota_min && $nota != null) {
                                     $mediaParciales[$user_id] = "No llega a la nota minima tarea";
+                                    $evaluation->mediaParciales = $mediaParciales;
                                     break;
                                 } else {
-                                    if ($aux2 == count($parciales)) {
+                                    if ($aux2 == count($evaluation->parciales)) {
                                         $aux2 = 0;
                                     }
                                     if ($nota != null) {
                                         $aux2++;
                                     }
                                     if ($aux2 == 0) {
-                                        $aux2 = count($parciales);
+                                        $aux2 = count($evaluation->parciales);
                                     }
                                     $aux += $nota;
                                     $mediaParciales[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaParciales = $mediaParciales;
                                 }
                             }
                             $aux = 0;
@@ -106,30 +109,33 @@ class EvaluacionesController extends Controller
 
                     break;
                 case 'Trabajos':
-                    $trabajos = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
-                    foreach ($trabajos as $trabajo) {
+                    $evaluation->trabajos = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    foreach ($evaluation->trabajos as $trabajo) {
                         foreach ($trabajo->users as $user) {
                             $notaTrabajos[$user->id][$trabajo->id] = $user->pivot->value;
+                            $evaluation->notaTrabajos = $notaTrabajos;
                         }
                     }
-                    if ($notaTrabajos != null) {
-                        foreach ($notaTrabajos as $user_id => $trabajosNotas) {
+                    if ($evaluation->notaTrabajos != null) {
+                        foreach ($evaluation->notaTrabajos as $user_id => $trabajosNotas) {
                             foreach ($trabajosNotas as $nota) {
                                 if ($nota < $task_type->pivot->nota_min && $nota != null) {
                                     $mediaTrabajos[$user_id] = "No llega a la nota minima tarea";
+                                    $evaluation->mediaTrabajos = $mediaTrabajos;
                                     break;
                                 } else {
-                                    if ($aux2 == count($trabajos)) {
+                                    if ($aux2 == count($evaluation->trabajos)) {
                                         $aux2 = 0;
                                     }
                                     if ($nota != null) {
                                         $aux2++;
                                     }
                                     if ($aux2 == 0) {
-                                        $aux2 = count($trabajos);
+                                        $aux2 = count($evaluation->trabajos);
                                     }
                                     $aux += $nota;
                                     $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaTrabajos = $mediaTrabajos;
                                 }
                             }
                             $aux = 0;
@@ -138,30 +144,33 @@ class EvaluacionesController extends Controller
                     }
                     break;
                 case 'Actitud':
-                    $actitud = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
-                    foreach ($actitud as $act) {
+                    $evaluation->actitud = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    foreach ($evaluation->actitud as $act) {
                         foreach ($act->users as $user) {
                             $notaActitud[$user->id][$act->id] = $user->pivot->value;
+                            $evaluation->notaActitud = $notaActitud;
                         }
                     }
-                    if ($notaActitud != null) {
-                        foreach ($notaActitud as $user_id => $actitudNotas) {
+                    if ($evaluation->notaActitud != null) {
+                        foreach ($evaluation->notaActitud as $user_id => $actitudNotas) {
                             foreach ($actitudNotas as $nota) {
                                 if ($nota < $task_type->pivot->nota_min && $nota != null) {
                                     $mediaActitud[$user_id] = "No llega a la nota minima tarea";
+                                    $evaluation->mediaActitud = $mediaActitud;
                                     break;
                                 } else {
-                                    if ($aux2 == count($actitud)) {
+                                    if ($aux2 == count($evaluation->actitud)) {
                                         $aux2 = 0;
                                     }
                                     if ($nota != null) {
                                         $aux2++;
                                     }
                                     if ($aux2 == 0) {
-                                        $aux2 = count($actitud);
+                                        $aux2 = count($evaluation->actitud);
                                     }
                                     $aux += $nota;
                                     $mediaActitud[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaActitud = $mediaActitud;
                                 }
                             }
                             $aux = 0;
@@ -170,30 +179,34 @@ class EvaluacionesController extends Controller
                     }
                     break;
                 case 'Recuperacion':
-                    $recuperacion = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
-                    foreach ($recuperacion as $rec) {
+                    $evaluation->recuperacion = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    foreach ($evaluation->recuperacion as $rec) {
                         foreach ($rec->users as $user) {
                             $notaRecuperacion[$user->id][$rec->id] = $user->pivot->value;
+                            $evaluation->notaRecuperacion = $notaRecuperacion;
                         }
                     }
-                    if ($notaRecuperacion != null) {
-                        foreach ($notaRecuperacion as $user_id => $recuperacionNotas) {
+                    if ($evaluation->notaRecuperacion != null) {
+                        foreach ($evaluation->notaRecuperacion as $user_id => $recuperacionNotas) {
                             foreach ($recuperacionNotas as $nota) {
                                 if ($nota < $task_type->pivot->nota_min && $nota != null) {
                                     $mediaRecuperacion[$user_id] = "No llega a la nota minima tarea";
+                                    $evaluation->mediaRecuperacion = $mediaRecuperacion;
                                     break;
                                 } else {
-                                    if ($aux2 == count($recuperacion)) {
+                                    if ($aux2 == count($evaluation->recuperacion)) {
                                         $aux2 = 0;
                                     }
                                     if ($nota != null) {
                                         $aux2++;
                                     }
                                     if ($aux2 == 0) {
-                                        $aux2 = count($recuperacion);
+                                        $aux2 = count($evaluation->recuperacion);
                                     }
                                     $aux += $nota;
                                     $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaRecuperacion = $mediaRecuperacion;
+
                                 }
                             }
                             $aux = 0;
@@ -204,7 +217,7 @@ class EvaluacionesController extends Controller
             }
         }
 
-        return view('Notas.desglose', compact('evaluation', 'users', 'subject', 'parciales', 'trabajos', 'actitud', 'recuperacion', 'notaParciales', 'notaTrabajos', 'notaActitud', 'notaRecuperacion', 'mediaRecuperacion', 'mediaParciales', 'mediaTrabajos', 'mediaActitud'));
+        return view('Notas.desglose', compact('evaluation', 'subject'));
     }
 
     /**
