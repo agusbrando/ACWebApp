@@ -20,9 +20,9 @@
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
                     <fieldset>
-                    <div class="form-group">
+                        <div class="form-group">
                             <label for="formControlSelect1">Aula</label>
-                            <select class="form-control @error('classroom') is-invalid @enderror" id="classroom" name="classroom">                                                               
+                            <select class="form-control @error('classroom') is-invalid @enderror" id="classroom" name="classroom">
                                 @foreach($classrooms as $classroom)
                                 <option value="{{$classroom->id}}">{{$classroom->name}}</option>
                                 @endforeach

@@ -76,6 +76,36 @@
             Stock
         </a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/sessions">
+            <span data-feather="file-text"></span>
+            Sessions 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/states">
+            <span data-feather="file-text"></span>
+            States 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/subjects">
+            <span data-feather="file-text"></span>
+            Subjects 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/evaluations">
+            <span data-feather="file-text"></span>
+            Evaluations 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/types">
+            <span data-feather="file-text"></span>
+            Types 
+        </a>
+        </li>
     </ul>
     </div>
 </nav>

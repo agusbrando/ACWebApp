@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classroom extends Model
 {
-   
+ 
     protected $table = 'classrooms';
 
     protected $primaryKey = 'id';
+
+   
 
     /**
     * The primary key associated with the table.
@@ -42,9 +44,8 @@ class Classroom extends Model
         'id',
         'name',
         'number',
-
     ];
-
+   
     
     public function sessions(){
         return $this->hasMany('App\Models\Session');

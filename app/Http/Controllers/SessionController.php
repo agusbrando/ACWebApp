@@ -20,7 +20,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions = Session::paginate(10)->load('type','classroom');
+        $sessions = Session::paginate(10);// ->load('type','classroom')
         $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
         return view('sessions.index', compact('sessions','days'));
     }
@@ -61,8 +61,8 @@ class SessionController extends Controller
         ]);
 
         $session = new Session([
-            'classroom_id' => $request->get('classroom'),
-            'type_id' => $request->get('type'),
+            'classroom' => $request->get('classroom'),
+            'type' => $request->get('type'),
             'day' => $request->get('day'),
             'time_start' => $request->get('time_start'),
             'time_end' => $request->get('time_end')
@@ -93,10 +93,16 @@ class SessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id)    
     {
-        $session = Session::find($id);       
-        return view('sessions.edit', compact('session'));
+        date_default_timezone_set('Europe/Madrid'); 
+        $session = Session::find($id);
+        $sessions = Session::all();       
+        $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];        
+        $classrooms = Classroom::all();        
+        $types = Type::all()->where('model', Event::class);
+        
+        return view('sessions.edit', compact('session','sessions', 'days', 'types', 'classrooms'));
     }
 
     /**
@@ -110,22 +116,21 @@ class SessionController extends Controller
     {
 
         $request->validate([
-            'classroom_id' => 'required',
-            'type_id' => 'required',
+            'classroom' => 'required',
+            'type' => 'required',
             'day' => 'required',
             'time_start' => 'required',
             'time_end' => 'required'
         ]);
         $session = Session::find($id);
-        $session->classroom_id = $request->get('classroom_id');
-        $session->type_id = $request->get('type_id');
-        $session->email = $request->get('email');
+        $session->classroom_id = $request->get('classroom');
+        $session->type_id = $request->get('type');
         $session->time_start = $request->get('time_start');
         $session->time_end = $request->get('time_end');
 
 
         $session->save();
-        return redirect('/sessions' . $id)->with('Succes', 'Sesión editada!');
+        return redirect('/sessions' )->with('Succes', 'Sesión editada!');
     }
 
     /**

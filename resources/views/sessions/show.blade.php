@@ -30,7 +30,7 @@
                 <div>
                     <h5 class="card-title">Aula: {{$session->classroom->name }}</h5>
                     <p class="card-text">Tipo: {{$session->type->name }}</p>
-                    <p class="card-text">Dia de la semana:{{$days[$session->day]}}</p>
+                    <p class="card-text">Dia de la semana: {{$days[$session->day]}}</p>
                     <p class="card-text">Hora de inicio: {{$session->time_start->format('H:i') }}</p>
                     <p class="card-text">Hora de fin: {{$session->time_end->format('H:i') }}</p>
                 </div>
