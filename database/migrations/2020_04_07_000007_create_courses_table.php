@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->integer('num_students');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
