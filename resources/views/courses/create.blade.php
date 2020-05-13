@@ -21,48 +21,82 @@
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
                 <div class="container">
-                    <form method="post" >
+                    <form method="post" action="{{ route('courses.store') }}">
                         <!-- Proteccion contra consultas no deseadas -->
                         @csrf
 
                         <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" placeholder="Nombre del objeto">
-                        </div>
-                        <div class="form-group">
-                            <label for="number">Number</label>
-                            <input type="text" class="form-control" id="numberItem" name="number" aria-describedby="nombreHelp" placeholder="Numero del objeto">
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre">Fecha de Compra</label>
-                            <input type="date" id="date_pucharse" name="date_pucharse" placeholder="- Seleccionar fecha -" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="formControlSelect1">¿En que Aula va a estar?</label>
-                            <select class="form-control" id="classroom_id" name="classroom_id">
-                                <option disabled selected>Selecciona un Aula</option>
+                            <label for="formControlSelect1">Asignatura</label>
+                            <select class="form-control" id="subject_id" name="subject_id">
+                                <option disabled selected>Selecciona una asignatura</option>
                                 <!--Hace la funcion de un placeholder-->
+                                @foreach($subjects as $subject)
+                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                @endforeach
                                 
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="formControlSelect1">Estado del objeto</label>
-                            <select class="form-control" id="state_id" name="state_id">
-                                <option disable>Selecciona un estado</option>
+                            <label for="formControlSelect1">Curso</label>
+                            <select class="form-control" id="course_id" name="course_id">
+                                <option disabled selected>Selecciona un curso</option>
                                 <!--Hace la funcion de un placeholder-->
-                               
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="formControlSelect1">Tipo de objeto</label>
-                            <select class="form-control" id="type_id" name="type_id">
-                                <option disabled selected>Selecciona un tipo</option>
-                                <!--Hace la funcion de un placeholder-->
+                                @foreach($courses as $course)
+                                <option value="{{$course->id}}">{{$course->level}}º {{$course->name}}</option>
+                                @endforeach
                                 
                             </select>
                         </div>
-
-
+                        <div class="form-group">
+                            <label for="formControlSelect1">Evaluación</label>
+                            <select class="form-control" id="evaluation_id" name="evaluation_id">
+                                <option disabled selected>Selecciona una evaluación</option>
+                                <!--Hace la funcion de un placeholder-->
+                                @foreach($evaluations as $evaluation)
+                                <option value="{{$evaluation->id}}">{{$evaluation->name}}</option>
+                                @endforeach
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlSelect1">Año</label>
+                            <select class="form-control" id="year_id" name="year_id">
+                                <option disabled selected>Selecciona un año</option>
+                                <!--Hace la funcion de un placeholder-->
+                                @foreach($years as $year)
+                                <option value="{{$year->id}}">{{$year->name}}</option>
+                                @endforeach
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlSelect1">¿Quien es el responsable?</label>
+                            <select class="form-control" id="responsable_id" name="responsable_id">
+                                <option disabled selected>Selecciona un responsable</option>
+                                <!--Hace la funcion de un placeholder-->
+                                @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
+                                @endforeach
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Observaciones</label>
+                            <input type="text" class="form-control" id="notes" name="notes" aria-describedby="notesHelp" placeholder="Observaciones">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Fecha de correción</label>
+                            <input type="date" id="date_check" name="date_check" placeholder="- Seleccionar fecha -" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Fecha inicio</label>
+                            <input type="date" id="date_start" name="date_start" placeholder="- Seleccionar fecha -" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Fecha fin</label>
+                            <input type="date" id="date_end" name="date_end" placeholder="- Seleccionar fecha -" class="form-control">
+                        </div>
+                        
                         <div class="form-group">
                             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
 

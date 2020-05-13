@@ -13,6 +13,8 @@ use App\Models\State;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Year;
+use App\Models\Evaluation;
+use App\Models\Subject;
 use App\Models\YearUnion;
 
 class CourseController extends Controller
@@ -39,7 +41,14 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('courses.create');
+        $classrooms = Classroom::all(); 
+        $courses = Course::all(); 
+        $users = User::all();
+        $subjects = Subject::all();
+        $evaluations = Evaluation::all();
+        $years = Year::orderBy("date_start", "DESC")->get();
+
+        return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations','years'));
     }
 
     /**
@@ -65,14 +74,11 @@ class CourseController extends Controller
     {
         $yearUnion = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->first(); 
         $types = Type::all()->where('model', Item::class);
-        $classrooms = Classroom::all();    //->load('name', Classroom::class)
+        $classrooms = Classroom::all();  
         $states = State::all();
         $items = Item::all();
         $users = User::all();
-
-        // $responsables = $yearUnion
-        
-        // $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
+        $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
   
         return view('courses.show', compact( 'yearUnion', 'classrooms', 'items', 'types', 'states', 'users', 'yearUnionUsers'));
 
