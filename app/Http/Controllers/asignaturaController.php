@@ -59,6 +59,7 @@ class AsignaturaController extends Controller
         $subject = Subject::find($id);
         $taskTypes = Type::all()->where('model', Task::class);
         $evaluaciones = $subject->evaluations;
+        $suspendido = false;
 
         foreach ($evaluaciones as $eval) {
             $eval->percentages = $eval->types;
@@ -82,17 +83,22 @@ class AsignaturaController extends Controller
                                 if ($percentage->id == $task_type->id) {
                                     $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
                                     $user->tareas = $tareas;
+                                    // if ($tareas[$task_type->name] > round(($percentage->pivot->nota_min * $percentage->pivot->percentage) / 100, 2)) {
+                                    //     $user->nota_final = "No llega a la nota media";
+                                    //     break;
+                                    // }
                                 }
                             }
                             if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
                                 $user->nota_final = $user->tareas[$task_type->name];
                                 break;
                             } else {
-                                $sumaFinal += $task->pivot->value;
+                                $sumaFinal += $tareas[$task_type->name];
                             }
                         }
-                        //Restamos -1 para que no cuente recuperado
-                        $user->nota_final = round($sumaFinal / (count($taskTypes) - 1), 2);
+                        if($suspendido == false){
+                            $user->nota_final = $sumaFinal;
+                        }
                     }
                 } else {
                     //TODO: Controlar Error
@@ -102,7 +108,6 @@ class AsignaturaController extends Controller
         }
 
         return view('Notas.evaluations', compact('subject', 'evaluaciones'));
-
     }
 
     /**

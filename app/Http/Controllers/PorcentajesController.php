@@ -179,7 +179,7 @@ class PorcentajesController extends Controller
             }
         }
 
-        if ($sumaEval1 < 100 && $sumaEval2 < 100 && $sumaEval3 < 100) {
+        if ($sumaEval1 <= 100 && $sumaEval2 <= 100 && $sumaEval3 <= 100) {
             $comprobacion = true;
         } else {
             $comprobacion = false;

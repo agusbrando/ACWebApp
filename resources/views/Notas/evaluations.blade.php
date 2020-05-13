@@ -83,7 +83,7 @@
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->last_name}} {{$user->first_name}}</td>
                                     @foreach($user->tareas as $tarea)
-                                    <td>{{$tarea}}%</td>
+                                    <td>{{$tarea}}</td>
                                     @endforeach
                                     <td>{{$user->nota_final}}</td>
                                     <td>{{$user->nota_final}}</td>
