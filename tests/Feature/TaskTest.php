@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\App\Models;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -9,7 +9,6 @@ use App\Models\Task;
 use App\Models\Evaluation;
 use App\Models\Course;
 use App\Models\Subject;
-use App\Models\User;
 
 class TaskTest extends TestCase
 {
@@ -42,7 +41,7 @@ class TaskTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
+            //find 
         $evaluation = Evaluation::find($task->evaluation_id);
 
         $this->assertEquals($task->evaluation->name, $evaluation->name);
@@ -78,7 +77,7 @@ class TaskTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
+            //role id y timetable id
         $user = User::create([
             'first_name' => 'Admin',
             'email' => 'ejemplo@campusaula.com',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\App\Models;
 
 use App\Models\Attachment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -9,6 +9,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Message;
 use App\Models\Role;
+use App\Models\Timetable;
 
 class AttachmentTest extends TestCase
 {
@@ -19,6 +20,13 @@ class AttachmentTest extends TestCase
      */
     public function testAttachmentableMessage()
     {
+        $timetable = Timetable::create([
+            'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         $role = Role::create([
             'name' => 'Test',
             'created_at' => now(),
@@ -32,7 +40,7 @@ class AttachmentTest extends TestCase
             'password' => 'pruebas',
             'created_at' => now(),
             'updated_at' => now(),
-            'timetable_id' => '1',
+            'timetable_id' => $timetable->id,
             'role_id' => $role->id
         ]);
 
@@ -57,4 +65,5 @@ class AttachmentTest extends TestCase
         $user->delete();
         $role->delete();
     }
+
 }

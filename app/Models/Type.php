@@ -17,10 +17,10 @@ class Type extends Model
         return $this->hasMany('App\Models\Event');
     }
 
-    public function evaluations(){
-        return $this->belongsToMany(Evaluation::class)->withPivot('percentage','nota_min_tarea','nota_media_tarea', 'nota_media_minima')->withTimestamps();
+    public function yearUnions(){
+        return $this->belongsToMany(YearUnion::class, 'percentages', 'type_id', 'year_union_id')->using(Percentage::class)->withPivot('percentage','min_grade','average_grade')->withTimestamps();
     }
-
+    
     public function misbehaviors()
     {
         return $this->hasMany('App\Models\Misbehavior');
@@ -29,9 +29,12 @@ class Type extends Model
     {
         return $this->hasMany('App\Models\Item');
     }
-
-    public function tasks()
+ public function tasks()
     {
         return $this->hasMany('App\Models\Task');
     }
+public function percentages(){
+        return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+    }
+    
 }

@@ -34,7 +34,7 @@ class MisbehaviorsTest extends TestCase
         $user = User::create([
             'first_name' => 'Alberto',
             'last_name' => 'Ferrer',
-            'rol_id' => $role->id,
+            'role_id' => $role->id,
             'password' => bcrypt('password'),
             'email' => 'alumno.apellido1@campusaula.com',
             'created_at' => now(),
@@ -74,7 +74,7 @@ class MisbehaviorsTest extends TestCase
         $user = User::create([
             'first_name' => 'Alberto',
             'last_name' => 'Ferrer',
-            'rol_id' => $role->id,
+            'role_id' => $role->id,
             'password' => bcrypt('password'),
             'email' => 'alumno.apellido1@campusaula.com',
             'created_at' => now(),
@@ -113,7 +113,7 @@ class MisbehaviorsTest extends TestCase
         $user = User::create([
             'first_name' => 'Alberto',
             'last_name' => 'Ferrer',
-            'rol_id' => $role->id,
+            'role_id' => $role->id,
             'password' => bcrypt('password'),
             'email' => 'alumno.apellido2@campusaula.com',
             'created_at' => now(),
@@ -142,7 +142,7 @@ class MisbehaviorsTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $timeTable = Timeable::create([
+        $timeTable = Timetable::create([
             'name' => '2DAM2020',
             'date_start' =>  now(),
             'date_end' => now(),

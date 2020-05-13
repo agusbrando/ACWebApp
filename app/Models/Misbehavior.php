@@ -14,14 +14,16 @@ class Misbehavior extends Model
 
     protected $guarded = [];
 
-    public function user()
-    {
-        return $this->BelongsTo(User::class);
+
+    public function sessionTimetable(){
+        return $this->BelongsTo(SessionTimetable::class);
     }
-        public function sessionTimetable(){
-        $this ->BelongsTo(SessionTimetable::class);
-    }
+
     public function type(){
-        $this ->BelongsTo(Type::class);
+        return $this->BelongsTo(Type::class);
+    }
+
+    public function yearUnionUser(){
+        return $this->BelongsTo(YearUnionUser::class);
     }
 }

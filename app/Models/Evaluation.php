@@ -9,19 +9,8 @@ class Evaluation extends Model
     protected $table = 'evaluations';
     protected $guarded = [];
 
-    public function subject(){
-        return $this->belongsTo('App\Models\Subject');
-    }
-
-    public function tasks(){
-        return $this->hasMany('App\Models\Task');
-    }
-
-    public function types(){
-        return $this->belongsToMany(Type::class)->withPivot('percentage','nota_min_tarea','nota_media_tarea','nota_media_minima')->withTimestamps();
-    }
-
-    public function users(){
-        return $this->belongsToMany(User::class,'evaluations_users')->using(EvaluationsUsers::class)->withTimestamps();
+     //todas las yearUnion de esa evaluacion, una por curso y asignatura
+     public function yearUnions(){
+        return $this->hasMany(YearUnion::class);
     }
 }
