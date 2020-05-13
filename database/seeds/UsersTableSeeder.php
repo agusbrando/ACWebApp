@@ -45,7 +45,6 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('@VcEse5F@b25c7e'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 4,
             'timetable_id'=>1
         ]);
         
@@ -75,7 +74,6 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role_id' => 4,
                 'timetable_id'=>1
             ]);
         }
