@@ -15,7 +15,6 @@ class State extends Model
         'name',
     ];
 
-
     public function items()
     {
         return $this->hasMany('App\Models\Item');

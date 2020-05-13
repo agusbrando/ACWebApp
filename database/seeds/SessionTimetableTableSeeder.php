@@ -14,49 +14,49 @@ class SessionTimetableTableSeeder extends Seeder
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 1,
+            'year_union_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 2,
+            'year_union_id' => 2,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 3,
+            'year_union_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 4,
+            'year_union_id' => 4,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 5,
+            'year_union_id' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 6,
+            'year_union_id' => 6,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,
-            'subject_id' => 7,
+            'year_union_id' => 7,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

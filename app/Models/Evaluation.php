@@ -10,7 +10,7 @@ class Evaluation extends Model
     protected $guarded = [];
 
      //todas las yearUnion de esa evaluacion, una por curso y asignatura
-     public function yearUnion(){
+     public function yearUnions(){
         return $this->hasMany(YearUnion::class);
     }
 }

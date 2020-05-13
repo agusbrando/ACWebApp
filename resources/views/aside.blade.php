@@ -76,6 +76,19 @@
             Stock
         </a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/courses">
+            <span data-feather="file-text"></span>
+            Cursos
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/states">
+            <span data-feather="file-text"></span>
+            Estados
+        </a>
+        </li>
+        
     </ul>
     </div>
 </nav>
