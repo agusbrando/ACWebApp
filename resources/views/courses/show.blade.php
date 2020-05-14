@@ -11,11 +11,8 @@
             <div class="d-flex flex-row">
                 <a href="/courses" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3>Curso </h3>
-
             </div>
             <div class="d-flex flex-row-reverse">
-
-
             </div>
         </div>
         <div class="card-body row no-gutters">
@@ -48,7 +45,10 @@
                                             <td>{{$subject->name }}</td>
                                             <td class="botones">
                                                 <a class="btn btn-outline-primary" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
-                                                <a href="{{ route('asignaturas.show', $subject->id) }}" class="btn btn-primary btn-sm mr-2">Evaluaciones</a>
+                                                <form action="{{ route('subjects.evaluations',  ['subject' => $subject->id, 'year' => $yearId, 'course' => $courseId ]) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary btn-sm mr-2">Evaluaciones</button>
+                                                </form>
                                                 <a href="#" class="btn btn-primary btn-sm">Programacion</a>
                                             </td>
                                         </tr>
@@ -79,70 +79,70 @@
                                                 <div class="card">
 
 
-                                                        <table id='mytable' class="table w-100">
-                                                            <thead class="thead-dark">
+                                                    <table id='mytable' class="table w-100">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Apellido</th>
+                                                                <th>Items</th>
+                                                                <th>Responsabilizar Item</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            @foreach($yearUnion->yearUnionUsers as $yearUnionUser)
+
+                                                            <form method="get" action="">
+                                                                @csrf
+                                                                @method('GET')
                                                                 <tr>
-                                                                    <th>Nombre</th>
-                                                                    <th>Apellido</th>
-                                                                    <th>Items</th>
-                                                                    <th>Responsabilizar Item</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
 
-                                                                @foreach($yearUnion->yearUnionUsers as $yearUnionUser)
+                                                                    <td>{{$yearUnionUser->user->first_name}}</td>
+                                                                    <td>{{$yearUnionUser->user->last_name}}</td>
 
-                                                                <form method="get" action="">
-                                                                    @csrf
-                                                                    @method('GET')
-                                                                    <tr>
+                                                                    <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
+                                                                        @foreach($yearUnionUser->items as $item)
+                                                                        <form method="get" action="{{ route('courses.showItem', $item->id)}}">
+                                                                            @csrf
+                                                                            @method('GET')
+                                                                            <button class="btn btn-outline-primary m-1 " type="submit">{{"Nº ".$item->number." - ".$item->name}}</button>
+                                                                        </form>
 
-                                                                        <td>{{$yearUnionUser->user->first_name}}</td>
-                                                                        <td>{{$yearUnionUser->user->last_name}}</td>
+                                                                        @endforeach
+                                                                    </td>
 
-                                                                        <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
-                                                                            @foreach($yearUnionUser->items as $item)
-                                                                            <form method="get" action="{{ route('courses.showItem', $item->id)}}">
+                                                                    <td>
+                                                                        <div class="form-group ">
+                                                                            <form class="botones d-flex flex-wrap" method="get" action="#">
                                                                                 @csrf
                                                                                 @method('GET')
-                                                                                <button class="btn btn-outline-primary m-1 " type="submit">{{"Nº ".$item->number." - ".$item->name}}</button>
+
+                                                                                <select class="form-control " id="type_id" name="type_id">
+                                                                                    <option disabled selected>Selecciona un Item</option>
+                                                                                    <!--Hace la funcion de un placeholder-->
+                                                                                    @foreach($items as $item)
+                                                                                    @if($item->id == $item->item_id)
+                                                                                    <option selected value="{{$item->id}}">{{$item->name}}</option>
+                                                                                    @else
+                                                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+
+                                                                                    @endif
+
+                                                                                    @endforeach
+
+                                                                                </select>
+
+
+                                                                                <button class="btn btn-outline-info mt-2" role="button">Asignar Item</button>
                                                                             </form>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </form>
 
-                                                                            @endforeach
-                                                                        </td>
-
-                                                                        <td>
-                                                                            <div class="form-group ">
-                                                                                <form class="botones d-flex flex-wrap" method="get" action="#">
-                                                                                    @csrf
-                                                                                    @method('GET')
-
-                                                                                    <select class="form-control " id="type_id" name="type_id">
-                                                                                        <option disabled selected>Selecciona un Item</option>
-                                                                                        <!--Hace la funcion de un placeholder-->
-                                                                                        @foreach($items as $item)
-                                                                                        @if($item->id == $item->item_id)
-                                                                                        <option selected value="{{$item->id}}">{{$item->name}}</option>
-                                                                                        @else
-                                                                                        <option value="{{$item->id}}">{{$item->name}}</option>
-
-                                                                                        @endif
-
-                                                                                        @endforeach
-
-                                                                                    </select>
-
-
-                                                                                    <button class="btn btn-outline-info mt-2" role="button">Asignar Item</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </form>
-
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
 
                                                 </div>
                                             </ul>
