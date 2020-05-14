@@ -12,13 +12,13 @@
 
       <div class="d-flex flex-row">
         <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
-        <h3>Material del Aula</h3>
+        <h3>Material del {{$item->aula->name}}</h3> <!-- saco el nombre del array clave valor -->
       </div>
       <div class="d-flex flex-row-reverse">
         <form method="post" action="{{ route('items.destroy', $item->id)}}">
           @csrf
           @method('DELETE')
-          <button class="btn btn-outline-danger ml-2" type="submit">Delete</button>
+          <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
         </form>
         <form method="get" action="{{ route('items.edit', $item->id) }}">
           @csrf
@@ -37,7 +37,7 @@
           <!-- Portfolio Item Row -->
           <div class="row">
             <div class="col">
-              <h1 class="display-8">Responsables</h1>
+              <h1 class="display-8">{{$item->number." - ".$item->name}}</h1>
 
 
               <div class="col-md-11">
@@ -47,20 +47,17 @@
             </div>
 
             <div class="col-md-4">
-              <form method="get" action="{{ route('items.edit', $item->id)}}">
-                @csrf
-                @method('GET')
-                <button class="btn btn-primary my-1 mt-4" type="submit">Añadir Responsable</button>
-              </form>
-              <h3 class="my-3">Project Description</h3>
+              
+              <h3 class="my-3">Atributos</h3>
 
-              <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-              <h3 class="my-3">Project Details</h3>
-              <ul>
-                <li>Lorem Ipsum</li>
-                <li>Dolor Sit Amet</li>
-                <li>Consectetur</li>
-                <li>Adipiscing Elit</li>
+              <ul class="text-justify">
+                <li>ID              = {{$item->id}}</li>
+                <li>Número          = {{$item->number}}</li>
+                <li>Fecha de compra = {{$item->date_pucharse}}</li>
+                <li>Aula            = {{$item->aula->name}}</li>
+                <li>Estado          = {{$item->state->name}}</li>
+                <li>Tipo            = {{$item->type->name}}</li>
+
               </ul>
             </div>
 
