@@ -89,8 +89,6 @@ class ClassroomTest extends TestCase
         $type->destroy($type);
         $role->destroy($role);  
         }
-
-
     public function testItem()
     {
         $classroom = Classroom::create([
