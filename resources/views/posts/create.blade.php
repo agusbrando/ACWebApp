@@ -4,12 +4,12 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
+            <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Nuevo Post</h3>
             <form action="{{ route('posts.store')}}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="col-12">
-                    <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     <a class="btn btn-outline-warning float-right" href="{{ route('posts.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
@@ -30,20 +30,12 @@
                 <div>
                     <fieldset>
                         <div class="form-group">
-                            <label for="user_id">Id Usuario</label>
-                            <input value="" name="user_id" id="user_id" type="number" class="@error('user_id') is-invalid @enderror form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="title">Título</label>
                             <input value="" name="title" id="title" type="text" class="@error('title') is-invalid @enderror form-control">
                         </div>
                         <div class="form-group">
                             <label for="text">Texto</label>
                             <input value="" name="text" id="text" type="text" class="@error('text') is-invalid @enderror form-control">
-                        </div>
-                        </br>
-                        <div class="input-group hdtuto control-group lst increment">
-                            <input type="file" name="name[]" class="myfrm form-control">
                         </div>
                     </fieldset>
                     @error('email', 'login')

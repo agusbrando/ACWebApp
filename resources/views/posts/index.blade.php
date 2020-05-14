@@ -4,9 +4,9 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
+            <a href="/home" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Posts</h3>
             <div>
-                <a href="/home" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                 <a class="btn btn-outline-success" href="{{ route('posts.create')}}">Añadir</a>
             </div>
         </div>
