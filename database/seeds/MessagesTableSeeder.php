@@ -11,14 +11,34 @@ class MessagesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 5; $i++) {
-            DB::table('messages')->insert([
-                'user_id'         =>     $i,
-                'title'         =>  'title ' .  $i,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'text'         =>  'text ' .  $i
-            ]);
-        }
+        DB::table('messages')->insert([
+            'user_id' => 1,
+            'subject' => 'de admin a user',
+            'message' => 'con un adjunto',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('messages')->insert([
+            'user_id' => 1,
+            'subject' => 'de admin a guillermo',
+            'message' => 'sin adjunto',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('messages')->insert([
+            'user_id' => 2,
+            'subject' => 'de user a admin',
+            'message' => 'sin adjunto',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('messages')->insert([
+            'user_id' => 4,
+            'subject' => 'de marcelo a admin',
+            'message' => 'con dos adjuntos',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
     }
 }

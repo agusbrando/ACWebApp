@@ -29,7 +29,8 @@ class ItemController extends Controller
         $types = Type::all()->where('model', Item::class);
         $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
-        $items = Item::all();
+        $items = Item::paginate(10);
+        
         return view('items.index', compact('classrooms', 'items', 'types', 'states'));
     }
     public function filter(Request $request)

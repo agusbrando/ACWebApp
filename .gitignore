@@ -11,3 +11,11 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .vscode/launch.json
+config/roles.php
+database/migrations/2016_01_15_105324_create_roles_table.php
+database/migrations/2016_01_15_114412_create_role_user_table.php
+database/migrations/2016_01_26_115212_create_permissions_table.php
+database/migrations/2016_01_26_115523_create_permission_role_table.php
+database/migrations/2016_02_09_132439_create_permission_user_table.php
+database/seeds/ConnectRelationshipsSeeder.php
+composer.lock

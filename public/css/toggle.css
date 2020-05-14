@@ -59,3 +59,16 @@
   .slider.round:before {
     border-radius: 50%;
   }
+  .boton button{
+    background-color: white;
+  }
+  .contenedor{
+    display: flex;
+    flex-direction: row;
+  }
+  .select-iz{
+    width: 100%;
+  }
+  .espacio{
+    width: 10px;
+  }

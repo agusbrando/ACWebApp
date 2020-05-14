@@ -4,16 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Seguimiento extends Model
+class Tracking extends Model
 {
    protected $table ='trackings';
 
    protected $primaryKey ='id';
 
    protected $fillable = [
+    'signature',
     'user_id',
-    'datetime_start',
-    'datetime_end',
+    'date_signature',
+    'time_start',
+    'time_end',
     'num_hours'
     
 

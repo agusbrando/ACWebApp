@@ -13,9 +13,10 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'first_name' => 'Admin',
-            'email' => 'admin@campusaula.com',
+            'email' => 'admin@champusaula.com',
             'last_name' => 'Admin',
             'password' => bcrypt('adminPass'),
+            'signature'=>'..\storage\app\signatures\'1\'5ea93e9b2fb28.png',
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 1,
@@ -34,7 +35,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
             'last_name' => 'Garrido Portes',
-            'email' => 'guillermo.garrido@campusaula.com',
+            'email' => 'guillermo.garrido@champusaula.com',
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
@@ -51,22 +52,22 @@ class UsersTableSeeder extends Seeder
             'role_id' => 4,
             'timetable_id'=>1
         ]);
-        
+
         DB::table('users')->insert([
             'first_name' => 'Marcelo',
             'last_name' => 'Malonda Pellicer',
-            'email' => 'marcelo.malonda1@campusaula.com',
+            'email' => 'marcelo.malonda@champusaula.com',
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 2,
+            'role_id' => 3,
             'timetable_id'=>1
         ]);
         DB::table('users')->insert([
-            'first_name' => 'Marcelo',
-            'last_name' => 'Malonda Pellicer',
-            'email' => 'marcelo.malonda@campusaula.com',
-            'password' => bcrypt('password'),
+            'first_name' => 'Default',
+            'last_name' => 'User',
+            'email' => 'user@default.com',
+            'password' => bcrypt('default'),
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
@@ -80,7 +81,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role_id' => 4,
+                'role_id' => 1,
                 'timetable_id'=>1
             ]);
         }

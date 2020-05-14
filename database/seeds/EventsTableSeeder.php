@@ -12,21 +12,23 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         DB::table('events')->insert([
-            'type_id' => 1,
             'session_id' => 1,
-            'user_id' =>1,
+            'user_id' => 1,
+            'type_id' => 1,
+            'title' => 'default',
             'description' => 'default',
-            'date' => date("Y-m-d"),
+            'date' => date("Y-m-d H:i:s"),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         DB::table('events')->insert([
-            'type_id' => 2,
             'session_id' => 2,
-            'user_id' =>2,
+            'user_id' => 2,
+            'type_id' => 2,
+            'title' => 'default',
             'description' => 'default',
-            'date' => date("Y-m-d"),
+            'date' => date("Y-m-d H:i:s"),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

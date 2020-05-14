@@ -11,12 +11,6 @@ class CalificationsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('califications')->insert([
-            'year_user_id'=>5,
-            'task_id'=>1,
-            'value'=>5,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+       
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\State;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+
 
 class StateController extends Controller
 {
@@ -13,7 +16,8 @@ class StateController extends Controller
      */
     public function index()
     {
-        //
+        $states = State::paginate(10);
+        return view('states.index', compact('states'));
     }
 
     /**
@@ -23,7 +27,8 @@ class StateController extends Controller
      */
     public function create()
     {
-        //
+        $states = State::all();
+        return view('states.create', compact('states'));
     }
 
     /**
@@ -34,19 +39,31 @@ class StateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            ]);
+
+        $state = new State([
+            'name' => $request->get('name')
+        ]);
+        $state->save();
+        return redirect('/states')->with('Success', 'State saved!');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.  
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($state_id)
     {
-        //
+        $state = State::find($state_id);
+        // $user->role = $user->role;
+
+        return view('states.show', compact('state'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -56,7 +73,8 @@ class StateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $state = State::find($id);       
+        return view('states.edit', compact('state'));
     }
 
     /**
@@ -68,7 +86,17 @@ class StateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            'name' => 'required',
+            
+        ]);
+        $state = State::find($id);
+        $state->name = $request->get('name');      
+
+
+        $state->save();
+        return redirect('/states')->with('Succes', 'Usuario editado!');
     }
 
     /**
@@ -79,6 +107,9 @@ class StateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $state = State::find($id);
+        $state->delete();
+
+        return redirect('/states')->with('Success', 'State deleted!');
     }
 }

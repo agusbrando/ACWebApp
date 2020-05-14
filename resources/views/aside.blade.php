@@ -8,13 +8,25 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link" href="{{ url('messages')}}">
             <span data-feather="layers"></span>
-            Mensajes 
+            Mensajes recibidos
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="/">
+            <a class="nav-link" href="{{ url('messages_send')}}">
+                <span data-feather="layers"></span>
+            Mensajes enviados
+            </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('messages.create')}}">
+                    <span data-feather="layers"></span>
+                Nuevo mensaje
+                </a>
+                </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">
             <span data-feather="file"></span>
             Seguimiento
         </a>
@@ -26,7 +38,7 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link" href="/events">
             <span data-feather="users"></span>
             Calendario
         </a>
@@ -36,7 +48,7 @@
             <span data-feather="bar-chart-2"></span>
             Horario
         </a>
-        </li>        
+        </li>
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -47,21 +59,33 @@
     </h6>
     <ul class="nav flex-column mb-2">
         <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link" href="http://127.0.0.1:8000/asignaturas">
             <span data-feather="file-text"></span>
-            Notas 
+            Notas
         </a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="/">
             <span data-feather="file-text"></span>
-            Programación 
+            Programación
         </a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="/permissions">
             <span data-feather="file-text"></span>
             Permisos
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/users">
+            <span data-feather="file-text"></span>
+            Usuarios
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/roles">
+            <span data-feather="file-text"></span>
+            Roles
         </a>
         </li>
         <li class="nav-item">
@@ -74,6 +98,39 @@
         <a class="nav-link" href="/items">
             <span data-feather="file-text"></span>
             Stock
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/sessions">
+            <span data-feather="file-text"></span>
+            Sessions 
+        <a class="nav-link" href="/courses">
+            <span data-feather="file-text"></span>
+            Cursos
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/states">
+            <span data-feather="file-text"></span>
+            States 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/subjects">
+            <span data-feather="file-text"></span>
+            Subjects 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/evaluations">
+            <span data-feather="file-text"></span>
+            Evaluations 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/types">
+            <span data-feather="file-text"></span>
+            Types 
         </a>
         </li>
     </ul>

@@ -3,17 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Message extends Model
 {
-      protected $table = 'messages';
+    use SoftDeletes;
+
+    protected $with = ['attachments'];
+    protected $table = 'messages';
     protected $primaryKey = 'id';
     protected $guarded = [];
+    protected $dates = ['deleted_at'];
 
-    public function sends()
-    {
-        return $this->hasMany('App\Models\Send');
-    }
 
     public function user()
     {
@@ -24,7 +26,9 @@ class Message extends Model
     {
         return $this->morphMany('App\Models\Attachment', 'attachmentable');
     }
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User')->withPivot('read')->withTimeStamps();
+    }
 
-
-    
 }

@@ -1,3 +1,8 @@
+body {
+    background-color: #E6E6E6;
+    margin-top: 30px;
+}
+
 .principal {
     font-size: .875rem;
     display: flex;
@@ -6,6 +11,11 @@
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
+}
+
+body {
+    background-color: #E6E6E6;
+    margin-top: 30px;
 }
 
 .fondo {
@@ -20,6 +30,7 @@
 #navbarDropdown{
     color: white;
 }
+
 
 /*
  * Sidebar
@@ -139,7 +150,6 @@
         font-size: 3.5rem;
     }
 }
-
 body {
     background-color: #E6E6E6;
     margin-top: 30px;

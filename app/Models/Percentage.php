@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Percentage extends Pivot
 {
-    protected $table = 'percentages';
+    protected $table = 'evaluation_type';
     protected $guarded = [];
+
+    //TODO deleted
 }
