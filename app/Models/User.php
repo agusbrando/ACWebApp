@@ -5,18 +5,16 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use AjCastro\EagerLoadPivotRelations\EagerLoadPivotTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use EagerLoadPivotTrait;
 
     protected $table = 'users';
 
     protected $primaryKey = 'id';
     protected $guarded = [];
-    
+
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -35,8 +33,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-    
-   
+
+
 
     public function trackings()
     {
@@ -52,7 +50,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Timetable');
     }
 
-    
+
     //todas las year unions en las que haya un responsable
     public function yearUnionsResponsable()
     {

@@ -53,12 +53,5 @@ class SessionTimetableTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('session_timetables')->insert([
-            'session_id' => 1,
-            'timetable_id' => 1,
-            'year_union_id' => 7,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 }
