@@ -23,14 +23,6 @@
                 <div>
                     <fieldset>
                         <div class="form-group">
-                            <label for="user_id">Id Usuario</label>
-                            <input value="" name="user_id" id="user_id" type="number" class="@error('user_id') is-invalid @enderror form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="post_id">Id Post</label>
-                            <input value="" name="post_id" id="post_id" type="number" class="@error('post_id') is-invalid @enderror form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="text">Texto</label>
                             <input value="" name="text" id="text" type="text" class="@error('text') is-invalid @enderror form-control">
                         </div>

@@ -7,14 +7,14 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
+            <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Editar Comentario</h3>
             <form action="{{ route('comments.update',$comment->id)}}" method="POST">
                 @method('PATCH')
                 <div>
                     <div class="col-12">
-                        <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
-                        <a class="btn btn-outline-warning float-right" href="{{ route('comments.show',$comment->id)}}" tabindex="-1" aria-disabled="true">Cancelar</a>
+                        <a class="btn btn-outline-warning float-right" href="/posts" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
                 </div>
         </div>
@@ -26,14 +26,6 @@
                 <div>
 
                     <fieldset>
-                        <div class="form-group">
-                            <label for="user_id">Id Usuario</label>
-                            <input value="{{$comment->user_id}}" name="user_id" id="user_id" type="number" class="@error('user_id') is-invalid @enderror form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="post_id">Id Post</label>
-                            <input value="{{$comment->title}}" name="post_id" id="post_id" type="number" class="@error('post_id') is-invalid @enderror form-control">
-                        </div>
                         <div class="form-group">
                             <label for="text">Texto</label>
                             <input value="{{$comment->text}}" name="text" id="text" type="text" class="@error('text') is-invalid @enderror form-control">
