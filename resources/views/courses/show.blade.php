@@ -34,7 +34,29 @@
                             Aquí irá la programacion del curso
                         </div>
                         <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
-                            Aquí iran las asignaturas
+                            <div class="card-body row no-gutters table-responsive">
+                                <table class="table col-12 ">
+                                    <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach($subjects as $subject)
+                                    <tbody>
+                                        <tr>
+                                            <td>{{$subject->name }}</td>
+                                            <td class="botones">
+                                                <a class="btn btn-outline-primary" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
+                                                <a href="{{ route('asignaturas.show', $subject->id) }}" class="btn btn-primary btn-sm mr-2">Evaluaciones</a>
+                                                <a href="#" class="btn btn-primary btn-sm">Programacion</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                    @endforeach
+                                </table>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
                             <div id="accordion">
@@ -49,14 +71,14 @@
                                         </h5>
                                         <span class="badge badge-primary badge-pill"> {{$yearUnion->yearUnionUsers->count()}}</span>
                                     </div>
-                                    
+
 
                                     <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse" aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
                                         <div class="card-body">
                                             <ul class="list-group list-group-flush">
                                                 <div class="card">
 
-                                                    
+
                                                         <table id='mytable' class="table w-100">
                                                             <thead class="thead-dark">
                                                                 <tr>
@@ -121,7 +143,7 @@
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
-                                                    
+
                                                 </div>
                                             </ul>
                                         </div>
