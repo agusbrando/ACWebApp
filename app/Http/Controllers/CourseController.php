@@ -21,7 +21,7 @@ use App\Models\YearUnionUser;
 class CourseController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Esta es la vista principal donde se listarán todos los cursos.
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,7 +36,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Creamos un nuevo curso .
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,7 +53,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guardamos el curso en la Base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -93,33 +93,30 @@ class CourseController extends Controller
             }
         }
         
-
+        $items = Item::all();
         $types = Type::where('model', Item::class);
-        $classrooms = Classroom::all();  
+        $classrooms = Classroom::all(); 
         
-        // $items = Item::all();
-        // $users = User::all();
-        // $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
-        
-        
-
-        return view('courses.show', compact( 'classrooms', 'types','yearUnions'));
+        return view('courses.show', compact( 'classrooms', 'types','yearUnions', 'items'));
 
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Aqui pasamos dos atributos y cargamos un curso en la vista de editar.
      *
-     * @param  int  $id
+     * @param  int  $courseId
+     * @param int $yearId
      * @return \Illuminate\Http\Response
      */
     public function edit($courseId, $yearId)
     {
-        //
+        $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
+
+        return view('courses.edit', compact( 'yearUnionUsers'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * El boton de la vista edit hara que actualice los datos de un curso específico en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -131,7 +128,7 @@ class CourseController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Hacemos un softDelete del curso en la base de datos.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -141,5 +138,21 @@ class CourseController extends Controller
         Course::find($id)->delete();
 
         return redirect('/courses')->with('exito', 'Curso eliminado!');
+    }
+
+    /**
+     * Esto nos llevará a la vista de detalle del item cuando le hagamos click en la tabla.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showItem($id)
+    {
+        $item = Item::find($id);
+        $type = Type::find($item->type_id);
+        $users = User::all();
+        $courses = Course::all();
+
+        return view('items.show', compact('item', 'type', 'users', 'courses'));
     }
 }
