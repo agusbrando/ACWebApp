@@ -67,54 +67,34 @@ class TypesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+       
+
         DB::table('types')->insert([
             'name' => 'Trabajos',
-            'model' => Percentage::class,
+            'model' => 'App\Models\Task',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('types')->insert([
             'name' => 'Examenes',
-            'model' => Percentage::class,
+            'model' => 'App\Models\Task',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
-        DB::table('types')->insert([
-            'name' => 'Practicas',
-            'model' => Percentage::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
+        
         DB::table('types')->insert([
             'name' => 'Actitud',
-            'model' => Percentage::class,
+            'model' => 'App\Models\Task',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('types')->insert([
+            'name' => 'Recuperacion',
+            'model' => 'App\Models\Task',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        DB::table('types')->insert([
-            'name' => 'Parcial',
-            'model' => Task::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('types')->insert([
-            'name' => 'Practica',
-            'model' => Task::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('types')->insert([
-            'name' => 'ActitudNota',
-            'model' => Task::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-    
     }
 }

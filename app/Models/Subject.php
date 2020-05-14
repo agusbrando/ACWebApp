@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\SubjectsUsers;
 
 class Subject extends Model
 {
@@ -29,5 +30,7 @@ class Subject extends Model
     {
         return $this->hasMany('App\Models\SessionTimetable');
     }
+
+    
 
 }

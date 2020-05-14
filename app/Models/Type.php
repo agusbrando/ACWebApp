@@ -35,8 +35,12 @@ class Type extends Model
     {
         return $this->hasMany('App\Models\Item');
     }
-
-    public function percentages(){
+ public function tasks()
+    {
+        return $this->hasMany('App\Models\Task');
+    }
+public function percentages(){
         return $this->belongsToMany(Type::class)->using(Percentage::class)->withPivot('percentage')->withTimestamps();
     }
+    
 }

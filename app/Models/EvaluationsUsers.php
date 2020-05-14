@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Percentage extends Pivot
+class EvaluationsUsers extends Pivot
 {
-    protected $table = 'evaluation_type';
+    protected $table = 'evaluations_users';
     protected $guarded = [];
-
-    //TODO deleted
 }

@@ -1,13 +1,7 @@
 <?php
 
-use App\Models\Misbehavior;
-use App\Models\SessionTimetable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,30 +25,26 @@ use Illuminate\Support\Facades\Auth;
 Route::resource('events', 'CalendarController');
 Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
 
-
-
-use Symfony\Component\Console\Input\Input;
-use Illuminate\Support\Facades\DB;
-
-Route::get('/login', function () {
-    return view('welcome');
-});
-
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::resource('asistencia', 'AsistenciaController');
+Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
+Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
+Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
+Route::resource('asignaturas', 'AsignaturaController');
+Route::resource('evaluaciones', 'EvaluacionesController');
+Route::resource('porcentajes', 'PorcentajesController');
+Route::resource('desglose', 'DesgloseController');
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
 Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
-
-
-
-
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
-
+Route::get('evaluaciones/desglose/crearTarea/{id}/{eval_id}', 'DesgloseController@create');
+Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
+Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
+Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->name('desglose.updateTrabajos');
+Route::post('desglose/updateActitud', 'DesgloseController@updateActitud')->name('desglose.updateActitud');
+Route::post('desglose/updateRecuperacion', 'DesgloseController@updateRecuperacion')->name('desglose.updateRecuperacion');
 Route::resource('units', 'UnitController');
 Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
 Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
@@ -69,6 +59,8 @@ Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspec
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
+Route::get('tareas/{id}', 'DesgloseController@eliminar');
+Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
 
 Route::post('/imprimir', 'TrackingController@imprimir')->name('print');
 Route::post('/excel', 'TrackingController@excel')->name('excel');
@@ -90,6 +82,7 @@ Route::resource('sessions','SessionController');
 Route::resource('subjects','SubjectController');
 Route::resource('types','TypeController');
 Route::resource('users','UserController');
+Route::get('evaluaciones/desglose/{subject_id}/{evaluation_id}', 'EvaluacionesController@show');
 Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');

@@ -1,30 +1,22 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use AjCastro\EagerLoadPivotRelations\EagerLoadPivotTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use EagerLoadPivotTrait;
 
     protected $table = 'users';
 
     protected $primaryKey = 'id';
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'first_name', 'last_name', 'email', 'password','role_id','signature'
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    protected $guarded = [];
+    
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -43,11 +35,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-
-    public function items()
-    {
-        return $this->belongsToMany('App\Models\Item', 'items-users', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
-    }
+    
+   
 
     public function trackings()
     {
@@ -63,10 +52,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Timetable');
     }
 
-    public function tasks()
-    {
-        return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
-    }
+    
     //todas las year unions en las que haya un responsable
     public function yearUnionsResponsable()
     {

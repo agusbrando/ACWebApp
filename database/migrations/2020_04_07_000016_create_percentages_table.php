@@ -17,8 +17,9 @@ class CreatePercentagesTable extends Migration
             $table->integer('year_union_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->integer('percentage')->unsigned();
-            $table->integer('min_grade')->unsigned();
-            $table->integer('average_grade')->unsigned();
+            $table->integer('min_grade_task')->unsigned();
+            $table->integer('average_grade_task')->unsigned();
+            $table->integer('min_average_grade_task')->unsigned();
             $table->timestamps();
 
             $table->primary(['year_union_id', 'type_id']);
@@ -34,6 +35,6 @@ class CreatePercentagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('percentages');
+        Schema::dropIfExists('evaluation_type');
     }
 }
