@@ -39,8 +39,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'user_id' => 'required',
             'title' => 'required',
             'text' => 'required'
         ]);
@@ -111,7 +109,6 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required',
             'title' => 'required',
             'text' => 'required'
         ]);
