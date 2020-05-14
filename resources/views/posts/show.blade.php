@@ -4,9 +4,9 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Comentarios</h3>
+            <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
+            <h3>Post</h3>
             <div>
-                <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                 <a class="btn btn-outline-info" href="{{ route('posts.edit',$post->id)}}">Editar</a>
                 <form class="float-right" action="{{ route('posts.destroy',$post->id)}}" method="POST">
                     @csrf

@@ -7,12 +7,12 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
+            <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Editar Post</h3>
             <form action="{{ route('posts.update',$post->id)}}" method="POST">
                 @method('PATCH')
                 <div>
                     <div class="col-12">
-                        <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                         <a class="btn btn-outline-warning float-right" href="{{ route('posts.show',$post->id)}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
@@ -26,10 +26,6 @@
                 <div>
 
                     <fieldset>
-                        <div class="form-group">
-                            <label for="user_id">Id Usuario</label>
-                            <input value="{{$post->user_id}}" name="user_id" id="user_id" type="number" class="@error('user_id') is-invalid @enderror form-control">
-                        </div>
                         <div class="form-group">
                             <label for="title">Título</label>
                             <input value="{{$post->title}}" name="title" id="title" type="text" class="@error('title') is-invalid @enderror form-control">
