@@ -155,4 +155,23 @@ class CourseController extends Controller
 
         return view('items.show', compact('item', 'type', 'users', 'courses'));
     }
+
+    /**
+     * Esto asignará un item al usuario cuando de le demos al boton de asignar item de la vista show del curso
+     *
+     * @param  int  $itemId
+     * @param  int  $userId
+     * @param  int  $yearUnionId
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function responsabilizarItem($itemId, $userId, $yearUnionId)
+    {
+        $item = Item::find($id);
+        $type = Type::find($item->type_id);
+        $users = User::all();
+        $courses = Course::all();
+
+        return view('items.show', compact('item', 'type', 'users', 'courses'));
+    }
 }
