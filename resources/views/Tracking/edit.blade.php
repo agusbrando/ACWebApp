@@ -64,18 +64,6 @@
   </div>
 </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <script type="text/javascript">
   var sig = $('#sig').signature({
     syncField: '#signature64',
