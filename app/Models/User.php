@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     use Notifiable;
 
@@ -43,7 +43,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-    
+
     public function items()
     {
         return $this->belongsToMany('App\Models\Item', 'items-users', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
@@ -82,9 +82,20 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Comment');
     }
-    
+
+    public function messagesReceive()
+    {
+        return $this->belongsToMany('App\Models\Message')->withPivot('read')->withTimeStamps();
+    }
+
+    public function messagesSent()
+    {
+        return $this->hasMany('App\Models\Message');
+    }
+
     //** lista de year unions (asignaturas por cada evaluacion) en las que esta matriculado el alumno */
     public function yearUnions(){
         return $this->belongsToMany(YearUnion::class, 'yearUnionUsers', 'user_id', 'year_union_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
     }
+
 }

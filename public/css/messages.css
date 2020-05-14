@@ -1,0 +1,18 @@
+.cabezeraTabla {
+    color: #fff;
+    background-color: #4d5358;
+    border-color: #454d55;
+}
+
+.containerAttachment {
+    display: flex;
+    flex-flow: row wrap;
+}
+.my-4 {
+    margin-top: 3rem !important;
+    margin-bottom: 1rem !important;
+}
+.icon-size{
+
+    font-size: 50px;
+}
