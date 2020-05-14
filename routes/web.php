@@ -111,6 +111,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
 
 Route::get('/time', 'CalendarController@getTime');
+Route::get('/list', 'CalendarController@getList');
 
 Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
 
