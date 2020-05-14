@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password','role_id'
+        'first_name', 'last_name', 'email', 'password','role_id','signature'
     ];
 
     /**
@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function trackings()
     {
-        return $this->hasMany('App\Models\Trackings');
+        return $this->hasMany('App\Models\Tracking');
     }
     public function misbehaviors()
     {

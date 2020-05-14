@@ -32,7 +32,7 @@ class Session extends Model
 
     public function sessionTimetables()
     {
-        return $this->belongsToMany(Timetable::class, 'session_timetable')->using(SessionTimetable::class)->withPivot('')->withTimestamps();
+        return $this->belongsToMany(Timetable::class,'session_timetables')->withTimestamps();
     }
     
 

@@ -8,6 +8,7 @@ use App\Models\Task;
 
 use Illuminate\Support\Facades\Auth;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,13 +80,45 @@ Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('uni
 
 Route::resource('notesPercentages', 'NotesPercentagesController');
 Route::resource('programs', 'ProgramController');
-Route::post('programs/{id}/unit', 'ProgramController@storeUnit')->name('programs.storeUnit');
-Route::post('programs/{id}/aspecto', 'ProgramController@storeAspecto')->name('programs.storeAspecto');
-Route::patch('programs/{program_id}/unit/{id}', 'ProgramController@updateUnit')->name('programs.updateUnit');
-Route::patch('programs/{program_id}/aspecto/{id}', 'ProgramController@updateAspecto')->name('programs.updateAspecto');
-Route::delete('programs/{program_id}/unit/{id}', 'ProgramController@destroyUnit')->name('programs.destroyUnit');
-Route::delete('programs/{program_id}/aspecto/{id}', 'ProgramController@destroyAspecto')->name('programs.destroyAspecto');
-Route::get('programs/{program_id}/aspecto/{id}/edit', 'ProgramController@editarAspecto')->name('programs.editarAspecto');
+Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
+Route::post('programs/{id}/aspecto','ProgramController@storeAspecto')->name('programs.storeAspecto');
+Route::patch('programs/{program_id}/unit/{id}','ProgramController@updateUnit')->name('programs.updateUnit');
+Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspecto')->name('programs.updateAspecto');
+Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
+Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
+Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
+Route::get('/login', function () {
+    return view('welcome');
+});
+
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::post('/imprimir', 'TrackingController@imprimir')->name('print');
+Route::post('/excel', 'TrackingController@excel')->name('excel');
+Route::get('seguimiento/filtrar','TrackingController@filtrar')->name('seguimiento.filtrar');
+Route::get('seguimiento','TrackingController@fileStorageServe');
+Route::resource('horarios', 'TimetableController');
+Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
+Route::post('seguimiento/{signature}/download', 'TimetableController@download')->name('download');
+Route::resource('seguimiento', 'TrackingController');
+Route::get('seguimiento','TrackingController@index');
+Route::post('seguimiento','TrackingController@store')->name('seguimiento.store');
+
+Route::get('/models', function () {
+
+    $role = 1;
+
+    echo '*Usuarios con el id_role '.$role.'*<br>';
+    $users = App\Models\Role::find($role)->users;
+
+    foreach ($users as $user) {
+        echo ($user->first_name).'<br>';
+    }
+
+    echo'<br>';
+});
+
 
 Route::resource('permissions','PermissionController');
 Route::resource('classrooms','ClassroomController');
@@ -96,7 +129,7 @@ Route::resource('subjects','SubjectController');
 Route::resource('types','TypeController');
 
 Auth::routes();
-
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
 

@@ -924,4 +924,4 @@ class SessionsTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
     }
-}
+} 

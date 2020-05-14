@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@campusaula.com',
             'last_name' => 'Admin',
             'password' => bcrypt('adminPass'),
+            'signature'=>'..\storage\app\signatures\'1\'5ea93e9b2fb28.png',
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 1,
