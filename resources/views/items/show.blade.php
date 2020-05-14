@@ -11,7 +11,7 @@
     <div class="card-header row m-0 justify-content-between">
       
       <div class="d-flex flex-row">
-          <a href="/items" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+          <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
           <h3>Material del Aula</h3>
       </div>
       <div class="d-flex flex-row-reverse">
