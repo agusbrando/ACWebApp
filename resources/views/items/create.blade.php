@@ -12,7 +12,7 @@
                 <div class="d-flex flex-row">
                     @csrf
                     @method('GET')
-                    <a href="{{ route('items.index')}}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                    <a href="{{ url()->previous() }}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
 
                     <h3>Crear Item</h3>
                 </div>
