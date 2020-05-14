@@ -184,23 +184,60 @@
                 </div> 
                 <div class="collapse multi-collapse col-lg-12 col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample2">
                         @if(!$editar)
-                        <table class="table col-12" >
+                        <table class="table col-12 text-left" >
                             <thead class="thead-dark col-12">
                                 <tr>
-                                    <th>Aspecto Evaluado</th>
-                                    <th>Observaciones</th>
-                                    <th>Actions</th>
+                                    <th class="d-flex flex-row justify-content-between">
+                                        
+                                            <div class="col-6 text-center">Aspecto Evaluado</div>
+                                            <div class="col-6 text-center">Observaciones</div>
+                                        
+                                    </th>
+                                    
+                                    <!-- <th>
+                                        <div class="card-deck">
+                                            <div class="card border-0 bg-dark">
+                                                <div class="card-body">
+                                                <h5 class="card-title text-center">Aspecto Evaluado</h5>
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="card border-0 bg-dark">
+                                                <div class="card-body">
+                                                <h5 class="card-title text-center">Observaciones</h5>
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </th> -->
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($program->evaluables as $evaluable)
                                     <tr>
-                                        <td>{{$evaluable->name}}</td>
-                                        <td>
+                                        <!-- <td class="text-justify">{{$evaluable->name}}</td>
+                                        <td class="text-justify">
                                             
                                             {{$evaluable->pivot->description}}
+                                        </td> -->
+                                        <td>
+                                            <div class="card-deck">
+                                                <div class="card border-0">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card border-0">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-justify">{{$evaluable->pivot->description}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                         </td>
-                                        <td class="botones justify-content-center">
+                                        <td class="botones justify-content-end text-right">
                                             <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
         
 
