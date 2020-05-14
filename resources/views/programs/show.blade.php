@@ -103,7 +103,7 @@
                 $('#masInfo{{$i}}').toggle();
                 $('#cabFecha').toggle();
                 $('#fechaPrevista{{$i}}').toggle();
-
+                $('#columna{{$i}}').toggle();
             });
         @endfor
     });
@@ -276,7 +276,7 @@
                         </form>
                         @endif
                 </div> 
-                <div class="collapse multi-collapse col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample3">
+                <div class="collapse multi-collapse col-sm-12"  id="multiCollapseExample3">
                     <div class="dropdown justify-content-start">
                     
                             <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -301,7 +301,7 @@
                                     <th></th>
                                     <th>Contenido</th>
                                     <th></th>
-                                    <th>En Plazo</th>
+                                    <th class="text-center">En Plazo</th>
                                     <th>Fechas</th>
                                     <th></th>
                                     <th></th>
@@ -315,16 +315,17 @@
                                     <td> {{$unidad->name}}</td>
                                     <td></td>
                                     @if(strtotime($unidad->expected_date_end) < strtotime($unidad->date_end))
-                                    <td class="text-danger"><i class="fas fa-times"></i></td>
+                                    <td class="text-danger text-center"><i class="fas fa-times"></i></td>
                                     @else
-                                    <td class="text-success"><i class="fas fa-check"></i></td>
+                                    <td class="text-success  text-center"><i class="fas fa-check"></i></td>
                                     @endif
                                     
                                     <td class="text-nowrap">{{date('d/m/Y',strtotime($unidad->date_start))}} - {{date('d/m/Y',strtotime($unidad->date_end))}}</td>
                                     <td  id="fechaPrevista{{$k}}">({{date('d/m/Y',strtotime($unidad->expected_date_start))}} - {{date('d/m/Y',strtotime($unidad->expected_date_end))}})</td>
+                                    <td id="columna{{$k}}"></td>
                                     <td></td>
-                                    
                                 </tr>
+                                @if($unidad->notes != '' && $unidad->improvements != '')
                                 <tr  id="masInfo{{$k}}">
 
                                     <!-- <th>Observaciones</th>
@@ -338,13 +339,21 @@
                                             <div class="card border-0">
                                                 <div class="card-body">
                                                 <h5 class="card-title text-center">Observaciones</h5>
+                                                @if($unidad->notes != '')
                                                 <p class="card-text text-justify">{{$unidad->notes}}</p>
+                                                @else
+                                                <p class="card-text text-center">No hay observaciones en esta unidad</p>
+                                                @endif
                                                 </div>
                                             </div>
                                             <div class="card border-0">
                                                 <div class="card-body">
                                                 <h5 class="card-title text-center">Acciones de mejora</h5>
+                                                @if($unidad->improvements != '')
                                                 <p class="card-text text-justify">{{$unidad->improvements}}</p>
+                                                @else
+                                                <p class="card-text text-center">No hay acciones de mejora en esta unidad</p>
+                                                @endif
                                                 </div>
                                             </div>
                                             
@@ -355,6 +364,8 @@
                                     
                                     
                                 </tr>
+                                @else
+                                @endif
                                 @endforeach    
                             </tbody>
                         </table>
