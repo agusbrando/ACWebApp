@@ -9,28 +9,28 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="card shadow">
     <div class="card-header row m-0 justify-content-between">
-      
+
       <div class="d-flex flex-row">
-          <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
-          <h3>Material del Aula</h3>
+        <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+        <h3>Material del Aula</h3>
       </div>
       <div class="d-flex flex-row-reverse">
-        <form  method="post" action="{{ route('items.destroy', $item->id)}}">
+        <form method="post" action="{{ route('items.destroy', $item->id)}}">
           @csrf
           @method('DELETE')
           <button class="btn btn-outline-danger ml-2" type="submit">Delete</button>
         </form>
-        <form  method="get" action="{{ route('items.edit', $item->id) }}">
+        <form method="get" action="{{ route('items.edit', $item->id) }}">
           @csrf
           @method('GET')
           <button class="btn btn-outline-info" role="button">Editar Material</button>
         </form>
-        
+
       </div>
     </div>
     <div class="card-body row no-gutters">
       <div class="col-sm-12">
-        
+
         <div class="container">
 
 
@@ -40,65 +40,9 @@
               <h1 class="display-8">Responsables</h1>
 
 
-              <div id="accordion">
-
-                @foreach($courses as $course)
-                @if(($course->level % 2) != 0)
-                <div class="card">
-                  <div class="card-header list-group-item d-flex justify-content-between align-items-center" id="heading{{$course->id}}" data-toggle="collapse" data-target="#collapse{{$course->id}}" aria-expanded="false" aria-controls="collapse{{$course->id}}">
-
-                    <h5 class="mb-0">
-                      <button class="btn collapsed">
-                        {{$course->name}}
-                      </button>
-                    </h5>
-                    <span class="badge badge-primary badge-pill"> {{$users->count()}}</span>
-                  </div>
-                  <!-- collapse show lo muestra abierto por defecto -->
-                  <div id="collapse{{$course->id}}" class="collapse" aria-labelledby="heading{{$course->id}}" data-parent="#accordion">
-                    <div class="card-body">
-                      <ul class="list-group list-group-flush">
-
-                        <!-- @foreach($users as $user)
-
-                  <li class="list-group-item list-group-item-action">{{$user->first_name}}, {{$user->last_name}}</li>
-                  @endforeach -->
-
-                        @foreach($courses as $course2)
-                        @if((($course->id.$course->level) == ($course2->id.$course2->level)) || ($course->id.$course->level) == (($course2->id + 1).($course2->level + 1)))
-                        <div class="card">
-
-                          <div class="card-header list-group-item d-flex justify-content-between align-items-center" id="heading{{$course2->id.$course2->level}}" data-toggle="collapse" data-target="#collapse{{$course2->id.$course2->level}}" aria-expanded="false" aria-controls="collapse{{$course2->id.$course2->level}}">
-
-                            <h5 class="mb-0">
-                              <button class="btn collapsed">
-                                {{$course2->level.'º de '.$course2->name}}
-                              </button>
-                            </h5>
-                          </div>
-                          <!-- collapse show lo muestra abierto por defecto -->
-                          <div id="collapse{{$course2->id.$course2->level}}" class="collapse" aria-labelledby="heading{{$course2->id.$course2->level}}" data-parent="#accordion">
-                            <div class="card-body">
-                              <ul class="list-group list-group-flush">
-
-                                @foreach($users as $user)
-
-                                <li class="list-group-item list-group-item-action">{{$user->first_name}}, {{$user->last_name}}</li>
-                                @endforeach
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        @endif
-                        @endforeach
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                @endif
-                @endforeach
+              <div class="col-md-11">
+                <img class="img-fluid" src="http://placehold.it/750x500" alt="">
               </div>
-
 
             </div>
 
@@ -158,7 +102,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </main>
 
