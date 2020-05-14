@@ -29,7 +29,7 @@
       <a style="margin: 19px; width: 100%;" href="#" class="btn btn-outline-primary">Publicar</a>
     </div>
     </br>
-    <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+    <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
       <p>12/05 11:27</p>
@@ -46,7 +46,7 @@
       <div>
         <img style="float: left;" src="{{asset('img/corazon.png')}}" alt="" width="25" height="25">
         <p style="float: left;">0</p>
-        <p style="float: right;">X Comentarios</p>
+        <p style="float: right;">1 Comentarios</p>
       </div>
       </br>
       <div>
@@ -58,14 +58,14 @@
   </br>
   <div class="card shadow">
     </br>
-    <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+    <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      <p>12/05 11:43</p>
-      <h4 style="text-align: center;">Ponencia ESIC</h4>
+      <p>13/05 13:23</p>
+      <h4 style="text-align: center;">Aula Campus en el Desafío Junior de ESIC</h4>
     </div>
     <div class="card-body row no-gutters">
-      <img src="{{asset('img/dinantia2.png')}}" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+      <img src="{{asset('img/dinantia4.png')}}" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
     </div>
     <div class="card-body row no-gutters">
       <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p>
@@ -75,7 +75,7 @@
       <div>
         <img style="float: left;" src="{{asset('img/corazon.png')}}" alt="" width="25" height="25">
         <p style="float: left;">0</p>
-        <p style="float: right;">X Comentarios</p>
+        <p style="float: right;">1 Comentarios</p>
       </div>
       </br>
       <div>
@@ -87,7 +87,7 @@
   </br>
   <div class="card shadow">
     </br>
-    <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+    <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
       <p>12/05 13:40</p>
@@ -104,7 +104,7 @@
       <div>
         <img style="float: left;" src="{{asset('img/corazon.png')}}" alt="" width="25" height="25">
         <p style="float: left;">0</p>
-        <p style="float: right;">X Comentarios</p>
+        <p style="float: right;">1 Comentarios</p>
       </div>
       </br>
       <div>
