@@ -167,10 +167,34 @@ class CourseController extends Controller
      */
     public function responsabilizarItem($itemId, $userId, $yearUnionId)
     {
+        $yearUnions = YearUnion::select('id','evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation'); 
+        foreach($yearUnions as $yearUnion){
+            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->get()->load('items', 'user');
+            $registrados = array();
+            foreach($yearUnion->yearUnionUsers as $yearUnionUser){
+
+
+                //Aseguramos que no se repitan los usuarios
+                if( !in_array($yearUnionUser->user_id, $registrados) ){
+                    array_push($registrados, $yearUnionUser->user_id);
+                    $yearUnionUser->items = $yearUnionUser->items;
+                    $yearUnionUser->user = $yearUnionUser->user;
+                }else{
+                    $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
+                }
+                
+            }
+        }
+        
+        $items = Item::all();
+        $types = Type::where('model', Item::class);
+        $classrooms = Classroom::all(); 
+        
+
+
+
         $item = Item::find($id);
-        $type = Type::find($item->type_id);
         $users = User::all();
-        $courses = Course::all();
 
         return view('items.show', compact('item', 'type', 'users', 'courses'));
     }
