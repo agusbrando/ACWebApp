@@ -10,7 +10,7 @@
                 @method('POST')
                 <div class="col-12">
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
-                    <a class="btn btn-outline-warning float-right" href="{{ route('messages.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
+                    <a class="btn btn-outline-warning float-right" href="{{ url()->previous() }}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
         </div>
         <div class="card-body row no-gutters">
