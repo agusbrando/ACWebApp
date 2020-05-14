@@ -48,7 +48,7 @@
 
             <div class="col-md-4">
               
-              <h3 class="my-3">Atributos</h3>
+              <h3 class="my-3">Características</h3>
 
               <ul class="text-justify">
                 <li>ID              = {{$item->id}}</li>
