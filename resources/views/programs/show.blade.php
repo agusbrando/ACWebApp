@@ -293,17 +293,19 @@
 
                     @for($i=1;$i<=3;$i++)
                     <div id='divTablaEval{{$i}}' class="mt-5 row no-gutters table-responsive">
-                        <span class="badge badge-primary float-left"> {{$i}}º Evaluacion </span>
+                        <h5 class="card-title text-center mb-3"> {{$i}}º Evaluación</h5>
+                        <!-- <span class="badge badge-primary float-left"> {{$i}}º Evaluacion </span> -->
                         <table id='tablaEval{{$i}}' class="table col-12 text-left table-striped" >
                             <thead class="thead-dark col-12">
                                 <tr>
                                     <th></th>
                                     <th>Contenido</th>
                                     <th></th>
-                                    <th>Estado</th>
+                                    <th>En Plazo</th>
                                     <th>Fechas</th>
                                     <th></th>
                                     <th></th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -313,27 +315,44 @@
                                     <td> {{$unidad->name}}</td>
                                     <td></td>
                                     @if(strtotime($unidad->expected_date_end) < strtotime($unidad->date_end))
-                                    <td class="text-danger">Fuera de Plazo</td>
+                                    <td class="text-danger"><i class="fas fa-times"></i></td>
                                     @else
-                                    <td class="text-success">Dentro de Plazo</td>
+                                    <td class="text-success"><i class="fas fa-check"></i></td>
                                     @endif
                                     
                                     <td class="text-nowrap">{{date('d/m/Y',strtotime($unidad->date_start))}} - {{date('d/m/Y',strtotime($unidad->date_end))}}</td>
                                     <td  id="fechaPrevista{{$k}}">({{date('d/m/Y',strtotime($unidad->expected_date_start))}} - {{date('d/m/Y',strtotime($unidad->expected_date_end))}})</td>
-                                    <td class="text-right" colspan="2">
-                                        
-                                        <a type="button" class="btn"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-eye"></i></a>
+                                    <td></td>
+                                    
+                                </tr>
+                                <tr  id="masInfo{{$k}}">
+
+                                    <!-- <th>Observaciones</th>
+                                    
+                                    
+                                    <td  colspan="2" class="text-justify">{{$unidad->notes}}</td>
+                                    <th>Acciones de mejora</th>
+                                    <td class="text-justify" colspan="2">{{$unidad->improvements}}</td> -->
+                                    <td colspan="6">
+                                        <div class="card-deck">
+                                            <div class="card border-0">
+                                                <div class="card-body">
+                                                <h5 class="card-title text-center">Observaciones</h5>
+                                                <p class="card-text text-justify">{{$unidad->notes}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="card border-0">
+                                                <div class="card-body">
+                                                <h5 class="card-title text-center">Acciones de mejora</h5>
+                                                <p class="card-text text-justify">{{$unidad->improvements}}</p>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
 
                                     </td>
-                                </tr>
-                                <tr id="masInfo{{$k}}">
-                                    <th>Observaciones</th>
+                                
                                     
-                                    
-                                    <td  colspan="3" class="text-justify">{{$unidad->notes}}</td>
-                                    <th>Acciones de mejora</th>
-                                    <td class="text-justify">{{$unidad->improvements}}</td>
-
                                     
                                 </tr>
                                 @endforeach    
