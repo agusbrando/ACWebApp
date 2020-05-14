@@ -48,7 +48,7 @@
                             <input type="date" value="{{$fecha}}" class="form-control" readonly name="fecha">
                         </div>
                         <br>
-                        <input type="submit" class="btn btn-outline-success" value="Guardar">
+                        <input type="submit" class="btn btn-outline-success" value="Finalizar">
                     </div>
                 </form>
                 <br>

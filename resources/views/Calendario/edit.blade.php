@@ -11,6 +11,7 @@
                 <div>
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
+                        {{ csrf_field() }}
                         <a class="btn btn-outline-warning float-right" href="{{ route('events.show',$event->id)}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
                 </div>
@@ -24,7 +25,7 @@
                     <fieldset>
                         <div class="form-group">
                             <label for="title">Título</label>
-                            <input value="{{$event->title}}" name="title" id="title" type="text" class="@error('first_name') is-invalid @enderror form-control">
+                            <input value="{{$titulo}}" name="title" id="title" type="text" class="@error('first_name') is-invalid @enderror form-control">
                         </div>
                         <div class="form-group">
                             <label for="date">Fecha</label>
@@ -32,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Descripción</label>
-                            <textarea value="{{$event->description}}" id="description" type="text" rows="3" maxlength="30" style="resize:none;" class="@error('email') is-invalid @enderror form-control" name="description"></textarea>
+                            <textarea id="description" type="text" rows="3" maxlength="30" style="resize:none;" class="@error('description') is-invalid @enderror form-control" name="description">{{ $descripcion }}</textarea>
                         </div>
                     </fieldset>
                     @error('email', 'login')
