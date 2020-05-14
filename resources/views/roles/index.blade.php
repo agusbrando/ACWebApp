@@ -7,38 +7,33 @@
 
     <div class="card shadow">
       <div class="card-header row m-0 justify-content-between">
-        <h3>Permisos</h3>
+        <h3>Roles</h3>
         <div>
-          <a class="btn btn-outline-success" href="/permissions/create" class="btn btn-success">Añadir</a>
+          <a class="btn btn-outline-success" href="/roles/create" class="btn btn-success">Añadir</a>
         </div>
       </div>
       <div class="card-body row no-gutters table-responsive">
         <table class="table col-12 ">
           <thead id="developers" class="thead-dark col-12 col-md-8 col-lg-10 p-3">
             <tr>
-              <th scope="col">Permiso</th>
-              @foreach($roles as $role)
-              <th scope="col">
-                {{$role->name}}
-              </th>
-              @endforeach
+              <th scope="col">Roles</th>
+              <th scope="col">Habilitar</th>
               <th scope="col">Ver</th>
             </tr>
           </thead>
-          @foreach($permissions as $permission)
+          @foreach($roles as $role)
           <tbody>
             <tr>
-              <td>{{$permission->name }}</td>
-              @foreach($roles as $role)
+              <td>{{$role->name }}</td>
               <td>
                 <label class="switch">
                   <input type="checkbox">
                   <span class="slider round"></span>
                 </label>
               </td>
-              @endforeach
+              
               <td class="botones">
-                <a class="btn btn-outline-primary" href="{{ route('permissions.show',$permission->id)}}">Ver</a>
+                <a class="btn btn-outline-primary" href="{{ route('roles.show',$role->id)}}">Ver</a>
               </td>
             </tr>
           </tbody>
@@ -48,11 +43,11 @@
 
       <div class=" card-footer col-12">
         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <input type="hidden" value="{{$permissions}}">
-          </ul>
-        </nav>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <input type="hidden" value="{{$roles}}">
+                </ul>
+            </nav>
       </div>
     </div>
   </main>

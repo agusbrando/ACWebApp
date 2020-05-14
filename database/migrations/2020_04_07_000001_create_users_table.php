@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        
+
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('first_name');
@@ -26,10 +26,11 @@ class CreateUsersTable extends Migration
             $table->integer('timetable_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
-            
-            $table->foreign('role_id')->references('id')->on('roles');
+
             $table->foreign('timetable_id')->references('id')->on('timetables');
-            
+            // $table->foreign('role_id')->references('id')->on('roles');
+            // $table->foreign('permission_id')->references('id')->on('permissions');
+
         });
     }
 
@@ -39,7 +40,7 @@ class CreateUsersTable extends Migration
      * @return void
      */
     public function down()
-    {   
+    {
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('users');
         Schema::enableForeignKeyConstraints();

@@ -87,13 +87,7 @@ Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspec
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
-Route::get('/login', function () {
-    return view('welcome');
-});
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::post('/imprimir', 'TrackingController@imprimir')->name('print');
 Route::post('/excel', 'TrackingController@excel')->name('excel');
 Route::get('seguimiento/filtrar','TrackingController@filtrar')->name('seguimiento.filtrar');
@@ -105,21 +99,7 @@ Route::resource('seguimiento', 'TrackingController');
 Route::get('seguimiento','TrackingController@index');
 Route::post('seguimiento','TrackingController@store')->name('seguimiento.store');
 
-Route::get('/models', function () {
-
-    $role = 1;
-
-    echo '*Usuarios con el id_role '.$role.'*<br>';
-    $users = App\Models\Role::find($role)->users;
-
-    foreach ($users as $user) {
-        echo ($user->first_name).'<br>';
-    }
-
-    echo'<br>';
-});
-
-
+Route::resource('roles','RoleController');
 Route::resource('permissions','PermissionController');
 Route::resource('classrooms','ClassroomController');
 Route::resource('evaluations','EvaluationController');
@@ -127,7 +107,7 @@ Route::resource('states','StateController');
 Route::resource('sessions','SessionController');
 Route::resource('subjects','SubjectController');
 Route::resource('types','TypeController');
-
+Route::resource('users','UserController');
 Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
