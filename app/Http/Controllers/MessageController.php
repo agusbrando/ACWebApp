@@ -75,12 +75,6 @@ class MessageController extends Controller
         $message->save();
         $users = $request->get('users');
 
-        foreach ($users as $userid) {
-            $user = User::find($userid);
-            $user->messagesReceive()->attach($message->id);
-            Mail::to($user->email)->send(new MessageMail($message));
-
-        }
         if ($request->hasfile('filenames')) {
             foreach ($request->file('filenames') as $file) {
                 $name = $file->getClientOriginalName();
@@ -95,6 +89,14 @@ class MessageController extends Controller
                 $attachment->save();
             }
         }
+
+        foreach ($users as $userid) {
+            $user = User::find($userid);
+            $user->messagesReceive()->attach($message->id);
+            Mail::to($user->email)->send(new MessageMail($message));
+
+        }
+
 
         return redirect('/messages')->with('success', 'Message Send!');
     }
