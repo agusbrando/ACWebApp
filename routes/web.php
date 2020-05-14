@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::resource('events', 'CalendarController');
 Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
+Route::get('/crearEvento/{types}/{sessions}/{dia}/{tipo}', 'CalendarController@crearEvento')->name('crearEvento');
 
 Route::resource('asistencia', 'AsistenciaController');
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
