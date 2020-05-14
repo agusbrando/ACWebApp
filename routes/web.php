@@ -106,14 +106,14 @@ Route::get('/', 'HomeController@index');
 
 
 
-//RUTAS ITEMs
+//RUTAS ITEMs Sergio Lopez
 Route::post('/items/filter', 'ItemController@filter');
-// Route::post('/items/edit', 'ItemController@edit');
 Route::resource('items', 'ItemController');
-//RUTAS STATESs
-Route::resource('states', 'StateController');
-//RUTAS COURSEs
 
+//RUTAS STATEs
+Route::resource('states', 'StateController');
+
+//RUTAS COURSEs Sergio Lopez
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 Route::resource('courses', 'CourseController');
