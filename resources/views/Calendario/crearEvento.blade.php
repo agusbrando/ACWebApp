@@ -6,7 +6,15 @@
 <main role="main" class=" col-md-10 ml-sm-auto col-lg-10">
     <div class="card shadow">
         <div class="card-header bg-dark text-light row m-0 justify-content-between">
-            <h3 class="mt-1">Reserva de aulas</h3>
+            <div class="row">
+                <a href="javascript:history.back()" class="my-auto mx-1 h5"><i class="fas fa-arrow-left ml-1"></i></a>
+                <h3 class="mt-1 ml-1">Reserva de aulas</h3>
+            </div>
+            <div>
+                <a type="button" href="/types" class="btn btn-outline-light mt-1">Añadir Tipo</a>
+                <a type="button" href="/sessions" class="btn btn-outline-light mt-1 ml-1">Añadir Hora</a>
+                <a type="button" href="/list" class="btn btn-outline-light mt-1 ml-1">Listado</a>
+            </div>
         </div>
         <div class="card-body row no-gutters">
 
@@ -48,7 +56,7 @@
                             <input type="date" value="{{$fecha}}" class="form-control" readonly name="fecha">
                         </div>
                         <br>
-                        <input type="submit" class="btn btn-outline-success" value="Guardar">
+                        <input type="submit" class="btn btn-success w-25" value="Finalizar">
                     </div>
                 </form>
                 <br>

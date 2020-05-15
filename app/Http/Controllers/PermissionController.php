@@ -16,12 +16,11 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::all()->load('roles');
         $roles = Role::all();
+        // $assignPermissions[$permission_id]=$role_id;
         $permissions = Permission::paginate(5);
-        return view('permissions.index', compact('permissions','roles'));
-        
-        
+        return view('permissions.index', compact('permissions', 'roles'));
     }
 
     /**
@@ -88,7 +87,7 @@ class PermissionController extends Controller
     {
         $permissions = Permission::find($id);
         $roles = Role::all();
-        return view('permissions.edit', compact('permissions','roles'));
+        return view('permissions.edit', compact('permissions', 'roles'));
     }
 
     /**
@@ -131,5 +130,19 @@ class PermissionController extends Controller
         $permission->delete();
 
         return redirect('/permissions/')->with('success', 'Permission deleted!');
+    }
+    public function assignPermissionRole(Request $request)
+    {
+        $request->validate([
+            'assignPermissions' => ['required'],
+
+
+        ]);
+        $permissions = $request->get('assignPermissions');
+            foreach($permissions as $permission_id=>$role_id){
+                $permission = Permission::find($permission_id);
+                $permission -> roles()->sync($role_id);
+            }
+        return redirect('/permissions')->with('success', 'Permission saved!');
     }
 }

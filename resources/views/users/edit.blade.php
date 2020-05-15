@@ -6,7 +6,10 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Perfil de usuario</h3>
+            <div class="d-flex flex-row">
+                <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3> Editar usuario</h3>
+            </div>
             <form action="{{ route('users.update',$user->id)}}" method="POST">
                 @method('PATCH')
                 @csrf

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\Subject;
+use App\Models\YearUnion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -30,6 +31,23 @@ class SubjectController extends Controller
     {
         $subjects = Subject::all();
         return view('subjects.create', compact('subjects'));
+    }
+
+    public function evaluations(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required',
+            'year' => 'required',
+            'course' => 'required'
+        ]);
+
+        $yearUnions = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->get()->load('evaluation');
+
+        foreach($yearUnions as $yearUnion){
+            $yearUnion->evaluation = $yearUnion->evaluation;
+            $yearUnion->percentages = $yearUnion->types;
+        }
+       
     }
 
     /**

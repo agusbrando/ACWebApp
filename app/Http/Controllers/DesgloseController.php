@@ -205,7 +205,6 @@ class DesgloseController extends Controller
     public function eliminar($id)
     {
         $tasks = Task::all();
-
         $subject = Subject::find($id);
 
         return view('Notas.eliminarTarea', compact('tasks', 'subject'));
