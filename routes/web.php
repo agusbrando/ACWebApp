@@ -61,17 +61,17 @@ Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAsp
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
-
+//Route::Trackings carlos
 Route::post('/imprimir', 'TrackingController@imprimir')->name('print');
 Route::post('/excel', 'TrackingController@excel')->name('excel');
 Route::get('seguimiento/filtrar','TrackingController@filtrar')->name('seguimiento.filtrar');
 Route::get('seguimiento','TrackingController@fileStorageServe');
-Route::resource('horarios', 'TimetableController');
-Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
-Route::post('seguimiento/{signature}/download', 'TimetableController@download')->name('download');
 Route::resource('seguimiento', 'TrackingController');
 Route::get('seguimiento','TrackingController@index');
 Route::post('seguimiento','TrackingController@store')->name('seguimiento.store');
+//Route::Timetables carlos
+Route::resource('horarios', 'TimetableController');
+Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
 Route::resource('roles','RoleController');
 Route::resource('permissions','PermissionController');
