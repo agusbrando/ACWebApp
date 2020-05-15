@@ -276,19 +276,33 @@
                             <table class="table col-12" >
                                     <thead class="thead-dark col-12">
                                         <tr>
-                                            <th>Aspecto Evaluado</th>
-                                            <th>Observaciones</th>
-                                            <th>Actions</th>
+                                            <th class="d-flex flex-row justify-content-between">
+                                            
+                                                <div class="col-6 text-center">Aspecto Evaluado</div>
+                                                <div class="col-6 text-center">Observaciones</div>
+                                            
+                                            </th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($program->evaluables as $evaluable)
                                         @if($evaluable->pivot->id != $evaluadoEditar_id)
                                             <tr>
-                                                <td>{{$evaluable->name}}</td>
                                                 <td>
-                                                    
-                                                    {{$evaluable->pivot->description}}
+                                                    <div class="card-deck">
+                                                        <div class="card border-0">
+                                                            <div class="card-body">
+                                                                <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card border-0">
+                                                            <div class="card-body">
+                                                                <p class="card-text text-justify">{{$evaluable->pivot->description}}</p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
                                                 </td>
                                                 <td class="botones justify-content-center align-items-center">
                                                     <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
@@ -298,11 +312,28 @@
                                             
                                             <tr>
                                                
-                                                    <td>{{$evaluable->name}}</td>
-                                                    <td><textarea rows="1" name="description" class="form-control" >{{$evaluable->pivot->description}}</textarea></td>
-                                                    <td class="botones justify-content-center">
-                                                        <button class="btn" type="submit"><i class="far fa-save"></i></button>
-                                                        <a type="button" class="btn ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
+                                                    <td>
+                                                        <div class="card-deck">
+                                                            <div class="card border-0">
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card border-0">
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-justify"><textarea rows="3" name="description" class="form-control" >{{$evaluable->pivot->description}}</textarea></p>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td class="d-flex align-items-center">
+                                                        <div class="card-deck">
+                                                            <div class="card border-0 botones justify-content-center align-baseline">
+                                                                 <button class="btn" type="submit"><i class="far fa-save"></i></button>
+                                                                <a type="button" class="btn ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
+                                                            </div>
+                                                        <div class="card-deck">
                                                     </td>
                                             </tr>
                                                 
