@@ -38,7 +38,6 @@ Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
 Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
-Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 Route::get('evaluaciones/desglose/crearTarea/{id}/{eval_id}', 'DesgloseController@create');
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
 Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
@@ -46,10 +45,12 @@ Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->nam
 Route::post('desglose/updateActitud', 'DesgloseController@updateActitud')->name('desglose.updateActitud');
 Route::post('desglose/updateRecuperacion', 'DesgloseController@updateRecuperacion')->name('desglose.updateRecuperacion');
 Route::resource('units', 'UnitController');
-Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
-Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
-Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
+
 Route::resource('notesPercentages', 'NotesPercentagesController');
+
+//INICIO Rutas de Temporalizacion de la programacion
+
+Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 Route::resource('programs', 'ProgramController');
 Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
 Route::post('programs/{id}/evaluar','ProgramController@storeEvaluacion')->name('programs.storeEvaluacion');
@@ -59,9 +60,12 @@ Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspec
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
+
+//FIN Rutas de Temporalizacion de la programacion
+
+
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
-
 Route::post('/imprimir', 'TrackingController@imprimir')->name('print');
 Route::post('/excel', 'TrackingController@excel')->name('excel');
 Route::get('seguimiento/filtrar','TrackingController@filtrar')->name('seguimiento.filtrar');
