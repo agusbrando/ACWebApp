@@ -199,7 +199,7 @@ class TrackingController extends Controller
     foreach ($trackings as $key => $tracking) {
       $trackings[$key] = json_decode($tracking);
     }
-    $pdf = \PDF::loadView('pdf', compact('trackings', 'user'))->setPaper('a4', 'landscape');
+    $pdf = \PDF::loadView('Tracking.pdf', compact('trackings', 'user'))->setPaper('a4', 'landscape');
     return $pdf->download('trackings.pdf');
   }
   public function excel(Request $request)
@@ -208,7 +208,7 @@ class TrackingController extends Controller
     foreach ($trackings as $key => $tracking) {
       $trackings[$key] = json_decode($tracking);
     }
-    return view('excel', compact('trackings'));
+    return view('Tracking.excel', compact('trackings'));
   }
   
 }

@@ -62,8 +62,8 @@ Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAs
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
 //Route::Trackings carlos
-Route::post('/imprimir', 'TrackingController@imprimir')->name('print');
-Route::post('/excel', 'TrackingController@excel')->name('excel');
+Route::post('seguimiento/imprimir', 'TrackingController@imprimir')->name('seguimiento.print');
+Route::post('seguimiento/excel', 'TrackingController@excel')->name('seguimiento.excel');
 Route::get('seguimiento/filtrar','TrackingController@filtrar')->name('seguimiento.filtrar');
 Route::get('seguimiento','TrackingController@fileStorageServe');
 Route::resource('seguimiento', 'TrackingController');
