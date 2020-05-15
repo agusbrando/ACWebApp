@@ -29,38 +29,21 @@ Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento'
 Route::post('/crearEvento','CalendarController@store');
 
 Route::resource('asistencia', 'AsistenciaController');
-Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
-Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
-Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
-Route::resource('asignaturas', 'AsignaturaController');
-Route::resource('evaluaciones', 'EvaluacionesController');
-Route::resource('porcentajes', 'PorcentajesController');
-Route::resource('desglose', 'DesgloseController');
+
+
+
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
 Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
-Route::get('evaluaciones/desglose/crearTarea/{id}/{eval_id}', 'DesgloseController@create');
-Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
-Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
-Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->name('desglose.updateTrabajos');
-Route::post('desglose/updateActitud', 'DesgloseController@updateActitud')->name('desglose.updateActitud');
-Route::post('desglose/updateRecuperacion', 'DesgloseController@updateRecuperacion')->name('desglose.updateRecuperacion');
-Route::resource('units', 'UnitController');
-
-Route::resource('notesPercentages', 'NotesPercentagesController');
-
-//INICIO Rutas de Temporalizacion de la programacion
-
-
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 
 Route::resource('units', 'UnitController');
 Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
 Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
 Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
-
+Route::resource('notesPercentages', 'NotesPercentagesController');
 Route::resource('programs', 'ProgramController');
 Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
 Route::post('programs/{id}/evaluar','ProgramController@storeEvaluacion')->name('programs.storeEvaluacion');
@@ -89,13 +72,14 @@ Route::resource('horarios', 'TimetableController');
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
 Route::resource('classrooms','ClassroomController');
-Route::resource('evaluations','EvaluationController');
 Route::resource('states','StateController');
 Route::resource('sessions','SessionController');
-Route::resource('subjects','SubjectController');
-Route::resource('types','TypeController');
-Route::get('evaluaciones/desglose/{subject_id}/{evaluation_id}', 'EvaluacionesController@show');
 
+Route::resource('types','TypeController');
+Route::resource('users','UserController');
+Auth::routes();
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('messages', 'MessageController')->middleware('auth');
 
@@ -138,3 +122,26 @@ Route::resource('states', 'StateController');
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 Route::resource('courses', 'CourseController');
+
+//RUTAS SUBJECTS JAVI
+// Route::resource('asignaturas', 'AsignaturaController');
+Route::post('subjects/evaluations', 'SubjectController@evaluations')->name('subjects.evaluations');
+
+Route::resource('subjects','SubjectController');
+Route::resource('evaluations','EvaluationController');
+Route::resource('tasks', 'TaskController');
+
+Route::get('evaluaciones/desglose/{subject_id}/{evaluation_id}', 'EvaluacionesController@show');
+Route::get('tareas/{id}', 'DesgloseController@eliminar');
+//TODO Pasar parametros con formulario/Eliminar ruta y poner destroy
+Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
+
+//TODO Cambiar controller de DesgloseController.
+Route::get('evaluaciones/desglose/crearTarea/{id}/{eval_id}', 'DesgloseController@create');
+Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
+Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
+Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->name('desglose.updateTrabajos');
+Route::post('desglose/updateActitud', 'DesgloseController@updateActitud')->name('desglose.updateActitud');
+Route::post('desglose/updateRecuperacion', 'DesgloseController@updateRecuperacion')->name('desglose.updateRecuperacion');
+
+Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');

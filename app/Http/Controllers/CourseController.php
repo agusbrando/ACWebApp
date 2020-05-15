@@ -31,7 +31,7 @@ class CourseController extends Controller
         foreach($years as $year){
             $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
         }
-  
+
         return view('courses.index', compact( 'years'));
     }
 
@@ -42,8 +42,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $classrooms = Classroom::all(); 
-        $courses = Course::all(); 
+        $classrooms = Classroom::all();
+        $courses = Course::all();
         $users = User::all();
         $subjects = Subject::all();
         $evaluations = Evaluation::all();
@@ -68,19 +68,21 @@ class CourseController extends Controller
      *
      * @param  int  $courseId
      * @param  int  $yearId
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($courseId, $yearId)
     {
 
-        $yearUnions = YearUnion::select('id','evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation'); 
+        $yearUnions = YearUnion::select('id','evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
+        $subject_ids = array();
         foreach($yearUnions as $yearUnion){
+            if( !in_array($yearUnion->subject_id, $subject_ids) ){
+                array_push($subject_ids, $yearUnion->subject_id);
+            }
             $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->get()->load('items', 'user');
             $registrados = array();
             foreach($yearUnion->yearUnionUsers as $yearUnionUser){
-
-
                 //Aseguramos que no se repitan los usuarios
                 if( !in_array($yearUnionUser->user_id, $registrados) ){
                     array_push($registrados, $yearUnionUser->user_id);
@@ -89,15 +91,19 @@ class CourseController extends Controller
                 }else{
                     $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
                 }
-                
+
             }
         }
-        
+       
+        //Subjects Tab
+        $subjects = Subject::whereIn('id', $subject_ids)->get();
+
+        //Items Tab
         $items = Item::all();
         $types = Type::where('model', Item::class);
-        $classrooms = Classroom::all(); 
-        
-        return view('courses.show', compact( 'classrooms', 'types','yearUnions', 'items'));
+        $classrooms = Classroom::all();
+
+        return view('courses.show', compact( 'classrooms', 'types','yearUnions', 'items', 'subjects', 'yearId', 'courseId'));
 
     }
 
