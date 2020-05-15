@@ -57,12 +57,13 @@ class CalendarController extends Controller
       $events = Event::all()->where('type_id', 1);
     } else {
       $events = Event::all()->where('type_id', 2);
-    }  
+    }
 
     return view('/Calendario/time', compact('types', 'sessions', 'dia', 'tipo', 'events'));
   }
 
-  public function getList(Request $request){
+  public function getList(Request $request)
+  {
     $events = Event::all();
     return view('/Calendario/list', compact('events'));
   }
@@ -162,12 +163,15 @@ class CalendarController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $event = Event::find($id);
+
 
     $request->validate([
       'titulo'  =>  'required',
       'descripcion' => 'required'
+
     ]);
+
+    $event = Event::find($id);
 
     $event->title = $request->get('titulo');
     $event->description = $request->get('descripcion');
