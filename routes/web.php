@@ -2,6 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Classroom;
+use App\Models\Course;
+use App\Models\Type;
+use App\Models\State;
+use App\Models\Item;
+use App\Models\User;
+use App\Models\Year;
+use App\Models\Evaluation;
+use App\Models\Subject;
+use App\Models\YearUnion;
+use App\Models\YearUnionUser;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +32,28 @@ use Illuminate\Support\Facades\Auth;
 // Route::put('/event/update','CalendarController@update');
 // Route::get('/event/details/{id}','CalendarController@details');
 
+Route::get('/prueba', function () {
+
+    $user_id =12;
+    $item_id1= 1;
+    $item_id2= 2;
+ 
+    $yearUnions = User::find($user_id)->yearUnions;
+
+    $items = [Item::find($item_id1),Item::find($item_id2)];
+
+    foreach($yearUnions as $yearUnion){
+        foreach($items as $item){
+            if($yearUnion->pivot->assistance){
+
+                $yearUnion->pivot->items()->attach($item->id);
+
+            }
+        }
+    }
+
+
+});
 
 Route::resource('events', 'CalendarController');
 Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
@@ -116,4 +149,5 @@ Route::resource('states', 'StateController');
 //RUTAS COURSEs Sergio Lopez
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
+Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
 Route::resource('courses', 'CourseController');

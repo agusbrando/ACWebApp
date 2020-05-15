@@ -6,6 +6,7 @@
 @section('main')
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
@@ -37,98 +38,33 @@
                             Aquí iran las asignaturas
                         </div>
                         <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
-                            <div id="accordion">
-                                @foreach($yearUnions as $yearUnion)
 
-                                <div class="card">
-                                    <div class="card-header list-group-item d-flex justify-content-between align-items-center m-0" id="heading{{$yearUnion->evaluation->name}}" data-toggle="collapse" data-target="#collapse{{$yearUnion->evaluation->name}}" aria-expanded="false" aria-controls="collapse{{$yearUnion->evaluation->name}}">
-                                        <h5 class="mb-0">
-                                            <button class="btn collapsed">
-                                                {{$yearUnion->evaluation->name}}
-                                            </button>
-                                        </h5>
-                                        <span class="badge badge-primary badge-pill"> {{$yearUnion->yearUnionUsers->count()}}</span>
-                                    </div>
-                                    
+                            <form class="d-flex flex-column bd-highlight mb-3 ml-2" method="post" action="{{ route('courses.filter', array($courseId, $yearId))}}">
+                                @csrf
+                                <label for="formControlSelect1">Aulas</label>
+                                <div class="d-flex flex-row bd-highlight mb-3">
 
-                                    <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse" aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
-                                        <div class="card-body">
-                                            <ul class="list-group list-group-flush">
-                                                <div class="card">
-
-                                                    
-                                                        <table id='mytable' class="table w-100">
-                                                            <thead class="thead-dark">
-                                                                <tr>
-                                                                    <th>Nombre</th>
-                                                                    <th>Apellido</th>
-                                                                    <th>Items</th>
-                                                                    <th>Responsabilizar Item</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                @foreach($yearUnion->yearUnionUsers as $yearUnionUser)
-
-                                                                <form method="get" action="">
-                                                                    @csrf
-                                                                    @method('GET')
-                                                                    <tr>
-
-                                                                        <td>{{$yearUnionUser->user->first_name}}</td>
-                                                                        <td>{{$yearUnionUser->user->last_name}}</td>
-
-                                                                        <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
-                                                                            @foreach($yearUnionUser->items as $item)
-                                                                            <form method="get" action="{{ route('courses.showItem', $item->id)}}">
-                                                                                @csrf
-                                                                                @method('GET')
-                                                                                <button class="btn btn-outline-primary m-1 " type="submit">{{"Nº ".$item->number." - ".$item->name}}</button>
-                                                                            </form>
-
-                                                                            @endforeach
-                                                                        </td>
-
-                                                                        <td>
-                                                                            <div class="form-group ">
-                                                                                <form class="botones d-flex flex-wrap" method="get" action="#">
-                                                                                    @csrf
-                                                                                    @method('GET')
-
-                                                                                    <select class="form-control " id="type_id" name="type_id">
-                                                                                        <option disabled selected>Selecciona un Item</option>
-                                                                                        <!--Hace la funcion de un placeholder-->
-                                                                                        @foreach($items as $item)
-                                                                                        @if($item->id == $item->item_id)
-                                                                                        <option selected value="{{$item->id}}">{{$item->name}}</option>
-                                                                                        @else
-                                                                                        <option value="{{$item->id}}">{{$item->name}}</option>
-
-                                                                                        @endif
-
-                                                                                        @endforeach
-
-                                                                                    </select>
-
-
-                                                                                    <button class="btn btn-outline-info mt-2" role="button">Asignar Item</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </form>
-
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    
-                                                </div>
-                                            </ul>
+                                    <div class="d-flex flex-row ">
+                                        <select class="form-control " id="classroom_id" name="idClass">
+                                            <option value="" selected>Todas</option>
+                                            <!--Hace la funcion de un placeholder-->
+                                            @foreach($classrooms as $classroom)
+                                            <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="d-flex flex-row ml-3 botones">
+                                            <button class="btn btn-outline-primary " type="submit">Filtrar</button>
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
+
+                            </form>
+                            <div class="divShowCoursesContent d-flex justify-content-center ">
+                                <h2 class="align-self-center ">Selecciona un aula primero</h2>
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
