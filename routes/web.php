@@ -50,7 +50,14 @@ Route::resource('notesPercentages', 'NotesPercentagesController');
 
 //INICIO Rutas de Temporalizacion de la programacion
 
+
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
+
+Route::resource('units', 'UnitController');
+Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
+Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
+Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
+
 Route::resource('programs', 'ProgramController');
 Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
 Route::post('programs/{id}/evaluar','ProgramController@storeEvaluacion')->name('programs.storeEvaluacion');
