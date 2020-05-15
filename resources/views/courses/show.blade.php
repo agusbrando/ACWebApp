@@ -52,7 +52,6 @@
                                                 <a href="#" class="btn btn-primary btn-sm">Programacion</a>
                                             </td>
                                         </tr>
-
                                     </tbody>
                                     @endforeach
                                 </table>
