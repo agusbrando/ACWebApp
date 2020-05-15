@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Evaluation extends Model
 {
@@ -12,6 +12,7 @@ class Evaluation extends Model
     protected $table = 'evaluations';
     protected $guarded = [];   
 
+    protected $dates = ['deleted_at'];
 
      //todas las yearUnion de esa evaluacion, una por curso y asignatura
      public function yearUnions(){
