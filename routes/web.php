@@ -14,19 +14,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/calendar/{mes}','CalendarController@index_month');
-// Route::get('/calendar','CalendarController@index');
-// Route::post('/event/store','CalendarController@store');
-// Route::post('/event/create','CalendarController@create');
-// Route::put('/event/destroy/{id}','CalendarController@destroy');
-// Route::put('/event/update','CalendarController@update');
-// Route::get('/event/details/{id}','CalendarController@details');
 
 
-Route::resource('events', 'CalendarController');
-Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
-Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
-Route::post('/crearEvento','CalendarController@store');
+
 
 Route::resource('asistencia', 'AsistenciaController');
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
@@ -78,12 +68,6 @@ Route::post('seguimiento','TrackingController@store')->name('seguimiento.store')
 
 Route::resource('roles','RoleController');
 Route::resource('permissions','PermissionController');
-Route::resource('classrooms','ClassroomController');
-Route::resource('evaluations','EvaluationController');
-Route::resource('states','StateController');
-Route::resource('sessions','SessionController');
-Route::resource('subjects','SubjectController');
-Route::resource('types','TypeController');
 Route::resource('users','UserController');
 Route::get('evaluaciones/desglose/{subject_id}/{evaluation_id}', 'EvaluacionesController@show');
 Auth::routes();
@@ -93,8 +77,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('messages', 'MessageController')->middleware('auth');
 
 Route::get('messages_send', 'MessageController@index')->middleware('auth')->name('messagesSend.index');
-Route::get('/time', 'CalendarController@getTime');
-Route::get('/list', 'CalendarController@getList');
+
 
 Route::get('download_attachment_message/{idm}/{nameAttach}','MessageController@download')->name('downloadmessagefile');
 
@@ -111,14 +94,38 @@ Route::get('/', 'HomeController@index');
 
 
 
-//RUTAS ITEMs
+//RUTAS ITEMS
 Route::post('/items/filter', 'ItemController@filter');
 // Route::post('/items/edit', 'ItemController@edit');
 Route::resource('items', 'ItemController');
-//RUTAS STATESs
-Route::resource('states', 'StateController');
-//RUTAS COURSEs
 
+//RUTAS COURSES
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 Route::resource('courses', 'CourseController');
+
+//RUTAS EVENTS
+Route::resource('events', 'CalendarController');
+Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
+Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
+Route::post('/crearEvento','CalendarController@store');
+Route::get('/time', 'CalendarController@getTime');
+Route::get('/list', 'CalendarController@getList');
+
+//RUTAS CLASSROOMS
+Route::resource('classrooms','ClassroomController');
+
+//RUTAS EVALUATIONS
+Route::resource('evaluations','EvaluationController');
+
+//RUTAS STATES
+Route::resource('states','StateController');
+
+//RUTAS SESSIONS
+Route::resource('sessions','SessionController');
+
+//RUTAS SUBJECTS
+Route::resource('subjects','SubjectController');
+
+//RUTAS TYPES
+Route::resource('types','TypeController');
