@@ -141,16 +141,16 @@ class PorcentajesController extends Controller
                     $evaluacion = Evaluation::find($eval_id);
                     if ($type_id == 4) {
                         $evaluacion->types()->updateExistingPivot(intval($type_id), [
-                            'nota_min_tarea' => $values['nota_min_tarea'],
-                            'nota_media_tarea' => $values['nota_media_tarea'],
-                            'nota_media_minima' => $values['nota_media_minima']
+                            'min_grade_task' => $values['min_grade_task'],
+                            'average_grade_task' => $values['average_grade_task'],
+                            'min_average_grade_task' => $values['min_average_grade_task']
                         ]);
                     } else {
                         $evaluacion->types()->updateExistingPivot(intval($type_id), [
                             'percentage' => $values['porcentaje'],
-                            'nota_min_tarea' => $values['nota_min_tarea'],
-                            'nota_media_tarea' => $values['nota_media_tarea'],
-                            'nota_media_minima' => $values['nota_media_minima']
+                            'min_grade_task' => $values['min_grade_task'],
+                            'average_grade_task' => $values['average_grade_task'],
+                            'min_average_grade_task' => $values['min_average_grade_task']
                         ]);
                     }
                 }
