@@ -113,7 +113,7 @@ Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
 
-Route::get('evaluaciones/desglose/{subject_id}/{evaluation_id}', 'EvaluacionesController@show');
+Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');;
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
 //TODO Pasar parametros con formulario/Eliminar ruta y poner destroy
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');

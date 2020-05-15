@@ -9,7 +9,6 @@
                 <a href="/asignaturas" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3 class="m-auto">{{$course->name}} - {{$subject->name}}</h3>
             </div>
-            <!-- <a class="btn btn-outline-info float-right" href="{{ url('/porcentajes/create', $subject->id) }}">Añadir Porcentaje</a> -->
         </div>
         <div class="card-body row no-gutters">
             <div class="col">
@@ -31,7 +30,39 @@
                             </button>
                         </div>
                         @endif
-                        
+                        <form action="{{ route('porcentajes.update') }}" method="post">
+                            @csrf
+                            @foreach($yearUnions as $yearUnion)
+                            <table class="table col-12">
+                                <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
+                                    <tr>
+                                        <th>{{$yearUnion->evaluation->name}}</th>
+                                        <th>Porcentaje%</th>
+                                        <th>Nota Minima Tarea</th>
+                                        <th>Nota Media Tarea</th>
+                                        <th>Nota Media Minima</th>
+                                    </tr>
+                                </thead>
+                                @foreach($yearUnion->percentages as $porcentaje)
+                                <tbody>
+                                    <tr>
+                                        <td>{{$porcentaje->name}}</td>
+                                        @if($porcentaje->name == 'Recuperacion')
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][porcentaje]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}" disabled></td>
+                                        @else
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][porcentaje]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}"></td>
+                                        @endif
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][nota_min_tarea]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->min_grade_task}}"></td>
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][nota_media_tarea]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->average_grade_task}}"></td>
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][nota_media_minima]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->min_average_grade_task}}"></td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+                            </table>
+                            @endforeach
+                            <input type="hidden" name="subject" value={{$subject->id}}>
+                            <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
+                        </form>
                     </div>
                     @foreach($yearUnions as $yearUnion)
                     <div class="tab-pane fade table-responsive centro" id="a{{$yearUnion->evaluation->name}}" role="tabpanel">
@@ -63,6 +94,10 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <form action="{{ route('subject.desglose',  ['subject' => $subject->id, 'year' => $yearUnion->year_id, 'course' => $yearUnion->course_id, 'evaluation'=> ($yearUnion->evaluation->id)]) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-primary mr-2 float-right">Desglose</button>
+                        </form>
                     </div>
                     @endforeach
                 </div>
