@@ -117,9 +117,9 @@ Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
 //TODO Pasar parametros con formulario/Eliminar ruta y poner destroy
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
+Route::get('evaluaciones/desglose/crearTarea/{id}', 'TaskController@create');
 
 //TODO Cambiar controller de DesgloseController.
-Route::get('evaluaciones/desglose/crearTarea/{id}/{eval_id}', 'DesgloseController@create');
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
 Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
 Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->name('desglose.updateTrabajos');

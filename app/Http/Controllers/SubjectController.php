@@ -73,7 +73,7 @@ class SubjectController extends Controller
             $name = $task_type->name;
             switch ($name) {
                 case 'Examenes':
-                    $evaluation->parciales = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    $evaluation->parciales = Task::where('type_id', $task_type->id)->with('users')->get();
                     foreach ($evaluation->parciales as $parcial) {
                         foreach ($parcial->users as $user) {
                             $notaParciales[$user->id][$parcial->id] = $user->pivot->value;
@@ -109,7 +109,7 @@ class SubjectController extends Controller
 
                     break;
                 case 'Trabajos':
-                    $evaluation->trabajos = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    $evaluation->trabajos = Task::where('type_id', $task_type->id)->with('users')->get();
                     foreach ($evaluation->trabajos as $trabajo) {
                         foreach ($trabajo->users as $user) {
                             $notaTrabajos[$user->id][$trabajo->id] = $user->pivot->value;
@@ -144,7 +144,7 @@ class SubjectController extends Controller
                     }
                     break;
                 case 'Actitud':
-                    $evaluation->actitud = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    $evaluation->actitud = Task::where('type_id', $task_type->id)->with('users')->get();
                     foreach ($evaluation->actitud as $act) {
                         foreach ($act->users as $user) {
                             $notaActitud[$user->id][$act->id] = $user->pivot->value;
@@ -179,7 +179,7 @@ class SubjectController extends Controller
                     }
                     break;
                 case 'Recuperacion':
-                    $evaluation->recuperacion = Task::where('type_id', $task_type->id)->where('evaluation_id', $evaluation->id)->with('users')->get();
+                    $evaluation->recuperacion = Task::where('type_id', $task_type->id)->with('users')->get();
                     foreach ($evaluation->recuperacion as $rec) {
                         foreach ($rec->users as $user) {
                             $notaRecuperacion[$user->id][$rec->id] = $user->pivot->value;
@@ -242,7 +242,6 @@ class SubjectController extends Controller
                     $sumaFinal = 0;
                     $recuperado = 0;
                     foreach ($taskTypes as $task_type) {
-                        // $tasks =  $user->tasks()->where('evaluation_id', $yearUnion->id)->where('type_id', $task_type->id)->get();
                         $tasks =  YearUnionUser::find($user->pivot->user_id)->tasks;
                         $suma = 0;
                         $tareas[$task_type->name] = 0;

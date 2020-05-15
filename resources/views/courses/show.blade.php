@@ -49,6 +49,7 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary btn-sm mr-2">Evaluaciones</button>
                                                 </form>
+                                                <a href="{{ route('subjects.evaluations',  ['subject' => $subject->id, 'year' => $yearId, 'course' => $courseId ]) }}" class="btn btn-primary btn-sm mr-2">Evaluaciones</a>
                                                 <a href="#" class="btn btn-primary btn-sm">Programacion</a>
                                             </td>
                                         </tr>
