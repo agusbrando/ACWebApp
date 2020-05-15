@@ -91,7 +91,7 @@
 
                                                                         <td>
                                                                             <div class="form-group ">
-                                                                                <form class="botones d-flex flex-wrap" method="get" action="{{ route('courses.responsabilizarItem', array($item->id, user->id,$yearUnion->id))}}">
+                                                                                <form class="botones d-flex flex-wrap" method="get" action="#">
                                                                                     @csrf
                                                                                     @method('GET')
 
