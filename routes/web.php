@@ -52,6 +52,8 @@ Route::resource('notesPercentages', 'NotesPercentagesController');
 
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 Route::resource('programs', 'ProgramController');
+Route::resource('units', 'ProgramController');
+
 Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
 Route::post('programs/{id}/evaluar','ProgramController@storeEvaluacion')->name('programs.storeEvaluacion');
 Route::post('programs/{id}/aspecto','ProgramController@storeAspecto')->name('programs.storeAspecto');
