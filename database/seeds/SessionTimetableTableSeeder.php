@@ -12,10 +12,44 @@ class SessionTimetableTableSeeder extends Seeder
     public function run()
     {
         DB::table('session_timetables')->insert([
-            'id'=>1,
             'session_id' => 1,
             'timetable_id' => 1,
             'year_union_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('session_timetables')->insert([
+            'session_id' => 1,
+            'timetable_id' => 1,
+            'year_union_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('session_timetables')->insert([
+            'session_id' => 1,
+            'timetable_id' => 1,
+            'year_union_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('session_timetables')->insert([
+            'session_id' => 1,
+            'timetable_id' => 1,
+            'year_union_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('session_timetables')->insert([
+            'session_id' => 1,
+            'timetable_id' => 1,
+            'year_union_id' => 5,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('session_timetables')->insert([
+            'session_id' => 1,
+            'timetable_id' => 1,
+            'year_union_id' => 6,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

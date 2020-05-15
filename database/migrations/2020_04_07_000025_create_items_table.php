@@ -27,7 +27,7 @@ class CreateItemsTable extends Migration
             //Ponemos las claves ajenas
             $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->foreign('state_id')->references('id')->on('states');
-            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
 
         });
     }

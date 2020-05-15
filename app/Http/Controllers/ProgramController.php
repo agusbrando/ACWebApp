@@ -218,6 +218,9 @@ class ProgramController extends Controller
         $editar=false;
         $MisEvaluables = $program->evaluables;
         $listaEvaluables=[];
+        $responsable=null;
+        $fechas=null;
+        $notas=null;
         foreach($evaluables as $evaluable){
             $encontrado = false;
             foreach($MisEvaluables as $MiEvaluable){
@@ -246,9 +249,8 @@ class ProgramController extends Controller
             
             
         }
-        if($notas)
         $responsables = User::all();
-        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables','responsables','responsable','fechas','notas'));
+        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables','responsable','fechas','notas'));
     }
     public function editarAspecto($program_id, $id){
         $program = Program::findorfail($program_id);
@@ -257,6 +259,9 @@ class ProgramController extends Controller
         $editar=true;
         $MisEvaluables = $program->evaluables;
         $listaEvaluables=[];
+        $responsable=null;
+        $fechas=null;
+        $notas=null;
         foreach($evaluables as $evaluable){
             $encontrado = false;
             foreach($MisEvaluables as $MiEvaluable){
@@ -269,7 +274,21 @@ class ProgramController extends Controller
                 array_push($listaEvaluables,$evaluable);
             }
         }
-        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id','listaEvaluables'));
+        for($i=1;$i<=3;$i++){
+            $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
+            if($yearUnion != null){
+                $notas[$i]=$yearUnion->notes;
+                $fechas[$i]=$yearUnion->date_check;
+                $responsable[$i]=$yearUnion->responsable_id;
+                $responsable[$i]=User::find($responsable[$i]);
+                if($notas[$i]==null){
+                    $notas[$i]='';
+                }
+            }else{
+                $notas[$i]='';
+            }    
+        }
+        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id','listaEvaluables','responsable','fechas','notas'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -317,6 +336,29 @@ class ProgramController extends Controller
 
         $program->save();
         return redirect('/programs');
+
+    }
+    public function storeEvaluacion(Request $request, $id){
+
+        $request->validate([
+            'notes'=>'required',
+            'date_check'=>'required',
+            'eval'=>'required',
+        ]);
+
+        $user = Auth::user();
+        $notes = $request->get('notes');
+        $date_check = $request->get('date_check');
+        $evaluation_id= $request->get('eval');
+
+        $program = Program::find($id);
+        $yearUnion = $program->yearUnions->where('evaluation_id',$evaluation_id)->first();
+        $yearUnion->responsable()->associate($user);
+        $yearUnion->date_check = $date_check ;
+        $yearUnion->notes = $notes;
+        $yearUnion->save();
+
+        return redirect('/programs/'.$id);
 
     }
 

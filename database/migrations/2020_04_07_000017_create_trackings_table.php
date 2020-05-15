@@ -19,9 +19,9 @@ class CreateTrackingsTable extends Migration
             $table->timestamps();
             $table->string('signature');
             $table->integer('user_id')->unsigned();
-            
-            $table->datetime('datetime_start');
-            $table->datetime('datetime_end');
+            $table->date('date_signature');
+            $table->time('time_start');
+            $table->time('time_end');
             $table->string('num_hours');
             
 

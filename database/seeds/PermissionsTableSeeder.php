@@ -12,10 +12,77 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         DB::table('permissions')->insert([
-            'name' => 'borrar usuario',
+            'name'        => 'Can View Users',
+            'slug'        => 'view.users',
+            'description' => 'Can view users',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         DB::table('permissions')->insert([
-            'name' => 'insertar usuario',
+            'name'        => 'Can Create Users',
+            'slug'        => 'create.users',
+            'description' => 'Can create new users',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Can Edit Users',
+            'slug'        => 'edit.users',
+            'description' => 'Can edit users',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
+    // public function run()
+    // {
+    //     /*
+    //      * Permission Types
+    //      *
+    //      */
+    //     $Permissionitems = [
+        //     [
+                // 'name'        => 'Can View Users',
+                // 'slug'        => 'view.users',
+                // 'description' => 'Can view users',
+                // 'model'       => 'Permission',
+        //     ],
+        //     [
+        //         'name'        => 'Can Create Users',
+        //         'slug'        => 'create.users',
+        //         'description' => 'Can create new users',
+        //         'model'       => 'Permission',
+        //     ],
+        //     [
+        //         'name'        => 'Can Edit Users',
+        //         'slug'        => 'edit.users',
+        //         'description' => 'Can edit users',
+        //         'model'       => 'Permission',
+        //     ],
+        //     [
+        //         'name'        => 'Can Delete Users',
+        //         'slug'        => 'delete.users',
+        //         'description' => 'Can delete users',
+        //         'model'       => 'Permission',
+        //     ],
+        // ];
+
+    //     /*
+    //      * Add Permission Items
+    //      *
+    //      */
+    //     foreach ($Permissionitems as $Permissionitem) {
+    //         $newPermissionitem = config('roles.models.permission')::where('slug', '=', $Permissionitem['slug'])->first();
+    //         if ($newPermissionitem === null) {
+    //             $newPermissionitem = config('roles.models.permission')::create([
+    //                 'name'          => $Permissionitem['name'],
+    //                 'slug'          => $Permissionitem['slug'],
+    //                 'description'   => $Permissionitem['description'],
+    //                 'model'         => $Permissionitem['model'],
+    //             ]);
+    //         }
+    //     }
+    // }
 }

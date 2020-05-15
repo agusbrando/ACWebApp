@@ -13,9 +13,16 @@ class Session extends Model
     protected $fillable = [
         'id',
         'classroom_id',
-        'model',
+        'type_id',
+        'day',
         'time_start',
         'time_end'
+        
+    ];
+
+    protected $casts = [
+        'time_start' => 'date:hh:mm',
+        'time_end' => 'date:hh:mm',
     ];
 
     public function classroom()
@@ -25,13 +32,19 @@ class Session extends Model
 
     public function sessionTimetables()
     {
-        return $this->belongsToMany(Timetable::class, 'session_timetable')->using(SessionTimetable::class)->withPivot('')->withTimestamps();
+        return $this->belongsToMany(Timetable::class,'session_timetables')->withTimestamps();
     }
     
 
     public function event()
     {
         return $this->hasOne('App\Models\Event');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Type', 'type_id');
+        // return $this->belongsTo('App\Models\Type', 'type_id')->where('model', 'App\Models\Session');
     }
 
 }

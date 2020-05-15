@@ -6,30 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     use Notifiable;
 
     protected $table = 'users';
 
     protected $primaryKey = 'id';
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'first_name', 'last_name', 'email', 'password','role_id'
-    ];
+    protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     protected $casts = [
         'email_verified_ad'=>'datetime',
     ];
@@ -44,15 +33,12 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-    
-    public function items()
-    {
-        return $this->belongsToMany('App\Models\Item', 'items-users', 'user_id', 'item_id')->withPivot('date_inicio', 'date_fin')->withTimestamps();
-    }
+
+
 
     public function trackings()
     {
-        return $this->hasMany('App\Models\Trackings');
+        return $this->hasMany('App\Models\Tracking');
     }
     public function misbehaviors()
     {
@@ -64,10 +50,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Timetable');
     }
 
-    public function tasks()
-    {
-        return $this->belongsToMany(Task::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
-    }
+
     //todas las year unions en las que haya un responsable
     public function yearUnionsResponsable()
     {
@@ -83,9 +66,20 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Comment');
     }
-    
+
+    public function messagesReceive()
+    {
+        return $this->belongsToMany('App\Models\Message')->withPivot('read')->withTimeStamps();
+    }
+
+    public function messagesSent()
+    {
+        return $this->hasMany('App\Models\Message');
+    }
+
     //** lista de year unions (asignaturas por cada evaluacion) en las que esta matriculado el alumno */
     public function yearUnions(){
         return $this->belongsToMany(YearUnion::class, 'yearUnionUsers', 'user_id', 'year_union_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
     }
+
 }

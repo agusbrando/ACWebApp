@@ -38,12 +38,12 @@ class DatabaseSeeder extends Seeder
             ItemsTableSeeder::class,
             EventsTableSeeder::class,
             SessionTimetableTableSeeder::class,
-            RolesPermissionsTableSeeder::class,
             MisbehaviorsTableSeeder::class,
             PostsTableSeeder::class,
             CommentsTableSeeder::class,
             MessagesTableSeeder::class,
-            SendsTableSeeder::class,
+            MessagesUsersTableSeeder::class,
+            CommentsTableSeeder::class,
             AttachmentsTableSeeder::class,
             ItemYearTableSeeder::class
         ]);

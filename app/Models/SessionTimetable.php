@@ -12,7 +12,10 @@ class SessionTimetable extends Pivot
 
     protected $guarded = [];
 
-
+    
+    public function subject(){
+        return $this->belongsTo('App\Models\Subject');
+    }
     //** lista de todos los year unions user que tengan este year union */
     public function yearUnion(){
         return $this->belongsTo(YearUnion::class);
