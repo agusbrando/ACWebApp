@@ -3,9 +3,14 @@
         <div>
             <h1>AULACAMPUS</h1>
         </div>
-        <p>Tienes un nuevo mensaje disponible en la plataforma. </p>
-        <p>Asunto: {{ $messageSubject }}</p>
-        <p>Presiona el siguiente boton para acceder a ella:</p>
-        <a href="{{$url}}">Accede aquí</a>
+        <div>
+            <p>Hola {{$username}} {{$userlastname}},</p>
+            <p>¡Te informamos de que tienes un nuevo mensaje disponible en la plataforma!</p>
+            <div style="color: gray">
+                <p>Asunto: {{ $messageSubject }}</p>
+                <p>Total de adjuntos: {{ $attachmentscount }}</p>
+            </div>
+            <h3><a style="color: rgb(72, 115, 255);text-decoration: none;" href="{{$url}}">Accede aquí</a></h3>
+        </div>
     </div>
 </body>
