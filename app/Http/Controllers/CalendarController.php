@@ -57,9 +57,14 @@ class CalendarController extends Controller
       $events = Event::all()->where('type_id', 1);
     } else {
       $events = Event::all()->where('type_id', 2);
-    }
+    }  
 
     return view('/Calendario/time', compact('types', 'sessions', 'dia', 'tipo', 'events'));
+  }
+
+  public function getList(Request $request){
+    $events = Event::all();
+    return view('/Calendario/list', compact('events'));
   }
 
   public function index()
@@ -114,7 +119,7 @@ class CalendarController extends Controller
     ]);
 
     //devuelve el mensaje con exito
-    return redirect('/events')->with('Exito', '¡Evento borrado!');
+    return redirect('/list')->with('Exito', '¡Evento creado!');
   }
 
   /**
@@ -168,7 +173,7 @@ class CalendarController extends Controller
     $event->description = $request->get('descripcion');
     $event->save();
 
-    return redirect('/events')->with('Exito', '¡Evento editado!');
+    return redirect('/list')->with('Exito', '¡Evento editado!');
   }
 
 
@@ -183,6 +188,6 @@ class CalendarController extends Controller
     $event = Event::find($id);
     $event->delete();
 
-    return redirect('/events')->with('Exito', '¡Evento borrado!');
+    return redirect('/list')->with('Exito', '¡Evento borrado!');
   }
 }

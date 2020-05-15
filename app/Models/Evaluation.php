@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Evaluation extends Model
 {
-    use SoftDeletes;
+    
   
     protected $table = 'evaluations';
     protected $guarded = [];   
