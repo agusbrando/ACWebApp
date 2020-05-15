@@ -65,18 +65,18 @@ class TimetableController extends Controller
     {
         $timetable = Timetable::find($id);
         $timetable->sessions=$timetable->sessionTimetables;
-        
+        $horas=array();
         $session_timetables=SessionTimetable::all();
         foreach($session_timetables as $session_timetable){
             if($session_timetable->timetable_id == $id){
                 $session=Session::find($session_timetable->session_id);
                 $year_union=YearUnion::find($session_timetable->year_union_id);
                 $subject = Subject::find($year_union->subject_id);
-                
+                array_push($horas,$session,$session->subject=$subject);
             }
         }
         
-        return view('Timetable.horario', compact('timetable')); 
+        return view('Timetable.horario', compact('timetable','horas')); 
     }
     /**
      * Show the form for editing the specified resource.
