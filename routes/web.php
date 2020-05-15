@@ -73,19 +73,14 @@ Route::resource('seguimiento', 'TrackingController');
 Route::get('seguimiento','TrackingController@index');
 Route::post('seguimiento','TrackingController@store')->name('seguimiento.store');
 
-Route::resource('roles','RoleController');
-Route::resource('permissions','PermissionController');
 Route::resource('classrooms','ClassroomController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('states','StateController');
 Route::resource('sessions','SessionController');
 Route::resource('subjects','SubjectController');
 Route::resource('types','TypeController');
-Route::resource('users','UserController');
 Route::get('evaluaciones/desglose/{subject_id}/{evaluation_id}', 'EvaluacionesController@show');
-Auth::routes();
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::resource('messages', 'MessageController')->middleware('auth');
 
@@ -97,13 +92,22 @@ Route::get('sended/{id}', 'MessageController@showSended')->middleware('auth');
 
 Route::get('response/{id}', 'MessageController@create')->middleware('auth');
 
-Route::get('/', 'HomeController@index');
 
 Route::get('/stock', function () {
     return view('stock');
 });
-Route::get('/', 'HomeController@index');
 
+//RUTAS PERMISSIONS ROBY
+Route::post('/permissions/assignPermissionRole','PermissionController@assignPermissionRole')->name('permission.assign');
+Route::resource('permissions','PermissionController');
+//RUTAS ROLES ROBY
+Route::resource('roles','RoleController');
+//RUTAS USERS ROBY
+Route::resource('users','UserController');
+//RUTAS HOME ROBY
+Route::get('/', 'HomeController@index');
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 //RUTAS ITEMs
