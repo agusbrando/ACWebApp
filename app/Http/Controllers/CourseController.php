@@ -21,17 +21,22 @@ use App\Models\YearUnionUser;
 class CourseController extends Controller
 {
     /**
-     * Esta es la vista principal donde se listarán todos los cursos.
+     * Esta es la vista principal donde se listarán todos los cursos por años.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $years = Year::orderBy("date_start", "DESC")->get(); //Ordeno los años para que salga el más reciente primero
+        //Cojo los años odenados para que salga el más reciente primero
+        $years = Year::orderBy("date_start", "DESC")->get(); 
+        //Recorro todos los años para guardar en el todos los cursos que se han impartido
         foreach($years as $year){
-            $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+            //Guardo los diferentes yearUnion en cada año
+            $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')
+            ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
         }
-  
+        // Aquí le redirijes a la vista y le pasas los datos que quieres, 
+        //en este caso, le redirijo a la vista index y le paso los años con los cursos
         return view('courses.index', compact( 'years'));
     }
 
@@ -42,13 +47,14 @@ class CourseController extends Controller
      */
     public function create()
     {
+        //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
         $classrooms = Classroom::all(); 
         $courses = Course::all(); 
         $users = User::all();
         $subjects = Subject::all();
         $evaluations = Evaluation::all();
         $years = Year::orderBy("date_start", "DESC")->get();
-
+        //devuelvo la vista del formulario para crearlo
         return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations','years'));
     }
 

@@ -83,16 +83,17 @@ class ItemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Cuando en create le da al boton "guardar" guardamos el curso en la Base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // muestra los datos obtenidos del formulario en pantallak
+        // muestra los datos obtenidos del formulario en pantalla
         // dd(request()->all()); 
 
+        //Valido que los campos que necesito no sean nulos
         $request->validate([
             'name'=>'required',
             'number'=>'required',
@@ -100,7 +101,7 @@ class ItemController extends Controller
             'classroom_id'=>'required',
             'type_id'=>'required',
         ]);
-
+        //ahora recojo los valores de los difrentes input y selects llamandoles por su identificador
         $item = new Item([
             'name' => $request->get('name'),
             'number' => $request->get('number'),
@@ -111,7 +112,9 @@ class ItemController extends Controller
             
 
         ]);
+        //lo guardo en la base de datos
         $item->save();
+        //y le redirijo a la vista principal para que vea que se ha añadido
         return redirect('/items')->with('exito', 'Item creado!');
     }
 
