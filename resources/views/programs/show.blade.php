@@ -103,7 +103,7 @@
                 $('#masInfo{{$i}}').toggle();
                 $('#cabFecha').toggle();
                 $('#fechaPrevista{{$i}}').toggle();
-
+                $('#columna{{$i}}').toggle();
             });
         @endfor
     });
@@ -184,23 +184,60 @@
                 </div> 
                 <div class="collapse multi-collapse col-lg-12 col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample2">
                         @if(!$editar)
-                        <table class="table col-12" >
+                        <table class="table col-12 text-left" >
                             <thead class="thead-dark col-12">
                                 <tr>
-                                    <th>Aspecto Evaluado</th>
-                                    <th>Observaciones</th>
-                                    <th>Actions</th>
+                                    <th class="d-flex flex-row justify-content-between">
+                                        
+                                            <div class="col-6 text-center">Aspecto Evaluado</div>
+                                            <div class="col-6 text-center">Observaciones</div>
+                                        
+                                    </th>
+                                    
+                                    <!-- <th>
+                                        <div class="card-deck">
+                                            <div class="card border-0 bg-dark">
+                                                <div class="card-body">
+                                                <h5 class="card-title text-center">Aspecto Evaluado</h5>
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="card border-0 bg-dark">
+                                                <div class="card-body">
+                                                <h5 class="card-title text-center">Observaciones</h5>
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </th> -->
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($program->evaluables as $evaluable)
                                     <tr>
-                                        <td>{{$evaluable->name}}</td>
-                                        <td>
+                                        <!-- <td class="text-justify">{{$evaluable->name}}</td>
+                                        <td class="text-justify">
                                             
                                             {{$evaluable->pivot->description}}
+                                        </td> -->
+                                        <td>
+                                            <div class="card-deck">
+                                                <div class="card border-0">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card border-0">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-justify">{{$evaluable->pivot->description}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                         </td>
-                                        <td class="botones justify-content-center">
+                                        <td class="botones justify-content-end text-right">
                                             <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
         
 
@@ -239,19 +276,33 @@
                             <table class="table col-12" >
                                     <thead class="thead-dark col-12">
                                         <tr>
-                                            <th>Aspecto Evaluado</th>
-                                            <th>Observaciones</th>
-                                            <th>Actions</th>
+                                            <th class="d-flex flex-row justify-content-between">
+                                            
+                                                <div class="col-6 text-center">Aspecto Evaluado</div>
+                                                <div class="col-6 text-center">Observaciones</div>
+                                            
+                                            </th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($program->evaluables as $evaluable)
                                         @if($evaluable->pivot->id != $evaluadoEditar_id)
                                             <tr>
-                                                <td>{{$evaluable->name}}</td>
                                                 <td>
-                                                    
-                                                    {{$evaluable->pivot->description}}
+                                                    <div class="card-deck">
+                                                        <div class="card border-0">
+                                                            <div class="card-body">
+                                                                <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card border-0">
+                                                            <div class="card-body">
+                                                                <p class="card-text text-justify">{{$evaluable->pivot->description}}</p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
                                                 </td>
                                                 <td class="botones justify-content-center align-items-center">
                                                     <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
@@ -261,11 +312,28 @@
                                             
                                             <tr>
                                                
-                                                    <td>{{$evaluable->name}}</td>
-                                                    <td><textarea rows="1" name="description" class="form-control" >{{$evaluable->pivot->description}}</textarea></td>
-                                                    <td class="botones justify-content-center">
-                                                        <button class="btn" type="submit"><i class="far fa-save"></i></button>
-                                                        <a type="button" class="btn ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
+                                                    <td>
+                                                        <div class="card-deck">
+                                                            <div class="card border-0">
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card border-0">
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-justify"><textarea rows="3" name="description" class="form-control" >{{$evaluable->pivot->description}}</textarea></p>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td class="d-flex align-items-center">
+                                                        <div class="card-deck">
+                                                            <div class="card border-0 botones justify-content-center align-baseline">
+                                                                 <button class="btn" type="submit"><i class="far fa-save"></i></button>
+                                                                <a type="button" class="btn ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
+                                                            </div>
+                                                        <div class="card-deck">
                                                     </td>
                                             </tr>
                                                 
@@ -276,7 +344,7 @@
                         </form>
                         @endif
                 </div> 
-                <div class="collapse multi-collapse col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample3">
+                <div class="collapse multi-collapse col-sm-12"  id="multiCollapseExample3">
                     <div class="dropdown justify-content-start">
                     
                             <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -301,7 +369,7 @@
                                     <th></th>
                                     <th>Contenido</th>
                                     <th></th>
-                                    <th>En Plazo</th>
+                                    <th class="text-center">En Plazo</th>
                                     <th>Fechas</th>
                                     <th></th>
                                     <th></th>
@@ -315,16 +383,17 @@
                                     <td> {{$unidad->name}}</td>
                                     <td></td>
                                     @if(strtotime($unidad->expected_date_end) < strtotime($unidad->date_end))
-                                    <td class="text-danger"><i class="fas fa-times"></i></td>
+                                    <td class="text-danger text-center"><i class="fas fa-times"></i></td>
                                     @else
-                                    <td class="text-success"><i class="fas fa-check"></i></td>
+                                    <td class="text-success  text-center"><i class="fas fa-check"></i></td>
                                     @endif
                                     
                                     <td class="text-nowrap">{{date('d/m/Y',strtotime($unidad->date_start))}} - {{date('d/m/Y',strtotime($unidad->date_end))}}</td>
                                     <td  id="fechaPrevista{{$k}}">({{date('d/m/Y',strtotime($unidad->expected_date_start))}} - {{date('d/m/Y',strtotime($unidad->expected_date_end))}})</td>
+                                    <td id="columna{{$k}}"></td>
                                     <td></td>
-                                    
                                 </tr>
+                                @if($unidad->notes != '' && $unidad->improvements != '')
                                 <tr  id="masInfo{{$k}}">
 
                                     <!-- <th>Observaciones</th>
@@ -338,13 +407,21 @@
                                             <div class="card border-0">
                                                 <div class="card-body">
                                                 <h5 class="card-title text-center">Observaciones</h5>
+                                                @if($unidad->notes != '')
                                                 <p class="card-text text-justify">{{$unidad->notes}}</p>
+                                                @else
+                                                <p class="card-text text-center">No hay observaciones en esta unidad</p>
+                                                @endif
                                                 </div>
                                             </div>
                                             <div class="card border-0">
                                                 <div class="card-body">
                                                 <h5 class="card-title text-center">Acciones de mejora</h5>
+                                                @if($unidad->improvements != '')
                                                 <p class="card-text text-justify">{{$unidad->improvements}}</p>
+                                                @else
+                                                <p class="card-text text-center">No hay acciones de mejora en esta unidad</p>
+                                                @endif
                                                 </div>
                                             </div>
                                             
@@ -355,6 +432,8 @@
                                     
                                     
                                 </tr>
+                                @else
+                                @endif
                                 @endforeach    
                             </tbody>
                         </table>

@@ -26,7 +26,7 @@
                 </a>
                 </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/seguimiento">
             <span data-feather="file"></span>
             Seguimiento
         </a>
@@ -44,7 +44,7 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link" href="/horarios">
             <span data-feather="bar-chart-2"></span>
             Horario
         </a>
@@ -65,7 +65,7 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link" href="/programs">
             <span data-feather="file-text"></span>
             Programación
         </a>

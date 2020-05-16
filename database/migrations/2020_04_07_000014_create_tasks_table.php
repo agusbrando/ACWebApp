@@ -18,7 +18,6 @@ class CreateTasksTable extends Migration
             $table->integer('year_union_id')->unsigned();
             $table->string('name');
             $table->integer('type_id')->unsigned();
-
             $table->timestamps();
             $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('year_union_id')->references('id')->on('yearUnions');

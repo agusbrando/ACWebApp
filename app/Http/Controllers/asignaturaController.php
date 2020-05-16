@@ -52,7 +52,7 @@ class AsignaturaController extends Controller
      * Muestra la vista de evaluaciones, con los porcentajes cargados y la los usuarios con las notas de cada uno de ellos.
      *
      * @param  int  $id
-     * @return Notas.Evaluations
+     * @return view Notas.Evaluations
      */
     public function show($id)
     {
