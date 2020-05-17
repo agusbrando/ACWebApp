@@ -16,18 +16,18 @@
                         <th scope="col">Usuario</th>
                         <th scope="col">Asunto</th>
                         <th scope="col">Adjuntos</th>
-                        @if ($sitio == 0)
+                        @if ($isSend == 1)
                         <th scope="col">Visto</th>
                         @endif
                         <th scope="col">Accion</th>
                     </tr>
                 </thead>
                 @foreach($messages as $message)
-                @if ($sitio == 0)
+                @if ($isSend == 1)
                 @foreach ($message->users as $user)
                 <tbody>
                     <tr>
-                        <td>{{$message->user->first_name}} {{$message->user->last_name}}</td>
+                        <td>{{$user->first_name}} {{$user->last_name}}</td>
                         <td>{{$message->subject}}</td>
                         <td>{{count($message->attachments)}}</td>
                         @if ($user->pivot->read == 0)

@@ -65,14 +65,8 @@
 
 
 
-            <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar PDF</button>
-            </form>
-            <form class="float-right" action="{{ route('excel')}}" method="POST">
-                @csrf
-                @method('POST')
-
-                <button type="submit" class="btn btn-outline-success ml-1 float-right"> Descargar Excel </button>
-            </form>
+            
+            
 
             
         </div>

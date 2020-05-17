@@ -26,12 +26,7 @@ class DesgloseController extends Controller
      */
     public function create($id, $eval_id)
     {
-        $subject = Subject::find($id);
-        $evaluaciones = $subject->evaluations()->orderBy('name', 'asc')->get();
-        $tipos = Type::all()->where('model', Task::class);
-        $evaluation = Evaluation::find($eval_id);
 
-        return view('Notas.crearTarea', compact('subject', 'evaluaciones', 'tipos', 'evaluation'));
     }
 
     /**
@@ -42,27 +37,6 @@ class DesgloseController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'evaluaciones' => 'required',
-            'evaluation' => 'required',
-            'type' => 'required',
-            'subject' => 'required'
-        ]);
-
-        $evaluaciones = $request->get('evaluaciones');
-
-        foreach ($evaluaciones as $eval) {
-            $task = new Task([
-                'evaluation_id' => $eval,
-                'type_id' => $request->get('type'),
-                'name' => $request->get('name')
-            ]);
-            $task->save();
-            $this->storeNotes(Evaluation::find($eval), $task);
-        }
-
-        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluation'));
 
     }
 
@@ -77,8 +51,6 @@ class DesgloseController extends Controller
             $calification->save();
         }
     }
-
-    
 
     /**
      * Display the specified resource.
@@ -205,7 +177,6 @@ class DesgloseController extends Controller
     public function eliminar($id)
     {
         $tasks = Task::all();
-
         $subject = Subject::find($id);
 
         return view('Notas.eliminarTarea', compact('tasks', 'subject'));

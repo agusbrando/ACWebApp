@@ -45,12 +45,11 @@
                
                    
                     <td class="td">8:30-9:25</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                
+                   @foreach($horas as $hora)
+                        @if($hora->time_start=='8:30')
+                        <td>{{$hora->subject}}</td>
+                        @endif
+                   @endforeach
 
                 </tr>
                 <tr>

@@ -4,7 +4,10 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Nuevo Usuario</h3>
+            <div class="d-flex flex-row">
+                <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3> Nuevo usuario</h3>
+            </div>
             <form action="{{ route('users.store')}}" method="POST">
                 @method('POST')
                 <div class="col-12">
