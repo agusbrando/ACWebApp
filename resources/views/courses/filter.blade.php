@@ -24,19 +24,19 @@
                 <div class="  bd-highlight mb-3">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="false">General</a>
+                            <a class="nav-item nav-link " id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="false">General</a>
                             <a class="nav-item nav-link" id="nav-asignaturas-tab" data-toggle="tab" href="#nav-asignaturas" role="tab" aria-controls="nav-asignaturas" aria-selected="false">Asignaturas</a>
-                            <a class="nav-item nav-link" id="nav-items-tab" data-toggle="tab" href="#nav-items" role="tab" aria-controls="nav-items" aria-selected="true">Responsables</a>
+                            <a class="nav-item nav-link active" id="nav-items-tab" data-toggle="tab" href="#nav-items" role="tab" aria-controls="nav-items" aria-selected="true">Responsables</a>
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                        <div class="tab-pane fade show active table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                        <div class="tab-pane fade  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
                             Aquí irá la programacion del curso
                         </div>
                         <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
                             Aquí iran las asignaturas
                         </div>
-                        <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
+                        <div class="tab-pane fade show active" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
 
                             <form class="d-flex flex-column bd-highlight mb-3 ml-2" method="post" action="">
                                 @csrf
@@ -116,11 +116,11 @@
                                                                             <select class="form-control " id="type_id" name="type_id">
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
-                                                                                @foreach($items as $item)
-                                                                                @if($item->id == $item->item_id)
-                                                                                <option selected value="{{$item->id}}">{{$item->name}}</option>
+                                                                                @foreach($items as $item2)
+                                                                                @if($item2->id == $item->item_id)
+                                                                                <option selected value="{{$item2->id}}">{{$item2->name}}</option>
                                                                                 @else
-                                                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                                <option value="{{$item2->id}}">{{$item2->name}}</option>
 
                                                                                 @endif
 

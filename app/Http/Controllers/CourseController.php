@@ -102,13 +102,13 @@ class CourseController extends Controller
         if ($idClass != "") {
             $query = $query->where('classroom_id', $idClass);
             
-            
+            $items = $query->get();
         }else{
-            $query = $query->all();
+            $items = Item::all();
         }
 
         //Finalmente obtenemos todos los items que han pasado los filtros
-        $items = $query->get();
+        
 
 
         $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
