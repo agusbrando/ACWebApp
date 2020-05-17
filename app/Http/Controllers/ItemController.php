@@ -83,16 +83,17 @@ class ItemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda en la base de datos el Item hecho en item.create.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // muestra los datos obtenidos del formulario en pantallak
+        // muestra los datos obtenidos del formulario en pantalla
         // dd(request()->all()); 
 
+        //Validamos que los datos que necesitamos no sean nulos
         $request->validate([
             'name'=>'required',
             'number'=>'required',
@@ -100,7 +101,7 @@ class ItemController extends Controller
             'classroom_id'=>'required',
             'type_id'=>'required',
         ]);
-
+        //Una vez validados creamos el objeto
         $item = new Item([
             'name' => $request->get('name'),
             'number' => $request->get('number'),
@@ -111,6 +112,7 @@ class ItemController extends Controller
             
 
         ]);
+        //y lo guardamos en la base de datos
         $item->save();
         return redirect('/items')->with('exito', 'Item creado!');
     }

@@ -6,6 +6,7 @@
 @section('main')
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
@@ -60,7 +61,7 @@
                             </form>
 
 
-                            <div id="accordion">
+                            <div class="divShowCoursesContent" id="accordion">
                                 @foreach($yearUnions as $yearUnion)
 
                                 <div class="card">

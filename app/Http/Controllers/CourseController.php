@@ -104,7 +104,6 @@ class CourseController extends Controller
         }else{
             $items = Item::all();
         }
-
         //Finalmente obtenemos todos los items que han pasado los filtros
         $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
         foreach ($yearUnions as $yearUnion) {
@@ -127,9 +126,7 @@ class CourseController extends Controller
         $types = Type::all()->where('model', Item::class);
         $classrooms = Classroom::all();
         $states = State::all();
-        
-
-
+      
         return view('courses.filter', compact('classrooms', 'items', 'types', 'states', 'yearUnions'));
     }
 
@@ -206,19 +203,26 @@ class CourseController extends Controller
         // $item_id1 = 1;
         // $item_id2 = 2;
 
+        //Busco el curso del alumno
         $yearUnions = User::find($userId)->yearUnions;
+
         //crear for en un futuro si hay un multi select
         // $items = [Item::find($item_id1), Item::find($item_id2)];
+        
+        //Cojo el item que voy a asignar
         $item = Item::find($itemId);
+
+        
         foreach ($yearUnions as $yearUnion) {
             foreach ($item as $item) {
+                //compruebo que el alumno sea presencial
                 if ($yearUnion->pivot->assistance) {
-                    
+                    //si es presencial le asigno el Item
                     $yearUnion->pivot->items()->attach($item->id);
                 }
             }
         }
 
-        return view('items.show', compact('item'));
+        return view('courses.filter', compact('item'));
     }
 }
