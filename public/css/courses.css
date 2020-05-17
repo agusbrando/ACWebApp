@@ -1,0 +1,7 @@
+.divShowCoursesContent{
+    min-height: 500px;
+    max-height: fit-content;
+}
+.divShowCoursesContent h2{
+    padding-bottom: 220px;
+}

@@ -6,6 +6,7 @@
 @section('main')
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
@@ -59,17 +60,23 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
-                            <div id="accordion">
-                                @foreach($yearUnions as $yearUnion)
 
-                                <div class="card">
-                                    <div class="card-header list-group-item d-flex justify-content-between align-items-center m-0" id="heading{{$yearUnion->evaluation->name}}" data-toggle="collapse" data-target="#collapse{{$yearUnion->evaluation->name}}" aria-expanded="false" aria-controls="collapse{{$yearUnion->evaluation->name}}">
-                                        <h5 class="mb-0">
-                                            <button class="btn collapsed">
-                                                {{$yearUnion->evaluation->name}}
-                                            </button>
-                                        </h5>
-                                        <span class="badge badge-primary badge-pill"> {{$yearUnion->yearUnionUsers->count()}}</span>
+                            <form class="d-flex flex-column bd-highlight mb-3 ml-2" method="post" action="{{ route('courses.filter', array($courseId, $yearId))}}">
+                                @csrf
+                                <label for="formControlSelect1">Aulas</label>
+                                <div class="d-flex flex-row bd-highlight mb-3">
+
+                                    <div class="d-flex flex-row ">
+                                        <select class="form-control " id="classroom_id" name="idClass">
+                                            <option value="" selected>Todas</option>
+                                            <!--Hace la funcion de un placeholder-->
+                                            @foreach($classrooms as $classroom)
+                                            <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="d-flex flex-row ml-3 botones">
+                                            <button class="btn btn-outline-primary " type="submit">Filtrar</button>
+                                        </div>
                                     </div>
 
 
