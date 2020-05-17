@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Item;
+use App\Models\YearUnion;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +54,21 @@ Route::resource('notesPercentages', 'NotesPercentagesController');
 
 //INICIO Rutas de Temporalizacion de la programacion
 
+
+Route::get('/prueba', function () {
+  
+   
+ 
+    $yearUnions = YearUnion::all()->date_check;
+
+
+    foreach($yearUnions as $yearUnion){
+        
+       echo var_dump($yearUnion->date_check);
+    }
+
+
+});
 
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 
