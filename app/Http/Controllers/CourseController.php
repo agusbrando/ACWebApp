@@ -75,12 +75,10 @@ class CourseController extends Controller
     public function show($courseId, $yearId)
     {
         $courseId = $courseId;
-        $yearId = $yearId;;
-        $items = Item::all();
-        $types = Type::where('model', Item::class);
+        $yearId = $yearId;
         $classrooms = Classroom::all();
 
-        return view('courses.show', compact('classrooms', 'types', 'items', 'courseId', 'yearId'));
+        return view('courses.show', compact('classrooms', 'courseId', 'yearId'));
     }
     /**
      * Aqui filtramos las evaluaciones dependiendo del aula
@@ -108,9 +106,6 @@ class CourseController extends Controller
         }
 
         //Finalmente obtenemos todos los items que han pasado los filtros
-        
-
-
         $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
         foreach ($yearUnions as $yearUnion) {
             $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance',1)->get()->load('items', 'user');
