@@ -97,6 +97,8 @@ Route::get('/stock', function () {
     return view('stock');
 });
 
+
+//COMIENZO RUTAS ROBY
 //RUTAS PERMISSIONS ROBY
 Route::post('/permissions/assignPermissionRole','PermissionController@assignPermissionRole')->name('permission.assign');
 Route::resource('permissions','PermissionController');
@@ -108,6 +110,7 @@ Route::resource('users','UserController');
 Route::get('/', 'HomeController@index');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+//FIN RUTAS ROBY
 
 
 //RUTAS ITEMs
