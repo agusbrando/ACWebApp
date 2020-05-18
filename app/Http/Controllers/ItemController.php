@@ -112,7 +112,7 @@ class ItemController extends Controller
             
 
         ]);
-        //lo guardo en la base de datos
+        //y lo guardamos en la base de datos
         $item->save();
         //y le redirijo a la vista principal para que vea que se ha añadido
         return redirect('/items')->with('exito', 'Item creado!');
