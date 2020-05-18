@@ -162,9 +162,14 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($courseId, $yearId)
     {
-        Course::find($id)->delete();
+        //cojo todos los year union con ese año y curso
+        $yearUnions = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->get();
+        foreach($yearUnions as $yearUnion){
+            //y los voy eliminando
+            $yearUnion->delete();
+        }
 
         return redirect('/courses')->with('exito', 'Curso eliminado!');
     }

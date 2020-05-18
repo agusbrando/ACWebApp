@@ -15,6 +15,14 @@
 
             </div>
             <div class="d-flex flex-row-reverse">
+                <form method="post" action="">
+                    @csrf
+                    <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
+                </form>
+                <form method="post" action="">
+                    @csrf
+                    <button class="btn btn-outline-primary ml-2" type="submit">Editar Curso</button>
+                </form>
 
 
             </div>
@@ -103,7 +111,7 @@
 
 
                                                                     @foreach($yearUnionUser->items as $item)
-                                                                        <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
+                                                                    <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
                                                                     @endforeach
 
                                                                 </td>
@@ -117,8 +125,10 @@
                                                                             <select class="form-control " id="type_id" name="type_id">
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
+                                                                                @foreach($yearUnionUser->items as $item1)
+
                                                                                 @foreach($items as $item2)
-                                                                                @if($item2->id == $item->item_id)
+                                                                                @if($item2->id == $item->id)
                                                                                 <option selected value="{{$item2->id}}">{{$item2->name}}</option>
                                                                                 @else
                                                                                 <option value="{{$item2->id}}">{{$item2->name}}</option>
@@ -126,7 +136,7 @@
                                                                                 @endif
 
                                                                                 @endforeach
-
+                                                                                @endforeach
                                                                             </select>
 
 
