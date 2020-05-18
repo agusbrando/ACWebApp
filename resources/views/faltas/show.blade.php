@@ -5,8 +5,8 @@
 <!-- Tonggle -->
 <link href="{{ asset('css/toggle.css') }}" rel="stylesheet" type="text/css" />
 <!-- Jquery -->
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="card shadow">
@@ -28,40 +28,24 @@
           </nav>
           <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-eval1" role="tabpanel" aria-labelledby="nav-eval1-tab">
-                        <!-- <table id="alumnos" class="table table-striped" style="width:100%">
-                    <thead class="cabezeraTabla">
-                      <tr>
-                        @foreach($lista as $subject)
-                        <td>{{$subject['asignatura']}}</td>
-                        @endforeach
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        @foreach($lista as $subject)
-                        <td>{{$subject['faltas']}}/{{$subject['max']}}</td>
-                        @endforeach
-                      </tr>
-                    </tbody>
-                  </table> -->
 
-              <div id="accordion" class="accordion">
-                @foreach($lista as $falta)
+              <div id="accordion2">
+                @foreach($lista as $i=>$falta)
 
-                <div class="card" style="background-color: #EAEAEA">
-                  <div class="card-header" id="headingOne/{{$falta['asignatura']}}">
-                    <h7 class="mb-0">
-                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne/{{$falta['asignatura']}}" aria-expanded="true" aria-controls="collapseOne/{{$subject['asignatura']}}">
+                <div class="card">
+                  <div class="card-header" id="heading{{$i}}" style="background-color: #EAEAEA">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$i}}" aria-expanded="true" aria-controls="collapse{{$i}}">
                         <h7 style="color:grey;font-size:large">{{$falta['asignatura']}}</h7>
                       </button>
                       <div style="float: right; color: grey;">
                         {{$falta['faltas']}}/{{$falta['max']}}
                       </div>
-                    </h7>
+                    </h5>
                   </div>
 
-                  <div id="collapseOne/{{$falta['asignatura']}}" class="collapse" aria-labelledby="headingOne/{{$falta['asignatura']}}" data-parent="#accordion">
-                    <div class="card-body" style="background-color: #fff">
+                  <div id="collapse{{$i}}" class="collapse " aria-labelledby="heading{{$i}}" data-parent="#accordion2">
+                    <div class="card-body">
                       <table class="table">
                         <thead class="thead-dark">
                           <tr>
@@ -72,7 +56,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($misbehaviors as $misbehavior)
+                          @foreach($falta['listaFaltas'] as $misbehavior)
                           <tr>
                             <th>{{$misbehavior->id}}</th>
                             <td>{{$misbehavior->date}}</td>
@@ -94,7 +78,6 @@
                 @endforeach
               </div>
             </div>
-
 
             <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
               <div id="accordion">
