@@ -28,12 +28,12 @@
                                     
                                 </div>
                                 <div class="row justify-content-end mt-2">
-                                    <a type="button" class="btn"  href="{{ route('units.edit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-edit"></i></a>
+                                    <a type="button" class="btn text-primary"  href="{{ route('units.edit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-edit"></i></a>
                                     <div class="espacio"></div>
                                     <form  action="{{ route('programs.destroyUnit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                        <button class="btn" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn text-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                     <div class="espacio"></div>
                                 </div>
