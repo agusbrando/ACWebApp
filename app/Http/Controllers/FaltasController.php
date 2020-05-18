@@ -91,18 +91,22 @@ class FaltasController extends Controller
             //     }
             // }
             $count = 0;
-
+            $listadoFaltas = [];
             //Año actual
             $year = 1;
             foreach ($user->yearUnions->where('subject_id', $subject->id)->where('year_id', $year) as $yearunions_faltas) {
                 foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
                     // echo ($yearunions_faltas->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
+
+
                     //Hacer if para comprobar si es asistencia/comportamiento
                     $count = $count + 1;
+                    array_push($listadoFaltas, $falta);
+
                 }
             }
 
-            $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->max];
+            $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->max,'listaFaltas'=>$listadoFaltas];
             array_push($lista, $elemento);
         }
         return view('faltas.show', compact('user', 'lista', 'misbehaviors'));
