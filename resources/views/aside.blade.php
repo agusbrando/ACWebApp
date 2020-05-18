@@ -8,19 +8,12 @@
         </a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link" href="/">
-=======
         <a class="nav-link" href="{{ url('messages')}}">
->>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="layers"></span>
             Mensajes recibidos
         </a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link" href="/">
-=======
             <a class="nav-link" href="{{ url('messages_send')}}">
                 <span data-feather="layers"></span>
             Mensajes enviados
@@ -34,7 +27,6 @@
                 </li>
         <li class="nav-item">
         <a class="nav-link" href="/seguimiento">
->>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="file"></span>
             Seguimiento
         </a>
@@ -46,21 +38,13 @@
         </a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link" href="/">
-=======
         <a class="nav-link" href="/events">
->>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="users"></span>
             Calendario
         </a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link" href="/">
-=======
         <a class="nav-link" href="/horarios">
->>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="bar-chart-2"></span>
             Horario
         </a>
@@ -75,33 +59,13 @@
     </h6>
     <ul class="nav flex-column mb-2">
         <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link" href="posts">
-            <span data-feather="file-text"></span>
-            Posts 
-        </a>
-        </li>
-        <!--<li class="nav-item">
-        <a class="nav-link" href="users">
-            <span data-feather="file-text"></span>
-            Usuarios
-        </a>
-        </li>-->
-        <li class="nav-item">
-        <a class="nav-link" href="/">
-=======
         <a class="nav-link" href="http://127.0.0.1:8000/asignaturas">
->>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="file-text"></span>
             Notas
         </a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
-        <a class="nav-link" href="/">
-=======
         <a class="nav-link" href="/programs">
->>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="file-text"></span>
             Programación
         </a>
@@ -113,8 +77,6 @@
         </a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
-=======
         <a class="nav-link" href="/users">
             <span data-feather="file-text"></span>
             Usuarios
@@ -127,7 +89,6 @@
         </a>
         </li>
         <li class="nav-item">
->>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
         <a class="nav-link" href="/">
             <span data-feather="file-text"></span>
             Reserva de aulas

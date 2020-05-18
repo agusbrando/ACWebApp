@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -44,25 +43,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'role_id' => 'required'
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
 
 
         ]);
 
-        $user = new User([
+        $user = User::create([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
-            'password' => $request->get('password'),
-            'role_id' => $request->get('role')
+            'password' =>Hash::make($request->get('password')),
 
         ]);
-        $user->save();
-        return redirect('users.index')->with('success', 'Contact saved!');
+        return redirect('/users')->with('success', 'Contact saved!');
     }
 
     /**
@@ -74,9 +70,10 @@ class UserController extends Controller
     public function show($user_id)
     {
         $user = User::find($user_id);
+        $roles = Role::all();
         $user->role = $user->role;
 
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user','roles'));
     }
 
 

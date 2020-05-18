@@ -62,4 +62,5 @@ class AttachmentTest extends TestCase
         $user->delete();
         $role->delete();
     }
+
 }
