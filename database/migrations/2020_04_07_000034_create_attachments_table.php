@@ -19,10 +19,7 @@ class CreateAttachmentsTable extends Migration
             $table->string('extension');
             $table->integer('attachmentable_id')->unsigned();
             $table->string('attachmentable_type');
-
             $table->timestamps();
-
-
         });
     }
 

@@ -12,6 +12,7 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO Eliminar para produccion cuando se termine de implementar los test
         DB::table('items')->insert([
             'number' => 322,
             'name' => 'HP en-df4w43fd',
@@ -54,9 +55,9 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
-    
+
 
         }
-       
+
     }
 }

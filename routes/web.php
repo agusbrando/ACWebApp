@@ -28,6 +28,7 @@ Route::resource('classrooms','ClassroomController');
 //RUTAS EVALUATIONS(KEVIN)
 Route::resource('evaluations','EvaluationController');
 
+<<<<<<< HEAD
 //RUTAS SESSIONS(KEVIN)
 Route::resource('sessions','SessionController');
 
@@ -38,6 +39,17 @@ Route::resource('subjects','SubjectController');
 Route::resource('types','TypeController');
 
 //RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
+=======
+Route::resource('asistencia', 'AsistenciaController');
+Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
+Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
+Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
+Route::resource('asignaturas', 'AsignaturaController');
+Route::resource('evaluaciones', 'EvaluacionesController');
+Route::resource('porcentajes', 'PorcentajesController');
+Route::resource('desglose', 'DesgloseController');
+//RUTAS ASISTENCIA Y COMPORTAMIENTO
+>>>>>>> origin/new_master_aferrerc
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
@@ -128,3 +140,12 @@ Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
 Route::resource('courses', 'CourseController');
+
+//Rutas Posts Adrian
+Route::resource('posts', 'PostController');
+
+//Rutas Comments Adrian
+Route::resource('comments', 'CommentController');
+
+//Rutas Attachments Adrian
+Route::resource('attachments', 'AttachmentController');
