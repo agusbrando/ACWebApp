@@ -28,18 +28,6 @@ Route::resource('classrooms','ClassroomController');
 //RUTAS EVALUATIONS(KEVIN)
 Route::resource('evaluations','EvaluationController');
 
-<<<<<<< HEAD
-//RUTAS SESSIONS(KEVIN)
-Route::resource('sessions','SessionController');
-
-//RUTAS SUBJECTS(KEVIN)
-Route::resource('subjects','SubjectController');
-
-//RUTAS TYPES(KEVIN)
-Route::resource('types','TypeController');
-
-//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
-=======
 Route::resource('asistencia', 'AsistenciaController');
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
 Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
@@ -49,7 +37,6 @@ Route::resource('evaluaciones', 'EvaluacionesController');
 Route::resource('porcentajes', 'PorcentajesController');
 Route::resource('desglose', 'DesgloseController');
 //RUTAS ASISTENCIA Y COMPORTAMIENTO
->>>>>>> origin/new_master_aferrerc
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
