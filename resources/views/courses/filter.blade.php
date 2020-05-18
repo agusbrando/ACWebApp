@@ -118,13 +118,14 @@
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
                                                                                 @foreach($items as $item2)
+                                                                                @foreach($yearUnionUser->items as $item)
                                                                                 @if($item2->id == $item->item_id)
                                                                                 <option selected value="{{$item2->id}}">{{$item2->name}}</option>
                                                                                 @else
                                                                                 <option value="{{$item2->id}}">{{$item2->name}}</option>
 
                                                                                 @endif
-
+                                                                                @endforeach
                                                                                 @endforeach
 
                                                                             </select>
