@@ -13,6 +13,12 @@ class Attachment extends Model
     protected $primaryKey = 'id';
 
     //Columnas tabla
+    protected $fillable = [
+        'id',
+        'name',
+        'attachmentable_id',
+        'attachmentable_type'
+    ];
     protected $guarded = [];
 
     //Relaciones

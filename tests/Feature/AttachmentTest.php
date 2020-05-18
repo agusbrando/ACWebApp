@@ -3,6 +3,7 @@
 namespace Tests\Feature\App\Models;
 
 use App\Models\Attachment;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -10,6 +11,7 @@ use App\Models\User;
 use App\Models\Message;
 use App\Models\Role;
 use App\Models\Timetable;
+use App\Models\Post;
 
 class AttachmentTest extends TestCase
 {
@@ -18,50 +20,45 @@ class AttachmentTest extends TestCase
      *
      * @return void
      */
-    public function testAttachmentableMessage()
-    {
-        $timetable = Timetable::create([
-            'name' => '2DAM2020',
-            'date_start' =>  now(),
-            'date_end' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+    public function testAttachmentable() {
         $role = Role::create([
-            'name' => 'Test',
+            'name' => 'Name Testing',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         $user = User::create([
-            'first_name' => 'Pruebas',
-            'last_name' => 'Tests',
-            'email' => 'pruebas@campusaula.com',
-            'password' => 'pruebas',
+            'role_id' => $role->id,
+            'first_name' => 'First Name Testing',
+            'last_name' => 'Last Name Testing',
+            'password' => 'Password Testing',
+            'email' => 'emailtesting@campusaula.com',
             'created_at' => now(),
-            'updated_at' => now(),
-            'timetable_id' => $timetable->id,
-            'role_id' => $role->id
+            'updated_at' => now()
         ]);
 
-        $message = Message::create([
-            'title' => 'Pruebas',
-            'text' => 'Tests',
+        $post = Post::create([
+            'user_id' => $user->id,
+            'title' => 'Post Title Testing',
+            'text' => 'Post Testing',
             'created_at' => now(),
-            'user_id' => $user->id
+            'updated_at' => now()
         ]);
 
         $attachment = Attachment::create([
-            'name' => 'Pruebas1',
-            'attachmentable_type' => Message::class,
-            'attachmentable_id' => $message->id
+            'name' => 'Attachment Name',
+            'attachmentable_id' => $post->id,
+            'attachmentable_type' => Post::class,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
-        $this->assertEquals($attachment->attachmentable->id, $message->id);
-        $this->assertInstanceOf(Message::class, $attachment->attachmentable);
+        $this->assertEquals($attachment->attachmentable->id, $post->id);
+
+        $this->assertInstanceOf(Post::class, $attachment->attachmentable);
 
         $attachment->delete();
-        $message->delete();
+        $post->delete();
         $user->delete();
         $role->delete();
     }
