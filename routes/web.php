@@ -33,6 +33,7 @@ Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('evaluaciones', 'EvaluacionesController');
 Route::resource('porcentajes', 'PorcentajesController');
 Route::resource('desglose', 'DesgloseController');
+//RUTAS ASISTENCIA Y COMPORTAMIENTO
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
