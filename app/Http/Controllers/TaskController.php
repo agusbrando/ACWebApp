@@ -7,6 +7,7 @@ use App\Models\Task;
 use App\Models\Type;
 use App\Models\Subject;
 use App\Models\Evaluation;
+use App\Models\Calification;
 use App\Models\YearUnion;
 
 class TaskController extends Controller
@@ -52,24 +53,36 @@ class TaskController extends Controller
         $request->validate([
             'name' => 'required',
             'evaluaciones' => 'required',
-            'evaluation' => 'required',
             'type' => 'required',
-            'subject' => 'required'
+            'yearUnion' => 'required'
         ]);
 
         $evaluaciones = $request->get('evaluaciones');
 
         foreach ($evaluaciones as $eval) {
+            $yearUnion = YearUnion::find($request->get('yearUnion'));
             $task = new Task([
-                'evaluation_id' => $eval,
+                'year_union_id' => $yearUnion->id,
                 'type_id' => $request->get('type'),
                 'name' => $request->get('name')
             ]);
             $task->save();
-            $this->storeNotes(Evaluation::find($eval), $task);
+            $this->storeNotes($yearUnion, $task);
         }
 
         return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluation'));
+    }
+
+    protected function storeNotes($yearUnion, Task $task)
+    {
+        foreach ($yearUnion->users as $user) {
+            $calification = new Calification([
+                'task_id' => $task->id,
+                'year_user_id' =>  $user->id,
+                'value' => null
+            ]);
+            $calification->save();
+        }
     }
 
     /**
