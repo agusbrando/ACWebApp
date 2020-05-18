@@ -11,6 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO add all profesors, director, Students Boss 1 default student for each course
         DB::table('users')->insert([
             'first_name' => 'Admin',
             'email' => 'admin@champusaula.com',
