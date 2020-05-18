@@ -28,11 +28,11 @@ class CourseController extends Controller
     public function index()
     {
         $years = Year::orderBy("date_start", "DESC")->get(); //Ordeno los años para que salga el más reciente primero
-        foreach($years as $year){
+        foreach ($years as $year) {
             $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
         }
 
-        return view('courses.index', compact( 'years'));
+        return view('courses.index', compact('years'));
     }
 
     /**
@@ -49,7 +49,7 @@ class CourseController extends Controller
         $evaluations = Evaluation::all();
         $years = Year::orderBy("date_start", "DESC")->get();
 
-        return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations','years'));
+        return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
     }
 
     /**
@@ -74,27 +74,26 @@ class CourseController extends Controller
     public function show($courseId, $yearId)
     {
 
-        $yearUnions = YearUnion::select('id','evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
+        $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
         $subject_ids = array();
-        foreach($yearUnions as $yearUnion){
-            if( !in_array($yearUnion->subject_id, $subject_ids) ){
+        foreach ($yearUnions as $yearUnion) {
+            if (!in_array($yearUnion->subject_id, $subject_ids)) {
                 array_push($subject_ids, $yearUnion->subject_id);
             }
             $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->get()->load('items', 'user');
             $registrados = array();
-            foreach($yearUnion->yearUnionUsers as $yearUnionUser){
+            foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
                 //Aseguramos que no se repitan los usuarios
-                if( !in_array($yearUnionUser->user_id, $registrados) ){
+                if (!in_array($yearUnionUser->user_id, $registrados)) {
                     array_push($registrados, $yearUnionUser->user_id);
                     $yearUnionUser->items = $yearUnionUser->items;
                     $yearUnionUser->user = $yearUnionUser->user;
-                }else{
+                } else {
                     $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
                 }
-
             }
         }
-       
+
         //Subjects Tab
         $subjects = Subject::whereIn('id', $subject_ids)->get();
 
@@ -103,11 +102,10 @@ class CourseController extends Controller
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
 
-        return view('courses.show', compact( 'classrooms', 'types','yearUnions', 'items', 'subjects', 'yearId', 'courseId'));
-
+        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId'));
     }
 
-/**
+    /**
      * Aqui filtramos las evaluaciones dependiendo del aula
      *
      * @param  Request request
@@ -126,15 +124,15 @@ class CourseController extends Controller
         //Los resultados de cada consulta se va concatenando en $query
         if ($idClass != "") {
             $query = $query->where('classroom_id', $idClass);
-            
+
             $items = $query->get();
-        }else{
+        } else {
             $items = Item::all();
         }
         //Finalmente obtenemos todos los items que han pasado los filtros
         $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
         foreach ($yearUnions as $yearUnion) {
-            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance',1)->get()->load('items', 'user');
+            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance', 1)->get()->load('items', 'user');
             $registrados = array();
             foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
 
@@ -153,7 +151,7 @@ class CourseController extends Controller
         $types = Type::all()->where('model', Item::class);
         $classrooms = Classroom::all();
         $states = State::all();
-      
+
         return view('courses.filter', compact('classrooms', 'items', 'types', 'states', 'yearUnions'));
     }
 
@@ -168,7 +166,7 @@ class CourseController extends Controller
     {
         $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
 
-        return view('courses.edit', compact( 'yearUnionUsers'));
+        return view('courses.edit', compact('yearUnionUsers'));
     }
 
     /**
@@ -226,29 +224,28 @@ class CourseController extends Controller
      */
     public function responsabilizarItem($itemId, $userId, $yearUnionId)
     {
-        $yearUnions = YearUnion::select('id','evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation'); 
-        foreach($yearUnions as $yearUnion){
+        $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
+        foreach ($yearUnions as $yearUnion) {
             $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->get()->load('items', 'user');
             $registrados = array();
-            foreach($yearUnion->yearUnionUsers as $yearUnionUser){
+            foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
 
 
                 //Aseguramos que no se repitan los usuarios
-                if( !in_array($yearUnionUser->user_id, $registrados) ){
+                if (!in_array($yearUnionUser->user_id, $registrados)) {
                     array_push($registrados, $yearUnionUser->user_id);
                     $yearUnionUser->items = $yearUnionUser->items;
                     $yearUnionUser->user = $yearUnionUser->user;
-                }else{
+                } else {
                     $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
                 }
-                
             }
         }
-        
+
         $items = Item::all();
         $types = Type::where('model', Item::class);
-        $classrooms = Classroom::all(); 
-        
+        $classrooms = Classroom::all();
+
 
 
 
