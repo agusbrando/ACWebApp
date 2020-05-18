@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,17 +13,30 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'first_name' => 'Admin',
-            'email' => 'admin@champusaula.com',
-            'last_name' => 'Admin',
-            'password' => bcrypt('adminPass'),
-            'signature'=>'..\storage\app\signatures\'1\'5ea93e9b2fb28.png',
-            'created_at' => now(),
-            'updated_at' => now(),
-            'role_id' => 1,
-            'timetable_id'=>1
-        ]);
+        $role_admin = Role::where('name', 'admin')->first();
+
+        $user = new User();
+        $user->first_name = 'Admin';
+        $user->email = 'admin@example.com';
+        $user->last_name = 'Admin';
+        $user->password = bcrypt('adminPass');
+        $user->signature ='..\storage\app\signatures\'1\'5ea93e9b2fb28.png';
+        $user->role_id = "1";
+        $user->save();
+        $user->roles()->attach($role_admin);
+
+
+        // DB::table('users')->insert([
+        //     'first_name' => 'Admin',
+        //     'email' => 'admin@champusaula.com',
+        //     'last_name' => 'Admin',
+        //     'password' => bcrypt('adminPass'),
+        //     'signature' => '..\storage\app\signatures\'1\'5ea93e9b2fb28.png',
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        //     'role_id' => 1,
+        //     'timetable_id' => 1
+        // ]);
         DB::table('users')->insert([
             'first_name' => 'Alumno',
             'last_name' => 'Apellido',
@@ -30,7 +45,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 4,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
@@ -40,7 +55,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 2,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
         DB::table('users')->insert([
             'first_name' => 'sergio',
@@ -50,7 +65,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 4,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
 
         DB::table('users')->insert([
@@ -61,7 +76,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
         DB::table('users')->insert([
             'first_name' => 'Default',
@@ -71,18 +86,18 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
         for ($i = 1; $i <= 15; $i++) {
             DB::table('users')->insert([
-                'first_name' => 'Alumno'.$i,
-                'last_name' => 'Apellido'.$i,
-                'email' => 'user'.$i.'@campusaula.com',
+                'first_name' => 'Alumno' . $i,
+                'last_name' => 'Apellido' . $i,
+                'email' => 'user' . $i . '@campusaula.com',
                 'password' => bcrypt('password'),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'role_id' => 1,
-                'timetable_id'=>1
+                'timetable_id' => 1
             ]);
         }
     }
