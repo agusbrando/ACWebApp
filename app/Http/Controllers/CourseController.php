@@ -241,7 +241,15 @@ class CourseController extends Controller
                 }
             }
         }
+        
+        $items = Item::all();
+        $types = Type::where('model', Item::class);
+        $classrooms = Classroom::all(); 
+        
+        $item = Item::find($id);
+        $users = User::all();
 
+<<<<<<< HEAD
         $items = Item::all();
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
@@ -252,6 +260,8 @@ class CourseController extends Controller
         $item = Item::find($id);
         $users = User::all();
 
+=======
+>>>>>>> copia_master
         return view('items.show', compact('item', 'type', 'users', 'courses'));
     }
 }
