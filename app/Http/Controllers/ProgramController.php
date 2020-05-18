@@ -119,12 +119,7 @@ class ProgramController extends Controller
 
         $fechaInicio = date("Y-m-d",strtotime($fechaInicio));
         $fechaFin = date("Y-m-d",strtotime($fechaFin));
-        /*
-         'expected_date_start' => $request->get('expected_date_start'),
-            'expected_date_end' => $request->get('expected_date_end'),
-        */
-      
-        //  $expected_date_start=
+        
 
         $unit = new Unit([
             'name' => $request->get('name'),
@@ -210,17 +205,21 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
+        $usuario = Auth::user();
         $program = Program::findorfail($id);
         $evaluables = Evaluable::all();
         $evaluadoEditar_id = -1;
         $editar=false;
-        $MisEvaluables = $program->evaluables;
-        $listaEvaluables=[];
+        
         $responsable=null;
         $fechas=null;
         $notas=null;
+        $evaluado=['1'=>false, '2'=>false, '3'=>false];
+        $MisEvaluables = $program->evaluables;
+        $listaEvaluables=[];
         foreach($evaluables as $evaluable){
             $encontrado = false;
             foreach($MisEvaluables as $MiEvaluable){
@@ -243,6 +242,16 @@ class ProgramController extends Controller
                 if($notas[$i]==null){
                     $notas[$i]='';
                 }
+                if($fechas[$i]==null){
+                    $evaluado[$i]=false;
+                }else{
+                    $evaluado[$i]=true;
+                }
+                if($responsable[$i]==null){
+                    $evaluado[$i]=false;
+                }else{
+                    $evaluado[$i]=true;
+                }
             }else{
                 $notas[$i]='';
             }
@@ -250,9 +259,10 @@ class ProgramController extends Controller
             
         }
         $responsables = User::all();
-        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables','responsable','fechas','notas'));
+        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables','responsable','fechas','notas','usuario','evaluado'));
     }
     public function editarAspecto($program_id, $id){
+        $usuario = Auth::user();
         $program = Program::findorfail($program_id);
         $evaluables = Evaluable::all();
         $evaluadoEditar_id = $id;
@@ -262,6 +272,7 @@ class ProgramController extends Controller
         $responsable=null;
         $fechas=null;
         $notas=null;
+        $evaluado=['1'=>false, '2'=>false, '3'=>false];
         foreach($evaluables as $evaluable){
             $encontrado = false;
             foreach($MisEvaluables as $MiEvaluable){
@@ -284,11 +295,21 @@ class ProgramController extends Controller
                 if($notas[$i]==null){
                     $notas[$i]='';
                 }
+                if($fechas[$i]==null){
+                    $evaluado[$i]=false;
+                }else{
+                    $evaluado[$i]=true;
+                }
+                if($responsable[$i]==null){
+                    $evaluado[$i]=false;
+                }else{
+                    $evaluado[$i]=true;
+                }
             }else{
                 $notas[$i]='';
             }    
         }
-        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id','listaEvaluables','responsable','fechas','notas'));
+        return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id','listaEvaluables','responsable','fechas','notas','usuario','evaluado'));
     }
     /**
      * Show the form for editing the specified resource.

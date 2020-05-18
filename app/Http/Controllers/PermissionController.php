@@ -18,7 +18,11 @@ class PermissionController extends Controller
     {
         $permissions = Permission::all()->load('roles');
         $roles = Role::all();
-        // $assignPermissions[$permission_id]=$role_id;
+        // foreach($assignPermissions[$permission_id]=$role_id;){
+        //     $permission = Permission::find($permission_id);
+        //     $permission -> roles()->sync($role_id);
+        // }
+        
         $permissions = Permission::paginate(5);
         return view('permissions.index', compact('permissions', 'roles'));
     }
