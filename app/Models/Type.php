@@ -19,7 +19,7 @@ class Type extends Model
     }
 
     public function yearUnions(){
-        return $this->belongsToMany(YearUnion::class, 'percentages', 'type_id', 'year_union_id')->using(Percentage::class)->withPivot('percentage','min_grade_task','average_grade_task','min_average_grade_task')->withTimestamps();
+        return $this->belongsToMany(YearUnion::class, 'percentages')->withPivot('percentage','min_grade_task','average_grade_task','min_average_grade_task')->withTimestamps();
     }
 
     public function sessions()
