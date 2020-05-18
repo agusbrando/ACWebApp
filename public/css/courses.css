@@ -5,3 +5,9 @@
 .divShowCoursesContent h2{
     padding-bottom: 220px;
 }
+
+.spanShowBlade{
+    min-width: fit-content;
+    width: 150px;
+    margin-bottom: 5px;
+}
