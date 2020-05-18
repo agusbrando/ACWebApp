@@ -11,6 +11,6 @@ class CalificationsTableSeeder extends Seeder
      */
     public function run()
     {
-       
+       //TODO Dejar vacio para Produccion
     }
 }

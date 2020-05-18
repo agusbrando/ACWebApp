@@ -109,7 +109,7 @@ class SubjectController extends Controller
 
                     break;
                 case 'Trabajos':
-                    $evaluation->trabajos = Task::where('type_id', $task_type->id)->with('users')->get();
+                    $evaluation->trabajos = Task::where('type_id', $task_type->id)->with('yearUnionUsers')->get();
                     foreach ($evaluation->trabajos as $trabajo) {
                         foreach ($trabajo->users as $user) {
                             $notaTrabajos[$user->id][$trabajo->id] = $user->pivot->value;

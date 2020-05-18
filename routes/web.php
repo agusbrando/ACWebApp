@@ -1,19 +1,8 @@
 <?php
 
-use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Classroom;
-use App\Models\Course;
-use App\Models\Type;
-use App\Models\State;
-use App\Models\Item;
-use App\Models\User;
-use App\Models\Year;
-use App\Models\Evaluation;
-use App\Models\Subject;
-use App\Models\YearUnion;
-use App\Models\YearUnionUser;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,64 +14,46 @@ use App\Models\YearUnionUser;
 |
 */
 
+//RUTAS EVENTS (AGUSIN NICOLAS Y KEVIN)
+Route::resource('events', 'CalendarController');
+Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']); //TODO Revisad esta ruta. Debe estar en resources por lo que esta duplicada
+Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
+Route::post('/crearEvento','CalendarController@store');
+Route::get('/time', 'CalendarController@getTime');
+Route::get('/list', 'CalendarController@getList');
 
-Route::get('/prueba', function () {
+//RUTAS CLASSROOMS(KEVIN)
+Route::resource('classrooms','ClassroomController');
 
-    $user_id =12;
-    $item_id1= 1;
-    $item_id2= 2;
- 
-    $yearUnions = User::find($user_id)->yearUnions;
+//RUTAS EVALUATIONS(KEVIN)
+Route::resource('evaluations','EvaluationController');
 
-    $items = [Item::find($item_id1),Item::find($item_id2)];
+//RUTAS SESSIONS(KEVIN)
+Route::resource('sessions','SessionController');
 
-    foreach($yearUnions as $yearUnion){
-        foreach($items as $item){
-            if($yearUnion->pivot->assistance){
+//RUTAS SUBJECTS(KEVIN)
+Route::resource('subjects','SubjectController');
 
-                $yearUnion->pivot->items()->attach($item->id);
+//RUTAS TYPES(KEVIN)
+Route::resource('types','TypeController');
 
-            }
-        }
-    }
-
-
-});
-
-
-
+//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
 Route::resource('asistencia', 'AsistenciaController');
-
-
-
+Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
+Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
+Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
+Route::resource('asignaturas', 'AsignaturaController');
+Route::resource('evaluaciones', 'EvaluacionesController');
+Route::resource('porcentajes', 'PorcentajesController');
+Route::resource('desglose', 'DesgloseController');
+//RUTAS ASISTENCIA Y COMPORTAMIENTO
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
 Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
-Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 
-Route::resource('units', 'UnitController');
-Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
-Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
-Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
-Route::resource('notesPercentages', 'NotesPercentagesController');
-Route::resource('programs', 'ProgramController');
-Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
-Route::post('programs/{id}/evaluar','ProgramController@storeEvaluacion')->name('programs.storeEvaluacion');
-Route::post('programs/{id}/aspecto','ProgramController@storeAspecto')->name('programs.storeAspecto');
-Route::patch('programs/{program_id}/unit/{id}','ProgramController@updateUnit')->name('programs.updateUnit');
-Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspecto')->name('programs.updateAspecto');
-Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
-Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
-Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
-
-//FIN Rutas de Temporalizacion de la programacion
-
-
-Route::get('tareas/{id}', 'DesgloseController@eliminar');
-Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
-//Route::Trackings carlos
+//Route::Trackings (Carlos)
 Route::post('seguimiento/imprimir', 'TrackingController@imprimir')->name('seguimiento.print');
 Route::post('seguimiento/excel', 'TrackingController@excel')->name('seguimiento.excel');
 Route::get('seguimiento/filtrar','TrackingController@filtrar')->name('seguimiento.filtrar');
@@ -90,41 +61,22 @@ Route::get('seguimiento','TrackingController@fileStorageServe');
 Route::resource('seguimiento', 'TrackingController');
 Route::get('seguimiento','TrackingController@index');
 Route::post('seguimiento','TrackingController@store')->name('seguimiento.store');
-//Route::Timetables carlos
+
+//Route::Timetables (Carlos)
 Route::resource('horarios', 'TimetableController');
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
-Route::resource('roles','RoleController');
-Route::resource('permissions','PermissionController');
-Route::resource('users','UserController');
-Auth::routes();
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::resource('messages', 'MessageController')->middleware('auth');
-
-Route::get('messages_send', 'MessageController@index')->middleware('auth')->name('messagesSend.index');
-
-
-Route::get('download_attachment_message/{idm}/{nameAttach}','MessageController@download')->name('downloadmessagefile');
-
-Route::get('sended/{id}', 'MessageController@showSended')->middleware('auth');
-
-Route::get('response/{id}', 'MessageController@create')->middleware('auth');
-
-
-Route::get('/stock', function () {
-    return view('stock');
-});
-
-//RUTAS PERMISSIONS ROBY
+//RUTAS PERMISSIONS (Roby)
 Route::post('/permissions/assignPermissionRole','PermissionController@assignPermissionRole')->name('permission.assign');
 Route::resource('permissions','PermissionController');
-//RUTAS ROLES ROBY
+
+//RUTAS ROLES (Roby)
 Route::resource('roles','RoleController');
-//RUTAS USERS ROBY
+
+//RUTAS USERS (Roby)
 Route::resource('users','UserController');
-//RUTAS HOME ROBY
+
+//RUTAS HOME (Roby)
 Route::get('/', 'HomeController@index');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -146,8 +98,8 @@ Route::resource('courses', 'CourseController');
 
 //RUTAS SUBJECTS JAVI
 // Route::resource('asignaturas', 'AsignaturaController');
+//RUTAS SUBJECTS (Javi) //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
 Route::post('subjects/evaluations', 'SubjectController@evaluations')->name('subjects.evaluations');
-
 Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
@@ -164,28 +116,50 @@ Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('des
 Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->name('desglose.updateTrabajos');
 Route::post('desglose/updateActitud', 'DesgloseController@updateActitud')->name('desglose.updateActitud');
 Route::post('desglose/updateRecuperacion', 'DesgloseController@updateRecuperacion')->name('desglose.updateRecuperacion');
-
 Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
 
-//RUTAS EVENTS
-Route::resource('events', 'CalendarController');
-Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
-Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
-Route::post('/crearEvento','CalendarController@store');
-Route::get('/time', 'CalendarController@getTime');
-Route::get('/list', 'CalendarController@getList');
+//INICIO Rutas de Temporalizacion de la programacion (Jesus)
+Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
+Route::resource('units', 'UnitController');
+Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
+Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
+Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
+Route::resource('notesPercentages', 'NotesPercentagesController');
+Route::resource('programs', 'ProgramController');
+Route::post('programs/{id}/unit','ProgramController@storeUnit')->name('programs.storeUnit');
+Route::post('programs/{id}/evaluar','ProgramController@storeEvaluacion')->name('programs.storeEvaluacion');
+Route::post('programs/{id}/aspecto','ProgramController@storeAspecto')->name('programs.storeAspecto');
+Route::patch('programs/{program_id}/unit/{id}','ProgramController@updateUnit')->name('programs.updateUnit');
+Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspecto')->name('programs.updateAspecto');
+Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
+Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
+Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
 
-//RUTAS CLASSROOMS
-Route::resource('classrooms','ClassroomController');
+// Route Messages (Sergio Falco)
+Route::resource('messages', 'MessageController')->middleware('auth');
+Route::get('messages_send', 'MessageController@index')->middleware('auth')->name('messagesSend.index');
+Route::get('download_attachment_message/{idm}/{nameAttach}','MessageController@download')->name('downloadmessagefile');
+Route::get('sended/{id}', 'MessageController@showSended')->middleware('auth');
+Route::get('response/{id}', 'MessageController@create')->middleware('auth');
 
-//RUTAS EVALUATIONS
-Route::resource('evaluations','EvaluationController');
+//RUTAS ITEMs
+Route::post('/items/filter', 'ItemController@filter');
+Route::resource('items', 'ItemController');
 
-//RUTAS SESSIONS
-Route::resource('sessions','SessionController');
+//RUTAS STATESs Sergio Lopez
+Route::resource('states', 'StateController');
 
-//RUTAS SUBJECTS
-Route::resource('subjects','SubjectController');
+//RUTAS COURSEs Sergio Lopez
+Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
+Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
+Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
+Route::resource('courses', 'CourseController');
 
-//RUTAS TYPES
-Route::resource('types','TypeController');
+//Rutas Posts Adrian
+Route::resource('posts', 'PostController');
+
+//Rutas Comments Adrian
+Route::resource('comments', 'CommentController');
+
+//Rutas Attachments Adrian
+Route::resource('attachments', 'AttachmentController');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use App\Models\Classroom;
@@ -22,7 +21,7 @@ use App\Models\YearUnionUser;
 class CourseController extends Controller
 {
     /**
-     * Esta es la vista principal donde se listarán todos los cursos por años.
+     * Esta es la vista principal donde se listarán todos los cursos.
      *
      * @return \Illuminate\Http\Response
      */
@@ -55,12 +54,12 @@ class CourseController extends Controller
         $subjects = Subject::all();
         $evaluations = Evaluation::all();
         $years = Year::orderBy("date_start", "DESC")->get();
-        //devuelvo la vista del formulario para crearlo
-        return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations','years'));
+
+        return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
     }
 
     /**
-     * Cuando en create le da al boton "guardar" guardamos el curso en la Base de datos.
+     * Guardamos el curso en la Base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -80,12 +79,38 @@ class CourseController extends Controller
      */
     public function show($courseId, $yearId)
     {
-        $courseId = $courseId;
-        $yearId = $yearId;
+
+        $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
+        $subject_ids = array();
+        foreach ($yearUnions as $yearUnion) {
+            if (!in_array($yearUnion->subject_id, $subject_ids)) {
+                array_push($subject_ids, $yearUnion->subject_id);
+            }
+            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->get()->load('items', 'user');
+            $registrados = array();
+            foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
+                //Aseguramos que no se repitan los usuarios
+                if (!in_array($yearUnionUser->user_id, $registrados)) {
+                    array_push($registrados, $yearUnionUser->user_id);
+                    $yearUnionUser->items = $yearUnionUser->items;
+                    $yearUnionUser->user = $yearUnionUser->user;
+                } else {
+                    $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
+                }
+            }
+        }
+
+        //Subjects Tab
+        $subjects = Subject::whereIn('id', $subject_ids)->get();
+
+        //Items Tab
+        $items = Item::all();
+        $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
 
-        return view('courses.show', compact('classrooms', 'courseId', 'yearId'));
+        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId'));
     }
+
     /**
      * Aqui filtramos las evaluaciones dependiendo del aula
      *
@@ -109,13 +134,13 @@ class CourseController extends Controller
             $query = $query->where('classroom_id', $idClass);
 
             $items = $query->get();
-        }else{
+        } else {
             $items = Item::all();
         }
         //Finalmente obtenemos todos los items que han pasado los filtros
         $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
         foreach ($yearUnions as $yearUnion) {
-            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance',1)->get()->load('items', 'user');
+            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance', 1)->get()->load('items', 'user');
             $registrados = array();
             foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
 

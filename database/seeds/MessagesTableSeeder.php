@@ -11,6 +11,8 @@ class MessagesTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO Eliminar para produccion cuando se termine de implementar los test
+
         DB::table('messages')->insert([
             'user_id' => 1,
             'subject' => 'de admin a user',

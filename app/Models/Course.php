@@ -22,4 +22,10 @@ class Course extends Model
     public function yearUnions(){
         return $this->hasMany(YearUnion::class);
     }
+
+    public function subjects(){
+
+        return $this->belongsToMany(Subject::class, 'course_subject');
+
+    }
 }
