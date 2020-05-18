@@ -1,5 +1,7 @@
 @extends('base')
-
+@section('login')
+@include('auth.login')
+@endsection
 @section('main')
 
 <!-- Tonggle -->
@@ -100,9 +102,9 @@
             <div class="tab-pane fade" id="nav-eval2" role="tabpanel" aria-labelledby="nav-eval2-tab" style="width:100%">
               <div id="accordion">
                 <div class="card">
-                  <div class="card-header" id="headingOne" style="background-color: #EAEAEA">
+                  <div class="card-header" id="headingOne" style="background-color: #EAEAEA" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <h5 class="mb-0">
-                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <button class="btn btn-link" >
                         <h7 style="color:grey;font-size:large">Faltas Leves</h7>
                       </button>
                     </h5>

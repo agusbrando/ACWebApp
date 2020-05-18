@@ -83,7 +83,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Guarda en la base de datos el Item hecho en item.create.
+     * Cuando en create le da al boton "guardar" guardamos el curso en la Base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -93,7 +93,7 @@ class ItemController extends Controller
         // muestra los datos obtenidos del formulario en pantalla
         // dd(request()->all()); 
 
-        //Validamos que los datos que necesitamos no sean nulos
+        //Valido que los campos que necesito no sean nulos
         $request->validate([
             'name'=>'required',
             'number'=>'required',
@@ -101,7 +101,7 @@ class ItemController extends Controller
             'classroom_id'=>'required',
             'type_id'=>'required',
         ]);
-        //Una vez validados creamos el objeto
+        //ahora recojo los valores de los difrentes input y selects llamandoles por su identificador
         $item = new Item([
             'name' => $request->get('name'),
             'number' => $request->get('number'),
@@ -114,6 +114,7 @@ class ItemController extends Controller
         ]);
         //y lo guardamos en la base de datos
         $item->save();
+        //y le redirijo a la vista principal para que vea que se ha añadido
         return redirect('/items')->with('exito', 'Item creado!');
     }
 

@@ -57,7 +57,11 @@
                                             <option value="" selected>Todas</option>
                                             <!--Hace la funcion de un placeholder-->
                                             @foreach($classrooms as $classroom)
-                                            <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            @if($classroom->id == $idClass)
+                                                <option selected name="{{$classroom->id}}" value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            else
+                                                <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            @endif
                                             @endforeach
                                         </select>
                                         <div class="d-flex flex-row ml-3 botones">
@@ -118,11 +122,11 @@
 
                                                                 <td>
                                                                     <div class="form-group ">
-                                                                        <form class="botones d-flex flex-wrap" method="get" action="#">
+                                                                        <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($yearUnionUser->user->id, $courseId, $yearId))}}">
                                                                             @csrf
-                                                                            @method('GET')
-
-                                                                            <select class="form-control " id="type_id" name="type_id">
+                                                                            @method('POST')
+                                                                            <input type="hidden" name="idClass2"  value="{{$idClass}}">
+                                                                            <select multiple class="form-control " id="itemIds" name="itemIds[]">
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
                                                                                 @foreach($yearUnionUser->items as $item1)

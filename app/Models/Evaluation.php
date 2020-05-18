@@ -10,7 +10,7 @@ class Evaluation extends Model
     use SoftDeletes;
   
     protected $table = 'evaluations';
-    protected $guarded = [];   
+    protected $guarded = [];
 
     protected $dates = ['deleted_at'];
 

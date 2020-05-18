@@ -35,6 +35,6 @@ class CreatePercentagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('evaluation_type');
+        Schema::dropIfExists('percentages');
     }
 }
