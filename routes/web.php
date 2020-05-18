@@ -131,7 +131,7 @@ Route::post('desglose/updateRecuperacion', 'DesgloseController@updateRecuperacio
 
 Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
 
-//RUTAS EVENTS
+//RUTAS EVENTS (AGUSIN NICOLAS Y KEVIN)
 Route::resource('events', 'CalendarController');
 Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show']);
 Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento');
@@ -139,17 +139,17 @@ Route::post('/crearEvento','CalendarController@store');
 Route::get('/time', 'CalendarController@getTime');
 Route::get('/list', 'CalendarController@getList');
 
-//RUTAS CLASSROOMS
+//RUTAS CLASSROOMS(KEVIN)
 Route::resource('classrooms','ClassroomController');
 
-//RUTAS EVALUATIONS
+//RUTAS EVALUATIONS(KEVIN)
 Route::resource('evaluations','EvaluationController');
 
-//RUTAS SESSIONS
+//RUTAS SESSIONS(KEVIN)
 Route::resource('sessions','SessionController');
 
-//RUTAS SUBJECTS
+//RUTAS SUBJECTS(KEVIN)
 Route::resource('subjects','SubjectController');
 
-//RUTAS TYPES
+//RUTAS TYPES(KEVIN)
 Route::resource('types','TypeController');
