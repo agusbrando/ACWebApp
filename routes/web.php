@@ -3,6 +3,10 @@
 use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Item;
+use App\Models\YearUnion;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,16 +23,16 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::resource('asistencia', 'AsistenciaController');
-
-
-
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
 Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
-Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 
+
+//INICIO Rutas de Temporalizacion de la programacion
+
+Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 Route::resource('units', 'UnitController');
 Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
 Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
@@ -47,8 +51,7 @@ Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAs
 //FIN Rutas de Temporalizacion de la programacion
 
 
-Route::get('tareas/{id}', 'DesgloseController@eliminar');
-Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
+
 //Route::Trackings carlos
 Route::post('seguimiento/imprimir', 'TrackingController@imprimir')->name('seguimiento.print');
 Route::post('seguimiento/excel', 'TrackingController@excel')->name('seguimiento.excel');
@@ -122,6 +125,7 @@ Route::get('tareas/{id}', 'DesgloseController@eliminar');
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
 Route::get('evaluaciones/desglose/crearTarea/{id}', 'TaskController@create');
 
+
 //TODO Cambiar controller de DesgloseController.
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
 Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
@@ -130,6 +134,15 @@ Route::post('desglose/updateActitud', 'DesgloseController@updateActitud')->name(
 Route::post('desglose/updateRecuperacion', 'DesgloseController@updateRecuperacion')->name('desglose.updateRecuperacion');
 
 Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
+
+
+
+
+
+
+
+
+
 
 //RUTAS EVENTS
 Route::resource('events', 'CalendarController');
