@@ -45,23 +45,43 @@
 
 
                     <td class="td">8:30-9:25</td>
-                    @foreach($horas as $hora)
-                    @if($hora->time_start=='8:30:00')
-                        @if($hora->day==1)
-                            <td>{{$hora->subject->name}}</td>
-                        @elseif($hora->day==2)
-                            <td>{{$hora->subject->name}}</td>
-                        @endif
-                    @endif
+                    @foreach($sessions as $session)
+                       
+                            <td>
+                                @if($session->day==1)
+                                {{$session->subject->abbreviation}}-{{$session->subject->name}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($session->day==2)
+                                {{$session->subject->abbreviation}}-{{$session->subject->name}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($session->day==3)
+                                {{$session->subject->abbreviation}}-{{$session->subject->name}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($session->day==4)
+                                {{$session->subject->abbreviation}}- {{$session->subject->name}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($session->day==5)
+                                {{$session->subject->abbreviation}}-{{$session->subject->name}}
+                                @endif
+                            </td>
+                        
                     @endforeach
 
                 </tr>
                 <tr>
 
                     <td class="td">9:25-10:20</td>
-                    @foreach($horas as $hora)
+                    @foreach($sessions as $session)
 
-                    <td>{{$hora->subject->name}}</td>
+
 
                     @endforeach
                 </tr>
@@ -77,18 +97,18 @@
                 <tr>
 
                     <td class="td">10:40-11:35</td>
-                    @foreach($horas as $hora)
+                    @foreach($sessions as $session)
 
-                    <td>{{$hora->subject->name}}</td>
+
 
                     @endforeach
                 </tr>
                 <tr>
 
                     <td class="td">11:35-12:25</td>
-                    @foreach($horas as $hora)
+                    @foreach($sessions as $session)
 
-                    <td>{{$hora->subject->name}}</td>
+
 
                     @endforeach
                 </tr>
@@ -104,18 +124,18 @@
                 <tr>
 
                     <td class="td">12:40-13:35</td>
-                    @foreach($horas as $hora)
+                    @foreach($sessions as $session)
 
-                    <td>{{$hora->subject->name}}</td>
+
 
                     @endforeach
                 </tr>
                 <tr>
 
                     <td class="td">13:35-14:30</td>
-                    @foreach($horas as $hora)
+                    @foreach($sessions as $session)
 
-                    <td>{{$hora->subject->name}}</td>
+
 
                     @endforeach
                 </tr>
