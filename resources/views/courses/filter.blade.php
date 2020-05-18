@@ -128,9 +128,7 @@
                                                                                 @foreach($items as $item)
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
 
-                                                                                @endforeach
-
-                                                                                @endforeach
+                                                                                
                                                                                 @endforeach
                                                                             </select>
 
