@@ -162,46 +162,5 @@ class CourseController extends Controller
         return view('items.show', compact('item', 'type', 'users', 'courses'));
     }
 
-    /**
-     * Esto asignará un item al usuario cuando de le demos al boton de asignar item de la vista show del curso
-     *
-     * @param  int  $itemId
-     * @param  int  $userId
-     * @param  int  $yearUnionId
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function responsabilizarItem($itemId, $userId, $yearUnionId)
-    {
-        $yearUnions = YearUnion::select('id','evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation'); 
-        foreach($yearUnions as $yearUnion){
-            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->get()->load('items', 'user');
-            $registrados = array();
-            foreach($yearUnion->yearUnionUsers as $yearUnionUser){
-
-
-                //Aseguramos que no se repitan los usuarios
-                if( !in_array($yearUnionUser->user_id, $registrados) ){
-                    array_push($registrados, $yearUnionUser->user_id);
-                    $yearUnionUser->items = $yearUnionUser->items;
-                    $yearUnionUser->user = $yearUnionUser->user;
-                }else{
-                    $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
-                }
-                
-            }
-        }
-        
-        $items = Item::all();
-        $types = Type::where('model', Item::class);
-        $classrooms = Classroom::all(); 
-        
-
-
-
-        $item = Item::find($id);
-        $users = User::all();
-
-        return view('items.show', compact('item', 'type', 'users', 'courses'));
-    }
+    
 }
