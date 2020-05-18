@@ -13,11 +13,10 @@
                 @if ($sitio == 0)
                     <a class="btn btn-outline-success" href="/response/{{$message->id}}">Responder</a>
                 @endif
-                @if ($sitio == 0)
-                    <a class="btn btn-outline-info" href="{{ url('messages')}}">Volver</a>
-                @else
-                    <a class="btn btn-outline-info" href="{{ url('messages_send')}}">Volver</a>
-                @endif
+
+                    <a class="btn btn-outline-info" href="{{ url()->previous() }}">Volver</a>
+
+
                 <form class="float-right"action="{{ route('messages.destroy',$message->id)}}" method="POST">
                     @csrf
                     @method('DELETE')

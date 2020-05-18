@@ -59,11 +59,7 @@ class TrackingController extends Controller
       'date_start' => 'required',
     ]);
 
-
     $user = Auth::user();
-
-
-
 
     list($hora_ini_1, $hora_ini_2) = explode(":", $request->get('time_start'));
     list($hora_fin_1, $hora_fin_2) = explode(":", $request->get('time_end'));
@@ -86,7 +82,6 @@ class TrackingController extends Controller
 
     ]);
 
-
     $tracking->save();
     return redirect('/seguimiento')->with('exito', 'Horario creado!');
   }
@@ -102,7 +97,6 @@ class TrackingController extends Controller
     $user = Auth::user();
     return view('Tracking.edit', compact('user'));
   }
-
 
   public function update(Request $request, $id)
   {
@@ -141,7 +135,6 @@ class TrackingController extends Controller
       }
       //$file = $micarpeta . "\\" . uniqid() . '.' . $image_type;
       //file_put_contents($file, $image_base64);
-
 
       //"app/" . $ruta . "/" .
       $user->signature = Storage::url("/" . $ruta . "/" . $uniq . '.' . $image_type);
@@ -206,7 +199,7 @@ class TrackingController extends Controller
     foreach ($trackings as $key => $tracking) {
       $trackings[$key] = json_decode($tracking);
     }
-    $pdf = \PDF::loadView('pdf', compact('trackings', 'user'))->setPaper('a4', 'landscape');
+    $pdf = \PDF::loadView('Tracking.pdf', compact('trackings', 'user'))->setPaper('a4', 'landscape');
     return $pdf->download('trackings.pdf');
   }
   public function excel(Request $request)
@@ -215,7 +208,7 @@ class TrackingController extends Controller
     foreach ($trackings as $key => $tracking) {
       $trackings[$key] = json_decode($tracking);
     }
-    return view('excel', compact('trackings'));
+    return view('Tracking.excel', compact('trackings'));
   }
   
 }

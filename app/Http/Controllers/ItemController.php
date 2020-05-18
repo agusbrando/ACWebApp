@@ -126,6 +126,9 @@ class ItemController extends Controller
         $item = Item::find($id);
         $type = Type::find($item->type_id);
         $users = User::all();
+        $item->aula = Classroom::find($item->classroom_id);
+        $item->state = State::find($item->state_id);
+        $item->type = Type::find($item->type_id);
         $courses = Course::all();
 
         return view('items.show', compact('item', 'type', 'users', 'courses'));

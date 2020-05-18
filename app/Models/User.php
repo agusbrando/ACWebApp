@@ -82,4 +82,9 @@ class User extends Authenticatable
         return $this->belongsToMany(YearUnion::class, 'yearUnionUsers', 'user_id', 'year_union_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
     }
 
+    public function tasks()
+    {
+        return $this->hasManyThrough(Task::class, YearUnionUser::class);
+    }
+
 }

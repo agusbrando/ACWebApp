@@ -45,7 +45,7 @@ class YearUnion extends Model
 
     //acceso a types de ese year union (asignatura, en una determinada evaluacion) con sus porcentajes (por cada tipo)
     public function types(){
-        return $this->belongsToMany(Type::class, 'percentages', 'year_union_id', 'type_id')->using(Percentage::class)->withPivot('percentage','min_grade','average_grade')->withTimestamps();
+        return $this->belongsToMany(Type::class, 'percentages')->where('model', Task::class)->withPivot('percentage','min_grade_task','average_grade_task','min_average_grade_task')->withTimestamps();
     }
 
     //posible union con year union y sesion timetable
