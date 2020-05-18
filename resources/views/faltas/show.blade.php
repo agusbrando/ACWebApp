@@ -28,22 +28,22 @@
           </nav>
           <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-eval1" role="tabpanel" aria-labelledby="nav-eval1-tab">
-              <!-- <table id="alumnos" class="table table-striped" style="width:100%">
-          <thead class="cabezeraTabla">
-            <tr>
-              @foreach($lista as $subject)
-              <td>{{$subject['asignatura']}}</td>
-              @endforeach
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              @foreach($lista as $subject)
-              <td>{{$subject['faltas']}}/{{$subject['max']}}</td>
-              @endforeach
-            </tr>
-          </tbody>
-        </table> -->
+                        <!-- <table id="alumnos" class="table table-striped" style="width:100%">
+                    <thead class="cabezeraTabla">
+                      <tr>
+                        @foreach($lista as $subject)
+                        <td>{{$subject['asignatura']}}</td>
+                        @endforeach
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        @foreach($lista as $subject)
+                        <td>{{$subject['faltas']}}/{{$subject['max']}}</td>
+                        @endforeach
+                      </tr>
+                    </tbody>
+                  </table> -->
 
               <div id="accordion" class="accordion">
                 @foreach($lista as $falta)
@@ -51,7 +51,7 @@
                 <div class="card" style="background-color: #EAEAEA">
                   <div class="card-header" id="headingOne/{{$falta['asignatura']}}">
                     <h7 class="mb-0">
-                      <button class="btn btn-link hover color-red" data-toggle="collapse" data-target="#collapseOne/{{$falta['asignatura']}}" aria-expanded="true" aria-controls="collapseOne/{{$subject['asignatura']}}">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne/{{$falta['asignatura']}}" aria-expanded="true" aria-controls="collapseOne/{{$subject['asignatura']}}">
                         <h7 style="color:grey;font-size:large">{{$falta['asignatura']}}</h7>
                       </button>
                       <div style="float: right; color: grey;">
@@ -92,7 +92,6 @@
                   </div>
                 </div>
                 @endforeach
-
               </div>
             </div>
 
