@@ -35,7 +35,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea id="descripcion" name="descripcion" type="text" rows="3" maxlength="30" style="resize:none;" class="@error('descripcion') is-invalid @enderror form-control">{{$event->description }}</textarea>
+                                <textarea id="descripcion" name="descripcion" type="text" rows="3" maxlength="2000" style="resize:none;" class="@error('descripcion') is-invalid @enderror form-control">
+                                {{$event->description }}</textarea>
                             </div>
                         </fieldset>
                         @error('email', 'login')
