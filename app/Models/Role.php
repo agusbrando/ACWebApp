@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model  
+class Role extends Model
 {
     use SoftDeletes;
     /**
@@ -69,6 +69,16 @@ class Role extends Model
 
     public function users()
     {
-        return $this->belongsToMany(Type::class)->withPivot('permissions', 'role_permissions', 'roles')->withTimestamps();
+        return $this->hasMany(User::class)->withTimestamps();
+    }
+    public function user()
+    {
+        return $this
+            ->belongsToMany('App\Models\User')
+            ->withTimestamps();
+    }
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'permission_role', 'permission_id', 'role_id')->withTimeStamps();
     }
 }

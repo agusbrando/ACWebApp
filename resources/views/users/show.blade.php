@@ -7,7 +7,10 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Perfil de usuario</h3>
+            <div class="d-flex flex-row">
+                <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3> Perfil debug_backtrace usuario</h3>
+            </div>
             <div>
 
                 <a class="btn btn-outline-info" href="{{ route('users.edit',$user->id)}}">Editar</a>
@@ -27,13 +30,11 @@
                 <div>
                     <h5 class="card-title">{{($user->first_name)}} {{($user->last_name)}}</h5>
                     <p class="card-text">{{($user->email)}}</p>
-                    <p class="card-text">{{$user->role}}</p> 
+                    <p class="card-text">{{$user->role}}</p>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </main>
 @endsection
-                 
-

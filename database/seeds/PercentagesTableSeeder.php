@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Models\Type;
+use App\Models\Task;
+use App\Models\YearUnion;
 class PercentagesTableSeeder extends Seeder
 {
     /**
@@ -11,129 +13,27 @@ class PercentagesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('percentages')->insert([
-            'year_union_id' => 1,
-            'type_id' => 1,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 1,
-            'type_id' => 2,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 1,
-            'type_id' => 3,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 1,
-            'type_id' => 4,
-            'percentage' => 100,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        //NO tocar
 
-        DB::table('percentages')->insert([
-            'year_union_id' => 2,
-            'type_id' => 1,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 2,
-            'type_id' => 2,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 2,
-            'type_id' => 3,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 2,
-            'type_id' => 4,
-            'percentage' => 100,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $types = Type::where('model', Task::class)->get();
+        $yearUnions = YearUnion::all();
+        foreach ($yearUnions as $yearUnion) {
+            foreach($types as $type){
+                DB::table('percentages')->insert([
+                'year_union_id' => $yearUnion->id,
+                'type_id' => $type->id,
+                'percentage' => 0,
+                'min_grade_task' => 0,
+                'average_grade_task' => 0,
+                'min_average_grade_task' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            }
 
-        DB::table('percentages')->insert([
-            'year_union_id' => 3,
-            'type_id' => 1,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 3,
-            'type_id' => 2,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 3,
-            'type_id' => 3,
-            'percentage' => 30,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('percentages')->insert([
-            'year_union_id' => 3,
-            'type_id' => 4,
-            'percentage' => 100,
-            'min_grade_task' => 4,
-            'average_grade_task' => 5,
-            'min_average_grade_task' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        }
 
-        
+
+
     }
 }

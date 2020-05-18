@@ -11,7 +11,7 @@
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <form action="{{ route('desglose.store') }}" method="post">
+    <form action="{{ route('tasks.store') }}" method="post">
         @csrf
         <div class="card shadow">
             <div class="card-header row m-0 justify-content-between">
@@ -29,7 +29,7 @@
                         <label for="Porcentaje">Evaluaciones</label>
                         <select class="selectpicker w-100 mt-n1" title="Selecciona Evaluacion" multiple data-actions-box="true" name="evaluaciones[]">
                             @foreach($evaluaciones as $eval)
-                            <option value="{{$eval->id}}">{{$eval->name}}</option>
+                            <option value="{{$eval->evaluation->id}}">{{$eval->evaluation->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -41,8 +41,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <input type="hidden" name="subject" value={{$subject->id}}>
-                    <input type="hidden" name="evaluation" value={{$evaluation->id}}>
+                    <input type="hidden" name="yearUnion" value={{$yearUnion->id}}>
                 </div>
             </div>
             <div class=" card-footer col-12">

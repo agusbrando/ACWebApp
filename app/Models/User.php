@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -20,8 +21,43 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'email_verified_ad'=>'datetime',
+        'email_verified_ad' => 'datetime',
     ];
+
+
+
+    public function authorizeRoles($roles)
+    {
+        if ($this->hasAnyRole($roles)) {
+            return true;
+        }
+        abort(401, 'Esta acción no está autorizada.');
+    }
+    public function hasAnyRole($roles)
+    {
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                if ($this->hasRole($role)) {
+                    return true;
+                }
+            }
+        } else {
+            if ($this->hasRole($roles)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+
+
 
     public function events()
     {
@@ -33,7 +69,12 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
-
+    public function roles()
+    {
+        return $this
+            ->belongsToMany('App\Models\Role')
+            ->withTimestamps();
+    }
 
 
     public function trackings()
@@ -78,8 +119,13 @@ class User extends Authenticatable
     }
 
     //** lista de year unions (asignaturas por cada evaluacion) en las que esta matriculado el alumno */
-    public function yearUnions(){
-        return $this->belongsToMany(YearUnion::class, 'yearUnionUsers', 'user_id', 'year_union_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance','id');
+    public function yearUnions()
+    {
+        return $this->belongsToMany(YearUnion::class, 'yearUnionUsers', 'user_id', 'year_union_id')->using(YearUnionUser::class)->withTimeStamps()->withPivot('assistance', 'id');
     }
 
+    public function tasks()
+    {
+        return $this->hasManyThrough(Task::class, YearUnionUser::class);
+    }
 }

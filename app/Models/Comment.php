@@ -16,8 +16,8 @@ class Comment extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'text',
-        'post_id'
+        'post_id',
+        'text'
     ];
 
     //Relaciones

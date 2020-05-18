@@ -38,7 +38,13 @@ class Session extends Model
 
     public function event()
     {
-        return $this->hasOne('App\Models\Event');
+        return $this->hasOne(Event::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Type', 'type_id');
+        // return $this->belongsTo('App\Models\Type', 'type_id')->where('model', 'App\Models\Session');
     }
 
     public function type()

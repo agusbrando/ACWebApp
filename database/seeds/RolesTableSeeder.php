@@ -11,6 +11,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO Roles Profesor, Alumno, Administrador, Administracion
         DB::table('roles')->insert([
             'name'        => 'Admin',
             'slug'        => 'admin',

@@ -2,45 +2,7 @@
 
 @section('main')
 
-<!-- <script type="text/javascript">
-	$(document).ready(function()
-	    {  
-            $('#multiCollapseExample1').show();
-            $('#BotonAspecto').hide(); 
-            $("#tab1").on( "click", function() {	 
-                $('#multiCollapseExample1').show();
-                $('#multiCollapseExample2').hide();
-                $('#multiCollapseExample3').hide();
-                $('#BotonUnidad').show();
-                $('#BotonAspecto').hide();
-                $('#tab1').addClass('active');
-                $('#tab2').removeClass('active');
-                $('#tab3').removeClass('active');
-                });
-            $("#tab2").on( "click", function() {	 
-                $('#multiCollapseExample1').hide();
-                $('#multiCollapseExample2').show();
-                $('#multiCollapseExample3').hide();
-                $('#BotonUnidad').hide();
-                $('#BotonAspecto').show();
-                $('#tab1').removeClass('active');
-                $('#tab2').addClass('active');
-                $('#tab3').removeClass('active');
-                });
-            $("#tab3").on( "click", function() {	 
-                $('#multiCollapseExample1').hide();
-                $('#multiCollapseExample2').hide();
-                $('#multiCollapseExample3').show();
-               
-                $('#BotonUnidad').hide();
-                $('#BotonAspecto').hide();
-                $('#tab1').removeClass('active');
-                $('#tab2').removeClass('active');
-                $('#tab3').addClass('active');
-            });
-        });
-        
-</script> -->
+<!-- Habilitar los tabs, y los botones de cada uno de ellos -->
 <script>
     $(document).ready(function(){
         $('#multiCollapseExample1').show();
@@ -51,48 +13,37 @@
                 $('#tab{{$i}}').addClass('active');
                 $('#Boton{{$i}}').show();
                 @if($i==3)
-                    $(".dropdown-toggle").dropdown();
+                $(".dropdown-toggle").dropdown();
                 @endif
                 @for($j=1;$j<=3;$j++)
-                    @if($i!=$j)
-                        $('#multiCollapseExample{{$j}}').hide();
-                        $('#tab{{$j}}').removeClass('active');
-                        $('#Boton{{$j}}').hide();
-                    @endif
-                @endfor
-            });
-        @endfor
-    });
-</script>
-<script>
-    $(document).ready(function(){ 
-        @for($i=1;$i<=3;$i++)
-            $('#divTablaEval{{$i}}').hide();
-            $("#b{{$i}}EVAL").on( "click", function() {	 
-                $('#divTablaEval{{$i}}').show();
-                @for($j=1;$j<=3;$j++)
-                    @if($i!=$j)
-                        $('#divTablaEval{{$j}}').hide();
-                    @endif
+                @if($i!=$j)
+                    $('#multiCollapseExample{{$j}}').hide();
+                    $('#tab{{$j}}').removeClass('active');
+                    $('#Boton{{$j}}').hide();
+                @endif
                 @endfor
             });
         @endfor
     });
 </script>
 
+<!-- Para que al entrar en esta vista con $editar = true se vaya a la pestaña correspondiente -->
 @if($editar || ($mostrarAspecto ?? '') )
 <script type="text/javascript">
 	$(document).ready(function()
 	    {
             $('#multiCollapseExample1').hide();
+            $('#tab1').removeClass('active');
             $('#multiCollapseExample2').show();
-            $('#BotonAspecto').show();
-            $('#BotonUnidad').hide();
+            $('#tab2').addClass('active');
+            $('#Boton2').show();
+            $('#Boton1').hide();
         });
         
 </script>
 @endif
 
+<!-- Hablitar los botones "+" para mostrar informacion adicional de cada unidad -->
 <script>
     $(document).ready(function(){ 
         @for($i=0;$i<=($program->units->count());$i++)
@@ -103,7 +54,7 @@
                 $('#masInfo{{$i}}').toggle();
                 $('#cabFecha').toggle();
                 $('#fechaPrevista{{$i}}').toggle();
-
+                $('#columna{{$i}}').toggle();
             });
         @endfor
     });
@@ -156,23 +107,28 @@
                                 <th>F. final</th>
                                 <th>Eval.</th>
                 
-                                <th>Actions</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($program->units as $unidad)
                             <tr>
                                 <td>{{$unidad->name}}</td>
-                                <td>{{$unidad->expected_date_start}}</td>
-                                <td>{{$unidad->expected_date_end}}</td>
+                                <td>{{date('d/m/Y',strtotime($unidad->expected_date_start))}}</td>
+                                <td>{{date('d/m/Y',strtotime($unidad->expected_date_end))}}</td>
                                 <td>{{$unidad->expected_eval}}</td>
-                                <td>{{$unidad->date_start}}</td>
-                                <td>{{$unidad->date_end}}</td>
+                                @if(($unidad->date_start)!=null)
+                                <td>{{date('d/m/Y',strtotime($unidad->date_start))}}</td>
+                                <td>{{date('d/m/Y',strtotime($unidad->date_end))}}</td>
+                                @else
+                                <td></td>
+                                <td></td>
+                                @endif
                                 <td>{{$unidad->eval}}</td>
                                 
                                 <td class="botones justify-content-center">
                                     
-                                    <a type="button" class="btn"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-eye"></i></a>
+                                    <a type="button" class="btn text-warning"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-eye"></i></a>
 
                                 </td>
                             </tr>
@@ -184,23 +140,60 @@
                 </div> 
                 <div class="collapse multi-collapse col-lg-12 col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample2">
                         @if(!$editar)
-                        <table class="table col-12" >
+                        <table class="table col-12 text-left" >
                             <thead class="thead-dark col-12">
                                 <tr>
-                                    <th>Aspecto Evaluado</th>
-                                    <th>Observaciones</th>
-                                    <th>Actions</th>
+                                    <th class="d-flex justify-content-between border-6">
+                                        
+                                            <div class="col-6 text-center">Aspecto Evaluado</div>
+                                            <div class="col-6 text-center">Observaciones</div>
+                                        
+                                    </th>
+                                    
+                                    <!-- <th>
+                                        <div class="card-deck">
+                                            <div class="card border-0 bg-dark">
+                                                <div class="card-body">
+                                                <h5 class="card-title text-center">Aspecto Evaluado</h5>
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="card border-0 bg-dark">
+                                                <div class="card-body">
+                                                <h5 class="card-title text-center">Observaciones</h5>
+                                                
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </th> -->
+                                    <th> <div></div></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($program->evaluables as $evaluable)
                                     <tr>
-                                        <td>{{$evaluable->name}}</td>
-                                        <td>
+                                        <!-- <td class="text-justify">{{$evaluable->name}}</td>
+                                        <td class="text-justify">
                                             
                                             {{$evaluable->pivot->description}}
+                                        </td> -->
+                                        <td>
+                                            <div class="card-deck">
+                                                <div class="card border-0">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card border-0">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-justify">{{$evaluable->pivot->description}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                         </td>
-                                        <td class="botones justify-content-center">
+                                        <td class="botones justify-content-end text-right">
                                             <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
         
 
@@ -239,19 +232,33 @@
                             <table class="table col-12" >
                                     <thead class="thead-dark col-12">
                                         <tr>
-                                            <th>Aspecto Evaluado</th>
-                                            <th>Observaciones</th>
-                                            <th>Actions</th>
+                                            <th class="d-flex flex-row justify-content-between">
+                                            
+                                                <div class="col-6 text-center">Aspecto Evaluado</div>
+                                                <div class="col-6 text-center">Observaciones</div>
+                                            
+                                            </th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($program->evaluables as $evaluable)
                                         @if($evaluable->pivot->id != $evaluadoEditar_id)
                                             <tr>
-                                                <td>{{$evaluable->name}}</td>
                                                 <td>
-                                                    
-                                                    {{$evaluable->pivot->description}}
+                                                    <div class="card-deck">
+                                                        <div class="card border-0">
+                                                            <div class="card-body">
+                                                                <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card border-0">
+                                                            <div class="card-body">
+                                                                <p class="card-text text-justify">{{$evaluable->pivot->description}}</p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
                                                 </td>
                                                 <td class="botones justify-content-center align-items-center">
                                                     <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
@@ -261,11 +268,28 @@
                                             
                                             <tr>
                                                
-                                                    <td>{{$evaluable->name}}</td>
-                                                    <td><textarea rows="1" name="description" class="form-control" >{{$evaluable->pivot->description}}</textarea></td>
-                                                    <td class="botones justify-content-center">
-                                                        <button class="btn" type="submit"><i class="far fa-save"></i></button>
-                                                        <a type="button" class="btn ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
+                                                    <td>
+                                                        <div class="card-deck">
+                                                            <div class="card border-0">
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-justify">{{$evaluable->name}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card border-0">
+                                                                <div class="card-body">
+                                                                    <p class="card-text text-justify"><textarea rows="3" name="description" class="form-control" >{{$evaluable->pivot->description}}</textarea></p>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td class="d-flex align-items-center">
+                                                        <div class="card-deck">
+                                                            <div class="card border-0 botones justify-content-center align-baseline">
+                                                                 <button class="btn" type="submit"><i class="far fa-save"></i></button>
+                                                                <a type="button" class="btn ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
+                                                            </div>
+                                                        <div class="card-deck">
                                                     </td>
                                             </tr>
                                                 
@@ -276,8 +300,8 @@
                         </form>
                         @endif
                 </div> 
-                <div class="collapse multi-collapse col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample3">
-                    <div class="dropdown justify-content-start">
+                <div class="collapse multi-collapse col-sm-12"  id="multiCollapseExample3">
+                    <!-- <div class="dropdown justify-content-start">
                     
                             <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Evaluacion
@@ -289,121 +313,167 @@
                             <a class="dropdown-item" id="b2EVAL" href="#">2EVAL</a>
                             <a class="dropdown-item" id="b3EVAL" href="#">3EVAL</a>
                         </div>
-                    </div>
+                    </div> -->
 
-                    @for($i=1;$i<=3;$i++)
-                    <div id='divTablaEval{{$i}}' class="mt-5 row no-gutters table-responsive">
-                        <h5 class="card-title text-center mb-3"> {{$i}}º Evaluación</h5>
-                        <!-- <span class="badge badge-primary float-left"> {{$i}}º Evaluacion </span> -->
-                        <table id='tablaEval{{$i}}' class="table col-12 text-left table-striped" >
-                            <thead class="thead-dark col-12">
-                                <tr>
-                                    <th></th>
-                                    <th>Contenido</th>
-                                    <th></th>
-                                    <th>En Plazo</th>
-                                    <th>Fechas</th>
-                                    <th></th>
-                                    <th></th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($program->units->where('eval',$i) as $k=>$unidad)
-                                <tr>
-                                    <td><a type="button" id="btnMasInfo{{$k}}" class="btn text-warning" href="#"><i class="fas fa-plus"></i></a></td>
-                                    <td> {{$unidad->name}}</td>
-                                    <td></td>
-                                    @if(strtotime($unidad->expected_date_end) < strtotime($unidad->date_end))
-                                    <td class="text-danger"><i class="fas fa-times"></i></td>
-                                    @else
-                                    <td class="text-success"><i class="fas fa-check"></i></td>
-                                    @endif
-                                    
-                                    <td class="text-nowrap">{{date('d/m/Y',strtotime($unidad->date_start))}} - {{date('d/m/Y',strtotime($unidad->date_end))}}</td>
-                                    <td  id="fechaPrevista{{$k}}">({{date('d/m/Y',strtotime($unidad->expected_date_start))}} - {{date('d/m/Y',strtotime($unidad->expected_date_end))}})</td>
-                                    <td></td>
-                                    
-                                </tr>
-                                <tr  id="masInfo{{$k}}">
-
-                                    <!-- <th>Observaciones</th>
-                                    
-                                    
-                                    <td  colspan="2" class="text-justify">{{$unidad->notes}}</td>
-                                    <th>Acciones de mejora</th>
-                                    <td class="text-justify" colspan="2">{{$unidad->improvements}}</td> -->
-                                    <td colspan="6">
-                                        <div class="card-deck">
-                                            <div class="card border-0">
-                                                <div class="card-body">
-                                                <h5 class="card-title text-center">Observaciones</h5>
-                                                <p class="card-text text-justify">{{$unidad->notes}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="card border-0">
-                                                <div class="card-body">
-                                                <h5 class="card-title text-center">Acciones de mejora</h5>
-                                                <p class="card-text text-justify">{{$unidad->improvements}}</p>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-
-                                    </td>
-                                
-                                    
-                                    
-                                </tr>
-                                @endforeach    
-                            </tbody>
-                        </table>
-                        @if($notas[$i] == '')
-                            <form method="post" action="{{route('programs.storeEvaluacion', $program->id)}}">
-                            @csrf
-                                <input type="hidden" name="eval" value="{{$i}}">
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Notas</span>
-                                    </div>
-                                    <textarea class="form-control" name="notes" rows='3'></textarea>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
-                                    </div>
-                                    <input class="form-control" type="date" name="date_check">
-                                </div>
-                                <div class="row justify-content-center">
-                                    <input class="btn btn-outline-success" type='submit' value="Guardar">
-                                </div>
-                            </form>
-                        @else
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Notas</span>
-                            </div>
-                            <textarea class="form-control" name="notes" rows='3' readonly>{{$notas[$i]}}</textarea>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="input-group mb-3 col-12">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
-                                </div>
-                                <input class="form-control" type="date" name="date_check" value="{{$fechas[$i]}}" readonly>
-                                <div class="espacio"></div>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Responsable</span>
-                                </div>
-                                <div class="form-control profesor  text-truncate">{{$responsable[$i]->first_name}} {{$responsable[$i]->last_name}}</div>
-                            </div>
-                        </div>
-                        @endif
-
-                    </div>
-                    @endfor
+                    
  
+
+                    <div id="accordion">
+                    @for($i=1;$i<=3;$i++)
+                        <div class="card">
+                            <div class="card-header" id="heading{{$i}}">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#divTablaEval{{$i}}" aria-expanded="true" aria-controls="divTablaEval{{$i}}">
+                                {{$i}}º Evaluación
+                                </button>
+                            </h5>
+                            </div>
+
+                            <div id="divTablaEval{{$i}}" class="collapse" aria-labelledby="heading{{$i}}" data-parent="#accordion">
+                                <div class="card-body row no-gutters table-responsive">
+
+                                    <table id='tablaEval{{$i}}' class="table col-12 text-left" >
+                                        <thead class="thead-dark col-12">
+                                            <tr>
+                                                <th></th>
+                                                <th>Contenido</th>
+                                                <th></th>
+                                                <th class="text-center">En Plazo</th>
+                                                <th>Fechas</th>
+                                                <th></th>
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($program->units->where('eval',$i) as $k=>$unidad)
+                                            <tr>
+                                                <td><a type="button" id="btnMasInfo{{$k}}" class="btn text-warning" href="#"><i class="fas fa-plus"></i></a></td>
+                                                <td> {{$unidad->name}}</td>
+                                                <td></td>
+                                                @if(strtotime($unidad->expected_date_end) < strtotime($unidad->date_end))
+                                                <td class="text-danger text-center"><i class="fas fa-times"></i></td>
+                                                @else
+                                                <td class="text-success  text-center"><i class="fas fa-check"></i></td>
+                                                @endif
+                                                
+                                                <td class="text-nowrap">{{date('d/m/Y',strtotime($unidad->date_start))}} - {{date('d/m/Y',strtotime($unidad->date_end))}}</td>
+                                                <td  id="fechaPrevista{{$k}}">({{date('d/m/Y',strtotime($unidad->expected_date_start))}} - {{date('d/m/Y',strtotime($unidad->expected_date_end))}})</td>
+                                                <td id="columna{{$k}}"></td>
+                                                <td></td>
+                                            </tr>
+                                            @if($unidad->notes != '' || $unidad->improvements != '')
+                                            <tr  id="masInfo{{$k}}">
+
+                                                <!-- <th>Observaciones</th>
+                                                
+                                                
+                                                <td  colspan="2" class="text-justify">{{$unidad->notes}}</td>
+                                                <th>Acciones de mejora</th>
+                                                <td class="text-justify" colspan="2">{{$unidad->improvements}}</td> -->
+                                                <td colspan="6">
+                                                    <div class="card-deck">
+                                                        <div class="card border-0">
+                                                            <div class="card-body">
+                                                            <h5 class="card-title text-center">Observaciones</h5>
+                                                            @if($unidad->notes != '')
+                                                            <p class="card-text text-justify">{{$unidad->notes}}</p>
+                                                            @else
+                                                            <p class="card-text text-center">No hay observaciones en esta unidad</p>
+                                                            @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="card border-0">
+                                                            <div class="card-body">
+                                                            <h5 class="card-title text-center">Acciones de mejora</h5>
+                                                            @if($unidad->improvements != '')
+                                                            <p class="card-text text-justify">{{$unidad->improvements}}</p>
+                                                            @else
+                                                            <p class="card-text text-center">No hay acciones de mejora en esta unidad</p>
+                                                            @endif
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                </td>
+                                            
+                                                
+                                                
+                                            </tr>
+                                            @else
+                                            @endif
+                                            @endforeach    
+                                        </tbody>
+                                    </table>
+                                    @if($notas[$i] == '' && $usuario->role_id == 3)
+                                        <form method="post" action="{{route('programs.storeEvaluacion', $program->id)}}">
+                                        @csrf
+                                            <input type="hidden" name="eval" value="{{$i}}">
+
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Notas</span>
+                                                </div>
+                                                <textarea class="form-control" name="notes" rows='3'></textarea>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
+                                                </div>
+                                                <input class="form-control" type="date" name="date_check">
+                                            </div>
+                                            <div class="row justify-content-center">
+                                                <input class="btn btn-outline-success" type='submit' value="Guardar">
+                                            </div>
+                                        </form>
+                                    @else
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Notas</span>
+                                        </div>
+                                        <textarea class="form-control" name="notes" rows='3' readonly>{{$notas[$i]}}</textarea>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="input-group mb-3 col-12">
+                                        @if(!$evaluado[$i])
+                                            
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
+                                                </div>
+                                                <div class="form-control"> Por Evaluar </div>
+                                                <div class="espacio"></div>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Responsable</span>
+                                                </div>
+                                                <div class="form-control profesor  text-truncate">Por evaluar</div>
+                                        @else
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
+                                                </div>
+                                                <input class="form-control" type="date" name="date_check" value="{{$fechas[$i]}}" readonly>
+                                                <div class="espacio"></div>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Responsable</span>
+                                                </div>
+                                                <div class="form-control profesor  text-truncate">{{$responsable[$i]->first_name}} {{$responsable[$i]->last_name}}</div>
+                                        @endif
+                                            </div>
+                                        </div>
+                                    @endif
+                                        
+
+                                </div>
+                            </div>
+                        </div>
+                    @endfor
+                    </div>
+
+
+
+
+
+
                 </div> 
             </div>
             

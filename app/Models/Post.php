@@ -16,6 +16,7 @@ class Post extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'title',
         'text'
     ];
 
@@ -24,7 +25,7 @@ class Post extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function attachments() {
-        return $this->morphMany('App\Models\Attachment', 'attachable');
+    public function attachmentablements() {
+        return $this->morphMany('App\Models\Attachment', 'attachmentable');
     }
 }
