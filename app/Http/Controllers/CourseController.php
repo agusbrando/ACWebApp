@@ -196,9 +196,6 @@ class CourseController extends Controller
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all(); 
         
-
-
-
         $item = Item::find($id);
         $users = User::all();
 
