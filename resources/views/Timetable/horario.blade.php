@@ -42,20 +42,28 @@
                     <th>VIERNES</th>
                 </tr>
                 <tr>
-               
-                   
+
+
                     <td class="td">8:30-9:25</td>
-                   @foreach($horas as $hora)
-                        @if($hora->time_start=='8:30')
-                        <td>{{$hora->subject}}</td>
+                    @foreach($horas as $hora)
+                    @if($hora->time_start=='8:30:00')
+                        @if($hora->day==1)
+                            <td>{{$hora->subject->name}}</td>
+                        @elseif($hora->day==2)
+                            <td>{{$hora->subject->name}}</td>
                         @endif
-                   @endforeach
+                    @endif
+                    @endforeach
 
                 </tr>
                 <tr>
 
                     <td class="td">9:25-10:20</td>
+                    @foreach($horas as $hora)
 
+                    <td>{{$hora->subject->name}}</td>
+
+                    @endforeach
                 </tr>
                 <tr>
 
@@ -69,12 +77,20 @@
                 <tr>
 
                     <td class="td">10:40-11:35</td>
+                    @foreach($horas as $hora)
 
+                    <td>{{$hora->subject->name}}</td>
+
+                    @endforeach
                 </tr>
                 <tr>
 
                     <td class="td">11:35-12:25</td>
+                    @foreach($horas as $hora)
 
+                    <td>{{$hora->subject->name}}</td>
+
+                    @endforeach
                 </tr>
                 <tr>
 
@@ -88,12 +104,20 @@
                 <tr>
 
                     <td class="td">12:40-13:35</td>
+                    @foreach($horas as $hora)
 
+                    <td>{{$hora->subject->name}}</td>
+
+                    @endforeach
                 </tr>
                 <tr>
 
                     <td class="td">13:35-14:30</td>
+                    @foreach($horas as $hora)
 
+                    <td>{{$hora->subject->name}}</td>
+
+                    @endforeach
                 </tr>
             </table>
         </div>

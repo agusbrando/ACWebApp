@@ -108,9 +108,6 @@
                 <input type="hidden" value={{$tracking}} name="trackings[]">
                 @endforeach
 
-
-
-
                 <button type="submit" class="btn btn-outline-success ml-1 float-right"> Descargar Excel </button>
             </form>
 

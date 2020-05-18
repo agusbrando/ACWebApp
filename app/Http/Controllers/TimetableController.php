@@ -72,7 +72,8 @@ class TimetableController extends Controller
                 $session=Session::find($session_timetable->session_id);
                 $year_union=YearUnion::find($session_timetable->year_union_id);
                 $subject = Subject::find($year_union->subject_id);
-                array_push($horas,$session,$session->subject=$subject);
+                $session->subject=$subject;
+                array_push($horas,$session);
             }
         }
         
