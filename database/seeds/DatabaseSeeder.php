@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+
         $this->call([
             RolesTableSeeder::class,
             PermissionsTableSeeder::class,
@@ -22,32 +22,31 @@ class DatabaseSeeder extends Seeder
             CoursesTableSeeder::class,
             SubjectsTableSeeder::class,
             EvaluationsTableSeeder::class,
+            ProgramsTableSeeder::class,
+            YearsTableSeeder::class,
+            YearUnionsTableSeeder::class,
+            YearUnionUserTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,
-            PercentagesTableSeeder::class,
             TrackingsTableSeeder::class,
             SessionsTableSeeder::class,
-            ProgramsTableSeeder::class,
             UnitsTableSeeder::class,
             EvaluablesTableSeeder::class,
             EvaluatedsTableSeeder::class,
 	        StatesTableSeeder::class,
             ItemsTableSeeder::class,
             EventsTableSeeder::class,
-            ItemsUsersTableSeeder::class,
             SessionTimetableTableSeeder::class,
-            RolesPermissionsTableSeeder::class,
             MisbehaviorsTableSeeder::class,
             PostsTableSeeder::class,
             CommentsTableSeeder::class,
             MessagesTableSeeder::class,
-            SendsTableSeeder::class,
-            AttachmentsTableSeeder::class
-	    
-	    
-            
-	    
-	    
+            MessagesUsersTableSeeder::class,
+            CommentsTableSeeder::class,
+            AttachmentsTableSeeder::class,
+            ItemYearTableSeeder::class,
+            PercentagesTableSeeder::class,
+
         ]);
     }
 }

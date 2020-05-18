@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use App\Models\Classroom;
+use App\Models\Course;
 use App\Models\Type;
 use App\Models\State;
 use App\Models\Item;
+use App\Models\User;
 
 class ItemController extends Controller
 {
@@ -26,7 +29,8 @@ class ItemController extends Controller
         $types = Type::all()->where('model', Item::class);
         $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
-        $items = Item::all();
+        $items = Item::paginate(10);
+        
         return view('items.index', compact('classrooms', 'items', 'types', 'states'));
     }
     public function filter(Request $request)
@@ -91,6 +95,7 @@ class ItemController extends Controller
 
         $request->validate([
             'name'=>'required',
+            'number'=>'required',
             'date_pucharse'=>'required',
             'classroom_id'=>'required',
             'type_id'=>'required',
@@ -98,6 +103,7 @@ class ItemController extends Controller
 
         $item = new Item([
             'name' => $request->get('name'),
+            'number' => $request->get('number'),
             'date_pucharse'=>$request->get('date_pucharse'),
             'classroom_id'=>$request->get('classroom_id'),
             'state_id'=>'1',
@@ -119,6 +125,15 @@ class ItemController extends Controller
     {
         $items = DB::table('items')->where('classroom_id', $id)->get();
         return view('items.index', compact('items'));
+        $item = Item::find($id);
+        $type = Type::find($item->type_id);
+        $users = User::all();
+        $item->aula = Classroom::find($item->classroom_id);
+        $item->state = State::find($item->state_id);
+        $item->type = Type::find($item->type_id);
+        $courses = Course::all();
+
+        return view('items.show', compact('item', 'type', 'users', 'courses'));
     }
 
     /**
@@ -129,7 +144,14 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $types = Type::all()->where('model', Item::class);
+        $classrooms = Classroom::all();    //->load('name', Classroom::class)
+        $states = State::all();
+        $item = Item::find($id);
+        
+        $item->date_pucharse = Carbon::parse($item->date_pucharse)->format('Y-m-d');
+
+        return view('items.edit', compact('item', 'classrooms', 'types', 'states'));
     }
 
     /**
@@ -141,7 +163,26 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'number'=>'required',
+            'date_pucharse'=>'required',
+            'classroom_id'=>'required',
+            'state_id'=>'required',
+            'type_id'=>'required',
+        ]);
+        
+        $item = Item::find($id);
+        $item->name = $request->get('name');
+        $item->number = $request->get('number');
+        $item->date_pucharse = $request->get('date_pucharse');
+        $item->classroom_id = $request->get('classroom_id');
+        $item->state_id = $request->get('state_id');
+        $item->type_id = $request->get('type_id');
+       
+
+        $item->save();
+        return redirect('/items')->with('exito', 'Item editado!');
     }
 
     /**

@@ -1,14 +1,17 @@
 <?php
 
-namespace Tests\Feature;
-use App\Models\Role;
-use App\Models\User;
-use App\Models\Post;
+namespace Tests\Feature\App\Models;
+
 use App\Models\Attachment;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Message;
+use App\Models\Role;
+use App\Models\Timetable;
+use App\Models\Post;
 
 class AttachmentTest extends TestCase
 {

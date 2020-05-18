@@ -327,6 +327,7 @@ class ProgramTest extends TestCase
         ]);
         $unit_one = Unit::create([
             'program_id' => $program_one->id,
+            'name'=>'unidad 0',
             'expected_date_start' => '2019-09-12',	
             'expected_date_end' => '2019-09-12',	
             'date_start' => '2019-09-12',	
@@ -340,7 +341,8 @@ class ProgramTest extends TestCase
         ]);
         $unit_two = Unit::create([
             'program_id' => $program_one->id,
-            'expected_date_start' => '2019-09-13',	
+            'expected_date_start' => '2019-09-13',
+            'name'=>'unidad 0',	
             'expected_date_end' => '2019-09-27',	
             'date_start' => '2019-09-13',	
             'date_end' => '2019-09-19',	

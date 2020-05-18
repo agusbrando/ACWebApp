@@ -1,4 +1,4 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar ">
     <div class="sidebar-sticky">
     <ul class="nav flex-column">
         <li class="nav-item">
@@ -8,13 +8,33 @@
         </a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link" href="/">
+=======
+        <a class="nav-link" href="{{ url('messages')}}">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="layers"></span>
-            Mensajes 
+            Mensajes recibidos
         </a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link" href="/">
+=======
+            <a class="nav-link" href="{{ url('messages_send')}}">
+                <span data-feather="layers"></span>
+            Mensajes enviados
+            </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('messages.create')}}">
+                    <span data-feather="layers"></span>
+                Nuevo mensaje
+                </a>
+                </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/seguimiento">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="file"></span>
             Seguimiento
         </a>
@@ -26,17 +46,25 @@
         </a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link" href="/">
+=======
+        <a class="nav-link" href="/events">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="users"></span>
             Calendario
         </a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link" href="/">
+=======
+        <a class="nav-link" href="/horarios">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="bar-chart-2"></span>
             Horario
         </a>
-        </li>        
+        </li>
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -47,6 +75,7 @@
     </h6>
     <ul class="nav flex-column mb-2">
         <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link" href="posts">
             <span data-feather="file-text"></span>
             Posts 
@@ -60,14 +89,21 @@
         </li>-->
         <li class="nav-item">
         <a class="nav-link" href="/">
+=======
+        <a class="nav-link" href="http://127.0.0.1:8000/asignaturas">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="file-text"></span>
-            Notas 
+            Notas
         </a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link" href="/">
+=======
+        <a class="nav-link" href="/programs">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <span data-feather="file-text"></span>
-            Programación 
+            Programación
         </a>
         </li>
         <li class="nav-item">
@@ -77,6 +113,21 @@
         </a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
+=======
+        <a class="nav-link" href="/users">
+            <span data-feather="file-text"></span>
+            Usuarios
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/roles">
+            <span data-feather="file-text"></span>
+            Roles
+        </a>
+        </li>
+        <li class="nav-item">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
         <a class="nav-link" href="/">
             <span data-feather="file-text"></span>
             Reserva de aulas
@@ -86,6 +137,39 @@
         <a class="nav-link" href="/items">
             <span data-feather="file-text"></span>
             Stock
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/sessions">
+            <span data-feather="file-text"></span>
+            Sessions 
+        <a class="nav-link" href="/courses">
+            <span data-feather="file-text"></span>
+            Cursos
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/states">
+            <span data-feather="file-text"></span>
+            States 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/subjects">
+            <span data-feather="file-text"></span>
+            Subjects 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/evaluations">
+            <span data-feather="file-text"></span>
+            Evaluations 
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/types">
+            <span data-feather="file-text"></span>
+            Types 
         </a>
         </li>
     </ul>

@@ -19,6 +19,7 @@ class Attachment extends Model
         'attachmentable_id',
         'attachmentable_type'
     ];
+    protected $guarded = [];
 
     //Relaciones
     public function attachmentable() {

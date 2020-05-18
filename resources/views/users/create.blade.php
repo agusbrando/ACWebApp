@@ -4,11 +4,22 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
+<<<<<<< HEAD
             <h3>Nuevo Usuario</h3>
+=======
+            <div class="d-flex flex-row">
+                <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3> Nuevo usuario</h3>
+            </div>
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
             <form action="{{ route('users.store')}}" method="POST">
                 @method('POST')
                 <div class="col-12">
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
+<<<<<<< HEAD
+=======
+                    @csrf
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
                     <a class="btn btn-outline-warning float-right" href="{{ route('users.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
         </div>
@@ -32,6 +43,25 @@
                             <input value="" name="email" id="email" type="text" class="@error('email') is-invalid @enderror form-control">
                         </div>
                         <div class="form-group">
+<<<<<<< HEAD
+=======
+                            <label for="password">{{ __('Contraseña') }}</label>
+
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <!-- CONFIRM PASSWORD -->
+                        <div class="form-group">
+                            <label for="password-confirm">{{ __('Confirmar contraseña') }}</label>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        </div>
+                        <div class="form-group">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
                             <label for="role">Rol</label>
                             <select name="role" id="role" class="form-control">
                                 @foreach($roles as $role)

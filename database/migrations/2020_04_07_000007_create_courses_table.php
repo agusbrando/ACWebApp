@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateCoursesTable extends Migration
 {
     /**
@@ -17,8 +18,10 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->integer('level')->unsigned();
             $table->string('name');
+            $table->string('abbreviation');
             $table->integer('num_students');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +32,7 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
+        // Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('courses');
     }
 }

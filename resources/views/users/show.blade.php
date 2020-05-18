@@ -7,11 +7,22 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
+<<<<<<< HEAD
             <h3>Perfil de usuario</h3>
             <div>
 
                 <a class="btn btn-outline-info" href="{{ route('users.showedit',$user->id)}}">Editar</a>
                 <form class="float-right"action="{{ route('users.destroy',$user->id)}}" method="POST">
+=======
+            <div class="d-flex flex-row">
+                <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                <h3> Perfil debug_backtrace usuario</h3>
+            </div>
+            <div>
+
+                <a class="btn btn-outline-info" href="{{ route('users.edit',$user->id)}}">Editar</a>
+                <form class="float-right" action="{{ route('users.destroy',$user->id)}}" method="POST">
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-danger ml-1">Eliminar</button>
@@ -24,6 +35,7 @@
                 <img src="{{asset('img/default_avatar.jpg')}}" class="img-thumbnail" alt="...">
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
+<<<<<<< HEAD
                 @if(!$edit)
                 <div>
                     <h5 class="card-title">{{($user->first_name)}} {{($user->last_name)}}</h5>
@@ -93,3 +105,16 @@ Route::get('users/edit/{id}',['as' => 'users.showedit', 'uses' => 'UserControlle
     } -->
 <!-- Import de URL -->
 <!-- use Illuminate\Support\Facades\URL; -->
+=======
+                <div>
+                    <h5 class="card-title">{{($user->first_name)}} {{($user->last_name)}}</h5>
+                    <p class="card-text">{{($user->email)}}</p>
+                    <p class="card-text">{{$user->role}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+@endsection
+>>>>>>> 2dfad48e0d29c3db12647e27e6bb6bda5e35890c

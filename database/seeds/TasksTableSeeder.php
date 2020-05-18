@@ -11,11 +11,6 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tasks')->insert([
-            'evaluation_id' => 1,
-            'name' => 'Practica 1',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+
     }
 }

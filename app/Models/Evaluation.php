@@ -3,21 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Evaluation extends Model
 {
+    use SoftDeletes;
+  
     protected $table = 'evaluations';
     protected $guarded = [];
 
-    public function subject(){
-        return $this->belongsTo('App\Models\Subject');
-    }
+    protected $dates = ['deleted_at'];
 
-    public function tasks(){
-        return $this->hasMany('App\Models\Task');
-    }
-
-    public function types(){
-        return $this->belongsToMany(Type::class, 'percentages', 'evaluation_id', 'type_id')->using(Percentage::class)->withPivot('percentage')->withTimestamps();
+     //todas las yearUnion de esa evaluacion, una por curso y asignatura
+     public function yearUnions(){
+        return $this->hasMany(YearUnion::class);
     }
 }

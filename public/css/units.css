@@ -16,6 +16,9 @@ table.dataTable thead th{
     
 
 }
+.boton {
+    text-align: left;
+}
 .botones{
     display:flex;
     flex-direction: row;

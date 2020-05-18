@@ -12,10 +12,20 @@ class EvaluationsTableSeeder extends Seeder
     public function run()
     {
         DB::table('evaluations')->insert([
-            'subject_id' => 1,
             'name' => '1Eval',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('evaluations')->insert([
+            'name' => '2Eval',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('evaluations')->insert([
+            'name' => '3Eval',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
     }
 }

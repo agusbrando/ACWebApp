@@ -8,5 +8,5 @@ class Calification extends Pivot
 {
     protected $table = 'califications';
     protected $guarded = [];
-
+    //TODO deleted?
 }

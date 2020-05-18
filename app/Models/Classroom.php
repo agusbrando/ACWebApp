@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classroom extends Model
 {
-   
+ 
     protected $table = 'classrooms';
 
     protected $primaryKey = 'id';
+
+   
 
     /**
     * The primary key associated with the table.
@@ -17,9 +19,6 @@ class Classroom extends Model
     * @var string
     */
   
-    protected $primaryKey = 'id';
-
-
     /**
     * Indicates if the IDs are auto-incrementing.
     * Por defecto Eloquent asume que la clave primaria 
@@ -45,9 +44,8 @@ class Classroom extends Model
         'id',
         'name',
         'number',
-
     ];
-
+   
     
     public function sessions(){
         return $this->hasMany('App\Models\Session');

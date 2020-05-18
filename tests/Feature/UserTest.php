@@ -1,15 +1,24 @@
 <?php
 
 namespace Tests\Feature;
+use App\Models\User;
+use App\Models\Role;
+use App\Models\Post;
+use App\Models\Comment;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-
+use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Classroom;
 use App\Models\Session;
 use App\Models\Event;
+use App\Models\Item;
+use App\Models\State;
+use App\Models\Timetable;
+
+
 
 class UserTest extends TestCase
 {
@@ -18,44 +27,77 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
-    {
-        $item = Item::create([
-            'name' => 'Portatil Asus',
-            'date_pucharse' => Carbon::create('2020','03','30'),
-            'classroom_id' => 1,
-            'state_id' => 2,
-            'type_id' => 1,
+    public function testRole() {
+        $role = Role::create([
+            'name' => 'Name Testing',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        $item2 = Item::create([
-            'name' => 'Portatil MSI',
-            'date_pucharse' => Carbon::create('2020','02','30'),
-            'classroom_id' => 1,
-            'state_id' => 2,
-            'type_id' => 1,
+        $user = User::create([
+            'role_id' => $role->id,
+            'first_name' => 'First Name Testing',
+            'last_name' => 'Last Name Testing',
+            'password' => 'Password Testing',
+            'email' => 'emailtesting@campusaula.com',
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        
 
-        //Creacion de la tabla intermedia con los datos extra que no son los id
-        $item->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','09','16'),'date_fin' => Carbon::create('2020','06','12')]);
-        $item2->itemUser()->attach($itemuser, ['date_inicio' => Carbon::create('2019','04','16'),'date_fin' => Carbon::create('2020','06','12')]);
-        
-        //Array de Items recuperados
-        $items = $itemuser->items->pluck('id');
+        $this->assertEquals($user->role->id, $role->id);
 
-        $expectedItemsIds = collect([
-            ['id'=> $item->id],
-            ['id'=> $item2->id]
-        ])->pluck('id');
+        $user->delete();
+        $role->delete();
+    }
 
-        $this->assertEquals($items, $expectedUsersIds);
+    public function testComments() {
+        $role = Role::create([
+            'name' => 'Name Testing',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
-        $item->itemUser()->detach($itemuser);  
-        $item2->itemUser()->detach($itemuser); 
+        $user = User::create([
+            'role_id' => $role->id,
+            'first_name' => 'First Name Testing',
+            'last_name' => 'Last Name Testing',
+            'password' => 'Password Testing',
+            'email' => 'emailtesting@campusaula.com',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $post = Post::create([
+            'user_id' => $user->id,
+            'text' => 'Post Testing',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $comment1 = Comment::create([
+            'user_id' => $user->id,
+            'post_id' => $post->id,
+            'text' => 'Comment 1 Testing',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $comment2 = Comment::create([
+            'user_id' => $user->id,
+            'post_id' => $post->id,
+            'text' => 'Comment 2 Testing',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        $this->assertCount(2, $user->comments);
+        $this->assertEquals($user->comments[0]->id, $comment1->id);
+        $this->assertEquals($user->comments[1]->id, $comment2->id);
+
+        $comment2->delete();
+        $comment1->delete();
+        $post->delete();
+        $user->delete();
+        $role->delete();
     }
 }

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 
 class UserController extends Controller
@@ -17,9 +18,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
         return view('users.index', compact('users'));
+        
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -126,6 +129,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect('user')->with('success', 'User deleted!');
+        return redirect('/users/')->with('success', 'User deleted!');
     }
 }
