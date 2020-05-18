@@ -57,7 +57,7 @@
                             <td>Firma</td>
                         </tr>
                     </thead>
-                    <form class="float-right" action="{{ route('print')}}" method="POST">
+                    <form class="float-right" action="{{ route('seguimiento.print')}}" method="POST">
                         @csrf
                         @method('POST')
                         <tbody>
@@ -99,7 +99,7 @@
 
             <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar PDF</button>
             </form>
-            <form class="float-right" action="{{ route('excel')}}" method="POST">
+            <form class="float-right" action="{{ route('seguimiento.excel')}}" method="POST">
                 @csrf
                 @method('POST')
 

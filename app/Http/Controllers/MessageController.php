@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MessageMail;
+use App\Notifications\InvoicePaid;
 
 
 class MessageController extends Controller
@@ -22,16 +23,16 @@ class MessageController extends Controller
 
     public function index()
     {
-        $sitio = 0;
+        $isSend = 1;
         $user = Auth::user();
 
         if (URL::current() == url("/messages_send")) {
             $messages = $user->messagesSent->load('attachments', 'users');
         } else {
             $messages = $user->messagesReceive->load('attachments', 'user');
-            $sitio = 1;
+            $isSend = 0;
         }
-        return view('messages.index', compact('messages', 'sitio'));
+        return view('messages.index', compact('messages', 'isSend'));
     }
     /**
      * Show the form for creating a new resource.
@@ -78,9 +79,10 @@ class MessageController extends Controller
         foreach ($users as $userid) {
             $user = User::find($userid);
             $user->messagesReceive()->attach($message->id);
-            Mail::to($user->email)->send(new MessageMail($message));
-
+            $user->notify(new InvoicePaid($user,$message));
         }
+
+
         if ($request->hasfile('filenames')) {
             foreach ($request->file('filenames') as $file) {
                 $name = $file->getClientOriginalName();
@@ -95,6 +97,9 @@ class MessageController extends Controller
                 $attachment->save();
             }
         }
+
+
+
 
         return redirect('/messages')->with('success', 'Message Send!');
     }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Session;
 use App\Models\SessionTimetable;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\Timetable;
+use App\Models\YearUnion;
+
 class TimetableController extends Controller
 {
     /**
@@ -62,15 +65,18 @@ class TimetableController extends Controller
     {
         $timetable = Timetable::find($id);
         $timetable->sessions=$timetable->sessionTimetables;
-        
+        $horas=array();
         $session_timetables=SessionTimetable::all();
         foreach($session_timetables as $session_timetable){
             if($session_timetable->timetable_id == $id){
-                $subject = Subject::find($session_timetable->subject_id);
-                $timetable->sessions->subjects=$subject;
+                $session=Session::find($session_timetable->session_id);
+                $year_union=YearUnion::find($session_timetable->year_union_id);
+                $subject = Subject::find($year_union->subject_id);
+                array_push($horas,$session,$session->subject=$subject);
             }
         }
-        return view('Timetable.horario', compact('timetable')); 
+        
+        return view('Timetable.horario', compact('timetable','horas')); 
     }
     /**
      * Show the form for editing the specified resource.
