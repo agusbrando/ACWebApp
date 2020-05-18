@@ -38,7 +38,6 @@
                     <form method="POST" action="{{ route('items.update', $item->id) }}">
                         <!-- Proteccion contra consultas no deseadas -->
                         @csrf
-                        @method('PATCH')
 
                         <div class="form-group">
                             <label for="nombre">Nombre</label>

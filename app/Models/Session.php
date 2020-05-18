@@ -38,7 +38,7 @@ class Session extends Model
 
     public function event()
     {
-        return $this->hasOne('App\Models\Event');
+        return $this->hasOne(Event::class);
     }
 
     public function type()
