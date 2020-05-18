@@ -226,6 +226,7 @@ class CourseController extends Controller
         }
         //Cojo el array de Ids del multi select
         $itemIds = $request->get('itemIds');
+        
         //Cojo los items con los ids del array
         $itemsUser = Item::whereIn('id', $itemIds)->get();
         $classId= Classroom::find($idClass);
@@ -235,7 +236,22 @@ class CourseController extends Controller
                 //compruebo que el alumno sea presencial
                 if ($yearUnion->pivot->assistance) {
                     //si es presencial le asigno el Item
-                    $yearUnion->pivot->items()->attach($item->id);
+                    foreach($itemIds as $itemId){
+                        $encontrado = false;
+                        //Compruebo que no tenga ese item ya añadido
+                        foreach($yearUnion->pivot->items as $itemUser){
+                            if($itemUser->id == $itemId){
+                                $encontrado = true;
+                            break;
+                            }
+                        }
+                        if(!$encontrado){
+                            
+                            $yearUnion->pivot->items()->attach($item->id);
+                        }
+                    }
+                    
+                    
                 }
             }
         }

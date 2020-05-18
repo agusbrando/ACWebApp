@@ -39,20 +39,20 @@
                         </div>
                         <div class="tab-pane fade show active" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
 
-                            <form class="d-flex flex-column bd-highlight mb-3 ml-2" method="post" action="">
+                            <form class="d-flex flex-column bd-highlight mb-3 ml-2" method="post" action="{{ route('courses.filter', array($courseId, $yearId))}}">
                                 @csrf
                                 <label for="formControlSelect1">Aulas</label>
                                 <div class="d-flex flex-row bd-highlight mb-3">
 
                                     <div class="d-flex flex-row ">
                                         <select class="form-control " id="classroom_id" name="idClass">
-                                            <option value="" selected>Todas</option>
+                                            
                                             <!--Hace la funcion de un placeholder-->
                                             @foreach($classrooms as $classroom)
                                             @if($classroom->id == $idClass)
-                                                <option selected name="{{$classroom->id}}" value="{{$classroom->id}}">{{$classroom->name}}</option>
-                                            else
-                                                <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            <option selected name="{{$classroom->id}}" value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            @else
+                                            <option value="{{$classroom->id}}">{{$classroom->name}}</option>
                                             @endif
                                             @endforeach
                                         </select>
@@ -104,26 +104,22 @@
                                                                 <td>{{$yearUnionUser->user->last_name}}</td>
 
                                                                 <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
-
-
                                                                     @foreach($yearUnionUser->items as $item)
-                                                                        <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
+                                                                    <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
                                                                     @endforeach
-
                                                                 </td>
-
                                                                 <td>
                                                                     <div class="form-group ">
                                                                         <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($yearUnionUser->user->id, $courseId, $yearId))}}">
                                                                             @csrf
                                                                             @method('POST')
-                                                                            <input type="hidden" name="idClass2"  value="{{$idClass}}">
+                                                                            <input type="hidden" name="idClass2" value="{{$idClass}}">
                                                                             <select multiple class="form-control " id="itemIds" name="itemIds[]">
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
                                                                                 @foreach($items as $item)
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
-                                                                                
+
                                                                                 @endforeach
 
                                                                             </select>
@@ -134,12 +130,9 @@
                                                                     </div>
                                                                 </td>
                                                             </tr>
-
-
                                                             @endforeach
                                                         </tbody>
                                                     </table>
-
                                                 </div>
                                             </ul>
                                         </div>
@@ -147,7 +140,6 @@
                                 </div>
                                 @endforeach
                             </div>
-
                         </div>
                     </div>
                 </div>

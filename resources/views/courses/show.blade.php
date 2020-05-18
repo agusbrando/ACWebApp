@@ -46,7 +46,7 @@
 
                                     <div class="d-flex flex-row ">
                                         <select class="form-control " id="classroom_id" name="idClass">
-                                            <option value="" selected>Todas</option>
+                                            
                                             <!--Hace la funcion de un placeholder-->
                                             @foreach($classrooms as $classroom)
                                             <option value="{{$classroom->id}}">{{$classroom->name}}</option>
