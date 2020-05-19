@@ -5,8 +5,9 @@
 @endsection
 @section('main')
 
-<link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
   <div class="card shadow">
     <div class="card-header row m-0 justify-content-between">
 
@@ -47,18 +48,67 @@
             </div>
 
             <div class="col-md-4">
-              
+
               <h3 class="my-3">Características</h3>
-
-              <ul class="text-justify">
-                <li>ID              = {{$item->id}}</li>
-                <li>Número          = {{$item->number}}</li>
-                <li>Fecha de compra = {{$item->date_pucharse}}</li>
-                <li>Aula            = {{$item->aula->name}}</li>
-                <li>Estado          = {{$item->state->name}}</li>
-                <li>Tipo            = {{$item->type->name}}</li>
-
-              </ul>
+              <div class="flex-column w-100">
+                <div class="row justify-content-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text spanShowBlade" id="basic-addon1">ID</span>
+                    </div>
+                    <div class="form-control  text-truncate">{{$item->id}}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text spanShowBlade" id="basic-addon1">Número</span>
+                    </div>
+                    <div class="form-control  text-truncate">{{$item->number}}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text spanShowBlade" id="basic-addon1">Fecha de compra</span>
+                    </div>
+                    <div class="form-control  text-truncate">{{$item->date_pucharse}}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text spanShowBlade" id="basic-addon1">Aula</span>
+                    </div>
+                    <div class="form-control  text-truncate">{{$item->aula->name}}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text spanShowBlade" id="basic-addon1">Aula</span>
+                    </div>
+                    <div class="form-control  text-truncate">{{$item->aula->name}}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text spanShowBlade" id="basic-addon1">Estado</span>
+                    </div>
+                    <div class="form-control  text-truncate">{{$item->state->name}}</div>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text spanShowBlade" id="basic-addon1">Tipo</span>
+                    </div>
+                    <div class="form-control  text-truncate">{{$item->type->name}}</div>
+                  </div>
+                </div>
+              </div>
+            
             </div>
 
           </div>

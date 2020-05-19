@@ -138,7 +138,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar el item.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -156,7 +156,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos del item en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -187,13 +187,14 @@ class ItemController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un curso en concreto.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+        //busco el item y lo elimino
         Item::find($id)->delete();
 
         return redirect('/items')->with('exito', 'Item eliminado!');
