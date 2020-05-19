@@ -11,7 +11,6 @@ class SessionTimetableTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO ask Carlos
         DB::table('session_timetables')->insert([
             'session_id' => 1,
             'timetable_id' => 1,

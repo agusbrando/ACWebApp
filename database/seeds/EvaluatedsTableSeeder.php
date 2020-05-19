@@ -11,8 +11,6 @@ class EvaluatedsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO Eliminar para produccion cuando se termine de implementar los test
-
         DB::table('evaluateds')->insert([
             'evaluable_id' => '1',
             'program_id' => '1',

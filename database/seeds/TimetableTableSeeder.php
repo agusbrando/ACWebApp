@@ -11,7 +11,6 @@ class TimetableTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO SMR y FPBasica
         DB::table('timetables')->insert([
             'name' => '2DAM2020',
             'date_start' =>  now(),

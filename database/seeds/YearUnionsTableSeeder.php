@@ -11,8 +11,6 @@ class YearUnionsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO para el año 20-21 todas las asig todas las evals con foreach
-
         //EVAL 1 curso 1
         DB::table('yearUnions')->insert([
             'subject_id' => '1',

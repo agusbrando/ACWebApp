@@ -11,6 +11,14 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO Create 2 post
+        for ($i = 1; $i < 5; $i++) {
+            DB::table('posts')->insert([
+                'title' => $i,
+                'user_id' => $i,
+                'text' => 'Post '.$i,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
     }
 }

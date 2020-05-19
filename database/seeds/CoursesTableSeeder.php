@@ -11,8 +11,6 @@ class CoursesTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO ASIR y FPBASICA
-
         DB::table('courses')->insert([
             'level' => 1,
             'name' => 'Desarrollo de Aplicaciones Multiplataforma',

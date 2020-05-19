@@ -11,7 +11,6 @@ class YearUnionUserTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO matricular al estudiante default en todas las asignaturas de su curso
 
         for ($i = 5; $i <= 11; $i++) {
             DB::table('yearUnionUsers')->insert([

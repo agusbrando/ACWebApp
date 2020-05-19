@@ -13,7 +13,7 @@ class PercentagesTableSeeder extends Seeder
      */
     public function run()
     {
-        //NO tocar
+        //TODO Javi No Tocar
 
         $types = Type::where('model', Task::class)->get();
         $yearUnions = YearUnion::all();
@@ -30,10 +30,10 @@ class PercentagesTableSeeder extends Seeder
                 'updated_at' => now(),
             ]);
             }
-
+            
         }
 
-
-
+        
+        
     }
 }

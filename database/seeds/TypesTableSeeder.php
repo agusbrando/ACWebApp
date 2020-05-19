@@ -16,20 +16,19 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO Tutorías, Reserva de Aula, PCS, Portatiles, Pantallas, RACK, Proyector
         DB::table('types')->insert([
             'name' => 'Tutorías',
             'model' => 'App\Models\Event',
 	        'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now()      
         ]);
-
+        
         DB::table('types')->insert([
             'name' => 'Reserva de aulas',
             'model' => 'App\Models\Event',
 	        'created_at' => now(),
-            'updated_at' => now()
-        ]);
+            'updated_at' => now()      
+        ]);                
 
         DB::table('types')->insert([
             'name' => 'Portatil',
@@ -68,7 +67,7 @@ class TypesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+       
 
         DB::table('types')->insert([
             'name' => 'Trabajos',
@@ -83,7 +82,7 @@ class TypesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+        
         DB::table('types')->insert([
             'name' => 'Actitud',
             'model' => 'App\Models\Task',

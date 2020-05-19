@@ -11,7 +11,6 @@ class TrackingsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO Eliminar para produccion cuando se termine de implementar los test
         $trackings = [
             [
                 'signature'=>'',
@@ -22,7 +21,7 @@ class TrackingsTableSeeder extends Seeder
                 'num_hours'=>'4',
                 'created_at' => now(),
                 'updated_at' => now(),
-
+                
             ],
             [
                 'signature'=>'',
@@ -33,8 +32,8 @@ class TrackingsTableSeeder extends Seeder
                 'num_hours'=>'3',
                 'created_at' => now(),
                 'updated_at' => now(),
-
-
+                
+                
             ],
         ];
         DB::table('trackings')->insert($trackings);
