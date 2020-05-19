@@ -12,7 +12,7 @@
             </div>
             <div>
                 <a href="{{ url('evaluaciones/desglose/crearTarea', $evaluation) }}" class="btn btn-outline-info">Crear Tarea</a>
-                <a href="{{ url('tasks', $subject->id) }}" class="btn btn-outline-danger ">Eliminar Tarea</a>
+                <a href="{{ url('tareas', $subject->id) }}" class="btn btn-outline-danger ">Eliminar Tarea</a>
             </div>
         </div>
         <div class="card-body row no-gutters">

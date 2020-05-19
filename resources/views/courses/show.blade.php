@@ -40,6 +40,9 @@
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                            Aquí irá la programacion del curso
+                        </div>
                         <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
                             <div class="card-body row no-gutters table-responsive">
                                 <table class="table col-12 ">

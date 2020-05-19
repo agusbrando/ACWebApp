@@ -32,7 +32,7 @@
                         <td>{{$task->name}}</td>
                         <td>{{$task->evaluation->name}}</td>
                         <td>
-                            <a href="{{url('/tareas/eliminar', ['task_id'=> ($task->id), 'subject_id'=> ($subject->id)])}}" class="btn btn-danger text-white"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{url('/tasks/eliminar', ['task_id'=> ($task->id), 'subject_id'=> ($subject->id)])}}" class="btn btn-danger text-white"><i class="fas fa-trash-alt"></i></a>
                         </td>
 
                     </tbody>
