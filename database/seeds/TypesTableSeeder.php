@@ -16,7 +16,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO Tutorías, Reserva de Aula, PCS, Portatiles, Pantallas, RACK, Proyector
+        //TODO Tutorías, Reserva de Aula, PCS, Portatiles, Pantallas, RACK, Proyector (COMPLETO)
         DB::table('types')->insert([
             'name' => 'Tutorías',
             'model' => Event::class,
@@ -44,12 +44,28 @@ class TypesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('types')->insert([
+            'name' => 'RACK',
+            'model' => Item::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
         DB::table('types')->insert([
             'name' => 'All in One',
             'model' => Item::class,
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('types')->insert([
+            'name' => 'Proyector',
+            'model' => Item::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
         DB::table('types')->insert([
             'name' => 'Torre',
             'model' => Item::class,
