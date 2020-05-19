@@ -153,19 +153,19 @@
                         @if(!$editar)
                         <div class="card-deck border-bottom bg-dark text-white">
                             <div class="card border-0 bg-dark">
-                                <div class="card-body">
-                                <h5 class="card-title text-center">Aspecto Evaluado</h5>
+                                <div class="card-body p-0">
+                                <h5 class="card-title text-center p-1 pt-2">Aspecto Evaluado</h5>
                                 
                                 </div>
                             </div>
                             <div class="card border-0 bg-dark">
-                                <div class="card-body">
-                                <h5 class="card-title text-center">Observaciones</h5>
+                                <div class="card-body p-0">
+                                <h5 class="card-title text-center p-1 pt-2">Observaciones</h5>
                                 
                                 </div>
                             </div>
-                            <div class="card border-0 bg-dark">
-                                <div class="card-body">
+                            <div class="card border-0 bg-dark col-md-2">
+                                <div class="card-body p-0">
                                 <h5 class="card-title text-center"></h5>
                                 
                                 </div>
@@ -190,7 +190,7 @@
                                     <p class="card-text text-justify">{{$evaluable->pivot->description}}</p>
                                 </div>
                             </div>
-                            <div class="card border-0">
+                            <div class="card border-0 col-md-2">
                                 <div class="card-body">
                                     <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
             
@@ -226,21 +226,21 @@
                         <form method="POST" action="{{ route('programs.updateAspecto', ['program_id'=> ($program->id), 'id'=> $evaluadoEditar_id] ) }}">
                             @method('PATCH')  
                             @csrf
-                            <div class="card-deck border-bottom-1">
+                            <div class="card-deck border-bottom bg-dark text-white">
                                 <div class="card border-0 bg-dark">
-                                    <div class="card-body">
-                                    <h5 class="card-title text-center">Aspecto Evaluado</h5>
+                                    <div class="card-body p-0">
+                                    <h5 class="card-title text-center p-1 pt-2">Aspecto Evaluado</h5>
                                     
                                     </div>
                                 </div>
                                 <div class="card border-0 bg-dark">
-                                    <div class="card-body">
-                                    <h5 class="card-title text-center">Observaciones</h5>
+                                    <div class="card-body p-0">
+                                    <h5 class="card-title text-center p-1 pt-2">Observaciones</h5>
                                     
                                     </div>
                                 </div>
-                                <div class="card border-0 bg-dark">
-                                    <div class="card-body">
+                                <div class="card border-0 bg-dark col-md-2">
+                                    <div class="card-body p-0">
                                     <h5 class="card-title text-center"></h5>
                                     
                                     </div>
@@ -259,7 +259,7 @@
                                         <p class="card-text text-justify">{{$evaluable->pivot->description}}</p>
                                     </div>
                                 </div>
-                                <div class="card border-0 col-2">
+                                <div class="card border-0 col-md-2">
                                     <div class="card-body">
                                         <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
                 
@@ -282,7 +282,7 @@
                                          <p class="card-text text-justify"><textarea rows="3" name="description" class="form-control" >{{$evaluable->pivot->description}}</textarea></p>
                                     </div>
                                 </div>
-                                <div class="card border-0 col-2">
+                                <div class="card border-0 col-md-2">
                                     <div class="card-body">
                                         <button class="btn" type="submit"><i class="far fa-save"></i></button>
                                         <a type="button" class="btn ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
