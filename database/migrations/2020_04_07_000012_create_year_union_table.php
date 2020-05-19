@@ -20,6 +20,7 @@ class CreateYearUnionTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->integer('evaluation_id')->unsigned();
             $table->integer('year_id')->unsigned();
+            $table->integer('classroom_id')->unsigned();
             $table->integer('program_id')->unsigned()->nullable();
             $table->integer('responsable_id')->unsigned()->nullable();
             $table->string('notes')->nullable();
@@ -33,7 +34,7 @@ class CreateYearUnionTable extends Migration
             $table->foreign('year_id')->references('id')->on('years');
             $table->foreign('program_id')->references('id')->on('programs');
             $table->foreign('responsable_id')->references('id')->on('users');
-
+            $table->integer('classroom_id')->references('id')->on('classrooms');
         });
     }
 

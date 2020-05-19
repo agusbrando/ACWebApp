@@ -12,5 +12,6 @@ class ProgramsTableSeeder extends Seeder
     public function run()
     {
         //TODO Create one program foreach course add current profesor and ask if you dont know
+        
     }
 }

@@ -11,13 +11,12 @@ class MisbehaviorsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO FALTAS Igual que en dianantia Muy Grave, Grave, Leve
+        //TODO FALTAS Igual que en dianantia Muy Grave, Grave, Leve en Types, no aqui
         DB::table('misbehaviors')->insert([
             'session_timetable_id' => 1,
-            'description' => 'Muy Grave',
+            'description' => 'Asistencia1',
             'type_id' => 1,
             'year_user_id' => 3,
-            'type' => 1,
             'date' => now(),
             'created_at' => now(),
             'updated_at' => now(),
@@ -25,10 +24,9 @@ class MisbehaviorsTableSeeder extends Seeder
 
         DB::table('misbehaviors')->insert([
             'session_timetable_id' => 1,
-            'description' => 'Grave',
+            'description' => 'Asistencia2',
             'type_id' => 4,
             'year_user_id' => 2,
-            'type' => 1,
             'date' => now(),
             'created_at' => now(),
             'updated_at' => now(),
@@ -36,10 +34,9 @@ class MisbehaviorsTableSeeder extends Seeder
 
         DB::table('misbehaviors')->insert([
             'session_timetable_id' => 1,
-            'description' => 'Leve',
+            'description' => 'Asistencia3',
             'type_id' => 4,
             'year_user_id' => 2,
-            'type' => 1,
             'date' => now(),
             'created_at' => now(),
             'updated_at' => now(),
