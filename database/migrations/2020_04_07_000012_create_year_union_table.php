@@ -34,7 +34,7 @@ class CreateYearUnionTable extends Migration
             $table->foreign('year_id')->references('id')->on('years');
             $table->foreign('program_id')->references('id')->on('programs');
             $table->foreign('responsable_id')->references('id')->on('users');
-            $table->integer('classroom_id')->references('id')->on('classrooms');
+            $table->foreign('classroom_id')->references('id')->on('classrooms');
         });
     }
 
