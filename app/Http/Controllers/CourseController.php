@@ -194,19 +194,20 @@ class CourseController extends Controller
     /**
      * Hacemos un softDelete del curso en la base de datos.
      *
-     * @param  int  $id
+     * @param  int  $courseId
+     * @param  int  $yearId
      * @return \Illuminate\Http\Response
      */
     public function destroy($courseId, $yearId)
     {
         //cojo todos los year union con ese año y curso
-        $yearUnions = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->get();
-        foreach($yearUnions as $yearUnion){
-            //y los voy eliminando
-            $yearUnion->delete();
-        }
+        $yearUnion = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->first();
+        
+        //y los voy eliminando
+        $yearUnion->delete();
+        
 
-        return redirect('/courses')->with('exito', 'Curso eliminado!');
+        return redirect('courses.index')->with('exito', 'Curso eliminado!');
     }
 
     /**
