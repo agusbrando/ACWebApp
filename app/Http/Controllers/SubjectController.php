@@ -76,7 +76,7 @@ class SubjectController extends Controller
             $name = $task_type->name;
             switch ($name) {
                 case 'Examenes':
-                    $evaluation->parciales = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->where('evaluation_id', $request->get('evaluation'))->tasks->where('task_id', $task_type->id)->get();
+                    $evaluation->parciales = Task::where('type_id', $task_type->id)->with('yearUnionUsers')->get();
                     foreach ($evaluation->parciales as $parcial) {
                         foreach ($parcial->users as $user) {
                             $notaParciales[$user->id][$parcial->id] = $user->pivot->value;
