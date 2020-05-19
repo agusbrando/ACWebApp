@@ -13,53 +13,91 @@ class CourseSubjectsTableSeeder extends Seeder
     {
         //TODO ASIR y FPBASICA
 
-        DB::table('courses')->insert([
-            'level' => 1,
-            'name' => 'Desarrollo de Aplicaciones Multiplataforma',
-            'abbreviation' =>'DAM',
-            'num_students' => 30,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('courses')->insert([
-            'level' => 2,
-            'name' => 'Desarrollo de Aplicaciones Multiplataforma',
-            'abbreviation' =>'DAM',
-            'num_students' => 24,
+        //1ºDAM
+        for($i=4; $i<=8; $i++){
+
+            DB::table('course_subject')->insert([
+                'course_id' => 1,
+                'subject_id' => $i,
+                'max_hours' => 30,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+        }
+        //Ingles id 3
+        DB::table('course_subject')->insert([
+            'course_id' => 1,
+            'subject_id' => 3,
+            'max_hours' => 30,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        DB::table('courses')->insert([
-            'level' => 1,
-            'name' => 'Desarrollo de Aplicaciones Web',
-            'abbreviation' =>'DAW',
-            'num_students' => 22,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('courses')->insert([
-            'level' => 2,
-            'name' => 'Desarrollo de Aplicaciones Web',
-            'abbreviation' =>'DAW',
-            'num_students' => 20,
+        //FOL id 2
+        DB::table('course_subject')->insert([
+            'course_id' => 1,
+            'subject_id' => 2,
+            'max_hours' => 30,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        DB::table('courses')->insert([
-            'level' => 1,
-            'name' => 'Sistemas Microinformaticos y Redes',
-            'abbreviation' =>'SMR',
-            'num_students' => 25,
+        //2ºDAM
+        for($i=9; $i<=13; $i++){
+
+            DB::table('course_subject')->insert([
+                'course_id' => 2,
+                'subject_id' => $i,
+                'max_hours' => 30,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+        }
+        //Ingles id 3
+        DB::table('course_subject')->insert([
+            'course_id' => 2,
+            'subject_id' => 3,
+            'max_hours' => 30,
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('courses')->insert([
-            'level' => 2,
-            'name' => 'Sistemas Microinformaticos y Redes',
-            'abbreviation' =>'SMR',
-            'num_students' => 19,
+        //EIE id 1
+        DB::table('course_subject')->insert([
+            'course_id' => 2,
+            'subject_id' => 1,
+            'max_hours' => 30,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        //1ºDAW
+        for($i=4; $i<=8; $i++){
+
+            DB::table('course_subject')->insert([
+                'course_id' => 1,
+                'subject_id' => $i,
+                'max_hours' => 30,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+        }
+        //Ingles id 3
+        DB::table('course_subject')->insert([
+            'course_id' => 1,
+            'subject_id' => 3,
+            'max_hours' => 30,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        //FOL id 2
+        DB::table('course_subject')->insert([
+            'course_id' => 1,
+            'subject_id' => 2,
+            'max_hours' => 30,
             'created_at' => now(),
             'updated_at' => now()
         ]);

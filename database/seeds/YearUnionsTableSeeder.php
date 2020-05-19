@@ -21,7 +21,7 @@ class YearUnionsTableSeeder extends Seeder
             'year_id' => '1',
             'program_id' => '1',
             'responsable_id' => '4',
-            'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
+            'date_check' => '2016-09-22', //fecha en la que se revisa / da el visto beno
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
@@ -61,6 +61,28 @@ class YearUnionsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        for($i=1; $i<=3; $i++){
+            $cursos = Course::all();
+            foreach($cursos as $curso){
+                foreach($curso->subjects as $subject){
+                    DB::table('yearUnions')->insert([
+                        'subject_id' => $subject->id,
+                        'course_id' => $curso->id,
+                        'evaluation_id' => $i,
+                        'year_id' => '1',
+                        'program_id' => '2',
+                        'responsable_id' => '4',
+                        'date_check' => '2017-03-29',
+                        'date_start'=> '2017-03-28',
+                        'date_end'=> '2017-06-01',
+                        'notes' => 'Muy bien estructurado',
+                        'classroom_id'=>1, 
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+        }
         DB::table('yearUnions')->insert([
             'subject_id' => '3',
             'course_id' => '2',

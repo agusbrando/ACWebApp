@@ -17,9 +17,6 @@ class CreateSubjectsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('abbreviation');
-            $table->integer('max');
-            $table->integer('course_id')->unsigned();
-            $table->foreign('course_id')->references('id')->on('courses');
             $table->timestamps();
         });
     }
