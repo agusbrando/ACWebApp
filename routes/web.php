@@ -28,6 +28,16 @@ Route::resource('classrooms','ClassroomController');
 //RUTAS EVALUATIONS(KEVIN)
 Route::resource('evaluations','EvaluationController');
 
+//RUTAS SESSIONS(KEVIN)
+Route::resource('sessions','SessionController');
+
+//RUTAS SUBJECTS(KEVIN)
+Route::resource('subjects','SubjectController');
+
+//RUTAS TYPES(KEVIN)
+Route::resource('types','TypeController');
+
+//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
 Route::resource('asistencia', 'AsistenciaController');
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
 Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
@@ -71,6 +81,23 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+//RUTAS ITEMs Sergio Lopez
+Route::post('/items/filter', 'ItemController@filter');
+Route::resource('items', 'ItemController');
+
+//RUTAS STATESs
+Route::resource('states', 'StateController');
+
+//RUTAS COURSEs
+Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
+Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
+Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
+Route::post('courses/show/filter/{user_id}/{course_id}/{year_id}', 'CourseController@responsabilizarItem')->name('courses.responsabilizarItem');
+Route::resource('courses', 'CourseController');
+
+//RUTAS SUBJECTS JAVI
+// Route::resource('asignaturas', 'AsignaturaController');
 //RUTAS SUBJECTS (Javi) //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
 Route::post('subjects/evaluations', 'SubjectController@evaluations')->name('subjects.evaluations');
 Route::resource('subjects','SubjectController');

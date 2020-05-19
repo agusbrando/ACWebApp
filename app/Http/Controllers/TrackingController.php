@@ -36,9 +36,11 @@ class TrackingController extends Controller
     $num_hours = $suma / 60;
     $hora = floor($num_hours);
     $minutos = ($num_hours - $hora) * 60;
-
-    $horas = $hora . ':' . $minutos;
-
+    if ($minutos < 10) {
+      $horas = $hora . ':0' . $minutos;
+    } else {
+      $horas = $hora . ':' . $minutos;
+    }
 
     return view('Tracking.index', compact('trackings', 'user', 'horas'));
   }
@@ -70,7 +72,11 @@ class TrackingController extends Controller
     $hora = floor($num_hours);
     $minutos = ($num_hours - $hora) * 60;
 
-    $horas = $hora . ':' . $minutos;
+    if ($minutos < 10) {
+      $horas = $hora . ':0' . $minutos;
+    } else {
+      $horas = $hora . ':' . $minutos;
+    }
 
     $tracking = new Tracking([
       'signature' => $user->signature,
@@ -101,24 +107,22 @@ class TrackingController extends Controller
   public function update(Request $request, $id)
   {
     $user = Auth::user();
-    
-   
-    if ($request->hasFile('archivo')) {
-      $archivo =$request->file('archivo');
 
-      
-      $nombre=$archivo->getClientOriginalName();
+
+    if ($request->hasFile('archivo')) {
+      $archivo = $request->file('archivo');
+
+
+      $nombre = $archivo->getClientOriginalName();
       $ruta = "signatures/" . $user->id;
       $micarpeta = "storage/" . $ruta;
       //if (!file_exists($micarpeta)) {
-        Storage::disk("public")->put("/" .$ruta. "/" .$nombre,  File::get($archivo));
-      
-     
-      $user->signature = Storage::url($ruta. "/" .$nombre);
+      Storage::disk("public")->put("/" . $ruta . "/" . $nombre,  File::get($archivo));
+
+
+      $user->signature = Storage::url($ruta . "/" . $nombre);
 
       $user->save();
-
-     
     } else {
       $image_parts = explode(";base64,", $request->get('firma'));
 
@@ -185,7 +189,11 @@ class TrackingController extends Controller
     $hora = floor($num_hours);
     $minutos = ($num_hours - $hora) * 60;
 
-    $horas = $hora . ':' . $minutos;
+    if ($minutos < 10) {
+      $horas = $hora . ':0' . $minutos;
+    } else {
+      $horas = $hora . ':' . $minutos;
+    }
 
     return view('Tracking.index', compact('trackings', 'horas', 'user'));
   }
@@ -210,5 +218,4 @@ class TrackingController extends Controller
     }
     return view('Tracking.excel', compact('trackings'));
   }
-  
 }

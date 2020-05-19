@@ -14,9 +14,9 @@ class MisbehaviorsTableSeeder extends Seeder
         //TODO FALTAS Igual que en dianantia Muy Grave, Grave, Leve
         DB::table('misbehaviors')->insert([
             'session_timetable_id' => 1,
-            'description' => 'Retraso',
+            'description' => 'Muy Grave',
             'type_id' => 1,
-            'year_user_id' => 3,
+            'year_user_id' => 1,
             'type' => 1,
             'date' => now(),
             'created_at' => now(),
@@ -25,35 +25,25 @@ class MisbehaviorsTableSeeder extends Seeder
 
         DB::table('misbehaviors')->insert([
             'session_timetable_id' => 1,
-            'description' => 'Falta1',
-            'type_id' => 4,
-            'year_user_id' => 2,
-            'type' => 1,
-            'date' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        DB::table('misbehaviors')->insert([
-            'session_timetable_id' => 1,
-            'description' => 'Falta2',
-            'type_id' => 4,
-            'year_user_id' => 2,
-            'type' => 1,
-            'date' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        DB::table('misbehaviors')->insert([
-            'session_timetable_id' => 1,
-            'description' => 'Falta3',
+            'description' => 'Grave',
             'type_id' => 4,
             'year_user_id' => 1,
-            'type' => 2,
+            'type' => 1,
             'date' => now(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('misbehaviors')->insert([
+            'session_timetable_id' => 1,
+            'description' => 'Leve',
+            'type_id' => 4,
+            'year_user_id' => 1,
+            'type' => 1,
+            'date' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+       
     }
 }

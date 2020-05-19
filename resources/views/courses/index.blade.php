@@ -6,15 +6,17 @@
 @section('main')
 
 
-<link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    
+<link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3>Cursos</h3>
             </div>
-            
+
             <div>
                 <a class="btn btn-outline-info" href="/courses/create" role="button">Añadir Curso</a>
 
@@ -23,7 +25,7 @@
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
 
-                <div class="d-flex flex-row bd-highlight mb-3">
+                <div class="divShowCoursesContent  d-flex flex-row bd-highlight mb-3 ">
                     <div id="accordion" class="w-100 h-100">
 
                         @foreach($years as $year)
@@ -66,6 +68,8 @@
                                                                             <td>{{$course->level}}</td>
                                                                             <td>{{$course->name}}</td>
                                                                             <td>{{$course->num_students}}</td>
+
+                                                                            
                                                                             <td class="botones">
                                                                                 <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
                                                                                 
@@ -77,7 +81,7 @@
                                                         </tbody>
                                                     </table>
                                                 @endif
-                                                
+
                                             </div>
                                             <!-- collapse show lo muestra abierto por defecto -->
 
@@ -93,8 +97,6 @@
                 </div>
             </div>
         </div>
-
-        </form>
     </div>
 </main>
 
