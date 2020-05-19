@@ -42,6 +42,7 @@ class CoursesTableSeeder extends Seeder
             'level' => 2,
             'name' => 'Desarrollo de Aplicaciones Web',
             'abbreviation' =>'DAW',
+            
             'num_students' => 20,
             'created_at' => now(),
             'updated_at' => now()
