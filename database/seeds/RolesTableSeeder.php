@@ -26,6 +26,14 @@ class RolesTableSeeder extends Seeder
         $role->level = '4';
         $role->save();
 
+        $role = new Role();
+        $role->name = 'Direccion';
+        $role->slug = 'direc';
+        $role->description = 'Direccion del centro';
+        $role->level = '5';
+        $role->save();
+
+
         // DB::table('roles')->insert([
         //     'name'        => 'Admin',
         //     'slug'        => 'admin',
