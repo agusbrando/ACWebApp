@@ -96,8 +96,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <form action="{{ route('subject.desglose',  ['subject' => $subject->id, 'year' => $yearUnion->year_id, 'course' => $yearUnion->course_id, 'evaluation'=> ($yearUnion->evaluation->id)]) }}" method="post">
+                        <form action="{{ route('subject.desglose')}}" method="post">
                             @csrf
+                            <input type="hidden" name="subject" value={{$subject->id}}>
+                            <input type="hidden" name="year" value={{$yearUnion->year_id}}>
+                            <input type="hidden" name="course" value={{$yearUnion->course_id}}>
+                            <input type="hidden" name="evaluation" value={{$yearUnion->evaluation->id}}>
                             <button type="submit" class="btn btn-primary mr-2 float-right">Desglose</button>
                         </form>
                     </div>

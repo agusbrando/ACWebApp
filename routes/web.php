@@ -99,7 +99,7 @@ Route::resource('courses', 'CourseController');
 //RUTAS SUBJECTS JAVI
 // Route::resource('asignaturas', 'AsignaturaController');
 //RUTAS SUBJECTS (Javi) //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
-Route::post('subjects/evaluations', 'SubjectController@evaluations')->name('subjects.evaluations');
+Route::get('subjects/evaluations/{subject_id}', 'SubjectController@evaluations')->name('subjects.evaluations');
 Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
