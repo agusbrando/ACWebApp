@@ -13,17 +13,23 @@ class InvoicePaid extends Notification
 {
     use Queueable;
 
-    protected $user;
+    public $user;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user, $message)
+    public function __construct($user)
     {
         $this->user = $user;
 
     }
+
+    // public function getUser(){
+
+    //  return $this->user;
+
+    // }
 
     /**
      * Get the notification's delivery channels.
