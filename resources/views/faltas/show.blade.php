@@ -104,7 +104,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                        @foreach($listaFaltaLeve as $misbehavior)
+                          @foreach($listaFaltaLeve as $misbehavior)
                           <tr>
                             <td>{{$misbehavior->date}}</td>
                             <td>{{$misbehavior->description}}</td>
@@ -144,7 +144,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                        @foreach($listaFaltaGrave as $misbehavior)
+                          @foreach($listaFaltaGrave as $misbehavior)
                           <tr>
                             <td>{{$misbehavior->date}}</td>
                             <td>{{$misbehavior->description}}</td>
