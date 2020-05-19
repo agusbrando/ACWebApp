@@ -34,7 +34,7 @@ class ClassroomsTableSeeder extends Seeder
             'number'=> 5,
         ]);
         DB:table('classrooms')->insert([
-            'name'=> 'Aula 7',
+            'name'=> 'Aula 6',
             'number'=> 6,
         ]);
         DB:table('classrooms')->insert([
