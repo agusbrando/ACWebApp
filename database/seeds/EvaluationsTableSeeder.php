@@ -29,5 +29,11 @@ class EvaluationsTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        DB::table('evaluations')->insert([
+            'name' => 'EvalFinal',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }
