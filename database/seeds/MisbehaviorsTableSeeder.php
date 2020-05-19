@@ -11,7 +11,7 @@ class MisbehaviorsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO FALTAS Igual que en dianantia Muy Grave, Grave, Leve
+        //TODO FALTAS Igual que en dianantia Muy Grave, Grave, Leve (COMPLETO)
         DB::table('misbehaviors')->insert([
             'session_timetable_id' => 1,
             'description' => 'Muy Grave',

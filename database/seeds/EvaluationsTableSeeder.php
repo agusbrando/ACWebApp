@@ -11,7 +11,7 @@ class EvaluationsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO evaluacion final
+        //TODO evaluacion final (COMPLETO)
 
         DB::table('evaluations')->insert([
             'name' => '1Eval',
