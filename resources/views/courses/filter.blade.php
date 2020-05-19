@@ -15,6 +15,14 @@
 
             </div>
             <div class="d-flex flex-row-reverse">
+                <form method="post" action="">
+                    @csrf
+                    <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
+                </form>
+                <form method="post" action="">
+                    @csrf
+                    <button class="btn btn-outline-primary ml-2" type="submit">Editar Curso</button>
+                </form>
 
 
             </div>
@@ -120,8 +128,8 @@
                                                                                 @foreach($items as $item)
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
 
+                                                                                
                                                                                 @endforeach
-
                                                                             </select>
 
 
