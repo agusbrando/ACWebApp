@@ -33,7 +33,7 @@ class AttachmentsTableSeeder extends Seeder
 
         //TODO 2 Attachments para message(COMPLETADO)
         DB::table('attachments')->insert([
-            'name'=>'default_post.jpg',
+            'name'=>'default_message.jpg',
             'extension'=>'jpg',
             'attachmentable_id'=>2,
             'attachmentable_type'=> Message::class,
@@ -41,7 +41,7 @@ class AttachmentsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         DB::table('attachments')->insert([
-            'name'=>'default_post.jpg',
+            'name'=>'default_message.jpg',
             'extension'=>'jpg',
             'attachmentable_id'=>2,
             'attachmentable_type'=> Message::class,
