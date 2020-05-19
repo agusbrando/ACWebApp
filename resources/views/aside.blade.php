@@ -2,7 +2,7 @@
     <div class="sidebar-sticky">
     <ul class="nav flex-column">
         <li class="nav-item">
-        <a class="nav-link active" href="/">
+        <a class="nav-link active" href="/home">
             <span data-feather="home"></span>
             Muro <span class="sr-only">(current)</span>
         </a>
@@ -61,7 +61,7 @@
         <li class="nav-item">
         <a class="nav-link" href="/posts">
             <span data-feather="file-text"></span>
-            Post
+            Posts
         </a>
         </li>
         <li class="nav-item">
