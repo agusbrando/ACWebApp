@@ -137,7 +137,6 @@ class PorcentajesController extends Controller
 
         $porcentajes = $request->get('porcentajes');
         $comprobacionPorcentajes = $this->comprobacion($porcentajes);
-//TODO pasar tipo
         if ($comprobacionPorcentajes == 0) {
             foreach ($porcentajes as $eval_id => $types) {
                 foreach ($types as $type_id => $values) {

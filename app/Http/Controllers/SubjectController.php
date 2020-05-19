@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Type;
 use App\Models\Task;
+use App\Models\Year;
 use App\Models\Course;
 use App\Models\Subject;
 use App\Models\YearUnion;
@@ -48,7 +49,9 @@ class SubjectController extends Controller
             'evaluation' => 'required'
         ]);
 
+        $year = Year::find($request->get('year'));
         $subject = Subject::find($request->get('subject'));
+        $course = Course::find($request->get('course'));
         $eval = Evaluation::find($request->get('evaluation'));
         $evaluation = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->where('evaluation_id', $request->get('evaluation'))->first()->load('evaluation');
         $taskTypes = Type::all()->where('model', Task::class);
@@ -216,7 +219,7 @@ class SubjectController extends Controller
             }
         }
 
-        return view('Notas.desglose', compact('evaluation', 'subject', 'eval'));
+        return view('Notas.desglose', compact('evaluation', 'subject', 'eval', 'year', 'course'));
     }
 
     public function evaluations(Request $request)
@@ -227,6 +230,7 @@ class SubjectController extends Controller
             'course' => 'required'
         ]);
 
+        $year = Year::find($request->get('year'));
         $subject = Subject::find($request->get('subject'));
         $course = Course::find($request->get('course'));
         $yearUnions = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->get()->load('evaluation');
@@ -287,7 +291,7 @@ class SubjectController extends Controller
             }
         }
 
-        return view('Notas.evaluations', compact('subject', 'yearUnions', 'course'));
+        return view('Notas.evaluations', compact('subject', 'yearUnions', 'course', 'year'));
     }
 
     /**

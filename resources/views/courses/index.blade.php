@@ -66,8 +66,6 @@
                                                                             <td>{{$course->level}}</td>
                                                                             <td>{{$course->name}}</td>
                                                                             <td>{{$course->num_students}}</td>
-
-                                                                            
                                                                             <td class="botones">
                                                                                 <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
                                                                                 

@@ -7,7 +7,10 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
-                <a href="{{ url('asignaturas', $subject->id) }}" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
+                <form action="{{ route('subjects.evaluations',  ['subject' => $subject->id, 'year' => $year->id, 'course' => $course->id ]) }}" method="post">
+                    @csrf
+                    <button type="submit" href="#" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></button>
+                </form>
                 <h3 class="m-auto">Desglose {{$subject->name}} {{$eval->name}}</h3>
             </div>
             <div>
@@ -47,14 +50,13 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($evaluation->notaParciales != null)
-                                                @if($evaluation->notaParciales[$user->id][$parcial->id] < 4)
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaParciales[$user->id][$parcial->id]}}">
-                                                @else
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$evaluation->notaParciales[$user->id][$parcial->id]}}">
-                                                @endif
-                                                @else
-                                                <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
-                                                @endif
+                                                @if($evaluation->notaParciales[$user->id][$parcial->id] < 4) <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaParciales[$user->id][$parcial->id]}}">
+                                                    @else
+                                                    <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$evaluation->notaParciales[$user->id][$parcial->id]}}">
+                                                    @endif
+                                                    @else
+                                                    <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
+                                                    @endif
                                             </div>
                                         </td>
                                         @endforeach
@@ -93,14 +95,13 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($evaluation->notaTrabajos != null)
-                                                @if($evaluation->notaTrabajos[$user->id][$trabajo->id] < 4)
-                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaTrabajos[$user->id][$trabajo->id]}}">
-                                                @else
-                                                <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$evaluation->notaTrabajos[$user->id][$trabajo->id]}}">
-                                                @endif
-                                                @else
-                                                <input name="trabajos[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
-                                                @endif
+                                                @if($evaluation->notaTrabajos[$user->id][$trabajo->id] < 4) <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaTrabajos[$user->id][$trabajo->id]}}">
+                                                    @else
+                                                    <input name="trabajos[{{$user->id}}][{{$trabajo->id}}]" type="text" class="form-control w" value="{{$evaluation->notaTrabajos[$user->id][$trabajo->id]}}">
+                                                    @endif
+                                                    @else
+                                                    <input name="trabajos[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
+                                                    @endif
                                             </div>
                                         </td>
                                         @endforeach
@@ -139,14 +140,13 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($evaluation->notaActitud != null)
-                                                @if($evaluation->notaActitud[$user->id][$act->id] < 4)
-                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaActitud[$user->id][$act->id]}}">
-                                                @else
-                                                <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$evaluation->notaActitud[$user->id][$act->id]}}">
-                                                @endif
-                                                @else
-                                                <input name="actitud[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
-                                                @endif
+                                                @if($evaluation->notaActitud[$user->id][$act->id] < 4) <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaActitud[$user->id][$act->id]}}">
+                                                    @else
+                                                    <input name="actitud[{{$user->id}}][{{$act->id}}]" type="text" class="form-control w" value="{{$evaluation->notaActitud[$user->id][$act->id]}}">
+                                                    @endif
+                                                    @else
+                                                    <input name="actitud[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w">
+                                                    @endif
                                             </div>
                                         </td>
                                         @endforeach
@@ -185,14 +185,13 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($evaluation->notaRecuperacion != null)
-                                                @if($evaluation->notaRecuperacion[$user->id][$rec->id] < 4)
-                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaRecuperacion[$user->id][$rec->id]}}">
-                                                @else
-                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w" value="{{$evaluation->notaRecuperacion[$user->id][$rec->id]}}">
-                                                @endif
-                                                @else
-                                                <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w">
-                                                @endif
+                                                @if($evaluation->notaRecuperacion[$user->id][$rec->id] < 4) <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaRecuperacion[$user->id][$rec->id]}}">
+                                                    @else
+                                                    <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w" value="{{$evaluation->notaRecuperacion[$user->id][$rec->id]}}">
+                                                    @endif
+                                                    @else
+                                                    <input name="recuperacion[{{$user->id}}][{{$rec->id}}]" type="text" class="form-control w">
+                                                    @endif
                                             </div>
                                         </td>
                                         @endforeach
