@@ -46,7 +46,7 @@
 
                     <td class="td">8:30-9:25</td>
                     @foreach($sessions as $session)
-                       
+                        @if($session->time_start=='08:30')
                             <td>
                                 @if($session->day==1)
                                 {{$session->subject->abbreviation}}-{{$session->subject->name}}
@@ -72,7 +72,7 @@
                                 {{$session->subject->abbreviation}}-{{$session->subject->name}}
                                 @endif
                             </td>
-                        
+                        @endif
                     @endforeach
 
                 </tr>
