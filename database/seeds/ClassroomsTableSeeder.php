@@ -12,5 +12,6 @@ class ClassroomsTableSeeder extends Seeder
     public function run()
     {
         //TODO 9 Aulas + Aula taller
+        
     }
 }

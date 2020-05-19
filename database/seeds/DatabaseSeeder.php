@@ -23,9 +23,6 @@ class DatabaseSeeder extends Seeder
             SubjectsTableSeeder::class,
             EvaluationsTableSeeder::class,
             ProgramsTableSeeder::class,
-            YearsTableSeeder::class,
-            YearUnionsTableSeeder::class,
-            YearUnionUserTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,
             TrackingsTableSeeder::class,
@@ -46,6 +43,9 @@ class DatabaseSeeder extends Seeder
             AttachmentsTableSeeder::class,
             ItemYearTableSeeder::class,
             PercentagesTableSeeder::class,
+            YearsTableSeeder::class,
+            YearUnionsTableSeeder::class,
+            YearUnionUserTableSeeder::class,
 
         ]);
     }
