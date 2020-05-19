@@ -8,14 +8,23 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
+
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+
                 <h3>Curso </h3>
 
             </div>
             <div class="d-flex flex-row-reverse">
-
+                <form method="post" action="">
+                    @csrf
+                    <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
+                </form>
+                <form method="post" action="">
+                    @csrf
+                    <button class="btn btn-outline-primary ml-2" type="submit">Editar Curso</button>
+                </form>
 
             </div>
         </div>
