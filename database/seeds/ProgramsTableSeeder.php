@@ -12,6 +12,16 @@ class ProgramsTableSeeder extends Seeder
     public function run()
     {
         //TODO Create one program foreach course add current profesor and ask if you dont know
-        
+        DB::table('programs')->insert([
+            'name' => 'programaPrueba',
+            'professor_id' => 1,
+           
+        ]);
+        DB::table('programs')->insert([
+            'name' => 'programaPrueba2',
+            'professor_id' => 1,
+           
+        ]);
+
     }
 }
