@@ -28,16 +28,15 @@ Route::resource('classrooms','ClassroomController');
 //RUTAS EVALUATIONS(KEVIN)
 Route::resource('evaluations','EvaluationController');
 
-//RUTAS SESSIONS(KEVIN)
-Route::resource('sessions','SessionController');
-
-//RUTAS SUBJECTS(KEVIN)
-Route::resource('subjects','SubjectController');
-
-//RUTAS TYPES(KEVIN)
-Route::resource('types','TypeController');
-
-//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
+Route::resource('asistencia', 'AsistenciaController');
+Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
+Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
+Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
+Route::resource('asignaturas', 'AsignaturaController');
+Route::resource('evaluaciones', 'EvaluacionesController');
+Route::resource('porcentajes', 'PorcentajesController');
+Route::resource('desglose', 'DesgloseController');
+//RUTAS ASISTENCIA Y COMPORTAMIENTO
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
@@ -77,10 +76,14 @@ Route::post('subjects/evaluations', 'SubjectController@evaluations')->name('subj
 Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
+
 Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');;
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
+//TODO Pasar parametros con formulario/Eliminar ruta y poner destroy
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
 Route::get('evaluaciones/desglose/crearTarea/{id}', 'TaskController@create');
+
+//TODO Cambiar controller de DesgloseController.
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
 Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
 Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->name('desglose.updateTrabajos');
@@ -124,3 +127,12 @@ Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
 Route::resource('courses', 'CourseController');
+
+//Rutas Posts Adrian
+Route::resource('posts', 'PostController');
+
+//Rutas Comments Adrian
+Route::resource('comments', 'CommentController');
+
+//Rutas Attachments Adrian
+Route::resource('attachments', 'AttachmentController');

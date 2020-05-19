@@ -40,18 +40,6 @@ class DesgloseController extends Controller
 
     }
 
-    protected function storeNotes(Evaluation $eval, Task $task)
-    {
-        foreach ($eval->users as $user) {
-            $calification = new Calification([
-                'user_id' => $user->id,
-                'task_id' => $task->id,
-                'value' => null
-            ]);
-            $calification->save();
-        }
-    }
-
     /**
      * Display the specified resource.
      *

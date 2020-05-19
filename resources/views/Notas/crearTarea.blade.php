@@ -41,8 +41,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <input type="hidden" name="subject" value={{$yearUnion->subject_id}}>
-                    <input type="hidden" name="evaluation" value={{$yearUnion->evaluation_id}}>
+                    <input type="hidden" name="yearUnion" value={{$yearUnion->id}}>
                 </div>
             </div>
             <div class=" card-footer col-12">

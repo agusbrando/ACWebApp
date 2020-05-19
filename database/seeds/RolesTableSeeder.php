@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Role;
 
 class RolesTableSeeder extends Seeder
 {
@@ -12,6 +11,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
         $role = new Role();
         $role->name = 'admin';
         $role->slug = 'admin';
@@ -42,6 +42,17 @@ class RolesTableSeeder extends Seeder
         //     'created_at' => now(),
         //     'updated_at' => now(),
         // ]);
+=======
+        //TODO Roles Profesor, Alumno, Administrador, Administracion
+        DB::table('roles')->insert([
+            'name'        => 'Admin',
+            'slug'        => 'admin',
+            'description' => 'Admin Role',
+            'level'       => 5,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+>>>>>>> af269c95e9b945cb87e766c055e3d88113611d06
         DB::table('roles')->insert([
             'name'        => 'User',
             'slug'        => 'user',

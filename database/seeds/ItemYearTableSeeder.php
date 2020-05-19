@@ -11,6 +11,8 @@ class ItemYearTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO Eliminar para produccion cuando se termine de implementar los test
+
         DB::table('itemYear')->insert([
             'item_id' => '1',
             'year_user_id' => '1',

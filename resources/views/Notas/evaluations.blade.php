@@ -48,15 +48,17 @@
                                     <tr>
                                         <td>{{$porcentaje->name}}</td>
                                         @if($porcentaje->name == 'Recuperacion')
-                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][porcentaje]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}" disabled></td>
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][percentage]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}" readonly></td>
                                         @else
-                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][porcentaje]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}"></td>
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][percentage]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->percentage}}"></td>
                                         @endif
-                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][nota_min_tarea]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->min_grade_task}}"></td>
-                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][nota_media_tarea]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->average_grade_task}}"></td>
-                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][nota_media_minima]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->min_average_grade_task}}"></td>
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][min_grade_task]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->min_grade_task}}"></td>
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][average_grade_task]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->average_grade_task}}"></td>
+                                        <td><input name="porcentajes[{{$yearUnion->evaluation->id}}][{{$porcentaje->id}}][min_average_grade_task]" type="text" class="form-control w-75" value="{{$porcentaje->pivot->min_average_grade_task}}"></td>
                                     </tr>
                                 </tbody>
+                                <input type="hidden" name="course" value={{$yearUnion->course_id}}>
+                                <input type="hidden" name="year" value={{$yearUnion->year_id}}>
                                 @endforeach
                             </table>
                             @endforeach

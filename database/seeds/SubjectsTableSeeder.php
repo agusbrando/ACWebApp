@@ -11,6 +11,7 @@ class SubjectsTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO add all subjects for every course. Website
         DB::table('subjects')->insert([
             'course_id'=>1,
             'name' => 'Acceso a Datos',
