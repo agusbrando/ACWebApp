@@ -103,12 +103,6 @@ class TypesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('types')->insert([
-            'name' => 'Horario',
-            'model' => 'App\Models\Session',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
 
     }
 }
