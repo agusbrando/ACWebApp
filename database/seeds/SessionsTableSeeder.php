@@ -925,5 +925,32 @@ class SessionsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('sessions')->insert([
+            'classroom_id' => 2,
+            'type_id' => 13,
+            'day' => 1,
+            'time_start' => '8:30',
+            'time_end' => '9:25',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('sessions')->insert([
+            'classroom_id' => 2,
+            'type_id' => 13,
+            'day' => 1,
+            'time_start' => '9:25',
+            'time_end' => '10:20',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('sessions')->insert([
+            'classroom_id' => 2,
+            'type_id' => 13,
+            'day' => 2,
+            'time_start' => '8:30',
+            'time_end' => '9:25',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
