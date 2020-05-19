@@ -19,17 +19,24 @@ class TypesTableSeeder extends Seeder
         //TODO Tutorías, Reserva de Aula, PCS, Portatiles, Pantallas, RACK, Proyector
         DB::table('types')->insert([
             'name' => 'Tutorías',
-            'model' => 'App\Models\Event',
+            'model' => Event::class,
 	        'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('types')->insert([
             'name' => 'Reserva de aulas',
-            'model' => 'App\Models\Event',
+            'model' => Event::class,
 	        'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('types')->insert([
+            'name' => 'Horario',
+            'model' =>'App\Models\Sessions',
+	        'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
 
         DB::table('types')->insert([
             'name' => 'Portatil',
