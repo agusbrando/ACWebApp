@@ -20,10 +20,7 @@ class Session extends Model
         
     ];
 
-    protected $casts = [
-        'time_start' => 'date:hh:mm',
-        'time_end' => 'date:hh:mm',
-    ];
+   
 
     public function classroom()
     {

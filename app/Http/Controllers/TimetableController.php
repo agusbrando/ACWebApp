@@ -64,7 +64,7 @@ class TimetableController extends Controller
     public function horario($id)
     {
         $timetable = Timetable::find($id);
-        $timetable->sessions=$timetable->sessionTimetables;
+        
         $sessions=array();
         $session_timetables=SessionTimetable::all();
         foreach($session_timetables as $session_timetable){
