@@ -15,7 +15,7 @@ class PostsTableSeeder extends Seeder
 
         DB::table('posts')->insert([
             'user_id' => 1,
-            'title' => 'Post 1',
+            'title' => 'Título del Post 2',
             'text' => 'Descripción del post 1',
             'created_at' => now(),
             'updated_at' => now()
@@ -23,7 +23,7 @@ class PostsTableSeeder extends Seeder
 
         DB::table('posts')->insert([
             'user_id' => 2,
-            'title' => 'Post 2',
+            'title' => 'Título del Post 2',
             'text' => 'Descripción del post 2',
             'created_at' => now(),
             'updated_at' => now()
