@@ -221,10 +221,13 @@ class CourseController extends Controller
     public function eliminarYearUnion($courseId, $yearId)
     {
         //cojo todos los year union con ese año y curso
-        $yearUnion = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->first();
+        $yearUnions = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->get();
 
         //y los voy eliminando
-        $yearUnion->delete();
+        foreach($yearUnions as $yearUnion){
+            $yearUnion->delete();
+        }
+        
 
 
         return redirect('courses')->with('exito', 'Curso eliminado!');
