@@ -74,18 +74,17 @@ class FaltasController extends Controller
         $user = User::find($id);
         $user_id = $id;
         $subjects = Subject::all();
-
         $lista = [];
 
+        //
         foreach ($subjects as $subject) {
             $count = 0;
             $listadoFaltasAsistencia = [];
 
-            //Año actual
+            //ID AÑO ACTUAL
             $year = 1;
             foreach ($user->yearUnions->where('subject_id', $subject->id)->where('year_id', $year) as $yearunions_faltas) {
                 foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
-                    // echo ($yearunions_faltas->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
 
                     if ($falta->type_id == 12) {
                         $count = $count + 1;
@@ -103,11 +102,10 @@ class FaltasController extends Controller
         $listaFaltaGrave = [];
         $listaFaltaMuyGrave = [];
 
-        //Año actual
+        //ID AÑO ACTUAL
         $year = 1;
         foreach ($user->yearUnions->where('year_id', $year) as $yearunions_faltas) {
             foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
-                // echo ($yearunions_faltas->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
 
 
                 if ($falta->type_id == 9) {
