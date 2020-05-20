@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         
 
-        if ($request->session()->has('user_permissions')) {
+        if (!$request->session()->has('user_permissions')) {
             $permissions = $request->user()->role->permissions->pluck('name')->toArray();
             $request->session()->put('user_permissions', $permissions);
             $request->session()->put('user_role', $request->user()->role->name);

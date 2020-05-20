@@ -27,7 +27,9 @@ class Course extends Model
 
     public function subjects(){
 
-        return $this->belongsToMany(Subject::class, 'course_subject');
+        return $this->belongsToMany(Subject::class, 'course_subject')->using(CourseSubject::class)
+        ->withTimeStamps()->withPivot('max_hours','hours');
+
 
     }
 }
