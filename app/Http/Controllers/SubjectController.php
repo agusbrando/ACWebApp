@@ -46,7 +46,7 @@ class SubjectController extends Controller
             'subject' => 'required',
             'year' => 'required',
             'course' => 'required',
-            'evaluation' => 'required'
+            'evaluation' => 'required',
         ]);
 
         $year = Year::find($request->get('year'));
@@ -70,7 +70,6 @@ class SubjectController extends Controller
         $aux2 = 0;
 
         $evaluation->percentages = $evaluation->types;
-        $evaluation->users = $evaluation->users;
 
         foreach ($taskTypes as $task_type) {
             $name = $task_type->name;
@@ -78,7 +77,6 @@ class SubjectController extends Controller
                 case 'Examenes':
                     $evaluation->parciales = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->parciales as $parcial) {
-                        $aux = $parcial->yearUnionUsers;
                         foreach ($parcial->yearUnionUsers as $user) {
                             $notaParciales[$user->id][$parcial->id] = $user->pivot->value;
                             $evaluation->notaParciales = $notaParciales;
@@ -101,11 +99,9 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->parciales);
                                     }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaParciales[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaParciales = $mediaParciales;
-                                    }
+                                    $aux += $nota;
+                                    $mediaParciales[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaParciales = $mediaParciales;
                                 }
                             }
                             $aux = 0;
@@ -139,9 +135,13 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->trabajos);
                                     }
-                                    $aux += $nota;
-                                    $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
-                                    $evaluation->mediaTrabajos = $mediaTrabajos;
+                                    if ($nota != null) {
+                                        $aux += $nota;
+                                        $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
+                                        $evaluation->mediaTrabajos = $mediaTrabajos;
+                                    } else {
+                                        $mediaTrabajos[$user_id] = 0;
+                                    }
                                 }
                             }
                             $aux = 0;
@@ -174,9 +174,13 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->actitud);
                                     }
-                                    $aux += $nota;
-                                    $mediaActitud[$user_id] = round($aux / $aux2, 2);
-                                    $evaluation->mediaActitud = $mediaActitud;
+                                    if ($nota != null) {
+                                        $aux += $nota;
+                                        $mediaActitud[$user_id] = round($aux / $aux2, 2);
+                                        $evaluation->mediaActitud = $mediaActitud;
+                                    } else {
+                                        $mediaActitud[$user_id] = 0;
+                                    }
                                 }
                             }
                             $aux = 0;
@@ -209,9 +213,13 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->recuperacion);
                                     }
-                                    $aux += $nota;
-                                    $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
-                                    $evaluation->mediaRecuperacion = $mediaRecuperacion;
+                                    if ($nota != null) {
+                                        $aux += $nota;
+                                        $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
+                                        $evaluation->mediaRecuperacion = $mediaRecuperacion;
+                                    } else {
+                                        $mediaRecuperacion[$user_id] = 0;
+                                    }
                                 }
                             }
                             $aux = 0;
