@@ -48,38 +48,38 @@
 
                                             <div class="w-100" id="heading{{$year->id}}" data-toggle="collapse" data-target="#collapse{{$year->id}}" aria-expanded="false" aria-controls="collapse{{$year->id}}">
                                                 @if(count($year->yearUnions) > 0)
+                                                
+                                                    <table id='mytable' class="table w-100">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th>Año</th>
+                                                                <th>Nombre</th>
+                                                                <th>Numero de Alumnos</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        
+                                                                @foreach($year->yearUnions as $course)
+                                                                        <tr>
+                                                                            
+                                                                            <td>{{$course->course_id}} </td>
+                                                                            <td>{{$course->level}}</td>
+                                                                            <td>{{$course->name}}</td>
+                                                                            <td>{{$course->num_students}}</td>
 
-                                                <table id='mytable' class="table w-100">
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Año</th>
-                                                            <th>Nombre</th>
-                                                            <th>Numero de Alumnos</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                        @foreach($year->yearUnions as $course)
-                                                        <tr>
-
-                                                            <td>{{$course->course_id}} </td>
-                                                            <td>{{$course->level}}</td>
-                                                            <td>{{$course->name}}</td>
-                                                            <td>{{$course->num_students}}</td>
-
-
-                                                            <td class="botones">
-                                                                <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
-
-                                                            </td>
-
-                                                        </tr>
-                                                        @endforeach
-
-                                                    </tbody>
-                                                </table>
+                                                                            
+                                                                            <td class="botones">
+                                                                                <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
+                                                                                
+                                                                            </td>
+                                                                            
+                                                                        </tr>
+                                                                @endforeach
+                                                            
+                                                        </tbody>
+                                                    </table>
                                                 @endif
 
                                             </div>

@@ -58,9 +58,9 @@ class TaskController extends Controller
         ]);
 
         $evaluaciones = $request->get('evaluaciones');
+        $yearUnion = YearUnion::find($request->get('yearUnion'));
 
-        foreach ($evaluaciones as $eval) {
-            $yearUnion = YearUnion::find($request->get('yearUnion'));
+        foreach ($evaluaciones as $eval) {    
             $task = new Task([
                 'year_union_id' => $yearUnion->id,
                 'type_id' => $request->get('type'),
@@ -70,7 +70,7 @@ class TaskController extends Controller
             $this->storeNotes($yearUnion, $task);
         }
 
-        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluation'));
+        return redirect('subjects/evaluations/' . $yearUnion->subject_id);
     }
 
     protected function storeNotes($yearUnion, Task $task)
@@ -79,7 +79,8 @@ class TaskController extends Controller
             $calification = new Calification([
                 'task_id' => $task->id,
                 'year_user_id' =>  $user->id,
-                'value' => null
+                // TODO no puede ser null solucionar
+                'value' => 0
             ]);
             $calification->save();
         }

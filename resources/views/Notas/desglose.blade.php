@@ -7,12 +7,12 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
-                <a href="{{ url('asignaturas', $subject->id) }}" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
+                <a href="{{ route('subjects.evaluations', $subject->id) }}" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3 class="m-auto">Desglose {{$subject->name}} {{$eval->name}}</h3>
             </div>
             <div>
                 <a href="{{ url('evaluaciones/desglose/crearTarea', $evaluation) }}" class="btn btn-outline-info">Crear Tarea</a>
-                <a href="{{ url('tasks', $subject->id) }}" class="btn btn-outline-danger ">Eliminar Tarea</a>
+                <a href="{{ url('tareas', $subject->id) }}" class="btn btn-outline-danger ">Eliminar Tarea</a>
             </div>
         </div>
         <div class="card-body row no-gutters">
