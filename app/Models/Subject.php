@@ -31,6 +31,12 @@ class Subject extends Model
         return $this->hasMany('App\Models\SessionTimetable');
     }
 
-    
+    public function courses(){
+
+        return $this->belongsToMany(Course::class, 'course_subject')->using(CourseSubject::class)
+        ->withTimeStamps()->withPivot('max_hours','hours');
+
+
+    }
 
 }
