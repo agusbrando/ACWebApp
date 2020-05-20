@@ -20,7 +20,7 @@ class CourseSubjectsTableSeeder extends Seeder
             DB::table('course_subject')->insert([
                 'course_id' => 1,
                 'subject_id' => Subject::find($i)->id,
-                'max_hours' => round(Subject::find($i)->hours),
+                'max_hours' => round((Subject::find($i)->hours)*0.15),
                 'hours'=> Subject::find($i)->hours,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -53,7 +53,7 @@ class CourseSubjectsTableSeeder extends Seeder
             DB::table('course_subject')->insert([
                 'course_id' => 2,
                 'subject_id' => $i,
-                'max_hours' => round(Subject::find($i)->hours),
+                'max_hours' => round((Subject::find($i)->hours)*0.15),
                 'hours'=> Subject::find($i)->hours,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -86,7 +86,7 @@ class CourseSubjectsTableSeeder extends Seeder
                 'course_id' => 3,
                 'subject_id' => $i,
                 'hours'=> Subject::find($i)->hours,
-                'max_hours' => round(Subject::find($i)->hours),
+                'max_hours' => round((Subject::find($i)->hours)*0.15),
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
@@ -117,7 +117,7 @@ class CourseSubjectsTableSeeder extends Seeder
             DB::table('course_subject')->insert([
                 'course_id' => 4,
                 'subject_id' => $i,
-                'max_hours' => round(Subject::find($i)->hours),
+                'max_hours' => round((Subject::find($i)->hours)*0.15),
                 'hours'=> Subject::find($i)->hours,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -150,7 +150,7 @@ class CourseSubjectsTableSeeder extends Seeder
                 'course_id' => 5,
                 'subject_id' => $i,
                 'hours'=> Subject::find($i)->hours,
-                'max_hours' => round(Subject::find($i)->hours),
+                'max_hours' => round((Subject::find($i)->hours)*0.15),
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
@@ -187,13 +187,13 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //2ºASIR
-        for($i=23; $i<=27; $i++){
+        for($i=22; $i<=26; $i++){
 
             DB::table('course_subject')->insert([
                 'course_id' => 6,
                 'subject_id' => $i,
                 'hours'=> Subject::find($i)->hours,
-                'max_hours' => round(Subject::find($i)->hours),
+                'max_hours' => round((Subject::find($i)->hours)*0.15),
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

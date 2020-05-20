@@ -166,7 +166,7 @@ class SubjectsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);//LM
-        //2ºASIR 23-27
+        //2ºASIR 22-26
         DB::table('subjects')->insert([
             'name' => 'Administración de sistemas operativos',
             'abbreviation'=>'DWEC',
