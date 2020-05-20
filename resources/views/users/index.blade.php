@@ -29,7 +29,7 @@
                         <td>{{$user->first_name }}</td>
                         <td>{{$user->last_name }}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->role_id}}</td>
+                        <td>{{$user->role->name}}</td>
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('users.show',$user->id)}}">Ver</a>
                         </td>

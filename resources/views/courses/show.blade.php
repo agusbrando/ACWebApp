@@ -40,6 +40,9 @@
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                            Aquí irá la programacion del curso
+                        </div>
                         <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
                             <div class="card-body row no-gutters table-responsive">
                                 <table class="table col-12 ">
@@ -55,11 +58,8 @@
                                             <td>{{$subject->name }}</td>
                                             <td class="botones">
                                                 <div class="d-flex flex-row ">
-                                                    <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
-                                                    <form action="{{ route('subjects.evaluations',  ['subject' => $subject->id, 'year' => $yearId, 'course' => $courseId ]) }}" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-outline-primary mr-2">Evaluaciones</button>
-                                                    </form>
+                                                    <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>                                                    
+                                                    <a class="btn btn-outline-primary mr-2" href="{{route('subjects.evaluations', $subject->id)}}">Evaluaciones</a>
                                                     <a href="#" class="btn btn-outline-primary">Programacion</a>
                                                 </div>
                                             </td>

@@ -133,7 +133,62 @@ class YearUnionsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        
+        DB::table('yearUnions')->insert([
+            'subject_id' => '4',
+            'course_id' => '1',
+            'evaluation_id' => '1',
+            'year_id' => '1',
+            'program_id' => '1',
+            'responsable_id' => '4',
+            'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
+            'date_start'=> '2016-12-20', //fecha de la eval
+            'date_end'=> '2016-12-01',
+            'notes' => 'Muy bien estructurado',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('yearUnions')->insert([
+            'subject_id' => '2',
+            'course_id' => '1',
+            'evaluation_id' => '1',
+            'year_id' => '1',
+            'program_id' => '1',
+            'responsable_id' => '4',
+            'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
+            'date_start'=> '2016-12-20', //fecha de la eval
+            'date_end'=> '2016-12-01',
+            'notes' => 'Muy bien estructurado',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('yearUnions')->insert([
+            'subject_id' => '5',
+            'course_id' => '1',
+            'evaluation_id' => '1',
+            'year_id' => '1',
+            'program_id' => '1',
+            'responsable_id' => '4',
+            'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
+            'date_start'=> '2016-12-20', //fecha de la eval
+            'date_end'=> '2016-12-01',
+            'notes' => 'Muy bien estructurado',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('yearUnions')->insert([
+            'subject_id' => '6',
+            'course_id' => '1',
+            'evaluation_id' => '1',
+            'year_id' => '1',
+            'program_id' => '1',
+            'responsable_id' => '4',
+            'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
+            'date_start'=> '2016-12-20', //fecha de la eval
+            'date_end'=> '2016-12-01',
+            'notes' => 'Muy bien estructurado',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
     }
 }

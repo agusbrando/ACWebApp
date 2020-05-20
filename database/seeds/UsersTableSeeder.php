@@ -11,7 +11,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO add all profesors, director, Students Boss 1 default student for each course
         DB::table('users')->insert([
             'first_name' => 'Admin',
             'email' => 'admin@champusaula.com',
@@ -30,7 +29,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 4,
+            'role_id' => 3,
             'timetable_id'=>1
         ]);
         DB::table('users')->insert([
@@ -50,7 +49,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('@VcEse5F@b25c7e'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 4,
+            'role_id' => 3,
             'timetable_id'=>1
         ]);
 

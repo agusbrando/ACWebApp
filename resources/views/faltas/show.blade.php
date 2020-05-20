@@ -51,7 +51,6 @@
                       <table class="table">
                         <thead class="thead-dark">
                           <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Fecha/Hora</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Actions</th>
@@ -60,7 +59,6 @@
                         <tbody>
                           @foreach($falta['listaFaltas'] as $misbehavior)
                           <tr>
-                            <th>{{$misbehavior->id}}</th>
                             <td>{{$misbehavior->date}}</td>
                             <td>{{$misbehavior->description}}</td>
                             <td>
@@ -86,9 +84,12 @@
                 <div class="card">
                   <div class="card-header" id="headingOne" style="background-color: #EAEAEA" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <h5 class="mb-0">
-                      <button class="btn btn-link" >
+                      <button class="btn btn-link">
                         <h7 style="color:grey;font-size:large">Faltas Leves</h7>
                       </button>
+                      <div style="float: right; color: grey;">
+                        {{count($listaFaltaLeve)}}
+                      </div>
                     </h5>
                   </div>
 
@@ -97,16 +98,14 @@
                       <table class="table">
                         <thead class="thead-dark">
                           <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Fecha/Hora</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($misbehaviors as $misbehavior)
+                          @foreach($listaFaltaLeve as $misbehavior)
                           <tr>
-                            <th>{{$misbehavior->id}}</th>
                             <td>{{$misbehavior->date}}</td>
                             <td>{{$misbehavior->description}}</td>
                             <td>
@@ -129,6 +128,9 @@
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <h7 style="color:grey;font-size:large">Faltas Graves</h7>
                       </button>
+                      <div style="float: right; color: grey;">
+                        {{count($listaFaltaGrave)}}
+                      </div>
                     </h5>
                   </div>
                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
@@ -136,23 +138,21 @@
                       <table class="table">
                         <thead class="thead-dark">
                           <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Fecha/Hora</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($misbehaviors as $misbehavior)
+                          @foreach($listaFaltaGrave as $misbehavior)
                           <tr>
-                            <th>{{$misbehavior->id}}</th>
                             <td>{{$misbehavior->date}}</td>
                             <td>{{$misbehavior->description}}</td>
                             <td>
                               <form action="{{ route('faltas.destroy1', ['user_id'=>$user->id ,'id'=>$misbehavior->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                                <button class="btn btn-danger float-right mr-2" type="submit">Delete</button>
                               </form>
                             </td>
                           </tr>
@@ -168,6 +168,9 @@
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         <h7 style="color:grey;font-size:large">Faltas muy Graves</h7>
                       </button>
+                      <div style="float: right; color: grey;">
+                        {{count($listaFaltaMuyGrave)}}
+                      </div>
                     </h5>
                   </div>
                   <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
@@ -175,23 +178,21 @@
                       <table class="table">
                         <thead class="thead-dark">
                           <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Fecha/Hora</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($misbehaviors as $misbehavior)
+                          @foreach($listaFaltaMuyGrave as $misbehavior)
                           <tr>
-                            <th>{{$misbehavior->id}}</th>
                             <td>{{$misbehavior->date}}</td>
                             <td>{{$misbehavior->description}}</td>
                             <td>
                               <form action="{{ route('faltas.destroy1', ['user_id'=>$user->id ,'id'=>$misbehavior->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                                <button class="btn btn-danger float-right mr-2" type="submit">Delete</button>
                               </form>
                             </td>
                           </tr>

@@ -40,9 +40,11 @@ class DatabaseSeeder extends Seeder
             MessagesUsersTableSeeder::class,
             CommentsTableSeeder::class,
             AttachmentsTableSeeder::class,
-            PercentagesTableSeeder::class,
+           
+            
             YearsTableSeeder::class,
             YearUnionsTableSeeder::class,
+            PercentagesTableSeeder::class,
             SessionTimetableTableSeeder::class,
             YearUnionUserTableSeeder::class,
             MisbehaviorsTableSeeder::class,

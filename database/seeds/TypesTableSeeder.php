@@ -86,12 +86,30 @@ class TypesTableSeeder extends Seeder
         ]);
 
         DB::table('types')->insert([
-            'name' => 'default3',
+            'name' => 'Falta Leve',
+            'model' => Misbehavior::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('types')->insert([
+            'name' => 'Falta Grave',
+            'model' => Misbehavior::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('types')->insert([
+            'name' => 'Falta muy Grave',
             'model' => Misbehavior::class,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
+        DB::table('types')->insert([
+            'name' => 'Asistencia',
+            'model' => Misbehavior::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
         DB::table('types')->insert([
             'name' => 'Trabajos',
