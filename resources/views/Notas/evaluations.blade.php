@@ -6,7 +6,7 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
-                <a href="/asignaturas" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
+                <a href="{{url('courses/show', ['course' => $course->id, 'year' => $year->id])}}" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3 class="m-auto">{{$course->name}} - {{$subject->name}}</h3>
             </div>
         </div>
@@ -30,7 +30,7 @@
                             </button>
                         </div>
                         @endif
-                        <form action="{{ route('porcentajes.update') }}" method="post">
+                        <form  action="{{ url('porcentajes/updatePorcentaje') }}" method="post">
                             @csrf
                             @foreach($yearUnions as $yearUnion)
                             <table class="table col-12">
@@ -96,8 +96,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <form action="{{ route('subject.desglose',  ['subject' => $subject->id, 'year' => $yearUnion->year_id, 'course' => $yearUnion->course_id, 'evaluation'=> ($yearUnion->evaluation->id)]) }}" method="post">
+                        <form action="{{ route('subject.desglose')}}" method="post">
                             @csrf
+                            <input type="hidden" name="subject" value={{$subject->id}}>
+                            <input type="hidden" name="year" value={{$yearUnion->year_id}}>
+                            <input type="hidden" name="course" value={{$yearUnion->course_id}}>
+                            <input type="hidden" name="evaluation" value={{$yearUnion->evaluation->id}}>
                             <button type="submit" class="btn btn-primary mr-2 float-right">Desglose</button>
                         </form>
                     </div>

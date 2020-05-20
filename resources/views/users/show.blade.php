@@ -30,7 +30,7 @@
                 <div>
                     <h5 class="card-title">{{($user->first_name)}} {{($user->last_name)}}</h5>
                     <p class="card-text">{{($user->email)}}</p>
-                    <p class="card-text">{{$user->role}}</p>
+                    <p class="card-text">{{$user->role->name}}</p>
                 </div>
             </div>
 
