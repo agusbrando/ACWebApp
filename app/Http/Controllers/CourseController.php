@@ -69,14 +69,14 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         for($i=1; $i<=3; $i++){
-            $cursos = $request->get('course');
+            $curso = Course::where('id', $request->get('course'));
             
             $fechasInicioFin =[];
             $year=1;
             array_push($fechasInicioFin,['date_start'=> $request->get('eval_1_date_start'), 'date_end'=>$request->get('eval_1_date_end')]);//1ºEVAL
             array_push($fechasInicioFin,['date_start'=> $request->get('eval_2_date_start'), 'date_end'=>$request->get('eval_2_date_end')]);//2ºEVAL
             array_push($fechasInicioFin,['date_start'=> $request->get('eval_3_date_start'), 'date_end'=>$request->get('eval_3_date_end')]);//3ºEVAL
-            foreach($cursos as $curso){
+            
                 foreach($curso->subjects as $j=>$subject){
                     DB::table('yearUnions')->insert([
                         'subject_id' => $subject->id,
@@ -90,7 +90,7 @@ class CourseController extends Controller
                         'updated_at' => now(),
                     ]);
                 }
-            }
+            
             if($curso->level == 2){
                 if( $i==2 ){
                     break;
