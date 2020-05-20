@@ -26,8 +26,10 @@ class CreateYearUnionTable extends Migration
             $table->date('date_check')->nullable();
             $table->date('date_start');
             $table->date('date_end');
-            $table->timestamps();
+            $table->date('deleted_at');
             $table->softDeletes();
+            $table->timestamps();
+            
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('evaluation_id')->references('id')->on('evaluations');
