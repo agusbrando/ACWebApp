@@ -40,7 +40,7 @@ class YearUnionsTableSeeder extends Seeder
                 }
             }
             if($curso->level == 2){
-                if( $i==2 ){
+                if( $i==2 ){  
                     break;
                 }
             }
