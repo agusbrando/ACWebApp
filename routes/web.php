@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Subject;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('prueba', function () {
+    
+    echo var_dump(Subject::find(4)->hours);
+});
+
+
 
 //RUTAS EVENTS (AGUSIN NICOLAS Y KEVIN)
 Route::resource('events', 'CalendarController');
