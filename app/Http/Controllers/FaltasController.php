@@ -74,42 +74,50 @@ class FaltasController extends Controller
         $user = User::find($id);
         $user_id = $id;
         $subjects = Subject::all();
-
         $lista = [];
 
+        //
         foreach ($subjects as $subject) {
-            // $timetables = $subject->timetables;
-            // $count = 0;
-            // foreach ($timetables as $timetable) {
-            //     $misbehaviours = Misbehavior::all()->where('session_timetable_id', $timetable->id);
-            //     if ($misbehaviours != null) {
-            //         foreach ($misbehaviours as $misbehaviour) {
-            //             if ($misbehaviour->user_id == $user_id) {
-            //                 $count = $count + 1;
-            //             }
-            //         }
-            //     }
-            // }
             $count = 0;
-            $listadoFaltas = [];
-            //Año actual
+            $listadoFaltasAsistencia = [];
+
+            //ID AÑO ACTUAL
             $year = 1;
             foreach ($user->yearUnions->where('subject_id', $subject->id)->where('year_id', $year) as $yearunions_faltas) {
                 foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
-                    // echo ($yearunions_faltas->subject->name).' - '.($falta->description).' - '.($falta->date).'<br>';
 
-
-                    //Hacer if para comprobar si es asistencia/comportamiento
-                    $count = $count + 1;
-                    array_push($listadoFaltas, $falta);
-
+                    if ($falta->type_id == 12) {
+                        $count = $count + 1;
+                        array_push($listadoFaltasAsistencia, $falta);
+                    }
                 }
             }
 
-            $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->max,'listaFaltas'=>$listadoFaltas];
+            $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->max, 'listaFaltas' => $listadoFaltasAsistencia];
             array_push($lista, $elemento);
         }
-        return view('faltas.show', compact('user', 'lista', 'misbehaviors'));
+
+        $listaComportamiento = [];
+        $listaFaltaLeve = [];
+        $listaFaltaGrave = [];
+        $listaFaltaMuyGrave = [];
+
+        //ID AÑO ACTUAL
+        $year = 1;
+        foreach ($user->yearUnions->where('year_id', $year) as $yearunions_faltas) {
+            foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
+
+
+                if ($falta->type_id == 9) {
+                    array_push($listaFaltaLeve, $falta);
+                } elseif ($falta->type_id == 10) {
+                    array_push($listaFaltaGrave, $falta);
+                } elseif ($falta->type_id == 11) {
+                    array_push($listaFaltaMuyGrave, $falta);
+                }
+            }
+        }
+        return view('faltas.show', compact('user', 'lista', 'misbehaviors', 'listaFaltaLeve', 'listaFaltaGrave', 'listaFaltaMuyGrave'));
     }
 
 
@@ -142,7 +150,7 @@ class FaltasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $user_id)
+    public function destroy($user_id, $id)
     {
         $misbehavior = Misbehavior::findOrFail($id);
         $misbehavior->delete();

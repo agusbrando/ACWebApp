@@ -79,7 +79,7 @@ class MessageController extends Controller
         foreach ($users as $userid) {
             $user = User::find($userid);
             $user->messagesReceive()->attach($message->id);
-            $user->notify(new InvoicePaid($user,$message));
+            $message->notify(new InvoicePaid($user));
         }
 
 
