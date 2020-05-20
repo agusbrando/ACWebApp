@@ -17,7 +17,7 @@ use App\Models\Subject;
 
 Route::get('prueba', function () {
     
-    echo var_dump(Subject::find(3)->hours);
+    echo var_dump(Subject::find(4)->hours);
 });
 
 
