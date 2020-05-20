@@ -24,7 +24,7 @@
                 </form>
                 <form method="post" action="">
                     @csrf
-                    <button class="btn btn-outline-primary ml-2" type="submit">Editar Curso</button>
+                    <button class="btn btn-outline-info ml-2" type="submit">Editar Curso</button>
                 </form>
 
             </div>
