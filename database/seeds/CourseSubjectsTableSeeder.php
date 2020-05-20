@@ -2,7 +2,6 @@
 
 use App\Models\Subject;
 use Illuminate\Database\Seeder;
-use App\Models\Subject;
 
 class CourseSubjectsTableSeeder extends Seeder
 {

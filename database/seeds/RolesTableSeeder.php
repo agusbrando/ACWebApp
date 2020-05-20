@@ -16,7 +16,6 @@ class RolesTableSeeder extends Seeder
             'name'        => 'Admin',
             'slug'        => 'admin',
             'description' => 'Admin Role',
-            'level'       => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -26,7 +25,6 @@ class RolesTableSeeder extends Seeder
             'name'        => 'User',
             'slug'        => 'user',
             'description' => 'User Role',
-            'level'       => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -34,7 +32,6 @@ class RolesTableSeeder extends Seeder
             'name'        => 'Profesor',
             'slug'        => 'profesor',
             'description' => 'Profesor Role',
-            'level'       => 2,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -42,7 +39,6 @@ class RolesTableSeeder extends Seeder
             'name'        => 'Alumno',
             'slug'        => 'alumno',
             'description' => 'Alumno Role',
-            'level'       => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -50,7 +46,6 @@ class RolesTableSeeder extends Seeder
             'name'        => 'Administracion',
             'slug'        => 'administracion',
             'description' => 'Administracion Role',
-            'level'       => 2,
             'created_at' => now(),
             'updated_at' => now(),
         ]);        
@@ -58,7 +53,6 @@ class RolesTableSeeder extends Seeder
             'name'        => 'Unverified',
             'slug'        => 'unverified',
             'description' => 'Unverified Role',
-            'level'       => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
