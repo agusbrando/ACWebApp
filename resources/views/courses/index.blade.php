@@ -49,9 +49,9 @@
                                             <div class="w-100" id="heading{{$year->id}}" data-toggle="collapse" data-target="#collapse{{$year->id}}" aria-expanded="false" aria-controls="collapse{{$year->id}}">
                                                
                                                 @if(count($year->yearUnions) > 0)
-                                                    @foreach($year->yearUnions as $course)
+                                                    
                                                         
-                                                            <table id='mytable' class="table w-100">
+                                                            <table id='mytable' class="table w-100 pb-5">
                                                                 <thead class="thead-dark">
                                                                     <tr>
                                                                         <th>Id</th>
@@ -61,6 +61,7 @@
                                                                         <th>Actions</th>
                                                                     </tr>
                                                                 </thead>
+                                                                @foreach($year->yearUnions as $course)
                                                                 <tr>
 
                                                                     <td>{{$course->course_id}} </td>
@@ -73,12 +74,12 @@
                                                                         <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
                                                                     </td>
                                                                 </tr>
-
+                                                                @endforeach
                                                                 </tbody>
                                                             </table>
                                                       
 
-                                                    @endforeach
+                                                    
                                                 @endif
 
                                             </div>
