@@ -32,6 +32,10 @@ class YearUnion extends Model
     public function responsable(){
         return $this->belongsTo(User::class);
     }
+
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
     //TODO Revisar si se usa
 //     //** lista de todos los year unions user que tengan este year union */
 //    public function yearUnionUsers(){
@@ -53,5 +57,7 @@ class YearUnion extends Model
     {
         return $this->hasMany('App\Models\SessionTimetable');
     }
-
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
 }

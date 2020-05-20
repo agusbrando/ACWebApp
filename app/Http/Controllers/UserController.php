@@ -103,13 +103,14 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'role' =>'required'
         ]);
         $user = User::find($id);
         $user->first_name = $request->get('first_name');
         $user->last_name = $request->get('last_name');
         $user->email = $request->get('email');
-
+        $user->role_id = $request->get('role');
 
         $user->save();
         return redirect('/users/' . $id)->with('Succes', 'Usuario editado!');

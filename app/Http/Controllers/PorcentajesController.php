@@ -137,7 +137,6 @@ class PorcentajesController extends Controller
 
         $porcentajes = $request->get('porcentajes');
         $comprobacionPorcentajes = $this->comprobacion($porcentajes);
-//TODO pasar tipo
         if ($comprobacionPorcentajes == 0) {
             foreach ($porcentajes as $eval_id => $types) {
                 foreach ($types as $type_id => $values) {
@@ -161,7 +160,7 @@ class PorcentajesController extends Controller
             }
 
             //TODO Como hacer return a las evaluaciones
-            return redirect('asignaturas/' . $request->get('subject'));
+            return redirect('subjects/evaluations/' . $request->get('subject'));
         } else if ($comprobacionPorcentajes == 1) {
             return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 1');
         } else if ($comprobacionPorcentajes == 2) {

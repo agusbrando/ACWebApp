@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ClassroomsTableSeeder::class,
             CoursesTableSeeder::class,
             SubjectsTableSeeder::class,
+            CourseSubjectsTableSeeder::class,
             EvaluationsTableSeeder::class,
             ProgramsTableSeeder::class,
             TasksTableSeeder::class,
@@ -40,11 +41,11 @@ class DatabaseSeeder extends Seeder
             CommentsTableSeeder::class,
             AttachmentsTableSeeder::class,
            
-            PercentagesTableSeeder::class,
+            
             YearsTableSeeder::class,
             YearUnionsTableSeeder::class,
+            PercentagesTableSeeder::class,
             SessionTimetableTableSeeder::class,
-            
             YearUnionUserTableSeeder::class,
             MisbehaviorsTableSeeder::class,
             ItemYearTableSeeder::class,
