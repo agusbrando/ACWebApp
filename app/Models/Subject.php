@@ -33,7 +33,7 @@ class Subject extends Model
 
     public function courses(){
 
-        return $this->belongsToMany(Course::class, 'course_subjects')->using(CourseSubject::class)
+        return $this->belongsToMany(Course::class, 'course_subject')->using(CourseSubject::class)
         ->withTimeStamps()->withPivot('max_hours','hours');
 
 

@@ -187,7 +187,7 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //2ºASIR
-        for($i=23; $i<=27; $i++){
+        for($i=22; $i<=26; $i++){
 
             DB::table('course_subject')->insert([
                 'course_id' => 6,
