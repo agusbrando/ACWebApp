@@ -21,7 +21,7 @@ class CreateCourseSubjectTable extends Migration
             $table->integer('hours')->unsigned();
             $table->timestamps();
             $table->unique(['course_id', 'subject_id']);
-            $table->foreign('course_id')->references('id')->on('evaluations');
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('subject_id')->references('id')->on('users');
         });
     }

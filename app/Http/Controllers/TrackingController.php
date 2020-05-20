@@ -25,11 +25,12 @@ class TrackingController extends Controller
     $trackings = $user->trackings()->paginate(1);
     //$trackings = DB::table('trackings')->paginate(5);
     //$trackings = Tracking::all();
+    $count=0;
     $suma = 0;
     foreach ($trackings as $trackingsuser) {
       if ($trackingsuser->user_id == $user->id) {
         list($hora, $min) = explode(":", $trackingsuser->num_hours);
-
+        $count++;
         $suma += ($hora * 60) + $min;
       }
     }
@@ -42,7 +43,7 @@ class TrackingController extends Controller
       $horas = $hora . ':' . $minutos;
     }
 
-    return view('Tracking.index', compact('trackings', 'user', 'horas'));
+    return view('Tracking.index', compact('trackings', 'user', 'horas','count'));
   }
 
   public function create()

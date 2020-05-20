@@ -134,10 +134,26 @@ class YearUnionsTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('yearUnions')->insert([
-            'subject_id' => '4',
+            'subject_id' => '10',
+            'course_id' => '2',
+            'evaluation_id' => '1',
+            'year_id' => '1',
+            'program_id' => '1',
+            'classroom_id'=>1, 
+            'responsable_id' => '4',
+            'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
+            'date_start'=> '2016-12-20', //fecha de la eval
+            'date_end'=> '2016-12-01',
+            'notes' => 'Muy bien estructurado',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('yearUnions')->insert([
+            'subject_id' => '11',
             'course_id' => '1',
             'evaluation_id' => '1',
             'year_id' => '1',
+            'classroom_id'=>1, 
             'program_id' => '1',
             'responsable_id' => '4',
             'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
@@ -148,11 +164,12 @@ class YearUnionsTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('yearUnions')->insert([
-            'subject_id' => '2',
+            'subject_id' => '12',
             'course_id' => '1',
             'evaluation_id' => '1',
             'year_id' => '1',
             'program_id' => '1',
+            'classroom_id'=>1, 
             'responsable_id' => '4',
             'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
             'date_start'=> '2016-12-20', //fecha de la eval
@@ -162,23 +179,10 @@ class YearUnionsTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('yearUnions')->insert([
-            'subject_id' => '5',
+            'subject_id' => '13',
             'course_id' => '1',
             'evaluation_id' => '1',
-            'year_id' => '1',
-            'program_id' => '1',
-            'responsable_id' => '4',
-            'date_check' => '2016-09-22',	//fecha en la que se revisa / da el visto beno
-            'date_start'=> '2016-12-20', //fecha de la eval
-            'date_end'=> '2016-12-01',
-            'notes' => 'Muy bien estructurado',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('yearUnions')->insert([
-            'subject_id' => '6',
-            'course_id' => '1',
-            'evaluation_id' => '1',
+            'classroom_id'=>1, 
             'year_id' => '1',
             'program_id' => '1',
             'responsable_id' => '4',

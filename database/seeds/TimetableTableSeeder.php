@@ -13,7 +13,50 @@ class TimetableTableSeeder extends Seeder
     {
         //TODO SMR y FPBasica
         DB::table('timetables')->insert([
+            'name' => '1SMR2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('timetables')->insert([
+            'name' => '2SMR2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('timetables')->insert([
+            'name' => '1FPB2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('timetables')->insert([
+            'name' => '2FPB2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('timetables')->insert([
+            'name' => '1DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('timetables')->insert([
             'name' => '2DAM2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('timetables')->insert([
+            'name' => '1ASIR2020',
             'date_start' =>  now(),
             'date_end' => now(),
             'created_at' => now(),
@@ -30,6 +73,14 @@ class TimetableTableSeeder extends Seeder
 
         DB::table('timetables')->insert([
             'name' => '2DAW2020',
+            'date_start' =>  now(),
+            'date_end' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('timetables')->insert([
+            'name' => '1DAW2020',
             'date_start' =>  now(),
             'date_end' => now(),
             'created_at' => now(),
