@@ -138,6 +138,7 @@ Route::get('messages_send', 'MessageController@index')->middleware('auth')->name
 Route::get('download_attachment_message/{idm}/{nameAttach}','MessageController@download')->name('downloadmessagefile');
 Route::get('sended/{id}', 'MessageController@showSended')->middleware('auth');
 Route::get('response/{id}', 'MessageController@create')->middleware('auth');
+Route::resource('notifications', 'NotificationController')->middleware('auth');
 
 //RUTAS ITEMs
 Route::post('/items/filter', 'ItemController@filter');
