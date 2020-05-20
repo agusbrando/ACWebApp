@@ -38,7 +38,9 @@ class CourseController extends Controller
             
                 if ($year->yearUnions->last()->trashed()) {
                     $year->yearUnions->pull();
-                } 
+                }else{
+                    $year->yearUnions->push();
+                }
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
         //en este caso, le redirijo a la vista index y le paso los años con los cursos
