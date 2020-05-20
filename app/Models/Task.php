@@ -18,4 +18,8 @@ class Task extends Model
     {
         return $this->belongsTo('App\Models\Type');
     }
+    public function yearUnion()
+    {
+        return $this->belongsTo(YearUnion::class);
+    }
 }

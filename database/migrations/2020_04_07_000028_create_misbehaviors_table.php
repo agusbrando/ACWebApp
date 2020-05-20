@@ -15,7 +15,7 @@ class CreateMisbehaviorsTable extends Migration
     {
         Schema::create('misbehaviors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description')->nullable(true);
+            $table->string('description')->nullable();
             $table->integer('type_id')->unsigned();
             $table->foreign('type_id')->references('id')->on('types');
             $table->integer('year_user_id')->unsigned();
@@ -34,7 +34,8 @@ class CreateMisbehaviorsTable extends Migration
      */
     public function down()
     {
-        Schema::enableForeignKeyConstraints(); //Ponemos esto en la ultima tabla para que no de error de permisos al hacer el refesh
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('misbehaviors');
+        Schema::enableForeignKeyConstraints();
     }
 }
