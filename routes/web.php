@@ -96,7 +96,7 @@ Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name(
 Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
 Route::post('courses/show/filter/{user_id}/{course_id}/{year_id}', 'CourseController@responsabilizarItem')->name('courses.responsabilizarItem');
 //eliminar
-Route::post('courses/show/{course_id}/{year_id}', 'CourseController@destroy')->name('courses.destroy');
+Route::delete('courses/show/{course_id}/{year_id}', 'CourseController@eliminarYearUnion')->name('courses.eliminarYearUnion');
 Route::resource('courses', 'CourseController');
 
 //RUTAS SUBJECTS JAVI
