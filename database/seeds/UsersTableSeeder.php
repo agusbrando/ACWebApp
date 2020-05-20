@@ -32,16 +32,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id'=>1
         ]);
-        DB::table('users')->insert([
-            'first_name' => 'Guillermo',
-            'last_name' => 'Garrido Portes',
-            'email' => 'guillermo.garrido@champusaula.com',
-            'password' => bcrypt('password'),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'role_id' => 2,
-            'timetable_id'=>1
-        ]);
+        
         DB::table('users')->insert([
             'first_name' => 'sergio',
             'last_name' => 'sergio',
@@ -52,17 +43,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id'=>1
         ]);
-
-        DB::table('users')->insert([
-            'first_name' => 'Marcelo',
-            'last_name' => 'Malonda Pellicer',
-            'email' => 'marcelo.malonda@champusaula.com',
-            'password' => bcrypt('password'),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'role_id' => 3,
-            'timetable_id'=>1
-        ]);
+        
         DB::table('users')->insert([
             'first_name' => 'Default',
             'last_name' => 'User',
@@ -85,6 +66,112 @@ class UsersTableSeeder extends Seeder
                 'timetable_id'=>1
             ]);
         }
-        
+        //Profesores
+        DB::table('users')->insert([
+            'first_name' => 'Belén',
+            'last_name' => 'López Pérez',
+            'email' => 'belen.lopez@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+        DB::table('users')->insert([
+            'first_name' => 'Guillermo',
+            'last_name' => 'Garrido Portes',
+            'email' => 'guillermo.garrido@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 2,
+            'timetable_id'=>1
+        ]);
+        DB::table('users')->insert([
+            'first_name' => 'Marcelo',
+            'last_name' => 'Malonda Pellicer',
+            'email' => 'marcelo.malonda@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+        DB::table('users')->insert([
+            'first_name' => 'Matilde',
+            'last_name' => 'Gil Villanova',
+            'email' => 'matilde.gil@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+
+        DB::table('users')->insert([
+            'first_name' => 'Miguel Ángel',
+            'last_name' => 'Belenguer Sánchez',
+            'email' => 'miguel.belenguer@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+
+        DB::table('users')->insert([
+            'first_name' => 'José Manuel',
+            'last_name' => 'Ramón García',
+            'email' => 'josemanuel.ramon@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+
+        DB::table('users')->insert([
+            'first_name' => 'Raquel',
+            'last_name' => 'Valls Valls',
+            'email' => 'raquel.valls@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+
+        DB::table('users')->insert([
+            'first_name' => 'Jose',
+            'last_name' => 'Fito',
+            'email' => 'jose.fito@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+
+        DB::table('users')->insert([
+            'first_name' => 'Mario',
+            'last_name' => 'García Atienza',
+            'email' => 'mario.garcia@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+
+        DB::table('users')->insert([
+            'first_name' => 'Olga ',
+            'last_name' => 'Minguet',
+            'email' => 'olga.minguet@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
     }
 }
