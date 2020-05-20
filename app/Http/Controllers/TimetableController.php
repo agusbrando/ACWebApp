@@ -93,13 +93,13 @@ class TimetableController extends Controller
                             $session->subject->color='#aaffaa';
                         break; 
                         case 'LM':
-                            $session->subject->color='#11ffaa';
+                            $session->subject->color='#55ffaa';
                         break; 
                         case 'EDE':
-                            $session->subject->color='#aaff11';
+                            $session->subject->color='#8fffff';
                         break; 
                         case 'PSP':
-                            $session->subject->color='#aaaa11';
+                            $session->subject->color='#ffdd77';
                         break; 
                         case 'PMM':
                             $session->subject->color='#ffaaaa';  
