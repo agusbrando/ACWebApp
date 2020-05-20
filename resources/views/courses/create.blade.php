@@ -25,17 +25,7 @@
                         <!-- Proteccion contra consultas no deseadas -->
                         @csrf
 
-                        <div class="form-group">
-                            <label for="formControlSelect1">Asignatura</label>
-                            <select class="form-control" id="subject_id" name="subject_id">
-                                <option disabled selected>Selecciona una asignatura</option>
-                                <!--Hace la funcion de un placeholder-->
-                                @foreach($subjects as $subject)
-                                <option value="{{$subject->id}}">{{$subject->name}}</option>
-                                @endforeach
-                                
-                            </select>
-                        </div>
+
                         <div class="form-group">
                             <label for="formControlSelect1">Curso</label>
                             <select class="form-control" id="course_id" name="course_id">
@@ -44,19 +34,50 @@
                                 @foreach($courses as $course)
                                 <option value="{{$course->id}}">{{$course->level}}º {{$course->name}}</option>
                                 @endforeach
-                                
+
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="formControlSelect1">Evaluación</label>
-                            <select class="form-control" id="evaluation_id" name="evaluation_id">
-                                <option disabled selected>Selecciona una evaluación</option>
-                                <!--Hace la funcion de un placeholder-->
-                                @foreach($evaluations as $evaluation)
-                                <option value="{{$evaluation->id}}">{{$evaluation->name}}</option>
-                                @endforeach
-                                
-                            </select>
+                        <div class="card-deck justify-content-between">
+                            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                <div class="card-header">1º Eval</div>
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title">Fecha Inicio</h5>
+                                        <input type="date" id="eval_1_date_start" name="eval_1_date_start" placeholder="- Seleccionar fecha -" class="form-control">
+                                    </div>
+                                    <div>
+                                        <h5 class="card-title">Fecha Fin</h5>
+                                        <input type="date" id="eval_1_date_end" name="eval_1_date_end" placeholder="- Seleccionar fecha -" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                <div class="card-header">2º Eval</div>
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title">Fecha Inicio</h5>
+                                        <input type="date" id="eval_2_date_start" name="eval_2_date_start" placeholder="- Seleccionar fecha -" class="form-control">
+                                    </div>
+                                    <div>
+                                        <h5 class="card-title">Fecha Fin</h5>
+                                        <input type="date" id="eval_2_date_end" name="eval_2_date_end" placeholder="- Seleccionar fecha -" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                <div class="card-header">3º Eval</div>
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title">Fecha Inicio</h5>
+                                        <input type="date" id="eval_3_date_start" name="eval_3_date_start" placeholder="- Seleccionar fecha -" class="form-control">
+                                    </div>
+                                    <div>
+                                        <h5 class="card-title">Fecha Fin</h5>
+                                        <input type="date" id="eval_3_date_end" name="eval_3_date_end" placeholder="- Seleccionar fecha -" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="form-group">
                             <label for="formControlSelect1">Año</label>
@@ -66,7 +87,7 @@
                                 @foreach($years as $year)
                                 <option value="{{$year->id}}">{{$year->name}}</option>
                                 @endforeach
-                                
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -77,7 +98,7 @@
                                 @foreach($users as $user)
                                 <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
                                 @endforeach
-                                
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -96,7 +117,7 @@
                             <label for="nombre">Fecha fin</label>
                             <input type="date" id="date_end" name="date_end" placeholder="- Seleccionar fecha -" class="form-control">
                         </div>
-                        
+
                         <div class="form-group">
                             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
 
