@@ -27,13 +27,14 @@ class CreateYearUnionTable extends Migration
             $table->date('date_start');
             $table->date('date_end');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('evaluation_id')->references('id')->on('evaluations');
             $table->foreign('year_id')->references('id')->on('years');
             $table->foreign('program_id')->references('id')->on('programs');
             $table->foreign('responsable_id')->references('id')->on('users');
-
+            
         });
     }
 
