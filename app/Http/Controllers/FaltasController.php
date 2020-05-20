@@ -52,6 +52,7 @@ class FaltasController extends Controller
             'date' => 'required',
             'type_id' => 'required',
             'description' => 'required'
+            
 
         ]);
         $misbehavior = new Misbehavior([
