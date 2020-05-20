@@ -34,7 +34,7 @@ class CourseController extends Controller
         foreach ($years as $year) {
             //Guardo los diferentes yearUnion en cada año
             $year->yearUnions = DB::table('yearUnions')->select('year_id', 'course_id', 'name', 'level', 'num_students')
-                ->where('year_id', $year->id)->where('deleted_at', null)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+                ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
             
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
