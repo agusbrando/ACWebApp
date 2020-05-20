@@ -13,7 +13,7 @@ class CreateCourseSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_subjects', function (Blueprint $table) {
+        Schema::create('course_subject', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_id')->unsigned();
             $table->integer('subject_id')->unsigned();
@@ -21,8 +21,8 @@ class CreateCourseSubjectTable extends Migration
             $table->integer('hours')->unsigned();
             $table->timestamps();
             $table->unique(['course_id', 'subject_id']);
-            $table->foreign('course_id')->references('id')->on('evaluations');
-            $table->foreign('subject_id')->references('id')->on('users');
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('subject_id')->references('id')->on('subjects');
         });
     }
 
