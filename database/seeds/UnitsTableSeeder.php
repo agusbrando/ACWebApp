@@ -11,7 +11,8 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('units')->insert([
+        //TODO Create 8 units per subject
+        /*DB::table('units')->insert([
             'program_id' => 1,
             'name'=>'Unidad 0. Introduccion de la asignatura',
             'expected_date_start' => '2019-09-12',	
@@ -24,6 +25,6 @@ class UnitsTableSeeder extends Seeder
             'improvements' => 'Mejoras de la unidad 0 para el futuro',
             'created_at' => now(),
             'updated_at' => now()
-        ]);
+        ]);*/
     }
 }

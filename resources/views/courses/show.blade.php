@@ -59,11 +59,8 @@
                                             <td>{{$subject->name }}</td>
                                             <td class="botones">
                                                 <div class="d-flex flex-row ">
-                                                    <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
-                                                    <form action="{{ route('subjects.evaluations',  ['subject' => $subject->id, 'year' => $yearId, 'course' => $courseId ]) }}" method="post">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-outline-primary mr-2">Evaluaciones</button>
-                                                    </form>
+                                                    <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>                                                    
+                                                    <a class="btn btn-outline-primary mr-2" href="{{route('subjects.evaluations', $subject->id)}}">Evaluaciones</a>
                                                     <a href="#" class="btn btn-outline-primary">Programacion</a>
                                                 </div>
                                             </td>

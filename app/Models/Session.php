@@ -20,10 +20,7 @@ class Session extends Model
         
     ];
 
-    protected $casts = [
-        'time_start' => 'date:hh:mm',
-        'time_end' => 'date:hh:mm',
-    ];
+   
 
     public function classroom()
     {
@@ -47,10 +44,6 @@ class Session extends Model
         // return $this->belongsTo('App\Models\Type', 'type_id')->where('model', 'App\Models\Session');
     }
 
-    public function type()
-    {
-        return $this->belongsTo('App\Models\Type', 'type_id');
-        // return $this->belongsTo('App\Models\Type', 'type_id')->where('model', 'App\Models\Session');
-    }
+   
 
 }

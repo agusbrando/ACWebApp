@@ -21,11 +21,9 @@ class DatabaseSeeder extends Seeder
             ClassroomsTableSeeder::class,
             CoursesTableSeeder::class,
             SubjectsTableSeeder::class,
+            CourseSubjectsTableSeeder::class,
             EvaluationsTableSeeder::class,
             ProgramsTableSeeder::class,
-            YearsTableSeeder::class,
-            YearUnionsTableSeeder::class,
-            YearUnionUserTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,
             TrackingsTableSeeder::class,
@@ -36,16 +34,21 @@ class DatabaseSeeder extends Seeder
 	        StatesTableSeeder::class,
             ItemsTableSeeder::class,
             EventsTableSeeder::class,
-            SessionTimetableTableSeeder::class,
-            MisbehaviorsTableSeeder::class,
             PostsTableSeeder::class,
             CommentsTableSeeder::class,
             MessagesTableSeeder::class,
             MessagesUsersTableSeeder::class,
             CommentsTableSeeder::class,
             AttachmentsTableSeeder::class,
-            ItemYearTableSeeder::class,
+           
+            
+            YearsTableSeeder::class,
+            YearUnionsTableSeeder::class,
             PercentagesTableSeeder::class,
+            SessionTimetableTableSeeder::class,
+            YearUnionUserTableSeeder::class,
+            MisbehaviorsTableSeeder::class,
+            ItemYearTableSeeder::class,
 
         ]);
     }

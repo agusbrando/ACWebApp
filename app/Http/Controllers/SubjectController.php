@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Type;
 use App\Models\Task;
+use App\Models\Year;
 use App\Models\Course;
 use App\Models\Subject;
 use App\Models\YearUnion;
@@ -48,7 +49,9 @@ class SubjectController extends Controller
             'evaluation' => 'required'
         ]);
 
+        $year = Year::find($request->get('year'));
         $subject = Subject::find($request->get('subject'));
+        $course = Course::find($request->get('course'));
         $eval = Evaluation::find($request->get('evaluation'));
         $evaluation = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->where('evaluation_id', $request->get('evaluation'))->first()->load('evaluation');
         $taskTypes = Type::all()->where('model', Task::class);
@@ -73,7 +76,7 @@ class SubjectController extends Controller
             $name = $task_type->name;
             switch ($name) {
                 case 'Examenes':
-                    $evaluation->parciales = Task::where('type_id', $task_type->id)->with('users')->get();
+                    $evaluation->parciales = Task::where('type_id', $task_type->id)->with('yearUnionUsers')->get();
                     foreach ($evaluation->parciales as $parcial) {
                         foreach ($parcial->users as $user) {
                             $notaParciales[$user->id][$parcial->id] = $user->pivot->value;
@@ -216,20 +219,24 @@ class SubjectController extends Controller
             }
         }
 
-        return view('Notas.desglose', compact('evaluation', 'subject', 'eval'));
+        return view('Notas.desglose', compact('evaluation', 'subject', 'eval', 'year', 'course'));
     }
 
-    public function evaluations(Request $request)
+    public function evaluations(Request $request, $subject_id)
     {
-        $request->validate([
-            'subject' => 'required',
-            'year' => 'required',
-            'course' => 'required'
-        ]);
 
-        $subject = Subject::find($request->get('subject'));
-        $course = Course::find($request->get('course'));
-        $yearUnions = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->get()->load('evaluation');
+        $request->session()->put('subject_id', $subject_id);
+        if ($request->session()->has('course_id') && $request->session()->has('year_id')) {
+            $course_id = $request->session()->get('course_id');
+            $year_id = $request->session()->get('year_id');
+        }else{
+            // TODO devolver error
+        }
+
+        $year = Year::find($year_id);
+        $subject = Subject::find($subject_id);
+        $course = Course::find($course_id);
+        $yearUnions = YearUnion::where('subject_id', $subject_id)->where('year_id', $year_id)->where('course_id', $course_id)->get()->load('evaluation');
         $taskTypes = Type::all()->where('model', Task::class);
 
         foreach ($yearUnions as $yearUnion) {
@@ -287,7 +294,7 @@ class SubjectController extends Controller
             }
         }
 
-        return view('Notas.evaluations', compact('subject', 'yearUnions', 'course'));
+        return view('Notas.evaluations', compact('subject', 'yearUnions', 'course', 'year'));
     }
 
     /**

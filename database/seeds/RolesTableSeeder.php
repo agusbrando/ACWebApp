@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Role;
 
 class RolesTableSeeder extends Seeder
 {
@@ -19,6 +20,8 @@ class RolesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        
+
         DB::table('roles')->insert([
             'name'        => 'User',
             'slug'        => 'user',
@@ -27,6 +30,30 @@ class RolesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('roles')->insert([
+            'name'        => 'Profesor',
+            'slug'        => 'profesor',
+            'description' => 'Profesor Role',
+            'level'       => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('roles')->insert([
+            'name'        => 'Alumno',
+            'slug'        => 'alumno',
+            'description' => 'Alumno Role',
+            'level'       => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('roles')->insert([
+            'name'        => 'Administracion',
+            'slug'        => 'administracion',
+            'description' => 'Administracion Role',
+            'level'       => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);        
         DB::table('roles')->insert([
             'name'        => 'Unverified',
             'slug'        => 'unverified',

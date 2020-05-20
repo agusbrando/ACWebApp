@@ -33,7 +33,6 @@ class PercentagesTableSeeder extends Seeder
             
         }
 
-        
-        
+       
     }
 }

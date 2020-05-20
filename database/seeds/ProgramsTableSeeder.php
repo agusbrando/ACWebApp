@@ -11,23 +11,17 @@ class ProgramsTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO Create one program foreach course add current profesor and ask if you dont know
         DB::table('programs')->insert([
-            'professor_id' => 3,
-            'name'=> 'DAM - Programacion multimedia y dispositivos moviles (2020)',
-            'created_at' => now(),
-            'updated_at' => now()
+            'name' => 'programaPrueba',
+            'professor_id' => 1,
+           
         ]);
         DB::table('programs')->insert([
-            'professor_id' => 3,
-            'name'=> 'DAW - Bases de Datos (2020)',
-            'created_at' => now(),
-            'updated_at' => now()
+            'name' => 'programaPrueba2',
+            'professor_id' => 1,
+           
         ]);
-        DB::table('programs')->insert([
-            'professor_id' => 3,
-            'name'=>'DAM semipresencial - Programacion multimedia y dispositivos moviles (2020)',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+
     }
 }

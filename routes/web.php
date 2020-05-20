@@ -100,20 +100,17 @@ Route::delete('courses/show/{course_id}/{year_id}', 'CourseController@eliminarYe
 Route::resource('courses', 'CourseController');
 
 //RUTAS SUBJECTS JAVI
-// Route::resource('asignaturas', 'AsignaturaController');
-//RUTAS SUBJECTS (Javi) //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
-Route::post('subjects/evaluations', 'SubjectController@evaluations')->name('subjects.evaluations');
+//TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
+Route::get('subjects/evaluations/{subject_id}', 'SubjectController@evaluations')->name('subjects.evaluations');
 Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
 
 Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');;
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
-//TODO Pasar parametros con formulario/Eliminar ruta y poner destroy
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
 Route::get('evaluaciones/desglose/crearTarea/{id}', 'TaskController@create');
 
-//TODO Cambiar controller de DesgloseController.
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
 Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');
 Route::post('desglose/updateTrabajos', 'DesgloseController@updateTrabajos')->name('desglose.updateTrabajos');

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use  App\Models\Message;
+use  App\Models\Post;
 
 class AttachmentsTableSeeder extends Seeder
 {
@@ -12,30 +13,44 @@ class AttachmentsTableSeeder extends Seeder
      */
     public function run()
     {
+        //TODO 2 Attachments para post(COMPLETADO)
         DB::table('attachments')->insert([
-            'name'=>'noticia-gato-bano-mascota-casa-unas-gatito.jpg',
+            'name'=>'default_post.jpg',
             'extension'=>'jpg',
             'attachmentable_id'=>1,
+            'attachmentable_type'=> Post::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('attachments')->insert([
+            'name'=>'default_post.jpg',
+            'extension'=>'jpg',
+            'attachmentable_id'=>1,
+            'attachmentable_type'=> Post::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        //TODO 2 Attachments para message(COMPLETADO)
+        DB::table('attachments')->insert([
+            'name'=>'default_message.jpg',
+            'extension'=>'jpg',
+            'attachmentable_id'=>2,
+            'attachmentable_type'=> Message::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('attachments')->insert([
+            'name'=>'default_message.jpg',
+            'extension'=>'jpg',
+            'attachmentable_id'=>2,
             'attachmentable_type'=> Message::class,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        DB::table('attachments')->insert([
-            'name'=>'noticia-gato-bano-mascota-casa-unas-gatito.jpg',
-            'extension'=>'jpg',
-            'attachmentable_id'=>4,
-            'attachmentable_type'=> Message::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('attachments')->insert([
-            'name'=>'doggo.jpg',
-            'extension'=>'jpg',
-            'attachmentable_id'=>4,
-            'attachmentable_type'=> Message::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+       
     }
+
+
 }

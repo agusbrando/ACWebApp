@@ -137,19 +137,19 @@ class PorcentajesController extends Controller
 
         $porcentajes = $request->get('porcentajes');
         $comprobacionPorcentajes = $this->comprobacion($porcentajes);
-//TODO pasar tipo
         if ($comprobacionPorcentajes == 0) {
             foreach ($porcentajes as $eval_id => $types) {
                 foreach ($types as $type_id => $values) {
                     $evaluacion = YearUnion::where('course_id', $request->get('course'))->where('year_id', $request->get('year'))->where('evaluation_id', $eval_id)->where('subject_id', $request->get('subject'))->distinct()->first();
-                    if ($type_id == 12) {
-                        $evaluacion->types()->updateExistingPivot(intval($type_id), [
+                    $type = Type::find($type_id);
+                    if ($type->id == 12) {
+                        $evaluacion->types()->updateExistingPivot(intval($type->id), [
                             'min_grade_task' => $values['min_grade_task'],
                             'average_grade_task' => $values['average_grade_task'],
                             'min_average_grade_task' => $values['min_average_grade_task']
                         ]);
                     } else {
-                        $evaluacion->types()->updateExistingPivot(intval($type_id), [
+                        $evaluacion->types()->updateExistingPivot(intval($type->id), [
                             'percentage' => $values['percentage'],
                             'min_grade_task' => $values['min_grade_task'],
                             'average_grade_task' => $values['average_grade_task'],
@@ -160,7 +160,7 @@ class PorcentajesController extends Controller
             }
 
             //TODO Como hacer return a las evaluaciones
-            return redirect('asignaturas/' . $request->get('subject'));
+            return redirect('subjects/evaluations/' . $request->get('subject'));
         } else if ($comprobacionPorcentajes == 1) {
             return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 1');
         } else if ($comprobacionPorcentajes == 2) {
@@ -178,12 +178,13 @@ class PorcentajesController extends Controller
 
         foreach ($porcentajes as $eval_id => $types) {
             foreach ($types as $type_id => $values) {
-                if ($type_id == 12) {
+                $type = Type::find($type_id);
+                if ($type->name == "Recuperacion") {
                     break;
                 }
-                if ($type_id != 12 && $eval_id == 1) {
+                if ($type->name == "Recuperacion" && $eval_id == 1) {
                     $sumaEval1 += $values['percentage'];
-                } else if ($type_id != 12 && $eval_id == 2) {
+                } else if ($type->name == "Recuperacion" && $eval_id == 2) {
                     $sumaEval2 += $values['percentage'];
                 } else {
                     $sumaEval3 += $values['percentage'];

@@ -11,18 +11,47 @@ class ClassroomsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('classrooms')->insert([
-            'name' => 'Taller',
-            'number' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        //TODO 9 Aulas + Aula taller (COMPLETO)
 
         DB::table('classrooms')->insert([
-            'name' => 'Aula_2',
-            'number' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
+            'name'=> 'Aula 1',
+            'number'=> 1,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Aula 2',
+            'number'=> 2,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Aula 3',
+            'number'=> 3,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Aula 4',
+            'number'=> 4,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Aula 5',
+            'number'=> 5,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Aula 6',
+            'number'=> 6,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Aula 7',
+            'number'=> 7,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Aula 8',
+            'number'=> 8,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Aula 9',
+            'number'=> 9,
+        ]);
+        DB::table('classrooms')->insert([
+            'name'=> 'Taller',
+            'number'=> 10,
         ]);
     }
 }
