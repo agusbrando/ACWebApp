@@ -83,7 +83,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $attachments = $post->attachmentablements;
-        $comments = Comments::all();
+        $comments = $post->comments;
         return view('posts.show', compact('post', 'attachments', 'comments'));
     }
 
