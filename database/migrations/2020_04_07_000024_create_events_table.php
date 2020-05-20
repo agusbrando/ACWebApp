@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->integer('type_id')->unsigned();
             $table->string('title');
             $table->string('description');
-            $table->dateTime('date');
+            $table->date('date');
             $table->timestamps();
   
             $table->foreign('session_id')->references('id')->on('sessions');
