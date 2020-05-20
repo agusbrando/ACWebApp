@@ -20,6 +20,10 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function __construct(Request $request){
+
+    //     $request->session()->put('key', 'value');
+    // }
 
     public function index()
     {
@@ -79,7 +83,7 @@ class MessageController extends Controller
         foreach ($users as $userid) {
             $user = User::find($userid);
             $user->messagesReceive()->attach($message->id);
-            $message->notify(new InvoicePaid($user));
+            $user->notify(new InvoicePaid($message,$user));
         }
 
 
