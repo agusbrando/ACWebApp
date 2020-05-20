@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+use App\Models\Course;
 use Illuminate\Database\Seeder;
 
 class YearUnionsTableSeeder extends Seeder
@@ -61,8 +63,8 @@ class YearUnionsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        /*
-        //Creacion de todos los seeders de los yearUnions, necesario primero los cursos, con sus asignaturas
+        
+        // Creacion de todos los seeders de los yearUnions, necesario primero los cursos, con sus asignaturas
         for($i=1; $i<=3; $i++){
             $cursos = Course::all();
             
@@ -78,8 +80,8 @@ class YearUnionsTableSeeder extends Seeder
                         'course_id' => $curso->id,
                         'evaluation_id' => $i,
                         'year_id' => $year,
-                        'date_start'=> $fechasInicioFin[$i]['date_start'],
-                        'date_end'=> $fechasInicioFin[$i]['date_end'],
+                        'date_start'=> $fechasInicioFin[$i-1]['date_start'],
+                        'date_end'=> $fechasInicioFin[$i-1]['date_end'],
                         'classroom_id'=> $j+1, 
                         'created_at' => now(),
                         'updated_at' => now(),
@@ -87,7 +89,7 @@ class YearUnionsTableSeeder extends Seeder
                 }
             }
         }
-        */
+        
         DB::table('yearUnions')->insert([
             'subject_id' => '3',
             'course_id' => '2',
@@ -144,6 +146,7 @@ class YearUnionsTableSeeder extends Seeder
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
+            'classroom_id'=>1, 
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -158,6 +161,7 @@ class YearUnionsTableSeeder extends Seeder
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
+            'classroom_id'=>1, 
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -172,6 +176,7 @@ class YearUnionsTableSeeder extends Seeder
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
+            'classroom_id'=>1, 
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -186,6 +191,7 @@ class YearUnionsTableSeeder extends Seeder
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
+            'classroom_id'=>1, 
             'created_at' => now(),
             'updated_at' => now(),
         ]);

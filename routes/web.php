@@ -106,7 +106,7 @@ Route::resource('tasks', 'TaskController');
 Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');;
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
 Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
-Route::get('evaluaciones/desglose/crearTarea/{id}', 'TaskController@create');
+Route::get('desglose/crearTarea/{id}', 'TaskController@create');
 
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
 Route::post('desglose/updateNotes', 'DesgloseController@updateNotes')->name('desglose.updateNotes');

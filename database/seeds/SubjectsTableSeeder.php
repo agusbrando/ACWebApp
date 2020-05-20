@@ -107,6 +107,37 @@ class SubjectsTableSeeder extends Seeder
         ]);
         //FIN 2º DAM 
 
+        //2ºDAW 14-17
+        DB::table('subjects')->insert([
+            'name' => 'Desarrollo web en entorno cliente',
+            'abbreviation'=>'DWEC',
+            "hours"=>140	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Desarrollo web en entorno servidor',
+            'abbreviation'=>'DWES',
+            "hours"=>160	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Despliegue de aplicaciones web',
+            'abbreviation'=>'DAW',
+            "hours"=>80	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Diseño de interfaces web',
+            'abbreviation'=>'DIW',
+            "hours"=>120	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         
+        //1ºASIR
+
     }
 }
