@@ -47,22 +47,20 @@
                                         <div class="card">
 
                                             <div class="w-100" id="heading{{$year->id}}" data-toggle="collapse" data-target="#collapse{{$year->id}}" aria-expanded="false" aria-controls="collapse{{$year->id}}">
+                                               
                                                 @if(count($year->yearUnions) > 0)
-
-                                                <table id='mytable' class="table w-100">
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Año</th>
-                                                            <th>Nombre</th>
-                                                            <th>Numero de Alumnos</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                        @foreach($year->yearUnions as $course)
-                                                            @if($course->deleted_at == null)
+                                                    @foreach($year->yearUnions as $course)
+                                                        @if($course->trashed())
+                                                            <table id='mytable' class="table w-100">
+                                                                <thead class="thead-dark">
+                                                                    <tr>
+                                                                        <th>Id</th>
+                                                                        <th>Año</th>
+                                                                        <th>Nombre</th>
+                                                                        <th>Numero de Alumnos</th>
+                                                                        <th>Actions</th>
+                                                                    </tr>
+                                                                </thead>
                                                                 <tr>
 
                                                                     <td>{{$course->course_id}} </td>
@@ -73,16 +71,14 @@
 
                                                                     <td class="botones">
                                                                         <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
-
                                                                     </td>
-
                                                                 </tr>
-                                                            @endif
 
-                                                        @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        @endif
 
-                                                    </tbody>
-                                                </table>
+                                                    @endforeach
                                                 @endif
 
                                             </div>
