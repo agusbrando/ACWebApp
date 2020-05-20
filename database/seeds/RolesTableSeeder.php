@@ -32,6 +32,30 @@ class RolesTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('roles')->insert([
+            'name'        => 'Profesor',
+            'slug'        => 'profesor',
+            'description' => 'Profesor Role',
+            'level'       => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('roles')->insert([
+            'name'        => 'Alumno',
+            'slug'        => 'alumno',
+            'description' => 'Alumno Role',
+            'level'       => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('roles')->insert([
+            'name'        => 'Administracion',
+            'slug'        => 'administracion',
+            'description' => 'Administracion Role',
+            'level'       => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);        
+        DB::table('roles')->insert([
             'name'        => 'Unverified',
             'slug'        => 'unverified',
             'description' => 'Unverified Role',
