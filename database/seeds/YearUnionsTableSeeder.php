@@ -144,6 +144,7 @@ class YearUnionsTableSeeder extends Seeder
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
+            'classroom_id'=>1, 
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -158,6 +159,7 @@ class YearUnionsTableSeeder extends Seeder
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
+            'classroom_id'=>1, 
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -172,6 +174,7 @@ class YearUnionsTableSeeder extends Seeder
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
+            'classroom_id'=>1, 
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -186,6 +189,7 @@ class YearUnionsTableSeeder extends Seeder
             'date_start'=> '2016-12-20', //fecha de la eval
             'date_end'=> '2016-12-01',
             'notes' => 'Muy bien estructurado',
+            'classroom_id'=>1, 
             'created_at' => now(),
             'updated_at' => now(),
         ]);

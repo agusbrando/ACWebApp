@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Subject;
 use Illuminate\Database\Seeder;
 
 class CourseSubjectsTableSeeder extends Seeder
@@ -84,6 +85,7 @@ class CourseSubjectsTableSeeder extends Seeder
             DB::table('course_subject')->insert([
                 'course_id' => 3,
                 'subject_id' => $i,
+                'hours'=> 96,
                 'max_hours' => round(Subject::find($i)->hours),
                 'created_at' => now(),
                 'updated_at' => now()
