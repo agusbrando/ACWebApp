@@ -29,18 +29,13 @@ class CourseController extends Controller
     public function index()
     {
         //Cojo los años odenados para que salga el más reciente primero
-        $years = Year::orderBy("date_start", "DESC")->get();
+        $years = DB::table('years')->orderBy("date_start", "DESC")->get();
         //Recorro todos los años para guardar en el todos los cursos que se han impartido
         foreach ($years as $year) {
             //Guardo los diferentes yearUnion en cada año
-            $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')
-                ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+            $year->yearUnions = DB::table('yearUnions')->select('year_id', 'course_id', 'name', 'level', 'num_students')
+                ->where('year_id', $year->id)->where('deleted_at', null)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
             
-                if ($year->yearUnions->last()->trashed()) {
-                    $year->yearUnions->pull();
-                }else{
-                    $year->yearUnions->push();
-                }
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
         //en este caso, le redirijo a la vista index y le paso los años con los cursos

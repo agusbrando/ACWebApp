@@ -50,7 +50,7 @@
                                                
                                                 @if(count($year->yearUnions) > 0)
                                                     @foreach($year->yearUnions as $course)
-                                                        @if($course->trashed())
+                                                        
                                                             <table id='mytable' class="table w-100">
                                                                 <thead class="thead-dark">
                                                                     <tr>
@@ -76,7 +76,7 @@
 
                                                                 </tbody>
                                                             </table>
-                                                        @endif
+                                                      
 
                                                     @endforeach
                                                 @endif
