@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             MessagesUsersTableSeeder::class,
             CommentsTableSeeder::class,
             AttachmentsTableSeeder::class,
-           
+            
             
             YearsTableSeeder::class,
             YearUnionsTableSeeder::class,
