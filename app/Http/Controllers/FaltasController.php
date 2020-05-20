@@ -50,11 +50,16 @@ class FaltasController extends Controller
     {
         $request->validate([
             'date' => 'required',
-            'type' => 'required',
+            'type_id' => 'required',
             'description' => 'required'
 
         ]);
-        Misbehavior::create($request->all());
+        $misbehavior = new Misbehavior([
+            'date' => $request->get('date'),
+            'type_id' => $request->get('type_id'),
+            'description' => $request->get('description')
+        ]);
+        $misbehavior->save();
         return redirect()->route('faltas.index')
             ->with('success', 'Falta añadida!');
         // $misbehaviors =Misbehavior::all()->

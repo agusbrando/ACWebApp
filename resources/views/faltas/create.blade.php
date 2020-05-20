@@ -26,33 +26,32 @@
                     <form action="{{ route('faltas.crear', $user->id) }}" method="POST">
                         @csrf
                         <h5>Fecha:</h5>
-                        <form action="{{ url('asistencia/filter') }}" disable value="{{$user->id}}">
-                            <div class="contenedor">
-                                <input type="text" id="datepicker" placeholder="- Seleccionar fecha -" class="form-control col-6 mb-2" name="date">
-                            </div>
-
-                            <h5>Tipo:</h5>
-                            <div class="form-group">
-                                <select class="form-control col-6" id="types" name="type">
-                                    <option value="2">Falta Leve</option>
-                                    <option value="3">Falta Grave</option>
-                                    <option value="4">Falta Muy Grave</option>
-                                </select>
-                            </div>
+                        <!-- <form action="{{ url('asistencia/filter') }}" disable value="{{$user->id}}"> -->
+                        <div class="contenedor">
+                            <input type="text" id="datepicker" placeholder="- Seleccionar fecha -" class="form-control col-6 mb-2" name="date">
+                        </div>
+                        <h5>Tipo:</h5>
+                        <div class="form-group">
+                            <select class="form-control col-6" id="types" name="type_id">
+                                <option value="11">Falta Leve</option>
+                                <option value="12">Falta Grave</option>
+                                <option value="13">Falta Muy Grave</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="textarea mt-2" for="exampleFormControlTextarea1">
+                                <h5>Descripción:</h5>
+                            </label>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <!-- </form> -->
+                    </form>
                 </div>
-                <div class="form-group col-6">
-                    <label class="textarea mt-2" for="exampleFormControlTextarea1">
-                        <h5>Descripción:</h5>
-                    </label>
-                    <textarea class="form-control" name="description" rows="3"></textarea>
-                </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>
-                </form>
 
             </div>
         </div>
+    </div>
     </div>
 
 </main>
