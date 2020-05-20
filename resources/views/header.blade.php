@@ -5,8 +5,7 @@
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
             <div class="notificationsDropDown">
-                <i class="far fa-bell dropDownIcon mr-5"></i>
-
+                <a href="{{ route('notifications.index')}}"><i class="far fa-bell dropDownIcon mr-5"></i></a>
             @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
