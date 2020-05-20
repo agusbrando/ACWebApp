@@ -2,7 +2,7 @@
 
 use App\Models\Subject;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class CourseSubjectsTableSeeder extends Seeder
 {
     /**
