@@ -17,7 +17,7 @@
 
             </div>
             <div class="d-flex flex-row-reverse">
-                <form method="post" action="{{ route('courses.destroy', array($courseId,$yearId))}}">
+                <form method="post" action="{{ route('courses.eliminarYearUnion', array($courseId, $yearId))}}">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
