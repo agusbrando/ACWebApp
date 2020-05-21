@@ -11,8 +11,6 @@ class YearsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO only 20-21
-
         DB::table('years')->insert([
             'name' => '2019/2020',
             'date_start' => '2019/09/09',
@@ -20,5 +18,9 @@ class YearsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        
+        
+        
+        
     }
 }

@@ -11,7 +11,6 @@ class SubjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO add all subjects for every course. Website
         DB::table('subjects')->insert([
             'name' => 'Empresa e Iniciativa Emprendedora',
             'abbreviation'=>'EIE',
@@ -205,30 +204,30 @@ class SubjectsTableSeeder extends Seeder
         
         //1º de SMR
         DB::table('subjects')->insert([
-            'name' => 'Administración de sistemas operativos',
-            'abbreviation'=>'DWEC',
-            "hours"=>120	,
+            'name' => 'Montaje y mantenimiento de equipos',
+            'abbreviation'=>'MME',
+            "hours"=>224	,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
-            'name' => 'Servicios de red e Internet',
-            'abbreviation'=>'DWES',
-            "hours"=>120	,
+            'name' => 'Redes locales',
+            'abbreviation'=>'RL',
+            "hours"=>224	,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
-            'name' => 'Implantación de aplicaciones web',
-            'abbreviation'=>'DAW',
-            "hours"=>100	,
+            'name' => 'Aplicaciones ofimáticas',
+            'abbreviation'=>'AO',
+            "hours"=>224	,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
-            'name' => 'Administración de sistemas gestores de bases de datos',
-            'abbreviation'=>'DIW',
-            "hours"=>60	,
+            'name' => 'Sistemas operativos Monopuesto',
+            'abbreviation'=>'SOM',
+            "hours"=>128	,
             'created_at' => now(),
             'updated_at' => now()
         ]);

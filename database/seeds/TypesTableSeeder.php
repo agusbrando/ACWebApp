@@ -21,9 +21,9 @@ class TypesTableSeeder extends Seeder
             'name' => 'Tutorías',
             'model' => Event::class,
 	        'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now()      
         ]);
-
+        
         DB::table('types')->insert([
             'name' => 'Reserva de aulas',
             'model' => Event::class,
@@ -124,7 +124,7 @@ class TypesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+        
         DB::table('types')->insert([
             'name' => 'Actitud',
             'model' => 'App\Models\Task',

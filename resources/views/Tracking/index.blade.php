@@ -60,9 +60,11 @@
                     <form class="float-right" action="{{ route('seguimiento.print')}}" method="POST">
                         @csrf
                         @method('POST')
+                        
                         <tbody>
 
                             @foreach($trackings as $tracking)
+                            
                             <input type="hidden" value={{$tracking}} name="trackings[]">
 
                             <tr>
@@ -77,6 +79,11 @@
                             @endforeach
 
                         </tbody>
+                        @if($count == 0)
+                        <tbody>
+                            <tr><td colspan="5" class="center">No hay tracking, añade uno para mostrarlo</td></tr>
+                        </tbody>
+                        @endif
                         <thead class="cabezeraTabla">
                             <tr>
                                 <td></td>

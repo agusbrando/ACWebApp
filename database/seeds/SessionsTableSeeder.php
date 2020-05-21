@@ -259,7 +259,7 @@ class SessionsTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Tutorias Miercoles
+        // Tutorias Miercoles 
 
         DB::table('sessions')->insert([
             'classroom_id' => 1,
@@ -616,9 +616,9 @@ class SessionsTableSeeder extends Seeder
         ]);
 
 
-        //RESERVA DE AULAS HORA EN HORA
+        //RESERVA DE AULAS HORA EN HORA 
 
-        //Lunes
+        //Lunes        
         DB::table('sessions')->insert([
             'classroom_id' => 2,
             'type_id' => 2,
@@ -865,7 +865,7 @@ class SessionsTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        //Viernes
+        //Viernes       
 
         DB::table('sessions')->insert([
             'classroom_id' => 2,
@@ -1495,4 +1495,4 @@ class SessionsTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
     }
-}
+} 

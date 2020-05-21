@@ -10,7 +10,7 @@
     <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      <p>20/05 17:30</p>
+      <p>{{$post1}}</p>
       <h4 style="text-align: center;">¿Cómo orientar profesionalmente a tu hijo?</h4>
     </div>
     <div class="card-body row no-gutters">
@@ -39,7 +39,7 @@
     <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      <p>13/05 13:23</p>
+      <p>{{$post2}}</p>
       <h4 style="text-align: center;">Aula Campus en el Desafío Junior de ESIC</h4>
     </div>
     <div class="card-body row no-gutters">
@@ -68,7 +68,7 @@
     <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      <p>12/05 13:40</p>
+      <p>{{$post3}}</p>
       <h4 style="text-align: center;">Acceso a Dinantia desde Ordenador</h4>
     </div>
     <div class="card-body row no-gutters">
