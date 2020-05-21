@@ -11,7 +11,6 @@ class SubjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO add all subjects for every course. Website
         DB::table('subjects')->insert([
             'name' => 'Empresa e Iniciativa Emprendedora',
             'abbreviation'=>'EIE',
@@ -202,5 +201,6 @@ class SubjectsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        
     }
 }

@@ -12,6 +12,10 @@ class ClassroomsTableSeeder extends Seeder
     public function run()
     {
         //TODO 9 Aulas + Aula taller (COMPLETO)
+        DB::table('classrooms')->insert([
+            'name'=> 'Taller',
+            'number'=> 10,
+        ]);
 
         DB::table('classrooms')->insert([
             'name'=> 'Aula 1',
@@ -49,9 +53,6 @@ class ClassroomsTableSeeder extends Seeder
             'name'=> 'Aula 9',
             'number'=> 9,
         ]);
-        DB::table('classrooms')->insert([
-            'name'=> 'Taller',
-            'number'=> 10,
-        ]);
+        
     }
 }

@@ -23,12 +23,7 @@ class CalendarController extends Controller
   public function crearEvento($fecha, $hora, $type)
   {
 
-    if ($type == 1) {
-      $tipo = 'Tutorías';
-    } else {
-      $tipo = 'Reserva de aulas';
-    }
-
+    $tipo = Type::find($type)->name;
     return view("/Calendario/crearEvento", compact('fecha', 'hora', 'tipo'));
   }
 
@@ -46,20 +41,13 @@ class CalendarController extends Controller
     ]);
 
     $tipo = Type::where('name', $request->get('tipo'))->first();
-
     $dia = date($request->get('date'));
     $day = date('w', strtotime($dia));
 
-    $sessions = $tipo->sessions()->where('day', $day)->get();
-    $types = Type::all()->where('model', Event::class);
-
-    if ($request->get('tipo') == 'Tutorías') {
-      $events = Event::all()->where('type_id', 1);
-    } else {
-      $events = Event::all()->where('type_id', 2);
-    }
-
-    return view('/Calendario/time', compact('types', 'sessions', 'dia', 'tipo', 'events'));
+    $events = Event::all()->where('type_id', $tipo->id)->where('date', $dia);
+    $event_ids = $events->pluck('session_id');
+    $sessions = $tipo->sessions()->whereNotIn('id', $event_ids)->where('day', $day)->get();
+    return view('/Calendario/time', compact('sessions', 'dia', 'tipo', 'events'));
   }
 
   public function getList(Request $request)

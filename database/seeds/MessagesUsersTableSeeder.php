@@ -11,8 +11,6 @@ class MessagesUsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO Eliminar para produccion cuando se termine de implementar los test
-
         DB::table('message_user')->insert([
             'message_id' => 1,
             'user_id' => 2,

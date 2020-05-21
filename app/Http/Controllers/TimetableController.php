@@ -74,6 +74,52 @@ class TimetableController extends Controller
                 $subject = Subject::find($year_union->subject_id);
                 
                     $session->subject=$subject;
+
+                    switch($subject->abbreviation){
+                        case 'EIE':
+                        case 'FOL':
+                            $session->subject->color='#ffaaff';
+                        break;  
+                        case 'BD':
+                            $session->subject->color='#aaffff';
+                        break;  
+                        case 'SI':
+                            $session->subject->color='#ffffaa';
+                        break;  
+                        case 'ING':
+                            $session->subject->color='#aaaaff';
+                        break; 
+                        case 'PRO':
+                            $session->subject->color='#aaffaa';
+                        break; 
+                        case 'LM':
+                            $session->subject->color='#55ffaa';
+                        break; 
+                        case 'EDE':
+                            $session->subject->color='#8fffff';
+                        break; 
+                        case 'PSP':
+                            $session->subject->color='#ffdd77';
+                        break; 
+                        case 'PMM':
+                            $session->subject->color='#ffaaaa';  
+                        break; 
+                        case 'SGE':
+                            $session->subject->color='#aaff77';
+                        break; 
+                        case 'AD':
+                            $session->subject->color='#aa77ff';
+                        break; 
+                        case 'DI':
+                            $session->subject->color='#77aaff';
+                        break;
+                    }
+
+
+
+
+
+
                     array_push($sessions,$session);
                 
                 

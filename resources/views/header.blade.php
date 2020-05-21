@@ -4,6 +4,8 @@
         <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
+            <div class="notificationsDropDown">
+                <a href="{{ route('notifications.index')}}"><i class="far fa-bell dropDownIcon mr-5"></i></a>
             @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -31,6 +33,7 @@
                 </div>
             </li>
             @endguest
+        </div>
         </ul>
     </nav>
 </header>

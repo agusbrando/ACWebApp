@@ -24,7 +24,7 @@ class Type extends Model
 
     public function sessions()
     {
-        return $this->hasMany('App\Models\Session' , 'type_id');
+        return $this->hasMany('App\Models\Session');
     }
     
     public function misbehaviors()

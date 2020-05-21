@@ -31,7 +31,7 @@
         <br>
         <div id="buttons">
           @foreach($types as $type)
-          <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block" />
+            <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block" />
           @endforeach
         </div>
         <br>
