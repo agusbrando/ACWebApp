@@ -18,27 +18,7 @@ class YearsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('years')->insert([
-            'name' => '2018/2019',
-            'date_start' => '2018/09/09',
-            'date_end' => '2019/06/15',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('years')->insert([
-            'name' => '2017/2018',
-            'date_start' => '2017/09/09',
-            'date_end' => '2018/06/15',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('years')->insert([
-            'name' => '2016/2017',
-            'date_start' => '2016/09/09',
-            'date_end' => '2017/06/15',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        
         
         
         
