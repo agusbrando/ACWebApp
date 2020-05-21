@@ -34,12 +34,8 @@ class HomeController extends Controller
             $request->session()->put('user_role', $request->user()->role->name);
         }
 
-        $post1 = Post::select('created_at')->where('id', 1)->get();
-        $post2 = Post::select('created_at')->where('id', 2)->get();
-        $post3 = Post::select('created_at')->where('id', 3)->get();
-        
-        //$comment = Comment::select('text')->where('id', 1)->get();
+        $posts = Post::all();
 
-        return view('home', compact('post1', 'post2', 'post3'));
+        return view('home', compact('posts'));
     }
 }
