@@ -18,7 +18,7 @@ class ItemsTableSeeder extends Seeder
             'date_pucharse' => Carbon::create('2020','03','30'),
             'classroom_id' => 1,
             'state_id' => 1,
-            'type_id' => 3,
+            'type_id' => 6,
             'created_at' => now(),
             'updated_at' => now()
         ]);
