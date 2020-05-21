@@ -35,20 +35,9 @@ class HomeController extends Controller
             $request->session()->put('user_role', $request->user()->role->name);
         }
 
-        //$posts = Post::all();
-        for($i=1;$i<=3;$i++) {
-            $posts = Post::all()->where('id', $i++);
-        }
-
-        //$users = User::all();
-        for($i=1;$i<=3;$i++) {
-            $users = User::all()->where('id', $i++);
-        }
-
-        //$comments = Comment::all();
-        for($i=1; $i<=3;$i++) {
-            $comments = Comment::all()->where('id', $i++);
-        }
+        $posts = Post::all();
+        $users = User::all();
+        $comments = Comment::all();
 
         return view('home', compact('posts', 'users', 'comments'));
     }
