@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 class YearUnion extends Model
 {
+    use SoftDeletes; 
     protected $table = 'yearUnions';
 
     protected $primaryKey = 'id';
@@ -13,6 +15,8 @@ class YearUnion extends Model
     public $timestamps = true;
 
     protected $guarded =[];
+
+    protected $dates = ['deleted_at'];
 
     public function year(){
         return $this->belongsTo(Year::class);
@@ -31,10 +35,6 @@ class YearUnion extends Model
     }
     public function responsable(){
         return $this->belongsTo(User::class);
-    }
-
-    public function tasks(){
-        return $this->hasMany(Task::class);
     }
     //TODO Revisar si se usa
 //     //** lista de todos los year unions user que tengan este year union */
@@ -57,7 +57,5 @@ class YearUnion extends Model
     {
         return $this->hasMany('App\Models\SessionTimetable');
     }
-    public function tasks(){
-        return $this->hasMany(Task::class);
-    }
+    
 }

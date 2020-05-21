@@ -17,6 +17,8 @@ class Course extends Model
     //Este guardará la fecha en la que eleminamos un objeto
     protected $dates = ['deleted_at'];
 
+    //protected $softCascade = ['posts']; indica la relación a eliminar en casaca yearUnion 
+
     //relaciones
     //todas las yearUnion de ese curso, una por evaluacion y asignatura
     public function yearUnions(){
@@ -25,7 +27,9 @@ class Course extends Model
 
     public function subjects(){
 
-        return $this->belongsToMany(Subject::class, 'course_subject');
+        return $this->belongsToMany(Subject::class, 'course_subject')->using(CourseSubject::class)
+        ->withTimeStamps()->withPivot('max_hours','hours');
+
 
     }
 }

@@ -12,7 +12,7 @@ class Task extends Model
     //lista de todos los year union users con sus calificaciones en las tareas, de una evaluacion en concreto de una asignatura en concreto
     public function yearUnionUsers()
     {
-        return $this->belongsToMany(YearUnionUser::class, 'califications')->using(Calification::class)->withPivot('value')->withTimestamps();
+        return $this->belongsToMany(YearUnionUser::class, 'califications', 'task_id', 'year_user_id')->withPivot('value')->withTimestamps();
     }
     public function type()
     {

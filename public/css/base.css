@@ -154,3 +154,12 @@ body {
     background-color: #E6E6E6;
     margin-top: 30px;
 }
+
+.notificationsDropDown{
+    display: flex;
+}
+.dropDownIcon{
+    font-weight: 400;
+    font-size: 35px;
+    color: white;
+}

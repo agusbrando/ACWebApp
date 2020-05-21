@@ -15,8 +15,10 @@
 
             </div>
             <div class="d-flex flex-row-reverse">
-                <form method="post" action="">
+                <form method="post" action="{{ route('courses.destroy', array($courseId, $yearId))}}">
                     @csrf
+
+                    @method('DELETE')
                     <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
                 </form>
                 <form method="post" action="">
@@ -54,7 +56,7 @@
 
                                     <div class="d-flex flex-row ">
                                         <select class="form-control " id="classroom_id" name="idClass">
-                                            
+
                                             <!--Hace la funcion de un placeholder-->
                                             @foreach($classrooms as $classroom)
                                             @if($classroom->id == $idClass)
@@ -128,7 +130,7 @@
                                                                                 @foreach($items as $item)
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
 
-                                                                                
+
                                                                                 @endforeach
                                                                             </select>
 

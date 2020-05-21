@@ -29,7 +29,6 @@ class CoursesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
         DB::table('courses')->insert([
             'level' => 1,
             'name' => 'Desarrollo de Aplicaciones Web',
@@ -42,11 +41,46 @@ class CoursesTableSeeder extends Seeder
             'level' => 2,
             'name' => 'Desarrollo de Aplicaciones Web',
             'abbreviation' =>'DAW',
-            
             'num_students' => 20,
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('courses')->insert([
+            'level' => 1,
+            'name' => 'Administracion de Sistemas Informaticos y en Red',
+            'abbreviation' =>'ASIR',
+            'num_students' => 23,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('courses')->insert([
+            'level' => 2,
+            'name' => 'Administracion de Sistemas Informaticos y en Red',
+            'abbreviation' =>'ASIR',
+            'num_students' => 23,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+   /*
+        DB::table('courses')->insert([
+            'level' => 1,
+            'name' => 'FP Básica en Informática y Comunicaciones',
+            'abbreviation' =>'FPBASICA',
+            'num_students' => 30,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('courses')->insert([
+            'level' => 2,
+            'name' => 'FP Básica en Informática y Comunicaciones',
+            'abbreviation' =>'FPBASICA',
+            'num_students' => 30,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        
 
         DB::table('courses')->insert([
             'level' => 1,
@@ -65,40 +99,10 @@ class CoursesTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        DB::table('courses')->insert([
-            'level' => 1,
-            'name' => 'Administracion de Sistemas Informaticos y en Red',
-            'abbreviation' =>'ASIR',
-            'num_students' => 23,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+       */ 
 
-        DB::table('courses')->insert([
-            'level' => 2,
-            'name' => 'Administracion de Sistemas Informaticos y en Red',
-            'abbreviation' =>'ASIR',
-            'num_students' => 23,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+       
 
-        DB::table('courses')->insert([
-            'level' => 1,
-            'name' => 'FP Básica en Informática y Comunicaciones',
-            'abbreviation' =>'FPBASICA',
-            'num_students' => 30,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
 
-        DB::table('courses')->insert([
-            'level' => 2,
-            'name' => 'FP Básica en Informática y Comunicaciones',
-            'abbreviation' =>'FPBASICA',
-            'num_students' => 30,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
     }
 }

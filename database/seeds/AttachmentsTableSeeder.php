@@ -13,23 +13,8 @@ class AttachmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO 2 Attachments para post(COMPLETADO)
-        DB::table('attachments')->insert([
-            'name'=>'default_post.jpg',
-            'extension'=>'jpg',
-            'attachmentable_id'=>1,
-            'attachmentable_type'=> Post::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('attachments')->insert([
-            'name'=>'default_post.jpg',
-            'extension'=>'jpg',
-            'attachmentable_id'=>1,
-            'attachmentable_type'=> Post::class,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        
+
 
         //TODO 2 Attachments para message(COMPLETADO)
         DB::table('attachments')->insert([
@@ -45,6 +30,24 @@ class AttachmentsTableSeeder extends Seeder
             'extension'=>'jpg',
             'attachmentable_id'=>2,
             'attachmentable_type'=> Message::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        
+        //TODO 2 Attachments para post(COMPLETADO)
+        DB::table('attachments')->insert([
+            'name'=>'default_post.jpg',
+            'extension'=>'jpg',
+            'attachmentable_id'=>1,
+            'attachmentable_type'=> Post::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('attachments')->insert([
+            'name'=>'default_post.jpg',
+            'extension'=>'jpg',
+            'attachmentable_id'=>1,
+            'attachmentable_type'=> Post::class,
             'created_at' => now(),
             'updated_at' => now()
         ]);
