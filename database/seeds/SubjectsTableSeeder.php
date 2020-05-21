@@ -28,7 +28,7 @@ class SubjectsTableSeeder extends Seeder
         DB::table('subjects')->insert([
             'name' => 'Ingles',
             'abbreviation'=>'ING',
-            'color'=>'##aaaaff',
+            'color'=>'#aaaaff',
             'created_at' => now(),
             'updated_at' => now()
         ]);

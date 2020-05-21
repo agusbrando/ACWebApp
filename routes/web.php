@@ -72,6 +72,9 @@ Route::post('seguimiento','TrackingController@store')->name('seguimiento.store')
 
 //Route::Timetables (Carlos)
 Route::resource('horarios', 'TimetableController');
+Route::resource('sessiontimetable', 'SessionTimetableController');
+Route::get('sessiontimetable/crear/{id}', 'SessionTimetableController@crear')->name('session');
+
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
 //RUTAS PERMISSIONS (Roby)
