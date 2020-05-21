@@ -54,6 +54,17 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
+            'first_name' => 'Adri',
+            'last_name' => 'Pérez',
+            'email' => 'adpesan@campusaula.com',
+            'password' => bcrypt('12345678'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id'=>1
+        ]);
+
+        DB::table('users')->insert([
             'first_name' => 'Marcelo',
             'last_name' => 'Malonda Pellicer',
             'email' => 'marcelo.malonda@champusaula.com',
