@@ -59,7 +59,7 @@
                                             <td>{{$subject->name }}</td>
                                             <td class="botones">
                                                 <div class="d-flex flex-row ">
-                                                    <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>                                                    
+                                                    <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
                                                     <a class="btn btn-outline-primary mr-2" href="{{route('subjects.evaluations', $subject->id)}}">Evaluaciones</a>
                                                     <a href="#" class="btn btn-outline-primary">Programacion</a>
                                                 </div>
@@ -70,9 +70,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
-                            Aquí iran las asignaturas
-                        </div>
+
                         <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
 
                             <form class="d-flex flex-column bd-highlight mb-3 ml-2" method="post" action="{{ route('courses.filter', array($courseId, $yearId))}}">
@@ -85,7 +83,11 @@
 
                                             <!--Hace la funcion de un placeholder-->
                                             @foreach($classrooms as $classroom)
+                                            @if($classroom->id == $idClass)
+                                            <option selected name="{{$classroom->id}}" value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            @else
                                             <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                            @endif
                                             @endforeach
                                         </select>
                                         <div class="d-flex flex-row ml-3 botones">
