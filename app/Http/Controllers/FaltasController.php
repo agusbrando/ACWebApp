@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Misbehavior;
 use App\Models\Subject;
 use App\Models\User;
@@ -79,10 +80,10 @@ class FaltasController extends Controller
         $misbehaviors = Misbehavior::all();
         $user = User::find($id);
         $user_id = $id;
-        $subjects = Subject::all();
+        $course=Course::find(5);
+        $subjects = $course->subjects;
         $lista = [];
-
-        //
+        
         foreach ($subjects as $subject) {
             $count = 0;
             $listadoFaltasAsistencia = [];
@@ -99,7 +100,7 @@ class FaltasController extends Controller
                 }
             }
 
-            $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->max, 'listaFaltas' => $listadoFaltasAsistencia];
+            $elemento = ['asignatura' => $subject->name, 'faltas' => $count, 'max' => $subject->pivot->max_hours, 'listaFaltas' => $listadoFaltasAsistencia];
             array_push($lista, $elemento);
         }
 
