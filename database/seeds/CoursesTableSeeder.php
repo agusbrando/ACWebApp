@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class CoursesTableSeeder extends Seeder
 {
     /**
@@ -13,6 +13,7 @@ class CoursesTableSeeder extends Seeder
     {
         //TODO ASIR y FPBASICA (COMPLETO)
 
+        //DAM
         DB::table('courses')->insert([
             'level' => 1,
             'name' => 'Desarrollo de Aplicaciones Multiplataforma',
@@ -101,8 +102,6 @@ class CoursesTableSeeder extends Seeder
         
 
        */ 
-
-       
 
 
     }

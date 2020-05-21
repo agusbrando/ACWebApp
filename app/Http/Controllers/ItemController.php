@@ -114,8 +114,9 @@ class ItemController extends Controller
         ]);
         //y lo guardamos en la base de datos
         $item->save();
+
         //y le redirijo a la vista principal para que vea que se ha añadido
-        return redirect('/items')->with('exito', 'Item creado!');
+        return redirect('/items/'.$item->id)->with('exito', 'Item creado!');
     }
 
     /**
@@ -149,10 +150,10 @@ class ItemController extends Controller
         $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
         $item = Item::find($id);
-        
+        $itemId = $id;
         $item->date_pucharse = Carbon::parse($item->date_pucharse)->format('Y-m-d');
 
-        return view('items.edit', compact('item', 'classrooms', 'types', 'states'));
+        return view('items.edit', compact('item', 'classrooms', 'types', 'states','itemId'));
     }
 
     /**
@@ -183,7 +184,7 @@ class ItemController extends Controller
        
 
         $item->save();
-        return redirect('/items')->with('exito', 'Item editado!');
+        return redirect('/items/'.$id)->with('exito', 'Item editado!');
     }
 
     /**
