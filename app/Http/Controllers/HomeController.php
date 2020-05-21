@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Comments;
-use App\Models\Attachments;
+use App\Models\Comment;
+use App\Models\Attachment;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -39,11 +40,16 @@ class HomeController extends Controller
             $posts = Post::all()->where('id', $i++);
         }
 
-        //$comments = Comment::all();
-        for($i=1; $i<=3;$i++) {
-            $comments = Post::all()->where('id', $i++);
+        //$users = User::all();
+        for($i=1;$i<=3;$i++) {
+            $users = User::all()->where('id', $i++);
         }
 
-        return view('home', compact('posts', 'comments'));
+        //$comments = Comment::all();
+        for($i=1; $i<=3;$i++) {
+            $comments = Comment::all()->where('id', $i++);
+        }
+
+        return view('home', compact('posts', 'users', 'comments'));
     }
 }

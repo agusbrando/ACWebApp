@@ -10,7 +10,9 @@
     <div>
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-        <p style="font-weight: bold; float: left;">Adrián Pérez</p>
+        @foreach($users as $user)
+          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+        @endforeach
         @foreach($posts as $post)
           <h4 style="text-align: center;">{{$post->title}}</h4>
         @endforeach
@@ -49,7 +51,9 @@
     <div>
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-        <p style="font-weight: bold; float: left;">Adrián Pérez</p>
+        @foreach($users as $user)
+          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+        @endforeach
         @foreach($posts as $post)
           <h4 style="text-align: center;">{{$post->title}}</h4>
         @endforeach
@@ -88,7 +92,9 @@
     <div>
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-        <p style="font-weight: bold; float: left;">Adrián Pérez</p>
+        @foreach($users as $user)
+          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+        @endforeach
         @foreach($posts as $post)
           <h4 style="text-align: center;">{{$post->title}}</h4>
         @endforeach
