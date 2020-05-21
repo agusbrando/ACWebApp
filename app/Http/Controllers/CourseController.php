@@ -111,6 +111,7 @@ class CourseController extends Controller
     {
         $request->session()->put('course_id', $courseId);
         $request->session()->put('year_id', $yearId);
+        
         $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
         $subject_ids = array();
         foreach ($yearUnions as $yearUnion) {
