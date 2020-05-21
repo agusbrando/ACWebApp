@@ -13,16 +13,17 @@ class InvoicePaid extends Notification
 {
     use Queueable;
 
-    public $user;
+    protected $message;
+    protected $user;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($message,$user)
     {
+        $this->message = $message;
         $this->user = $user;
-
     }
 
     // public function getUser(){
@@ -73,6 +74,8 @@ class InvoicePaid extends Notification
 
     public function toDatabase()
     {
-       return[ 'uscsdavgsder_id'=>'1',];
+       return['subject'=> $this->message->subject,
+                'email' =>$this->user->email,
+                'message_id' =>$this->message->id];
 }
 }
