@@ -61,6 +61,22 @@ class CoursesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('courses')->insert([
+            'level' => 1,
+            'name' => 'Sistemas Microinformaticos y Redes',
+            'abbreviation' =>'SMR',
+            'num_students' => 25,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('courses')->insert([
+            'level' => 2,
+            'name' => 'Sistemas Microinformaticos y Redes',
+            'abbreviation' =>'SMR',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
    /*
         DB::table('courses')->insert([
             'level' => 1,
@@ -82,22 +98,7 @@ class CoursesTableSeeder extends Seeder
 
         
 
-        DB::table('courses')->insert([
-            'level' => 1,
-            'name' => 'Sistemas Microinformaticos y Redes',
-            'abbreviation' =>'SMR',
-            'num_students' => 25,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('courses')->insert([
-            'level' => 2,
-            'name' => 'Sistemas Microinformaticos y Redes',
-            'abbreviation' =>'SMR',
-            'num_students' => 19,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        
 
        */ 
 

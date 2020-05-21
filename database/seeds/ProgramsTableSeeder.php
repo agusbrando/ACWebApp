@@ -12,8 +12,10 @@ class ProgramsTableSeeder extends Seeder
     public function run()
     {
         //TODO Create one program foreach course add current profesor and ask if you dont know
+        
+        $asignatura = Subject::where('name','Acceso a Datos')->first();
         DB::table('programs')->insert([
-            'name' => 'programaPrueba',
+            'name' => ($asignatura->courses->name).$asignatura->name,
             'professor_id' => 1,
            
         ]);

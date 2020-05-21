@@ -202,7 +202,7 @@ class SubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         
-        //1º de SMR
+        //1º de SMR 27-31
         DB::table('subjects')->insert([
             'name' => 'Montaje y mantenimiento de equipos',
             'abbreviation'=>'MME',
@@ -238,8 +238,38 @@ class SubjectsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        //2º de SMR 32-35
+        DB::table('subjects')->insert([
+            'name' => 'Sistemas operativos en red',
+            'abbreviation'=>'SOR',
+            "hours"=>176	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Seguridad informática',
+            'abbreviation'=>'SEI',
+            "hours"=>110	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Servicios en red',
+            'abbreviation'=>'SER',
+            "hours"=>176	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Aplicaciones web',
+            'abbreviation'=>'APW',
+            "hours"=>88	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
-
+        //1ºFP BASICA
+        
 
     }
 }
