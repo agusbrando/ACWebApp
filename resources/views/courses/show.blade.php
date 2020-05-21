@@ -59,7 +59,7 @@
                                             <td>{{$subject->name }}</td>
                                             <td class="botones">
                                                 <div class="d-flex flex-row ">
-                                                    <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>                                                    
+                                                    <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
                                                     <a class="btn btn-outline-primary mr-2" href="{{route('subjects.evaluations', $subject->id)}}">Evaluaciones</a>
                                                     <a href="#" class="btn btn-outline-primary">Programacion</a>
                                                 </div>
@@ -69,9 +69,6 @@
                                     @endforeach
                                 </table>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
-                            Aquí iran las asignaturas
                         </div>
                         <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
 
