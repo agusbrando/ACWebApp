@@ -33,7 +33,7 @@ class TaskController extends Controller
         $evaluaciones = YearUnion::where('subject_id', $yearUnion->subject_id)->where('year_id', $yearUnion->year_id)->where('course_id', $yearUnion->course_id)->get()->load('evaluation');
         $tipos = Type::all()->where('model', Task::class);
 
-        foreach($evaluaciones as $eval){
+        foreach ($evaluaciones as $eval) {
             $eval->evaluation = $eval->evaluation;
         }
 
@@ -52,23 +52,20 @@ class TaskController extends Controller
         //TODO JAVI hacer funcional store tareas
         $request->validate([
             'name' => 'required',
-            'evaluaciones' => 'required',
             'type' => 'required',
             'yearUnion' => 'required'
         ]);
 
-        $evaluaciones = $request->get('evaluaciones');
         $yearUnion = YearUnion::find($request->get('yearUnion'));
 
-        foreach ($evaluaciones as $eval) {    
-            $task = new Task([
-                'year_union_id' => $yearUnion->id,
-                'type_id' => $request->get('type'),
-                'name' => $request->get('name')
-            ]);
-            $task->save();
-            $this->storeNotes($yearUnion, $task);
-        }
+        $task = new Task([
+            'year_union_id' => $yearUnion->id,
+            'type_id' => $request->get('type'),
+            'name' => $request->get('name')
+        ]);
+        $task->save();
+        $this->storeNotes($yearUnion, $task);
+
 
         return redirect('subjects/evaluations/' . $yearUnion->subject_id);
     }
