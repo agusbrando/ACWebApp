@@ -7,13 +7,17 @@
       <a style="margin: 19px; width: 100%;" href="#" class="btn btn-outline-primary">Publicar</a>
     </div>
     </br>
-    <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
-      <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-      <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      @foreach($posts as $post)
-        <p>{{$post->created_at}}</p>
-      @endforeach
-      <h4 style="text-align: center;">¿Cómo orientar profesionalmente a tu hijo?</h4>
+    <div>
+      <div>
+        <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
+        <p style="font-weight: bold; float: left;">Adrián Pérez</p>
+        <h4 style="text-align: center;">¿Cómo orientar profesionalmente a tu hijo?</h4>
+      </div>
+      <div>
+        @foreach($posts as $post)
+          <p>{{$post->created_at}}</p>
+        @endforeach
+      </div>
     </div>
     <div class="card-body row no-gutters">
       <img src="{{asset('img/dinantia1.png')}}" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
@@ -38,13 +42,17 @@
   </br>
   <div class="card shadow">
     </br>
-    <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
-      <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-      <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      @foreach($posts as $post)
-        <p>{{$post->created_at}}</p>
-      @endforeach
-      <h4 style="text-align: center;">Aula Campus en el Desafío Junior de ESIC</h4>
+    <div>
+      <div>
+        <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
+        <p style="font-weight: bold; float: left;">Adrián Pérez</p>
+        <h4 style="text-align: center;">Aula Campus en el Desafío Junior de ESIC</h4>
+      </div>
+      <div>
+        @foreach($posts as $post)
+          <p>{{$post->created_at}}</p>
+        @endforeach
+      </div>
     </div>
     <div class="card-body row no-gutters">
       <img src="{{asset('img/dinantia4.png')}}" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
@@ -69,13 +77,17 @@
   </br>
   <div class="card shadow">
     </br>
-    <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
-      <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-      <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      @foreach($posts as $post)
-        <p>{{$post->created_at}}</p>
-      @endforeach
-      <h4 style="text-align: center;">Acceso a Dinantia desde Ordenador</h4>
+    <div>
+      <div>
+        <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
+        <p style="font-weight: bold; float: left;">Adrián Pérez</p>
+        <h4 style="text-align: center;">Acceso a Dinantia desde el Ordenador</h4>
+      </div>
+      <div>
+        @foreach($posts as $post)
+          <p>{{$post->created_at}}</p>
+        @endforeach
+      </div>
     </div>
     <div class="card-body row no-gutters">
       <img src="{{asset('img/dinantia3.png')}}" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
