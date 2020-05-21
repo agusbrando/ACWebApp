@@ -57,5 +57,8 @@ class YearUnion extends Model
     {
         return $this->hasMany('App\Models\SessionTimetable');
     }
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
     
 }
