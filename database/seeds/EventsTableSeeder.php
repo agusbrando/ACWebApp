@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Session;
 
 class EventsTableSeeder extends Seeder
 {
@@ -12,26 +13,42 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         //TODO Eliminar para produccion cuando se termine de implementar los test
-        DB::table('events')->insert([
-            'session_id' => 1,
-            'user_id' => 1,
-            'type_id' => 1,
-            'title' => 'default',
-            'description' => 'default',
-            'date' => date("Y-m-d H:i:s"),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $dia = date("Y-m-d");
+        $day = date('w', strtotime($dia));
 
-        DB::table('events')->insert([
-            'session_id' => 2,
-            'user_id' => 2,
-            'type_id' => 2,
-            'title' => 'default',
-            'description' => 'default',
-            'date' => date("Y-m-d H:i:s"),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        //Tutorías
+        $sessions = Session::where('day', $day)->where('type_id', 1)->get();
+        for($i = 0; $i < 5; $i++){
+
+            DB::table('events')->insert([
+                'session_id' => $sessions[$i]->id,
+                'user_id' => 1,
+                'type_id' => 1,
+                'title' => 'default',
+                'description' => 'default',
+                'date' => $dia,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+        }
+
+        //Reserva de aulas
+        $sessions = Session::where('day', $day)->where('type_id', 2)->get();
+        for($i = 0; $i < 5; $i++){
+
+            DB::table('events')->insert([
+                'session_id' => $sessions[$i]->id,
+                'user_id' => 1,
+                'type_id' => 2,
+                'title' => 'default',
+                'description' => 'default',
+                'date' => $dia,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+        }
+        
     }
 }
