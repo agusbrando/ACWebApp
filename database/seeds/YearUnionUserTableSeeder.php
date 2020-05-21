@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Course;
 use App\Models\YearUnion;
 
 class YearUnionUserTableSeeder extends Seeder
