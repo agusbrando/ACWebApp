@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Subject;
-use Illuminate\Database\Seeder;
 
+use Illuminate\Database\Seeder;
+use App\Models\Subject;
 class CourseSubjectsTableSeeder extends Seeder
 {
     /**
@@ -15,18 +15,18 @@ class CourseSubjectsTableSeeder extends Seeder
         //TODO ASIR y FPBASICA
 
         //1ºDAM
-        for($i=4; $i<=8; $i++){
+       for($i=4; $i<=8; $i++){
 
-            DB::table('course_subject')->insert([
+        DB::table('course_subject')->insert([
                 'course_id' => 1,
                 'subject_id' => Subject::find($i)->id,
                 'max_hours' => round((Subject::find($i)->hours)*0.15),
                 'hours'=> Subject::find($i)->hours,
                 'created_at' => now(),
                 'updated_at' => now()
-            ]);
+             ]);
 
-        }
+         }
         //Ingles id 3
         DB::table('course_subject')->insert([
             'course_id' => 1,
