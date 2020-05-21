@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\YearUnion;
 use App\Models\Course;
+
 class YearUnionUserTableSeeder extends Seeder
 {
     /**
@@ -33,6 +34,7 @@ class YearUnionUserTableSeeder extends Seeder
 
 
 
+        
         DB::table('yearUnionUsers')->insert([
             'year_union_id' => '1',
             'user_id' => '2',
@@ -68,7 +70,6 @@ class YearUnionUserTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
         //TODO matricular al estudiante default en todas las asignaturas de su curso
         $year_id=1;
         $cursos = Course::all();
@@ -99,5 +100,8 @@ class YearUnionUserTableSeeder extends Seeder
            
 
         }
+
+
+
     }
 }
