@@ -10,7 +10,9 @@
     <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      <p>{{$post1}}</p>
+      @foreach($posts as $post)
+        <p>{{$post->created_at}}</p>
+      @endforeach
       <h4 style="text-align: center;">¿Cómo orientar profesionalmente a tu hijo?</h4>
     </div>
     <div class="card-body row no-gutters">
@@ -39,7 +41,9 @@
     <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      <p>{{$post2}}</p>
+      @foreach($posts as $post)
+        <p>{{$post->created_at}}</p>
+      @endforeach
       <h4 style="text-align: center;">Aula Campus en el Desafío Junior de ESIC</h4>
     </div>
     <div class="card-body row no-gutters">
@@ -68,7 +72,9 @@
     <div style="display: flex; margin-left: auto; margin-right: auto; width: 80%;">
       <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
       <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-      <p>{{$post3}}</p>
+      @foreach($posts as $post)
+        <p>{{$post->created_at}}</p>
+      @endforeach
       <h4 style="text-align: center;">Acceso a Dinantia desde Ordenador</h4>
     </div>
     <div class="card-body row no-gutters">
