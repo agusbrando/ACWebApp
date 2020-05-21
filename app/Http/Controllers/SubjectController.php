@@ -136,13 +136,9 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->trabajos);
                                     }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaTrabajos = $mediaTrabajos;
-                                    } else {
-                                        $mediaTrabajos[$user_id] = 0;
-                                    }
+                                    $aux += $nota;
+                                    $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaTrabajos = $mediaTrabajos;
                                 }
                             }
                             $aux = 0;
@@ -175,13 +171,9 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->actitud);
                                     }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaActitud[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaActitud = $mediaActitud;
-                                    } else {
-                                        $mediaActitud[$user_id] = 0;
-                                    }
+                                    $aux += $nota;
+                                    $mediaActitud[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaActitud = $mediaActitud;
                                 }
                             }
                             $aux = 0;
@@ -193,7 +185,7 @@ class SubjectController extends Controller
                     $evaluation->recuperacion = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->recuperacion as $rec) {
                         foreach ($rec->yearUnionUsers as $yearUnionUser) {
-                            $notaRecuperacion[$yearUnionUser->id][$rec->id] = $yearUnionUser->user->pivot->value;
+                            $notaRecuperacion[$yearUnionUser->id][$rec->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaRecuperacion = $notaRecuperacion;
                         }
                     }
@@ -214,13 +206,9 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->recuperacion);
                                     }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaRecuperacion = $mediaRecuperacion;
-                                    } else {
-                                        $mediaRecuperacion[$user_id] = 0;
-                                    }
+                                    $aux += $nota;
+                                    $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaRecuperacion = $mediaRecuperacion;
                                 }
                             }
                             $aux = 0;
