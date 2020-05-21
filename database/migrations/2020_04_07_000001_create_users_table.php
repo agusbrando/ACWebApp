@@ -28,8 +28,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->foreign('timetable_id')->references('id')->on('timetables');
-            // $table->foreign('role_id')->references('id')->on('roles');
-            // $table->foreign('permission_id')->references('id')->on('permissions');
+            $table->foreign('role_id')->references('id')->on('roles');
 
         });
     }

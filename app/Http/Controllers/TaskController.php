@@ -79,8 +79,7 @@ class TaskController extends Controller
             $calification = new Calification([
                 'task_id' => $task->id,
                 'year_user_id' =>  $user->id,
-                // TODO no puede ser null solucionar
-                'value' => 0
+                'value' => null
             ]);
             $calification->save();
         }

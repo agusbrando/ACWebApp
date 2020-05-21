@@ -48,27 +48,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='8:30')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -82,27 +82,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='9:25')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -126,27 +126,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='10:40')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}"> 
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
+                    </td >
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
+                    </td >
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
+                    </td >
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
+                    </td >
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -161,27 +161,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='11:35')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}"> 
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -205,27 +205,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='12:40')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -241,27 +241,27 @@
 
                     @if($session->time_start=='13:35')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -285,27 +285,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='15:00')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}"> 
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -319,27 +319,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='15:55')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -363,27 +363,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='17:10')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -398,27 +398,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='18:05')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -442,27 +442,27 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='19:10')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -478,27 +478,27 @@
 
                     @if($session->time_start=='20:05')
                     @if($session->day==1)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==4)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
                     @if($session->day==5)
-                    <td>
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif

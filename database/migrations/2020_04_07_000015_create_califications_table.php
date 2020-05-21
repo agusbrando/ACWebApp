@@ -17,7 +17,7 @@ class CreateCalificationsTable extends Migration
             $table->increments('id');
             $table->integer('task_id')->unsigned();
             $table->integer('year_user_id')->unsigned();
-            $table->decimal('value');
+            $table->decimal('value')->nullable();
             $table->timestamps();
             $table->unique(['task_id', 'year_user_id']);
             $table->foreign('task_id')->references('id')->on('tasks');

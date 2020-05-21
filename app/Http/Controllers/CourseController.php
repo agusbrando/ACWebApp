@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -30,14 +31,15 @@ class CourseController extends Controller
         //Cojo los años odenados para que salga el más reciente primero
         $years = Year::orderBy("date_start", "DESC")->get();
         //Recorro todos los años para guardar en el todos los cursos que se han impartido
-        foreach($years as $year){
+        foreach ($years as $year) {
             //Guardo los diferentes yearUnion en cada año
             $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')
-            ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+                ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+            
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
         //en este caso, le redirijo a la vista index y le paso los años con los cursos
-        return view('courses.index', compact( 'years'));
+        return view('courses.index', compact('years'));
     }
 
     /**
@@ -66,7 +68,35 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        for($i=1; $i<=3; $i++){
+            $curso = Course::where('id', $request->get('course'));
+            
+            $fechasInicioFin =[];
+            $year=1;
+            array_push($fechasInicioFin,['date_start'=> $request->get('eval_1_date_start'), 'date_end'=>$request->get('eval_1_date_end')]);//1ºEVAL
+            array_push($fechasInicioFin,['date_start'=> $request->get('eval_2_date_start'), 'date_end'=>$request->get('eval_2_date_end')]);//2ºEVAL
+            array_push($fechasInicioFin,['date_start'=> $request->get('eval_3_date_start'), 'date_end'=>$request->get('eval_3_date_end')]);//3ºEVAL
+            
+                foreach($curso->subjects as $j=>$subject){
+                    DB::table('yearUnions')->insert([
+                        'subject_id' => $subject->id,
+                        'course_id' => $curso->id,
+                        'evaluation_id' => $i,
+                        'year_id' => $year,
+                        'date_start'=> $fechasInicioFin[$i-1]['date_start'],
+                        'date_end'=> $fechasInicioFin[$i-1]['date_end'],
+                        'classroom_id'=> $j+1, 
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            
+            if($curso->level == 2){
+                if( $i==2 ){
+                    break;
+                }
+            }
+        }
     }
 
     /**
@@ -195,21 +225,42 @@ class CourseController extends Controller
     /**
      * Hacemos un softDelete del curso en la base de datos.
      *
-     * @param  int  $id
+     * @param  int  $courseId
+     * @param  int  $yearId
      * @return \Illuminate\Http\Response
      */
     public function destroy($courseId, $yearId)
     {
         //cojo todos los year union con ese año y curso
+        $yearUnion = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->first();
+
+        //y los voy eliminando
+        $yearUnion->delete();
+
+
+        return redirect('courses.index')->with('exito', 'Curso eliminado!');
+    }
+    /**
+     * Hacemos un softDelete del curso en la base de datos.
+     *
+     * @param  int  $courseId
+     * @param  int  $yearId
+     * @return \Illuminate\Http\Response
+     */
+    public function eliminarYearUnion($courseId, $yearId)
+    {
+        //cojo todos los year union con ese año y curso
         $yearUnions = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->get();
+
+        //y los voy eliminando
         foreach($yearUnions as $yearUnion){
-            //y los voy eliminando
             $yearUnion->delete();
         }
+        
 
-        return redirect('/courses')->with('exito', 'Curso eliminado!');
+
+        return redirect('courses')->with('exito', 'Curso eliminado!');
     }
-
     /**
      * Esto nos llevará a la vista de detalle del item cuando le hagamos click en la tabla.
      *
@@ -242,8 +293,8 @@ class CourseController extends Controller
     public function responsabilizarItem(Request $request, $userId, $courseId, $yearId)
     {
         $request->validate([
-            'idClass2'=>'required',
-            'itemIds'=>'required'
+            'idClass2' => 'required',
+            'itemIds' => 'required'
         ]);
         $idClass = $request->get('idClass2');
         //Busco el curso del alumno
@@ -252,37 +303,35 @@ class CourseController extends Controller
         if ($idClass != "") {
 
             $items = Item::where('classroom_id', $idClass)->get();
-        }else{
+        } else {
             $items = Item::all();
         }
         //Cojo el array de Ids del multi select
         $itemIds = $request->get('itemIds');
-        
+
         //Cojo los items con los ids del array
         $itemsUser = Item::whereIn('id', $itemIds)->get();
-        $classId= Classroom::find($idClass);
+        $classId = Classroom::find($idClass);
 
         foreach ($yearUnions as $yearUnion) {
             foreach ($itemsUser as $item) {
                 //compruebo que el alumno sea presencial
                 if ($yearUnion->pivot->assistance) {
                     //si es presencial le asigno el Item
-                    foreach($itemIds as $itemId){
+                    foreach ($itemIds as $itemId) {
                         $encontrado = false;
                         //Compruebo que no tenga ese item ya añadido
-                        foreach($yearUnion->pivot->items as $itemUser){
-                            if($itemUser->id == $itemId){
+                        foreach ($yearUnion->pivot->items as $itemUser) {
+                            if ($itemUser->id == $itemId) {
                                 $encontrado = true;
-                            break;
+                                break;
                             }
                         }
-                        if(!$encontrado){
-                            
+                        if (!$encontrado) {
+
                             $yearUnion->pivot->items()->attach($item->id);
                         }
                     }
-                    
-                    
                 }
             }
         }
@@ -291,7 +340,7 @@ class CourseController extends Controller
 
         $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
         foreach ($yearUnions as $yearUnion) {
-            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance',1)->get()->load('items', 'user');
+            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance', 1)->get()->load('items', 'user');
             $registrados = array();
             foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
 
@@ -313,6 +362,5 @@ class CourseController extends Controller
         $yearId = $yearId;
 
         return view('courses.filter', compact('classrooms', 'items', 'types', 'states', 'yearUnions', 'courseId', 'yearId', 'idClass'));
-
     }
 }

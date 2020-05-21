@@ -11,8 +11,6 @@ class EvaluablesTableSeeder extends Seeder
      */
     public function run()
     {
-        //TODO revisar que esten todos bien segun excel
-
         DB::table('evaluables')->insert([
             'name' => 'La metodología didáctica aplicada',
             'created_at' => now(),
