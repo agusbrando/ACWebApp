@@ -8,8 +8,8 @@
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    
-<link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
@@ -47,40 +47,45 @@
                                         <div class="card">
 
                                             <div class="w-100" id="heading{{$year->id}}" data-toggle="collapse" data-target="#collapse{{$year->id}}" aria-expanded="false" aria-controls="collapse{{$year->id}}">
-                                                @if(count($year->yearUnions) > 0)
-                                                
-                                                    <table id='mytable' class="table w-100">
-                                                        <thead class="thead-dark">
-                                                            <tr>
-                                                                <th>Id</th>
-                                                                <th>Año</th>
-                                                                <th>Nombre</th>
-                                                                <th>Numero de Alumnos</th>
-                                                                <th>Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        
-                                                                @foreach($year->yearUnions as $course)
-                                                                        <tr>
-                                                                            
-                                                                            <td>{{$course->course_id}} </td>
-                                                                            <td>{{$course->level}}</td>
-                                                                            <td>{{$course->name}}</td>
-                                                                            <td>{{$course->num_students}}</td>
 
-                                                                            
-                                                                            <td class="botones">
-                                                                                <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
-                                                                                
-                                                                            </td>
-                                                                            
-                                                                        </tr>
-                                                                @endforeach
-                                                            
-                                                        </tbody>
-                                                    </table>
+                                                @if(count($year->yearUnions) > 0)
+
+
+                                                <table id='mytable' class="table w-100 pb-5">
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Año</th>
+                                                            <th>Nombre</th>
+                                                            <th>Numero de Alumnos</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    @foreach($year->yearUnions as $course)
+                                                    <tr>
+
+                                                        <td>{{$course->course_id}} </td>
+                                                        <td>{{$course->level}}</td>
+                                                        <td>{{$course->name}}</td>
+                                                        <td>{{$course->num_students}}</td>
+
+
+                                                        <td class="botones">
+                                                            <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                                @else
+
+                                                <div class="divShowCoursesContent d-flex justify-content-center ">
+                                                    <h2 class="align-self-center ">No hay ningún curso</h2>
+                                                </div>
+
+
                                                 @endif
+
 
                                             </div>
                                             <!-- collapse show lo muestra abierto por defecto -->

@@ -17,13 +17,14 @@
 
             </div>
             <div class="d-flex flex-row-reverse">
-                <form method="post" action="">
+                <form method="post" action="{{ route('courses.eliminarYearUnion', array($courseId, $yearId))}}">
                     @csrf
+                    @method('DELETE')
                     <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
                 </form>
                 <form method="post" action="">
                     @csrf
-                    <button class="btn btn-outline-primary ml-2" type="submit">Editar Curso</button>
+                    <button class="btn btn-outline-info ml-2" type="submit">Editar Curso</button>
                 </form>
 
             </div>
@@ -40,7 +41,7 @@
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                    <div class="tab-pane fade  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                        <div class="tab-pane fade  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
                             Aquí irá la programacion del curso
                         </div>
                         <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
@@ -81,7 +82,7 @@
 
                                     <div class="d-flex flex-row ">
                                         <select class="form-control " id="classroom_id" name="idClass">
-                                            
+
                                             <!--Hace la funcion de un placeholder-->
                                             @foreach($classrooms as $classroom)
                                             <option value="{{$classroom->id}}">{{$classroom->name}}</option>

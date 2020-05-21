@@ -17,6 +17,8 @@ class Course extends Model
     //Este guardará la fecha en la que eleminamos un objeto
     protected $dates = ['deleted_at'];
 
+    //protected $softCascade = ['posts']; indica la relación a eliminar en casaca yearUnion 
+
     //relaciones
     //todas las yearUnion de ese curso, una por evaluacion y asignatura
     public function yearUnions(){

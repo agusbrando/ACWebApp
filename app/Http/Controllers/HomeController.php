@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        
 
         if (!$request->session()->has('user_permissions')) {
             $permissions = $request->user()->role->permissions->pluck('name')->toArray();
