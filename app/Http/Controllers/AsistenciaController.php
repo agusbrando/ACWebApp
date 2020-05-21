@@ -2,52 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\User;
+use App\Models\YearUnion;
 use Illuminate\Http\Request;
 
 class AsistenciaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        $filtradoCurso=false;
         $users = User::all();
-        return view('asistencia.index', compact('users'));
+        $courses = Course::all();
+        return view('asistencia.index', compact('users', 'courses', 'filtradoCurso'));
     }
 
-    //FILTROS
     public function filter(Request $request)
     {
-        //Definimos que obtendrá objetos de la tabla items
-        $query = DB::table('misbehaviors');
+        $request->validate([
 
-        //cogemos los valores de los selects
-        // $idData = $request->get('data');
-        // $idHorario = $request->get('horario');
-        $idCurso = $request->get('curso');
-        $idAsignatura = $request->get('asignatura');
+            'grupo' => 'required',
+            'date' => 'required'
 
-        //Controlamos que si no llega null haga una consulta obteniendo los item 
-        //que tenga dicho id de los diferentes filtros.
-        //Los resultados de cada consulta se va concatenando en $query
-        // if($idData != ""){
-        //     $query = $query->where('date', $idData);
-        // }
-        // if($idHorario != ""){
-        //     $query = $query->where('state_id', $idState);
-        // }
-        if($idCurso != ""){
-            $query = $query->where('type_id', $idCurso);
-        }
-        if($idAsignatura != ""){
-            $query = $query->where('type_id', $idAsignatura);
-        }
-        //Finalmente obtenemos todos los items que han pasado los filtros
-        $items = $query->get();
-        
+        ]);
 
-        //Filtro para coger solo los typos del modelo Item
-        $types = Type::all()->where('model', Item::class);
-        $classrooms = Classroom::all();
-        $states = State::all();
-        
-        return view('items.index', compact('classrooms', 'items', 'types', 'states'));
+        $fecha = $request->get('date');
+
+        $yearUnion=YearUnion::where('year_id', 1)->where('course_id', $request->get('grupo'))->first();
+        $users=$yearUnion->users;
+        $courses=Course::all();
+        $filtradoCurso=true;
+        $subjects=Course::find($request->get('grupo'))->subjects; 
+        return view('asistencia.index', compact('users', 'courses', 'fecha', 'filtradoCurso', 'subjects'));
     }
 }

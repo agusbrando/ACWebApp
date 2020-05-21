@@ -38,7 +38,7 @@
                                 <option value="13">Falta Muy Grave</option>
                             </select>
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group">
                             <label class="textarea mt-2" for="exampleFormControlTextarea1">
                                 <h5>Descripción:</h5>
                             </label>

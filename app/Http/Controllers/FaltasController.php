@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Misbehavior;
-use App\Models\Subject;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -53,19 +52,23 @@ class FaltasController extends Controller
         $request->validate([
             'date' => 'required',
             'type_id' => 'required',
-            'description' => 'required'
-
+            'description' => 'required',
+            'year_user_id' => 'required',
+            'session_timetable_id' => 'required'
 
         ]);
+
         $misbehavior = new Misbehavior([
             'date' => $request->get('date'),
             'type_id' => $request->get('type_id'),
-            'description' => $request->get('description')
+            'description' => $request->get('description'),
+            'year_user_id' => 1,
+            'session_timetable_id' => 1
         ]);
         $misbehavior->save();
-        return redirect()->route('faltas.index')
-            ->with('success', 'Falta añadida!');
-        // $misbehaviors =Misbehavior::all()->
+        // return redirect()->route('faltas.index')
+        //     ->with('success', 'Falta añadida!');
+        return redirect('/faltas/' . $user_id);
     }
 
     /**
@@ -85,8 +88,8 @@ class FaltasController extends Controller
         $subjects = $course->subjects;
         $typesFaltaLeve = Type::all()->where('name', 'Falta Leve')->first();
         $typesFaltaGrave = Type::all()->where('name', 'Falta Grave')->first();
-        $typesFaltaMuyGrave= Type::all()->where('name', 'Falta muy Grave')->first();
-        $typesAsistencia= Type::all()->where('name', 'Asistencia')->first();
+        $typesFaltaMuyGrave = Type::all()->where('name', 'Falta muy Grave')->first();
+        $typesAsistencia = Type::all()->where('name', 'Asistencia')->first();
         $lista = [];
 
         foreach ($subjects as $subject) {
@@ -120,7 +123,7 @@ class FaltasController extends Controller
             foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
 
 
-                if ($falta->type_id ==$typesFaltaLeve->id) {
+                if ($falta->type_id == $typesFaltaLeve->id) {
                     array_push($listaFaltaLeve, $falta);
                 } elseif ($falta->type_id == $typesFaltaGrave->id) {
                     array_push($listaFaltaGrave, $falta);
@@ -129,7 +132,7 @@ class FaltasController extends Controller
                 }
             }
         }
-        return view('faltas.show', compact('user', 'lista', 'misbehaviors', 'listaFaltaLeve', 'listaFaltaGrave', 'listaFaltaMuyGrave'));
+        return view('faltas.show', compact('user', 'lista', 'courses', 'misbehaviors', 'listaFaltaLeve', 'listaFaltaGrave', 'listaFaltaMuyGrave'));
     }
 
 
