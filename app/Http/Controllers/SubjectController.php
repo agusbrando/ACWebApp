@@ -77,8 +77,9 @@ class SubjectController extends Controller
                 case 'Examenes':
                     $evaluation->parciales = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->parciales as $parcial) {
+                        $parcial->yearUnionUsers = $parcial->yearUnionUsers;
                         foreach ($parcial->yearUnionUsers as $yearUnionUser) {
-                            $notaParciales[$yearUnionUser->user->id][$parcial->id] = $yearUnionUser->pivot->value;
+                            $notaParciales[$yearUnionUser->id][$parcial->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaParciales = $notaParciales;
                         }
                     }
