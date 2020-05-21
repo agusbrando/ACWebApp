@@ -11,7 +11,9 @@
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
         <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-        <h4 style="text-align: center;">¿Cómo orientar profesionalmente a tu hijo?</h4>
+        @foreach($posts as $post)
+          <h4 style="text-align: center;">{{$post->title}}</h4>
+        @endforeach
       </div>
       <div>
         @foreach($posts as $post)
@@ -46,7 +48,9 @@
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
         <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-        <h4 style="text-align: center;">Aula Campus en el Desafío Junior de ESIC</h4>
+        @foreach($posts as $post)
+          <h4 style="text-align: center;">{{$post->title}}</h4>
+        @endforeach
       </div>
       <div>
         @foreach($posts as $post)
@@ -81,7 +85,9 @@
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
         <p style="font-weight: bold; float: left;">Adrián Pérez</p>
-        <h4 style="text-align: center;">Acceso a Dinantia desde el Ordenador</h4>
+        @foreach($posts as $post)
+          <h4 style="text-align: center;">{{$post->title}}</h4>
+        @endforeach
       </div>
       <div>
         @foreach($posts as $post)

@@ -35,13 +35,13 @@ class HomeController extends Controller
         }
 
         //$posts = Post::all();
-        for($i=1;$i<3;$i++) {
-            $posts = Post::all()->where('id', $i);
+        for($i=1;$i<=3;$i++) {
+            $posts = Post::all()->where('id', $i++);
         }
 
         //$comments = Comment::all();
-        for($i=1; $i<3;$i++) {
-            $comments = Post::all()->where('id', $i);
+        for($i=1; $i<=3;$i++) {
+            $comments = Post::all()->where('id', $i++);
         }
 
         return view('home', compact('posts', 'comments'));
