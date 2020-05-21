@@ -17,7 +17,7 @@ class CourseSubjectsTableSeeder extends Seeder
         //1ºDAM
         for($i=4; $i<=8; $i++){
 
-            DB::table('course_subjects')->insert([
+            DB::table('course_subject')->insert([
                 'course_id' => 1,
                 'subject_id' => Subject::find($i)->id,
                 'max_hours' => round((Subject::find($i)->hours)*0.15),
@@ -28,7 +28,7 @@ class CourseSubjectsTableSeeder extends Seeder
 
         }
         //Ingles id 3
-        DB::table('course_subjects')->insert([
+        DB::table('course_subject')->insert([
             'course_id' => 1,
             'subject_id' => 3,
             'max_hours' => 14,
@@ -38,7 +38,7 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //FOL id 2
-        DB::table('course_subjects')->insert([
+        DB::table('course_subject')->insert([
             'course_id' => 1,
             'subject_id' => 2,
             'max_hours' => 14,
@@ -50,7 +50,7 @@ class CourseSubjectsTableSeeder extends Seeder
         //2ºDAM
         for($i=9; $i<=13; $i++){
 
-            DB::table('course_subjects')->insert([
+            DB::table('course_subject')->insert([
                 'course_id' => 2,
                 'subject_id' => $i,
                 'max_hours' => round((Subject::find($i)->hours)*0.15),
@@ -61,7 +61,7 @@ class CourseSubjectsTableSeeder extends Seeder
 
         }
         //Ingles id 3
-        DB::table('course_subjects')->insert([
+        DB::table('course_subject')->insert([
             'course_id' => 2,
             'subject_id' => 3,
             'max_hours' => 6,
@@ -70,7 +70,7 @@ class CourseSubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         //EIE id 1
-        DB::table('course_subjects')->insert([
+        DB::table('course_subject')->insert([
             'course_id' => 2,
             'subject_id' => 1,
             'max_hours' => 9,
@@ -82,7 +82,7 @@ class CourseSubjectsTableSeeder extends Seeder
         //1ºDAW
         for($i=4; $i<=8; $i++){
 
-            DB::table('course_subjects')->insert([
+            DB::table('course_subject')->insert([
                 'course_id' => 3,
                 'subject_id' => $i,
                 'hours'=> Subject::find($i)->hours,
@@ -93,7 +93,7 @@ class CourseSubjectsTableSeeder extends Seeder
 
         }
         //Ingles id 3
-        DB::table('course_subjects')->insert([
+        DB::table('course_subject')->insert([
             'course_id' => 3,
             'subject_id' => 3,
             'max_hours' => 14,
@@ -103,7 +103,7 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //FOL id 2
-        DB::table('course_subjects')->insert([
+        DB::table('course_subject')->insert([
             'course_id' => 3,
             'subject_id' => 2,
             'max_hours' => 14,

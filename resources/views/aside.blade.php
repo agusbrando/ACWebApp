@@ -52,7 +52,7 @@
         </ul>
 
 
-        @if(Session::get('user_role')!= 'User')
+        @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Administración</span>
             <a class="d-flex align-items-center text-muted" href="/">
@@ -60,7 +60,7 @@
             </a>
         </h6>
         <ul class="nav flex-column mb-2">
-            @if(in_array('Can View Users', Session::get('user_permissions')))
+            @if(in_array('Leer_post', Session::get('user_permissions')))
             <li class="nav-item">
                 <a class="nav-link" href="/posts">
                     <span data-feather="file-text"></span>
