@@ -136,7 +136,7 @@ class SubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         
-        //1ºASIR 18-22
+        //1ºASIR 18-21
         DB::table('subjects')->insert([
             'name' => 'Implantación de sistemas operativos',
             'abbreviation'=>'ISO',
@@ -202,5 +202,44 @@ class SubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         
+        //1º de SMR
+        DB::table('subjects')->insert([
+            'name' => 'Administración de sistemas operativos',
+            'abbreviation'=>'DWEC',
+            "hours"=>120	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Servicios de red e Internet',
+            'abbreviation'=>'DWES',
+            "hours"=>120	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Implantación de aplicaciones web',
+            'abbreviation'=>'DAW',
+            "hours"=>100	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Administración de sistemas gestores de bases de datos',
+            'abbreviation'=>'DIW',
+            "hours"=>60	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Seguridad y alta disponibilidad',
+            'abbreviation'=>'DIW',
+            "hours"=>100,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+
+
     }
 }
