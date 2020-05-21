@@ -115,9 +115,9 @@ Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
 
-Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');;
+Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
-Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
+Route::get('tareas/eliminar/{task_id}/{yearUnion_id}', 'DesgloseController@destroy')->name('desglose.destroy');
 Route::get('desglose/crearTarea/{id}', 'TaskController@create');
 
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
