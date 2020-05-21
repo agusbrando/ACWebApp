@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Misbehavior;
 use App\Models\Subject;
+use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,7 @@ class FaltasController extends Controller
             'date' => 'required',
             'type_id' => 'required',
             'description' => 'required'
-            
+
 
         ]);
         $misbehavior = new Misbehavior([
@@ -80,10 +81,14 @@ class FaltasController extends Controller
         $misbehaviors = Misbehavior::all();
         $user = User::find($id);
         $user_id = $id;
-        $course=Course::find(5);
+        $course = Course::find(5);
         $subjects = $course->subjects;
+        $typesFaltaLeve = Type::all()->where('name', 'Falta Leve')->first();
+        $typesFaltaGrave = Type::all()->where('name', 'Falta Grave')->first();
+        $typesFaltaMuyGrave= Type::all()->where('name', 'Falta muy Grave')->first();
+        $typesAsistencia= Type::all()->where('name', 'Asistencia')->first();
         $lista = [];
-        
+
         foreach ($subjects as $subject) {
             $count = 0;
             $listadoFaltasAsistencia = [];
@@ -93,7 +98,7 @@ class FaltasController extends Controller
             foreach ($user->yearUnions->where('subject_id', $subject->id)->where('year_id', $year) as $yearunions_faltas) {
                 foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
 
-                    if ($falta->type_id == 12) {
+                    if ($falta->type_id == $typesAsistencia->id) {
                         $count = $count + 1;
                         array_push($listadoFaltasAsistencia, $falta);
                     }
@@ -115,11 +120,11 @@ class FaltasController extends Controller
             foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
 
 
-                if ($falta->type_id == 9) {
+                if ($falta->type_id ==$typesFaltaLeve->id) {
                     array_push($listaFaltaLeve, $falta);
-                } elseif ($falta->type_id == 10) {
+                } elseif ($falta->type_id == $typesFaltaGrave->id) {
                     array_push($listaFaltaGrave, $falta);
-                } elseif ($falta->type_id == 11) {
+                } elseif ($falta->type_id == $typesFaltaMuyGrave->id) {
                     array_push($listaFaltaMuyGrave, $falta);
                 }
             }
