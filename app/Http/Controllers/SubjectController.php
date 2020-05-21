@@ -249,6 +249,7 @@ class SubjectController extends Controller
                     $sumaFinal = 0;
                     $recuperado = 0;
                     foreach ($taskTypes as $task_type) {
+                        $yearUnionUser =  YearUnionUser::find($user->pivot->user_id);
                         $tasks =  YearUnionUser::find($user->pivot->user_id)->tasks;
                         $suma = 0;
                         $tareas[$task_type->name] = 0;

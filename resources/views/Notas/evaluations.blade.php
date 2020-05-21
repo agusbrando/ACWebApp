@@ -82,7 +82,7 @@
                             <tbody>
                                 @foreach($yearUnion->users as $user)
                                 <tr>
-                                    <td>{{$user->last_name}} {{$user->first_name}}</td>
+                                    <td>{{$user->last_name}}, {{$user->first_name}}</td>
                                     @foreach($user->tareas as $key => $tarea)
                                     @if($user->suspendido[$key])
                                     <td class="text-danger">{{$tarea}}</td>
