@@ -73,8 +73,6 @@
 
                         <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
                             <div class="divShowCoursesContent" id="accordion">
-                                @foreach($yearUnions as $yearUnion)
-
                                 <div class="card">
                                     <div class="card-header list-group-item d-flex justify-content-between align-items-center m-0" id="heading{{$yearUnion->evaluation->name}}" data-toggle="collapse" data-target="#collapse{{$yearUnion->evaluation->name}}" aria-expanded="false" aria-controls="collapse{{$yearUnion->evaluation->name}}">
                                         <h5 class="mb-0">
@@ -120,7 +118,7 @@
                                                                         <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($yearUnionUser->user->id, $courseId, $yearId))}}">
                                                                             @csrf
                                                                             @method('POST')
-                                                                            
+
                                                                             <select multiple class="form-control " id="itemIds" name="itemIds[]">
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
