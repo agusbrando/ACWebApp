@@ -10,6 +10,7 @@
             <h3>Detalles Asignaturas</h3>
             <form action="{{ route('subjects.update',$subject->id)}}" method="POST">
                 @method('PATCH')
+                @csrf
                 <div>
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
@@ -28,7 +29,15 @@
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input value="{{$subject->name}}" name="name" id="name" type="text" class="@error('name') is-invalid @enderror form-control">
-                        </div>                       
+                        </div>
+                        <div class="form-group">
+                            <label for="hours">Horas</label>
+                            <input value="{{$subject->hours}}" name="hours" id="hours" type="text" class="@error('hours') is-invalid @enderror form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="abbreviation">Siglas</label>
+                            <input value="{{$subject->abbreviation}}" name="abbreviation" id="abbreviation" type="text" class="@error('abbreviation') is-invalid @enderror form-control">
+                        </div>                             
                      </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -41,24 +50,3 @@
     </div>
 </main>
 @endsection
-
-
-<!-- Rutas -->
-
-<!-- Route::resource('users','UserController');
-Route::get('users/edit/{id}',['as' => 'users.showedit', 'uses' => 'UserController@show']); -->
-
-<!-- Controller -->
-
-<!-- public function show($user_id)
-    {
-        $user = User::find($user_id);
-        $edit = false;
-        if(URL::current() == url("/users/edit/".$user_id)){
-            $edit = true;
-        }
-        return view('users.show', compact('user','edit'));
-    } -->
-<!-- Import de URL -->
-<!-- use Illuminate\Support\Facades\URL; -->
-<!--  -->
