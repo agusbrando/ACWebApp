@@ -17,8 +17,17 @@ class ProgramsTableSeeder extends Seeder
     {
         //TODO Create one program foreach course add current profesor and ask if you dont know
         
+        //1ºDAM
+        $this->crearProgramacion('DAM',1,'Programación',10);
+        $this->crearProgramacion('DAM',1,'Base de Datos',2);
+        $this->crearProgramacion('DAM',1,'Sistemas informáticos',7);
+        $this->crearProgramacion('DAM',1,'Ingles',8);
+        $this->crearProgramacion('DAM',1,'Entornos de desarrollo',10);
+        $this->crearProgramacion('DAM',1,'Formación y orientación laboral',5);
+        $this->crearProgramacion('DAM',1,'Lenguajes de marcas y sistemas de gestión de información',2);
+
         //2ºDAM
-        $this->crearProgramacion('DAM',2,'Accesso a Datos',10);
+        $this->crearProgramacion('DAM',2,'Acceso a Datos',10);
         $this->crearProgramacion('DAM',2,'Sistema de Gestión Empresarial',10);
         $this->crearProgramacion('DAM',2,'Programación de Servicios y Procesos',10);
         $this->crearProgramacion('DAM',2,'Programacion multimedia y dispositivos moviles',3);
@@ -26,13 +35,39 @@ class ProgramsTableSeeder extends Seeder
         $this->crearProgramacion('DAM',2,'Ingles',8);
         $this->crearProgramacion('DAM',2,'Empresa e Iniciativa Emprendedora',5);
 
+        //1ºASIR
+        $this->crearProgramacion('ASIR',1,'Implantación de sistemas operativos',7);
+        $this->crearProgramacion('ASIR',1,'Planificación y administración de redes',6);
+        $this->crearProgramacion('ASIR',1,'Fundamentos de hardware',7);
+        $this->crearProgramacion('ASIR',1,'Gestión de bases de datos',2);
+        $this->crearProgramacion('ASIR',1,'Lenguajes de marcas y sistemas de gestión de información',2);
+        $this->crearProgramacion('ASIR',1,'Ingles',8);
+        $this->crearProgramacion('ASIR',1,'Formación y orientación laboral',5);
       
-      
-       
+       //2ºASIR
+       $this->crearProgramacion('ASIR',2,'Administración de sistemas operativos',7);
+       $this->crearProgramacion('ASIR',2,'Servicios de red e Internet',3);
+       $this->crearProgramacion('ASIR',2,'Implantación de aplicaciones web',3);
+       $this->crearProgramacion('ASIR',2,'Administración de sistemas gestores de bases de datos',7);
+       $this->crearProgramacion('ASIR',2,'Seguridad y alta disponibilidad',6);
+       $this->crearProgramacion('ASIR',2,'Ingles',8);
+       $this->crearProgramacion('ASIR',2,'Empresa e Iniciativa Emprendedora',5);
         
-
-       
+        //1ºSMR
+        $this->crearProgramacion('SMR',1,'Montaje y mantenimiento de equipos',12);
+        $this->crearProgramacion('SMR',1,'Redes locales',11);
+        $this->crearProgramacion('SMR',1,'Aplicaciones ofimáticas',12);
+        $this->crearProgramacion('SMR',1,'Sistemas operativos Monopuesto',11);
+        $this->crearProgramacion('SMR',1,'Ingles',11);
+        $this->crearProgramacion('SMR',1,'Formación y orientación laboral',11);
         
+        //2ºSMR
+        $this->crearProgramacion('SMR',2,'Sistemas operativos en red',12);
+        $this->crearProgramacion('SMR',2,'Seguridad informática',12);
+        $this->crearProgramacion('SMR',2,'Servicios en red',11);
+        $this->crearProgramacion('SMR',2,'Aplicaciones web',11);
+        $this->crearProgramacion('SMR',2,'Ingles',11);
+        $this->crearProgramacion('SMR',2,'Empresa e Iniciativa Emprendedora',12);
        
 
     }
