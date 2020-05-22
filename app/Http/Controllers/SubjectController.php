@@ -79,7 +79,7 @@ class SubjectController extends Controller
                     foreach ($evaluation->parciales as $parcial) {
                         $parcial->yearUnionUsers = $parcial->yearUnionUsers;
                         foreach ($parcial->yearUnionUsers as $yearUnionUser) {
-                            $notaParciales[$yearUnionUser->id][$parcial->id] = $yearUnionUser->pivot->value;
+                            $notaParciales[$yearUnionUser->user->id][$parcial->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaParciales = $notaParciales;
                         }
                     }
@@ -115,7 +115,7 @@ class SubjectController extends Controller
                     $evaluation->trabajos = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->trabajos as $trabajo) {
                         foreach ($trabajo->yearUnionUsers as $yearUnionUser) {
-                            $notaTrabajos[$yearUnionUser->id][$trabajo->id] = $yearUnionUser->pivot->value;
+                            $notaTrabajos[$yearUnionUser->user->id][$trabajo->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaTrabajos = $notaTrabajos;
                         }
                     }
@@ -136,13 +136,9 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->trabajos);
                                     }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaTrabajos = $mediaTrabajos;
-                                    } else {
-                                        $mediaTrabajos[$user_id] = 0;
-                                    }
+                                    $aux += $nota;
+                                    $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaTrabajos = $mediaTrabajos;
                                 }
                             }
                             $aux = 0;
@@ -154,7 +150,7 @@ class SubjectController extends Controller
                     $evaluation->actitud = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->actitud as $act) {
                         foreach ($act->yearUnionUsers as $yearUnionUser) {
-                            $notaActitud[$yearUnionUser->id][$act->id] = $yearUnionUser->pivot->value;
+                            $notaActitud[$yearUnionUser->user->id][$act->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaActitud = $notaActitud;
                         }
                     }
@@ -175,13 +171,9 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->actitud);
                                     }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaActitud[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaActitud = $mediaActitud;
-                                    } else {
-                                        $mediaActitud[$user_id] = 0;
-                                    }
+                                    $aux += $nota;
+                                    $mediaActitud[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaActitud = $mediaActitud;
                                 }
                             }
                             $aux = 0;
@@ -193,7 +185,7 @@ class SubjectController extends Controller
                     $evaluation->recuperacion = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->recuperacion as $rec) {
                         foreach ($rec->yearUnionUsers as $yearUnionUser) {
-                            $notaRecuperacion[$yearUnionUser->id][$rec->id] = $yearUnionUser->user->pivot->value;
+                            $notaRecuperacion[$yearUnionUser->user->id][$rec->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaRecuperacion = $notaRecuperacion;
                         }
                     }
@@ -214,13 +206,9 @@ class SubjectController extends Controller
                                     if ($aux2 == 0) {
                                         $aux2 = count($evaluation->recuperacion);
                                     }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaRecuperacion = $mediaRecuperacion;
-                                    } else {
-                                        $mediaRecuperacion[$user_id] = 0;
-                                    }
+                                    $aux += $nota;
+                                    $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
+                                    $evaluation->mediaRecuperacion = $mediaRecuperacion;
                                 }
                             }
                             $aux = 0;
@@ -234,6 +222,14 @@ class SubjectController extends Controller
         return view('Notas.desglose', compact('evaluation', 'subject', 'eval', 'year', 'course'));
     }
 
+    /**
+     * Muestra las notas medias de los usuarios con sus 
+     * notas finales aplicando los porcentajes en una tabla.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param int $subject_id
+     * @return view Notas.evaluations
+     */
     public function evaluations(Request $request, $subject_id)
     {
 
@@ -256,12 +252,14 @@ class SubjectController extends Controller
             $yearUnion->percentages = $yearUnion->types;
             $yearUnion->users = $yearUnion->users;
             $yearUnion->tareas = $taskTypes;
+            $users = $yearUnion->users;
             foreach ($yearUnion->users as $user) {
                 if (count($taskTypes) > 0) {
                     $sumaFinal = 0;
                     $recuperado = 0;
                     foreach ($taskTypes as $task_type) {
-                        $tasks =  YearUnionUser::find($user->pivot->user_id)->tasks;
+                        $yearUnionUser =  YearUnionUser::find($user->pivot->id);
+                        $tasks =  $yearUnionUser->tasks()->where('type_id', $task_type->id)->get();
                         $suma = 0;
                         $tareas[$task_type->name] = 0;
                         $user->tareas = $tareas;
@@ -334,10 +332,10 @@ class SubjectController extends Controller
     }
 
     /**
-     * Display the specified resource.  
+     * Muestra la informacion de una asignatura  
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return view Subjects.Show
      */
     public function show($id)
     {

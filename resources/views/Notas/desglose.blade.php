@@ -12,7 +12,7 @@
             </div>
             <div>
                 <a href="{{ url('desglose/crearTarea', $evaluation) }}" class="btn btn-outline-info">Crear Tarea</a>
-                <a href="{{ url('tareas', $subject->id) }}" class="btn btn-outline-danger ">Eliminar Tarea</a>
+                <a href="{{ url('tareas', $evaluation) }}" class="btn btn-outline-danger ">Eliminar Tarea</a>
             </div>
         </div>
         <div class="card-body row no-gutters">
@@ -68,7 +68,7 @@
                                 </tbody>
                             </table>
                             <input type="hidden" name="subject" value={{$subject->id}}>
-                            <input type="hidden" name="evaluacion" value={{$eval->id}}>
+                            <input type="hidden" name="yearUnion" value={{$evaluation->id}}>
                             <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
                         </form>
                     </div>
@@ -114,7 +114,7 @@
                                 </tbody>
                             </table>
                             <input type="hidden" name="subject" value={{$subject->id}}>
-                            <input type="hidden" name="evaluacion" value={{$eval->id}}>
+                            <input type="hidden" name="yearUnion" value={{$evaluation->id}}>
                             <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
                         </form>
                     </div>
@@ -160,7 +160,7 @@
                                 </tbody>
                             </table>
                             <input type="hidden" name="subject" value={{$subject->id}}>
-                            <input type="hidden" name="evaluacion" value={{$eval->id}}>
+                            <input type="hidden" name="yearUnion" value={{$evaluation->id}}>
                             <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
                         </form>
                     </div>
@@ -206,7 +206,7 @@
                                 </tbody>
                             </table>
                             <input type="hidden" name="subject" value={{$subject->id}}>
-                            <input type="hidden" name="evaluacion" value={{$eval->id}}>
+                            <input type="hidden" name="yearUnion" value={{$evaluation->id}}>
                             <button class="btn btn-primary mt-3 float-right" type="submit">Guardar</button>
                         </form>
                     </div>
