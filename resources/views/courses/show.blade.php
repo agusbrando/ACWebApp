@@ -13,7 +13,7 @@
             <div class="d-flex flex-row">
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
 
-                <h3>Curso </h3>
+                <h3>{{$yearUnionsPrueba->first()->course->level}}º {{$yearUnionsPrueba->first()->course->abbreviation}}</h3>
 
             </div>
             <div class="d-flex flex-row-reverse">
@@ -88,7 +88,7 @@
                                     <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse" aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
                                         <div class="card-body">
                                             <ul class="list-group list-group-flush">
-                                                <div class="card">
+                                                <div class="card row no-gutters table-responsive">
 
 
                                                     <table id='mytable' class="table w-100">
@@ -125,6 +125,7 @@
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
                                                                                 @foreach($items as $item)
+                                                                                
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
 
 
