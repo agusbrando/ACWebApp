@@ -150,6 +150,7 @@
                     
                 </div> 
                 <div class="collapse multi-collapse col-lg-12 col-sm-12 row no-gutters table-responsive"  id="multiCollapseExample2">
+                   
                         @if(!$editar)
                         <div class="card-deck border-bottom bg-dark text-white">
                             <div class="card border-0 bg-dark">
@@ -195,24 +196,25 @@
                                     <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
             
 
-                                    <a type="button" class="btn" data-toggle="modal" data-target="#confirm-delete/{{$evaluable->pivot->id}}"><i class="fas fa-trash-alt text-warning"></i></a>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#confirm-delete{{$evaluable->pivot->id}}"><i class="fas fa-trash-alt text-warning"></i></button>
                                         
                                     <!-- Modal Confirmacion Borrar-->
-                                    <div class="modal fade" id="confirm-delete/{{$evaluable->pivot->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
+                                    <div class="modal fade" id="confirm-delete{{$evaluable->pivot->id}}" tabindex="-1" role="dialog" aria-labelledby="confirm-delete{{$evaluable->pivot->id}}Label" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                                <div class="modal-header">
-                                                    Confirmación de borrar
+                                                <div class="modal-header text-center">
+                                                    <h5 class="modal-title text-center" id="confirm-delete{{$evaluable->pivot->id}}Label"> Confirmación de borrar</h5>
+                                                   
                                                 </div>
                                                 <div class="modal-body wrap">
                                                     ¿Estas seguro de que deseas borrar este aspecto evaluado de la programacion?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                                                     <form  action="{{ route('programs.destroyAspecto',  ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)]) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm" type="submit">Borrar</button>
+                                                        <button class="btn btn-outline-danger btn-sm" type="submit">Borrar</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -296,38 +298,23 @@
                         @endif
                 </div> 
                 <div class="collapse multi-collapse col-sm-12"  id="multiCollapseExample3">
-                    <!-- <div class="dropdown justify-content-start">
-                    
-                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Evaluacion
-                            </button>
-                        
-                        
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" id="b1EVAL" href="#">1EVAL</a>
-                            <a class="dropdown-item" id="b2EVAL" href="#">2EVAL</a>
-                            <a class="dropdown-item" id="b3EVAL" href="#">3EVAL</a>
-                        </div>
-                    </div> -->
 
-                    
- 
 
                     <div id="accordion">
-                    @for($i=1;$i<=3;$i++)
+                    @foreach($program->yearUnions as $i=>$yearUnion)
                         <div class="card">
-                            <div class="card-header" id="heading{{$i}}">
+                            <div class="card-header" id="heading{{$i+1}}">
                             <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#divTablaEval{{$i}}" aria-expanded="true" aria-controls="divTablaEval{{$i}}">
-                                {{$i}}º Evaluación
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#divTablaEval{{$i+1}}" aria-expanded="true" aria-controls="divTablaEval{{$i+1}}">
+                                {{$yearUnion->evaluation->name}}
                                 </button>
                             </h5>
                             </div>
 
-                            <div id="divTablaEval{{$i}}" class="collapse" aria-labelledby="heading{{$i}}" data-parent="#accordion">
+                            <div id="divTablaEval{{$i+1}}" class="collapse" aria-labelledby="heading{{$i+1}}" data-parent="#accordion">
                                 <div class="card-body row no-gutters table-responsive">
-
-                                    <table id='tablaEval{{$i}}' class="table col-12 text-left" >
+                                    @if($yearUnion->evaluation->id!=4)
+                                    <table id='tablaEval{{$i+1}}' class="table col-12 text-left" >
                                         <thead class="thead-dark col-12">
                                             <tr>
                                                 <th></th>
@@ -341,11 +328,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($program->units->where('eval',$i) as $k=>$unidad)
+                                               
+                                            @foreach($program->units->where('eval',$i+1) as $k=>$unidad)
                                             <tr>
                                                 <td>
-                                                    <a type="button" id="btnMasInfo{{$k}}" class="btn text-primary" href="#"><i class="fas fa-plus"></i></a>
-                                                    <a type="button" id="btnMenosInfo{{$k}}" class="btn text-primary" href="#"><i class="fas fa-minus"></i></a>
+                                                    <a type="button" id="btnMasInfo{{$k}}" class="btn btn-sm text-primary" href="#"><i class="fas fa-plus"></i></a>
+                                                    <a type="button" id="btnMenosInfo{{$k}}" class="btn btn-sm text-primary" href="#"><i class="fas fa-minus"></i></a>
                                                 </td>
                                                 <td> {{$unidad->name}}</td>
                                                 <td></td>
@@ -404,10 +392,11 @@
                                             @endforeach    
                                         </tbody>
                                     </table>
-                                    @if($notas[$i] == '' && $usuario->role_id == 3)
+                                    @endif
+                                    @if($notas[$i+1] == '' && $usuario->role_id == 3)
                                         <form method="post" action="{{route('programs.storeEvaluacion', $program->id)}}">
                                         @csrf
-                                            <input type="hidden" name="eval" value="{{$i}}">
+                                            <input type="hidden" name="eval" value="{{$i+1}}">
 
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
@@ -430,11 +419,11 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Notas</span>
                                         </div>
-                                        <textarea class="form-control" name="notes" rows='3' readonly>{{$notas[$i]}}</textarea>
+                                        <textarea class="form-control" name="notes" rows='3' readonly>{{$notas[$i+1]}}</textarea>
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="input-group mb-3 col-12">
-                                        @if(!$evaluado[$i])
+                                        @if(!$evaluado[$i+1])
                                             
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
@@ -449,12 +438,12 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">Fecha Comprobacion</span>
                                                 </div>
-                                                <input class="form-control" type="date" name="date_check" value="{{$fechas[$i]}}" readonly>
+                                                <input class="form-control" type="date" name="date_check" value="{{$fechas[$i+1]}}" readonly>
                                                 <div class="espacio"></div>
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">Responsable</span>
                                                 </div>
-                                                <div class="form-control profesor  text-truncate">{{$responsable[$i]->first_name}} {{$responsable[$i]->last_name}}</div>
+                                                <div class="form-control profesor  text-truncate">{{$responsable[$i+1]->first_name}} {{$responsable[$i+1]->last_name}}</div>
                                         @endif
                                             </div>
                                         </div>
@@ -464,7 +453,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                     </div>
 
 

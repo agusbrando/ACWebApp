@@ -25,12 +25,15 @@ class YearUnionsTableSeeder extends Seeder
         array_push($fechasInicioFin, ['date_start' => '2020-02-25', 'date_end' => '2020-05-28']); //3ºEVAL
         array_push($fechasInicioFin, ['date_start' => '2020-06-01', 'date_end' => '2020-06-18']); //4ºEVAL
 
-        for ($i = 1; $i <= count($fechasInicioFin); $i++) {
+       
 
             foreach ($cursos as $j => $curso) {
-                if ($i == 3 && ($curso->level == 2)) {
-                    $i++;
-                } else {
+                for ($i = 1; $i <= count($fechasInicioFin); $i++) {
+
+                    if ($i == 3 && ($curso->level == 2)) {
+                        $i++;
+                    }
+                    
                     foreach ($curso->subjects as $subject) {
                         DB::table('yearUnions')->insert([
                             'subject_id' => $subject->id,
@@ -47,5 +50,5 @@ class YearUnionsTableSeeder extends Seeder
                 }
             }
         }
-    }
+    
 }

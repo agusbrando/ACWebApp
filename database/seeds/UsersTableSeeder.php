@@ -26,6 +26,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         //Profesores
+        //2
         DB::table('users')->insert([
             'first_name' => 'Belén',
             'last_name' => 'López Pérez',
@@ -36,6 +37,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
+        //3
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
             'last_name' => 'Garrido Portes',
@@ -46,6 +48,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
+        //4
         DB::table('users')->insert([
             'first_name' => 'Marcelo',
             'last_name' => 'Malonda Pellicer',
@@ -56,6 +59,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
+        //5
         DB::table('users')->insert([
             'first_name' => 'Matilde',
             'last_name' => 'Gil Villanova',
@@ -66,7 +70,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
-
+        //6
         DB::table('users')->insert([
             'first_name' => 'Miguel Ángel',
             'last_name' => 'Belenguer Sánchez',
@@ -77,7 +81,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
-
+        //7
         DB::table('users')->insert([
             'first_name' => 'José Manuel',
             'last_name' => 'Ramón García',
@@ -88,7 +92,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
-
+        //8
         DB::table('users')->insert([
             'first_name' => 'Raquel',
             'last_name' => 'Valls Valls',
@@ -99,7 +103,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
-
+        //9
         DB::table('users')->insert([
             'first_name' => 'Jose',
             'last_name' => 'Fito',
@@ -110,7 +114,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
-
+        //10
         DB::table('users')->insert([
             'first_name' => 'Mario',
             'last_name' => 'García Atienza',
@@ -121,7 +125,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
-
+        //11
         DB::table('users')->insert([
             'first_name' => 'Olga ',
             'last_name' => 'Minguet',

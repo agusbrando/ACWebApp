@@ -80,51 +80,51 @@
 </main>
 
 
-<script>
-    $('#daterangepicker').daterangepicker({
-        "showDropdowns": true,
-        "autoApply": true,
-        "language":'auto',
-        "startDate": false,
-        "endDate": false,
-        "opens": "center",
-        "locale": {
-            "format": "DD/MM/YYYY",
-            "separator": " - ",
-            "applyLabel": "Aplicar",
-            "cancelLabel": "Cancelar",
-            "fromLabel": "hasta",
-            "toLabel": "De",
-            "customRangeLabel": "Custom",
-            "weekLabel": "S",
-            "daysOfWeek": [
-                "D",
-                "L",
-                "M",
-                "X",
-                "J",
-                "V",
-                "S"
-            ],
-            "monthNames": [
-                "Enero",
-                "Febrero",
-                "Marzo",
-                "Abril",
-                "Mayo",
-                "Junio",
-                "Julio",
-                "Agosto",
-                "Septiembre",
-                "Octubre",
-                "Noviembre",
-                "Diciembre"
-            ],
-            "firstDay": 1
-        }
-    }, function(start, end, label) {
-    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-    });
-</script>
+    <script>
+        $('#daterangepicker').daterangepicker({
+            "showDropdowns": true,
+            "autoApply": true,
+            "language":'auto',
+            "startDate": false,
+            "endDate": false,
+            "opens": "center",
+            "locale": {
+                "format": "DD/MM/YYYY",
+                "separator": " - ",
+                "applyLabel": "Aplicar",
+                "cancelLabel": "Cancelar",
+                "fromLabel": "hasta",
+                "toLabel": "De",
+                "customRangeLabel": "Custom",
+                "weekLabel": "S",
+                "daysOfWeek": [
+                    "D",
+                    "L",
+                    "M",
+                    "X",
+                    "J",
+                    "V",
+                    "S"
+                ],
+                "monthNames": [
+                    "Enero",
+                    "Febrero",
+                    "Marzo",
+                    "Abril",
+                    "Mayo",
+                    "Junio",
+                    "Julio",
+                    "Agosto",
+                    "Septiembre",
+                    "Octubre",
+                    "Noviembre",
+                    "Diciembre"
+                ],
+                "firstDay": 1
+            }
+        }, function(start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+        });
+    </script>
 @endsection
 
