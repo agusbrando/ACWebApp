@@ -62,6 +62,22 @@ class CoursesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('courses')->insert([
+            'level' => 1,
+            'name' => 'Sistemas Microinformaticos y Redes',
+            'abbreviation' =>'SMR',
+            'num_students' => 25,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('courses')->insert([
+            'level' => 2,
+            'name' => 'Sistemas Microinformaticos y Redes',
+            'abbreviation' =>'SMR',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
    /*
         DB::table('courses')->insert([
             'level' => 1,
@@ -83,65 +99,9 @@ class CoursesTableSeeder extends Seeder
 
         
 
-        //ASIR
-        DB::table('courses')->insert([
-            'level' => 1,
-            'name' => 'Administracion de Sistemas Informaticos y en Red',
-            'abbreviation' =>'ASIR',
-            'num_students' => 23,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('courses')->insert([
-            'level' => 2,
-            'name' => 'Sistemas Microinformaticos y Redes',
-            'abbreviation' =>'SMR',
-            'num_students' => 19,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-       */ 
-
-        //FPBASICA
-        // DB::table('courses')->insert([
-        //     'level' => 1,
-        //     'name' => 'FP Básica en Informática y Comunicaciones',
-        //     'abbreviation' =>'FPBASICA',
-        //     'num_students' => 30,
-        //     'created_at' => now(),
-        //     'updated_at' => now()
-        // ]);
-        // DB::table('courses')->insert([
-        //     'level' => 2,
-        //     'name' => 'FP Básica en Informática y Comunicaciones',
-        //     'abbreviation' =>'FPBASICA',
-        //     'num_students' => 30,
-        //     'created_at' => now(),
-        //     'updated_at' => now()
-        // ]);
-
-        //SMR
-        // DB::table('courses')->insert([
-        //     'level' => 1,
-        //     'name' => 'Sistemas Microinformaticos y Redes',
-        //     'abbreviation' =>'SMR',
-        //     'num_students' => 25,
-        //     'created_at' => now(),
-        //     'updated_at' => now()
-        // ]);
-        // DB::table('courses')->insert([
-        //     'level' => 2,
-        //     'name' => 'Sistemas Microinformaticos y Redes',
-        //     'abbreviation' =>'SMR',
-        //     'num_students' => 19,
-        //     'created_at' => now(),
-        //     'updated_at' => now()
-        // ]);
-
         
 
-       
+       */ 
 
 
     }

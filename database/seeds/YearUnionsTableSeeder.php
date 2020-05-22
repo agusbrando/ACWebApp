@@ -28,24 +28,25 @@ class YearUnionsTableSeeder extends Seeder
         for ($i = 1; $i <= count($fechasInicioFin); $i++) {
 
             foreach ($cursos as $j => $curso) {
+                
                 if ($i == 3 && ($curso->level == 2)) {
                     $i++;
-                } else {
-                    foreach ($curso->subjects as $subject) {
-                        DB::table('yearUnions')->insert([
-                            'subject_id' => $subject->id,
-                            'course_id' => $curso->id,
-                            'evaluation_id' => $i,
-                            'year_id' => $year,
-                            'date_start' => $fechasInicioFin[$i - 1]['date_start'],
-                            'date_end' => $fechasInicioFin[$i - 1]['date_end'],
-                            'classroom_id' => $j+1,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]);
-                    }
                 }
-            
+                
+                foreach ($curso->subjects as $subject) {
+                    DB::table('yearUnions')->insert([
+                        'subject_id' => $subject->id,
+                        'course_id' => $curso->id,
+                        'evaluation_id' => $i,
+                        'year_id' => $year,
+                        'date_start' => $fechasInicioFin[$i - 1]['date_start'],
+                        'date_end' => $fechasInicioFin[$i - 1]['date_end'],
+                        'classroom_id' => $j+1,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+                
             }
             
         }
