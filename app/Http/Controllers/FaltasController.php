@@ -18,16 +18,7 @@ class FaltasController extends Controller
      */
     public function index()
     {
-        // $lista = Misbehavior::all();
-        // return view('', compact('lista'));
-        // $users = User::all();
-        // $misbehaviors = null;
-
-        // foreach ($users as $user) {
-        //     $misbehaviors = $user->misbehaviors;
-        // }
-
-        // return view('faltas.show', compact('users','misbehaviors'));
+        //
     }
 
     /**
@@ -47,28 +38,29 @@ class FaltasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $user_id)
+    public function store(Request $request)
     {
         $request->validate([
             'date' => 'required',
             'type_id' => 'required',
             'description' => 'required',
-            'year_user_id' => 'required',
-            'session_timetable_id' => 'required'
+            'user_id' => 'required',
 
         ]);
-
-        $misbehavior = new Misbehavior([
-            'date' => $request->get('date'),
+        $user_id = $request->get('user_id');
+        $fechaFin  = str_replace('/', '-',  $request->get('date'));
+        $fechaFin = date("Y-m-d H:i", strtotime($fechaFin));
+        $misbehavior = Misbehavior::create([
+            'date' => $fechaFin,
             'type_id' => $request->get('type_id'),
             'description' => $request->get('description'),
-            'year_user_id' => 1,
+            'year_user_id' => User::find($user_id)->yearUnions->first()->pivot->id,
             'session_timetable_id' => 1
         ]);
         $misbehavior->save();
         // return redirect()->route('faltas.index')
         //     ->with('success', 'Falta añadida!');
-        return redirect('/faltas/' . $user_id);
+        return redirect('/faltas/'. $user_id);
     }
 
     /**
