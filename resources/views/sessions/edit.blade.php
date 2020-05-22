@@ -61,11 +61,11 @@
                         </div>
                         <div class="form-group">
                             <label for="time_start">Hora de Fin</label>
-                            <input value="{{$session->time_start->format('H:i') }}" class="form-control @error('time_start') is-invalid @enderror form-control" type="time" id="time_start" name="time_start">
+                            <input value="{{$session->time_start}}" class="form-control @error('time_start') is-invalid @enderror form-control" type="time" id="time_start" name="time_start">
                         </div>
                         <div class="form-group">
                             <label for="time_end">Hora de Fin</label>
-                            <input value="{{$session->time_end->format('H:i') }}" class="form-control @error('time_end') is-invalid @enderror form-control" type="time" id="time_end" name="time_end">
+                            <input value="{{$session->time_end }}" class="form-control @error('time_end') is-invalid @enderror form-control" type="time" id="time_end" name="time_end">
                         </div>
                     </fieldset>
                     @error('email', 'login')
