@@ -45,6 +45,8 @@ class TypesTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
+        
+
         DB::table('types')->insert([
             'name' => 'RACK',
             'model' => Item::class,
@@ -138,6 +140,11 @@ class TypesTableSeeder extends Seeder
             'updated_at' => now()
         ]);
        
-
+        DB::table('types')->insert([
+            'name' => 'Raton',
+            'model' => Item::class,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

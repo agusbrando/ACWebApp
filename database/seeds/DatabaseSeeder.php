@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             UnitsTableSeeder::class,
             EvaluablesTableSeeder::class,
 	        StatesTableSeeder::class,
-            ItemsTableSeeder::class,
+            
             EventsTableSeeder::class,
             PostsTableSeeder::class,
             CommentsTableSeeder::class,
@@ -45,6 +45,8 @@ class DatabaseSeeder extends Seeder
             ProgramsTableSeeder::class,
             EvaluatedsTableSeeder::class,
 
+            ItemsTableSeeder::class,
+            
             PercentagesTableSeeder::class,
             SessionTimetableTableSeeder::class,
             YearUnionUserTableSeeder::class,
