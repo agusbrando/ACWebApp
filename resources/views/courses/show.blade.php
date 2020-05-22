@@ -13,7 +13,7 @@
             <div class="d-flex flex-row">
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
 
-                <h3>{{$yearUnionsPrueba->first()->course->level}}º {{$yearUnionsPrueba->first()->course->abbreviation}}</h3>
+                <h3>{{$yearUnionsPrueba->first()->course->level}}º {{$yearUnionsPrueba->first()->course->abbreviation}} - {{$yearUnionsPrueba->first()->classroom->name}}</h3>
 
             </div>
             <div class="d-flex flex-row-reverse">
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade " id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
-
+                
                             <div class="divShowCoursesContent" id="accordion">
                                 @foreach($yearUnionsPrueba as $yearUnion)
 
@@ -125,9 +125,9 @@
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
                                                                                 @foreach($items as $item)
-                                                                                
+                                                                                @if($item->classroom_id == $yearUnion->classroom_id)
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
-
+                                                                                @endif
 
                                                                                 @endforeach
                                                                             </select>
