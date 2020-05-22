@@ -92,12 +92,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //RUTAS ITEMs Sergio Lopez
 Route::post('/items/filter', 'ItemController@filter');
+//update
+Route::patch('/items/show/edit/{item_id}', 'ItemController@update')->name('items.updateItem');
 Route::resource('items', 'ItemController');
 
-//RUTAS STATESs
+//RUTAS STATESs Sergio Lopez
 Route::resource('states', 'StateController');
 
-//RUTAS COURSEs
+//RUTAS COURSEs Sergio Lopez
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 //filtro
@@ -110,6 +112,7 @@ Route::resource('courses', 'CourseController');
 //RUTAS SUBJECTS JAVI
 //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
 Route::get('subjects/evaluations/{subject_id}', 'SubjectController@evaluations')->name('subjects.evaluations');
+Route::get('desglose', 'SubjectController@desglose')->name('subjects.desglose');
 Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
@@ -149,19 +152,11 @@ Route::get('messages_send', 'MessageController@index')->middleware('auth')->name
 Route::get('download_attachment_message/{idm}/{nameAttach}','MessageController@download')->name('downloadmessagefile');
 Route::get('sended/{id}', 'MessageController@showSended')->middleware('auth');
 Route::get('response/{id}', 'MessageController@create')->middleware('auth');
+Route::resource('notifications', 'NotificationController')->middleware('auth');
 
 //RUTAS ITEMs
 Route::post('/items/filter', 'ItemController@filter');
 Route::resource('items', 'ItemController');
-
-//RUTAS STATESs Sergio Lopez
-Route::resource('states', 'StateController');
-
-//RUTAS COURSEs Sergio Lopez
-Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
-Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
-Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
-Route::resource('courses', 'CourseController');
 
 //Rutas Posts Adrian
 Route::resource('posts', 'PostController');

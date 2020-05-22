@@ -136,7 +136,7 @@ class SubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         
-        //1ºASIR 18-22
+        //1ºASIR 18-21
         DB::table('subjects')->insert([
             'name' => 'Implantación de sistemas operativos',
             'abbreviation'=>'ISO',
@@ -201,5 +201,75 @@ class SubjectsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        
+        //1º de SMR 27-31
+        DB::table('subjects')->insert([
+            'name' => 'Montaje y mantenimiento de equipos',
+            'abbreviation'=>'MME',
+            "hours"=>224	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Redes locales',
+            'abbreviation'=>'RL',
+            "hours"=>224	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Aplicaciones ofimáticas',
+            'abbreviation'=>'AO',
+            "hours"=>224	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Sistemas operativos Monopuesto',
+            'abbreviation'=>'SOM',
+            "hours"=>128	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Seguridad y alta disponibilidad',
+            'abbreviation'=>'DIW',
+            "hours"=>100,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        //2º de SMR 32-35
+        DB::table('subjects')->insert([
+            'name' => 'Sistemas operativos en red',
+            'abbreviation'=>'SOR',
+            "hours"=>176	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Seguridad informática',
+            'abbreviation'=>'SEI',
+            "hours"=>110	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Servicios en red',
+            'abbreviation'=>'SER',
+            "hours"=>176	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Aplicaciones web',
+            'abbreviation'=>'APW',
+            "hours"=>88	,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        //1ºFP BASICA
+        
+
     }
 }

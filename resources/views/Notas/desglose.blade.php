@@ -47,7 +47,7 @@
                                         <td>
                                             <div class="input-group col-10">
                                                 @if($evaluation->notaParciales != null)
-                                                @if($evaluation->notaParciales[$user->id][$parcial->id] < 4)
+                                                @if($evaluation->notaParciales[$user->id][$parcial->id] < 4 && $evaluation->notaParciales[$user->id][$parcial->id] != null)
                                                 <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w text-danger" value="{{$evaluation->notaParciales[$user->id][$parcial->id]}}">
                                                 @else
                                                 <input name="examenes[{{$user->id}}][{{$parcial->id}}]" type="text" class="form-control w" value="{{$evaluation->notaParciales[$user->id][$parcial->id]}}">

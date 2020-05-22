@@ -70,17 +70,19 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="tab-pane fade " id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
 
-                        <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
                             <div class="divShowCoursesContent" id="accordion">
+                                @foreach($yearUnionsPrueba as $yearUnion)
+
                                 <div class="card">
-                                    <div class="card-header list-group-item d-flex justify-content-between align-items-center m-0" id="heading{{$yearUnion->evaluation->name}}" data-toggle="collapse" data-target="#collapse{{$yearUnion->evaluation->name}}" aria-expanded="false" aria-controls="collapse{{$yearUnion->evaluation->name}}">
+                                    <div class="card-header list-group-item d-flex justify-content-between align-items-center m-0" id="heading{{$yearUnion->evaluation->name}}" data-toggle="collapse" data-target="#collapse{{$yearUnion->evaluation->name}}" aria-expanded="true" aria-controls="collapse{{$yearUnion->evaluation->name}}">
                                         <h5 class="mb-0">
                                             <button class="btn collapsed">
                                                 {{$yearUnion->evaluation->name}}
                                             </button>
                                         </h5>
-                                        <span class="badge badge-primary badge-pill"> {{$yearUnion->yearUnionUsers->count()}}</span>
+                                        <span class="badge badge-primary badge-pill"> {{$yearUnion->users->count()}}</span>
                                     </div>
 
                                     <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse" aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
@@ -100,25 +102,25 @@
                                                         </thead>
                                                         <tbody>
 
-                                                            @foreach($yearUnion->yearUnionUsers as $yearUnionUser)
+                                                            @foreach($yearUnion->users as $user)
 
 
                                                             <tr>
 
-                                                                <td>{{$yearUnionUser->user->first_name}}</td>
-                                                                <td>{{$yearUnionUser->user->last_name}}</td>
+                                                                <td>{{$user->first_name}}</td>
+                                                                <td>{{$user->last_name}}</td>
 
                                                                 <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
-                                                                    @foreach($yearUnionUser->items as $item)
+                                                                    @foreach($user->pivot->items as $item)
                                                                     <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
                                                                     @endforeach
                                                                 </td>
                                                                 <td>
                                                                     <div class="form-group ">
-                                                                        <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($yearUnionUser->user->id, $courseId, $yearId))}}">
+                                                                        <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($user->id, $courseId, $yearId))}}">
                                                                             @csrf
                                                                             @method('POST')
-
+                                                                            
                                                                             <select multiple class="form-control " id="itemIds" name="itemIds[]">
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
@@ -145,10 +147,6 @@
                                 </div>
                                 @endforeach
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </div>

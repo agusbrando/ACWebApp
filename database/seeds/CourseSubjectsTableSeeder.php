@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Subject;
-use Illuminate\Database\Seeder;
 
+use Illuminate\Database\Seeder;
+use App\Models\Subject;
 class CourseSubjectsTableSeeder extends Seeder
 {
     /**
@@ -15,18 +15,18 @@ class CourseSubjectsTableSeeder extends Seeder
         //TODO ASIR y FPBASICA
 
         //1ºDAM
-        for($i=4; $i<=8; $i++){
+       for($i=4; $i<=8; $i++){
 
-            DB::table('course_subject')->insert([
+        DB::table('course_subject')->insert([
                 'course_id' => 1,
                 'subject_id' => Subject::find($i)->id,
                 'max_hours' => round((Subject::find($i)->hours)*0.15),
                 'hours'=> Subject::find($i)->hours,
                 'created_at' => now(),
                 'updated_at' => now()
-            ]);
+             ]);
 
-        }
+         }
         //Ingles id 3
         DB::table('course_subject')->insert([
             'course_id' => 1,
@@ -144,7 +144,7 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //1ºASIR
-        for($i=18; $i<=22; $i++){
+        for($i=18; $i<=21; $i++){
 
             DB::table('course_subject')->insert([
                 'course_id' => 5,
@@ -218,6 +218,71 @@ class CourseSubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
+        //1ºSMR
+        for($i=27; $i<=31; $i++){
 
+            DB::table('course_subject')->insert([
+                'course_id' => 7,
+                'subject_id' => $i,
+                'hours'=> Subject::find($i)->hours,
+                'max_hours' => round((Subject::find($i)->hours)*0.15),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+        }
+
+        //Ingles id 3
+        DB::table('course_subject')->insert([
+            'course_id' => 7,
+            'subject_id' => 3,
+            'max_hours' => 9,
+            'hours'=> 64,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        //FOL id 2
+        DB::table('course_subject')->insert([
+            'course_id' => 7,
+            'subject_id' => 2,
+            'max_hours' => 13,
+            'hours'=> 96,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        //2ºSMR
+        for($i=32; $i<=35; $i++){
+
+            DB::table('course_subject')->insert([
+                'course_id' => 8,
+                'subject_id' => $i,
+                'hours'=> Subject::find($i)->hours,
+                'max_hours' => round((Subject::find($i)->hours)*0.15),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+        }
+
+        //Ingles id 3
+        DB::table('course_subject')->insert([
+            'course_id' => 8,
+            'subject_id' => 3,
+            'max_hours' => 6,
+            'hours' =>44,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        //EIE id 1
+        DB::table('course_subject')->insert([
+            'course_id' => 8,
+            'subject_id' => 1,
+            'max_hours' => 10,
+            'hours' =>66,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

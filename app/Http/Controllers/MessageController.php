@@ -21,6 +21,7 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
     public function index()
     {
         $isSend = 1;
@@ -79,7 +80,7 @@ class MessageController extends Controller
         foreach ($users as $userid) {
             $user = User::find($userid);
             $user->messagesReceive()->attach($message->id);
-            $message->notify(new InvoicePaid($user));
+            $user->notify(new InvoicePaid($message,$user));
         }
 
 

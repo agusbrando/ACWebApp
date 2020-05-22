@@ -109,9 +109,33 @@ class CourseController extends Controller
      */
     public function show($courseId, $yearId, Request $request)
     {
+        // $yearUnionsItems = YearUnion::select('id','evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation'); 
+        // foreach($yearUnionsItems as $yearUnion){
+        //     $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->get()->load('items', 'user');
+        //     $registrados = array();
+        //     foreach($yearUnion->yearUnionUsers as $yearUnionUser){
+
+
+        //         //Aseguramos que no se repitan los usuarios
+        //         if( !in_array($yearUnionUser->user_id, $registrados) ){
+        //             array_push($registrados, $yearUnionUser->user_id);
+        //             $yearUnionUser->items = $yearUnionUser->items;
+        //             $yearUnionUser->user = $yearUnionUser->user;
+        //         }else{
+        //             $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
+        //         }
+                
+        //     }
+        // }
+
+        
+
         $request->session()->put('course_id', $courseId);
         $request->session()->put('year_id', $yearId);
-        $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->whereBetween('evaluation_id', [1, 3])->distinct()->get()->load('evaluation', 'subject');
+        $course = Course::find($courseId);
+        $yearUnionsPrueba = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
+
+        $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
         $subject_ids = array();
         foreach ($yearUnions as $yearUnion) {
             if (!in_array($yearUnion->subject_id, $subject_ids)) {
@@ -139,7 +163,7 @@ class CourseController extends Controller
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
 
-        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId'));
+        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId', 'yearUnionsPrueba'));
     }
 
     /**
