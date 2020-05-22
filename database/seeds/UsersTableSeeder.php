@@ -136,7 +136,17 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
-
+        //12
+        DB::table('users')->insert([
+            'first_name' => 'Javier ',
+            'last_name' => 'Tárrega',
+            'email' => 'javier.tarrega@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id' => 1
+        ]);
         //ALUMNOS
         $cursos = Course::all();
         foreach ($cursos as $curso) {
