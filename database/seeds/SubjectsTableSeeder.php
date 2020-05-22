@@ -202,7 +202,7 @@ class SubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         
-        //1º de SMR 27-31
+        //1º de SMR 27-30
         DB::table('subjects')->insert([
             'name' => 'Montaje y mantenimiento de equipos',
             'abbreviation'=>'MME',
@@ -231,7 +231,7 @@ class SubjectsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        //2º de SMR 32-35
+        //2º de SMR 31-34
         DB::table('subjects')->insert([
             'name' => 'Sistemas operativos en red',
             'abbreviation'=>'SOR',
