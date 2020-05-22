@@ -159,7 +159,7 @@ class CourseController extends Controller
         $subjects = Subject::whereIn('id', $subject_ids)->get();
 
         //Items Tab
-        $items = Item::all();
+        $items = Item::where('classroom_id', $yearUnionsPrueba->first()->classroom->id)->get();
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
 
@@ -385,6 +385,6 @@ class CourseController extends Controller
         $courseId = $courseId;
         $yearId = $yearId;
 
-        return view('courses.filter', compact('classrooms', 'items', 'types', 'states', 'yearUnions', 'courseId', 'yearId', 'idClass'));
+        return view('courses.show', compact('classrooms', 'items', 'types', 'states', 'yearUnions', 'courseId', 'yearId', 'idClass'));
     }
 }

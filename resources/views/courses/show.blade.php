@@ -125,9 +125,8 @@
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
                                                                                 @foreach($items as $item)
-                                                                                @if($item->classroom_id == $yearUnion->classroom_id)
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
-                                                                                @endif
+                                                                                
 
                                                                                 @endforeach
                                                                             </select>
