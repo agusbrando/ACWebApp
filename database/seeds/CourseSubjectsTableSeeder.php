@@ -219,7 +219,7 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //1ºSMR
-        for($i=27; $i<=31; $i++){
+        for($i=27; $i<=30; $i++){
 
             DB::table('course_subject')->insert([
                 'course_id' => 7,
@@ -253,7 +253,7 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //2ºSMR
-        for($i=32; $i<=35; $i++){
+        for($i=31; $i<=34; $i++){
 
             DB::table('course_subject')->insert([
                 'course_id' => 8,
