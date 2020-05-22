@@ -11,6 +11,23 @@ use Illuminate\Support\Facades\Auth;
 
 class FaltasController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +70,7 @@ class FaltasController extends Controller
             'date' => 'required',
             'type_id' => 'required',
             'description' => 'required'
-            
+
 
         ]);
         $misbehavior = new Misbehavior([
@@ -83,7 +100,7 @@ class FaltasController extends Controller
         $course=Course::find(5);
         $subjects = $course->subjects;
         $lista = [];
-        
+
         foreach ($subjects as $subject) {
             $count = 0;
             $listadoFaltasAsistencia = [];

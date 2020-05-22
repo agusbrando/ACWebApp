@@ -7,10 +7,27 @@ use App\Models\Type;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,21 +65,21 @@ class TypeController extends Controller
 
         $type = new Type([
             'name' => $request->get('name'),
-            'model' => $request->get('model')   
+            'model' => $request->get('model')
         ]);
         $type->save();
         return redirect('types')->with('success', 'Type saved!');
     }
 
     /**
-     * Display the specified resource.  
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $type = Type::find($id);        
+        $type = Type::find($id);
 
         return view('types.show', compact('type'));
     }

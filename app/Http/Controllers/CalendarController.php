@@ -8,12 +8,30 @@ use App\Models\Type;
 use App\Models\User;
 use App\Models\Event;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 use function PHPSTORM_META\type;
 
 class CalendarController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
   /**
    * Display a listing of the resource.
    *

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -21,6 +21,23 @@ use App\Models\YearUnionUser;
 
 class CourseController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Esta es la vista principal donde se listarán todos los cursos.
      *
@@ -35,7 +52,7 @@ class CourseController extends Controller
             //Guardo los diferentes yearUnion en cada año
             $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')
                 ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
-            
+
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
         //en este caso, le redirijo a la vista index y le paso los años con los cursos
@@ -70,13 +87,13 @@ class CourseController extends Controller
     {
         for($i=1; $i<=3; $i++){
             $curso = Course::where('id', $request->get('course'));
-            
+
             $fechasInicioFin =[];
             $year=1;
             array_push($fechasInicioFin,['date_start'=> $request->get('eval_1_date_start'), 'date_end'=>$request->get('eval_1_date_end')]);//1ºEVAL
             array_push($fechasInicioFin,['date_start'=> $request->get('eval_2_date_start'), 'date_end'=>$request->get('eval_2_date_end')]);//2ºEVAL
             array_push($fechasInicioFin,['date_start'=> $request->get('eval_3_date_start'), 'date_end'=>$request->get('eval_3_date_end')]);//3ºEVAL
-            
+
                 foreach($curso->subjects as $j=>$subject){
                     DB::table('yearUnions')->insert([
                         'subject_id' => $subject->id,
@@ -85,12 +102,12 @@ class CourseController extends Controller
                         'year_id' => $year,
                         'date_start'=> $fechasInicioFin[$i-1]['date_start'],
                         'date_end'=> $fechasInicioFin[$i-1]['date_end'],
-                        'classroom_id'=> $j+1, 
+                        'classroom_id'=> $j+1,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
                 }
-            
+
             if($curso->level == 2){
                 if( $i==2 ){
                     break;
@@ -256,7 +273,7 @@ class CourseController extends Controller
         foreach($yearUnions as $yearUnion){
             $yearUnion->delete();
         }
-        
+
 
 
         return redirect('courses')->with('exito', 'Curso eliminado!');

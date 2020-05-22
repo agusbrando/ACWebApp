@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Task;
@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\DB;
 
 class DesgloseController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         //
@@ -83,7 +100,7 @@ class DesgloseController extends Controller
             'evaluacion' => 'required'
         ]);
 
-        $recuperacion = $request->get('recuperacion');        
+        $recuperacion = $request->get('recuperacion');
 
         foreach ($recuperacion as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
@@ -106,7 +123,7 @@ class DesgloseController extends Controller
             'evaluacion' => 'required'
         ]);
 
-        $actitud = $request->get('actitud');        
+        $actitud = $request->get('actitud');
 
         foreach ($actitud as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
@@ -129,7 +146,7 @@ class DesgloseController extends Controller
             'evaluacion' => 'required',
         ]);
 
-        $examenes = $request->get('examenes');        
+        $examenes = $request->get('examenes');
 
         foreach ($examenes as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
@@ -152,7 +169,7 @@ class DesgloseController extends Controller
             'evaluacion' => 'required'
         ]);
 
-        $trabajos = $request->get('trabajos');        
+        $trabajos = $request->get('trabajos');
 
         foreach ($trabajos as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {

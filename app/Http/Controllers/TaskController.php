@@ -9,9 +9,26 @@ use App\Models\Subject;
 use App\Models\Evaluation;
 use App\Models\Calification;
 use App\Models\YearUnion;
-
+use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +77,7 @@ class TaskController extends Controller
         $evaluaciones = $request->get('evaluaciones');
         $yearUnion = YearUnion::find($request->get('yearUnion'));
 
-        foreach ($evaluaciones as $eval) {    
+        foreach ($evaluaciones as $eval) {
             $task = new Task([
                 'year_union_id' => $yearUnion->id,
                 'type_id' => $request->get('type'),

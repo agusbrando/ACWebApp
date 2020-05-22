@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Classroom;
 use App\Models\Course;
 use App\Models\Type;
@@ -22,7 +22,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        
+
         //Cojo todas las aulas que exiten para mostrarlas en el desplegable
         // para elegir a que aula pertenece el Item
 
@@ -30,7 +30,7 @@ class ItemController extends Controller
         $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
         $items = Item::paginate(10);
-        
+
         return view('items.index', compact('classrooms', 'items', 'types', 'states'));
     }
     public function filter(Request $request)
@@ -43,7 +43,7 @@ class ItemController extends Controller
         $idState = $request->get('idState');
         $idType = $request->get('idType');
 
-        //Controlamos que si no llega null haga una consulta obteniendo los item 
+        //Controlamos que si no llega null haga una consulta obteniendo los item
         //que tenga dicho id de los diferentes filtros.
         //Los resultados de cada consulta se va concatenando en $query
         if($idClass != ""){
@@ -57,16 +57,16 @@ class ItemController extends Controller
         }
         //Finalmente obtenemos todos los items que han pasado los filtros
         $items = $query->get();
-        
+
 
         //Filtro para coger solo los typos del modelo Item
         $types = Type::all()->where('model', Item::class);
         $classrooms = Classroom::all();
         $states = State::all();
-        
+
         return view('items.index', compact('classrooms', 'items', 'types', 'states'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -78,7 +78,7 @@ class ItemController extends Controller
         $classrooms = Classroom::all();
         //Filtro para coger solo los typos del modelo Item
         $types = Type::all()->where('model',Item::class);
-        
+
         return view('items.create', compact('classrooms', 'types', 'states'));
     }
 
@@ -91,7 +91,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         // muestra los datos obtenidos del formulario en pantalla
-        // dd(request()->all()); 
+        // dd(request()->all());
 
         //Valido que los campos que necesito no sean nulos
         $request->validate([
@@ -109,7 +109,7 @@ class ItemController extends Controller
             'classroom_id'=>$request->get('classroom_id'),
             'state_id'=>'1',
             'type_id'=>$request->get('type_id'),
-            
+
 
         ]);
         //y lo guardamos en la base de datos
@@ -149,7 +149,7 @@ class ItemController extends Controller
         $classrooms = Classroom::all();    //->load('name', Classroom::class)
         $states = State::all();
         $item = Item::find($id);
-        
+
         $item->date_pucharse = Carbon::parse($item->date_pucharse)->format('Y-m-d');
 
         return view('items.edit', compact('item', 'classrooms', 'types', 'states'));
@@ -172,7 +172,7 @@ class ItemController extends Controller
             'state_id'=>'required',
             'type_id'=>'required',
         ]);
-        
+
         $item = Item::find($id);
         $item->name = $request->get('name');
         $item->number = $request->get('number');
@@ -180,7 +180,7 @@ class ItemController extends Controller
         $item->classroom_id = $request->get('classroom_id');
         $item->state_id = $request->get('state_id');
         $item->type_id = $request->get('type_id');
-       
+
 
         $item->save();
         return redirect('/items')->with('exito', 'Item editado!');

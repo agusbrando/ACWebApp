@@ -23,6 +23,23 @@ class ProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         $programs = Program::all();
@@ -33,7 +50,7 @@ class ProgramController extends Controller
         $user = Auth::user();
         $programs = [];
         $programs_professor = Program::all()->where('professor_id',$user->id);
-       
+
         return view('programs.index',compact('programs','programs_professor'));
     }
 
@@ -74,7 +91,7 @@ class ProgramController extends Controller
         $curso = Course::findorfail($request->get('course_id'));
         $asignatura = Subject::findorfail($request->get('subject_id'));
         $anyo = Year::findorfail($request->get('year_id'));
-        
+
         $evaluations = YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',$anyo->id)->get();
 
 
@@ -86,23 +103,23 @@ class ProgramController extends Controller
                 ]);
                 $program->professor()->associate($profesor);
                 $program->save();
-    
+
                 $program->yearUnions()->saveMany($evaluations);
-                      
+
                 return redirect('/programs');
-    
+
             }else{
                 echo 'error, ya existe';
             }
-            
+
         }else{
 
 
         }
-        
-        
-        
-        
+
+
+
+
 
     }
     public function storeUnit(Request $request, $id){
@@ -119,7 +136,7 @@ class ProgramController extends Controller
 
         $fechaInicio = date("Y-m-d",strtotime($fechaInicio));
         $fechaFin = date("Y-m-d",strtotime($fechaFin));
-        
+
 
         $unit = new Unit([
             'name' => $request->get('name'),
@@ -127,7 +144,7 @@ class ProgramController extends Controller
             'expected_date_end' =>  $fechaFin,
             'expected_eval'=>$request->get('expected_eval')
         ]);
-        
+
         $program->units()->save($unit);
         return redirect('/programs/'.$id);
     }
@@ -152,8 +169,8 @@ class ProgramController extends Controller
         $unit->notes = $request->get('notes');
         $unit->improvements = $request->get('improvements');
         $unit->save();
-        
-       
+
+
 
         return redirect('/programs/'.$program_id);
     }
@@ -175,9 +192,9 @@ class ProgramController extends Controller
             ]);
             $aspecto->save();
         }
-        
+
         $program->evaluables()->attach($aspecto->id,['description'=>$description]);
-        
+
         return redirect('/programs/'.$id);
     }
     public function updateAspecto(Request $request, $program_id, $id){
@@ -190,7 +207,7 @@ class ProgramController extends Controller
         $description = $request->get('description');
 
         $aspecto = Evaluated::find($id);
-        
+
         /*$evaluable = Evaluable::find($aspecto->evaluable_id);
         $evaluable->name = $name;
         $evaluable->save();*/
@@ -213,7 +230,7 @@ class ProgramController extends Controller
         $evaluables = Evaluable::all();
         $evaluadoEditar_id = -1;
         $editar=false;
-        
+
         $responsable=null;
         $fechas=null;
         $notas=null;
@@ -255,8 +272,8 @@ class ProgramController extends Controller
             }else{
                 $notas[$i]='';
             }
-            
-            
+
+
         }
         $responsables = User::all();
         return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables','responsable','fechas','notas','usuario','evaluado'));
@@ -307,7 +324,7 @@ class ProgramController extends Controller
                 }
             }else{
                 $notas[$i]='';
-            }    
+            }
         }
         return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id','listaEvaluables','responsable','fechas','notas','usuario','evaluado'));
     }
@@ -336,7 +353,7 @@ class ProgramController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $request->validate([
             'professor_id'=>'required',
             'user_id'=>'required',
