@@ -46,10 +46,10 @@ class ProgramsTableSeeder extends Seeder
       
        //2ºASIR
        $this->crearProgramacion('ASIR',2,'Administración de sistemas operativos',7);
-       $this->crearProgramacion('ASIR',2,'Servicios de red e Internet',6);
-       $this->crearProgramacion('ASIR',2,'Implantación de aplicaciones web',7);
-       $this->crearProgramacion('ASIR',2,'Administración de sistemas gestores de bases de datos',2);
-       $this->crearProgramacion('ASIR',2,'Seguridad y alta disponibilidad',2);
+       $this->crearProgramacion('ASIR',2,'Servicios de red e Internet',3);
+       $this->crearProgramacion('ASIR',2,'Implantación de aplicaciones web',3);
+       $this->crearProgramacion('ASIR',2,'Administración de sistemas gestores de bases de datos',7);
+       $this->crearProgramacion('ASIR',2,'Seguridad y alta disponibilidad',6);
        $this->crearProgramacion('ASIR',2,'Ingles',8);
        $this->crearProgramacion('ASIR',2,'Empresa e Iniciativa Emprendedora',5);
         
