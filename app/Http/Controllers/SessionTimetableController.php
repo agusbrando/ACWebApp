@@ -79,9 +79,10 @@ class SessionTimetableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($session_id,$timetable_id)
     {
-        $session_timetable=SessionTimetable::find($id);
+        $session_timetables=SessionTimetable::all();
+        $session_timetable=$session_timetables->where('timetable_id',$timetable_id)->where('session_id',$session_id);
         return view('SessionTimetable.show',compact('session_timetable'));
     }
 
@@ -94,8 +95,8 @@ class SessionTimetableController extends Controller
      */
     public function edit($id)
     {
-        $session_timetable=SessionTimetable::find($id);
-        return view('SessionTimetable.edit',compact('session_timetable'));
+        
+        return view('SessionTimetable.edit');
                
     }
 
