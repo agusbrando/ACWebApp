@@ -81,7 +81,8 @@ class SessionTimetableController extends Controller
      */
     public function show($id)
     {
-        return view('SessionTimetable.show');
+        $session_timetable=SessionTimetable::find($id);
+        return view('SessionTimetable.show',compact('session_timetable'));
     }
 
    
@@ -93,7 +94,8 @@ class SessionTimetableController extends Controller
      */
     public function edit($id)
     {
-        
+        $session_timetable=SessionTimetable::find($id);
+        return view('SessionTimetable.edit',compact('session_timetable'));
                
     }
 
