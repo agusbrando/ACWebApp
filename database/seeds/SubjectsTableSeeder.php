@@ -231,13 +231,6 @@ class SubjectsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('subjects')->insert([
-            'name' => 'Seguridad y alta disponibilidad',
-            'abbreviation'=>'DIW',
-            "hours"=>100,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
         //2º de SMR 32-35
         DB::table('subjects')->insert([
             'name' => 'Sistemas operativos en red',

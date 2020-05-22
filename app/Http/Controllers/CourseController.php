@@ -136,6 +136,7 @@ class CourseController extends Controller
         $yearUnionsPrueba = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
 
         $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
+        $yearUnionPrograms = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('evaluation_id',1)->get();
         $subject_ids = array();
         foreach ($yearUnions as $yearUnion) {
             if (!in_array($yearUnion->subject_id, $subject_ids)) {
@@ -163,7 +164,7 @@ class CourseController extends Controller
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
 
-        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId', 'yearUnionsPrueba'));
+        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId', 'yearUnionsPrueba','yearUnionPrograms'));
     }
 
     /**

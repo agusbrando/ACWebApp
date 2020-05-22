@@ -61,7 +61,7 @@
                                                 <div class="d-flex flex-row ">
                                                     <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
                                                     <a class="btn btn-outline-primary mr-2" href="{{route('subjects.evaluations', $subject->id)}}">Evaluaciones</a>
-                                                    <a href="#" class="btn btn-outline-primary">Programacion</a>
+                                                    <a href="/programs/{{$yearUnionPrograms->where('subject_id',$subject->id)->first()->program->id}}" class="btn btn-outline-primary">Programacion</a>
                                                 </div>
                                             </td>
                                         </tr>
