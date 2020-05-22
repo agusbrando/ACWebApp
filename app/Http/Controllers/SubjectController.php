@@ -222,6 +222,14 @@ class SubjectController extends Controller
         return view('Notas.desglose', compact('evaluation', 'subject', 'eval', 'year', 'course'));
     }
 
+    /**
+     * Muestra las notas medias de los usuarios con sus 
+     * notas finales aplicando los porcentajes en una tabla.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param int $subject_id
+     * @return view Notas.evaluations
+     */
     public function evaluations(Request $request, $subject_id)
     {
 
@@ -244,13 +252,14 @@ class SubjectController extends Controller
             $yearUnion->percentages = $yearUnion->types;
             $yearUnion->users = $yearUnion->users;
             $yearUnion->tareas = $taskTypes;
+            $users = $yearUnion->users;
             foreach ($yearUnion->users as $user) {
                 if (count($taskTypes) > 0) {
                     $sumaFinal = 0;
                     $recuperado = 0;
                     foreach ($taskTypes as $task_type) {
-                        $yearUnionUser =  YearUnionUser::where('user_id', $user->id)->where('year_union_id', $yearUnion->id)->first();
-                        $tasks =  $yearUnionUser->tasks;
+                        $yearUnionUser =  YearUnionUser::find($user->pivot->id);
+                        $tasks =  $yearUnionUser->tasks()->where('type_id', $task_type->id)->get();
                         $suma = 0;
                         $tareas[$task_type->name] = 0;
                         $user->tareas = $tareas;
@@ -318,10 +327,10 @@ class SubjectController extends Controller
     }
 
     /**
-     * Display the specified resource.  
+     * Muestra la informacion de una asignatura  
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return view Subjects.Show
      */
     public function show($id)
     {

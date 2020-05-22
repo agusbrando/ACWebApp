@@ -76,15 +76,17 @@ class DesgloseController extends Controller
         $request->validate([
             'recuperacion' => 'required',
             'subject' => 'required',
-            'evaluacion' => 'required'
+            'yearUnion' => 'required',
         ]);
 
         $recuperacion = $request->get('recuperacion');
+        $yearUnion = $request->get('yearUnion');
 
         foreach ($recuperacion as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
+                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion)->first();
                 $task = Task::find($task_id);
-                $task->yearUnionUsers()->updateExistingPivot($user_id, [
+                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);
             }
@@ -98,15 +100,17 @@ class DesgloseController extends Controller
         $request->validate([
             'actitud' => 'required',
             'subject' => 'required',
-            'evaluacion' => 'required'
+            'yearUnion' => 'required',
         ]);
 
         $actitud = $request->get('actitud');
+        $yearUnion = $request->get('yearUnion');
 
         foreach ($actitud as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
+                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion)->first();
                 $task = Task::find($task_id);
-                $task->yearUnionUsers()->updateExistingPivot($user_id, [
+                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);
             }
@@ -144,15 +148,17 @@ class DesgloseController extends Controller
         $request->validate([
             'trabajos' => 'required',
             'subject' => 'required',
-            'evaluacion' => 'required'
+            'yearUnion' => 'required',
         ]);
 
         $trabajos = $request->get('trabajos');
+        $yearUnion = $request->get('yearUnion');
 
         foreach ($trabajos as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
+                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion)->first();
                 $task = Task::find($task_id);
-                $task->yearUnionUsers()->updateExistingPivot($user_id, [
+                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);
             }
