@@ -1,9 +1,7 @@
 @extends('base')
 
 @section('main')
-
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">    
-
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
         <div class="d-flex flex-row">
@@ -11,14 +9,12 @@
                 <h3>Detalles Tipos</h3>
             </div>
             <div>
-
                 <a class="btn btn-outline-info" href="{{ route('types.edit',$type->id)}}">Editar</a>
                 <form class="float-right" action="{{ route('types.destroy',$type->id)}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-danger ml-1">Eliminar</button>
                 </form>
-
             </div>
         </div>
         <div class="card-body row no-gutters">

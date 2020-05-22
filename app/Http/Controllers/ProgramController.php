@@ -232,31 +232,57 @@ class ProgramController extends Controller
                 array_push($listaEvaluables,$evaluable);
             }
         }
-        for($i=1;$i<=3;$i++){
-            $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
-            if($yearUnion != null){
-                $notas[$i]=$yearUnion->notes;
-                $fechas[$i]=$yearUnion->date_check;
-                $responsable[$i]=$yearUnion->responsable_id;
-                $responsable[$i]=User::find($responsable[$i]);
-                if($notas[$i]==null){
+        $yearUnion =  $program->yearUnions->first();
+        if($yearUnion->course->level == 1){
+            for($i=1;$i<=4;$i++){
+                $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
+                if($yearUnion != null){
+                    $notas[$i]=$yearUnion->notes;
+                    $fechas[$i]=$yearUnion->date_check;
+                    $responsable[$i]=$yearUnion->responsable_id;
+                    $responsable[$i]=User::find($responsable[$i]);
+                    if($notas[$i]==null){
+                        $notas[$i]='';
+                    }
+                    if($fechas[$i]==null){
+                        $evaluado[$i]=false;
+                    }else{
+                        $evaluado[$i]=true;
+                    }
+                    if($responsable[$i]==null){
+                        $evaluado[$i]=false;
+                    }else{
+                        $evaluado[$i]=true;
+                    }
+                }else{
                     $notas[$i]='';
-                }
-                if($fechas[$i]==null){
-                    $evaluado[$i]=false;
-                }else{
-                    $evaluado[$i]=true;
-                }
-                if($responsable[$i]==null){
-                    $evaluado[$i]=false;
-                }else{
-                    $evaluado[$i]=true;
-                }
-            }else{
-                $notas[$i]='';
+                }    
             }
-            
-            
+        }else{
+            for($i=1;$i<=3;$i++){
+                $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
+                if($yearUnion != null){
+                    $notas[$i]=$yearUnion->notes;
+                    $fechas[$i]=$yearUnion->date_check;
+                    $responsable[$i]=$yearUnion->responsable_id;
+                    $responsable[$i]=User::find($responsable[$i]);
+                    if($notas[$i]==null){
+                        $notas[$i]='';
+                    }
+                    if($fechas[$i]==null){
+                        $evaluado[$i]=false;
+                    }else{
+                        $evaluado[$i]=true;
+                    }
+                    if($responsable[$i]==null){
+                        $evaluado[$i]=false;
+                    }else{
+                        $evaluado[$i]=true;
+                    }
+                }else{
+                    $notas[$i]='';
+                }    
+            }
         }
         $responsables = User::all();
         return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id', 'listaEvaluables','responsable','fechas','notas','usuario','evaluado'));
@@ -285,30 +311,59 @@ class ProgramController extends Controller
                 array_push($listaEvaluables,$evaluable);
             }
         }
-        for($i=1;$i<=3;$i++){
-            $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
-            if($yearUnion != null){
-                $notas[$i]=$yearUnion->notes;
-                $fechas[$i]=$yearUnion->date_check;
-                $responsable[$i]=$yearUnion->responsable_id;
-                $responsable[$i]=User::find($responsable[$i]);
-                if($notas[$i]==null){
+        $yearUnion =  $program->yearUnions->first();
+        if($yearUnion->course->level == 1){
+            for($i=1;$i<=4;$i++){
+                $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
+                if($yearUnion != null){
+                    $notas[$i]=$yearUnion->notes;
+                    $fechas[$i]=$yearUnion->date_check;
+                    $responsable[$i]=$yearUnion->responsable_id;
+                    $responsable[$i]=User::find($responsable[$i]);
+                    if($notas[$i]==null){
+                        $notas[$i]='';
+                    }
+                    if($fechas[$i]==null){
+                        $evaluado[$i]=false;
+                    }else{
+                        $evaluado[$i]=true;
+                    }
+                    if($responsable[$i]==null){
+                        $evaluado[$i]=false;
+                    }else{
+                        $evaluado[$i]=true;
+                    }
+                }else{
                     $notas[$i]='';
-                }
-                if($fechas[$i]==null){
-                    $evaluado[$i]=false;
+                }    
+            }
+        }else{
+            for($i=1;$i<=3;$i++){
+                $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
+                if($yearUnion != null){
+                    $notas[$i]=$yearUnion->notes;
+                    $fechas[$i]=$yearUnion->date_check;
+                    $responsable[$i]=$yearUnion->responsable_id;
+                    $responsable[$i]=User::find($responsable[$i]);
+                    if($notas[$i]==null){
+                        $notas[$i]='';
+                    }
+                    if($fechas[$i]==null){
+                        $evaluado[$i]=false;
+                    }else{
+                        $evaluado[$i]=true;
+                    }
+                    if($responsable[$i]==null){
+                        $evaluado[$i]=false;
+                    }else{
+                        $evaluado[$i]=true;
+                    }
                 }else{
-                    $evaluado[$i]=true;
-                }
-                if($responsable[$i]==null){
-                    $evaluado[$i]=false;
-                }else{
-                    $evaluado[$i]=true;
-                }
-            }else{
-                $notas[$i]='';
-            }    
+                    $notas[$i]='';
+                }    
+            }
         }
+        
         return view('programs.show',compact('program','evaluables','editar','evaluadoEditar_id','listaEvaluables','responsable','fechas','notas','usuario','evaluado'));
     }
     /**

@@ -20,7 +20,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions = Session::paginate(10);// ->load('type','classroom')
+        $sessions = Session::paginate(10);
         $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
         return view('sessions.index', compact('sessions','days'));
     }
@@ -61,8 +61,8 @@ class SessionController extends Controller
         ]);
 
         $session = new Session([
-            'classroom' => $request->get('classroom'),
-            'type' => $request->get('type'),
+            'classroom_id' => $request->get('classroom'),
+            'type_id' => $request->get('type'),
             'day' => $request->get('day'),
             'time_start' => $request->get('time_start'),
             'time_end' => $request->get('time_end')
