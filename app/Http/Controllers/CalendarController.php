@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use App\Models\Type;
@@ -22,7 +23,6 @@ class CalendarController extends Controller
 
   public function crearEvento($fecha, $hora, $type)
   {
-
     $tipo = Type::find($type)->name;
     return view("/Calendario/crearEvento", compact('fecha', 'hora', 'tipo'));
   }
@@ -52,16 +52,19 @@ class CalendarController extends Controller
 
   public function getList(Request $request)
   {
+    $user = Auth::user();
     $events = Event::all();
-    return view('/Calendario/list', compact('events'));
+    //$events = Event::where('user_id', $user->id)->get();
+    return view('/Calendario/list', compact('events', 'user'));
   }
 
   public function index()
   {
+    $user = Auth::user();
     $sessions = [];
     $events = [];
     $types = Type::all()->where('model', Event::class);
-    return view('/Calendario/calendar', compact('types', 'sessions', 'events'));
+    return view('/Calendario/calendar', compact('types', 'sessions', 'events', 'user'));
   }
 
   /**

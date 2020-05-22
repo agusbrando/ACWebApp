@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input value="{{$state->name}}" name="name" id="name" type="text" class="@error('name') is-invalid @enderror form-control">
-                        </div>                       
+                        </div>
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>
