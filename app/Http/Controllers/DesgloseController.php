@@ -7,6 +7,7 @@ use App\Models\Calification;
 use App\Models\Task;
 use App\Models\YearUnion;
 use App\Models\Evaluation;
+use App\Models\YearUnionUser;
 use Illuminate\Support\Facades\DB;
 
 class DesgloseController extends Controller
@@ -119,15 +120,17 @@ class DesgloseController extends Controller
         $request->validate([
             'examenes' => 'required',
             'subject' => 'required',
-            'evaluacion' => 'required',
+            'yearUnion' => 'required',
         ]);
 
         $examenes = $request->get('examenes');
+        $yearUnion = $request->get('yearUnion');
 
         foreach ($examenes as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
+                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion)->first();
                 $task = Task::find($task_id);
-                $task->yearUnionUsers()->updateExistingPivot($user_id, [
+                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);
             }

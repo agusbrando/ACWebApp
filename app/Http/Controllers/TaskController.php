@@ -9,6 +9,7 @@ use App\Models\Subject;
 use App\Models\Evaluation;
 use App\Models\Calification;
 use App\Models\YearUnion;
+use App\Models\YearUnionUser;
 
 class TaskController extends Controller
 {
@@ -73,9 +74,10 @@ class TaskController extends Controller
     protected function storeNotes($yearUnion, Task $task)
     {
         foreach ($yearUnion->users as $user) {
+            $yearUnionUser = YearUnionUser::where('user_id', $user->id)->where('year_union_id', $yearUnion->id)->first();
             $calification = new Calification([
                 'task_id' => $task->id,
-                'year_user_id' =>  $user->id,
+                'year_user_id' =>  $yearUnionUser->id,
                 'value' => null
             ]);
             $calification->save();

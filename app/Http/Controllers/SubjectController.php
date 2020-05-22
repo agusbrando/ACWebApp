@@ -79,7 +79,7 @@ class SubjectController extends Controller
                     foreach ($evaluation->parciales as $parcial) {
                         $parcial->yearUnionUsers = $parcial->yearUnionUsers;
                         foreach ($parcial->yearUnionUsers as $yearUnionUser) {
-                            $notaParciales[$yearUnionUser->id][$parcial->id] = $yearUnionUser->pivot->value;
+                            $notaParciales[$yearUnionUser->user->id][$parcial->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaParciales = $notaParciales;
                         }
                     }
@@ -115,7 +115,7 @@ class SubjectController extends Controller
                     $evaluation->trabajos = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->trabajos as $trabajo) {
                         foreach ($trabajo->yearUnionUsers as $yearUnionUser) {
-                            $notaTrabajos[$yearUnionUser->id][$trabajo->id] = $yearUnionUser->pivot->value;
+                            $notaTrabajos[$yearUnionUser->user->id][$trabajo->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaTrabajos = $notaTrabajos;
                         }
                     }
@@ -150,7 +150,7 @@ class SubjectController extends Controller
                     $evaluation->actitud = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->actitud as $act) {
                         foreach ($act->yearUnionUsers as $yearUnionUser) {
-                            $notaActitud[$yearUnionUser->id][$act->id] = $yearUnionUser->pivot->value;
+                            $notaActitud[$yearUnionUser->user->id][$act->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaActitud = $notaActitud;
                         }
                     }
@@ -185,7 +185,7 @@ class SubjectController extends Controller
                     $evaluation->recuperacion = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->recuperacion as $rec) {
                         foreach ($rec->yearUnionUsers as $yearUnionUser) {
-                            $notaRecuperacion[$yearUnionUser->id][$rec->id] = $yearUnionUser->pivot->value;
+                            $notaRecuperacion[$yearUnionUser->user->id][$rec->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaRecuperacion = $notaRecuperacion;
                         }
                     }
@@ -249,8 +249,8 @@ class SubjectController extends Controller
                     $sumaFinal = 0;
                     $recuperado = 0;
                     foreach ($taskTypes as $task_type) {
-                        $yearUnionUser =  YearUnionUser::find($user->pivot->user_id);
-                        $tasks =  YearUnionUser::find($user->pivot->user_id)->tasks;
+                        $yearUnionUser =  YearUnionUser::where('user_id', $user->id)->where('year_union_id', $yearUnion->id)->first();
+                        $tasks =  $yearUnionUser->tasks;
                         $suma = 0;
                         $tareas[$task_type->name] = 0;
                         $user->tareas = $tareas;
