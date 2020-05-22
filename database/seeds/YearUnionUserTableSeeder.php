@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\YearUnion;
+use Illuminate\Support\Facades\DB;
 
 class YearUnionUserTableSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class YearUnionUserTableSeeder extends Seeder
         $year_id = 1;
         $cursos = Course::all();
         foreach ($cursos as $curso) {
-            $empiezo = User::where('first_name' , 'Alumno1 ' . $curso->level . $curso->abbreviation)->first();
+            $empiezo = User::where('first_name', 'Alumno1 ' . $curso->level . $curso->abbreviation)->first();
             if ($empiezo != null) {
                 foreach ($curso->subjects as $asignatura) {
 
