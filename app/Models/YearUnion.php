@@ -60,5 +60,7 @@ class YearUnion extends Model
     public function tasks(){
         return $this->hasMany(Task::class);
     }
-    
+    public function classroom(){
+        return $this->belongsTo(Classroom::class);
+    }
 }
