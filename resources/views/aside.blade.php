@@ -104,12 +104,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <span data-feather="file-text"></span>
-                    Reserva de aulas
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/items">
                     <span data-feather="file-text"></span>
                     Stock

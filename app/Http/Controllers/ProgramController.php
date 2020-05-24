@@ -311,6 +311,7 @@ class ProgramController extends Controller
                 array_push($listaEvaluables,$evaluable);
             }
         }
+        $yearUnion =  $program->yearUnions->first();
         if($yearUnion->course->level == 1){
             for($i=1;$i<=4;$i++){
                 $yearUnion = $program->yearUnions->where('evaluation_id',$i)->first();
