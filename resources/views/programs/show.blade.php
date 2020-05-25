@@ -84,6 +84,7 @@
                 <div class="card-header">
                     <div class="col-12">
                         <h3 class="text-left p-1">{{$program->name}}</h3>
+                        @if($usuario->id == $program->professor->id)
                         <div class="float-right">
                             <a class="btn btn-outline-success" id="Boton1" href="{{route('units.create',$program->id)}}">Añadir Unidad</a>
                         </div>
@@ -92,6 +93,8 @@
                             <a class="btn btn-outline-success"  id="Boton2" href="{{route('programs.createAspecto', $program->id)}}" >Añadir Nuevo Aspecto</a>
 
                         </div>
+                        @else
+                        @endif
                     </div>
 
                     <ul class="nav nav-tabs card-header-tabs pt-3">
@@ -194,6 +197,7 @@
                                 </div>
                             </div>
                             <div class="card border-0 col-md-2">
+                            @if($usuario->id == $program->professor->id)
                                 <div class="card-body">
                                     <a type="button" class="btn btn-sm btn-outline-primary mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
             
@@ -223,6 +227,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            @else
+                            @endif
                             </div>
                         </div>
                         @endforeach
@@ -395,7 +401,7 @@
                                         </tbody>
                                     </table>
                                     @endif
-                                    @if($notas[$i+1] == '' && $usuario->role_id == 3)
+                                    @if($notas[$i+1] == '' && $usuario->role_id == 1)
                                         <form method="post" action="{{route('programs.storeEvaluacion', $program->id)}}">
                                         @csrf
                                             <input type="hidden" name="eval" value="{{$i+1}}">
