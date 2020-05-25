@@ -11,15 +11,21 @@
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
         @foreach($users as $user)
-          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          @if($user->id==1)
+            <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          @endif
         @endforeach
         @foreach($posts as $post)
-          <h4 style="text-align: center;">{{$post->title}}</h4>
+          @if($post->id==1)
+            <h4 style="text-align: center;">{{$post->title}}</h4>
+          @endif
         @endforeach
       </div>
       <div>
         @foreach($posts as $post)
-          <p>{{$post->created_at}}</p>
+          @if($post->id==1)
+            <p>{{$post->created_at}}</p>
+          @endif
         @endforeach
       </div>
     </div>
@@ -28,7 +34,9 @@
     </div>
     <div class="card-body row no-gutters">
       @foreach($posts as $post)
-        <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">{{$post->text}}</p>
+        @if($post->id==1)
+          <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">{{$post->text}}</p>
+        @endif
       @endforeach
     </div>
     </hr>
@@ -52,15 +60,21 @@
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
         @foreach($users as $user)
-          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          @if($user->id==2)
+            <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          @endif
         @endforeach
         @foreach($posts as $post)
-          <h4 style="text-align: center;">{{$post->title}}</h4>
+          @if($post->id==2)
+            <h4 style="text-align: center;">{{$post->title}}</h4>
+          @endif
         @endforeach
       </div>
       <div>
         @foreach($posts as $post)
-          <p>{{$post->created_at}}</p>
+          @if($post->id==2)
+            <p>{{$post->created_at}}</p>
+          @endif
         @endforeach
       </div>
     </div>
@@ -69,7 +83,9 @@
     </div>
     <div class="card-body row no-gutters">
       @foreach($posts as $post)
-        <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">{{$post->text}}</p>
+        @if($post->id==2)
+          <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">{{$post->text}}</p>
+        @endif
       @endforeach
     </div>
     </hr>
@@ -93,15 +109,21 @@
       <div>
         <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
         @foreach($users as $user)
-          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          @if($user->id==3)
+            <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          @endif
         @endforeach
         @foreach($posts as $post)
-          <h4 style="text-align: center;">{{$post->title}}</h4>
+          @if($post->id==3)
+            <h4 style="text-align: center;">{{$post->title}}</h4>
+          @endif
         @endforeach
       </div>
       <div>
         @foreach($posts as $post)
-          <p>{{$post->created_at}}</p>
+          @if($post->id==3)
+            <p>{{$post->created_at}}</p>
+          @endif
         @endforeach
       </div>
     </div>
@@ -110,7 +132,9 @@
     </div>
     <div class="card-body row no-gutters">
       @foreach($posts as $post)
-        <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">{{$post->text}}</p>
+        @if($post->id==3)
+          <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">{{$post->text}}</p>
+        @endif
       @endforeach
     </div>
     </hr>
