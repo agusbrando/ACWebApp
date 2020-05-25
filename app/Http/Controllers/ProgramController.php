@@ -25,17 +25,15 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::all();
+        $user = Auth::user();
+
+        $programs = $programs_professor = Program::all()->where('professor_id',$user->id);
+        //solo las programaciones de ese profesor
+
         return view('programs.index',compact('programs'));
     }
 
-    public function myPrograms(){
-        $user = Auth::user();
-        $programs = [];
-        $programs_professor = Program::all()->where('professor_id',$user->id);
-       
-        return view('programs.index',compact('programs','programs_professor'));
-    }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -131,20 +129,35 @@ class ProgramController extends Controller
         $program->units()->save($unit);
         return redirect('/programs/'.$id);
     }
+
+    public function createAspecto($id){
+
+        $program = Program::findorfail($id);
+        $evaluados = Evaluated::select('evaluable_id')->where('program_id',$id)->get()->toArray();
+        $listaEvaluables=Evaluable::whereNotIn('id',$evaluados)->get();
+        return view('programs.evaluable',compact('listaEvaluables','program'));
+
+    }
+
     public function updateUnit(Request $request,$program_id, $id){
 
         $request->validate([
             'name'=>'required',
-            'expected_date_start'=>'required',
-            'expected_date_end'=>'required',
-            'expected_eval'=>'required'
+            'expected_eval'=>'required',
+            'expected_date'=>'required'
         ]);
 
         $unit = Unit::find($id);
+        $fechas = explode(' - ',$request->get('expected_date'),2);
+        $fechaInicio = str_replace('/', '-', $fechas[0]);
+        $fechaFin  = str_replace('/', '-', $fechas[1]);
 
+        $fechaInicio = date("Y-m-d",strtotime($fechaInicio));
+        $fechaFin = date("Y-m-d",strtotime($fechaFin));
+        
         $unit->name = $request->get('name');
-        $unit->expected_date_start= $request->get('expected_date_start');
-        $unit->expected_date_end = $request->get('expected_date_end');
+        $unit->expected_date_start= $fechaInicio;
+        $unit->expected_date_end =  $fechaFin;
         $unit->expected_eval = $request->get('expected_eval');
         $unit->date_start = $request->get('date_start');
         $unit->date_end = $request->get('date_end');
@@ -162,7 +175,7 @@ class ProgramController extends Controller
 
         $request->validate([
             'name'=>'required',
-            'description'=>'required'
+            'description'=>'nullable'
         ]);
         $name = $request->get('name');
         $description = $request->get('description');
@@ -174,6 +187,7 @@ class ProgramController extends Controller
                 'name' => $name
             ]);
             $aspecto->save();
+            return redirect('/programs/'.$id.'/aspect/create');
         }
         
         $program->evaluables()->attach($aspecto->id,['description'=>$description]);
@@ -210,6 +224,7 @@ class ProgramController extends Controller
     {
         $usuario = Auth::user();
         $program = Program::findorfail($id);
+
         $evaluables = Evaluable::all();
         $evaluadoEditar_id = -1;
         $editar=false;

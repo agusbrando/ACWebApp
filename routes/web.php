@@ -140,6 +140,7 @@ Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->nam
 //INICIO Rutas de Temporalizacion de la programacion (Jesus)
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 Route::resource('units', 'UnitController');
+Route::get('programs/{program_id}/aspect/create', 'ProgramController@createAspecto')->name('programs.createAspecto');
 Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
 Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
 Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');

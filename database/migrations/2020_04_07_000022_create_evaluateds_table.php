@@ -20,7 +20,7 @@ class CreateEvaluatedsTable extends Migration
             $table->integer('program_id')->unsigned();
             $table->foreign('evaluable_id')->references('id')->on('evaluables')->onDelete('cascade');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

@@ -84,12 +84,17 @@
                 <div class="card-header">
                     <div class="col-12">
                         <h3 class="text-left p-1">{{$program->name}}</h3>
+                        @if($usuario->id == $program->professor->id)
                         <div class="float-right">
                             <a class="btn btn-outline-success" id="Boton1" href="{{route('units.create',$program->id)}}">Añadir Unidad</a>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-outline-success"  id="Boton2" href="#" data-toggle="modal" data-target="#crearAspecto">Añadir Nuevo Aspecto</a>
+                            <!-- <a class="btn btn-outline-success"  id="Boton2" href="#" data-toggle="modal" data-target="#crearAspecto">Añadir Nuevo Aspecto</a> -->
+                            <a class="btn btn-outline-success"  id="Boton2" href="{{route('programs.createAspecto', $program->id)}}" >Añadir Nuevo Aspecto</a>
+
                         </div>
+                        @else
+                        @endif
                     </div>
 
                     <ul class="nav nav-tabs card-header-tabs pt-3">
@@ -139,7 +144,7 @@
                                 
                                 <td class="botones justify-content-center">
                                     
-                                    <a type="button" class="btn text-warning"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-eye"></i></a>
+                                    <a type="button" class="btn btn-sm btn-outline-warning"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-eye"></i></a>
 
                                 </td>
                             </tr>
@@ -192,11 +197,12 @@
                                 </div>
                             </div>
                             <div class="card border-0 col-md-2">
+                            @if($usuario->id == $program->professor->id)
                                 <div class="card-body">
-                                    <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
+                                    <a type="button" class="btn btn-sm btn-outline-primary mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
             
 
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#confirm-delete{{$evaluable->pivot->id}}"><i class="fas fa-trash-alt text-warning"></i></button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#confirm-delete{{$evaluable->pivot->id}}"><i class="fas fa-trash-alt"></i></button>
                                         
                                     <!-- Modal Confirmacion Borrar-->
                                     <div class="modal fade" id="confirm-delete{{$evaluable->pivot->id}}" tabindex="-1" role="dialog" aria-labelledby="confirm-delete{{$evaluable->pivot->id}}Label" aria-hidden="true">
@@ -221,6 +227,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            @else
+                            @endif
                             </div>
                         </div>
                         @endforeach
@@ -263,10 +271,10 @@
                                 </div>
                                 <div class="card border-0 col-md-2">
                                     <div class="card-body">
-                                        <a type="button" class="btn mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
+                                        <a type="button" class="btn btn-sm btn-outline-primary mr-2" href="{{route('programs.editarAspecto', ['program_id'=> ($program->id), 'id'=> ($evaluable->pivot->id)] )}}"><i class="far fa-edit"></i></a>
                 
 
-                                        <a type="button" class="btn" data-toggle="modal" data-target="#confirm-delete/{{$evaluable->pivot->id}}"><i class="fas fa-trash-alt text-warning"></i></a>
+                                        <a type="button" class="btn btn-sm btn-outline-danger borrar" data-toggle="modal" data-target="#confirm-delete/{{$evaluable->pivot->id}}"><i class="fas fa-trash-alt"></i></a>
                                             
                                         
                                     </div>
@@ -286,8 +294,8 @@
                                 </div>
                                 <div class="card border-0 col-md-2">
                                     <div class="card-body">
-                                        <button class="btn" type="submit"><i class="far fa-save"></i></button>
-                                        <a type="button" class="btn ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
+                                        <button class="btn btn-sm btn-outline-success" type="submit"><i class="far fa-save"></i></button>
+                                        <a type="button" class="btn btn-sm btn-outline-danger borrar ml-2" href="{{route('programs.show',$program->id)}}"><i class="fas fa-times"></i></a>
                                         
                                     </div>
                                 </div>
@@ -332,8 +340,8 @@
                                             @foreach($program->units->where('eval',$i+1) as $k=>$unidad)
                                             <tr>
                                                 <td>
-                                                    <a type="button" id="btnMasInfo{{$k}}" class="btn btn-sm text-primary" href="#"><i class="fas fa-plus"></i></a>
-                                                    <a type="button" id="btnMenosInfo{{$k}}" class="btn btn-sm text-primary" href="#"><i class="fas fa-minus"></i></a>
+                                                    <a type="button" id="btnMasInfo{{$k}}" class="btn btn-sm btn-outline-primary" href="#"  role="button"><i class="fas fa-plus"></i></a>
+                                                    <a type="button" id="btnMenosInfo{{$k}}" class="btn btn-sm btn-primary" href="#"  role="button"><i class="fas fa-minus"></i></a>
                                                 </td>
                                                 <td> {{$unidad->name}}</td>
                                                 <td></td>
@@ -344,7 +352,7 @@
                                                 @endif
                                                 
                                                 <td class="text-nowrap">{{date('d/m/Y',strtotime($unidad->date_start))}} - {{date('d/m/Y',strtotime($unidad->date_end))}}</td>
-                                                <td  id="fechaPrevista{{$k}}">({{date('d/m/Y',strtotime($unidad->expected_date_start))}} - {{date('d/m/Y',strtotime($unidad->expected_date_end))}})</td>
+                                                <td  class="text-nowrap" id="fechaPrevista{{$k}}">({{date('d/m/Y',strtotime($unidad->expected_date_start))}} - {{date('d/m/Y',strtotime($unidad->expected_date_end))}})</td>
                                                 <td id="columna{{$k}}"></td>
                                                 <td></td>
                                             </tr>
@@ -357,10 +365,10 @@
                                                 <td  colspan="2" class="text-justify">{{$unidad->notes}}</td>
                                                 <th>Acciones de mejora</th>
                                                 <td class="text-justify" colspan="2">{{$unidad->improvements}}</td> -->
-                                                <td colspan="6">
+                                                <td colspan="7">
                                                     <div class="card-deck">
                                                         <div class="card border-0">
-                                                            <div class="card-body">
+                                                            <div class="card-body observaciones">
                                                             <h5 class="card-title text-center">Observaciones</h5>
                                                             @if($unidad->notes != '')
                                                             <p class="card-text text-justify">{{$unidad->notes}}</p>
@@ -370,7 +378,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="card border-0">
-                                                            <div class="card-body">
+                                                            <div class="card-body observaciones">
                                                             <h5 class="card-title text-center">Acciones de mejora</h5>
                                                             @if($unidad->improvements != '')
                                                             <p class="card-text text-justify">{{$unidad->improvements}}</p>
@@ -393,7 +401,7 @@
                                         </tbody>
                                     </table>
                                     @endif
-                                    @if($notas[$i+1] == '' && $usuario->role_id == 3)
+                                    @if($notas[$i+1] == '' && $usuario->role_id == 1)
                                         <form method="post" action="{{route('programs.storeEvaluacion', $program->id)}}">
                                         @csrf
                                             <input type="hidden" name="eval" value="{{$i+1}}">
