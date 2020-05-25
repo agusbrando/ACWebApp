@@ -334,12 +334,9 @@ class CourseController extends Controller
     {
         $yearUnionsCollection = $request->get('yearUnions');
         $yearUnions = array();
-        
-
         foreach ($yearUnionsCollection as $yearUnion) {
-            array_push($yearUnions,
-                new YearUnion($yearUnion);
-        };
+            array_push($yearUnions, json_decode($yearUnion));
+        }
         $pdf = \PDF::loadView('courses.pdf', compact('yearUnions'))->setPaper('a4', 'landscape');
         return $pdf->download('courses.pdf');
     }
