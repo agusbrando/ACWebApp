@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 
 use App\Models\Classroom;
@@ -15,9 +15,11 @@ use App\Models\Item;
 use App\Models\User;
 use App\Models\Year;
 use App\Models\Evaluation;
+use App\Models\ItemYear;
 use App\Models\Subject;
 use App\Models\YearUnion;
 use App\Models\YearUnionUser;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -35,7 +37,6 @@ class CourseController extends Controller
             //Guardo los diferentes yearUnion en cada año
             $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')
                 ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
-            
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
         //en este caso, le redirijo a la vista index y le paso los años con los cursos
@@ -68,31 +69,31 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        for($i=1; $i<=3; $i++){
+        for ($i = 1; $i <= 3; $i++) {
             $curso = Course::where('id', $request->get('course'));
-            
-            $fechasInicioFin =[];
-            $year=1;
-            array_push($fechasInicioFin,['date_start'=> $request->get('eval_1_date_start'), 'date_end'=>$request->get('eval_1_date_end')]);//1ºEVAL
-            array_push($fechasInicioFin,['date_start'=> $request->get('eval_2_date_start'), 'date_end'=>$request->get('eval_2_date_end')]);//2ºEVAL
-            array_push($fechasInicioFin,['date_start'=> $request->get('eval_3_date_start'), 'date_end'=>$request->get('eval_3_date_end')]);//3ºEVAL
-            
-                foreach($curso->subjects as $j=>$subject){
-                    DB::table('yearUnions')->insert([
-                        'subject_id' => $subject->id,
-                        'course_id' => $curso->id,
-                        'evaluation_id' => $i,
-                        'year_id' => $year,
-                        'date_start'=> $fechasInicioFin[$i-1]['date_start'],
-                        'date_end'=> $fechasInicioFin[$i-1]['date_end'],
-                        'classroom_id'=> $j+1, 
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
-            
-            if($curso->level == 2){
-                if( $i==2 ){
+
+            $fechasInicioFin = [];
+            $year = 1;
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_1_date_start'), 'date_end' => $request->get('eval_1_date_end')]); //1ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_2_date_start'), 'date_end' => $request->get('eval_2_date_end')]); //2ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_3_date_start'), 'date_end' => $request->get('eval_3_date_end')]); //3ºEVAL
+
+            foreach ($curso->subjects as $j => $subject) {
+                DB::table('yearUnions')->insert([
+                    'subject_id' => $subject->id,
+                    'course_id' => $curso->id,
+                    'evaluation_id' => $i,
+                    'year_id' => $year,
+                    'date_start' => $fechasInicioFin[$i - 1]['date_start'],
+                    'date_end' => $fechasInicioFin[$i - 1]['date_end'],
+                    'classroom_id' => $j + 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            if ($curso->level == 2) {
+                if ($i == 2) {
                     break;
                 }
             }
@@ -109,9 +110,15 @@ class CourseController extends Controller
      */
     public function show($courseId, $yearId, Request $request)
     {
+
         $request->session()->put('course_id', $courseId);
         $request->session()->put('year_id', $yearId);
+
+        $course = Course::find($courseId);
+        $yearUnionsPrueba = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
+
         $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
+        $yearUnionPrograms = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('evaluation_id',1)->get();
         $subject_ids = array();
         foreach ($yearUnions as $yearUnion) {
             if (!in_array($yearUnion->subject_id, $subject_ids)) {
@@ -135,11 +142,16 @@ class CourseController extends Controller
         $subjects = Subject::whereIn('id', $subject_ids)->get();
 
         //Items Tab
-        $items = Item::all();
+        $itemUsers = array();
+
+        $itemYear = ItemYear::select('item_id')->get()->toArray();
+        $items = Item::where('classroom_id', $yearUnionsPrueba->first()->classroom->id)->whereNotIn('id', $itemYear)->get();
+
+
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
 
-        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId'));
+        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId', 'yearUnionsPrueba','yearUnionPrograms'));
     }
 
     /**
@@ -253,10 +265,10 @@ class CourseController extends Controller
         $yearUnions = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->get();
 
         //y los voy eliminando
-        foreach($yearUnions as $yearUnion){
+        foreach ($yearUnions as $yearUnion) {
             $yearUnion->delete();
         }
-        
+
 
 
         return redirect('courses')->with('exito', 'Curso eliminado!');
@@ -293,74 +305,40 @@ class CourseController extends Controller
     public function responsabilizarItem(Request $request, $userId, $courseId, $yearId)
     {
         $request->validate([
-            'idClass2' => 'required',
             'itemIds' => 'required'
         ]);
-        $idClass = $request->get('idClass2');
         //Busco el curso del alumno
         $yearUnions = User::find($userId)->yearUnions;
 
-        if ($idClass != "") {
-
-            $items = Item::where('classroom_id', $idClass)->get();
-        } else {
-            $items = Item::all();
-        }
         //Cojo el array de Ids del multi select
         $itemIds = $request->get('itemIds');
 
         //Cojo los items con los ids del array
         $itemsUser = Item::whereIn('id', $itemIds)->get();
-        $classId = Classroom::find($idClass);
 
         foreach ($yearUnions as $yearUnion) {
             foreach ($itemsUser as $item) {
                 //compruebo que el alumno sea presencial
                 if ($yearUnion->pivot->assistance) {
                     //si es presencial le asigno el Item
-                    foreach ($itemIds as $itemId) {
-                        $encontrado = false;
-                        //Compruebo que no tenga ese item ya añadido
-                        foreach ($yearUnion->pivot->items as $itemUser) {
-                            if ($itemUser->id == $itemId) {
-                                $encontrado = true;
-                                break;
-                            }
-                        }
-                        if (!$encontrado) {
-
-                            $yearUnion->pivot->items()->attach($item->id);
-                        }
-                    }
+                    $yearUnion->pivot->items()->attach($item->id);
                 }
             }
         }
 
-
-
-        $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
-        foreach ($yearUnions as $yearUnion) {
-            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance', 1)->get()->load('items', 'user');
-            $registrados = array();
-            foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
-
-                //Aseguramos que no se repitan los usuarios
-                if (!in_array($yearUnionUser->user_id, $registrados)) {
-                    array_push($registrados, $yearUnionUser->user_id);
-                    $yearUnionUser->items = $yearUnionUser->items;
-                    $yearUnionUser->user = $yearUnionUser->user;
-                } else {
-                    $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
-                }
-            }
-        }
-
-        $types = Type::all()->where('model', Item::class);
-        $classrooms = Classroom::all();
-        $states = State::all();
         $courseId = $courseId;
         $yearId = $yearId;
 
-        return view('courses.filter', compact('classrooms', 'items', 'types', 'states', 'yearUnions', 'courseId', 'yearId', 'idClass'));
+        return redirect('courses/show/' . $courseId . '/' . $yearId);
+    }
+    public function imprimir(Request $request)
+    {
+        $yearUnionsCollection = $request->get('yearUnions');
+        $yearUnions = array();
+        foreach ($yearUnionsCollection as $yearUnion) {
+            array_push($yearUnions, json_decode($yearUnion));
+        }
+        $pdf = \PDF::loadView('courses.pdf', compact('yearUnions'))->setPaper('a4', 'landscape');
+        return $pdf->download('courses.pdf');
     }
 }

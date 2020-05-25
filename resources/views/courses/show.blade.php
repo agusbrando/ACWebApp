@@ -13,7 +13,7 @@
             <div class="d-flex flex-row">
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
 
-                <h3>Curso </h3>
+                <h3>{{$yearUnionsPrueba->first()->course->level}}º {{$yearUnionsPrueba->first()->course->abbreviation}} - {{$yearUnionsPrueba->first()->classroom->name}}</h3>
 
             </div>
             <div class="d-flex flex-row-reverse">
@@ -41,9 +41,10 @@
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                        <div class="tab-pane fade  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                        <div class="tab-pane fade show active  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
                             Aquí irá la programacion del curso
                         </div>
+
                         <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
                             <div class="card-body row no-gutters table-responsive">
                                 <table class="table col-12 ">
@@ -61,7 +62,7 @@
                                                 <div class="d-flex flex-row ">
                                                     <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
                                                     <a class="btn btn-outline-primary mr-2" href="{{route('subjects.evaluations', $subject->id)}}">Evaluaciones</a>
-                                                    <a href="#" class="btn btn-outline-primary">Programacion</a>
+                                                    <a href="/programs/{{$yearUnionPrograms->where('subject_id',$subject->id)->first()->program->id}}" class="btn btn-outline-primary">Programacion</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -70,33 +71,98 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
+                        <div class="tab-pane fade " id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
 
-                            <form class="d-flex flex-column bd-highlight mb-3 ml-2" method="post" action="{{ route('courses.filter', array($courseId, $yearId))}}">
-                                @csrf
-                                <label for="formControlSelect1">Aulas</label>
-                                <div class="d-flex flex-row bd-highlight mb-3">
+                            <div class="divShowCoursesContent" id="accordion">
+                                @foreach($yearUnionsPrueba as $yearUnion)
 
-                                    <div class="d-flex flex-row ">
-                                        <select class="form-control " id="classroom_id" name="idClass">
+                                <div class="card">
+                                    <div class="card-header list-group-item d-flex justify-content-between align-items-center m-0" id="heading{{$yearUnion->evaluation->name}}" data-toggle="collapse" data-target="#collapse{{$yearUnion->evaluation->name}}" aria-expanded="true" aria-controls="collapse{{$yearUnion->evaluation->name}}">
+                                        <h5 class="mb-0">
+                                            <button class="btn collapsed">
+                                                {{$yearUnion->evaluation->name}}
+                                            </button>
+                                        </h5>
+                                        <span class="badge badge-primary badge-pill"> {{$yearUnion->users->count()}}</span>
+                                    </div>
 
-                                            <!--Hace la funcion de un placeholder-->
-                                            @foreach($classrooms as $classroom)
-                                            <option value="{{$classroom->id}}">{{$classroom->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="d-flex flex-row ml-3 botones">
-                                            <button class="btn btn-outline-primary " type="submit">Filtrar</button>
+                                    <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse" aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                <div class="card row no-gutters table-responsive">
+
+
+                                                    <table id='mytable' class="table w-100">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Apellido</th>
+                                                                <th>Items</th>
+                                                                <th>Responsabilizar Item</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            @foreach($yearUnion->users as $user)
+
+
+                                                            <tr>
+
+                                                                <td>{{$user->first_name}}</td>
+                                                                <td>{{$user->last_name}}</td>
+
+                                                                <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
+                                                                    @foreach($user->pivot->items as $item)
+                                                                    <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
+                                                                    @endforeach
+                                                                </td>
+                                                                <td>
+                                                                    <div class="form-group ">
+                                                                        <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($user->id, $courseId, $yearId))}}">
+                                                                            @csrf
+                                                                            @method('POST')
+
+                                                                            <select multiple class="form-control " id="itemIds" name="itemIds[]">
+                                                                                <option disabled selected>Selecciona un Item</option>
+                                                                                <!--Hace la funcion de un placeholder-->
+                                                                                @foreach($items as $item)
+                                                                                <option selected value="{{$item->id}}">{{$item->name}}</option>
+
+
+                                                                                @endforeach
+                                                                            </select>
+
+
+                                                                            <button class="btn btn-outline-info mt-2" role="button">Asignar Item</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-
-                            </form>
-                            <div class="divShowCoursesContent d-flex justify-content-center ">
-                                <h2 class="align-self-center ">Selecciona un aula primero</h2>
+                                @endforeach
                             </div>
-
-
+                            <div class="card-footer col-12">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <!-- Boton para imprimir PDF-->
+                                        <form class="float-right" action="{{ route('courses.print')}}" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            @foreach($yearUnionsPrueba as $yearUnion)
+                                            <input type="hidden" value={{$yearUnion}} name="yearUnions[]">
+                                            @endforeach
+                                            <button type="submit" class="btn btn-outline-danger ml-1 float-right"> Descargar PDF </button>
+                                        </form>
+                                    </ul>
+                                </nav>
+                            </div>
 
                         </div>
                     </div>

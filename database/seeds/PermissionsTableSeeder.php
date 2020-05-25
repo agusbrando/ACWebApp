@@ -943,5 +943,314 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         //FIN PERMISOS TASK//
+
+
+        //PERMISOS TIMETABLE//
+        DB::table('permissions')->insert([
+            'name'        => 'Crear_timetable',
+            'slug'        => 'crear.timetable',
+            'description' => 'Añadir timetable al sistema ',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Leer_timetable',
+            'slug'        => 'leer.timetable',
+            'description' => 'Leer timetable del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Modificar_timetable',
+            'slug'        => 'modif.timetable',
+            'description' => 'Modificar timetable del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Eliminar_timetable',
+            'slug'        => 'eliminar.timetable',
+            'description' => 'Eliminar timetable del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Listar_timetable',
+            'slug'        => 'listar.timetable',
+            'description' => 'Listar timetable del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        //FIN PERMISOS TIMETABLE//
+
+        //PERMISOS TRACKINGS//
+        DB::table('permissions')->insert([
+            'name'        => 'Crear_trackings',
+            'slug'        => 'crear.trackings',
+            'description' => 'Añadir trackings al sistema ',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Leer_trackings',
+            'slug'        => 'leer.trackings',
+            'description' => 'Leer trackings del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Modificar_trackings',
+            'slug'        => 'modif.trackings',
+            'description' => 'Modificar trackings del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Eliminar_trackings',
+            'slug'        => 'eliminar.trackings',
+            'description' => 'Eliminar trackings del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Listar_trackings',
+            'slug'        => 'listar.trackings',
+            'description' => 'Listar trackings del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        //FIN PERMISOS TRACKINGS//
+
+        //PERMISOS TYPE//
+        DB::table('permissions')->insert([
+            'name'        => 'Crear_type',
+            'slug'        => 'crear.type',
+            'description' => 'Añadir type al sistema ',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Leer_type',
+            'slug'        => 'leer.type',
+            'description' => 'Leer type del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Modificar_type',
+            'slug'        => 'modif.type',
+            'description' => 'Modificar type del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Eliminar_type',
+            'slug'        => 'eliminar.type',
+            'description' => 'Eliminar type del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Listar_type',
+            'slug'        => 'listar.type',
+            'description' => 'Listar type del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        //FIN PERMISOS TYPE//
+
+        //PERMISOS UNIT//
+        DB::table('permissions')->insert([
+            'name'        => 'Crear_unit',
+            'slug'        => 'crear.unit',
+            'description' => 'Añadir unit al sistema ',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Leer_unit',
+            'slug'        => 'leer.unit',
+            'description' => 'Leer unit del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Modificar_unit',
+            'slug'        => 'modif.unit',
+            'description' => 'Modificar unit del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Eliminar_unit',
+            'slug'        => 'eliminar.unit',
+            'description' => 'Eliminar unit del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Listar_unit',
+            'slug'        => 'listar.unit',
+            'description' => 'Listar unit del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        //FIN PERMISOS UNIT//
+
+        //PERMISOS USER//
+        DB::table('permissions')->insert([
+            'name'        => 'Crear_user',
+            'slug'        => 'crear.user',
+            'description' => 'Añadir user al sistema ',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Leer_user',
+            'slug'        => 'leer.user',
+            'description' => 'Leer user del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Modificar_user',
+            'slug'        => 'modif.user',
+            'description' => 'Modificar user del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Eliminar_user',
+            'slug'        => 'eliminar.user',
+            'description' => 'Eliminar user del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Listar_user',
+            'slug'        => 'listar.user',
+            'description' => 'Listar user del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        //FIN PERMISOS USER//
+
+        //PERMISOS YEAR//
+        DB::table('permissions')->insert([
+            'name'        => 'Crear_year',
+            'slug'        => 'crear.year',
+            'description' => 'Añadir year al sistema ',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Leer_year',
+            'slug'        => 'leer.year',
+            'description' => 'Leer year del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Modificar_year',
+            'slug'        => 'modif.year',
+            'description' => 'Modificar year del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Eliminar_year',
+            'slug'        => 'eliminar.year',
+            'description' => 'Eliminar year del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Listar_year',
+            'slug'        => 'listar.year',
+            'description' => 'Listar year del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        //FIN PERMISOS YEAR//
+
+        //PERMISOS YEARUNION//
+        DB::table('permissions')->insert([
+            'name'        => 'Crear_yearunion',
+            'slug'        => 'crear.yearunion',
+            'description' => 'Añadir yearunion al sistema ',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Leer_yearunion',
+            'slug'        => 'leer.yearunion',
+            'description' => 'Leer yearunion del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Modificar_yearunion',
+            'slug'        => 'modif.yearunion',
+            'description' => 'Modificar yearunion del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Eliminar_yearunion',
+            'slug'        => 'eliminar.yearunion',
+            'description' => 'Eliminar yearunion del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('permissions')->insert([
+            'name'        => 'Listar_yearunion',
+            'slug'        => 'listar.yearunion',
+            'description' => 'Listar yearunion del sistema',
+            'model'       => 'Permission',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        //FIN PERMISOS YEARUNION//
     }
 }
