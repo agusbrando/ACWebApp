@@ -10,11 +10,13 @@
                 <a href="/events" class="my-auto mx-1 h5"><i class="fas fa-arrow-left ml-1"></i></a>
                 <h3 class="mt-1 ml-1">Reserva de aulas</h3>
             </div>
+            @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
             <div>
                 <a type="button" href="/types" class="btn btn-outline-light mt-1">Añadir Tipo</a>
                 <a type="button" href="/sessions" class="btn btn-outline-light mt-1 ml-1">Añadir Hora</a>
                 <a type="button" href="/list" class="btn btn-outline-light mt-1 ml-1">Listado</a>
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters">
 
@@ -34,7 +36,9 @@
                             @if($event->type_id == 1)
                                 <h5 class="text-muted">Tutoría</h5>
                             @else
+                            @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
                                 <h5 class="text-muted">Reserva de aula</h5>
+                                @endif
                             @endif
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <a>{{ $event->title }}</a>

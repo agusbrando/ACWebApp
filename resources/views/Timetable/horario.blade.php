@@ -10,13 +10,11 @@
         <div class="card-header row m-0 justify-content-between">
             <a href="/horarios" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Horario {{$timetable->name}}</h3>
+            @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
             <div class="row">
-
                 <td>
-
                     <form action="{{ route('horarios.edit', $timetable->id)}}" method="get">
                         @csrf
-
                         <button class="btn btn-outline-primary  float-right m-1" type="submit">Editar</button>
                     </form>
                 </td>
@@ -27,8 +25,8 @@
                         <button class="btn btn-outline-danger  float-right m-1" type="submit">Borrar</button>
                     </form>
                 </td>
-
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters">
 
@@ -126,24 +124,24 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='10:40')
                     @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}"> 
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td >
+                    </td>
                     @endif
                     @if($session->day==2)
                     <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td >
+                    </td>
                     @endif
                     @if($session->day==3)
                     <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td >
+                    </td>
                     @endif
                     @if($session->day==4)
                     <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td >
+                    </td>
                     @endif
                     @if($session->day==5)
                     <td style="background-color:{{$session->subject->color}}">
@@ -166,7 +164,7 @@
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}"> 
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
@@ -295,7 +293,7 @@
                     </td>
                     @endif
                     @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}"> 
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
                     </td>
                     @endif
