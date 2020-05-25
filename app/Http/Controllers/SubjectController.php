@@ -113,7 +113,7 @@ class SubjectController extends Controller
                                 $evaluation->mediaFinalExamenes = $mediaFinalExamenes;
                             }
                             if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
-                                $mediaParciales[$user_id] = "No llega a la nota minima " . $notaFinal;
+                                $mediaParciales[$user_id] = "No llega a la media/ " . $notaFinal;
                                 $evaluation->mediaParciales = $mediaParciales;
                             }
                             $aux = 0;
@@ -159,7 +159,7 @@ class SubjectController extends Controller
                                 $evaluation->mediaFinalTrabajos = $mediaFinalTrabajos;
                             }
                             if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
-                                $mediaTrabajos[$user_id] = "No llega a la nota minima " . $notaFinal;
+                                $mediaTrabajos[$user_id] = "No llega a la media/ " . $notaFinal;
                                 $evaluation->mediaTrabajos = $mediaTrabajos;
                             }
                             $aux = 0;
@@ -204,7 +204,7 @@ class SubjectController extends Controller
                                 $evaluation->mediaFinalActitud = $mediaFinalActitud;
                             }
                             if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
-                                $mediaActitud[$user_id] = "No llega a la nota minima " . $notaFinal;
+                                $mediaActitud[$user_id] = "No llega a la media/ " . $notaFinal;
                                 $evaluation->mediaActitud = $mediaActitud;
                             }
                             $aux = 0;
@@ -249,7 +249,7 @@ class SubjectController extends Controller
                                 $evaluation->mediaFinalRecuperacion = $mediaFinalRecuperacion;
                             }
                             if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
-                                $mediaRecuperacion[$user_id] = "No llega a la nota minima " . $notaFinal;
+                                $mediaRecuperacion[$user_id] = "No llega a la media/ " . $notaFinal;
                                 $evaluation->mediaRecuperacion = $mediaRecuperacion;
                             }
                             $aux = 0;
