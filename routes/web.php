@@ -114,6 +114,8 @@ Route::post('courses/show/filter/{user_id}/{course_id}/{year_id}', 'CourseContro
 //eliminar
 Route::delete('courses/show/{course_id}/{year_id}', 'CourseController@eliminarYearUnion')->name('courses.eliminarYearUnion');
 Route::resource('courses', 'CourseController');
+//Imprimir
+Route::post('courses/show/imprimir', 'CourseController@imprimir')->name('courses.print');
 
 //RUTAS SUBJECTS JAVI
 //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
