@@ -25,6 +25,7 @@ class UsersTableSeeder extends Seeder
             'timetable_id' => 1
         ]);
 
+
         //Profesores
         //2
         DB::table('users')->insert([
