@@ -19,25 +19,26 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card text-center">
-                        <div class="card-header">
-                            <div class="d-flex flex-row d-flex justify-content-between">
+                        <div class="card-header row m-0 justify-content-between">
+                            
                                 <div class="d-flex flex-row d-flex justify-content-between">
                                     
                                     <a href="/programs/{{$unidad->program_id}}" class="my-auto mx-1 h5 mr-1"><i class="fas fa-arrow-left" ></i></a>
                                     <h3 class="text-left ml-2 mt-2">{{$unidad->name}}</h3>
                                     
                                 </div>
-                                <div class="row justify-content-end mt-2">
-                                    <a type="button" class="btn text-primary"  href="{{ route('units.edit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-edit"></i></a>
-                                    <div class="espacio"></div>
-                                    <form  action="{{ route('programs.destroyUnit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                        <button class="btn text-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                    <div class="espacio"></div>
+                                
+                                <div class="mt-2">
+                                     <div class="row justify-content-end align-items-center">
+                                        <a type="button" role="button" class="btn btn-sm btn-outline-primary"  href="{{ route('units.edit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-edit"></i></a>
+                                        <div class="espacio"></div>
+                                        
+                                            <button class="btn btn-sm btn-outline-danger" type="button" role="button" data-toggle="modal" data-target="#confirm-delete"><i class="fas fa-trash-alt"></i></button>
+                                        <div class="espacio"></div>
+                                    </div>
                                 </div>
-                            </div>
+                               
+                            
                         </div>
                         <div class="card-body col-12">
                                 
@@ -66,10 +67,12 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Evaluacion Prevista</span>
                                             </div>
-                                            <select class="form-control" name="expected_eval" value="{{$unidad->expected_eval}}" disabled>
-                                                <option value="1EVAL">1EVAL</option>
-                                                <option value="2EVAL">2EVAL</option>
-                                                <option value="3EVAL">3EVAL</option>
+                                            
+                                            <select class="form-control custom-select" name="expected_eval" disabled>
+                                                @for($i=1;$i<=3;$i++)
+                                                <option value="{{$i}}EVAL" {{$unidad->expected_eval == $i.'EVAL' ? 'selected' : ''}}>{{$i}}EVAL</option>
+                     
+                                                @endfor
                                             </select>
                                         </div>
                                 
@@ -89,10 +92,11 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Evaluacion</span>
                                             </div>
-                                            <select class="form-control" name="eval" value="{{$unidad->eval}}" disabled>
-                                                <option value="1EVAL">1EVAL</option>
-                                                <option value="2EVAL">2EVAL</option>
-                                                <option value="3EVAL">3EVAL</option>
+                                            <select class="form-control custom-select" name="eval" disabled>
+                                                @for($i=1;$i<=3;$i++)
+                                                <option value="{{$i}}EVAL" {{$unidad->eval == $i.'EVAL' ? 'selected' : ''}}>{{$i}}EVAL</option>
+                
+                                                @endfor
                                             </select>
                                         </div>
                                         <div class="input-group mb-3">
@@ -122,6 +126,27 @@
         
 </main>
 
-
+<!-- Modal Confirmacion Borrar-->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="confirm-deleteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title text-center" id="confirm-deleteLabel"> Confirmación de borrar</h5>
+                
+            </div>
+            <div class="modal-body wrap">
+                ¿Esta seguro/a de que desea borrar esta unidad de la programacion?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <form action="{{ route('programs.destroyUnit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-outline-danger btn-sm" type="submit">Borrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
