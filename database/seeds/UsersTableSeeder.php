@@ -148,6 +148,30 @@ class UsersTableSeeder extends Seeder
             'role_id' => 3,
             'timetable_id' => 1
         ]);
+
+        //Jefatura de estudios y dirección
+
+        DB::table('users')->insert([
+            'first_name' => 'Jefatura',
+            'last_name' => 'de Estudios',
+            'email' => 'jefaturaesdutios@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 1,
+            'timetable_id' => 1
+        ]);
+        DB::table('users')->insert([
+            'first_name' => 'Direccion',
+            'last_name' => 'de Centro',
+            'email' => 'direccion@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 1,
+            'timetable_id' => 1
+        ]);
+
         //ALUMNOS
         $cursos = Course::all();
         foreach ($cursos as $curso) {
