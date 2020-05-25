@@ -108,19 +108,5 @@ class TimetableTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        DB::table('timetables')->insert([
-            'name' => '1SMR2020',
-            'date_start' =>  now(),
-            'date_end' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('timetables')->insert([
-            'name' => '2SMR2020',
-            'date_start' =>  now(),
-            'date_end' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 }
