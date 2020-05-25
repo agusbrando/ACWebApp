@@ -31,8 +31,8 @@
           @if(!empty($sessions))
             @foreach($sessions->sortBy('time_start') as $session)
               <button type="submit" 
-              onclick="window.location.href='{{ route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $tipo]) }}'"
-               class="btn btn-info btn-block">{{ $session->time_start->format('H:i') }}</button>
+              onclick="window.location.href='{{ route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start, 'tipo' => $tipo]) }}'"
+              class="btn btn-info btn-block">{{ $session->time_start }}</button>
             @endforeach
           @else
             <p>No hay horas disponibles.</p>

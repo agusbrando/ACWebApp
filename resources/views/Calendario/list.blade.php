@@ -30,21 +30,21 @@
                 <hr class="w-75">
                 <br>
                 <div id="buttons">
-                    @if(!empty($events))
+                     @if(!empty($events))
                         @foreach($events->sortBy('date') as $event)
-                            <h3>{{ substr($event->date, -17, 14) }}</h3>
-                            @if($event->type_id == 1)
-                                <h5 class="text-muted">Tutoría</h5>
-                            @else
-                            @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
-                                <h5 class="text-muted">Reserva de aula</h5>
+                            @if($event->type_id == 1 || ($event->type_id == 2 && $user->role_id != 4))
+                                <h3>{{ substr($event->date, -2, 2).substr($event->date, -6, 4).substr($event->date, -10, 4) }}</h3>
+                                @if($event->type_id == 1)
+                                    <h5 class="text-muted">Tutoría</h5>
+                                @else
+                                    <h5 class="text-muted">Reserva de aula</h5>
                                 @endif
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <a>{{ $event->title }}</a>
+                                    <a id="info" type="submit" href="{{ asset('events/edit/'.$event->id) }}" class="btn btn-info btn-sm">Detalles</a>
+                                </div>
+                                <hr>
                             @endif
-                            <div class="card-body d-flex justify-content-between align-items-center">
-                                <a>{{ $event->title }}</a>
-                                <a id="info" type="submit" href="{{ asset('events/edit/'.$event->id) }}" class="btn btn-info btn-sm">Detalles</a>
-                            </div>
-                            <hr>
                         @endforeach
                     @else
                         <p>No existen reservas.</p>

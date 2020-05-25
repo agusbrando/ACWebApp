@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Course;
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,46 +18,15 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@champusaula.com',
             'last_name' => 'Admin',
             'password' => bcrypt('adminPass'),
-            'signature'=>'..\storage\app\signatures\'1\'5ea93e9b2fb28.png',
+            'signature' => '..\storage\app\signatures\'1\'5ea93e9b2fb28.png',
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 1,
-            'timetable_id'=>1
-        ]);
-        DB::table('users')->insert([
-            'first_name' => 'Alumno',
-            'last_name' => 'Apellido',
-            'email' => 'user@campusaula.com',
-            'password' => bcrypt('password'),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'role_id' => 3,
-            'timetable_id'=>1
-        ]);
-        
-        DB::table('users')->insert([
-            'first_name' => 'sergio',
-            'last_name' => 'sergio',
-            'email' => 'sergio@sergio.com',
-            'password' => bcrypt('@VcEse5F@b25c7e'),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'role_id' => 3,
-            'timetable_id'=>1
-        ]);
-        
-        DB::table('users')->insert([
-            'first_name' => 'Default',
-            'last_name' => 'User',
-            'email' => 'user@default.com',
-            'password' => bcrypt('default'),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
 
         //Profesores
+        //2
         DB::table('users')->insert([
             'first_name' => 'Belén',
             'last_name' => 'López Pérez',
@@ -64,8 +35,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
+        //3
         DB::table('users')->insert([
             'first_name' => 'Guillermo',
             'last_name' => 'Garrido Portes',
@@ -73,9 +45,10 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'created_at' => now(),
             'updated_at' => now(),
-            'role_id' => 2,
-            'timetable_id'=>1
+            'role_id' => 3,
+            'timetable_id' => 1
         ]);
+        //4
         DB::table('users')->insert([
             'first_name' => 'Marcelo',
             'last_name' => 'Malonda Pellicer',
@@ -84,8 +57,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
+        //5
         DB::table('users')->insert([
             'first_name' => 'Matilde',
             'last_name' => 'Gil Villanova',
@@ -94,9 +68,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
-
+        //6
         DB::table('users')->insert([
             'first_name' => 'Miguel Ángel',
             'last_name' => 'Belenguer Sánchez',
@@ -105,9 +79,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
-
+        //7
         DB::table('users')->insert([
             'first_name' => 'José Manuel',
             'last_name' => 'Ramón García',
@@ -116,9 +90,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
-
+        //8
         DB::table('users')->insert([
             'first_name' => 'Raquel',
             'last_name' => 'Valls Valls',
@@ -127,9 +101,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
-
+        //9
         DB::table('users')->insert([
             'first_name' => 'Jose',
             'last_name' => 'Fito',
@@ -138,9 +112,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
-
+        //10
         DB::table('users')->insert([
             'first_name' => 'Mario',
             'last_name' => 'García Atienza',
@@ -149,9 +123,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
-
+        //11
         DB::table('users')->insert([
             'first_name' => 'Olga ',
             'last_name' => 'Minguet',
@@ -160,22 +134,34 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => 3,
-            'timetable_id'=>1
+            'timetable_id' => 1
         ]);
-
+        //12
+        DB::table('users')->insert([
+            'first_name' => 'Javier ',
+            'last_name' => 'Tárrega',
+            'email' => 'javier.tarrega@champusaula.com',
+            'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 3,
+            'timetable_id' => 1
+        ]);
         //ALUMNOS
-        for ($i = 1; $i <= 120; $i++) {
-            DB::table('users')->insert([
-                'first_name' => 'Alumno'.$i,
-                'last_name' => 'Apellido'.$i,
-                'email' => 'user'.$i.'@campusaula.com',
-                'password' => bcrypt('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
-                'role_id' => 4,
-                'timetable_id'=>1
-            ]);
+        $cursos = Course::all();
+        foreach ($cursos as $curso) {
+            for ($i = 1; $i <= $curso->num_students; $i++) {
+                DB::table('users')->insert([
+                    'first_name' => 'Alumno' . $i . ' ' . $curso->level . $curso->abbreviation,
+                    'last_name' => 'Apellido' . $i,
+                    'email' => 'Alumno' . $i . $curso->level . $curso->abbreviation . '@campusaula.com',
+                    'password' => bcrypt('password'),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'role_id' => 4,
+                    'timetable_id' => 1
+                ]);
+            }
         }
-        
     }
 }

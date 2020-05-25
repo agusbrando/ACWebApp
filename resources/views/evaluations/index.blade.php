@@ -12,8 +12,7 @@
         <div class="card-body row no-gutters table-responsive">
             <table class="table col-12 ">
                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
-                    <tr>
-                       
+                    <tr>                       
                         <th scope="col">Nombre</th>               
                         <th scope="col">Accion</th>
                     </tr>
@@ -30,7 +29,6 @@
                 @endforeach
             </table>
         </div>
-
         <div class="card-footer col-12">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">

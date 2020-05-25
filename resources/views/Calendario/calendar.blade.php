@@ -31,7 +31,9 @@
         <br>
         <div id="buttons">
           @foreach($types as $type)
-            <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block" />
+            @if($type->id == 1 || ($type->id == 2 && $user->role_id != 4))
+              <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block" />
+            @endif
           @endforeach
         </div>
         <br>

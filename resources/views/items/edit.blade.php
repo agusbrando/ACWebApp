@@ -20,7 +20,7 @@
                 </div>
             </form>
             <div class="d-flex flex-row-reverse">
-                <form  method="post" action="{{ route('items.destroy', $item->id)}}">
+                <form  method="post" action="{{ route('items.destroy', $itemId)}}">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
@@ -35,10 +35,11 @@
                 <div class="container">
 
 
-                    <form method="POST" action="{{ route('items.update', $item->id) }}">
+                    <form method="post" action="{{ route('items.updateItem', $itemId) }}">
                         <!-- Proteccion contra consultas no deseadas -->
+                        @method('PATCH')
                         @csrf
-
+                        
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" class="form-control" id="nombreItem" name="name" aria-describedby="nombreHelp" value="{{$item->name}}" placeholder="Cambia el nombre">

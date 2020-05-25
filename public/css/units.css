@@ -19,9 +19,7 @@ table.dataTable thead th{
     display:flex;
     flex-direction: row;
 }
-.botones *{
-    padding-left: 10px;
-}
+
 
 .tablas{
     display: flex;
