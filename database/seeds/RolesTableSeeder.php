@@ -56,5 +56,20 @@ class RolesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('roles')->insert([
+            'name'        => 'Direccion',
+            'slug'        => 'direccion',
+            'description' => 'Direccion Role',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('roles')->insert([
+            'name'        => 'Jefe de Estudios',
+            'slug'        => 'jefeEstudios',
+            'description' => 'Jefatura de estudios Role',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
