@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Comments;
-use App\Models\Attachments;
+use App\Models\Comment;
+use App\Models\Attachment;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -52,12 +53,10 @@ class HomeController extends Controller
             $request->session()->put('user_role', $request->user()->role->name);
         }
 
-        $post1 = Post::select('created_at')->where('id', 1)->get();
-        $post2 = Post::select('created_at')->where('id', 2)->get();
-        $post3 = Post::select('created_at')->where('id', 3)->get();
+        $posts = Post::all();
+        $users = User::all();
+        $comments = Comment::all();
 
-        //$comment = Comment::select('text')->where('id', 1)->get();
-
-        return view('home', compact('post1', 'post2', 'post3'));
+        return view('home', compact('posts', 'users', 'comments'));
     }
 }

@@ -76,7 +76,7 @@
 
 
                             <div class="divShowCoursesContent" id="accordion">
-                                @foreach($yearUnions as $yearUnion)
+                                @foreach($yearUnionsPrueba as $yearUnion)
 
                                 <div class="card">
                                     <div class="card-header list-group-item d-flex justify-content-between align-items-center m-0" id="heading{{$yearUnion->evaluation->name}}" data-toggle="collapse" data-target="#collapse{{$yearUnion->evaluation->name}}" aria-expanded="false" aria-controls="collapse{{$yearUnion->evaluation->name}}">
@@ -105,22 +105,22 @@
                                                         </thead>
                                                         <tbody>
 
-                                                            @foreach($yearUnion->yearUnionUsers as $yearUnionUser)
+                                                            @foreach($yearUnion->users as $user)
 
 
                                                             <tr>
 
-                                                                <td>{{$yearUnionUser->user->first_name}}</td>
-                                                                <td>{{$yearUnionUser->user->last_name}}</td>
+                                                                <td>{{$user->first_name}}</td>
+                                                                <td>{{$user->last_name}}</td>
 
                                                                 <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
-                                                                    @foreach($yearUnionUser->items as $item)
+                                                                    @foreach($user->pivot->items as $item)
                                                                     <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
                                                                     @endforeach
                                                                 </td>
                                                                 <td>
                                                                     <div class="form-group ">
-                                                                        <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($yearUnionUser->user->id, $courseId, $yearId))}}">
+                                                                        <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($user->id, $courseId, $yearId))}}">
                                                                             @csrf
                                                                             @method('POST')
                                                                             <input type="hidden" name="idClass2" value="{{$idClass}}">

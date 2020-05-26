@@ -40,7 +40,7 @@ class SubjectController extends Controller
 
     public function index()
     {
-        $subjects = Subject::all();
+        $subjects = Subject::paginate(10);
         return view('subjects.index', compact('subjects'));
     }
 
@@ -58,20 +58,28 @@ class SubjectController extends Controller
     public function desglose(Request $request)
     {
 
-        //TODO JAVI NO FUNCIONA
-        $request->validate([
-            'subject' => 'required',
-            'year' => 'required',
-            'course' => 'required',
-            'evaluation' => 'required',
-        ]);
+        if ($request->session()->has('subject') && $request->session()->has('year') && $request->session()->has('course') && $request->session()->has('evaluation')) {
+            $year = Year::find($request->session()->get('year'));
+            $subject = Subject::find($request->session()->get('subject'));
+            $course = Course::find($request->session()->get('course'));
+            $eval = Evaluation::find($request->session()->get('evaluation'));
+            $evaluation = YearUnion::where('subject_id', $subject->id)->where('year_id', $year->id)->where('course_id', $course->id)->where('evaluation_id', $eval->id)->first()->load('evaluation');
+            $taskTypes = $evaluation->types;
+        } else {
+            $request->validate([
+                'subject' => 'required',
+                'year' => 'required',
+                'course' => 'required',
+                'evaluation' => 'required',
+            ]);
+            $year = Year::find($request->get('year'));
+            $subject = Subject::find($request->get('subject'));
+            $course = Course::find($request->get('course'));
+            $eval = Evaluation::find($request->get('evaluation'));
+            $evaluation = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->where('evaluation_id', $request->get('evaluation'))->first()->load('evaluation');
+            $taskTypes = $evaluation->types;
+        }
 
-        $year = Year::find($request->get('year'));
-        $subject = Subject::find($request->get('subject'));
-        $course = Course::find($request->get('course'));
-        $eval = Evaluation::find($request->get('evaluation'));
-        $evaluation = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->where('evaluation_id', $request->get('evaluation'))->first()->load('evaluation');
-        $taskTypes = $evaluation->types;
 
         $notaParciales = null;
         $notaTrabajos = null;
@@ -85,15 +93,19 @@ class SubjectController extends Controller
 
         $aux = 0;
         $aux2 = 0;
+        $suspendido = false;
 
         $evaluation->percentages = $evaluation->types;
 
         foreach ($taskTypes as $task_type) {
+            $notaMin[$task_type->name] = $task_type->pivot->min_grade_task;
+            $evaluation->notaMin = $notaMin;
             $name = $task_type->name;
             switch ($name) {
                 case 'Examenes':
                     $evaluation->parciales = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->parciales as $parcial) {
+                        $parcial->yearUnionUsers = $parcial->yearUnionUsers;
                         foreach ($parcial->yearUnionUsers as $yearUnionUser) {
                             $notaParciales[$yearUnionUser->user->id][$parcial->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaParciales = $notaParciales;
@@ -102,27 +114,36 @@ class SubjectController extends Controller
                     if ($evaluation->notaParciales != null) {
                         foreach ($evaluation->notaParciales as $user_id => $examenes) {
                             foreach ($examenes as $nota) {
-                                if ($nota < $task_type->pivot->min_grade_task && $nota != null) {
-                                    $mediaParciales[$user_id] = "No llega a la nota minima tarea";
-                                    $evaluation->mediaParciales = $mediaParciales;
-                                    break;
-                                } else {
-                                    if ($aux2 == count($evaluation->parciales)) {
-                                        $aux2 = 0;
-                                    }
-                                    if ($nota != null) {
-                                        $aux2++;
-                                    }
-                                    if ($aux2 == 0) {
-                                        $aux2 = count($evaluation->parciales);
-                                    }
-                                    $aux += $nota;
-                                    $mediaParciales[$user_id] = round($aux / $aux2, 2);
-                                    $evaluation->mediaParciales = $mediaParciales;
+                                if ($aux2 == count($evaluation->parciales)) {
+                                    $aux2 = 0;
                                 }
+                                if ($nota != null) {
+                                    $aux2++;
+                                }
+                                if ($aux2 == 0) {
+                                    $aux2 = count($evaluation->parciales);
+                                }
+                                $aux += $nota;
+                                $notaFinal = round($aux / $aux2, 2);
+                                $mediaParciales[$user_id] = $notaFinal;
+                                $evaluation->mediaParciales = $mediaParciales;
+                                $mediaFinalExamenes[$user_id] = $notaFinal;
+                                $evaluation->mediaFinalExamenes = $mediaFinalExamenes;
+                                if ($nota < $task_type->pivot->min_grade_task && $nota != null) {
+                                    $suspendido = true;
+                                }
+                            }
+                            if ($suspendido) {
+                                $mediaFinalExamenes[$user_id] = 3;
+                                $evaluation->mediaFinalExamenes = $mediaFinalExamenes;
+                            }
+                            if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
+                                $mediaParciales[$user_id] = "No llega a la media " . $notaFinal;
+                                $evaluation->mediaParciales = $mediaParciales;
                             }
                             $aux = 0;
                             $aux2 = 0;
+                            $suspendido = false;
                         }
                     }
 
@@ -138,31 +159,37 @@ class SubjectController extends Controller
                     if ($evaluation->notaTrabajos != null) {
                         foreach ($evaluation->notaTrabajos as $user_id => $trabajosNotas) {
                             foreach ($trabajosNotas as $nota) {
-                                if ($nota < $task_type->pivot->min_grade_task && $nota != null) {
-                                    $mediaTrabajos[$user_id] = "No llega a la nota minima tarea";
-                                    $evaluation->mediaTrabajos = $mediaTrabajos;
-                                    break;
-                                } else {
-                                    if ($aux2 == count($evaluation->trabajos)) {
-                                        $aux2 = 0;
-                                    }
-                                    if ($nota != null) {
-                                        $aux2++;
-                                    }
-                                    if ($aux2 == 0) {
-                                        $aux2 = count($evaluation->trabajos);
-                                    }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaTrabajos[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaTrabajos = $mediaTrabajos;
-                                    } else {
-                                        $mediaTrabajos[$user_id] = 0;
-                                    }
+
+                                if ($aux2 == count($evaluation->trabajos)) {
+                                    $aux2 = 0;
                                 }
+                                if ($nota != null) {
+                                    $aux2++;
+                                }
+                                if ($aux2 == 0) {
+                                    $aux2 = count($evaluation->trabajos);
+                                }
+                                $aux += $nota;
+                                $notaFinal = round($aux / $aux2, 2);
+                                $mediaTrabajos[$user_id] = $notaFinal;
+                                $evaluation->mediaTrabajos = $mediaTrabajos;
+                                $mediaFinalTrabajos[$user_id] = $notaFinal;
+                                $evaluation->mediaFinalTrabajos = $mediaFinalTrabajos;
+                                if ($nota < $task_type->pivot->min_grade_task && $nota != null) {
+                                    $suspendido = true;
+                                }
+                            }
+                            if ($suspendido) {
+                                $mediaFinalTrabajos[$user_id] = 3;
+                                $evaluation->mediaFinalTrabajos = $mediaFinalTrabajos;
+                            }
+                            if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
+                                $mediaTrabajos[$user_id] = "No llega a la media " . $notaFinal;
+                                $evaluation->mediaTrabajos = $mediaTrabajos;
                             }
                             $aux = 0;
                             $aux2 = 0;
+                            $suspendido = false;
                         }
                     }
                     break;
@@ -177,31 +204,37 @@ class SubjectController extends Controller
                     if ($evaluation->notaActitud != null) {
                         foreach ($evaluation->notaActitud as $user_id => $actitudNotas) {
                             foreach ($actitudNotas as $nota) {
-                                if ($nota < $task_type->pivot->min_grade_task && $nota != null) {
-                                    $mediaActitud[$user_id] = "No llega a la nota minima tarea";
-                                    $evaluation->mediaActitud = $mediaActitud;
-                                    break;
-                                } else {
-                                    if ($aux2 == count($evaluation->actitud)) {
-                                        $aux2 = 0;
-                                    }
-                                    if ($nota != null) {
-                                        $aux2++;
-                                    }
-                                    if ($aux2 == 0) {
-                                        $aux2 = count($evaluation->actitud);
-                                    }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaActitud[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaActitud = $mediaActitud;
-                                    } else {
-                                        $mediaActitud[$user_id] = 0;
-                                    }
+
+                                if ($aux2 == count($evaluation->actitud)) {
+                                    $aux2 = 0;
                                 }
+                                if ($nota != null) {
+                                    $aux2++;
+                                }
+                                if ($aux2 == 0) {
+                                    $aux2 = count($evaluation->actitud);
+                                }
+                                $aux += $nota;
+                                $notaFinal = round($aux / $aux2, 2);
+                                $mediaActitud[$user_id] = $notaFinal;
+                                $evaluation->mediaActitud = $mediaActitud;
+                                $mediaFinalActitud[$user_id] = $notaFinal;
+                                $evaluation->mediaFinalActitud = $mediaFinalActitud;
+                                if ($nota < $task_type->pivot->min_grade_task && $nota != null) {
+                                    $suspendido = true;
+                                }
+                            }
+                            if ($suspendido) {
+                                $mediaFinalActitud[$user_id] = 3;
+                                $evaluation->mediaFinalActitud = $mediaFinalActitud;
+                            }
+                            if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
+                                $mediaActitud[$user_id] = "No llega a la media " . $notaFinal;
+                                $evaluation->mediaActitud = $mediaActitud;
                             }
                             $aux = 0;
                             $aux2 = 0;
+                            $suspendido = false;
                         }
                     }
                     break;
@@ -209,38 +242,44 @@ class SubjectController extends Controller
                     $evaluation->recuperacion = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->recuperacion as $rec) {
                         foreach ($rec->yearUnionUsers as $yearUnionUser) {
-                            $notaRecuperacion[$yearUnionUser->user->id][$rec->id] = $yearUnionUser->user->pivot->value;
+                            $notaRecuperacion[$yearUnionUser->user->id][$rec->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaRecuperacion = $notaRecuperacion;
                         }
                     }
                     if ($evaluation->notaRecuperacion != null) {
                         foreach ($evaluation->notaRecuperacion as $user_id => $recuperacionNotas) {
                             foreach ($recuperacionNotas as $nota) {
-                                if ($nota < $task_type->pivot->min_grade_task && $nota != null) {
-                                    $mediaRecuperacion[$user_id] = "No llega a la nota minima tarea";
-                                    $evaluation->mediaRecuperacion = $mediaRecuperacion;
-                                    break;
-                                } else {
-                                    if ($aux2 == count($evaluation->recuperacion)) {
-                                        $aux2 = 0;
-                                    }
-                                    if ($nota != null) {
-                                        $aux2++;
-                                    }
-                                    if ($aux2 == 0) {
-                                        $aux2 = count($evaluation->recuperacion);
-                                    }
-                                    if ($nota != null) {
-                                        $aux += $nota;
-                                        $mediaRecuperacion[$user_id] = round($aux / $aux2, 2);
-                                        $evaluation->mediaRecuperacion = $mediaRecuperacion;
-                                    } else {
-                                        $mediaRecuperacion[$user_id] = 0;
-                                    }
+
+                                if ($aux2 == count($evaluation->recuperacion)) {
+                                    $aux2 = 0;
                                 }
+                                if ($nota != null) {
+                                    $aux2++;
+                                }
+                                if ($aux2 == 0) {
+                                    $aux2 = count($evaluation->recuperacion);
+                                }
+                                $aux += $nota;
+                                $notaFinal = round($aux / $aux2, 2);
+                                $mediaRecuperacion[$user_id] = $notaFinal;
+                                $evaluation->mediaRecuperacion = $mediaRecuperacion;
+                                $mediaFinalRecuperacion[$user_id] = $notaFinal;
+                                $evaluation->mediaFinalRecuperacion = $mediaFinalRecuperacion;
+                                if ($nota < $task_type->pivot->min_grade_task && $nota != null) {
+                                    $suspendido = true;
+                                }
+                            }
+                            if ($suspendido) {
+                                $mediaFinalRecuperacion[$user_id] = 3;
+                                $evaluation->mediaFinalRecuperacion = $mediaFinalRecuperacion;
+                            }
+                            if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
+                                $mediaRecuperacion[$user_id] = "No llega a la media " . $notaFinal;
+                                $evaluation->mediaRecuperacion = $mediaRecuperacion;
                             }
                             $aux = 0;
                             $aux2 = 0;
+                            $suspendido = false;
                         }
                     }
                     break;
@@ -250,6 +289,14 @@ class SubjectController extends Controller
         return view('Notas.desglose', compact('evaluation', 'subject', 'eval', 'year', 'course'));
     }
 
+    /**
+     * Muestra las notas medias de los usuarios con sus
+     * notas finales aplicando los porcentajes en una tabla.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param int $subject_id
+     * @return view Notas.evaluations
+     */
     public function evaluations(Request $request, $subject_id)
     {
 
@@ -272,12 +319,14 @@ class SubjectController extends Controller
             $yearUnion->percentages = $yearUnion->types;
             $yearUnion->users = $yearUnion->users;
             $yearUnion->tareas = $taskTypes;
+            $users = $yearUnion->users;
             foreach ($yearUnion->users as $user) {
                 if (count($taskTypes) > 0) {
                     $sumaFinal = 0;
                     $recuperado = 0;
                     foreach ($taskTypes as $task_type) {
-                        $tasks =  YearUnionUser::find($user->pivot->user_id)->tasks;
+                        $yearUnionUser =  YearUnionUser::where('user_id', $user->id)->where('year_union_id', $yearUnion->id)->first();
+                        $tasks =  $yearUnionUser->tasks()->where('type_id', $task_type->id)->get();
                         $suma = 0;
                         $tareas[$task_type->name] = 0;
                         $user->tareas = $tareas;
@@ -292,12 +341,13 @@ class SubjectController extends Controller
                                 if ($percentage->id == $task_type->id) {
                                     $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
                                     $user->tareas = $tareas;
-                                    $aux = round(($percentage->pivot->nota_media_minima * $percentage->pivot->percentage) / 100, 2);
-                                    if ($tareas[$task_type->name] < $aux && $tareas[$task_type->name] != 0) {
+                                    $notaMinTarea = round(($percentage->pivot->min_grade_task * $percentage->pivot->percentage) / 100, 2);
+                                    if ($tareas[$task_type->name] < $notaMinTarea && $tareas[$task_type->name] != 0) {
                                         $resultados[$task_type->name] = true;
                                     }
                                     if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
-                                        $user->nota_final = $user->tareas[$task_type->name];
+                                        $user->boletin = $user->tareas[$task_type->name];
+                                        $recuperado = true;
                                         break;
                                     } else {
                                         $sumaFinal += $tareas[$task_type->name];
@@ -306,11 +356,19 @@ class SubjectController extends Controller
                             }
                             $user->suspendido = $resultados;
                             foreach ($user->suspendido as $suspendido) {
-                                if ($suspendido == false) {
+                                if ($suspendido == false && $recuperado != true) {
                                     $user->nota_final = $sumaFinal;
-                                } else {
+                                } else if ($suspendido == true && $recuperado != true) {
                                     $user->nota_final = "No llega nota media minima " . $sumaFinal;
                                     break;
+                                }
+                            }
+                            if ($recuperado) {
+                                $user->nota_final = $sumaFinal;
+                            } else {
+                                $user->boletin = $sumaFinal;
+                                if($sumaFinal < 4 && $sumaFinal!=0){
+                                    $user->boletin = 3;
                                 }
                             }
                         }
@@ -334,21 +392,26 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'hours'=>'required',
+            'abbreviation'=>'required'
         ]);
 
         $subject = new Subject([
             'name' => $request->get('name'),
+            'hours' => $request->get('hours'),
+            'abbreviation' => $request->get('abbreviation')
         ]);
+
         $subject->save();
-        return redirect('/courses')->with('success', 'Subject saved!');
+        return redirect('/subjects')->with('success', 'Subject saved!');
     }
 
     /**
-     * Display the specified resource.
+     * Muestra la informacion de una asignatura
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return view Subjects.Show
      */
     public function show($id)
     {
@@ -381,10 +444,14 @@ class SubjectController extends Controller
     {
 
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'hours' => 'required',
+            'abbreviation' => 'required'
         ]);
         $subject = Subject::find($id);
         $subject->name = $request->get('name');
+        $subject->hours = $request->get('hours');
+        $subject->abbreviation = $request->get('abbreviation');
 
         $subject->save();
         return redirect('/subjects')->with('Succes', 'Subject editado!');

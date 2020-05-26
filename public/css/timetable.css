@@ -78,3 +78,8 @@ th{
 .descanso{
     background-color: rgb(235, 233, 233);
 }
+
+.tdhorario{
+    height: 50px;
+    color:black;
+}

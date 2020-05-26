@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Task;
-use App\Models\Type;
+use App\Models\Year;
+use App\Models\Course;
+
 use App\Models\Subject;
+use App\Models\Task;
+use App\Models\YearUnion;
 use App\Models\Evaluation;
-use App\Models\Calification;
 use App\Models\YearUnionUser;
 use Illuminate\Support\Facades\DB;
 
@@ -44,7 +45,6 @@ class DesgloseController extends Controller
      */
     public function create($id, $eval_id)
     {
-
     }
 
     /**
@@ -55,7 +55,6 @@ class DesgloseController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -97,22 +96,28 @@ class DesgloseController extends Controller
         $request->validate([
             'recuperacion' => 'required',
             'subject' => 'required',
-            'evaluacion' => 'required'
+            'yearUnion' => 'required',
         ]);
 
         $recuperacion = $request->get('recuperacion');
+        $yearUnion = YearUnion::find($request->get('yearUnion'));
+
+        $request->session()->put('subject', $yearUnion->subject_id);
+        $request->session()->put('year', $yearUnion->course_id);
+        $request->session()->put('course', $yearUnion->year_id);
+        $request->session()->put('evaluation', $yearUnion->evaluation_id);
 
         foreach ($recuperacion as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
-                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->first();
+                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion->id)->first();
                 $task = Task::find($task_id);
-                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id,[
+                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);
             }
         }
 
-        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+        return redirect()->route('subjects.desglose', $request);
     }
 
     public function updateActitud(Request $request)
@@ -120,22 +125,28 @@ class DesgloseController extends Controller
         $request->validate([
             'actitud' => 'required',
             'subject' => 'required',
-            'evaluacion' => 'required'
+            'yearUnion' => 'required',
         ]);
 
         $actitud = $request->get('actitud');
+        $yearUnion = YearUnion::find($request->get('yearUnion'));
+
+        $request->session()->put('subject', $yearUnion->subject_id);
+        $request->session()->put('year', $yearUnion->course_id);
+        $request->session()->put('course', $yearUnion->year_id);
+        $request->session()->put('evaluation', $yearUnion->evaluation_id);
 
         foreach ($actitud as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
-                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->first();
+                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion->id)->first();
                 $task = Task::find($task_id);
-                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id,[
+                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);
             }
         }
 
-        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+        return redirect()->route('subjects.desglose', $request);
     }
 
     public function updateNotes(Request $request)
@@ -143,22 +154,29 @@ class DesgloseController extends Controller
         $request->validate([
             'examenes' => 'required',
             'subject' => 'required',
-            'evaluacion' => 'required',
+            'yearUnion' => 'required',
         ]);
 
         $examenes = $request->get('examenes');
+        $yearUnion = YearUnion::find($request->get('yearUnion'));
+
+        $examenes = $request->get('examenes');
+        $request->session()->put('subject', $yearUnion->subject_id);
+        $request->session()->put('year', $yearUnion->course_id);
+        $request->session()->put('course', $yearUnion->year_id);
+        $request->session()->put('evaluation', $yearUnion->evaluation_id);
 
         foreach ($examenes as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
-                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->first();
+                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion->id)->first();
                 $task = Task::find($task_id);
-                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id,[
+                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);
             }
         }
 
-        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+        return redirect()->route('subjects.desglose', $request);
     }
 
     public function updateTrabajos(Request $request)
@@ -166,30 +184,38 @@ class DesgloseController extends Controller
         $request->validate([
             'trabajos' => 'required',
             'subject' => 'required',
-            'evaluacion' => 'required'
+            'yearUnion' => 'required',
         ]);
 
         $trabajos = $request->get('trabajos');
+        $yearUnion = YearUnion::find($request->get('yearUnion'));
+
+        $request->session()->put('subject', $yearUnion->subject_id);
+        $request->session()->put('year', $yearUnion->course_id);
+        $request->session()->put('course', $yearUnion->year_id);
+        $request->session()->put('evaluation', $yearUnion->evaluation_id);
 
         foreach ($trabajos as $user_id => $tasks) {
             foreach ($tasks as $task_id => $task_value) {
-                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->first();
+                $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion->id)->first();
                 $task = Task::find($task_id);
-                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id,[
+                $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);
             }
         }
 
-        return redirect('evaluaciones/desglose/'.$request->get('subject').'/'.$request->get('evaluacion'));
+        return redirect()->route('subjects.desglose', $request);
     }
 
+    //TODO pasar a taskController
     public function eliminar($id)
     {
-        $tasks = Task::all();
-        $subject = Subject::find($id);
+        $evaluacion = YearUnion::find($id)->load('evaluation');
+        $tasks = $evaluacion->tasks()->get();
+        $eval = Evaluation::find($evaluacion->evaluation_id);
 
-        return view('Notas.eliminarTarea', compact('tasks', 'subject'));
+        return view('Notas.eliminarTarea', compact('tasks', 'evaluacion', 'eval'));
     }
 
     /**
@@ -198,12 +224,18 @@ class DesgloseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $subject_id)
+    public function destroy($task_id, $yearUnion_id)
     {
-        $task = Task::find($id);
+        $evaluacion = YearUnion::find($yearUnion_id)->load('evaluation');
+        $task = Task::find($task_id);
 
+        $usuarios = $evaluacion->users;
+        foreach ($usuarios as $user) {
+            $task->yearUnionUsers()->detach($user->id);
+        }
         $task->delete();
 
-        return redirect('evaluaciones/desglose/'.$subject_id.'/'.$task->evaluation->id);
+        //TODO hacer redirect bien
+        return redirect()->route('tareas/eliminar', ['id' => $task->id]);
     }
 }

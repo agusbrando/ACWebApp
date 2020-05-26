@@ -2,10 +2,9 @@
 
 @section('main')
 
-<main class="col-md-12 col-lg-10">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 <link href="{{ asset('css/timetable.css') }}" rel="stylesheet" type="text/css" />
-    <div class="header"></div>
-    <div class="container-fluid container">
+    
         <div class="card shadow">
             
             <div class="card-header row m-0 justify-content-between float-right">

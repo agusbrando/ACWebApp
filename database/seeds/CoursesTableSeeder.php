@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class CoursesTableSeeder extends Seeder
 {
     /**
@@ -13,6 +13,7 @@ class CoursesTableSeeder extends Seeder
     {
         //TODO ASIR y FPBASICA (COMPLETO)
 
+        //DAM
         DB::table('courses')->insert([
             'level' => 1,
             'name' => 'Desarrollo de Aplicaciones Multiplataforma',
@@ -61,6 +62,22 @@ class CoursesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('courses')->insert([
+            'level' => 1,
+            'name' => 'Sistemas Microinformaticos y Redes',
+            'abbreviation' =>'SMR',
+            'num_students' => 25,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('courses')->insert([
+            'level' => 2,
+            'name' => 'Sistemas Microinformaticos y Redes',
+            'abbreviation' =>'SMR',
+            'num_students' => 19,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
    /*
         DB::table('courses')->insert([
             'level' => 1,
@@ -82,26 +99,9 @@ class CoursesTableSeeder extends Seeder
 
         
 
-        DB::table('courses')->insert([
-            'level' => 1,
-            'name' => 'Sistemas Microinformaticos y Redes',
-            'abbreviation' =>'SMR',
-            'num_students' => 25,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('courses')->insert([
-            'level' => 2,
-            'name' => 'Sistemas Microinformaticos y Redes',
-            'abbreviation' =>'SMR',
-            'num_students' => 19,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        
 
        */ 
-
-       
 
 
     }

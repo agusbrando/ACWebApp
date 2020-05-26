@@ -5,17 +5,19 @@
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-<link href="{{ asset('css/timetable.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/timetable.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow ">
         <div class="card-header row m-0 justify-content-between">
             <h3>Horarios</h3>
             <div>
+                @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
+
                 <form action="{{ route('horarios.create')}}" method="get">
                     @csrf
 
                     <button class="btn btn-outline-primary" type="submit">Añadir Horario</button>
                 </form>
-
+                @endif
 
             </div>
         </div>
@@ -31,8 +33,9 @@
                                 <td>Nombre</td>
                                 <td>Fecha Inicio</td>
                                 <td>Fecha Fin</td>
-                                
+
                                 <td>Ver</td>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -42,7 +45,7 @@
                                 <td>{{$timetable->name}}</td>
                                 <td>{{$timetable->date_start}}</td>
                                 <td>{{$timetable->date_end}}</td>
-                                
+
                                 <td>
                                     <form action="{{ route('Ind', $timetable->id)}}" method="get">
                                         @csrf
@@ -50,6 +53,7 @@
                                         <button class="btn btn-warning" type="submit">Ver</button>
                                     </form>
                                 </td>
+
                             </tr>
 
                             @endforeach
@@ -65,10 +69,10 @@
 
 
 
-            
-            
 
-            
+
+
+
         </div>
     </div>
 

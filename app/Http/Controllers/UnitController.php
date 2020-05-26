@@ -33,6 +33,7 @@ class UnitController extends Controller
      */
     public function index()
     {
+
         $subjects = Subject::all();
         return view('units.index',compact('subjects'));
     }
@@ -85,10 +86,10 @@ class UnitController extends Controller
     public function show($program_id, $id)
     {
 
-
-         $program =Program::find($program_id);
+        $usuario = Auth::user();
+        $program =Program::find($program_id);
         $unidad = Unit::find($id);
-        return view('units.show',compact('program','unidad'));
+        return view('units.show',compact('program','unidad','usuario'));
 
 
     }

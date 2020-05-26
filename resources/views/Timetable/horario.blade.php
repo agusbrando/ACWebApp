@@ -10,17 +10,19 @@
         <div class="card-header row m-0 justify-content-between">
             <a href="/horarios" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Horario {{$timetable->name}}</h3>
+            @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
             <div class="row">
-
                 <td>
+
+                     <a href="{{ route('session', $timetable->id)}}" class="btn btn-outline-primary float-right m-1 " type="button">
+                        Añadir Horario
+                    </a>
 
                     <form action="{{ route('horarios.edit', $timetable->id)}}" method="get">
                         @csrf
-
                         <button class="btn btn-outline-primary  float-right m-1" type="submit">Editar</button>
                     </form>
-                </td>
-                <td>
+
                     <form action="{{ route('horarios.destroy', $timetable->id)}}" method="post">
                         @csrf
                         @method('DELETE')
@@ -28,7 +30,9 @@
                     </form>
                 </td>
 
+
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters">
 
@@ -45,71 +49,103 @@
 
 
                     <td class="td">8:30-9:25</td>
+
+                    <td >
                     @foreach($sessions as $session)
-                    @if($session->time_start=='8:30')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
+                    @if($session->time_start=='8:30' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario" style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='8:30' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='8:30' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='8:30' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='8:30' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+
 
                 </tr>
                 <tr>
 
                     <td class="td">9:25-10:20</td>
+                    <td>
                     @foreach($sessions as $session)
-                    @if($session->time_start=='9:25')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
-
+                    @if($session->time_start=='9:25' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='9:25' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='9:25' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='9:25' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='9:25' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr class="descanso">
 
@@ -123,27 +159,28 @@
                 <tr>
 
                     <td class="td">10:40-11:35</td>
+                    <td>
                     @foreach($sessions as $session)
                     @if($session->time_start=='10:40')
                     @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}"> 
+                    <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td >
+                    </td>
                     @endif
                     @if($session->day==2)
                     <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td >
+                    </td>
                     @endif
                     @if($session->day==3)
                     <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td >
+                    </td>
                     @endif
                     @if($session->day==4)
                     <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td >
+                    </td>
                     @endif
                     @if($session->day==5)
                     <td style="background-color:{{$session->subject->color}}">
@@ -153,11 +190,54 @@
                     @endif
 
 
+                    @if($session->time_start=='10:40' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='10:40' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='10:40' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='10:40' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='10:40' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr>
 
                     <td class="td">11:35-12:25</td>
+                    <td>
                     @foreach($sessions as $session)
                     @if($session->time_start=='11:35')
                     @if($session->day==1)
@@ -166,29 +246,51 @@
                     </td>
                     @endif
                     @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}"> 
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
                     <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
-
+                    @if($session->time_start=='11:35' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='11:35' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='11:35' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='11:35' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='11:35' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr class="descanso">
 
@@ -202,72 +304,100 @@
                 <tr>
 
                     <td class="td">12:40-13:35</td>
+                    <td>
                     @foreach($sessions as $session)
-                    @if($session->time_start=='12:40')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
-
+                    @if($session->time_start=='12:40' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='12:40' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                     @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='12:40' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='12:40' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='12:40' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr>
 
                     <td class="td">13:35-14:30</td>
+                    <td>
                     @foreach($sessions as $session)
-
-                    @if($session->time_start=='13:35')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
+                    @if($session->time_start=='13:35' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='13:35' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='13:35' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='13:35' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='13:35' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr class="descanso">
 
@@ -282,71 +412,107 @@
 
 
                     <td class="td">15:00-15:55</td>
+                    <td>
                     @foreach($sessions as $session)
-                    @if($session->time_start=='15:00')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
+                    @if($session->time_start=='15:00' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
                     </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
+<<<<<<< HEAD
                     @endif
                     @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}"> 
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
                     <td style="background-color:{{$session->subject->color}}">
                         {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
+=======
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='15:00' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
                     @endforeach
-
+>>>>>>> 058de3fea9d4a7f632001eee4f1351e7b37b8a95
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='15:00' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='15:00' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='15:00' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr>
 
                     <td class="td">15:55-16:50</td>
+                    <td>
                     @foreach($sessions as $session)
-                    @if($session->time_start=='15:55')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
-
+                    @if($session->time_start=='15:55' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='15:55' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='15:55' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='15:55' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a>
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='15:55' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr class="descanso">
 
@@ -360,76 +526,104 @@
                 <tr>
 
                     <td class="td">17:10-18:05</td>
+                    <td>
                     @foreach($sessions as $session)
-                    @if($session->time_start=='17:10')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
-
+                    @if($session->time_start=='17:10' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='17:10' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='17:10' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='17:10' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='17:10' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr>
 
-                    <td class="td">18:05-19:05</td>
+                    <td class="td">18:05-19:00</td>
+                    <td>
                     @foreach($sessions as $session)
-                    @if($session->time_start=='18:05')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
-
+                    @if($session->time_start=='18:05' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='18:05' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='18:05' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='18:05' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='18:05' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr class="descanso">
 
-                    <td class="td">19:05-19:20</td>
+                    <td class="td">19:00-19:15</td>
                     <td>DESCANSO</td>
                     <td>DESCANSO</td>
                     <td>DESCANSO</td>
@@ -438,73 +632,101 @@
                 </tr>
                 <tr>
 
-                    <td class="td">19:10-20:05</td>
+                    <td class="td">19:15-20:05</td>
+                    <td>
                     @foreach($sessions as $session)
-                    @if($session->time_start=='19:10')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
-
+                    @if($session->time_start=='19:15' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='19:15' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='19:15' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='19:15' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='19:15' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
                 <tr>
 
                     <td class="td">20:05-21:00</td>
+                    <td>
                     @foreach($sessions as $session)
-
-                    @if($session->time_start=='20:05')
-                    @if($session->day==1)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==2)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==3)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==4)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @if($session->day==5)
-                    <td style="background-color:{{$session->subject->color}}">
-                        {{$session->subject->abbreviation}}-{{$session->subject->name}}
-                    </td>
-                    @endif
-                    @endif
-
+                    @if($session->time_start=='20:05' && $session->day==1)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
                     @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='20:05' && $session->day==2)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='20:05' && $session->day==3)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='20:05' && $session->day==4)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
+                    <td >
+                    @foreach($sessions as $session)
+                    @if($session->time_start=='20:05' && $session->day==5)
+                    <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
+                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                     </a> 
+                       @endif
+                    @endforeach
+                    </td>
                 </tr>
             </table>
         </div>

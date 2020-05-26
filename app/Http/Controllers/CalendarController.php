@@ -40,7 +40,6 @@ class CalendarController extends Controller
 
   public function crearEvento($fecha, $hora, $type)
   {
-
     $tipo = Type::find($type)->name;
     return view("/Calendario/crearEvento", compact('fecha', 'hora', 'tipo'));
   }
@@ -70,16 +69,25 @@ class CalendarController extends Controller
 
   public function getList(Request $request)
   {
+    $user = Auth::user();
     $events = Event::all();
-    return view('/Calendario/list', compact('events'));
+    //$events = Event::where('user_id', $user->id)->get();
+    return view('/Calendario/list', compact('events', 'user'));
+  }
+
+  public function getTeacher(Request $request)
+  {
+    $teachers = User::all()->where('role_id', 3);
+    return view('/Calendario/teacher', compact('teachers', 'tipo', 'dia'));
   }
 
   public function index()
   {
+    $user = Auth::user();
     $sessions = [];
     $events = [];
     $types = Type::all()->where('model', Event::class);
-    return view('/Calendario/calendar', compact('types', 'sessions', 'events'));
+    return view('/Calendario/calendar', compact('types', 'sessions', 'events', 'user'));
   }
 
   /**
@@ -145,12 +153,6 @@ class CalendarController extends Controller
     return view('calendario.show', compact('event', 'edit'));
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function edit($id)
   {
     $event = Event::find($id);
@@ -158,6 +160,14 @@ class CalendarController extends Controller
     $descripcion = $event->description;
 
     return view("/Calendario/edit", compact('id', 'event', 'titulo', 'descripcion'));
+  }
+
+  public function destroy($id)
+  {
+    $event = Event::find($id);
+    $event->delete();
+
+    return redirect('/list')->with('Exito', '¡Evento borrado!');
   }
 
   /**
@@ -169,8 +179,6 @@ class CalendarController extends Controller
    */
   public function update(Request $request, $id)
   {
-
-
     $request->validate([
       'titulo'  =>  'required',
       'descripcion' => 'required'
@@ -178,7 +186,6 @@ class CalendarController extends Controller
     ]);
 
     $event = Event::find($id);
-
     $event->title = $request->get('titulo');
     $event->description = $request->get('descripcion');
     $event->save();
@@ -193,11 +200,5 @@ class CalendarController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
-  {
-    $event = Event::find($id);
-    $event->delete();
 
-    return redirect('/list')->with('Exito', '¡Evento borrado!');
-  }
 }
