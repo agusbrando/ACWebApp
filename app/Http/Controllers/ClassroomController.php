@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Classroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\Auth;
 
 class ClassroomController extends Controller
 {
@@ -13,6 +13,23 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         $classrooms = Classroom::paginate(10);
@@ -46,7 +63,7 @@ class ClassroomController extends Controller
         $classroom = new Classroom([
             'name' => $request->get('name'),
             'number' => $request->get('number')
-            
+
 
 
         ]);
@@ -55,14 +72,14 @@ class ClassroomController extends Controller
     }
 
     /**
-     * Display the specified resource.  
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($classroom_id)
     {
-        $classroom = Classroom::find($classroom_id);        
+        $classroom = Classroom::find($classroom_id);
 
         return view('classrooms.show', compact('classroom'));
     }
@@ -76,7 +93,7 @@ class ClassroomController extends Controller
      */
     public function edit($id)
     {
-        $classroom = Classroom::find($id);       
+        $classroom = Classroom::find($id);
         return view('classrooms.edit', compact('classroom'));
     }
 
@@ -93,12 +110,12 @@ class ClassroomController extends Controller
         $request->validate([
             'name' => 'required',
             'number' => 'required'
-            
+
         ]);
         $classroom = Classroom::find($id);
         $classroom->name = $request->get('name');
         $classroom->number = $request->get('number');
-      
+
 
         $classroom->save();
         return redirect('/classrooms')->with('Succes', 'Aula editado!');

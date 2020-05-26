@@ -6,7 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,13 +15,30 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         $users = User::paginate(10);
         return view('users.index', compact('users'));
-        
+
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -62,7 +79,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.  
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

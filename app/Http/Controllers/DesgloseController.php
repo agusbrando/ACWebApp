@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Year;
 use App\Models\Course;
@@ -15,6 +15,23 @@ use Illuminate\Support\Facades\DB;
 
 class DesgloseController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         //
@@ -139,10 +156,11 @@ class DesgloseController extends Controller
             'subject' => 'required',
             'yearUnion' => 'required',
         ]);
-                
+
         $examenes = $request->get('examenes');
         $yearUnion = YearUnion::find($request->get('yearUnion'));
 
+        $examenes = $request->get('examenes');
         $request->session()->put('subject', $yearUnion->subject_id);
         $request->session()->put('year', $yearUnion->course_id);
         $request->session()->put('course', $yearUnion->year_id);

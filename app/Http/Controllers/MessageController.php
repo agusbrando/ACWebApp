@@ -24,8 +24,17 @@ class MessageController extends Controller
     public function __construct(Request $request)
     {
         $user = Auth::user();
-        $notifications = $user->unreadNotifications;
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
         $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
     }
 
     public function index()
@@ -86,6 +95,7 @@ class MessageController extends Controller
         foreach ($users as $userid) {
             $user = User::find($userid);
             $user->messagesReceive()->attach($message->id);
+            Mail::to($user)->send(new MessageMail($message));
             $user->notify(new InvoicePaid($message, $user));
         }
 
@@ -116,13 +126,24 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $message = Message::find($id)->loadMissing('attachments');
         $user = $message->users->first();
         $message->users()->updateExistingPivot($user->id, array('read' => 1));
+
+        $user = Auth::user();
+        $notifications = $request->session()->get('notifications');
+
+        foreach ($notifications as $notification) {
+           if ($notification->data['message_id'] == $message->id) {
+               $notification->markAsRead();
+           }
+        }
+
         $sitio = 0;
         return view('messages.show', compact('message', 'sitio'));
+
     }
     public function showSended($id)
     {

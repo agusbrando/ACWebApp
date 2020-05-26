@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\PDF;
@@ -23,6 +22,23 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Esta es la vista principal donde se listarán todos los cursos.
      *
@@ -37,6 +53,7 @@ class CourseController extends Controller
             //Guardo los diferentes yearUnion en cada año
             $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')
                 ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
         //en este caso, le redirijo a la vista index y le paso los años con los cursos
@@ -146,7 +163,7 @@ class CourseController extends Controller
 
         $itemYear = ItemYear::select('item_id')->get()->toArray();
         $items = Item::where('classroom_id', $yearUnionsPrueba->first()->classroom->id)->whereNotIn('id', $itemYear)->get();
-        
+
 
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
@@ -333,15 +350,15 @@ class CourseController extends Controller
     }
     public function imprimir($courseId, $yearId)
     {
-        
+
         $course = Course::find($courseId);
         //Cojo las evaluaciones
         $yearUnions = YearUnion::where('course_id', $courseId )->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
-        
-        
+
+
         $pdf = \PDF::loadView('courses.pdf', compact('yearUnions'))->setPaper('a4', 'landscape');
         return $pdf->download('courses.pdf');
-        
-        
+
+
     }
 }
