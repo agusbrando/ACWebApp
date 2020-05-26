@@ -59,6 +59,11 @@ class TaskController extends Controller
 
         $yearUnion = YearUnion::find($request->get('yearUnion'));
 
+        $request->session()->put('subject', $yearUnion->subject_id);
+        $request->session()->put('year', $yearUnion->course_id);
+        $request->session()->put('course', $yearUnion->year_id);
+        $request->session()->put('evaluation', $yearUnion->evaluation_id);
+
         $task = new Task([
             'year_union_id' => $yearUnion->id,
             'type_id' => $request->get('type'),
@@ -68,7 +73,7 @@ class TaskController extends Controller
         $this->storeNotes($yearUnion, $task);
 
 
-        return redirect('subjects/evaluations/' . $yearUnion->subject_id);
+        return redirect()->route('subjects.desglose', $request);
     }
 
     protected function storeNotes($yearUnion, Task $task)

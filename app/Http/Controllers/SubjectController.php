@@ -41,20 +41,28 @@ class SubjectController extends Controller
     public function desglose(Request $request)
     {
 
-        //TODO JAVI NO FUNCIONA
-        $request->validate([
-            'subject' => 'required',
-            'year' => 'required',
-            'course' => 'required',
-            'evaluation' => 'required',
-        ]);
+        if ($request->session()->has('subject') && $request->session()->has('year') && $request->session()->has('course') && $request->session()->has('evaluation')) {
+            $year = Year::find($request->session()->get('year'));
+            $subject = Subject::find($request->session()->get('subject'));
+            $course = Course::find($request->session()->get('course'));
+            $eval = Evaluation::find($request->session()->get('evaluation'));
+            $evaluation = YearUnion::where('subject_id', $subject->id)->where('year_id', $year->id)->where('course_id', $course->id)->where('evaluation_id', $eval->id)->first()->load('evaluation');
+            $taskTypes = $evaluation->types;
+        } else {
+            $request->validate([
+                'subject' => 'required',
+                'year' => 'required',
+                'course' => 'required',
+                'evaluation' => 'required',
+            ]);
+            $year = Year::find($request->get('year'));
+            $subject = Subject::find($request->get('subject'));
+            $course = Course::find($request->get('course'));
+            $eval = Evaluation::find($request->get('evaluation'));
+            $evaluation = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->where('evaluation_id', $request->get('evaluation'))->first()->load('evaluation');
+            $taskTypes = $evaluation->types;
+        }
 
-        $year = Year::find($request->get('year'));
-        $subject = Subject::find($request->get('subject'));
-        $course = Course::find($request->get('course'));
-        $eval = Evaluation::find($request->get('evaluation'));
-        $evaluation = YearUnion::where('subject_id', $request->get('subject'))->where('year_id', $request->get('year'))->where('course_id', $request->get('course'))->where('evaluation_id', $request->get('evaluation'))->first()->load('evaluation');
-        $taskTypes = $evaluation->types;
 
         $notaParciales = null;
         $notaTrabajos = null;
@@ -113,7 +121,7 @@ class SubjectController extends Controller
                                 $evaluation->mediaFinalExamenes = $mediaFinalExamenes;
                             }
                             if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
-                                $mediaParciales[$user_id] = "No llega a la media/ " . $notaFinal;
+                                $mediaParciales[$user_id] = "No llega a la media " . $notaFinal;
                                 $evaluation->mediaParciales = $mediaParciales;
                             }
                             $aux = 0;
@@ -159,7 +167,7 @@ class SubjectController extends Controller
                                 $evaluation->mediaFinalTrabajos = $mediaFinalTrabajos;
                             }
                             if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
-                                $mediaTrabajos[$user_id] = "No llega a la media/ " . $notaFinal;
+                                $mediaTrabajos[$user_id] = "No llega a la media " . $notaFinal;
                                 $evaluation->mediaTrabajos = $mediaTrabajos;
                             }
                             $aux = 0;
@@ -204,7 +212,7 @@ class SubjectController extends Controller
                                 $evaluation->mediaFinalActitud = $mediaFinalActitud;
                             }
                             if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
-                                $mediaActitud[$user_id] = "No llega a la media/ " . $notaFinal;
+                                $mediaActitud[$user_id] = "No llega a la media " . $notaFinal;
                                 $evaluation->mediaActitud = $mediaActitud;
                             }
                             $aux = 0;
@@ -249,7 +257,7 @@ class SubjectController extends Controller
                                 $evaluation->mediaFinalRecuperacion = $mediaFinalRecuperacion;
                             }
                             if ($notaFinal < $task_type->pivot->average_grade_task && $nota != null) {
-                                $mediaRecuperacion[$user_id] = "No llega a la media/ " . $notaFinal;
+                                $mediaRecuperacion[$user_id] = "No llega a la media " . $notaFinal;
                                 $evaluation->mediaRecuperacion = $mediaRecuperacion;
                             }
                             $aux = 0;
@@ -321,7 +329,7 @@ class SubjectController extends Controller
                                         $resultados[$task_type->name] = true;
                                     }
                                     if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
-                                        $user->nota_final = $user->tareas[$task_type->name];
+                                        $user->boletin = $user->tareas[$task_type->name];
                                         $recuperado = true;
                                         break;
                                     } else {
@@ -338,7 +346,11 @@ class SubjectController extends Controller
                                     break;
                                 }
                             }
-                            $user->boletin = $sumaFinal;
+                            if ($recuperado) {
+                                $user->nota_final = $sumaFinal;
+                            } else {
+                                $user->boletin = $sumaFinal;
+                            }
                         }
                     }
                 } else {

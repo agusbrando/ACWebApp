@@ -128,8 +128,6 @@ class CourseController extends Controller
         //     }
         // }
 
-        
-
         $request->session()->put('course_id', $courseId);
         $request->session()->put('year_id', $yearId);
         $course = Course::find($courseId);
