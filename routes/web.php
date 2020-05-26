@@ -45,8 +45,8 @@ Route::resource('subjects','SubjectController');
 //RUTAS TYPES(KEVIN)
 Route::resource('types','TypeController');
 
-//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
-Route::resource('asistencia', 'AsistenciaController');
+//RUTAS ASISTENCIA Y COMPORTAMIENTO
+
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
 Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
 Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
@@ -54,12 +54,14 @@ Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('evaluaciones', 'EvaluacionesController');
 Route::resource('porcentajes', 'PorcentajesController');
 Route::resource('desglose', 'DesgloseController');
-//RUTAS ASISTENCIA Y COMPORTAMIENTO
+//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
+Route::resource('asistencia', 'AsistenciaController');
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
 Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
+Route::post('asistencia/lista', 'AsistenciaController@filter')->name('asistencia.filter');
 
 //Route::Trackings (Carlos)
 Route::post('seguimiento/imprimir', 'TrackingController@imprimir')->name('seguimiento.print');
@@ -72,6 +74,9 @@ Route::post('seguimiento','TrackingController@store')->name('seguimiento.store')
 
 //Route::Timetables (Carlos)
 Route::resource('horarios', 'TimetableController');
+Route::resource('sessiontimetable', 'SessionTimetableController');
+Route::get('sessiontimetable/crear/{id}', 'SessionTimetableController@crear')->name('session');
+
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
 //RUTAS PERMISSIONS (Roby)

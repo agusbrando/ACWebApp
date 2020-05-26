@@ -21,6 +21,12 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        $notifications = $user->unreadNotifications;
+        $request->session()->put('notifications', $notifications);
+    }
 
     public function index()
     {
@@ -43,16 +49,16 @@ class MessageController extends Controller
     public function create($id = null)
     {
         $isResponse = false;
-        if($id != null){
+        if ($id != null) {
 
             $isResponse = true;
             $message = Message::find($id);
             $user = User::find($message->user_id);
-            return view('messages.create', compact('user','message','isResponse'));
-        }else{
+            return view('messages.create', compact('user', 'message', 'isResponse'));
+        } else {
             $users = User::all();
-            return view('messages.create', compact('users','isResponse'));
-    }
+            return view('messages.create', compact('users', 'isResponse'));
+        }
     }
     /**
      * Store a newly created resource in storage.
@@ -80,7 +86,7 @@ class MessageController extends Controller
         foreach ($users as $userid) {
             $user = User::find($userid);
             $user->messagesReceive()->attach($message->id);
-            $user->notify(new InvoicePaid($message,$user));
+            $user->notify(new InvoicePaid($message, $user));
         }
 
 

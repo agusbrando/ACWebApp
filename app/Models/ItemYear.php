@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItemYear extends Pivot
 {
-    protected $table = 'itemYears';
+    protected $table = 'itemYear';
 
     protected $primaryKey = 'id';
 

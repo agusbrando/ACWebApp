@@ -13,7 +13,7 @@
             <div class="d-flex flex-row">
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
 
-                <h3>Curso </h3>
+                <h3>{{$yearUnionsPrueba->first()->course->level}}º {{$yearUnionsPrueba->first()->course->abbreviation}} - {{$yearUnionsPrueba->first()->classroom->name}}</h3>
 
             </div>
             <div class="d-flex flex-row-reverse">
@@ -41,9 +41,10 @@
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                        <div class="tab-pane fade  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+                        <div class="tab-pane fade show active  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
                             Aquí irá la programacion del curso
                         </div>
+                        
                         <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
                             <div class="card-body row no-gutters table-responsive">
                                 <table class="table col-12 ">
@@ -61,7 +62,7 @@
                                                 <div class="d-flex flex-row ">
                                                     <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
                                                     <a class="btn btn-outline-primary mr-2" href="{{route('subjects.evaluations', $subject->id)}}">Evaluaciones</a>
-                                                    <a href="#" class="btn btn-outline-primary">Programacion</a>
+                                                    <a href="/programs/{{$yearUnionPrograms->where('subject_id',$subject->id)->first()->program->id}}" class="btn btn-outline-primary">Programacion</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -71,7 +72,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade " id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
-
+                
                             <div class="divShowCoursesContent" id="accordion">
                                 @foreach($yearUnionsPrueba as $yearUnion)
 
@@ -88,7 +89,7 @@
                                     <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse" aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
                                         <div class="card-body">
                                             <ul class="list-group list-group-flush">
-                                                <div class="card">
+                                                <div class="card row no-gutters table-responsive">
 
 
                                                     <table id='mytable' class="table w-100">
@@ -126,7 +127,7 @@
                                                                                 <!--Hace la funcion de un placeholder-->
                                                                                 @foreach($items as $item)
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
-
+                                                                                
 
                                                                                 @endforeach
                                                                             </select>

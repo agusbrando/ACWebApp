@@ -53,9 +53,21 @@ class ProgramsTableSeeder extends Seeder
        $this->crearProgramacion('ASIR',2,'Ingles',8);
        $this->crearProgramacion('ASIR',2,'Empresa e Iniciativa Emprendedora',5);
         
-
-       
+        //1ºSMR
+        $this->crearProgramacion('SMR',1,'Montaje y mantenimiento de equipos',12);
+        $this->crearProgramacion('SMR',1,'Redes locales',11);
+        $this->crearProgramacion('SMR',1,'Aplicaciones ofimáticas',12);
+        $this->crearProgramacion('SMR',1,'Sistemas operativos Monopuesto',11);
+        $this->crearProgramacion('SMR',1,'Ingles',11);
+        $this->crearProgramacion('SMR',1,'Formación y orientación laboral',11);
         
+        //2ºSMR
+        $this->crearProgramacion('SMR',2,'Sistemas operativos en red',12);
+        $this->crearProgramacion('SMR',2,'Seguridad informática',12);
+        $this->crearProgramacion('SMR',2,'Servicios en red',11);
+        $this->crearProgramacion('SMR',2,'Aplicaciones web',11);
+        $this->crearProgramacion('SMR',2,'Ingles',11);
+        $this->crearProgramacion('SMR',2,'Empresa e Iniciativa Emprendedora',12);
        
 
     }

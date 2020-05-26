@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Misbehavior;
-use App\Models\Subject;
+use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,16 +18,7 @@ class FaltasController extends Controller
      */
     public function index()
     {
-        // $lista = Misbehavior::all();
-        // return view('', compact('lista'));
-        // $users = User::all();
-        // $misbehaviors = null;
-
-        // foreach ($users as $user) {
-        //     $misbehaviors = $user->misbehaviors;
-        // }
-
-        // return view('faltas.show', compact('users','misbehaviors'));
+        //
     }
 
     /**
@@ -47,24 +38,29 @@ class FaltasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $user_id)
+    public function store(Request $request)
     {
         $request->validate([
             'date' => 'required',
             'type_id' => 'required',
-            'description' => 'required'
-            
+            'description' => 'required',
+            'user_id' => 'required',
 
         ]);
-        $misbehavior = new Misbehavior([
-            'date' => $request->get('date'),
+        $user_id = $request->get('user_id');
+        $fechaFin  = str_replace('/', '-',  $request->get('date'));
+        $fechaFin = date("Y-m-d H:i", strtotime($fechaFin));
+        $misbehavior = Misbehavior::create([
+            'date' => $fechaFin,
             'type_id' => $request->get('type_id'),
-            'description' => $request->get('description')
+            'description' => $request->get('description'),
+            'year_user_id' => User::find($user_id)->yearUnions->first()->pivot->id,
+            'session_timetable_id' => 1
         ]);
         $misbehavior->save();
-        return redirect()->route('faltas.index')
-            ->with('success', 'Falta añadida!');
-        // $misbehaviors =Misbehavior::all()->
+        // return redirect()->route('faltas.index')
+        //     ->with('success', 'Falta añadida!');
+        return redirect('/faltas/'. $user_id);
     }
 
     /**
@@ -80,10 +76,14 @@ class FaltasController extends Controller
         $misbehaviors = Misbehavior::all();
         $user = User::find($id);
         $user_id = $id;
-        $course=Course::find(5);
+        $course = Course::find(5);
         $subjects = $course->subjects;
+        $typesFaltaLeve = Type::all()->where('name', 'Falta Leve')->first();
+        $typesFaltaGrave = Type::all()->where('name', 'Falta Grave')->first();
+        $typesFaltaMuyGrave = Type::all()->where('name', 'Falta muy Grave')->first();
+        $typesAsistencia = Type::all()->where('name', 'Asistencia')->first();
         $lista = [];
-        
+
         foreach ($subjects as $subject) {
             $count = 0;
             $listadoFaltasAsistencia = [];
@@ -93,7 +93,7 @@ class FaltasController extends Controller
             foreach ($user->yearUnions->where('subject_id', $subject->id)->where('year_id', $year) as $yearunions_faltas) {
                 foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
 
-                    if ($falta->type_id == 12) {
+                    if ($falta->type_id == $typesAsistencia->id) {
                         $count = $count + 1;
                         array_push($listadoFaltasAsistencia, $falta);
                     }
@@ -115,16 +115,16 @@ class FaltasController extends Controller
             foreach ($yearunions_faltas->pivot->misbehavours as $falta) {
 
 
-                if ($falta->type_id == 9) {
+                if ($falta->type_id == $typesFaltaLeve->id) {
                     array_push($listaFaltaLeve, $falta);
-                } elseif ($falta->type_id == 10) {
+                } elseif ($falta->type_id == $typesFaltaGrave->id) {
                     array_push($listaFaltaGrave, $falta);
-                } elseif ($falta->type_id == 11) {
+                } elseif ($falta->type_id == $typesFaltaMuyGrave->id) {
                     array_push($listaFaltaMuyGrave, $falta);
                 }
             }
         }
-        return view('faltas.show', compact('user', 'lista', 'misbehaviors', 'listaFaltaLeve', 'listaFaltaGrave', 'listaFaltaMuyGrave'));
+        return view('faltas.show', compact('user', 'lista', 'courses', 'misbehaviors', 'listaFaltaLeve', 'listaFaltaGrave', 'listaFaltaMuyGrave'));
     }
 
 

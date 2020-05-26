@@ -23,7 +23,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::all();
+        $subjects = Subject::paginate(10);
         return view('subjects.index', compact('subjects'));
     }
 
@@ -372,14 +372,19 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'hours'=>'required',
+            'abbreviation'=>'required'
         ]);
 
         $subject = new Subject([
             'name' => $request->get('name'),
+            'hours' => $request->get('hours'),
+            'abbreviation' => $request->get('abbreviation')
         ]);
+
         $subject->save();
-        return redirect('/courses')->with('success', 'Subject saved!');
+        return redirect('/subjects')->with('success', 'Subject saved!');
     }
 
     /**
@@ -419,10 +424,14 @@ class SubjectController extends Controller
     {
 
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'hours' => 'required',
+            'abbreviation' => 'required'
         ]);
         $subject = Subject::find($id);
         $subject->name = $request->get('name');
+        $subject->hours = $request->get('hours');
+        $subject->abbreviation = $request->get('abbreviation');
 
         $subject->save();
         return redirect('/subjects')->with('Succes', 'Subject editado!');

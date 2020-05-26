@@ -17,7 +17,11 @@ class CourseSubjectsTableSeeder extends Seeder
         //1ºDAM
        for($i=4; $i<=8; $i++){
 
+<<<<<<< HEAD
+            DB::table('course_subject')->insert([
+=======
         DB::table('course_subject')->insert([
+>>>>>>> 35cfb0c342f1752b6d509a52744d3d45550a6749
                 'course_id' => 1,
                 'subject_id' => Subject::find($i)->id,
                 'max_hours' => round((Subject::find($i)->hours)*0.15),
@@ -219,7 +223,7 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //1ºSMR
-        for($i=27; $i<=31; $i++){
+        for($i=27; $i<=30; $i++){
 
             DB::table('course_subject')->insert([
                 'course_id' => 7,
@@ -253,7 +257,7 @@ class CourseSubjectsTableSeeder extends Seeder
         ]);
 
         //2ºSMR
-        for($i=32; $i<=35; $i++){
+        for($i=31; $i<=34; $i++){
 
             DB::table('course_subject')->insert([
                 'course_id' => 8,
