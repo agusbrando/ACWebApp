@@ -76,12 +76,12 @@ class ProgramsTableSeeder extends Seeder
         $curso = Course::where('abbreviation',$curso_abreviacion)->where('level',$nivelCurso)->first();
         
         $asignatura = Subject::where('name',$asignatura_nombre)->first();
-        DB::table('programs')->insert([
-            'name' => '('.($curso->level).($curso->abbreviation).') - '.$asignatura->name,
-            'professor_id' => $profesor_id,
+        // DB::table('programs')->insert([
+        //     'name' => '('.($curso->level).($curso->abbreviation).') - '.$asignatura->name,
+        //     'professor_id' => $profesor_id,
            
-        ]);
-        $evaluations = YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',1)->get();
-        $program = Program::all()->last()->yearUnions()->saveMany($evaluations);
+        // ]);
+        // $evaluations = YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',1)->get();
+        // $program = Program::all()->last()->yearUnions()->saveMany($evaluations);
     }
 }
