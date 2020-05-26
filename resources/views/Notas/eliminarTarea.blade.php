@@ -13,7 +13,7 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Eliminar Tarea</h3>
+            <h3>Eliminar Tareas {{$eval->name}}</h3>
         </div>
         <div class="card-body row no-gutters">
             <div class="table-responsive">
@@ -22,7 +22,6 @@
                         <tr id='columna'>
                             <th>Tipo</th>
                             <th>Nombre</th>
-                            <th>Evaluacion</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -30,9 +29,8 @@
                     <tbody>
                         <td>{{$task->type->name}}</td>
                         <td>{{$task->name}}</td>
-                        <td>{{$task->evaluation->name}}</td>
                         <td>
-                            <a href="{{url('/tasks/eliminar', ['task_id'=> ($task->id), 'subject_id'=> ($subject->id)])}}" class="btn btn-danger text-white"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{url('/tareas/eliminar', ['task' => ($task->id), 'yearUnion' => ($evaluacion->id)])}}" class="btn btn-danger text-white"><i class="fas fa-trash-alt"></i></a>
                         </td>
 
                     </tbody>

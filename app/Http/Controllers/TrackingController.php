@@ -16,6 +16,21 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class TrackingController extends Controller
 {
 
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
 
   public function index()
   {

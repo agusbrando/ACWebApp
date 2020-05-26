@@ -1,15 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\Program;
 use App\Models\Unit;
-use Illuminate\Support\Facades\Auth;
 
 class UnitController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +33,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        
+
         $subjects = Subject::all();
         return view('units.index',compact('subjects'));
     }
@@ -57,7 +73,7 @@ class UnitController extends Controller
         ]);
         $unit->save();
         return redirect('/programs');
-        
+
 
     }
 
@@ -69,7 +85,7 @@ class UnitController extends Controller
      */
     public function show($program_id, $id)
     {
-       
+
         $usuario = Auth::user();
         $program =Program::find($program_id);
         $unidad = Unit::find($id);
@@ -86,12 +102,12 @@ class UnitController extends Controller
      */
     public function edit($program_id, $id)
     {
-        
+
         $program =Program::find($program_id);
         $unidad = Unit::find($id);
         return view('units.edit',compact('program','unidad'));
 
-        
+
     }
 
     /**

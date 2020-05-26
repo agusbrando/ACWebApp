@@ -128,4 +128,10 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Task::class, YearUnionUser::class);
     }
+
+    public function session()
+    {
+        return $this->hasMany('App\Models\Session');
+    }
+
 }

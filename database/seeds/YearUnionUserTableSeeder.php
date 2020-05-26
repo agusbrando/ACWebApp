@@ -43,5 +43,8 @@ class YearUnionUserTableSeeder extends Seeder
                 }
             }
         }
+
+
+
     }
 }

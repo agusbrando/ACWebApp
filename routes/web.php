@@ -29,6 +29,7 @@ Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento'
 Route::post('/crearEvento','CalendarController@store');
 Route::get('/time', 'CalendarController@getTime');
 Route::get('/list', 'CalendarController@getList');
+Route::get('/teacher', 'CalendarController@getTeacher');
 
 //RUTAS CLASSROOMS(KEVIN)
 Route::resource('classrooms','ClassroomController');
@@ -45,8 +46,8 @@ Route::resource('subjects','SubjectController');
 //RUTAS TYPES(KEVIN)
 Route::resource('types','TypeController');
 
-//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
-Route::resource('asistencia', 'AsistenciaController');
+//RUTAS ASISTENCIA Y COMPORTAMIENTO
+
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
 Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
 Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
@@ -54,12 +55,14 @@ Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('evaluaciones', 'EvaluacionesController');
 Route::resource('porcentajes', 'PorcentajesController');
 Route::resource('desglose', 'DesgloseController');
-//RUTAS ASISTENCIA Y COMPORTAMIENTO
+//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
+Route::resource('asistencia', 'AsistenciaController');
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
 Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
+Route::post('asistencia/lista', 'AsistenciaController@filter')->name('asistencia.filter');
 
 //Route::Trackings (Carlos)
 Route::post('seguimiento/imprimir', 'TrackingController@imprimir')->name('seguimiento.print');
@@ -72,6 +75,11 @@ Route::post('seguimiento','TrackingController@store')->name('seguimiento.store')
 
 //Route::Timetables (Carlos)
 Route::resource('horarios', 'TimetableController');
+Route::resource('sessiontimetable', 'SessionTimetableController');
+Route::get('sessiontimetable/crear/{id}', 'SessionTimetableController@crear')->name('session');
+Route::get('sessiontimetable/{session_id}/{timetable_id}', 'SessionTimetableController@show')->name('session.show');
+Route::post('horario/imprimir/{id}', 'TimetableController@imprimir')->name('horario.print');
+
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
 //RUTAS PERMISSIONS (Roby)
@@ -107,7 +115,11 @@ Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filte
 Route::post('courses/show/filter/{user_id}/{course_id}/{year_id}', 'CourseController@responsabilizarItem')->name('courses.responsabilizarItem');
 //eliminar
 Route::delete('courses/show/{course_id}/{year_id}', 'CourseController@eliminarYearUnion')->name('courses.eliminarYearUnion');
-Route::resource('courses', 'CourseController');
+// Route::resource('courses', 'CourseController');
+//Imprimir
+Route::post('courses/show/imprimir/{course_id}/{year_id}', 'CourseController@imprimir')->name('courses.print');
+//Asignar
+Route::get('courses/asignarAsignaturas', 'CourseController@asignarAsignaturas')->name('courses.asignarAsignaturas');
 
 //RUTAS SUBJECTS JAVI
 //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
@@ -117,9 +129,9 @@ Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
 
-Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');;
+Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
-Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
+Route::get('tareas/eliminar/{task_id}/{yearUnion_id}', 'DesgloseController@destroy')->name('desglose.destroy');
 Route::get('desglose/crearTarea/{id}', 'TaskController@create');
 
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
