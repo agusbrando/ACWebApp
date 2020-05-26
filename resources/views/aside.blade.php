@@ -87,12 +87,14 @@
                     Programación
                 </a>
             </li>
+            @if(Session::get('user_role')!= 'Profesor')
             <li class="nav-item">
                 <a class="nav-link" href="/permissions">
                     <span data-feather="file-text"></span>
                     Permisos
                 </a>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="/users">
                     <span data-feather="file-text"></span>
@@ -105,6 +107,7 @@
                     Roles
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="/items">
                     <span data-feather="file-text"></span>

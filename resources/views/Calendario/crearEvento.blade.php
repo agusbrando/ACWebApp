@@ -11,12 +11,14 @@
                 <h3 class="mt-1 ml-1">Reserva de aulas</h3>
             </div>
             <div>
-            @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
-                <a type="button" href="/types" class="btn btn-outline-light mt-1">Añadir Tipo</a>
-                <a type="button" href="/sessions" class="btn btn-outline-light mt-1 ml-1">Añadir Hora</a>
-            @endif
-                <a type="button" href="/list" class="btn btn-outline-light mt-1 ml-1">Listado</a>
-            </div>
+      @if(in_array('Crear_event', Session::get('user_permissions')))
+        <a type="button" href="/types" class="btn btn-outline-light mt-1">Añadir Tipo</a>
+        <a type="button" href="/sessions" class="btn btn-outline-light mt-1 ml-1">Añadir Hora</a>
+      @endif
+      @if(in_array('Listar_event', Session::get('user_permissions')))
+        <a type="button" href="/list" class="btn btn-outline-light mt-1 ml-1">Listado</a>
+      @endif
+      </div>
         </div>
         <div class="card-body row no-gutters">
 
