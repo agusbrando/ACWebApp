@@ -110,12 +110,17 @@
 
                                                                 <td>{{$user->first_name}}</td>
                                                                 <td>{{$user->last_name}}</td>
-
                                                                 <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
                                                                     @foreach($user->pivot->items as $item)
-                                                                    <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
+                                                                        @if($item != null || $item != "")
+                                                                            <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
+
+                                                                        @else
+                                                                            <p>Sin Items<p>
+                                                                        @endif
                                                                     @endforeach
                                                                 </td>
+                                                                
                                                                 <td>
                                                                     <div class="form-group ">
                                                                         <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($user->id, $courseId, $yearId))}}">

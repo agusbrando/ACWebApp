@@ -80,7 +80,7 @@
                         @if($item != null || $item != "")
                         {{"Nº ".$item->number." - ".$item->name}}
                         @else
-                        "Sin Items"
+                        <p>"Sin Items"<p>
                         @endif
                         @endforeach
                     </td>
