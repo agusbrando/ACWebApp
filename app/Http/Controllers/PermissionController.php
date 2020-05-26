@@ -33,6 +33,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        
         $permissions = Permission::all()->load('roles');
         $roles = Role::all();
         foreach ($permissions as $permission) {
@@ -46,7 +47,7 @@ class PermissionController extends Controller
         }
 
         $permissions = Permission::paginate(25);
-        return view('permissions.index', compact('permissions', 'roles', 'assignPermissions'));
+        return view('permissions.index', compact('permissions', 'roles','assignPermissions'));
     }
 
     /**

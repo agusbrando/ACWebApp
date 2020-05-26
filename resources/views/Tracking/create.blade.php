@@ -33,7 +33,9 @@
                     <label>No tienes firma,<a href="{{ route('seguimiento.edit', $user->id)}}">¿Quieres añadir?</a></label>
                     @endif
                     <br>
+                    @if(in_array('Modificar_trackings', Session::get('user_permissions')))
                     <input type="submit" class="btn btn-success col-3" value="firmar">
+                    @endif
                     <br>
                 </form>
             </div>

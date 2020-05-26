@@ -20,7 +20,9 @@
                 <form class="float-right"action="{{ route('messages.destroy',$message->id)}}" method="POST">
                     @csrf
                     @method('DELETE')
+                    @if(in_array('Eliminar_message', Session::get('user_permissions')))
                     <button type="submit" class="btn btn-outline-danger ml-1">Eliminar</button>
+                    @endif
                 </form>
             </div>
         </div>
