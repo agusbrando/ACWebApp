@@ -7,6 +7,7 @@
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/scrollbar.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
 
         <div class="card-header row m-0 justify-content-between">
@@ -32,7 +33,7 @@
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
 
-                <div class="  bd-highlight mb-3">
+                <div class=" bd-highlight mb-3">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-general-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general" aria-selected="true">General</a>
@@ -86,66 +87,68 @@
                                         <span class="badge badge-primary badge-pill"> {{$yearUnion->users->count()}}</span>
                                     </div>
 
-                                    <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse" aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
+                                    <div id="collapse{{$yearUnion->evaluation->name}}" class="collapse  " aria-labelledby="heading{{$yearUnion->evaluation->name}}" data-parent="#accordion">
                                         <div class="card-body">
                                             <ul class="list-group list-group-flush">
-                                                <div class="card row no-gutters table-responsive">
+                                                <div class="w-100 scrollbar scrollbar-primary">
+                                                    <div class="card row no-gutters table-responsive force-overflow ">
 
 
-                                                    <table id='mytable' class="table w-100">
-                                                        <thead class="thead-dark">
-                                                            <tr>
-                                                                <th>Nombre</th>
-                                                                <th>Apellido</th>
-                                                                <th>Items</th>
-                                                                <th>Responsabilizar Item</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                                        <table id='mytable' class="table w-100 ">
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th>Nombre</th>
+                                                                    <th>Apellido</th>
+                                                                    <th>Items</th>
+                                                                    <th>Responsabilizar Item</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
 
-                                                            @foreach($yearUnion->users as $user)
+                                                                @foreach($yearUnion->users as $user)
 
 
-                                                            <tr>
+                                                                <tr>
 
-                                                                <td>{{$user->first_name}}</td>
-                                                                <td>{{$user->last_name}}</td>
+                                                                    <td>{{$user->first_name}}</td>
+                                                                    <td>{{$user->last_name}}</td>
 
-                                                                <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
-                                                                    @foreach($user->pivot->items as $item)
+                                                                    <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
+                                                                        @foreach($user->pivot->items as $item)
                                                                         @if($item != null || $item != "")
-                                                                         <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
+                                                                        <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
 
                                                                         @else
-                                                                         <p>Sin Items<p>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </td>
-                                                                <td>
-                                                                    <div class="form-group ">
-                                                                        <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($user->id, $courseId, $yearId))}}">
-                                                                            @csrf
-                                                                            @method('POST')
-
-                                                                            <select multiple class="form-control " id="itemIds" name="itemIds[]">
-                                                                                <option disabled selected>Selecciona un Item</option>
-                                                                                <!--Hace la funcion de un placeholder-->
-                                                                                @foreach($items as $item)
-                                                                                <option selected value="{{$item->id}}">{{$item->name}}</option>
-
-
+                                                                        <p>Sin Items<p>
+                                                                                @endif
                                                                                 @endforeach
-                                                                            </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-group ">
+                                                                            <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($user->id, $courseId, $yearId))}}">
+                                                                                @csrf
+                                                                                @method('POST')
+
+                                                                                <select multiple class="form-control " id="itemIds" name="itemIds[]">
+                                                                                    <option disabled selected>Selecciona un Item</option>
+                                                                                    <!--Hace la funcion de un placeholder-->
+                                                                                    @foreach($items as $item)
+                                                                                    <option selected value="{{$item->id}}">{{$item->name}}</option>
 
 
-                                                                            <button class="btn btn-outline-info mt-2" role="button">Asignar Item</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
+                                                                                    @endforeach
+                                                                                </select>
+
+
+                                                                                <button class="btn btn-outline-info mt-2" role="button">Asignar Item</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </ul>
                                         </div>
