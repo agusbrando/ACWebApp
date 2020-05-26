@@ -145,7 +145,7 @@ class CourseController extends Controller
 
         $itemYear = ItemYear::select('item_id')->get()->toArray();
         $items = Item::where('classroom_id', $yearUnionsPrueba->first()->classroom->id)->whereNotIn('id', $itemYear)->get();
-
+        
 
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
@@ -330,14 +330,17 @@ class CourseController extends Controller
 
         return redirect('courses/show/' . $courseId . '/' . $yearId);
     }
-    public function imprimir(Request $request)
+    public function imprimir($courseId, $yearId)
     {
-        $yearUnionsCollection = $request->get('yearUnions');
-        $yearUnions = array();
-        foreach ($yearUnionsCollection as $yearUnion) {
-            array_push($yearUnions, json_decode($yearUnion));
-        }
+        
+        $course = Course::find($courseId);
+        //Cojo las evaluaciones
+        $yearUnions = YearUnion::where('course_id', $courseId )->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
+        
+        
         $pdf = \PDF::loadView('courses.pdf', compact('yearUnions'))->setPaper('a4', 'landscape');
         return $pdf->download('courses.pdf');
+        
+        
     }
 }

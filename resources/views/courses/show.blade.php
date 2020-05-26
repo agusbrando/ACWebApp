@@ -152,12 +152,12 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination">
                                         <!-- Boton para imprimir PDF-->
-                                        <form class="float-right" action="{{ route('courses.print')}}" method="POST">
+                                        <form class="float-right" action="{{ route('courses.print', array($courseId, $yearId))}}" method="POST">
                                             @csrf
                                             @method('POST')
-                                            @foreach($yearUnionsPrueba as $yearUnion)
+                                            <!-- @foreach($yearUnionsPrueba as $yearUnion)
                                             <input type="hidden" value={{$yearUnion}} name="yearUnions[]">
-                                            @endforeach
+                                            @endforeach -->
                                             <button type="submit" class="btn btn-outline-danger ml-1 float-right"> Descargar PDF </button>
                                         </form>
                                     </ul>
