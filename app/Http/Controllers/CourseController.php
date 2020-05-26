@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 
 use App\Models\Classroom;
@@ -19,6 +19,7 @@ use App\Models\ItemYear;
 use App\Models\Subject;
 use App\Models\YearUnion;
 use App\Models\YearUnionUser;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -314,43 +315,33 @@ class CourseController extends Controller
 
         //Cojo los items con los ids del array
         $itemsUser = Item::whereIn('id', $itemIds)->get();
-       
+
         foreach ($yearUnions as $yearUnion) {
             foreach ($itemsUser as $item) {
                 //compruebo que el alumno sea presencial
                 if ($yearUnion->pivot->assistance) {
                     //si es presencial le asigno el Item
-                   $yearUnion->pivot->items()->attach($item->id);
-                    
+                    $yearUnion->pivot->items()->attach($item->id);
                 }
             }
         }
 
-
-
-        // $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
-        // foreach ($yearUnions as $yearUnion) {
-        //     $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance', 1)->get()->load('items', 'user');
-        //     $registrados = array();
-        //     foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
-
-        //         //Aseguramos que no se repitan los usuarios
-        //         if (!in_array($yearUnionUser->user_id, $registrados)) {
-        //             array_push($registrados, $yearUnionUser->user_id);
-        //             $yearUnionUser->items = $yearUnionUser->items;
-        //             $yearUnionUser->user = $yearUnionUser->user;
-        //         } else {
-        //             $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
-        //         }
-        //     }
-        // }
-
-        // $types = Type::all()->where('model', Item::class);
-        // $classrooms = Classroom::all();
-        // $states = State::all();
         $courseId = $courseId;
         $yearId = $yearId;
 
-        return redirect('courses/show/'.$courseId.'/'.$yearId);
+        return redirect('courses/show/' . $courseId . '/' . $yearId);
+    }
+    public function imprimir($courseId, $yearId)
+    {
+        
+        $course = Course::find($courseId);
+        //Cojo las evaluaciones
+        $yearUnions = YearUnion::where('course_id', $courseId )->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
+        
+        
+        $pdf = \PDF::loadView('courses.pdf', compact('yearUnions'))->setPaper('a4', 'landscape');
+        return $pdf->download('courses.pdf');
+        
+        
     }
 }

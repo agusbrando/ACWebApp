@@ -44,7 +44,7 @@
                         <div class="tab-pane fade show active  table-responsive" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
                             Aquí irá la programacion del curso
                         </div>
-                        
+
                         <div class="tab-pane fade" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
                             <div class="card-body row no-gutters table-responsive">
                                 <table class="table col-12 ">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade " id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
-                
+
                             <div class="divShowCoursesContent" id="accordion">
                                 @foreach($yearUnionsPrueba as $yearUnion)
 
@@ -121,13 +121,13 @@
                                                                         <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($user->id, $courseId, $yearId))}}">
                                                                             @csrf
                                                                             @method('POST')
-                                                                            
+
                                                                             <select multiple class="form-control " id="itemIds" name="itemIds[]">
                                                                                 <option disabled selected>Selecciona un Item</option>
                                                                                 <!--Hace la funcion de un placeholder-->
                                                                                 @foreach($items as $item)
                                                                                 <option selected value="{{$item->id}}">{{$item->name}}</option>
-                                                                                
+
 
                                                                                 @endforeach
                                                                             </select>
@@ -148,6 +148,22 @@
                                 </div>
                                 @endforeach
                             </div>
+                            <div class="card-footer col-12">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <!-- Boton para imprimir PDF-->
+                                        <form class="float-right" action="{{ route('courses.print', array($courseId, $yearId))}}" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <!-- @foreach($yearUnionsPrueba as $yearUnion)
+                                            <input type="hidden" value={{$yearUnion}} name="yearUnions[]">
+                                            @endforeach -->
+                                            <button type="submit" class="btn btn-outline-danger ml-1 float-right"> Descargar PDF </button>
+                                        </form>
+                                    </ul>
+                                </nav>
+                            </div>
+
                         </div>
                     </div>
                 </div>
