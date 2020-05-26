@@ -51,7 +51,7 @@
                     @foreach($sessions as $session)
                     @if($session->time_start=='8:30' && $session->day==1)
                     <a href="{{route('session.show', ['session_id'=>$session->id ,'timetable_id'=>$timetable->id])}}"> 
-                       <div class="tdhorario "style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
+                       <div class="tdhorario" style="background-color:{{$session->subject->color}}">{{$session->subject->abbreviation}}</div>
                      </a> 
                        @endif
                     @endforeach

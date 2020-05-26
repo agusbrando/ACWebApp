@@ -23,7 +23,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::all();
+        $subjects = Subject::paginate(10);
         return view('subjects.index', compact('subjects'));
     }
 
@@ -77,8 +77,9 @@ class SubjectController extends Controller
                 case 'Examenes':
                     $evaluation->parciales = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->parciales as $parcial) {
+                        $parcial->yearUnionUsers = $parcial->yearUnionUsers;
                         foreach ($parcial->yearUnionUsers as $yearUnionUser) {
-                            $notaParciales[$yearUnionUser->user->id][$parcial->id] = $yearUnionUser->pivot->value;
+                            $notaParciales[$yearUnionUser->id][$parcial->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaParciales = $notaParciales;
                         }
                     }
@@ -114,7 +115,7 @@ class SubjectController extends Controller
                     $evaluation->trabajos = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->trabajos as $trabajo) {
                         foreach ($trabajo->yearUnionUsers as $yearUnionUser) {
-                            $notaTrabajos[$yearUnionUser->user->id][$trabajo->id] = $yearUnionUser->pivot->value;
+                            $notaTrabajos[$yearUnionUser->id][$trabajo->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaTrabajos = $notaTrabajos;
                         }
                     }
@@ -153,7 +154,7 @@ class SubjectController extends Controller
                     $evaluation->actitud = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->actitud as $act) {
                         foreach ($act->yearUnionUsers as $yearUnionUser) {
-                            $notaActitud[$yearUnionUser->user->id][$act->id] = $yearUnionUser->pivot->value;
+                            $notaActitud[$yearUnionUser->id][$act->id] = $yearUnionUser->pivot->value;
                             $evaluation->notaActitud = $notaActitud;
                         }
                     }
@@ -192,7 +193,7 @@ class SubjectController extends Controller
                     $evaluation->recuperacion = $evaluation->tasks()->where('type_id', $task_type->id)->get();
                     foreach ($evaluation->recuperacion as $rec) {
                         foreach ($rec->yearUnionUsers as $yearUnionUser) {
-                            $notaRecuperacion[$yearUnionUser->user->id][$rec->id] = $yearUnionUser->user->pivot->value;
+                            $notaRecuperacion[$yearUnionUser->id][$rec->id] = $yearUnionUser->user->pivot->value;
                             $evaluation->notaRecuperacion = $notaRecuperacion;
                         }
                     }
@@ -317,14 +318,19 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'hours'=>'required',
+            'abbreviation'=>'required'
         ]);
 
         $subject = new Subject([
             'name' => $request->get('name'),
+            'hours' => $request->get('hours'),
+            'abbreviation' => $request->get('abbreviation')
         ]);
+
         $subject->save();
-        return redirect('/courses')->with('success', 'Subject saved!');
+        return redirect('/subjects')->with('success', 'Subject saved!');
     }
 
     /**
@@ -364,10 +370,14 @@ class SubjectController extends Controller
     {
 
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'hours' => 'required',
+            'abbreviation' => 'required'
         ]);
         $subject = Subject::find($id);
         $subject->name = $request->get('name');
+        $subject->hours = $request->get('hours');
+        $subject->abbreviation = $request->get('abbreviation');
 
         $subject->save();
         return redirect('/subjects')->with('Succes', 'Subject editado!');

@@ -14,7 +14,7 @@
 <script>
     $(document).ready(function() {
         $('#tabla').DataTable( {
-            dom : "<'row'<'col-sm-6'><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'>>",
+            dom : "<'row'<'col-sm-6's><'col-sm-6'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4 boton'B><'col-sm-4'><'col-sm-4'p>>",
             buttons: [
                 { extend: 'excel', className: 'btn-outline-success mr-2' }, 
                 { extend: 'pdf', className: 'btn-outline-danger mr-2' }
@@ -56,25 +56,26 @@
                 </div>
                 <div class="card-body">
                 
-                <table id='tabla' class="table table-striped table-bordered dt-responsive nowrap compact text-center" style="width:100%">
+                <table id='tabla' class="table table-striped table-bordered dt-responsive nowrap compact text-left" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Actions</th>
-
                                     <th>Profesor</th>
+
+                                    <th></th>
+
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($programs as $i=>$program)
                                 <tr>
                                     <td>{{$program->name}}</td>
+                                    
+                                    <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
                                     <td class="botones">
                                         <a class="btn btn-warning btn-sm mr-2" href="/programs/{{$program->id}}">Ver</a>
                                         
                                     </td>
-                                    <td>{{$program->professor->first_name}} {{$program->professor->last_name}}</td>
-                                    
                                 </tr>
                             @endforeach
                         

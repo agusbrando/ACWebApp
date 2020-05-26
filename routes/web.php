@@ -96,12 +96,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //RUTAS ITEMs Sergio Lopez
 Route::post('/items/filter', 'ItemController@filter');
+//update
+Route::patch('/items/show/edit/{item_id}', 'ItemController@update')->name('items.updateItem');
 Route::resource('items', 'ItemController');
 
-//RUTAS STATESs
+//RUTAS STATESs Sergio Lopez
 Route::resource('states', 'StateController');
 
-//RUTAS COURSEs
+//RUTAS COURSEs Sergio Lopez
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 //filtro
@@ -134,6 +136,7 @@ Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->nam
 //INICIO Rutas de Temporalizacion de la programacion (Jesus)
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 Route::resource('units', 'UnitController');
+Route::get('programs/{program_id}/aspect/create', 'ProgramController@createAspecto')->name('programs.createAspecto');
 Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
 Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
 Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
@@ -159,15 +162,6 @@ Route::resource('notifications', 'NotificationController')->middleware('auth');
 //RUTAS ITEMs
 Route::post('/items/filter', 'ItemController@filter');
 Route::resource('items', 'ItemController');
-
-//RUTAS STATESs Sergio Lopez
-Route::resource('states', 'StateController');
-
-//RUTAS COURSEs Sergio Lopez
-Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
-Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
-Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
-Route::resource('courses', 'CourseController');
 
 //Rutas Posts Adrian
 Route::resource('posts', 'PostController');

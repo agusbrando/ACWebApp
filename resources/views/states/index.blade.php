@@ -30,7 +30,6 @@
                 @endforeach
             </table>
         </div>
-
         <div class="card-footer col-12">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">

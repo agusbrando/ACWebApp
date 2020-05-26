@@ -15,7 +15,7 @@
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">
-                <img src="{{asset('img/default_avatar.jpg')}}" class="img-thumbnail" alt="...">
+                <img src="{{asset('img/default_subject.jpg')}}" class="img-thumbnail" alt="...">
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">
                 <div>
@@ -23,7 +23,15 @@
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input value="" name="name" id="name" type="text" class="@error('name') is-invalid @enderror form-control">
-                        </div>                        
+                        </div>   
+                        <div class="form-group">
+                            <label for="hours">Horas</label>
+                            <input value="" name="hours" id="hours" type="text" class="@error('hours') is-invalid @enderror form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="abbreviation">Siglas</label>
+                            <input value="" name="abbreviation" id="abbreviation" type="text" class="@error('abbreviation') is-invalid @enderror form-control">
+                        </div>                           
                      </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>
