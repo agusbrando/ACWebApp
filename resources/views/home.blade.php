@@ -2,13 +2,15 @@
 
 @section('main')
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="card shadow">
+    <div class="card-header row m-0 justify-content-between">
+      <a style="margin: 19px; width: 100%;" href="#" class="btn btn-outline-primary">Publicar</a>
+    </div>
+  </div>
+  </br>
   @foreach($users as $user)
   @foreach($posts as $post)
     <div class="card shadow">
-      <div class="card-header row m-0 justify-content-between">
-        <a style="margin: 19px; width: 100%;" href="#" class="btn btn-outline-primary">Publicar</a>
-      </div>
-      </br>
       <div>
         <div>
           <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
