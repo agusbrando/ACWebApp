@@ -23,7 +23,7 @@
                         <h3 class="display-5 text-left">{{$program->name}} - Nueva unidad</h3>
                         <div class="float-right">
                             <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
-                            <a class="btn btn-outline-warning float-right" href="{{ route('programs.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
+                            <a class="btn btn-outline-warning float-right" href="/programs/{{$program->id}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                         </div>
                     </div>
                     <div class="card-body row no-gutters">
@@ -42,18 +42,7 @@
                                         </div>
                                         <input id="daterangepicker" class="form-control" type="text" name="expected_date">
                                     </div>
-                                    <!-- <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Fecha Inicio Prevista</span>
-                                        </div>
-                                        <input class="form-control" type="date" name="expected_date_start">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Fecha Fin Prevista</span>
-                                        </div>
-                                        <input class="form-control" type="date" name="expected_date_end">
-                                    </div> -->
+                                   
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">Evaluacion Prevista</span>
