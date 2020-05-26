@@ -350,6 +350,9 @@ class SubjectController extends Controller
                                 $user->nota_final = $sumaFinal;
                             } else {
                                 $user->boletin = $sumaFinal;
+                                if($sumaFinal < 4 && $sumaFinal!=0){
+                                    $user->boletin = 3;
+                                }
                             }
                         }
                     }
