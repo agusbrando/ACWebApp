@@ -7,7 +7,7 @@
             <h3>Asignaturas</h3>
            
             <div>
-            <a class="btn btn-outline-primary ml-1" href="/courses/create" role="button">Asignar Asignatura</a>
+            <a class="btn btn-outline-primary ml-1" href="{{ route('courses.asignarAsignaturas')}}" role="button">Asignar Asignaturas</a>
             <a class="btn btn-outline-success" href="{{ route('subjects.create')}}">Añadir</a>
             </div>
         </div>

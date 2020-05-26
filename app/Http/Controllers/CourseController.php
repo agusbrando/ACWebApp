@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 use App\Models\Classroom;
 use App\Models\Course;
+use App\Models\CourseSubject;
 use App\Models\Type;
 use App\Models\State;
 use App\Models\Item;
@@ -289,5 +290,28 @@ class CourseController extends Controller
         return $pdf->download('courses.pdf');
         
         
+    }
+    public function asignarAsignaturas()
+    {
+         
+         $courses = Course::all();
+         $subjects = Subject::all();
+         foreach($courses as $course){
+             $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
+             $course->asignaturas = array();
+             foreach($courseSubjects as $courseSubject){
+                 foreach($subjects as $subject){
+                     if($subject->id == $courseSubject->subject_id){
+                        $course->asignaturas = array_push($subject);
+                     }
+                    
+                 }
+                
+             }
+            
+         }
+
+
+        return view('courses.asignarAsignaturas', compact('courses'));
     }
 }
