@@ -46,8 +46,8 @@ Route::resource('subjects','SubjectController');
 //RUTAS TYPES(KEVIN)
 Route::resource('types','TypeController');
 
-//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
-Route::resource('asistencia', 'AsistenciaController');
+//RUTAS ASISTENCIA Y COMPORTAMIENTO
+
 Route::get('porcentajes/evaluacion/{id}', 'PorcentajesController@index');
 Route::get('porcentajes/create/{id}', 'PorcentajesController@create');
 Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->name('porcentajes.update');
@@ -55,12 +55,14 @@ Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('evaluaciones', 'EvaluacionesController');
 Route::resource('porcentajes', 'PorcentajesController');
 Route::resource('desglose', 'DesgloseController');
-//RUTAS ASISTENCIA Y COMPORTAMIENTO
+//RUTAS ASISTENCIA Y COMPORTAMIENTO (Alberto)
+Route::resource('asistencia', 'AsistenciaController');
 Route::resource('comportamiento', 'ComportamientoController');
 Route::get('faltas/create/{id}', 'FaltasController@create');
 Route::delete('faltas/{user_id}/{id}', 'FaltasController@destroy')->name('faltas.destroy1');
 Route::post('faltas/{id}/create', 'FaltasController@create')->name('faltas.crear');
 Route::resource('faltas', 'FaltasController');
+Route::post('asistencia/lista', 'AsistenciaController@filter')->name('asistencia.filter');
 
 //Route::Trackings (Carlos)
 Route::post('seguimiento/imprimir', 'TrackingController@imprimir')->name('seguimiento.print');
@@ -73,6 +75,9 @@ Route::post('seguimiento','TrackingController@store')->name('seguimiento.store')
 
 //Route::Timetables (Carlos)
 Route::resource('horarios', 'TimetableController');
+Route::resource('sessiontimetable', 'SessionTimetableController');
+Route::get('sessiontimetable/crear/{id}', 'SessionTimetableController@crear')->name('session');
+
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
 //RUTAS PERMISSIONS (Roby)
@@ -93,12 +98,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //RUTAS ITEMs Sergio Lopez
 Route::post('/items/filter', 'ItemController@filter');
+//update
+Route::patch('/items/show/edit/{item_id}', 'ItemController@update')->name('items.updateItem');
 Route::resource('items', 'ItemController');
 
-//RUTAS STATESs
+//RUTAS STATESs Sergio Lopez
 Route::resource('states', 'StateController');
 
-//RUTAS COURSEs
+//RUTAS COURSEs Sergio Lopez
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 //filtro
@@ -116,9 +123,9 @@ Route::resource('subjects','SubjectController');
 Route::resource('evaluations','EvaluationController');
 Route::resource('tasks', 'TaskController');
 
-Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');;
+Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose');
 Route::get('tareas/{id}', 'DesgloseController@eliminar');
-Route::get('tareas/eliminar/{task_id}/{subject_id}', 'DesgloseController@destroy');
+Route::get('tareas/eliminar/{task_id}/{yearUnion_id}', 'DesgloseController@destroy')->name('desglose.destroy');
 Route::get('desglose/crearTarea/{id}', 'TaskController@create');
 
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes');
@@ -156,15 +163,6 @@ Route::resource('notifications', 'NotificationController')->middleware('auth');
 //RUTAS ITEMs
 Route::post('/items/filter', 'ItemController@filter');
 Route::resource('items', 'ItemController');
-
-//RUTAS STATESs Sergio Lopez
-Route::resource('states', 'StateController');
-
-//RUTAS COURSEs Sergio Lopez
-Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
-Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
-Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filter')->name('courses.filter');
-Route::resource('courses', 'CourseController');
 
 //Rutas Posts Adrian
 Route::resource('posts', 'PostController');

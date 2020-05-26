@@ -36,7 +36,6 @@
                             <a class="btn btn-outline-primary" href="{{ route('sessions.show',$session->id)}}">Ver</a>
                         </td>
                     </tr>
-
                 </tbody>
                 @endforeach
             </table>

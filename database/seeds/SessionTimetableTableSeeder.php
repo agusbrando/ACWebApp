@@ -37,21 +37,21 @@ class SessionTimetableTableSeeder extends Seeder
         DB::table('session_timetables')->insert([
             'session_id' => 93,
             'timetable_id' => 1,
-            'year_union_id' => 1,
+            'year_union_id' => 20,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 94,
             'timetable_id' => 1,
-            'year_union_id' => 4,
+            'year_union_id' => 20,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 95,
             'timetable_id' => 1,
-            'year_union_id' => 4,
+            'year_union_id' => 14,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -74,14 +74,14 @@ class SessionTimetableTableSeeder extends Seeder
         DB::table('session_timetables')->insert([
             'session_id' => 98,
             'timetable_id' => 1,
-            'year_union_id' => 8,
+            'year_union_id' => 14,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('session_timetables')->insert([
             'session_id' => 99,
             'timetable_id' => 1,
-            'year_union_id' => 8,
+            'year_union_id' => 14,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
