@@ -110,12 +110,17 @@
 
                                                                 <td>{{$user->first_name}}</td>
                                                                 <td>{{$user->last_name}}</td>
-
                                                                 <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
                                                                     @foreach($user->pivot->items as $item)
-                                                                    <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
+                                                                        @if($item != null || $item != "")
+                                                                            <a class="btn btn-outline-primary m-1 " href="{{ route('courses.showItem', $item->id)}}" type="button ">{{"Nº ".$item->number." - ".$item->name}}</a>
+
+                                                                        @else
+                                                                            <p>Sin Items<p>
+                                                                        @endif
                                                                     @endforeach
                                                                 </td>
+                                                                
                                                                 <td>
                                                                     <div class="form-group ">
                                                                         <form class="botones d-flex flex-wrap" method="post" action="{{ route('courses.responsabilizarItem', array($user->id, $courseId, $yearId))}}">
@@ -152,12 +157,12 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination">
                                         <!-- Boton para imprimir PDF-->
-                                        <form class="float-right" action="{{ route('courses.print')}}" method="POST">
+                                        <form class="float-right" action="{{ route('courses.print', array($courseId, $yearId))}}" method="POST">
                                             @csrf
                                             @method('POST')
-                                            @foreach($yearUnionsPrueba as $yearUnion)
+                                            <!-- @foreach($yearUnionsPrueba as $yearUnion)
                                             <input type="hidden" value={{$yearUnion}} name="yearUnions[]">
-                                            @endforeach
+                                            @endforeach -->
                                             <button type="submit" class="btn btn-outline-danger ml-1 float-right"> Descargar PDF </button>
                                         </form>
                                     </ul>

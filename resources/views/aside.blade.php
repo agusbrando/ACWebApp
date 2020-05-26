@@ -25,12 +25,14 @@
                     Nuevo mensaje
                 </a>
             </li>
+            @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
             <li class="nav-item">
                 <a class="nav-link" href="/seguimiento">
                     <span data-feather="file"></span>
                     Seguimiento
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="/">
                     <span data-feather="shopping-cart"></span>

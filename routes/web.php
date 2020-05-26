@@ -29,6 +29,7 @@ Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento'
 Route::post('/crearEvento','CalendarController@store');
 Route::get('/time', 'CalendarController@getTime');
 Route::get('/list', 'CalendarController@getList');
+Route::get('/teacher', 'CalendarController@getTeacher');
 
 //RUTAS CLASSROOMS(KEVIN)
 Route::resource('classrooms','ClassroomController');
@@ -115,7 +116,7 @@ Route::post('courses/show/filter/{user_id}/{course_id}/{year_id}', 'CourseContro
 Route::delete('courses/show/{course_id}/{year_id}', 'CourseController@eliminarYearUnion')->name('courses.eliminarYearUnion');
 Route::resource('courses', 'CourseController');
 //Imprimir
-Route::post('courses/show/imprimir', 'CourseController@imprimir')->name('courses.print');
+Route::post('courses/show/imprimir/{course_id}/{year_id}', 'CourseController@imprimir')->name('courses.print');
 
 //RUTAS SUBJECTS JAVI
 //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo

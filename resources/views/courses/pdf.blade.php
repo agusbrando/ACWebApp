@@ -52,9 +52,12 @@
 
 <body>
 
-    
+    <h3>{{$yearUnions->first()->course->level}}º {{$yearUnions->first()->course->abbreviation}} - {{$yearUnions->first()->classroom->name}}</h3>
+    <hr>
+
     <div class="contenido">
         @foreach($yearUnions as $yearUnion)
+        <h2>{{$yearUnion->evaluation->name}}</h2>
         <table id='mytable' class="table w-100">
             <thead class="thead-dark">
                 <tr>
@@ -74,7 +77,11 @@
                     <td>{{$user->last_name}}</td>
                     <td class="botones d-flex flex-wrap border border-bottom-0 border-left-0 border-right-0 ">
                         @foreach($user->pivot->items as $item)
+                        @if($item != null || $item != "")
                         {{"Nº ".$item->number." - ".$item->name}}
+                        @else
+                        <p>"Sin Items"<p>
+                        @endif
                         @endforeach
                     </td>
 

@@ -45,7 +45,7 @@ class SubjectsTableSeeder extends Seeder
            
         //1ºDAM 4-8
         DB::table('subjects')->insert([
-            'name' => 'Bases de Datos',
+            'name' => 'Base de Datos',
             'abbreviation' =>'BD',
             "hours"=>160,
             'color'=>'#aaffff',
@@ -119,7 +119,7 @@ class SubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
-            'name' => 'Accesso a Datos',
+            'name' => 'Acceso a Datos',
             'abbreviation'=>'AD',
             "hours"=>120,
             'color'=>'#aa77ff',
@@ -133,7 +133,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Desarrollo web en entorno cliente',
             'abbreviation'=>'DWEC',
             "hours"=>140	,
-            'color'=>'',
+            'color'=>'#6699dd',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -149,7 +149,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Despliegue de aplicaciones web',
             'abbreviation'=>'DAW',
             "hours"=>80	,
-            'color'=>'',
+            'color'=>'#0011dd',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -167,15 +167,15 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Implantación de sistemas operativos',
             'abbreviation'=>'ISO',
             "hours"=>224	,
-            'color'=>'',
+            'color'=>'#aaaa77',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
             'name' => 'Planificación y administración de redes',
-            'abbreviation'=>'PADR',
+            'abbreviation'=>'PAR',
             "hours"=>192	,
-            'color'=>'',
+            'color'=>'#aa77aa',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -183,7 +183,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Fundamentos de hardware',
             'abbreviation'=>'FH',
             "hours"=>96	,
-            'color'=>'',
+            'color'=>'#77aaaa',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -191,95 +191,121 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Gestión de bases de datos',
             'abbreviation'=>'GBD',
             "hours"=>160	,
-            'color'=>'',
+            'color'=>'#77aaaa',
             'created_at' => now(),
             'updated_at' => now()
         ]);//LM
         //2ºASIR 22-26
         DB::table('subjects')->insert([
             'name' => 'Administración de sistemas operativos',
-            'abbreviation'=>'DWEC',
+            'abbreviation'=>'ASO',
             "hours"=>120	,
-            'color'=>'',
+            'color'=>'#88aabb',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
             'name' => 'Servicios de red e Internet',
-            'abbreviation'=>'DWES',
+            'abbreviation'=>'SRI',
             "hours"=>120	,
-            'color'=>'',
+            'color'=>'#88bbcc',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
             'name' => 'Implantación de aplicaciones web',
-            'abbreviation'=>'DAW',
+            'abbreviation'=>'IAW',
             "hours"=>100	,
-            'color'=>'',
+            'color'=>'#bbbcec',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
             'name' => 'Administración de sistemas gestores de bases de datos',
-            'abbreviation'=>'DIW',
+            'abbreviation'=>'SGBD',
             "hours"=>60	,
-            'color'=>'',
+            'color'=>'#4abb7c',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
             'name' => 'Seguridad y alta disponibilidad',
-            'abbreviation'=>'DIW',
+            'abbreviation'=>'SAD',
             "hours"=>100,
-            'color'=>'',
+            'color'=>'#1abbec',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         
-        //1º de SMR
+        //1º de SMR 27-30
         DB::table('subjects')->insert([
-            'name' => 'Administración de sistemas operativos',
-            'abbreviation'=>'DWEC',
-            "hours"=>120	,
-            'color'=>'',
+            'name' => 'Montaje y mantenimiento de equipos',
+            'abbreviation'=>'MME',
+            "hours"=>224	,
+            'color'=>'#9acfea',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
-            'name' => 'Servicios de red e Internet',
-            'abbreviation'=>'DWES',
-            "hours"=>120	,
-            'color'=>'',
+            'name' => 'Redes locales',
+            'abbreviation'=>'RL',
+            "hours"=>224	,
+            'color'=>'#7fbcec',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
-            'name' => 'Implantación de aplicaciones web',
-            'abbreviation'=>'DAW',
-            "hours"=>100	,
-            'color'=>'',
+            'name' => 'Aplicaciones ofimáticas',
+            'abbreviation'=>'AO',
+            "hours"=>224	,
+            'color'=>'#1ab88c',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
-            'name' => 'Administración de sistemas gestores de bases de datos',
-            'abbreviation'=>'DIW',
-            "hours"=>60	,
-            'color'=>'',
+            'name' => 'Sistemas operativos Monopuesto',
+            'abbreviation'=>'SOM',
+            "hours"=>128	,
+            'color'=>'#1accec',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        //2º de SMR 31-34
+        DB::table('subjects')->insert([
+            'name' => 'Sistemas operativos en red',
+            'abbreviation'=>'SOR',
+            "hours"=>176	,
+            'color'=>'#1adb5c',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('subjects')->insert([
-            'name' => 'Seguridad y alta disponibilidad',
-            'abbreviation'=>'DIW',
-            "hours"=>100,
-            'color'=>'',
+            'name' => 'Seguridad informática',
+            'abbreviation'=>'SEI',
+            "hours"=>110	,
+            'color'=>'#1ab1ec',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Servicios en red',
+            'abbreviation'=>'SER',
+            "hours"=>176	,
+            'color'=>'#1accec',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('subjects')->insert([
+            'name' => 'Aplicaciones web',
+            'abbreviation'=>'APW',
+            "hours"=>88	,
+            'color'=>'#1abb78',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-
+        //1ºFP BASICA
+        
 
     }
 }
