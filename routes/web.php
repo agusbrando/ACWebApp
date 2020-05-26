@@ -114,9 +114,11 @@ Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filte
 Route::post('courses/show/filter/{user_id}/{course_id}/{year_id}', 'CourseController@responsabilizarItem')->name('courses.responsabilizarItem');
 //eliminar
 Route::delete('courses/show/{course_id}/{year_id}', 'CourseController@eliminarYearUnion')->name('courses.eliminarYearUnion');
-Route::resource('courses', 'CourseController');
+// Route::resource('courses', 'CourseController');
 //Imprimir
 Route::post('courses/show/imprimir/{course_id}/{year_id}', 'CourseController@imprimir')->name('courses.print');
+//Asignar
+Route::get('courses/asignarAsignaturas', 'CourseController@asignarAsignaturas')->name('courses.asignarAsignaturas');
 
 //RUTAS SUBJECTS JAVI
 //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
