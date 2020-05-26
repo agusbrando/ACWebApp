@@ -146,6 +146,9 @@ Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspec
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
+Route::get('programs/{program_id}/PDF','ProgramController@downloadPDF')->name('programs.PDF');
+Route::get('programs/{program_id}/Excel','ProgramController@downloadExcel')->name('programs.Excel');
+
 
 // Route Messages (Sergio Falco)
 Route::resource('messages', 'MessageController')->middleware('auth');

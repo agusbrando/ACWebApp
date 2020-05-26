@@ -23,7 +23,7 @@ class CreateYearUnionTable extends Migration
             $table->integer('classroom_id')->unsigned();
             $table->integer('program_id')->unsigned()->nullable();
             $table->integer('responsable_id')->unsigned()->nullable();
-            $table->string('notes')->nullable();
+            $table->text('notes')->nullable();
             $table->date('date_check')->nullable();
             $table->date('date_start');
             $table->date('date_end');

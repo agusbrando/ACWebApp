@@ -71,7 +71,7 @@ class ProgramsTableSeeder extends Seeder
        
 
     }
-    /**Abreviacion, nivel, Nombre Asignatura, Profesor id */
+    /**Abreviacion, nivel, Nombre Asignatura, Profesor id . Vincula una programacion a partir de un YearUnion con la asignatura y sus evaluaciones*/
     public function crearProgramacion($curso_abreviacion,$nivelCurso,$asignatura_nombre,$profesor_id){
         $curso = Course::where('abbreviation',$curso_abreviacion)->where('level',$nivelCurso)->first();
         
