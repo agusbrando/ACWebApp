@@ -20,6 +20,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 1,
             'time_start' => '08:30',
             'time_end' => '09:00',
@@ -30,6 +31,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 1,
             'time_start' => '09:00',
             'time_end' => '09:30',
@@ -40,6 +42,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 1,
             'time_start' => '09:30',
             'time_end' => '10:00',
@@ -50,6 +53,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 1,
             'time_start' => '10:00',
             'time_end' => '10:30',
@@ -60,6 +64,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 1,
             'time_start' => '10:30',
             'time_end' => '11:00',
@@ -70,6 +75,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 1,
             'time_start' => '11:00',
             'time_end' => '11:30',
@@ -80,6 +86,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 1,
             'time_start' => '11:30',
             'time_end' => '12:00',
@@ -90,6 +97,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 1,
             'time_start' => '12:00',
             'time_end' => '12:30',
@@ -100,6 +108,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 1,
             'time_start' => '12:30',
             'time_end' => '13:00',
@@ -110,6 +119,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 1,
             'time_start' => '13:00',
             'time_end' => '13:30',
@@ -120,6 +130,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 1,
             'time_start' => '13:30',
             'time_end' => '14:00',
@@ -130,6 +141,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 1,
             'time_start' => '14:00',
             'time_end' => '14:30',
@@ -142,6 +154,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 2,
             'time_start' => '08:30',
             'time_end' => '09:00',
@@ -152,6 +165,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 2,
             'time_start' => '09:00',
             'time_end' => '09:30',
@@ -162,6 +176,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 2,
             'time_start' => '09:30',
             'time_end' => '10:00',
@@ -172,6 +187,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 2,
             'time_start' => '10:00',
             'time_end' => '10:30',
@@ -182,6 +198,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 2,
             'time_start' => '10:30',
             'time_end' => '11:00',
@@ -192,6 +209,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 2,
             'time_start' => '11:00',
             'time_end' => '11:30',
@@ -202,6 +220,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 2,
             'time_start' => '11:30',
             'time_end' => '12:00',
@@ -212,6 +231,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 2,
             'time_start' => '12:00',
             'time_end' => '12:30',
@@ -222,6 +242,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 2,
             'time_start' => '12:30',
             'time_end' => '13:00',
@@ -232,6 +253,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 2,
             'time_start' => '13:00',
             'time_end' => '13:30',
@@ -242,6 +264,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 2,
             'time_start' => '13:30',
             'time_end' => '14:00',
@@ -252,6 +275,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 2,
             'time_start' => '14:00',
             'time_end' => '14:30',
@@ -264,6 +288,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 3,
             'time_start' => '08:30',
             'time_end' => '09:00',
@@ -274,6 +299,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 3,
             'time_start' => '09:00',
             'time_end' => '09:30',
@@ -284,6 +310,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 3,
             'time_start' => '09:30',
             'time_end' => '10:00',
@@ -294,6 +321,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 3,
             'time_start' => '10:00',
             'time_end' => '10:30',
@@ -304,6 +332,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 3,
             'time_start' => '10:30',
             'time_end' => '11:00',
@@ -314,6 +343,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 3,
             'time_start' => '11:00',
             'time_end' => '11:30',
@@ -324,6 +354,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 3,
             'time_start' => '11:30',
             'time_end' => '12:00',
@@ -334,6 +365,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 3,
             'time_start' => '12:00',
             'time_end' => '12:30',
@@ -344,6 +376,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 3,
             'time_start' => '12:30',
             'time_end' => '13:00',
@@ -354,6 +387,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 3,
             'time_start' => '13:00',
             'time_end' => '13:30',
@@ -364,6 +398,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 3,
             'time_start' => '13:30',
             'time_end' => '14:00',
@@ -374,6 +409,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 3,
             'time_start' => '14:00',
             'time_end' => '14:30',
@@ -386,6 +422,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 4,
             'time_start' => '08:30',
             'time_end' => '09:00',
@@ -396,6 +433,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 4,
             'time_start' => '09:00',
             'time_end' => '09:30',
@@ -406,6 +444,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 4,
             'time_start' => '09:30',
             'time_end' => '10:00',
@@ -416,6 +455,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 4,
             'time_start' => '10:00',
             'time_end' => '10:30',
@@ -426,6 +466,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 4,
             'time_start' => '10:30',
             'time_end' => '11:00',
@@ -436,6 +477,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 4,
             'time_start' => '11:00',
             'time_end' => '11:30',
@@ -446,6 +488,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 4,
             'time_start' => '11:30',
             'time_end' => '12:00',
@@ -456,6 +499,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 4,
             'time_start' => '12:00',
             'time_end' => '12:30',
@@ -466,6 +510,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 4,
             'time_start' => '12:30',
             'time_end' => '13:00',
@@ -476,6 +521,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 4,
             'time_start' => '13:00',
             'time_end' => '13:30',
@@ -486,6 +532,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 4,
             'time_start' => '13:30',
             'time_end' => '14:00',
@@ -498,6 +545,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 5,
             'time_start' => '08:30',
             'time_end' => '09:00',
@@ -508,6 +556,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 5,
             'time_start' => '09:00',
             'time_end' => '09:30',
@@ -518,6 +567,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 5,
             'time_start' => '09:30',
             'time_end' => '10:00',
@@ -528,6 +578,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 5,
             'time_start' => '10:00',
             'time_end' => '10:30',
@@ -538,6 +589,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 5,
             'time_start' => '10:30',
             'time_end' => '11:00',
@@ -548,6 +600,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 5,
             'time_start' => '11:00',
             'time_end' => '11:30',
@@ -558,6 +611,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 5,
             'time_start' => '11:30',
             'time_end' => '12:00',
@@ -568,6 +622,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 5,
             'day' => 5,
             'time_start' => '12:00',
             'time_end' => '12:30',
@@ -578,6 +633,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 5,
             'time_start' => '12:30',
             'time_end' => '13:00',
@@ -588,6 +644,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 5,
             'time_start' => '13:00',
             'time_end' => '13:30',
@@ -598,6 +655,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 5,
             'time_start' => '13:30',
             'time_end' => '14:00',
@@ -608,6 +666,7 @@ class SessionsTableSeeder extends Seeder
         DB::table('sessions')->insert([
             'classroom_id' => 1,
             'type_id' => 1,
+            'user_id' => 6,
             'day' => 5,
             'time_start' => '14:00',
             'time_end' => '14:30',

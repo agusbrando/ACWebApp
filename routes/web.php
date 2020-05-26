@@ -29,6 +29,7 @@ Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento'
 Route::post('/crearEvento','CalendarController@store');
 Route::get('/time', 'CalendarController@getTime');
 Route::get('/list', 'CalendarController@getList');
+Route::get('/teacher', 'CalendarController@getTeacher');
 
 //RUTAS CLASSROOMS(KEVIN)
 Route::resource('classrooms','ClassroomController');

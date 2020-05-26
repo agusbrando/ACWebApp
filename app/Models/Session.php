@@ -14,6 +14,7 @@ class Session extends Model
         'id',
         'classroom_id',
         'type_id',
+        'user_id',
         'day',
         'time_start',
         'time_end'
@@ -44,6 +45,9 @@ class Session extends Model
         // return $this->belongsTo('App\Models\Type', 'type_id')->where('model', 'App\Models\Session');
     }
 
-   
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
 
 }

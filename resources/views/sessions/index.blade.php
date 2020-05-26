@@ -30,8 +30,8 @@
                         <td>{{$session->classroom->name }}</td>
                         <td>{{$session->type->name }}</td>
                         <td>{{$days[$session->day]}}</td>
-                        <td>{{$session->time_start->format('H:i') }}</td>
-                        <td>{{$session->time_end->format('H:i') }}</td>
+                        <td>{{$session->time_start}}</td>
+                        <td>{{$session->time_end}}</td>
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('sessions.show',$session->id)}}">Ver</a>
                         </td>
