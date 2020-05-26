@@ -39,7 +39,7 @@
                                         <th>{{$yearUnion->evaluation->name}}</th>
                                         <th>Porcentaje%</th>
                                         <th>Nota Minima Tarea</th>
-                                        <th>Nota Media Tarea</th>
+                                        <th>Nota Media Tareas</th>
                                         <th>Nota Media Minima</th>
                                     </tr>
                                 </thead>
@@ -82,7 +82,7 @@
                             <tbody>
                                 @foreach($yearUnion->users as $user)
                                 <tr>
-                                    <td>{{$user->last_name}} {{$user->first_name}}</td>
+                                    <td>{{$user->last_name}}, {{$user->first_name}}</td>
                                     @foreach($user->tareas as $key => $tarea)
                                     @if($user->suspendido[$key])
                                     <td class="text-danger">{{$tarea}}</td>
@@ -91,7 +91,7 @@
                                     @endif
                                     @endforeach
                                     <td>{{$user->nota_final}}</td>
-                                    <td>{{$user->nota_final}}</td>
+                                    <td>{{$user->boletin}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

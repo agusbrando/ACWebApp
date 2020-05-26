@@ -4,8 +4,22 @@
         <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
-            <div class="notificationsDropDown">
-                <!-- <a href="{{ route('notifications.index')}}"><i class="far fa-bell dropDownIcon mr-5"></i></a> -->
+        <div class="notificationsDropDown">
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-bell dropDownIcon"></i>
+                     @if (Session::get('countNotifications') != 0)
+                <span class="badge badge-light">{{Session::get('countNotifications')}}</span>
+                    @endif
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    
+                </div>
+              </div>
+
+
+
             @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

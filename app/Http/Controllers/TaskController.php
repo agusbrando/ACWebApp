@@ -9,9 +9,28 @@ use App\Models\Subject;
 use App\Models\Evaluation;
 use App\Models\Calification;
 use App\Models\YearUnion;
+use Illuminate\Support\Facades\Auth;
+use App\Models\YearUnionUser;
 
 class TaskController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +52,7 @@ class TaskController extends Controller
         $evaluaciones = YearUnion::where('subject_id', $yearUnion->subject_id)->where('year_id', $yearUnion->year_id)->where('course_id', $yearUnion->course_id)->get()->load('evaluation');
         $tipos = Type::all()->where('model', Task::class);
 
-        foreach($evaluaciones as $eval){
+        foreach ($evaluaciones as $eval) {
             $eval->evaluation = $eval->evaluation;
         }
 
@@ -52,33 +71,36 @@ class TaskController extends Controller
         //TODO JAVI hacer funcional store tareas
         $request->validate([
             'name' => 'required',
-            'evaluaciones' => 'required',
             'type' => 'required',
             'yearUnion' => 'required'
         ]);
 
-        $evaluaciones = $request->get('evaluaciones');
         $yearUnion = YearUnion::find($request->get('yearUnion'));
 
-        foreach ($evaluaciones as $eval) {    
-            $task = new Task([
-                'year_union_id' => $yearUnion->id,
-                'type_id' => $request->get('type'),
-                'name' => $request->get('name')
-            ]);
-            $task->save();
-            $this->storeNotes($yearUnion, $task);
-        }
+        $request->session()->put('subject', $yearUnion->subject_id);
+        $request->session()->put('year', $yearUnion->course_id);
+        $request->session()->put('course', $yearUnion->year_id);
+        $request->session()->put('evaluation', $yearUnion->evaluation_id);
 
-        return redirect('subjects/evaluations/' . $yearUnion->subject_id);
+        $task = new Task([
+            'year_union_id' => $yearUnion->id,
+            'type_id' => $request->get('type'),
+            'name' => $request->get('name')
+        ]);
+        $task->save();
+        $this->storeNotes($yearUnion, $task);
+
+
+        return redirect()->route('subjects.desglose', $request);
     }
 
     protected function storeNotes($yearUnion, Task $task)
     {
         foreach ($yearUnion->users as $user) {
+            $yearUnionUser = YearUnionUser::where('user_id', $user->id)->where('year_union_id', $yearUnion->id)->first();
             $calification = new Calification([
                 'task_id' => $task->id,
-                'year_user_id' =>  $user->id,
+                'year_user_id' =>  $yearUnionUser->id,
                 'value' => null
             ]);
             $calification->save();

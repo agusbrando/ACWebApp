@@ -2,6 +2,8 @@
 
   @section('main')
 
+
+
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <link href="{{ asset('css/toggle.css') }}" rel="stylesheet" type="text/css" />
 
@@ -33,10 +35,17 @@
             <tbody>
               <tr>
                 <td>{{$permission->name }}</td>
-                @foreach($roles as $role)
+                @foreach($roles as $key=>$role)
                 <td>
                   <label class="switch">
-                    <input value="{{$role->id}}" name="assignPermissions[{{$permission->id}}][]" type="checkbox">
+
+                    @if(isset($assignPermissions[$permission->id][$role->id])&& $assignPermissions[$permission->id][$role->id] == true)
+                    
+                    <input value="true" name="assignPermissions[{{$permission->id}}][{{$role->id}}]" type="checkbox" checked="1">
+                    @else
+                    
+                    <input value="false" name="assignPermissions[{{$permission->id}}][{{$role->id}}]" type="checkbox" >
+                    @endif
                     <span class="slider round"></span>
                   </label>
                 </td>

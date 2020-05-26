@@ -10,8 +10,10 @@
         <h3 class="mt-1 ml-1">Reserva de aulas</h3>
       </div>
       <div>
+      @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
         <a type="button" href="/types" class="btn btn-outline-light mt-1">Añadir Tipo</a>
         <a type="button" href="/sessions" class="btn btn-outline-light mt-1 ml-1">Añadir Hora</a>
+      @endif
         <a type="button" href="/list" class="btn btn-outline-light mt-1 ml-1">Listado</a>
       </div>
     </div>
@@ -31,8 +33,8 @@
           @if(!empty($sessions))
             @foreach($sessions->sortBy('time_start') as $session)
               <button type="submit" 
-              onclick="window.location.href='{{ route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start->format('H:i'), 'tipo' => $tipo]) }}'"
-               class="btn btn-info btn-block">{{ $session->time_start->format('H:i') }}</button>
+              onclick="window.location.href='{{ route('crearEvento',['fecha'=> $dia, 'hora' => $session->time_start, 'tipo' => $tipo]) }}'"
+              class="btn btn-info btn-block">{{ $session->time_start }}</button>
             @endforeach
           @else
             <p>No hay horas disponibles.</p>
