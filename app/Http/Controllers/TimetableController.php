@@ -133,6 +133,35 @@ class TimetableController extends Controller
 
         return redirect('/horarios')->with('exito', 'Horario borrado!');
     }
+
+    public function imprimir($id)
+  {
+    
+    
+ 
+    
+
+    $sessions=array();
+        $session_timetables=SessionTimetable::all();
+        foreach($session_timetables as $session_timetable){
+            if($session_timetable->timetable_id == $id){
+                $session=Session::find($session_timetable->session_id);
+                $year_union=YearUnion::find($session_timetable->year_union_id);
+                $subject = Subject::find($year_union->subject_id);
+                
+                    $session->subject=$subject;
+
+                    array_push($sessions,$session);
+                
+                
+            }
+        }
+    
+
+
+    $pdf = \PDF::loadView('SessionTimetable.pdf', compact('sessions'))->setPaper('a4', 'landscape');
+    return $pdf->download('Horario.pdf');
+  }
 }
 
    

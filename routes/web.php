@@ -75,6 +75,7 @@ Route::resource('horarios', 'TimetableController');
 Route::resource('sessiontimetable', 'SessionTimetableController');
 Route::get('sessiontimetable/crear/{id}', 'SessionTimetableController@crear')->name('session');
 Route::get('sessiontimetable/{session_id}/{timetable_id}', 'SessionTimetableController@show')->name('session.show');
+Route::post('horario/imprimir/{id}', 'TimetableController@imprimir')->name('horario.print');
 
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 

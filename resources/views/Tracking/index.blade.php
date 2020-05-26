@@ -104,7 +104,7 @@
 
 
 
-            <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar PDF</button>
+            <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar pdf <i class="fas fa-file-pdf"></i></button>
             </form>
             <form class="float-right" action="{{ route('seguimiento.excel')}}" method="POST">
                 @csrf
@@ -115,7 +115,7 @@
                 <input type="hidden" value={{$tracking}} name="trackings[]">
                 @endforeach
 
-                <button type="submit" class="btn btn-outline-success ml-1 float-right"> Descargar Excel </button>
+                <button type="submit" class="btn btn-outline-success ml-1 float-right">Descargar excel <i class="fas fa-file-excel"></i></button>
             </form>
 
             <input type="hidden" value={{$trackings}}>

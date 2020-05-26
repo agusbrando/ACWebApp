@@ -87,20 +87,6 @@ class SessionTimetableController extends Controller
             $session_timetable=$s;
         break;
         }
-        
-        return view('SessionTimetable.show',compact('session_timetable'));
-    }
-
-   
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $session_timetable=SessionTimetable::find($id);
         $year_union=YearUnion::find($session_timetable->year_union_id);
         $subject=Subject::find($year_union->subject_id);
         $timetable=Timetable::find($session_timetable->timetable_id);
@@ -108,7 +94,7 @@ class SessionTimetableController extends Controller
         $session_timetables=SessionTimetable::all();
         $sessions=Session::all();
         $horas_validas=array();
-            $session_timetables_buenas = $session_timetables->where('timetable_id', $id);
+            $session_timetables_buenas = $session_timetables->where('timetable_id', $timetable_id);
             $subjects=Subject::all();
             $sessions_buenas=$sessions->where('type_id', 3);
             foreach($sessions_buenas as $session){
@@ -150,10 +136,24 @@ class SessionTimetableController extends Controller
                          $hora_valida->dia='Viernes';
                      break;
                 }
+        return view('SessionTimetable.show',compact('session_timetable','timetable','horas_validas','subjects','subject','hora_valida'));
+    }
+
+   
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $session_timetable=SessionTimetable::find($id);
+        
                  
              
          
-        return view('SessionTimetable.edit',compact('session_timetable','timetable','horas_validas','subjects','subject','hora_valida'));
+        return view('SessionTimetable.edit',compact('session_timetable'));
                
     }
 

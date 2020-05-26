@@ -47,7 +47,7 @@
                                     <form action="{{ route('Ind', $timetable->id)}}" method="get">
                                         @csrf
 
-                                        <button class="btn btn-warning" type="submit">Ver</button>
+                                        <button class="btn btn-outline-info" type="submit"><i class="far fa-eye"></i></button>
                                     </form>
                                 </td>
                             </tr>
