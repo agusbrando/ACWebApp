@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-12 col-md-3 col-lg-1 p-2">
                 {{-- <img class="img-thumbnail img-size" src="/img/iconfiles.png" alt=""> --}}
-                @if ($attachment->extension == 'jpg')
+                @if ($attachment->extension == 'jpg' or $attachment->extension == 'png')
                 <i class="fas fa-file-image icon-size"></i>
                 @endif
                 @if ($attachment->extension == 'pdf')

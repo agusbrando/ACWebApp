@@ -8,9 +8,26 @@ use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\Timetable;
 use App\Models\YearUnion;
-
+use Illuminate\Support\Facades\Auth;
 class TimetableController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,12 +56,12 @@ class TimetableController extends Controller
             'date_start'=>'required',
             'date_end'=>'required'
         ]);
-      
+
         $timetable = new Timetable([
             'name' => $request->get('name'),
             'date_start' => $request->get('date_start'),
             'date_end' => $request->get('date_end'),
-           
+
         ]);
         $timetable->save();
         return redirect('/horarios')->with('exito', 'Horario creado!');
@@ -64,7 +81,7 @@ class TimetableController extends Controller
     public function horario($id)
     {
         $timetable = Timetable::find($id);
-        
+
         $sessions=array();
         $session_timetables=SessionTimetable::all();
         foreach($session_timetables as $session_timetable){
@@ -72,16 +89,16 @@ class TimetableController extends Controller
                 $session=Session::find($session_timetable->session_id);
                 $year_union=YearUnion::find($session_timetable->year_union_id);
                 $subject = Subject::find($year_union->subject_id);
-                
+
                     $session->subject=$subject;
 
                     array_push($sessions,$session);
-                
-                
+
+
             }
         }
-        
-        return view('Timetable.horario', compact('timetable','sessions')); 
+
+        return view('Timetable.horario', compact('timetable','sessions'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -91,9 +108,9 @@ class TimetableController extends Controller
      */
     public function edit($id)
     {
-        
+
         $timetable = Timetable::find($id);
-        return view('Timetable.edit', compact('timetable'));        
+        return view('Timetable.edit', compact('timetable'));
     }
 
     /**
@@ -135,4 +152,4 @@ class TimetableController extends Controller
     }
 }
 
-   
+

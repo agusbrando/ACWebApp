@@ -9,7 +9,7 @@ use App\Models\Classroom;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
@@ -18,6 +18,23 @@ class SessionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         $sessions = Session::paginate(10);
@@ -32,12 +49,12 @@ class SessionController extends Controller
      */
     public function create()
     {
-        date_default_timezone_set('Europe/Madrid');      
+        date_default_timezone_set('Europe/Madrid');
 
-        $sessions = Session::all();       
-        $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];        
-        $classrooms = Classroom::all();        
-        $types = Type::all()->where('model', Event::class);;  
+        $sessions = Session::all();
+        $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+        $classrooms = Classroom::all();
+        $types = Type::all()->where('model', Event::class);;
 
         return view('sessions.create', compact('sessions', 'days', 'types', 'classrooms'));
     }
@@ -73,7 +90,7 @@ class SessionController extends Controller
     }
 
     /**
-     * Display the specified resource.  
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -93,15 +110,15 @@ class SessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)    
+    public function edit($id)
     {
-        date_default_timezone_set('Europe/Madrid'); 
+        date_default_timezone_set('Europe/Madrid');
         $session = Session::find($id);
-        $sessions = Session::all();       
-        $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];        
-        $classrooms = Classroom::all();        
+        $sessions = Session::all();
+        $days = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+        $classrooms = Classroom::all();
         $types = Type::all()->where('model', Event::class);
-        
+
         return view('sessions.edit', compact('session','sessions', 'days', 'types', 'classrooms'));
     }
 

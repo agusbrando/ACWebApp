@@ -44,7 +44,7 @@ class messageMail extends Mailable
      */
     public function build()
     {
-        //TODO change to gobal variable
+
         return $this->view('emails/message')->with([
             'messageSubject' => $this->message->subject,
             'username' => $this->user->first_name,

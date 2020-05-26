@@ -26,12 +26,6 @@ class InvoicePaid extends Notification
         $this->user = $user;
     }
 
-    // public function getUser(){
-
-    //  return $this->user;
-
-    // }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -41,7 +35,7 @@ class InvoicePaid extends Notification
     public function via($notifiable)
     {
 
-        return ['mail','database'];
+        return ['database'];
     }
 
     /**

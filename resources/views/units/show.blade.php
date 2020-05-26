@@ -30,11 +30,13 @@
                                 
                                 <div class="mt-2">
                                      <div class="row justify-content-end align-items-center">
+                                        @if($usuario->id == $program->professor->id)
                                         <a type="button" role="button" class="btn btn-sm btn-outline-primary"  href="{{ route('units.edit',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-edit"></i></a>
                                         <div class="espacio"></div>
-                                        
-                                            <button class="btn btn-sm btn-outline-danger" type="button" role="button" data-toggle="modal" data-target="#confirm-delete"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger" type="button" role="button" data-toggle="modal" data-target="#confirm-delete"><i class="fas fa-trash-alt"></i></button>
                                         <div class="espacio"></div>
+                                        @else
+                                        @endif
                                     </div>
                                 </div>
                                

@@ -33,7 +33,16 @@ class SubjectsTableSeeder extends Seeder
             'updated_at' => now()
         ]);
         //FIN COMUNES
-
+       
+             
+             
+            
+           
+            
+             
+            
+             
+           
         //1ºDAM 4-8
         DB::table('subjects')->insert([
             'name' => 'Base de Datos',
@@ -112,7 +121,7 @@ class SubjectsTableSeeder extends Seeder
         DB::table('subjects')->insert([
             'name' => 'Acceso a Datos',
             'abbreviation'=>'AD',
-            "hours"=>120	,
+            "hours"=>120,
             'color'=>'#aa77ff',
             'created_at' => now(),
             'updated_at' => now()
@@ -124,7 +133,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Desarrollo web en entorno cliente',
             'abbreviation'=>'DWEC',
             "hours"=>140	,
-            'color'=>'#88bbee',
+            'color'=>'#6699dd',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -140,7 +149,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Despliegue de aplicaciones web',
             'abbreviation'=>'DAW',
             "hours"=>80	,
-            'color'=>'',
+            'color'=>'#0011dd',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -215,7 +224,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Administración de sistemas gestores de bases de datos',
             'abbreviation'=>'SGBD',
             "hours"=>60	,
-            'color'=>'',
+            'color'=>'#4abb7c',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -223,7 +232,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Seguridad y alta disponibilidad',
             'abbreviation'=>'SAD',
             "hours"=>100,
-            'color'=>'#4abb7c',
+            'color'=>'#1abbec',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -233,7 +242,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Montaje y mantenimiento de equipos',
             'abbreviation'=>'MME',
             "hours"=>224	,
-            'color'=>'#1abbec',
+            'color'=>'#9acfea',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -241,7 +250,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Redes locales',
             'abbreviation'=>'RL',
             "hours"=>224	,
-            'color'=>'#9acfea',
+            'color'=>'#7fbcec',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -249,7 +258,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Aplicaciones ofimáticas',
             'abbreviation'=>'AO',
             "hours"=>224	,
-            'color'=>'#7fbcec',
+            'color'=>'#1ab88c',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -257,7 +266,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Sistemas operativos Monopuesto',
             'abbreviation'=>'SOM',
             "hours"=>128	,
-            'color'=>'',
+            'color'=>'#1accec',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -266,7 +275,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Sistemas operativos en red',
             'abbreviation'=>'SOR',
             "hours"=>176	,
-            'color'=>'#1ab88c',
+            'color'=>'#1adb5c',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -274,7 +283,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Seguridad informática',
             'abbreviation'=>'SEI',
             "hours"=>110	,
-            'color'=>'#1ab88c',
+            'color'=>'#1ab1ec',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -282,7 +291,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Servicios en red',
             'abbreviation'=>'SER',
             "hours"=>176	,
-            'color'=>'#1adb5c',
+            'color'=>'#1accec',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -290,7 +299,7 @@ class SubjectsTableSeeder extends Seeder
             'name' => 'Aplicaciones web',
             'abbreviation'=>'APW',
             "hours"=>88	,
-            'color'=>'#1ab1ec',
+            'color'=>'#1abb78',
             'created_at' => now(),
             'updated_at' => now()
         ]);

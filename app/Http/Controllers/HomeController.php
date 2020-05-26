@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Comments;
-use App\Models\Attachments;
+use App\Models\Comment;
+use App\Models\Attachment;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -14,9 +15,27 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+
+            $user = Auth::user();
+            if($user != null){
+                $notifications = $user->unreadNotifications;
+                $countNotifications = $user->unreadNotifications->count();
+            }else{
+                $notifications = [];
+                $countNotifications = 0;
+            }
+
+            $request->session()->put('notifications', $notifications);
+            $request->session()->put('countNotifications', $countNotifications);
+
+
+
+
+
     }
 
     /**
@@ -26,7 +45,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        
+
 
         if (!$request->session()->has('user_permissions')) {
             $permissions = $request->user()->role->permissions->pluck('name')->toArray();
@@ -34,12 +53,10 @@ class HomeController extends Controller
             $request->session()->put('user_role', $request->user()->role->name);
         }
 
-        $post1 = Post::select('created_at')->where('id', 1)->get();
-        $post2 = Post::select('created_at')->where('id', 2)->get();
-        $post3 = Post::select('created_at')->where('id', 3)->get();
-        
-        //$comment = Comment::select('text')->where('id', 1)->get();
+        $posts = Post::all();
+        $users = User::all();
+        $comments = Comment::all();
 
-        return view('home', compact('post1', 'post2', 'post3'));
+        return view('home', compact('posts', 'users', 'comments'));
     }
 }

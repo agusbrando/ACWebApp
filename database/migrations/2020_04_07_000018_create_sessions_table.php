@@ -17,6 +17,7 @@ class CreateSessionsTable extends Migration
             $table->increments('id');
             $table->integer('classroom_id')->unsigned();
             $table->integer('type_id')->unsigned();
+            $table->integer('user_id')->nullable()->unsigned();
             $table->integer('day');
             $table->string('time_start');
             $table->string('time_end');
@@ -24,6 +25,7 @@ class CreateSessionsTable extends Migration
 
             $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

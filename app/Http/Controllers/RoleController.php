@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -14,13 +14,30 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         $permissions = Permission::all();
         $roles = Role::all();
         $roles = Role::paginate(5);
         return view('roles.index', compact('roles','permissions'));
-        
+
     }
 
     /**
@@ -62,7 +79,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.  
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

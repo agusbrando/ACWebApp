@@ -2,12 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Attachment;
 use App\Models\Post;
 
 class AttachmentController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +54,7 @@ class AttachmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $this->validate($request, [
             'name' => 'required',
             'user_id' => 'required',
@@ -65,7 +83,7 @@ class AttachmentController extends Controller
                 ]);
             }
         }
-        
+
         $attachment->save();
         return back()->with('success', 'Archivos subidos correctamente');
     }

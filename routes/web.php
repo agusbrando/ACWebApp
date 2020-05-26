@@ -29,6 +29,7 @@ Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento'
 Route::post('/crearEvento','CalendarController@store');
 Route::get('/time', 'CalendarController@getTime');
 Route::get('/list', 'CalendarController@getList');
+Route::get('/teacher', 'CalendarController@getTeacher');
 
 //RUTAS CLASSROOMS(KEVIN)
 Route::resource('classrooms','ClassroomController');
@@ -76,6 +77,7 @@ Route::post('seguimiento','TrackingController@store')->name('seguimiento.store')
 Route::resource('horarios', 'TimetableController');
 Route::resource('sessiontimetable', 'SessionTimetableController');
 Route::get('sessiontimetable/crear/{id}', 'SessionTimetableController@crear')->name('session');
+Route::get('sessiontimetable/{session_id}/{timetable_id}', 'SessionTimetableController@show')->name('session.show');
 
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
@@ -113,6 +115,8 @@ Route::post('courses/show/filter/{user_id}/{course_id}/{year_id}', 'CourseContro
 //eliminar
 Route::delete('courses/show/{course_id}/{year_id}', 'CourseController@eliminarYearUnion')->name('courses.eliminarYearUnion');
 Route::resource('courses', 'CourseController');
+//Imprimir
+Route::post('courses/show/imprimir/{course_id}/{year_id}', 'CourseController@imprimir')->name('courses.print');
 
 //RUTAS SUBJECTS JAVI
 //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
@@ -137,6 +141,7 @@ Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->nam
 //INICIO Rutas de Temporalizacion de la programacion (Jesus)
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 Route::resource('units', 'UnitController');
+Route::get('programs/{program_id}/aspect/create', 'ProgramController@createAspecto')->name('programs.createAspecto');
 Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
 Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
 Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
