@@ -1,12 +1,7 @@
 h1{
     padding: 10px;
 }
-table.dataTable thead th{
-    background-color: #4d5358;
-    border-color: #454d55;
-    color: #fff;
 
-}
 .boton button {
     background-color:white;
     
@@ -23,7 +18,7 @@ table.dataTable thead th{
 .observaciones{
     background-color: rgb(255, 249, 226);
     border-radius: 5px;
-    padding-bottom: 10%;
+    padding-bottom: 6%;
 }
 .tablas{
     display: flex;

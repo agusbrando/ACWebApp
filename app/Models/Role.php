@@ -66,7 +66,7 @@ class Role extends Model
         parent::__construct($attributes);
         $this->table = config('roles.rolesTable');
     }
-
+    //He quitado el withTimeStamps aqui, porque es una tabla normal, no hay ninguna pivot en esta relacion (users)
     public function users()
     {
         return $this->hasMany(User::class);

@@ -6,8 +6,11 @@
         <div class="card-header row m-0 justify-content-between">
             <h3>Usuarios</h3>
             <div>
+            @if(in_array('Crear_message', Session::get('user_permissions')))
             <a class="btn btn-outline-success" href="{{ route('messages.create')}}">Añadir</a>
+            @endif
             </div>
+            
         </div>
         <div class="card-body row no-gutters table-responsive">
             <table class="table col-12 ">
@@ -45,9 +48,11 @@
                     <td>{{$message->user->first_name}} {{$message->user->last_name}}</td>
                     <td>{{$message->subject}}</td>
                     <td>{{count($message->attachments)}}</td>
+                    @if(in_array('Leer_message', Session::get('user_permissions')))
                     <td class="botones">
                         <a class="btn btn-outline-primary" href="{{ route('messages.show',$message->id)}}">Ver</a>
                     </td>
+                    @endif
                 </tbody>
                 @endif
                 @endforeach

@@ -144,7 +144,7 @@
                                 
                                 <td class="botones justify-content-center">
                                     
-                                    <a type="button" class="btn btn-sm btn-outline-warning"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-eye"></i></a>
+                                    <a type="button" class="btn btn-sm btn-outline-info"  href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="far fa-eye"></i></a>
 
                                 </td>
                             </tr>
@@ -401,6 +401,7 @@
                                         </tbody>
                                     </table>
                                     @endif
+                                    <!-- En esta linea de abajo poner la condicion -->
                                     @if($notas[$i+1] == '' && $usuario->role_id == 1)
                                         <form method="post" action="{{route('programs.storeEvaluacion', $program->id)}}">
                                         @csrf
@@ -478,6 +479,10 @@
                             <span class="input-group-text" id="basic-addon1">Profesor</span>
                         </div>
                         <div class="form-control profesor  text-truncate">{{$program->professor->first_name}} {{$program->professor->last_name}}</div>
+                        <div class="input-group-append" data-toggle="tooltip" data-placement="top" title="Descargar PDF/Excel de la programacion">
+                                <a class="input-group-text form-control btn btn-sm btn-danger" href="/programs/{{$program->id}}/PDF"><i class="fas fa-file-pdf"></i></a>
+                                <a class="input-group-text form-control btn btn-sm btn-outline-success" href="/programs/{{$program->id}}/Excel">Excel</a>
+                        </div>
                     </div>
             </div>
 
@@ -488,48 +493,12 @@
     </div> 
         
 </main>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 
-        <!-- Modal form Aspecto -->
-        <div class="modal fade" id="crearAspecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Aspecto Nuevo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                    <div class="modal-body">
-                <form method="post" action="{{ route('programs.storeAspecto', $program->id) }}">
-                @csrf
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Aspecto evaluado</span>
-                                </div>
-                                <select class="form-control custom-select" id="exampleFormControlSelect1" name="name">
-                                @foreach($listaEvaluables as $evaluable)
-                                    <option class="form-control anchuraselect" value="{{$evaluable->name}}">{{$evaluable->name}}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Descripcion</span>
-                                </div>
-                                <textarea name="description" rows="3" class="form-control"></textarea>
-                            </div>
-                            
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Añadir</button>
-                    </div>
-                </form>
-                </div>
-            </div>
-        </div>
-        </div>  
 
 
 

@@ -134,4 +134,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Session');
     }
 
+    //function posts
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+
 }

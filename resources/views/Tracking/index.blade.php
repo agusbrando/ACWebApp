@@ -10,9 +10,9 @@
         <div class="card-header row m-0 justify-content-between">
             <h3>Firmas de docente</h3>
             <div>
+            @if(in_array('Crear_trackings', Session::get('user_permissions')))
                 <a href="{{ route('seguimiento.create')}}" class="btn btn-outline-primary"> Añadir firma diaria </a>
-
-
+            @endif
             </div>
         </div>
         <div class="card-body row no-gutters">
@@ -137,8 +137,8 @@
 
 
 
-
-            <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar pdf <i class="fas fa-file-pdf"></i></button>
+        @if(in_array('Listar_trackings', Session::get('user_permissions')))
+            <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar PDF <i class="fas fa-file-pdf"></i></button>
             </form>
             <form class="float-right" action="{{ route('seguimiento.excel')}}" method="POST">
                 @csrf
@@ -153,6 +153,7 @@
             </form>
 
             <input type="hidden" value={{$trackings}}>
+            @endif
         </div>
 
 
