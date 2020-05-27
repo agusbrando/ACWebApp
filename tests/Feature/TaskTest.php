@@ -55,7 +55,7 @@ class TaskTest extends TestCase
 
         $classroom = Classroom::create([
             'name' => 'Clase',
-            'number' => 10,
+            'number' => 35,
         ]);
 
         $yearUnion = YearUnion::create([
@@ -106,22 +106,16 @@ class TaskTest extends TestCase
             'assistance' => true
         ]);
 
-        $calification = Calification::create([
-            'task_id' => $task->id,
-            'year_user_id' => $yearUnionUser->id,
-            'value' => 6
-        ]);
+        $task->yearUnionUsers()->attach($yearUnionUser->id, ['value' => 10]);
 
+        $califications = $task->yearUnionUsers;
 
-        //find 
-        $evaluation = Evaluation::find($task->evaluation_id);
+        $expected_yearUnionUsers_ids = collect([
+            ['id' => $task->id]
+        ])->pluck('id');
 
-        $this->assertEquals($task->evaluation->name, $evaluation->name);
+        $this->assertEquals($califications, $expected_yearUnionUsers_ids);
 
-        $task->delete();
-        $evaluation->delete();
-        $subject->delete();
-        $course->delete();
     }
 
     public function testUsers()

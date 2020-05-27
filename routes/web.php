@@ -98,17 +98,15 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-//RUTAS ITEMs Sergio Lopez
-Route::post('/items/filter', 'ItemController@filter');
-//update
-Route::patch('/items/show/edit/{item_id}', 'ItemController@update')->name('items.updateItem');
-Route::resource('items', 'ItemController');
-
-//RUTAS STATESs Sergio Lopez
-Route::resource('states', 'StateController');
-
 //RUTAS COURSEs Sergio Lopez
 Route::get('courses', 'CourseController@index');
+//create
+Route::get('courses/create', 'CourseController@create')->name('courses.create');
+//store
+Route::get('courses/store', 'CourseController@store')->name('courses.store');
+//edit
+Route::get('courses/edit/{course_id}/{year_id}', 'CourseController@edit')->name('courses.edit');
+//show
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 //filtro
