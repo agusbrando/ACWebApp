@@ -108,6 +108,14 @@ Route::resource('items', 'ItemController');
 Route::resource('states', 'StateController');
 
 //RUTAS COURSEs Sergio Lopez
+Route::get('courses', 'CourseController@index');
+//create
+Route::get('courses/create', 'CourseController@create')->name('courses.create');
+//store
+Route::get('courses/store', 'CourseController@store')->name('courses.store');
+//edit
+Route::get('courses/edit/{course_id}/{year_id}', 'CourseController@edit')->name('courses.edit');
+//show
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 //filtro
@@ -160,7 +168,7 @@ Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAsp
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
 Route::get('programs/{program_id}/PDF','ProgramController@downloadPDF')->name('programs.PDF');
 Route::get('programs/{program_id}/Excel','ProgramController@downloadExcel')->name('programs.Excel');
-
+Route::get('programs/{year_id}/{course_id}/{subject_id}/create','ProgramController@asignarProgramacion')->name('programs.asignarProgramacion');
 
 // Route Messages (Sergio Falco)
 Route::resource('messages', 'MessageController')->middleware('auth');
