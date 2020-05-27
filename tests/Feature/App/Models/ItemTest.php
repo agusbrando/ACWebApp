@@ -147,8 +147,8 @@ class ItemTest extends TestCase
             'model' => 'defaultModel'
         ]);
 
-        $item = Item::create([
-            'name' => 'Portatil Asus',
+        $item1 = Item::create([
+            'name' => 'Portatil Asus1',
             'number' => 2000,
             'date_pucharse' => Carbon::create('2020', '03', '30'),
             'classroom_id' => $classroom->id,
@@ -157,15 +157,30 @@ class ItemTest extends TestCase
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+        $item2 = Item::create([
+            'name' => 'Portatil Asus 2',
+            'number' => 3000,
+            'date_pucharse' => Carbon::create('2020', '03', '30'),
+            'classroom_id' => $classroom->id,
+            'state_id' => $state->id,
+            'type_id' => $type->id,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
         
 
         //Creamos un array de todos los id de los states creados en la DB
-        $states = $item->state->pluck('id');
+        $items = $state->items->pluck('id');
 
-        $this->assertEquals($states, $state->id);
+        $expectedItemIds = collect([
+            ['id' => $item1->id],
+            ['id' => $item2->id]
+        ])->pluck('id');
 
-        $item->delete();
+        $this->assertEquals($items, $expectedItemIds);
+
+        $item1->forceDelete();
+        $item2->forceDelete();
         $classroom->delete();
         $type->delete();
         $state->delete();
