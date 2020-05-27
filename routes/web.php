@@ -109,6 +109,11 @@ Route::resource('states', 'StateController');
 
 //RUTAS COURSEs Sergio Lopez
 Route::get('courses', 'CourseController@index');
+//create
+Route::get('courses/create', 'CourseController@create')->name('courses.create');
+//store
+Route::get('courses/store', 'CourseController@store')->name('courses.store');
+//show
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 //filtro
