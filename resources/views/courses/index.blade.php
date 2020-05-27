@@ -18,7 +18,7 @@
             </div>
 
             <div>
-                <a class="btn btn-outline-primary" href="/courses/create" role="button">Añadir Curso</a>
+                <a class="btn btn-outline-primary" href="{{route('courses.create')}}" role="button">Añadir Curso</a>
 
             </div>
         </div>

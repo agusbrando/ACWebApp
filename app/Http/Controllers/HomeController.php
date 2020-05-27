@@ -54,9 +54,12 @@ class HomeController extends Controller
         }
 
         $posts = Post::all();
-        $users = User::all();
-        $comments = Comment::all();
 
-        return view('home', compact('posts', 'users', 'comments'));
+        foreach($posts as $post) {
+            $post->user=$post->user;
+            $post->comments=$post->comments;
+        }
+
+    return view('home', compact('posts', 'post'));
     }
 }
