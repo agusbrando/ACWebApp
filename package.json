@@ -21,12 +21,9 @@
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
         "vue-template-compiler": "^2.6.11"
-<<<<<<< HEAD
-=======
     },
     "dependencies": {
         "@fortawesome/fontawesome": "^1.1.8",
         "font-awesome": "^4.7.0"
->>>>>>> master
     }
 }
