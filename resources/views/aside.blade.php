@@ -25,12 +25,14 @@
                     Nuevo mensaje
                 </a>
             </li>
+            @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
             <li class="nav-item">
                 <a class="nav-link" href="/seguimiento">
                     <span data-feather="file"></span>
                     Seguimiento
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="/">
                     <span data-feather="shopping-cart"></span>
@@ -52,7 +54,7 @@
         </ul>
 
 
-        @if(Session::get('user_role')!= 'User')
+        @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Administración</span>
             <a class="d-flex align-items-center text-muted" href="/">
@@ -60,7 +62,7 @@
             </a>
         </h6>
         <ul class="nav flex-column mb-2">
-            @if(in_array('Can View Users', Session::get('user_permissions')))
+            @if(in_array('Leer_post', Session::get('user_permissions')))
             <li class="nav-item">
                 <a class="nav-link" href="/posts">
                     <span data-feather="file-text"></span>
@@ -85,12 +87,14 @@
                     Programación
                 </a>
             </li>
+            @if(Session::get('user_role')!= 'Profesor')
             <li class="nav-item">
                 <a class="nav-link" href="/permissions">
                     <span data-feather="file-text"></span>
                     Permisos
                 </a>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="/users">
                     <span data-feather="file-text"></span>
@@ -103,12 +107,7 @@
                     Roles
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <span data-feather="file-text"></span>
-                    Reserva de aulas
-                </a>
-            </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="/items">
                     <span data-feather="file-text"></span>

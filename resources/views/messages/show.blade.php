@@ -20,7 +20,9 @@
                 <form class="float-right"action="{{ route('messages.destroy',$message->id)}}" method="POST">
                     @csrf
                     @method('DELETE')
+                    @if(in_array('Eliminar_message', Session::get('user_permissions')))
                     <button type="submit" class="btn btn-outline-danger ml-1">Eliminar</button>
+                    @endif
                 </form>
             </div>
         </div>
@@ -44,7 +46,7 @@
         <div class="row">
             <div class="col-12 col-md-3 col-lg-1 p-2">
                 {{-- <img class="img-thumbnail img-size" src="/img/iconfiles.png" alt=""> --}}
-                @if ($attachment->extension == 'jpg')
+                @if ($attachment->extension == 'jpg' or $attachment->extension == 'png')
                 <i class="fas fa-file-image icon-size"></i>
                 @endif
                 @if ($attachment->extension == 'pdf')

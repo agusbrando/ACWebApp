@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             CoursesTableSeeder::class,
             SubjectsTableSeeder::class,
             UsersTableSeeder::class,
-            //CourseSubjectsTableSeeder::class,
+            CourseSubjectsTableSeeder::class,
             EvaluationsTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,

@@ -5,10 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class PermissionController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,15 +33,21 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        
         $permissions = Permission::all()->load('roles');
         $roles = Role::all();
-        // foreach($assignPermissions[$permission_id]=$role_id;){
-        //     $permission = Permission::find($permission_id);
-        //     $permission -> roles()->sync($role_id);
-        // }
-        
-        $permissions = Permission::paginate(5);
-        return view('permissions.index', compact('permissions', 'roles'));
+        foreach ($permissions as $permission) {
+            foreach ($roles as $key => $role) {
+                if ($permission->roles != null) {
+                    if (in_array($role->id, $permission->roles->pluck('id')->toArray())) {
+                        $assignPermissions[$permission->id][$role->id]=true;
+                    }
+                }
+            }
+        }
+
+        $permissions = Permission::paginate(25);
+        return view('permissions.index', compact('permissions', 'roles','assignPermissions'));
     }
 
     /**
@@ -66,7 +89,7 @@ class PermissionController extends Controller
     }
 
     /**
-     * Display the specified resource.  
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -143,10 +166,14 @@ class PermissionController extends Controller
 
         ]);
         $permissions = $request->get('assignPermissions');
-            foreach($permissions as $permission_id=>$role_id){
-                $permission = Permission::find($permission_id);
-                $permission -> roles()->sync($role_id);
+        foreach ($permissions as $permission_id => $roles) {
+            foreach($roles as $role_id => $role){
+                if($role){
+                    $permission = Permission::find($permission_id);
+                    $permission->roles()->sync($role_id);
+                }
             }
+        }
         return redirect('/permissions')->with('success', 'Permission saved!');
     }
 }

@@ -19,10 +19,12 @@ table.dataTable thead th{
     display:flex;
     flex-direction: row;
 }
-.botones *{
-    padding-left: 10px;
-}
 
+.observaciones{
+    background-color: rgb(255, 249, 226);
+    border-radius: 5px;
+    padding-bottom: 10%;
+}
 .tablas{
     display: flex;
     flex-direction: column;
@@ -50,10 +52,12 @@ select{
 .profesor{
     width: fit-content;
 }
-.fa-edit{
-    color: blue;
+.borrar:hover .fa-trash-alt{
+    color:white;
 }
-
-.fa-save{
-    color: rgb(26, 150, 26);
+.borrar .fa-trash-alt{
+    color:#d9534f;
+}
+.tooltip .tooltiptext{
+    background-color: #454d55;
 }

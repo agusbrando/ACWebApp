@@ -17,6 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('hours')->nullable();
+            $table->string('color')->nullable();
             $table->string('abbreviation');
             $table->timestamps();
         });

@@ -4,8 +4,10 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Usuarios</h3>
+            <h3>Asignaturas</h3>
+           
             <div>
+            <a class="btn btn-outline-primary ml-1" href="{{ route('courses.asignarAsignaturas')}}" role="button">Asignar Asignaturas</a>
             <a class="btn btn-outline-success" href="{{ route('subjects.create')}}">Añadir</a>
             </div>
         </div>
@@ -14,6 +16,8 @@
                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                     <tr>
                         <th scope="col">Nombre</th>  
+                        <th scope="col">Horas</th>  
+                        <th scope="col">Siglas</th>  
                         <th scope="col">Action</th>                     
                     </tr>
                 </thead>
@@ -21,6 +25,8 @@
                 <tbody>
                     <tr>
                         <td>{{$subject->name }}</td>
+                        <td>{{$subject->hours }}</td>
+                        <td>{{$subject->abbreviation }}</td>                        
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
                         </td>
@@ -30,7 +36,6 @@
                 @endforeach
             </table>
         </div>
-
         <div class="card-footer col-12">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">

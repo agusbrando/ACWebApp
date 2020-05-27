@@ -30,12 +30,10 @@
                             <a class="btn btn-outline-primary" href="{{ route('types.show',$type->id)}}">Ver</a>
                         </td>
                     </tr>
-
                 </tbody>
                 @endforeach
             </table>
         </div>
-
         <div class="card-footer col-12">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -43,7 +41,6 @@
                 </ul>
             </nav>
         </div>
-
     </div>
 </main>
 @endsection

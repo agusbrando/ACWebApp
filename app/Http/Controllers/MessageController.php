@@ -21,6 +21,21 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
 
     public function index()
     {
@@ -43,16 +58,16 @@ class MessageController extends Controller
     public function create($id = null)
     {
         $isResponse = false;
-        if($id != null){
+        if ($id != null) {
 
             $isResponse = true;
             $message = Message::find($id);
             $user = User::find($message->user_id);
-            return view('messages.create', compact('user','message','isResponse'));
-        }else{
+            return view('messages.create', compact('user', 'message', 'isResponse'));
+        } else {
             $users = User::all();
-            return view('messages.create', compact('users','isResponse'));
-    }
+            return view('messages.create', compact('users', 'isResponse'));
+        }
     }
     /**
      * Store a newly created resource in storage.
@@ -80,7 +95,8 @@ class MessageController extends Controller
         foreach ($users as $userid) {
             $user = User::find($userid);
             $user->messagesReceive()->attach($message->id);
-            $user->notify(new InvoicePaid($message,$user));
+            Mail::to($user)->send(new MessageMail($message));
+            $user->notify(new InvoicePaid($message, $user));
         }
 
 
@@ -110,13 +126,24 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $message = Message::find($id)->loadMissing('attachments');
         $user = $message->users->first();
         $message->users()->updateExistingPivot($user->id, array('read' => 1));
+
+        $user = Auth::user();
+        $notifications = $request->session()->get('notifications');
+
+        foreach ($notifications as $notification) {
+           if ($notification->data['message_id'] == $message->id) {
+               $notification->markAsRead();
+           }
+        }
+
         $sitio = 0;
         return view('messages.show', compact('message', 'sitio'));
+
     }
     public function showSended($id)
     {

@@ -2,6 +2,10 @@
 
 @section('main')
 <link href="{{ asset('css/units.css') }}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     
@@ -22,14 +26,17 @@
                                     <h3 class="text-left ml-2 mt-2">{{$unidad->name}}</h3>
                                     
                                 </div>
-                                <div class="row justify-content-end mt-2">
-                                    <a type="button" class="btn" href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="fas fa-times"></i></i></a>
-                                    <div class="espacio"></div>
-                                    
-                                    <button class="btn" type="submit"><i class="fas fa-save"></i></button>
-                                    
-                                    <div class="espacio"></div>
+                                <div class="mt-2">
+                                    <div class="row justify-content-end">
+                                        <a type="button" class="btn btn-sm btn-outline-danger" href="{{ route('units.show',  ['program_id'=> ($program->id), 'id'=> ($unidad->id)]) }}"><i class="fas fa-times"></i></i></a>
+                                        <div class="espacio"></div>
+                                        
+                                        <button class="btn btn-sm btn-outline-success" type="submit"><i class="fas fa-save"></i></button>
+                                        
+                                        <div class="espacio"></div>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="card-body col-12">
@@ -47,28 +54,18 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Fechas Inicio/Fin Previstas</span>
                                             </div>
-                                            <input id="daterangepicker" class="form-control" type="text" name="expected_date_start" value="{{$unidad->expected_date_start}} - {{$unidad->expected_date_end}}">
+                                            <input id="daterangepicker" class="form-control" type="text" name="expected_date" value="{{$unidad->expected_date_start}} - {{$unidad->expected_date_end}}">
                                         </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">Fecha Inicio Prevista</span>
-                                            </div>
-                                            <input class="form-control" type="date" name="expected_date_start" value="{{$unidad->expected_date_start}}">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">Fecha Fin Prevista</span>
-                                            </div>
-                                            <input class="form-control" type="date" name="expected_date_end" value="{{$unidad->expected_date_end}}">
-                                        </div>
+                                        
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Evaluacion Prevista</span>
                                             </div>
-                                            <select class="form-control custom-select" name="expected_eval" value="{{$unidad->expected_eval}}">
-                                                <option value="1EVAL">1EVAL</option>
-                                                <option value="2EVAL">2EVAL</option>
-                                                <option value="3EVAL">3EVAL</option>
+                                            <select class="form-control custom-select" name="expected_eval">
+                                                @for($i=1;$i<=3;$i++)
+                                                <option value="{{$i}}EVAL" {{$unidad->expected_eval == $i.'EVAL' ? 'selected' : ''}}>{{$i}}EVAL</option>
+                     
+                                                @endfor
                                             </select>
                                         </div>
                                 
@@ -88,10 +85,11 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Evaluacion</span>
                                             </div>
-                                            <select class="form-control custom-select" name="eval" value="{{$unidad->eval}}">
-                                                <option value="1EVAL">1EVAL</option>
-                                                <option value="2EVAL">2EVAL</option>
-                                                <option value="3EVAL">3EVAL</option>
+                                            <select class="form-control custom-select" name="eval">
+                                                @for($i=1;$i<=3;$i++)
+                                                <option value="{{$i}}EVAL" {{$unidad->eval == $i.'EVAL' ? 'selected' : ''}}>{{$i}}EVAL</option>
+                
+                                                @endfor
                                             </select>
                                         </div>
                                         <div class="input-group mb-3">
@@ -120,7 +118,52 @@
     
         
 </main>
-
+<script>
+    $('#daterangepicker').daterangepicker({
+        "showDropdowns": true,
+        "autoApply": true,
+        "language":'auto',
+        "startDate": '{{date('d/m/Y',strtotime($unidad->expected_date_start))}}',
+        "endDate": '{{date('d/m/Y',strtotime($unidad->expected_date_end))}}',
+        "opens": "center",
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Aplicar",
+            "cancelLabel": "Cancelar",
+            "fromLabel": "hasta",
+            "toLabel": "De",
+            "customRangeLabel": "Custom",
+            "weekLabel": "S",
+            "daysOfWeek": [
+                "D",
+                "L",
+                "M",
+                "X",
+                "J",
+                "V",
+                "S"
+            ],
+            "monthNames": [
+                "Enero",
+                "Febrero",
+                "Marzo",
+                "Abril",
+                "Mayo",
+                "Junio",
+                "Julio",
+                "Agosto",
+                "Septiembre",
+                "Octubre",
+                "Noviembre",
+                "Diciembre"
+            ],
+            "firstDay": 1
+        }
+    }, function(start, end, label) {
+    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+</script>
 
 @endsection
 

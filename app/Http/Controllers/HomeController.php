@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
@@ -15,9 +15,27 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+
+            $user = Auth::user();
+            if($user != null){
+                $notifications = $user->unreadNotifications;
+                $countNotifications = $user->unreadNotifications->count();
+            }else{
+                $notifications = [];
+                $countNotifications = 0;
+            }
+
+            $request->session()->put('notifications', $notifications);
+            $request->session()->put('countNotifications', $countNotifications);
+
+
+
+
+
     }
 
     /**
@@ -27,7 +45,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        
+
 
         if (!$request->session()->has('user_permissions')) {
             $permissions = $request->user()->role->permissions->pluck('name')->toArray();
