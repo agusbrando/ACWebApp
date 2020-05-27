@@ -23,7 +23,11 @@
                     @endif
                 <div class="float-right">
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
-                    <a class="btn btn-outline-warning float-right" href="{{ route('programs.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
+                    @if($asignar)
+                    <a class="btn btn-outline-warning float-right" href="/courses/show/{{$courseId}}/{{$yearId}}" tabindex="-1" aria-disabled="true">Cancelar</a>
+                    @else
+                    <a class="btn btn-outline-warning float-right" href="/programs/" tabindex="-1" aria-disabled="true">Cancelar</a>
+                    @endif
                 </div>
             </div>
             <div class="card-body row no-gutters">
@@ -31,7 +35,64 @@
                 <div class="row justify-content-center col-12 p-3">
 
                     @if(!$editar)
+                        @if($asignar ==true)
+                        <fieldset>
+                        
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Profesor</span>
+                                    </div>
+                                    
+                                    <select class="form-control custom-select" id="exampleFormControlSelect1" name="professor_id">
+                                        @foreach($profesores as $profesor)
+                                        <option value="{{$profesor->id}}">{{$profesor->first_name}} {{$profesor->last_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Curso</span>
+                                    </div>
+                                    <select class="form-control custom-select" id="exampleFormControlSelect1" name="course_id" disabled>
+                                        @foreach($courses as $course)
+                                        <option value="{{$course->id}}" {{$course->id == $courseId ? 'selected' : ''}}>{{$course->level}}{{$course->abbreviation}}</option>
+                
+                                        @endforeach
+                                    </select>
+                                    <input type="hidden" value="{{$courseId}}" name="course_id">
 
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Asignaturas</span>
+                                    </div>
+                                    <select class="form-control custom-select" id="exampleFormControlSelect1" name="subject_id" disabled>
+                                        @foreach($subjects as $subject)
+                                        <option value="{{$subject->id}}" {{$subject->id == $subjectId ? 'selected' : ''}}>{{$subject->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="hidden" value="{{$subjectId}}" name="subject_id">
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Año</span>
+                                    </div>
+                                    <select class="form-control custom-select" id="exampleFormControlSelect1" name="year_id" disabled>
+                                         @foreach($years as $year)
+                                        <option value="{{$year->id}}" {{$year->id == $yearId ? 'selected' : ''}}>{{$year->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="hidden" value="{{$yearId}}" name="year_id">
+
+                                </div>
+                                
+
+                                </div>
+                                
+                            
+                        </fieldset>
+                        @else
                         <fieldset>
                         
                                 <div class="input-group mb-3">
@@ -80,7 +141,7 @@
                                 
                             
                         </fieldset>
-                        
+                        @endif
                     @else
                     
                         <fieldset>

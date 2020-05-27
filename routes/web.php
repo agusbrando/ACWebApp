@@ -159,7 +159,7 @@ Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAsp
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
 Route::get('programs/{program_id}/PDF','ProgramController@downloadPDF')->name('programs.PDF');
 Route::get('programs/{program_id}/Excel','ProgramController@downloadExcel')->name('programs.Excel');
-
+Route::get('programs/{year_id}/{course_id}/{subject_id}/create','ProgramController@asignarProgramacion')->name('programs.asignarProgramacion');
 
 // Route Messages (Sergio Falco)
 Route::resource('messages', 'MessageController')->middleware('auth');
