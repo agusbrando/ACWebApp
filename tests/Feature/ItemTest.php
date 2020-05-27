@@ -13,7 +13,6 @@ use App\Models\User;
 use App\Models\Type;
 use App\Models\Role;
 use App\Models\State;
-use App\Models\Role;
 use App\Models\Timetable;
 
 class ItemTest extends TestCase
