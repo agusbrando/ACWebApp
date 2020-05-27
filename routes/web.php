@@ -113,6 +113,8 @@ Route::get('courses', 'CourseController@index');
 Route::get('courses/create', 'CourseController@create')->name('courses.create');
 //store
 Route::get('courses/store', 'CourseController@store')->name('courses.store');
+//edit
+Route::get('courses/edit/{course_id}/{year_id}', 'CourseController@edit')->name('courses.edit');
 //show
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');

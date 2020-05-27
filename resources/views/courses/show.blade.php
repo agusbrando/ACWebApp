@@ -23,8 +23,9 @@
                     @method('DELETE')
                     <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
                 </form>
-                <form method="post" action="">
+                <form method="get" action="{{ route('courses.edit', array($courseId, $yearId))}}">
                     @csrf
+                    @method('GET')
                     <button class="btn btn-outline-info ml-2" type="submit">Editar Curso</button>
                 </form>
 
