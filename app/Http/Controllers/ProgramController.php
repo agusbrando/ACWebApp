@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\Evaluable;
 use App\Models\Evaluated;
 use App\Models\Course;
+use App\Models\Role;
+
 use App\Models\Year;
 use App\Models\YearUnion;
 
@@ -50,23 +52,40 @@ class ProgramController extends Controller
         return view('programs.index',compact('programs'));
     }
 
-
+    public function create()
+    {
+        $editar=false;
+        $asignar=false;
+        $programs = Program::all();
+        $usuario = Auth::user();
+        $profesores = Role::where('name','Profesor')->first()->users;
+        $subjects = Subject::all();
+        $courses = Course::all();
+        $years = Year::all();
+        return view('programs.create',compact('programs','profesores','usuario','subjects','years','courses','editar','asignar'));
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function asignarProgramacion($year_id, $course_id, $subject_id)
     {
+        
+        $subjectId = $subject_id;
+        $yearId = $year_id;
+        $courseId = $course_id;
+
         $editar=false;
+        $asignar=true;
         $programs = Program::all();
         $usuario = Auth::user();
-        $profesores = DB::table('users')->where('role_id', 2)->get();
+        $profesores = Role::where('name','Profesor')->first()->users;
         $subjects = Subject::all();
         $courses = Course::all();
         $years = Year::all();
-        return view('programs.create',compact('programs','profesores','usuario','subjects','years','courses','editar'));
+        return view('programs.create',compact('programs','profesores','usuario','subjects','years','courses','editar','asignar','courseId','yearId','subjectId'));
     }
 
     /**
@@ -104,7 +123,7 @@ class ProgramController extends Controller
 
                 $program->yearUnions()->saveMany($evaluations);
 
-                return redirect('/programs');
+                return redirect('/courses/show/'.$curso->id.'/'.$anyo->id);
 
             }else{
                 echo 'error, ya existe';
