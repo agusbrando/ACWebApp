@@ -10,8 +10,8 @@
     </div>
   </div>
   </br>
-  @foreach($users as $user)
   @foreach($posts as $post)
+  @foreach($users as $user)
     <div class="card shadow">
       <div>
         <div>
