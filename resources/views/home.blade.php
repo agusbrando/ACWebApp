@@ -10,13 +10,12 @@
     </div>
   </div>
   </br>
-  @foreach($users as $user)
   @foreach($posts as $post)
     <div class="card shadow">
       <div>
         <div>
           <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          <p style="font-weight: bold;">{{$post->user->first_name}} {{$post->user->last_name}}</p>
           <h4 style="text-align: center;">{{$post->title}}</h4>
         </div>
         <div>
@@ -34,7 +33,7 @@
         <div>
           <img style="float: left;" src="{{asset('img/corazon.png')}}" alt="" width="25" height="25">
           <p style="float: left;">0</p>
-          <p style="float: right;">1 Comentarios</p>
+          <p style="float: right;">{{count($post->comments)}} Comentarios</p>
         </div>
         </br>
         <div>
@@ -44,7 +43,6 @@
       </div>
     </div>
     </br>
-  @endforeach
   @endforeach
 </main>
 @endsection
