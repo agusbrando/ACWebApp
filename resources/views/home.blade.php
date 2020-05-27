@@ -33,7 +33,7 @@
         <div>
           <img style="float: left;" src="{{asset('img/corazon.png')}}" alt="" width="25" height="25">
           <p style="float: left;">0</p>
-          <p style="float: right;">1 Comentarios</p>
+          <p style="float: right;">{{count($post->comments)}} Comentarios</p>
         </div>
         </br>
         <div>
