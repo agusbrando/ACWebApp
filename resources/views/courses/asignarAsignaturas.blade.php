@@ -51,25 +51,26 @@
                                                                 <tr>
                                                                     <th>Id</th>
                                                                     <th>Nombre</th>
-                                                                    <th>Abreviación</th>
+                                                                    <th>Siglas</th>
                                                                     <th>Horas</th>
                                                                     <th>Actions</th>
                                                                 </tr>
                                                             </thead>
                                                             @foreach($course->asignaturas as $asignatura)
-                                                            <tr>
+                                                            <tbody>
+                                                                <tr>
 
-                                                                <td>{{$asignatura->id}} </td>
-                                                                <td>{{$asignatura->name}}</td>
-                                                                <td>{{$asignatura->abbreviation}}</td>
-                                                                <td>{{$asignatura->hours}}</td>
+                                                                    <td>{{$asignatura->id}} </td>
+                                                                    <td>{{$asignatura->name}}</td>
+                                                                    <td>{{$asignatura->abbreviation}}</td>
+                                                                    <td>{{$asignatura->hours}}</td>
 
 
-                                                                <td class="botones">
-                                                                    <a class="btn btn-outline-primary" href="#">Ver</a>
-                                                                </td>
-                                                            </tr>
-                                                            @endforeach
+                                                                    <td class="botones">
+                                                                        <a class="btn btn-outline-primary" href="{{ route('subjects.show',$asignatura->id)}}">Ver</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
