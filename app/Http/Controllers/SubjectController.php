@@ -283,6 +283,7 @@ class SubjectController extends Controller
     public function evaluations(Request $request, $subject_id)
     {
 
+        //TODO que no cuente examenes sin nota
         $request->session()->put('subject_id', $subject_id);
         if ($request->session()->has('course_id') && $request->session()->has('year_id')) {
             $course_id = $request->session()->get('course_id');
@@ -315,11 +316,13 @@ class SubjectController extends Controller
                         $user->tareas = $tareas;
                         $resultados[$task_type->name] = false;
                         $user->suspendido = $resultados;
+                        $sinNota = false;
                         if (count($tasks) > 0) {
                             foreach ($tasks as $task) {
                                 $suma += $task->pivot->value;
                             }
-                            $suma = $suma / count($tasks);
+                            $suma = $suma / (count($tasks));
+
                             foreach ($yearUnion->percentages as $percentage) {
                                 if ($percentage->id == $task_type->id) {
                                     $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
@@ -350,7 +353,7 @@ class SubjectController extends Controller
                                 $user->nota_final = $sumaFinal;
                             } else {
                                 $user->boletin = $sumaFinal;
-                                if($sumaFinal < 4 && $sumaFinal!=0){
+                                if ($sumaFinal < 4 && $sumaFinal != 0) {
                                     $user->boletin = 3;
                                 }
                             }
@@ -376,8 +379,8 @@ class SubjectController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'hours'=>'required',
-            'abbreviation'=>'required'
+            'hours' => 'required',
+            'abbreviation' => 'required'
         ]);
 
         $subject = new Subject([
