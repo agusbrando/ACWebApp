@@ -57,6 +57,10 @@ class HomeController extends Controller
         $users = User::all();
         $comments = Comment::all();
 
+        /*for($i=1;$i<=3;$i++) {
+            $users = User::all();
+        }*/
+
         return view('home', compact('posts', 'users', 'comments'));
     }
 }
