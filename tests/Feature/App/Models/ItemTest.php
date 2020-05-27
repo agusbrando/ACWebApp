@@ -11,7 +11,6 @@ use App\Models\Classroom;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Type;
-use App\Models\Role;
 use App\Models\State;
 use App\Models\Role;
 use App\Models\Timetable;
@@ -25,17 +24,10 @@ class ItemTest extends TestCase
      */
     public function testUsers()
     {
-        $timetable = Timetable::create([
-            'name' => '2DAM2020',
-            'date_start' =>  now(),
-            'date_end' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        
+       
         $classroom = Classroom::create([
-            'name' => '6',
-            'number' => 6,
+            'name' => '1000',
+            'number' => 1000,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -53,6 +45,7 @@ class ItemTest extends TestCase
 
         $item = Item::create([
             'name' => 'Portatil Asus',
+            'number' => 2000,
             'date_pucharse' => Carbon::create('2020', '03', '30'),
             'classroom_id' => $classroom->id,
             'state_id' => $state->id,
@@ -64,6 +57,8 @@ class ItemTest extends TestCase
         //CREACION USER
         $rol = Role::create([
             'name' => 'default',
+            'slug'        => 'profesor prueba',
+            'description' => 'Profesor Role',
             'created_at' => now(),
             'updated_at' => now()
         ]);
