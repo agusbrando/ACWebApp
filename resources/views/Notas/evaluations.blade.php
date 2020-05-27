@@ -91,7 +91,11 @@
                                     @endif
                                     @endforeach
                                     <td>{{$user->nota_final}}</td>
+                                    @if($user->boletin < 5)
+                                    <td class="text-danger">{{$user->boletin}}</td>
+                                    @else
                                     <td>{{$user->boletin}}</td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
