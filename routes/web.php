@@ -29,6 +29,7 @@ Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento'
 Route::post('/crearEvento','CalendarController@store');
 Route::get('/time', 'CalendarController@getTime');
 Route::get('/list', 'CalendarController@getList');
+Route::get('/teacher', 'CalendarController@getTeacher');
 
 //RUTAS CLASSROOMS(KEVIN)
 Route::resource('classrooms','ClassroomController');
@@ -76,6 +77,8 @@ Route::post('seguimiento','TrackingController@store')->name('seguimiento.store')
 Route::resource('horarios', 'TimetableController');
 Route::resource('sessiontimetable', 'SessionTimetableController');
 Route::get('sessiontimetable/crear/{id}', 'SessionTimetableController@crear')->name('session');
+Route::get('sessiontimetable/{session_id}/{timetable_id}', 'SessionTimetableController@show')->name('session.show');
+Route::post('horario/imprimir/{id}', 'TimetableController@imprimir')->name('horario.print');
 
 Route::get('horarios/{id}/Ind', 'TimetableController@horario')->name('Ind');
 
@@ -105,6 +108,7 @@ Route::resource('items', 'ItemController');
 Route::resource('states', 'StateController');
 
 //RUTAS COURSEs Sergio Lopez
+Route::get('courses', 'CourseController@index');
 Route::get('courses/show/{item_id}', 'CourseController@showItem')->name('courses.showItem');
 Route::get('courses/show/{course_id}/{year_id}', 'CourseController@show')->name('courses.show');
 //filtro
@@ -112,7 +116,11 @@ Route::post('courses/show/filter/{course_id}/{year_id}', 'CourseController@filte
 Route::post('courses/show/filter/{user_id}/{course_id}/{year_id}', 'CourseController@responsabilizarItem')->name('courses.responsabilizarItem');
 //eliminar
 Route::delete('courses/show/{course_id}/{year_id}', 'CourseController@eliminarYearUnion')->name('courses.eliminarYearUnion');
-Route::resource('courses', 'CourseController');
+// Route::resource('courses', 'CourseController');
+//Imprimir
+Route::post('courses/show/imprimir/{course_id}/{year_id}', 'CourseController@imprimir')->name('courses.print');
+//Asignar
+Route::get('courses/asignarAsignaturas', 'CourseController@asignarAsignaturas')->name('courses.asignarAsignaturas');
 
 //RUTAS SUBJECTS JAVI
 //TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
@@ -137,6 +145,7 @@ Route::post('porcentajes/updatePorcentaje', 'PorcentajesController@update')->nam
 //INICIO Rutas de Temporalizacion de la programacion (Jesus)
 Route::get('/misProgramaciones','ProgramController@myPrograms')->name('myPrograms');
 Route::resource('units', 'UnitController');
+Route::get('programs/{program_id}/aspect/create', 'ProgramController@createAspecto')->name('programs.createAspecto');
 Route::get('programs/{program_id}/unit/create', 'UnitController@create')->name('units.create');
 Route::get('programs/{program_id}/unit/{id}/edit', 'UnitController@edit')->name('units.edit');
 Route::get('programs/{program_id}/unit/{id}/', 'UnitController@show')->name('units.show');
@@ -150,6 +159,9 @@ Route::patch('programs/{program_id}/aspecto/{id}','ProgramController@updateAspec
 Route::delete('programs/{program_id}/unit/{id}','ProgramController@destroyUnit')->name('programs.destroyUnit');
 Route::delete('programs/{program_id}/aspecto/{id}','ProgramController@destroyAspecto')->name('programs.destroyAspecto');
 Route::get('programs/{program_id}/aspecto/{id}/edit','ProgramController@editarAspecto')->name('programs.editarAspecto');
+Route::get('programs/{program_id}/PDF','ProgramController@downloadPDF')->name('programs.PDF');
+Route::get('programs/{program_id}/Excel','ProgramController@downloadExcel')->name('programs.Excel');
+
 
 // Route Messages (Sergio Falco)
 Route::resource('messages', 'MessageController')->middleware('auth');

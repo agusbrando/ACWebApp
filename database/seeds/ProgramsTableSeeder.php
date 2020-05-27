@@ -71,17 +71,17 @@ class ProgramsTableSeeder extends Seeder
        
 
     }
-    /**Abreviacion, nivel, Nombre Asignatura, Profesor id */
+    /**Abreviacion, nivel, Nombre Asignatura, Profesor id . Vincula una programacion a partir de un YearUnion con la asignatura y sus evaluaciones*/
     public function crearProgramacion($curso_abreviacion,$nivelCurso,$asignatura_nombre,$profesor_id){
         $curso = Course::where('abbreviation',$curso_abreviacion)->where('level',$nivelCurso)->first();
         
         $asignatura = Subject::where('name',$asignatura_nombre)->first();
-        DB::table('programs')->insert([
-            'name' => '('.($curso->level).($curso->abbreviation).') - '.$asignatura->name,
-            'professor_id' => $profesor_id,
+        // DB::table('programs')->insert([
+        //     'name' => '('.($curso->level).($curso->abbreviation).') - '.$asignatura->name,
+        //     'professor_id' => $profesor_id,
            
-        ]);
-        $evaluations = YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',1)->get();
-        $program = Program::all()->last()->yearUnions()->saveMany($evaluations);
+        // ]);
+        // $evaluations = YearUnion::where('subject_id',$asignatura->id)->where('course_id',$curso->id)->where('year_id',1)->get();
+        // $program = Program::all()->last()->yearUnions()->saveMany($evaluations);
     }
 }

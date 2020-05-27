@@ -2,19 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\Event;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 use function PHPSTORM_META\type;
 
 class CalendarController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
   /**
    * Display a listing of the resource.
    *
@@ -56,6 +73,12 @@ class CalendarController extends Controller
     $events = Event::all();
     //$events = Event::where('user_id', $user->id)->get();
     return view('/Calendario/list', compact('events', 'user'));
+  }
+
+  public function getTeacher(Request $request)
+  {
+    $teachers = User::all()->where('role_id', 3);
+    return view('/Calendario/teacher', compact('teachers', 'tipo', 'dia'));
   }
 
   public function index()
@@ -130,12 +153,6 @@ class CalendarController extends Controller
     return view('calendario.show', compact('event', 'edit'));
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function edit($id)
   {
     $event = Event::find($id);
@@ -143,6 +160,14 @@ class CalendarController extends Controller
     $descripcion = $event->description;
 
     return view("/Calendario/edit", compact('id', 'event', 'titulo', 'descripcion'));
+  }
+
+  public function destroy($id)
+  {
+    $event = Event::find($id);
+    $event->delete();
+
+    return redirect('/list')->with('Exito', '¡Evento borrado!');
   }
 
   /**
@@ -154,8 +179,6 @@ class CalendarController extends Controller
    */
   public function update(Request $request, $id)
   {
-
-
     $request->validate([
       'titulo'  =>  'required',
       'descripcion' => 'required'
@@ -163,7 +186,6 @@ class CalendarController extends Controller
     ]);
 
     $event = Event::find($id);
-
     $event->title = $request->get('titulo');
     $event->description = $request->get('descripcion');
     $event->save();
@@ -178,11 +200,5 @@ class CalendarController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
-  {
-    $event = Event::find($id);
-    $event->delete();
 
-    return redirect('/list')->with('Exito', '¡Evento borrado!');
-  }
 }
