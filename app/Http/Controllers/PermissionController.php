@@ -33,6 +33,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        $assignPermissions=null;
         $permissions = Permission::all()->load('roles');
         $roles = Role::all();
         foreach ($permissions as $permission) {
