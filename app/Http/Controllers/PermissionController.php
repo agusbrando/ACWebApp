@@ -32,19 +32,18 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $assignPermission = null;
+        $assignPermissions = [];
         $permissions = Permission::all()->load('roles');
         $roles = Role::all();
         foreach ($permissions as $permission) {
             foreach ($roles as $key => $role) {
                 if ($permission->roles != null) {
                     if (in_array($role->id, $permission->roles->pluck('id')->toArray())) {
-                        
                         $assignPermissions[$permission->id][$role->id] = true;
                     }
                 }
             }
-        }
+        }  
 
         $permissions = Permission::paginate(25);
         return view('permissions.index', compact('permissions', 'roles', 'assignPermissions'));

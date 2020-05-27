@@ -25,10 +25,11 @@
                         <input type="date" class="form-control" id="date_end" name="date_end">
                     </div>
 
-
+                    @if(in_array('Crear_timetable', Session::get('user_permissions')))
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary" value="Guardar Cambios">
                     </div>
+                    @endif
                 </form>
             </div>
             <div class="card-footer col-12">
