@@ -63,7 +63,11 @@
                                                 <div class="d-flex flex-row ">
                                                     <a class="btn btn-outline-primary mr-2" href="{{ route('subjects.show',$subject->id)}}">Ver</a>
                                                     <a class="btn btn-outline-primary mr-2" href="{{route('subjects.evaluations', $subject->id)}}">Evaluaciones</a>
+                                                    @if($yearUnionPrograms->where('subject_id',$subject->id)->first()->program == null)
+                                                    <a class="btn btn-outline-primary mr-2" href="{{route('programs.asignarProgramacion', array($yearId, $courseId, $subject->id))}}">Asignar Programacion</a>
+                                                    @else
                                                     <a href="/programs/{{$yearUnionPrograms->where('subject_id',$subject->id)->first()->program->id}}" class="btn btn-outline-primary">Programacion</a>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
