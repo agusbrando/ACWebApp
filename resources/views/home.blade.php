@@ -11,12 +11,11 @@
   </div>
   </br>
   @foreach($posts as $post)
-  @foreach($users as $user)
     <div class="card shadow">
       <div>
         <div>
           <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          <p style="font-weight: bold;">{{$post->user->first_name}} {{$post->user->last_name}}</p>
           <h4 style="text-align: center;">{{$post->title}}</h4>
         </div>
         <div>
@@ -44,7 +43,6 @@
       </div>
     </div>
     </br>
-  @endforeach
   @endforeach
 </main>
 @endsection
