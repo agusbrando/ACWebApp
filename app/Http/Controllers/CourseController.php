@@ -310,22 +310,23 @@ class CourseController extends Controller
     }
     public function asignarAsignaturas()
     {
-         
+         $i = 0;
          $courses = Course::all();
          $subjects = Subject::all();
          foreach($courses as $course){
              $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
-             $course->asignaturas = array();
+             $asignaturas = array();
              foreach($courseSubjects as $courseSubject){
                  foreach($subjects as $subject){
                      if($subject->id == $courseSubject->subject_id){
-                        $course->asignaturas = array_push($subject);
+                        $asignaturas[$i] = $subject;
+                        $i = $i+1;
                      }
                     
                  }
                 
              }
-            
+            $course->asignaturas = $asignaturas;
          }
 
 
