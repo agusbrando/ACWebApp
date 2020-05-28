@@ -1,0 +1,39 @@
+.homeIzquierda {
+    float: left;
+}
+
+.homeDerecha {
+    float: right;
+}
+
+.margin1 {
+    margin: 19px;
+    width: 100%;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+.centrado {
+    text-align: center;
+}
+
+.justificado {
+    text-align: justify;
+}
+
+.estiloTextarea {
+    width: 94%;
+    border: none;
+}
+
+.enviar {
+    width: 6%;
+    float: right;
+}
+
+.comentarios {
+    font-weight: bold;
+    float: left;
+}
