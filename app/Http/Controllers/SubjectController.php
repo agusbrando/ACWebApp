@@ -353,7 +353,12 @@ class SubjectController extends Controller
                                             $resultados[$task_type->name] = true;
                                         }
                                         if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
-                                            $user->boletin = $user->tareas[$task_type->name];
+                                            if($user->tareas[$task_type->name] < 5){
+                                                $user->boletin = floor($user->tareas[$task_type->name]);
+                                            }else{
+                                                $user->boletin = round($user->tareas[$task_type->name], 0);
+
+                                            }
                                             $recuperado = true;
                                             break;
                                         } else {
@@ -373,7 +378,11 @@ class SubjectController extends Controller
                                 if ($recuperado) {
                                     $user->nota_final = $sumaFinal;
                                 } else {
-                                    $user->boletin = $sumaFinal;
+                                    if($sumaFinal < 5){
+                                        $user->boletin = floor($sumaFinal);
+                                    }else{
+                                        $user->boletin = round($sumaFinal, 0);
+                                    }
                                     if ($sumaFinal < 4 && $sumaFinal != 0) {
                                         $user->boletin = 3;
                                     }
