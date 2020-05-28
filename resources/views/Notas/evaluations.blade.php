@@ -1,4 +1,10 @@
 @extends('base')
+<script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
 
 @section('main')
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
@@ -30,7 +36,7 @@
                             </button>
                         </div>
                         @endif
-                        <form  action="{{ url('porcentajes/updatePorcentaje') }}" method="post">
+                        <form action="{{ url('porcentajes/updatePorcentaje') }}" method="post">
                             @csrf
                             @foreach($yearUnions as $yearUnion)
                             <table class="table col-12">
@@ -38,8 +44,8 @@
                                     <tr>
                                         <th>{{$yearUnion->evaluation->name}}</th>
                                         <th>Porcentaje%</th>
-                                        <th>Nota Minima Tarea</th>
-                                        <th>Nota Media Tarea</th>
+                                        <th data-toggle="tooltip" data-placement="top" title="La nota minima que un alumno debe obtener para que este aprobada esa tarea">Nota Minima</th>
+                                        <th>Nota Media</th>
                                         <th>Nota Media Minima</th>
                                     </tr>
                                 </thead>
@@ -91,7 +97,10 @@
                                     @endif
                                     @endforeach
                                     <td>{{$user->nota_final}}</td>
-                                    <td>{{$user->nota_final}}</td>
+                                    @if($user->boletin < 5) <td class="text-danger">{{$user->boletin}}</td>
+                                        @else
+                                        <td>{{$user->boletin}}</td>
+                                        @endif
                                 </tr>
                                 @endforeach
                             </tbody>

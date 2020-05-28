@@ -7,9 +7,13 @@
     <div class="card-header bg-dark text-light row m-0 justify-content-between">
       <h3 class="mt-1">Reserva de aulas</h3>
       <div>
+      @if(in_array('Crear_event', Session::get('user_permissions')))
         <a type="button" href="/types" class="btn btn-outline-light mt-1">Añadir Tipo</a>
         <a type="button" href="/sessions" class="btn btn-outline-light mt-1 ml-1">Añadir Hora</a>
+      @endif
+      @if(in_array('Listar_event', Session::get('user_permissions')))
         <a type="button" href="/list" class="btn btn-outline-light mt-1 ml-1">Listado</a>
+      @endif
       </div>
     </div>
     <div class="card-body row no-gutters">
@@ -30,11 +34,13 @@
         </div>
         <br>
         <div id="buttons">
+        @if(in_array('Leer_event', Session::get('user_permissions')))
           @foreach($types as $type)
             @if($type->id == 1 || ($type->id == 2 && $user->role_id != 4))
               <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block" />
             @endif
           @endforeach
+        @endif
         </div>
         <br>
         </form>

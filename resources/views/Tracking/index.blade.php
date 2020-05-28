@@ -10,9 +10,9 @@
         <div class="card-header row m-0 justify-content-between">
             <h3>Firmas de docente</h3>
             <div>
+            @if(in_array('Crear_trackings', Session::get('user_permissions')))
                 <a href="{{ route('seguimiento.create')}}" class="btn btn-outline-primary"> Añadir firma diaria </a>
-
-
+            @endif
             </div>
         </div>
         <div class="card-body row no-gutters">
@@ -23,24 +23,56 @@
                     <form method="get" action="{{ route('seguimiento.filtrar') }}">
 
                         @csrf
+                        <div class="form-group w-100">
+                            <label for="formControlSelect1"></label>
+                            <div class="card-deck ">
+                                <div class="card text-white w-25 bg-info mb-2" style="max-width: 18rem;">
+                                    <div class="card-header w-100 bg-dark">Filtrar por fecha única o inicial::</div>
+                                    <div class="card-body w-100 cabezeraTabla">
+                                        <div>
+                                            <h5 class="card-title"></h5>
+                                            <input type="date" class="rounded form-control" name="fecha">
+                                        </div>
 
-                        <table class="tabla w-100">
+                                    </div>
+                                </div>
+                                <div class="card text-white w-25 bg-info mb-2" style="max-width: 18rem;">
+                                    <div class="card-header w-100 bg-dark">Filtrar por mes:</div>
+                                    <div class="card-body w-100 cabezeraTabla">
+                                        <div>
+                                            <h5 class="card-title"></h5>
+                                            <input type="date" class="rounded form-control" name="fecha_fin">
+                                        </div>
 
-                            <tr>
-                                <td class="class20">Filtrar por fecha inicial:</td>
-                                <td class="class20">Filtrar por fecha final:</td>
-                                <td class="class20">Filtrar por mes:</td>
-                                <td class="class20">Filtrar por año:</td>
-                                <td class="class20"></td>
-                            </tr>
-                            <tr>
-                                <td class="class20"><input type="date" class="rounded class20" name="fecha"></td>
-                                <td class="class20"><input type="date" class="rounded class20" name="fecha_fin"></td>
-                                <td class="class20"><input type="month" class="rounded class20" name="mes"></td>
-                                <td class="class20"><input class="quantity rounded class20" type="number" name="anyo"></td>
-                                <td class="class20"><input type="submit" class="btn btn-success boton class20" value="Filtrar"></td>
-                            </tr>
-                        </table>
+                                    </div>
+                                </div>
+                                <div class="card text-white w-25 bg-info mb-2" style="max-width: 18rem;">
+                                    <div class="card-header w-100 bg-dark">Filtrar por mes:</div>
+                                    <div class="card-body w-100 cabezeraTabla">
+                                        <div>
+                                            <h5 class="card-title"></h5>
+                                            <input type="month" class="rounded form-control" name="mes">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card text-white w-25 bg-info mb-2" style="max-width: 18rem;">
+                                    <div class="card-header w-100 bg-dark">Filtrar por año:</div>
+                                    <div class="card-body w-100 cabezeraTabla">
+                                        <div>
+                                            <h5 class="card-title"></h5>
+                                            <input class="quantity rounded form-control" type="number" name="anyo">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div><input type="submit" class="btn btn-success boton class20" value="Filtrar"></div>
+                            </div>
+
+                        </div>
+
+
+
 
                     </form>
 
@@ -60,11 +92,11 @@
                     <form class="float-right" action="{{ route('seguimiento.print')}}" method="POST">
                         @csrf
                         @method('POST')
-                        
+
                         <tbody>
 
                             @foreach($trackings as $tracking)
-                            
+
                             <input type="hidden" value={{$tracking}} name="trackings[]">
 
                             <tr>
@@ -81,7 +113,9 @@
                         </tbody>
                         @if($count == 0)
                         <tbody>
-                            <tr><td colspan="5" class="center">No hay tracking, añade uno para mostrarlo</td></tr>
+                            <tr>
+                                <td colspan="5" class="center">No hay tracking, añade uno para mostrarlo</td>
+                            </tr>
                         </tbody>
                         @endif
                         <thead class="cabezeraTabla">
@@ -103,8 +137,8 @@
 
 
 
-
-            <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar PDF</button>
+        @if(in_array('Listar_trackings', Session::get('user_permissions')))
+            <button type="submit" class="btn btn-outline-danger ml-1 float-right">Descargar PDF <i class="fas fa-file-pdf"></i></button>
             </form>
             <form class="float-right" action="{{ route('seguimiento.excel')}}" method="POST">
                 @csrf
@@ -115,10 +149,11 @@
                 <input type="hidden" value={{$tracking}} name="trackings[]">
                 @endforeach
 
-                <button type="submit" class="btn btn-outline-success ml-1 float-right"> Descargar Excel </button>
+                <button type="submit" class="btn btn-outline-success ml-1 float-right">Descargar excel <i class="fas fa-file-excel"></i></button>
             </form>
 
             <input type="hidden" value={{$trackings}}>
+            @endif
         </div>
 
 

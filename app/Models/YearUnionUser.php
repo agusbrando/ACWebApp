@@ -44,6 +44,6 @@ class YearUnionUser extends Pivot
     }
 
     public function tasks(){
-        return $this->belongsToMany(Task::class,'califications', 'task_id', 'year_user_id')->withPivot('value')->withTimestamps();
+        return $this->belongsToMany(Task::class,'califications', 'year_user_id', 'task_id')->withPivot('value')->withTimestamps();
     }
 }

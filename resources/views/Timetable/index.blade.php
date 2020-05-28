@@ -5,17 +5,18 @@
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-<link href="{{ asset('css/timetable.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/timetable.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow ">
         <div class="card-header row m-0 justify-content-between">
             <h3>Horarios</h3>
             <div>
+                @if(in_array('Crear_timetable', Session::get('user_permissions')))
                 <form action="{{ route('horarios.create')}}" method="get">
                     @csrf
 
                     <button class="btn btn-outline-primary" type="submit">Añadir Horario</button>
                 </form>
-
+                @endif
 
             </div>
         </div>
@@ -31,8 +32,10 @@
                                 <td>Nombre</td>
                                 <td>Fecha Inicio</td>
                                 <td>Fecha Fin</td>
-                                
+                                @if(in_array('Listar_timetable', Session::get('user_permissions')))
+
                                 <td>Ver</td>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -42,14 +45,17 @@
                                 <td>{{$timetable->name}}</td>
                                 <td>{{$timetable->date_start}}</td>
                                 <td>{{$timetable->date_end}}</td>
-                                
+
                                 <td>
+                                    @if(in_array('Listar_timetable', Session::get('user_permissions')))
                                     <form action="{{ route('Ind', $timetable->id)}}" method="get">
                                         @csrf
 
-                                        <button class="btn btn-warning" type="submit">Ver</button>
+                                        <button class="btn btn-outline-info" type="submit"><i class="far fa-eye"></i></button>
                                     </form>
+                                    @endif
                                 </td>
+
                             </tr>
 
                             @endforeach
@@ -65,10 +71,10 @@
 
 
 
-            
-            
 
-            
+
+
+
         </div>
     </div>
 

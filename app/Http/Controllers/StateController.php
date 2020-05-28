@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\Auth;
 
 class StateController extends Controller
 {
@@ -14,6 +14,23 @@ class StateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         $states = State::paginate(10);
@@ -51,7 +68,7 @@ class StateController extends Controller
     }
 
     /**
-     * Display the specified resource.  
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -73,7 +90,7 @@ class StateController extends Controller
      */
     public function edit($id)
     {
-        $state = State::find($id);       
+        $state = State::find($id);
         return view('states.edit', compact('state'));
     }
 
@@ -89,10 +106,10 @@ class StateController extends Controller
 
         $request->validate([
             'name' => 'required',
-            
+
         ]);
         $state = State::find($id);
-        $state->name = $request->get('name');      
+        $state->name = $request->get('name');
 
 
         $state->save();

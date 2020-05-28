@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 
 use App\Models\Classroom;
 use App\Models\Course;
+use App\Models\CourseSubject;
 use App\Models\Type;
 use App\Models\State;
 use App\Models\Item;
@@ -19,9 +19,27 @@ use App\Models\ItemYear;
 use App\Models\Subject;
 use App\Models\YearUnion;
 use App\Models\YearUnionUser;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     /**
      * Esta es la vista principal donde se listarán todos los cursos.
      *
@@ -36,6 +54,7 @@ class CourseController extends Controller
             //Guardo los diferentes yearUnion en cada año
             $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')
                 ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
+
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
         //en este caso, le redirijo a la vista index y le paso los años con los cursos
@@ -115,9 +134,8 @@ class CourseController extends Controller
 
         $course = Course::find($courseId);
         $yearUnionsPrueba = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
-
-        $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
         $yearUnionPrograms = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('evaluation_id',1)->get();
+        $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
         $subject_ids = array();
         foreach ($yearUnions as $yearUnion) {
             if (!in_array($yearUnion->subject_id, $subject_ids)) {
@@ -145,7 +163,7 @@ class CourseController extends Controller
 
         $itemYear = ItemYear::select('item_id')->get()->toArray();
         $items = Item::where('classroom_id', $yearUnionsPrueba->first()->classroom->id)->whereNotIn('id', $itemYear)->get();
-        
+
 
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
@@ -153,59 +171,6 @@ class CourseController extends Controller
         return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId', 'yearUnionsPrueba','yearUnionPrograms'));
     }
 
-    /**
-     * Aqui filtramos las evaluaciones dependiendo del aula
-     *
-     * @param  Request request
-     * @return \Illuminate\Http\Response
-     */
-    public function filter(Request $request, $courseId, $yearId)
-    {
-
-
-        //Definimos que obtendrá objetos de la tabla items
-        $query = DB::table('items');
-
-        //cogemos los valores de los selects
-        $idClass = $request->get('idClass');
-
-        //Controlamos que si no llega null haga una consulta obteniendo los item
-        //que tenga dicho id del aula.
-        //Los resultados de cada consulta se va concatenando en $query
-        if ($idClass != "") {
-            $query = $query->where('classroom_id', $idClass);
-
-            $items = $query->get();
-        } else {
-            $items = Item::all();
-        }
-        //Finalmente obtenemos todos los items que han pasado los filtros
-        $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
-        foreach ($yearUnions as $yearUnion) {
-            $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance', 1)->get()->load('items', 'user');
-            $registrados = array();
-            foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
-
-                //Aseguramos que no se repitan los usuarios
-                if (!in_array($yearUnionUser->user_id, $registrados)) {
-                    array_push($registrados, $yearUnionUser->user_id);
-                    $yearUnionUser->items = $yearUnionUser->items;
-                    $yearUnionUser->user = $yearUnionUser->user;
-                } else {
-                    $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
-                }
-            }
-        }
-
-        //Filtro para coger solo los typos del modelo Item
-        $types = Type::all()->where('model', Item::class);
-        $classrooms = Classroom::all();
-        $states = State::all();
-        $courseId = $courseId;
-        $yearId = $yearId;
-
-        return view('courses.filter', compact('classrooms', 'items', 'types', 'states', 'yearUnions', 'courseId', 'yearId', 'idClass'));
-    }
 
     /**
      * Aqui pasamos dos atributos y cargamos un curso en la vista de editar.
@@ -314,43 +279,57 @@ class CourseController extends Controller
 
         //Cojo los items con los ids del array
         $itemsUser = Item::whereIn('id', $itemIds)->get();
-       
+
         foreach ($yearUnions as $yearUnion) {
             foreach ($itemsUser as $item) {
                 //compruebo que el alumno sea presencial
                 if ($yearUnion->pivot->assistance) {
                     //si es presencial le asigno el Item
-                   $yearUnion->pivot->items()->attach($item->id);
-                    
+                    $yearUnion->pivot->items()->attach($item->id);
                 }
             }
         }
 
-
-
-        // $yearUnions = YearUnion::select('id', 'evaluation_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation');
-        // foreach ($yearUnions as $yearUnion) {
-        //     $yearUnion->yearUnionUsers = YearUnionUser::where('year_union_id', $yearUnion->id)->where('assistance', 1)->get()->load('items', 'user');
-        //     $registrados = array();
-        //     foreach ($yearUnion->yearUnionUsers as $yearUnionUser) {
-
-        //         //Aseguramos que no se repitan los usuarios
-        //         if (!in_array($yearUnionUser->user_id, $registrados)) {
-        //             array_push($registrados, $yearUnionUser->user_id);
-        //             $yearUnionUser->items = $yearUnionUser->items;
-        //             $yearUnionUser->user = $yearUnionUser->user;
-        //         } else {
-        //             $yearUnion->yearUnionUsers->pull($yearUnionUser->id);
-        //         }
-        //     }
-        // }
-
-        // $types = Type::all()->where('model', Item::class);
-        // $classrooms = Classroom::all();
-        // $states = State::all();
         $courseId = $courseId;
         $yearId = $yearId;
 
-        return redirect('courses/show/'.$courseId.'/'.$yearId);
+        return redirect('courses/show/' . $courseId . '/' . $yearId);
+    }
+    public function imprimir($courseId, $yearId)
+    {
+
+        $course = Course::find($courseId);
+        //Cojo las evaluaciones
+        $yearUnions = YearUnion::where('course_id', $courseId )->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
+
+
+        $pdf = \PDF::loadView('courses.pdf', compact('yearUnions'))->setPaper('a4', 'landscape');
+        return $pdf->download('courses.pdf');
+
+
+    }
+    public function asignarAsignaturas()
+    {
+         $i = 0;
+         $courses = Course::all();
+         $subjects = Subject::all();
+         foreach($courses as $course){
+             $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
+             $asignaturas = array();
+             foreach($courseSubjects as $courseSubject){
+                 foreach($subjects as $subject){
+                     if($subject->id == $courseSubject->subject_id){
+                        $asignaturas[$i] = $subject;
+                        $i = $i+1;
+                     }
+                    
+                 }
+                
+             }
+            $course->asignaturas = $asignaturas;
+         }
+
+
+        return view('courses.asignarAsignaturas', compact('courses'));
     }
 }

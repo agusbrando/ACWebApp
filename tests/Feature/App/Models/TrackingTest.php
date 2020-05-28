@@ -18,6 +18,8 @@ class TrackingTest extends TestCase
         $role=Role::create([
             
             'name'=>'Prueba',
+            'slug'=> 'prueba test',
+            'description' => 'Alumno Role',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -35,18 +37,22 @@ class TrackingTest extends TestCase
             'last_name'=>'Apellidos Prueba',
             'email' => 'preuba.prueba@campusaula.com',
             'password' => bcrypt('password'),
+            'signature'=>'',
             'created_at' => now(),
             'updated_at' => now(),
-            'rol_id' =>$role->id,
+            'role_id' =>$role->id,
             'timetable_id'=>$timetable->id,
         ]);
     
         $tracking=Tracking::create([
             'signature'=>'',
-            'user_id' => $user->id,
-            'datetime_start' =>  now(),
-            'datetime_end' => now(),
-            'num_hours'=>'4',
+                'user_id' => $user->id,
+                'date_signature'=>  now(),
+                'time_start'=>'8:30',
+                'time_end'=>'14:30',
+                'num_hours'=>'3',
+                'created_at' => now(),
+                'updated_at' => now(),
         ]);
         $this->assertEquals($tracking->user_id,$user->id);
         $tracking->delete();

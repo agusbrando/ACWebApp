@@ -16,6 +16,7 @@ class Attachment extends Model
     protected $fillable = [
         'id',
         'name',
+        'extension',
         'attachmentable_id',
         'attachmentable_type'
     ];

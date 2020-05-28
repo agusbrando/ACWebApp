@@ -19,6 +19,8 @@ class TimetableTest extends TestCase
     {
         $role = Role::create([
             'name' => 'Profesor',
+            'slug'=> 'prueba test',
+            'description' => 'Alumno Role',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -34,6 +36,7 @@ class TimetableTest extends TestCase
             'last_name' => 'Apellido Apellido',
             'email' => 'profesor.apellido1@campusaula.com',
             'password' => bcrypt('password'),
+            'signature'=>'',
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => $role->id,
@@ -44,6 +47,7 @@ class TimetableTest extends TestCase
             'last_name' => 'Apellido Apellido',
             'email' => 'profesor.apellido2@campusaula.com',
             'password' => bcrypt('password'),
+            'signature'=>'',
             'created_at' => now(),
             'updated_at' => now(),
             'role_id' => $role->id,

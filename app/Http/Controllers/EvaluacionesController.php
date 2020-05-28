@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Calification;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\DB;
 //TODO JAVI review delete
 class EvaluacionesController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if($user != null){
+            $notifications = $user->unreadNotifications;
+            $countNotifications = $user->unreadNotifications->count();
+        }else{
+            $notifications = [];
+            $countNotifications = 0;
+        }
+
+        $request->session()->put('notifications', $notifications);
+        $request->session()->put('countNotifications', $countNotifications);
+
+    }
+
     public function index()
     {
         $users = DB::table('users')->where('role_id', '=', 4)->get();
@@ -51,7 +68,7 @@ class EvaluacionesController extends Controller
      */
     public function show()
     {
-        
+
     }
 
     /**
