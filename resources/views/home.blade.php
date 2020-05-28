@@ -44,12 +44,12 @@
         <div>
           @foreach($comments as $comment)
             <img style="float: left;" src="{{asset('img/usuarioDinantia.png')}}" alt="" width="35" height="35">
-            <div style="background-color: #E8EBF3;">
+            <div class="card-header row m-0 justify-content-between">
               <div>
                 <p style="font-weight: bold;">{{$comment->user->first_name}} {{$comment->user->last_name}}</p>
-                <p style="float: right;">{{$comment->created_at}}</p>
+                <p>{{$comment->text}}</p>
               </div>
-              <p>{{$comment->text}}</p>
+              <p style="float: right;">{{$comment->created_at}}</p>
             </div>
           @endforeach
         </div>
