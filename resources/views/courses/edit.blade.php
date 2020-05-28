@@ -14,7 +14,7 @@
                     @method('GET')
                     <a href="{{ url()->previous() }}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
 
-                    <h3>Crear Curso</h3>
+                    <h3>Editar Curso</h3>
                 </div>
             </form>
         </div>
@@ -74,9 +74,7 @@
                             <select class="form-control" id="responsable_id" name="responsable_id">
                                 <option disabled selected>Selecciona un responsable</option>
                                 <!--Hace la funcion de un placeholder-->
-                                @foreach($users as $user)
-                                <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</option>
-                                @endforeach
+                               
                                 
                             </select>
                         </div>
