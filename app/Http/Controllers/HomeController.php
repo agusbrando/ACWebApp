@@ -60,6 +60,6 @@ class HomeController extends Controller
             $post->comments=$post->comments;
         }
 
-    return view('home', compact('posts', 'post'));
+    return view('home', compact('posts'));
     }
 }
