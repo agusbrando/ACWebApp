@@ -43,10 +43,10 @@
                                     <tr>
                                         <th>{{$yearUnion->evaluation->name}}</th>
                                         <th data-toggle="tooltip" data-placement="bottom" title="El porcentaje del total que se le va asignar a un tipo de tareas. *La suma de los porcentajes no puede superar el 100%*">Porcentaje%</th>
-                                        <th data-toggle="tooltip" data-placement="bottom" title="La nota minima que un alumno debe obtener para que este aprobada esa tarea">
+                                        <th data-toggle="tooltip" data-placement="bottom" title="La nota a la que debe llegar el alumno en cada tarea">
                                             Nota Minima
                                         </th>
-                                        <th data-toggle="tooltip" data-placement="bottom" title="La nota media que un alumno debe obtener en un tipo de tareas concreto">
+                                        <th data-toggle="tooltip" data-placement="bottom" title="La nota a la que debe llegar el alumno en la media de sus tareas">
                                             Nota Media
                                         </th>
                                         <th data-toggle="tooltip" data-placement="bottom" title="La nota media minima que un alumno debe obtener para poder aprobar">Nota Media Minima</th>
@@ -100,7 +100,7 @@
                                     @endif
                                     @endforeach
                                     <td>{{$user->nota_final}}</td>
-                                    @if($user->boletin < 5) 
+                                    @if($user->boletin < 5 && $user->boletin != null) 
                                     <td class="bg-secondary text-white">{{$user->boletin}}</td>
                                     @else
                                     <td>{{$user->boletin}}</td>

@@ -6,7 +6,7 @@
 
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
-            <h3>Crear Tarea</h3>
+            <h3>Crear Tarea {{$yearUnion->evaluation->name}}</h3>
             <div class="d-flex flex-row">
                 <form action="{{ route('subject.desglose')}}" method="post">
                     @csrf

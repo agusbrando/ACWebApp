@@ -64,6 +64,7 @@ class SubjectController extends Controller
             $eval = Evaluation::find($request->session()->get('evaluation'));
             $evaluation = YearUnion::where('subject_id', $subject->id)->where('year_id', $year->id)->where('course_id', $course->id)->where('evaluation_id', $eval->id)->first()->load('evaluation');
             $taskTypes = $evaluation->types;
+            $request->session()->forget('evaluation');
         } else {
             $request->validate([
                 'subject' => 'required',
