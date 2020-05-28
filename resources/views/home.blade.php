@@ -39,6 +39,9 @@
         <div>
           <textarea style="width: 94%; border: none;">Añadir un comentario</textarea>
           <a style="width: 6%; float: right;" href="#" class="btn btn-danger">Enviar</a>
+        </div>
+        </br>
+        <div>
           @foreach($comments as $comment)
             <p style="background-color: #E8EBF3;">{{$comment->text}}</p>
           @endforeach
