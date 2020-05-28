@@ -182,8 +182,13 @@ class CourseController extends Controller
     public function edit($courseId, $yearId)
     {
         $yearUnionUsers = User::all()->join('yearUnionUsers', 'user_id', '=', 'yearUnionUsers.user_id');
-
-        return view('courses.edit', compact('yearUnionUsers'));
+        $subjects = Subject::all();
+        $classrooms = Classroom::all();
+        $courses = Course::all();
+        $evaluations = Evaluation::all();
+        $years = Year::all();
+        
+        return view('courses.edit', compact('yearUnionUsers','subjects','classrooms','courses','evaluations','years'));
     }
 
     /**
