@@ -28,6 +28,9 @@
       <div class="card-body row no-gutters">
         <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">{{$post->text}}</p>
       </div>
+      <div class="card-body row no-gutters">
+        <p style="text-align: justify; display: block; margin-left: auto; margin-right: auto; width: 50%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
       </hr>
       <div class="card-footer col-12">
         <div>
