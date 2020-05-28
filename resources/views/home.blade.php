@@ -43,7 +43,7 @@
         </br>
         <div>
           @foreach($comments as $comment)
-            <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
+            <img style="float: left;" src="{{asset('img/usuarioDinantia.png')}}" alt="" width="35" height="35">
             <div style="background-color: #E8EBF3;">
               <div>
                 <p style="font-weight: bold;">{{$post->user->first_name}} {{$post->user->last_name}}</p>
