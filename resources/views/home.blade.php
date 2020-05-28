@@ -49,10 +49,16 @@
             <img style="float: left;" src="{{asset('img/usuarioDinantia.png')}}" alt="" width="35" height="35">
             <div class="card-header row m-0 justify-content-between">
               <div>
-                <p style="font-weight: bold;">{{$comment->user->first_name}} {{$comment->user->last_name}}</p>
-                <p>{{$comment->text}}</p>
+                <div>
+                  <p style="font-weight: bold; float: left;">{{$comment->user->first_name}} {{$comment->user->last_name}}</p>
+                  <p style="float: right;">{{$comment->created_at}}</p>
+                </div>
+                </br>
+                <div>
+                  <p>{{$comment->text}}</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
               </div>
-              <p style="float: right;">{{$comment->created_at}}</p>
             </div>
             </br>
           @endforeach
