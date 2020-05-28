@@ -176,7 +176,7 @@ class PorcentajesController extends Controller
                 }
             }
 
-            //TODO Como hacer return a las evaluaciones
+            
             return redirect('/subjects/evaluations/' . $request->get('subject'));
         } else if ($comprobacionPorcentajes == 1) {
             return redirect('/subjects/evaluations/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 1');

@@ -208,7 +208,7 @@ class DesgloseController extends Controller
         return redirect()->route('subjects.desglose', $request);
     }
 
-    //TODO pasar a taskController
+    
     public function eliminar($id)
     {
         

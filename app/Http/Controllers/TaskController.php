@@ -68,7 +68,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
 
-        //TODO JAVI hacer funcional store tareas
+        
         $request->validate([
             'name' => 'required',
             'type' => 'required',
@@ -167,7 +167,7 @@ class TaskController extends Controller
         }
         $task->delete();
 
-        //TODO hacer redirect bien
+        
         return redirect()->route('tasks.eliminar', $evaluacion->id);
     }
 }

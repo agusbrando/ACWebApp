@@ -299,7 +299,7 @@ class SubjectController extends Controller
     public function evaluations(Request $request, $subject_id)
     {
 
-        //TODO que no cuente examenes sin nota
+        
         $request->session()->put('subject_id', $subject_id);
         if ($request->session()->has('course_id') && $request->session()->has('year_id')) {
             $course_id = $request->session()->get('course_id');
