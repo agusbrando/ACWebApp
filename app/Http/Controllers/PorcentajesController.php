@@ -176,14 +176,14 @@ class PorcentajesController extends Controller
                 }
             }
 
-            //TODO Como hacer return a las evaluaciones
-            return redirect('subjects/evaluations/' . $request->get('subject'));
+            
+            return redirect('/subjects/evaluations/' . $request->get('subject'));
         } else if ($comprobacionPorcentajes == 1) {
-            return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 1');
+            return redirect('/subjects/evaluations/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 1');
         } else if ($comprobacionPorcentajes == 2) {
-            return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 2');
+            return redirect('/subjects/evaluations/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 2');
         } else if ($comprobacionPorcentajes == 3) {
-            return redirect('asignaturas/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 3');
+            return redirect('/subjects/evaluations/' . $request->get('subject'))->with('error', 'Los porcentajes han superado el 100% de la Evaluacion 3');
         }
     }
 
@@ -199,9 +199,9 @@ class PorcentajesController extends Controller
                 if ($type->name == "Recuperacion") {
                     break;
                 }
-                if ($type->name == "Recuperacion" && $eval_id == 1) {
+                if ($type->name != "Recuperacion" && $eval_id == 1) {
                     $sumaEval1 += $values['percentage'];
-                } else if ($type->name == "Recuperacion" && $eval_id == 2) {
+                } else if ($type->name != "Recuperacion" && $eval_id == 2) {
                     $sumaEval2 += $values['percentage'];
                 } else {
                     $sumaEval3 += $values['percentage'];

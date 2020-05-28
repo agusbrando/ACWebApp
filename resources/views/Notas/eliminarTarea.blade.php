@@ -14,6 +14,14 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <h3>Eliminar Tareas {{$eval->name}}</h3>
+            <form action="{{ route('subject.desglose')}}" method="post">
+                @csrf
+                <input type="hidden" name="subject" value={{$evaluacion->subject_id}}>
+                <input type="hidden" name="year" value={{$evaluacion->year_id}}>
+                <input type="hidden" name="course" value={{$evaluacion->course_id}}>
+                <input type="hidden" name="evaluation" value={{$evaluacion->id}}>
+                <button type="submit" class="btn btn-outline-warning float-right mr-1">Cancelar</button>
+            </form>
         </div>
         <div class="card-body row no-gutters">
             <div class="table-responsive">
@@ -38,10 +46,6 @@
                 </table>
             </div>
         </div>
-        <div class=" card-footer col-12">
-            <a class="btn btn-outline-warning float-right" href="#" aria-disabled="true">Cancelar</a>
-        </div>
-        </form>
     </div>
 </main>
 

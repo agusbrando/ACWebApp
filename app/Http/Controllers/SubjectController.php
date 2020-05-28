@@ -64,6 +64,7 @@ class SubjectController extends Controller
             $eval = Evaluation::find($request->session()->get('evaluation'));
             $evaluation = YearUnion::where('subject_id', $subject->id)->where('year_id', $year->id)->where('course_id', $course->id)->where('evaluation_id', $eval->id)->first()->load('evaluation');
             $taskTypes = $evaluation->types;
+            $request->session()->forget('evaluation');
         } else {
             $request->validate([
                 'subject' => 'required',
@@ -299,7 +300,7 @@ class SubjectController extends Controller
     public function evaluations(Request $request, $subject_id)
     {
 
-        //TODO que no cuente examenes sin nota
+        
         $request->session()->put('subject_id', $subject_id);
         if ($request->session()->has('course_id') && $request->session()->has('year_id')) {
             $course_id = $request->session()->get('course_id');
@@ -353,7 +354,12 @@ class SubjectController extends Controller
                                             $resultados[$task_type->name] = true;
                                         }
                                         if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
-                                            $user->boletin = $user->tareas[$task_type->name];
+                                            if($user->tareas[$task_type->name] < 5){
+                                                $user->boletin = floor($user->tareas[$task_type->name]);
+                                            }else{
+                                                $user->boletin = round($user->tareas[$task_type->name], 0);
+
+                                            }
                                             $recuperado = true;
                                             break;
                                         } else {
@@ -373,9 +379,10 @@ class SubjectController extends Controller
                                 if ($recuperado) {
                                     $user->nota_final = $sumaFinal;
                                 } else {
-                                    $user->boletin = $sumaFinal;
-                                    if ($sumaFinal < 4 && $sumaFinal != 0) {
-                                        $user->boletin = 3;
+                                    if($sumaFinal < 5){
+                                        $user->boletin = floor($sumaFinal);
+                                    }else{
+                                        $user->boletin = round($sumaFinal, 0);
                                     }
                                 }
                             }
