@@ -25,17 +25,16 @@ class SubjectController extends Controller
     public function __construct(Request $request)
     {
         $user = Auth::user();
-        if($user != null){
+        if ($user != null) {
             $notifications = $user->unreadNotifications;
             $countNotifications = $user->unreadNotifications->count();
-        }else{
+        } else {
             $notifications = [];
             $countNotifications = 0;
         }
 
         $request->session()->put('notifications', $notifications);
         $request->session()->put('countNotifications', $countNotifications);
-
     }
 
     public function index()
@@ -334,44 +333,50 @@ class SubjectController extends Controller
                         $resultados[$task_type->name] = false;
                         $user->suspendido = $resultados;
                         $sinNota = false;
+                        $cont = 0;
                         if (count($tasks) > 0) {
                             foreach ($tasks as $task) {
+                                $cont++;
+                                if ($task->pivot->value == null) {
+                                    $cont -= 1;
+                                }
                                 $suma += $task->pivot->value;
                             }
-                            $suma = $suma / (count($tasks));
-
-                            foreach ($yearUnion->percentages as $percentage) {
-                                if ($percentage->id == $task_type->id) {
-                                    $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
-                                    $user->tareas = $tareas;
-                                    $notaMinTarea = round(($percentage->pivot->min_grade_task * $percentage->pivot->percentage) / 100, 2);
-                                    if ($tareas[$task_type->name] < $notaMinTarea && $tareas[$task_type->name] != 0) {
-                                        $resultados[$task_type->name] = true;
+                            if ($cont != 0) {
+                                $suma = $suma / $cont;
+                                foreach ($yearUnion->percentages as $percentage) {
+                                    if ($percentage->id == $task_type->id) {
+                                        $tareas[$task_type->name] = round(($suma * $percentage->pivot->percentage) / 100, 2);
+                                        $user->tareas = $tareas;
+                                        $notaMinTarea = round(($percentage->pivot->min_grade_task * $percentage->pivot->percentage) / 100, 2);
+                                        if ($tareas[$task_type->name] < $notaMinTarea && $tareas[$task_type->name] != 0) {
+                                            $resultados[$task_type->name] = true;
+                                        }
+                                        if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
+                                            $user->boletin = $user->tareas[$task_type->name];
+                                            $recuperado = true;
+                                            break;
+                                        } else {
+                                            $sumaFinal += $tareas[$task_type->name];
+                                        }
                                     }
-                                    if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
-                                        $user->boletin = $user->tareas[$task_type->name];
-                                        $recuperado = true;
+                                }
+                                $user->suspendido = $resultados;
+                                foreach ($user->suspendido as $suspendido) {
+                                    if ($suspendido == false && $recuperado != true) {
+                                        $user->nota_final = $sumaFinal;
+                                    } else if ($suspendido == true && $recuperado != true) {
+                                        $user->nota_final = "No llega nota media minima " . $sumaFinal;
                                         break;
-                                    } else {
-                                        $sumaFinal += $tareas[$task_type->name];
                                     }
                                 }
-                            }
-                            $user->suspendido = $resultados;
-                            foreach ($user->suspendido as $suspendido) {
-                                if ($suspendido == false && $recuperado != true) {
+                                if ($recuperado) {
                                     $user->nota_final = $sumaFinal;
-                                } else if ($suspendido == true && $recuperado != true) {
-                                    $user->nota_final = "No llega nota media minima " . $sumaFinal;
-                                    break;
-                                }
-                            }
-                            if ($recuperado) {
-                                $user->nota_final = $sumaFinal;
-                            } else {
-                                $user->boletin = $sumaFinal;
-                                if ($sumaFinal < 4 && $sumaFinal != 0) {
-                                    $user->boletin = 3;
+                                } else {
+                                    $user->boletin = $sumaFinal;
+                                    if ($sumaFinal < 4 && $sumaFinal != 0) {
+                                        $user->boletin = 3;
+                                    }
                                 }
                             }
                         }
