@@ -17,6 +17,11 @@
                     <h3>Editar Curso</h3>
                 </div>
             </form>
+            <div class="form-group">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+                <form method="post" action="{{ route('courses.store') }}">
+                    <button type="submit" class="btn btn-outline-success">Editar</button>
+            </div>
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
@@ -33,7 +38,7 @@
                                 @foreach($subjects as $subject)
                                 <option value="{{$subject->id}}">{{$subject->name}}</option>
                                 @endforeach
-                                
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -44,7 +49,7 @@
                                 @foreach($courses as $course)
                                 <option value="{{$course->id}}">{{$course->level}}º {{$course->name}}</option>
                                 @endforeach
-                                
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -55,7 +60,7 @@
                                 @foreach($evaluations as $evaluation)
                                 <option value="{{$evaluation->id}}">{{$evaluation->name}}</option>
                                 @endforeach
-                                
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -66,7 +71,7 @@
                                 @foreach($years as $year)
                                 <option value="{{$year->id}}">{{$year->name}}</option>
                                 @endforeach
-                                
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -74,8 +79,8 @@
                             <select class="form-control" id="responsable_id" name="responsable_id">
                                 <option disabled selected>Selecciona un responsable</option>
                                 <!--Hace la funcion de un placeholder-->
-                               
-                                
+
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -94,19 +99,20 @@
                             <label for="nombre">Fecha fin</label>
                             <input type="date" id="date_end" name="date_end" placeholder="- Seleccionar fecha -" class="form-control">
                         </div>
-                        
-                        <div class="form-group">
-                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
 
-                            <button type="submit" class="btn btn-outline-primary">Crear</button>
-                        </div>
+                        
                     </form>
                 </div>
             </div>
 
         </div>
         <div class=" card-footer w-100">
-            <a class="btn btn-outline-warning float-right" href="/courses" aria-disabled="true">Cancelar</a>
+            <div class="d-flex flex-row-reverse">
+                @csrf
+                @method('GET')
+                <a class="btn btn-outline-warning " href="{{ url()->previous() }}" aria-disabled="true">Cancelar</a>
+
+            </div>
         </div>
 </main>
 
