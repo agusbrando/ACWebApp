@@ -2,15 +2,21 @@
 
 namespace Tests\Feature\App\Models;
 
-use App\Models\Subject;
-use App\Models\Program;
-use App\Models\Role;
-use App\Models\User;
-use App\Models\Course;
-use App\Models\Timetable;
-use App\Models\Evaluation;
-
 use Tests\TestCase;
+use App\Models\Task;
+use App\Models\Evaluation;
+use App\Models\Course;
+use App\Models\Subject;
+use App\Models\YearUnion;
+use App\Models\Year;
+use App\Models\YearUnionUser;
+use App\Models\Type;
+use App\Models\Timetable;
+use App\Models\User;
+use App\Models\Classroom;
+use App\Models\Role;
+
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\DB;
@@ -124,23 +130,75 @@ class SubjectTest extends TestCase
     }
     public function testCourse()
     {
-        $course = Course::create([
-            'level' => 1,
-            'name' => 'Primero',
-            'num_students' => 30
-        ]);
-
         $subject = Subject::create([
-            'course_id' => $course->id,
-            'name' => 'Ejemplo5'
+            'name' => 'AsignaturaEjemplo',
+            'abbreviation' => 'ASEG',
+            "hours" => 256,
+            'color' => '#aaffaa'
         ]);
 
-        $course = Course::find($subject->course_id);
+        $course = Course::create([
+            'level' => 2,
+            'name' => 'CourseEjemplo',
+            'abbreviation' => 'CE',
+            'num_students' => 30,
+        ]);
+
+        $evaluation = Evaluation::create([
+            'name' => '1Eval'
+        ]);
+
+        $year = Year::create([
+            'name' => '2022/2024',
+            'date_start' => now(),
+            'date_end' => now()
+        ]);
+
+        $classroom = Classroom::create([
+            'name' => 'Clase',
+            'number' => 35,
+        ]);
+
+        $yearUnion = YearUnion::create([
+            'subject_id' => $subject->id,
+            'course_id' => $course->id,
+            'evaluation_id' => $evaluation->id,
+            'year_id' => $year->id,
+            'date_start' => now(),
+            'date_end' => now(),
+            'classroom_id' => $classroom->id
+        ]);
+
+        $role = Role::create([
+            'name' => 'Test',
+            'slug' => 'test',
+            'description' => 'test role'
+        ]);
+
+        $timetable = Timetable::create([
+            'name' => 'testCE2022',
+            'date_start' =>  now(),
+            'date_end' => now()
+        ]);
+
+        $user = User::create([
+            'first_name' => 'UserTest',
+            'last_name' => 'UserTest',
+            'email' => 'UserTest.lopez@champusaula.com',
+            'password' => bcrypt('password'),
+            'role_id' => $role->id,
+            'timetable_id' => $timetable->id
+        ]);
+
+        $type = Type::create([
+            'name' => 'TypeTest',
+            'model' => 'App\Models\Task'
+        ]);
+
+        $course = $subject->course;
 
         $this->assertEquals($subject->course, $course);
 
-        $subject->delete();
-        $course->delete();
     }
 
     /**@test */

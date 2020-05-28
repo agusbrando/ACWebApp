@@ -8,13 +8,13 @@
 
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
+    <link href="{{ asset('css/scrollbar.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/courses.css') }}" rel="stylesheet" type="text/css" />
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
-                <h3>Cursos Académicos</h3>
+                <h3>Cursos </h3>
             </div>
 
         </div>
@@ -43,38 +43,40 @@
                                         <div class="card">
 
                                             <div class="w-100" id="heading{{$course->id}}" data-toggle="collapse" data-target="#collapse{{$course->id}}" aria-expanded="false" aria-controls="collapse{{$course->id}}">
+                                                <div class="w-100 scrollbar scrollbar-primary">
+                                                    <div class="card row no-gutters table-responsive force-overflow ">
 
-                                                <table id='mytable' class="table w-100 pb-5">
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Nombre</th>
-                                                            <th>abbreviation</th>
-                                                            <th>hours</th>
-                                                        </tr>
-                                                    </thead>
-                                                    @foreach($course->asignaturas as $asignatura)
-                                                    <tr>
+                                                        <table id='mytable' class="table w-100 pb-5">
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th>Id</th>
+                                                                    <th>Nombre</th>
+                                                                    <th>Siglas</th>
+                                                                    <th>Horas</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            @foreach($course->asignaturas as $asignatura)
+                                                            <tbody>
+                                                                <tr>
 
-                                                        <td>{{$asignatura->id}} </td>
-                                                        <td>{{$asignatura->name}}</td>
-                                                        <td>{{$asignatura->abbreviation}}</td>
-                                                        <td>{{$asignatura->hours}}</td>
+                                                                    <td>{{$asignatura->id}} </td>
+                                                                    <td>{{$asignatura->name}}</td>
+                                                                    <td>{{$asignatura->abbreviation}}</td>
+                                                                    <td>{{$asignatura->hours}}</td>
 
 
-                                                        <td class="botones">
-                                                            <a class="btn btn-outline-primary" href="#">Ver</a>
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                                
+                                                                    <td class="botones">
+                                                                        <a class="btn btn-outline-primary" href="{{ route('subjects.show',$asignatura->id)}}">Ver</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <!-- collapse show lo muestra abierto por defecto -->
-
                                         </div>
-
                                     </ul>
                                 </div>
                             </div>
