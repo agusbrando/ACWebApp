@@ -51,6 +51,7 @@
               </div>
               <p style="float: right;">{{$comment->created_at}}</p>
             </div>
+            </br>
           @endforeach
         </div>
       </div>
