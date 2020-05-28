@@ -15,7 +15,7 @@
       <h3>Firma de {{$user->first_name}}, {{$user->last_name}}</h3>
     </div>
     <div class="card-body row no-gutters">
-      <div class="col-12 border-left bg-light">
+      <div class="col-12 ">
         <div class="col-12 col-md-8 col-lg-10 p-3">
           <form method="post" action="{{ route('seguimiento.update',$user->id) }}" enctype="multipart/form-data">
             @method('patch')
@@ -38,13 +38,18 @@
               <input id="customFile" name="archivo" type="file" class="custom-file-input rounded-pill" w-50>
               <label for="customFile" class="custom-file-label rounded-pill">Elige archivo</label>
             </div>
-            <input type="submit" class="btn btn-success" value="firmar">
-          </form>
+            
         </div>
       </div>
     </div>
     <div class=" card-footer col-12">
       <div class="col-md-12 text-center">
+      <input type="submit" class="btn btn-outline-success float-left" value="firmar">
+          </form>
+          <form action="{{ url()->previous() }}" >
+                    
+                    <button class="btn btn-outline-warning float-right" type="submit">Cancelar</button>
+                </form>
       </div>
     </div>
   </div>

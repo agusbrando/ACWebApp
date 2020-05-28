@@ -23,25 +23,56 @@
                     <form method="get" action="{{ route('seguimiento.filtrar') }}">
 
                         @csrf
-                        <table class="tabla w-100">
+                        <div class="form-group w-100">
+                            <label for="formControlSelect1"></label>
+                            <div class="card-deck ">
+                                <div class="card text-white w-25 bg-info mb-2" style="max-width: 18rem;">
+                                    <div class="card-header w-100 bg-dark">Filtrar por fecha única o inicial::</div>
+                                    <div class="card-body w-100 cabezeraTabla">
+                                        <div>
+                                            <h5 class="card-title"></h5>
+                                            <input type="date" class="rounded form-control" name="fecha">
+                                        </div>
 
-                            <tr>
-                                <td class="class20">Filtrar por fecha inicial:</td>
-                                <td class="class20">Filtrar por fecha final:</td>
-                                <td class="class20">Filtrar por mes:</td>
-                                <td class="class20">Filtrar por año:</td>
-                                <td class="class20"></td>
-                            </tr>
-                            <tr>
-                                <td class="class20"><input type="date" class="rounded class20" name="fecha"></td>
-                                <td class="class20"><input type="date" class="rounded class20" name="fecha_fin"></td>
-                                <td class="class20"><input type="month" class="rounded class20" name="mes"></td>
-                                <td class="class20"><input class="quantity rounded class20" type="number" name="anyo"></td>
-                                @if(in_array('Listar_trackings', Session::get('user_permissions')))
-                                <td class="class20"><input type="submit" class="btn btn-success boton class20" value="Filtrar"></td>
-                                @endif
-                            </tr>
-                        </table>
+                                    </div>
+                                </div>
+                                <div class="card text-white w-25 bg-info mb-2" style="max-width: 18rem;">
+                                    <div class="card-header w-100 bg-dark">Filtrar por mes:</div>
+                                    <div class="card-body w-100 cabezeraTabla">
+                                        <div>
+                                            <h5 class="card-title"></h5>
+                                            <input type="date" class="rounded form-control" name="fecha_fin">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card text-white w-25 bg-info mb-2" style="max-width: 18rem;">
+                                    <div class="card-header w-100 bg-dark">Filtrar por mes:</div>
+                                    <div class="card-body w-100 cabezeraTabla">
+                                        <div>
+                                            <h5 class="card-title"></h5>
+                                            <input type="month" class="rounded form-control" name="mes">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card text-white w-25 bg-info mb-2" style="max-width: 18rem;">
+                                    <div class="card-header w-100 bg-dark">Filtrar por año:</div>
+                                    <div class="card-body w-100 cabezeraTabla">
+                                        <div>
+                                            <h5 class="card-title"></h5>
+                                            <input class="quantity rounded form-control" type="number" name="anyo">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div><input type="submit" class="btn btn-success boton class20" value="Filtrar"></div>
+                            </div>
+
+                        </div>
+
+
+
 
                     </form>
 
@@ -61,11 +92,11 @@
                     <form class="float-right" action="{{ route('seguimiento.print')}}" method="POST">
                         @csrf
                         @method('POST')
-                        
+
                         <tbody>
 
                             @foreach($trackings as $tracking)
-                            
+
                             <input type="hidden" value={{$tracking}} name="trackings[]">
 
                             <tr>
@@ -82,7 +113,9 @@
                         </tbody>
                         @if($count == 0)
                         <tbody>
-                            <tr><td colspan="5" class="center">No hay tracking, añade uno para mostrarlo</td></tr>
+                            <tr>
+                                <td colspan="5" class="center">No hay tracking, añade uno para mostrarlo</td>
+                            </tr>
                         </tbody>
                         @endif
                         <thead class="cabezeraTabla">

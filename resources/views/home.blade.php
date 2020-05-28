@@ -40,6 +40,19 @@
           <textarea style="width: 94%; border: none;">Añadir un comentario</textarea>
           <a style="width: 6%; float: right;" href="#" class="btn btn-danger">Enviar</a>
         </div>
+        </br>
+        <div>
+          @foreach($comments as $comment)
+            <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
+            <div style="background-color: #E8EBF3;">
+              <div>
+                <p style="font-weight: bold;">{{$post->user->first_name}} {{$post->user->last_name}}</p>
+                <p style="float: right;">{{$comment->created_at}}</p>
+              </div>
+              <p>{{$comment->text}}</p>
+            </div>
+          @endforeach
+        </div>
       </div>
     </div>
     </br>
