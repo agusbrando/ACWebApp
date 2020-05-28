@@ -42,11 +42,13 @@
         </div>
         </br>
         <div>
-          
           @foreach($comments as $comment)
-            <img src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-            <p style="font-weight: bold;">{{$post->user->first_name}} {{$post->user->last_name}}</p>
-            <p style="background-color: #E8EBF3;">{{$comment->text}}</p>
+            <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
+            <div style="background-color: #E8EBF3;">
+              <p style="font-weight: bold;">{{$post->user->first_name}} {{$post->user->last_name}}</p>
+              <p>{{$comment->text}}</p>
+              <p style="text-align: right;">{{$comment->created_at}}</p>
+            </div>
           @endforeach
         </div>
       </div>
