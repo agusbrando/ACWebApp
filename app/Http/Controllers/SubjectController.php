@@ -384,9 +384,6 @@ class SubjectController extends Controller
                                     }else{
                                         $user->boletin = round($sumaFinal, 0);
                                     }
-                                    if ($sumaFinal < 4 && $sumaFinal != 0) {
-                                        $user->boletin = 3;
-                                    }
                                 }
                             }
                         }
