@@ -10,8 +10,7 @@
         <div class="card-header row m-0 justify-content-between">
             <h3>Horarios</h3>
             <div>
-                @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
-
+                @if(in_array('Crear_timetable', Session::get('user_permissions')))
                 <form action="{{ route('horarios.create')}}" method="get">
                     @csrf
 
@@ -33,9 +32,10 @@
                                 <td>Nombre</td>
                                 <td>Fecha Inicio</td>
                                 <td>Fecha Fin</td>
+                                @if(in_array('Listar_timetable', Session::get('user_permissions')))
 
                                 <td>Ver</td>
-                                
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -47,11 +47,13 @@
                                 <td>{{$timetable->date_end}}</td>
 
                                 <td>
+                                    @if(in_array('Listar_timetable', Session::get('user_permissions')))
                                     <form action="{{ route('Ind', $timetable->id)}}" method="get">
                                         @csrf
 
                                         <button class="btn btn-outline-info" type="submit"><i class="far fa-eye"></i></button>
                                     </form>
+                                    @endif
                                 </td>
 
                             </tr>

@@ -34,7 +34,7 @@
         </div>
         <br>
         <div id="buttons">
-        @if(in_array('Crear_event', Session::get('user_permissions')))
+        @if(in_array('Leer_event', Session::get('user_permissions')))
           @foreach($types as $type)
             @if($type->id == 1 || ($type->id == 2 && $user->role_id != 4))
               <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block" />
