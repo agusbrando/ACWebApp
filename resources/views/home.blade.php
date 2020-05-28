@@ -40,7 +40,7 @@
           <textarea style="width: 94%; border: none;">Añadir un comentario</textarea>
           <a style="width: 6%; float: right;" href="#" class="btn btn-danger">Enviar</a>
           @foreach($comments as $comment)
-            <p>{{$comment->text}}</p>
+            <p style="background-color: #E8EBF3;">{{$comment->text}}</p>
           @endforeach
         </div>
       </div>
