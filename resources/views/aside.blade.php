@@ -34,7 +34,7 @@
             </li>
             @endif
             <li class="nav-item">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="/asistencia">
                     <span data-feather="shopping-cart"></span>
                     Asistencia
                 </a>
@@ -62,23 +62,19 @@
             </a>
         </h6>
         <ul class="nav flex-column mb-2">
-            @if(in_array('Leer_post', Session::get('user_permissions')))
             <li class="nav-item">
                 <a class="nav-link" href="/posts">
                     <span data-feather="file-text"></span>
                     Post
                 </a>
             </li>
-            @endif
 
-            @if(in_array('Can List Users', Session::get('user_permissions')))
             <li class="nav-item">
                 <a class="nav-link" href="http://127.0.0.1:8000/asignaturas">
                     <span data-feather="file-text"></span>
                     Notas
                 </a>
             </li>
-            @endif
 
 
             <li class="nav-item">

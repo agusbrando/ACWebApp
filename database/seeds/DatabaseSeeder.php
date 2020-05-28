@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesTableSeeder::class,
             PermissionsTableSeeder::class,
+            RolePermissionsTableSeeder::class,
             TypesTableSeeder::class,
             TimetableTableSeeder::class,
             ClassroomsTableSeeder::class,
@@ -52,6 +53,8 @@ class DatabaseSeeder extends Seeder
             YearUnionUserTableSeeder::class,
             MisbehaviorsTableSeeder::class,
             ItemYearTableSeeder::class,
+            
+
 
         ]);
     }

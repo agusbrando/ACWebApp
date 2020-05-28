@@ -97,12 +97,13 @@
 
 
 
-
+                        @if(in_array('Crear_course', Session::get('user_permissions')))
                         <div class="form-group">
                             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
 
                             <button type="submit" class="btn btn-outline-primary">Crear</button>
                         </div>
+                        @endif
                     </form>
                 </div>
             </div>

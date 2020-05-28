@@ -18,16 +18,20 @@
 
             </div>
             <div class="d-flex flex-row-reverse">
+            @if(in_array('Eliminar_course', Session::get('user_permissions')))
                 <form method="post" action="{{ route('courses.eliminarYearUnion', array($courseId, $yearId))}}">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
                 </form>
+            @endif
+            @if(in_array('Modificar_course', Session::get('user_permissions')))
                 <form method="get" action="{{ route('courses.edit', array($courseId, $yearId))}}">
                     @csrf
                     @method('GET')
                     <button class="btn btn-outline-info ml-2" type="submit">Editar Curso</button>
                 </form>
+            @endif
 
             </div>
         </div>

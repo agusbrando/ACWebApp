@@ -6,9 +6,11 @@
         <div class="card-header row m-0 justify-content-between">
             <a href="/home" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Posts</h3>
+            @if(in_array('Crear_post', Session::get('user_permissions')))
             <div>
                 <a class="btn btn-outline-success" href="{{ route('posts.create')}}">Añadir</a>
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters table-responsive">
             <table id="tabla" class="table col-12 ">
@@ -19,7 +21,9 @@
                         <th scope="col">Texto</th>
                         <th scope="col">Fecha Creado</th>
                         <th scope="col">Fecha Actualizado</th>
+                        @if(in_array('Listar_post', Session::get('user_permissions')))
                         <th scope="col">Acción</th>
+                        @endif
                     </tr>
                 </thead>
                 @foreach($posts as $post)
@@ -30,9 +34,12 @@
                         <td style="text-align:justify;">{{$post->text }}</td>
                         <td>{{$post->created_at}}</td>
                         <td>{{$post->updated_at }}</td>
+
+                        @if(in_array('Listar_post', Session::get('user_permissions')))
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('posts.show',$post->id)}}">Ver</a>
                         </td>
+                        @endif
                     </tr>
 
                 </tbody>

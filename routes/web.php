@@ -91,7 +91,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //RUTAS ITEMs Sergio Lopez
-Route::post('/items/filter', 'ItemController@filter')->middleware('auth');
 //update
 Route::patch('/items/show/edit/{item_id}', 'ItemController@update')->name('items.updateItem')->middleware('auth');
 Route::resource('items', 'ItemController')->middleware('auth');

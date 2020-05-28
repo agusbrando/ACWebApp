@@ -9,12 +9,14 @@
             <form action="{{ route('evaluations.update',$evaluation->id)}}" method="POST">
                 @method('PATCH')
                 <div>
+                @if(in_array('Modificar_evaluation', Session::get('user_permissions')))
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                         @csrf
                         <a class="btn btn-outline-warning float-right" href="{{ route('evaluations.show',$evaluation->id)}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
                 </div>
+                @endif
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">

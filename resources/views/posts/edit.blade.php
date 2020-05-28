@@ -11,12 +11,14 @@
             <h3>Editar Post</h3>
             <form action="{{ route('posts.update',$post->id)}}" method="POST">
                 @method('PATCH')
+                @if(in_array('Modificar_post', Session::get('user_permissions')))
                 <div>
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                         <a class="btn btn-outline-warning float-right" href="{{ route('posts.show',$post->id)}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
                 </div>
+                @endif
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">

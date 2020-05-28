@@ -13,10 +13,12 @@
                 <a href="/" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3>Material del Aula</h3>
             </div>
+            @if(in_array('Crear_item', Session::get('user_permissions')))
             <div>
                 <a class="btn btn-outline-info" href="/items/create" role="button">Añadir Material</a>
 
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
@@ -102,11 +104,13 @@
                                     @endforeach
 
                                     <td class="botones">
+                                    @if(in_array('Listar_item', Session::get('user_permissions')))
                                         <form method="get" action="{{ route('items.show', $item->id)}}">
                                             @csrf
                                             @method('GET')
                                             <button class="btn btn-outline-primary" type="submit">Ver</button>
                                         </form>
+                                    @endif
                                     </td>
                                 </tr>
                                 @endforeach

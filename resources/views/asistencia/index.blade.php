@@ -65,9 +65,11 @@
                         </div>
                         @endif
                     </div>
+                    @if(in_array('Crear_misbehavior', Session::get('user_permissions')))
                     <div>
                         <button type="submit" class="btn btn-outline-primary ml-3">Filtrar</button>
                     </div>
+                    @endif
                 </form>
             </div>
             <!-- Tabla -->
@@ -98,9 +100,11 @@
                     @endforeach
                 </tbody>
             </table>
+            @if(in_array('Crear_misbehavior', Session::get('user_permissions')))
             <div>
                 <button type="button" class="btn btn-outline-info">Guardar</button>
             </div>
+            @endif
             @endif
         </div>
     </div>

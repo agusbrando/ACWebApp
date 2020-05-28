@@ -22,7 +22,9 @@
                         @if ($isSend == 1)
                         <th scope="col">Visto</th>
                         @endif
+                        @if(in_array('Listar_message', Session::get('user_permissions')))
                         <th scope="col">Accion</th>
+                        @endif
                     </tr>
                 </thead>
                 @foreach($messages as $message)
@@ -38,9 +40,11 @@
                         @else
                         <td>Ha sido visto</td>
                         @endif
+                        @if(in_array('Leer_message', Session::get('user_permissions')))
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('messages.show',$message->id)}}">Ver</a>
                         </td>
+                        @endif
                     </tr>
                 </tbody>
                 @endforeach

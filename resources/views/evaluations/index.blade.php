@@ -5,9 +5,11 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <h3>Evaluaciones</h3>
+            @if(in_array('Crear_evaluation', Session::get('user_permissions')))
             <div>
             <a class="btn btn-outline-success" href="{{ route('evaluations.create')}}">Añadir</a>
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters table-responsive">
             <table class="table col-12 ">

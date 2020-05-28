@@ -66,7 +66,9 @@
 
                                     </div>
                                 </div>
+                                @if(in_array('Listar_tracking', Session::get('user_permissions')))
                                 <div><input type="submit" class="btn btn-success boton class20" value="Filtrar"></div>
+                                @endif
                             </div>
 
                         </div>

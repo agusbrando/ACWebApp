@@ -3,11 +3,11 @@
 @section('main')
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="card shadow">
+  @if(in_array('Crear_post', Session::get('user_permissions')))
     <div class="card-header row m-0 justify-content-between">
-    @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
       <a style="margin: 19px; width: 100%;" href="#" class="btn btn-outline-primary">Publicar</a>
-    @endif
     </div>
+  @endif
   </div>
   </br>
   @foreach($posts as $post)

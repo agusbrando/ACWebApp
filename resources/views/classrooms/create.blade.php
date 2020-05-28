@@ -7,11 +7,13 @@
             <h3>Nueva Aula</h3>
             <form action="{{ route('classrooms.store')}}" method="POST">
                 @method('POST')
+                @if(in_array('Crear_classroom', Session::get('user_permissions')))
                 <div class="col-12">
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     @csrf
                     <a class="btn btn-outline-warning float-right" href="{{ route('classrooms.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
+                @endif
         </div>
         <form action="{{ route('classrooms.store')}}" method="POST">
             @method('POST')
