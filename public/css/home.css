@@ -1,12 +1,12 @@
-.homeIzquierda {
+.izquierda {
     float: left;
 }
 
-.homeDerecha {
+.derecha {
     float: right;
 }
 
-.margin1 {
+.publicar {
     margin: 19px;
     width: 100%;
 }
@@ -19,8 +19,19 @@
     text-align: center;
 }
 
+.imagenPost {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
 .justificado {
     text-align: justify;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 .estiloTextarea {
@@ -33,7 +44,7 @@
     float: right;
 }
 
-.comentarios {
+.usuarioComentarios {
     font-weight: bold;
     float: left;
 }
