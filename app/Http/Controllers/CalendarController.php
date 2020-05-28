@@ -52,13 +52,15 @@ class CalendarController extends Controller
     $sessions = [];
     $events = [];
 
-    $this->validate($request, [
-      'date' =>  'required',
-      'tipo' => 'required'
-    ]);
+    if ($request->session()->has('date') && $request->session()->has('tipo')) {
+      $date = $request->session()->get('date');
+      $tipo = $request->session()->get('tipo');
+    } else {
+        // TODO devolver error
+    }
 
-    $tipo = Type::where('name', $request->get('tipo'))->first();
-    $dia = date($request->get('date'));
+    $tipo = Type::where('name', $tipo)->first();
+    $dia = date($date);
     $day = date('w', strtotime($dia));
 
     $events = Event::all()->where('type_id', $tipo->id)->where('date', $dia);
@@ -77,6 +79,15 @@ class CalendarController extends Controller
 
   public function getTeacher(Request $request)
   {
+
+    $this->validate($request, [
+      'date' =>  'required',
+      'tipo' => 'required'
+    ]);
+
+    $request->session()->put('date', $request->get('date'));
+    $request->session()->put('tipo', $request->get('tipo'));
+
     $teachers = User::all()->where('role_id', 3);
     return view('/Calendario/teacher', compact('teachers', 'tipo', 'dia'));
   }
