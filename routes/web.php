@@ -130,8 +130,8 @@ Route::resource('evaluations','EvaluationController')->middleware('auth');
 Route::resource('tasks', 'TaskController')->middleware('auth');
 
 Route::post('desglose', 'SubjectController@desglose')->name('subject.desglose')->middleware('auth');
-Route::get('tareas/{id}', 'DesgloseController@eliminar')->middleware('auth');
-Route::get('tareas/eliminar/{task_id}/{yearUnion_id}', 'DesgloseController@destroy')->name('desglose.destroy')->middleware('auth');
+Route::get('tareas/{id}', 'TaskController@eliminar')->name('tasks.eliminar')->middleware('auth');
+Route::get('tareas/eliminar/{task_id}/{yearUnion_id}', 'TaskController@destroy')->name('tasks.destroy')->middleware('auth');
 Route::get('desglose/crearTarea/{id}', 'TaskController@create')->middleware('auth');
 
 Route::post('desglose/storeNotes', 'DesgloseController@storeNotes')->name('desglose.storeNotes')->middleware('auth');

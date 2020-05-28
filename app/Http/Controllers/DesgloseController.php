@@ -211,11 +211,7 @@ class DesgloseController extends Controller
     //TODO pasar a taskController
     public function eliminar($id)
     {
-        $evaluacion = YearUnion::find($id)->load('evaluation');
-        $tasks = $evaluacion->tasks()->get();
-        $eval = Evaluation::find($evaluacion->evaluation_id);
-
-        return view('Notas.eliminarTarea', compact('tasks', 'evaluacion', 'eval'));
+        
     }
 
     /**
@@ -226,16 +222,6 @@ class DesgloseController extends Controller
      */
     public function destroy($task_id, $yearUnion_id)
     {
-        $evaluacion = YearUnion::find($yearUnion_id)->load('evaluation');
-        $task = Task::find($task_id);
-
-        $usuarios = $evaluacion->users;
-        foreach ($usuarios as $user) {
-            $task->yearUnionUsers()->detach($user->id);
-        }
-        $task->delete();
-
-        //TODO hacer redirect bien
-        return redirect()->route('tareas/eliminar', ['id' => $task->id]);
+        
     }
 }

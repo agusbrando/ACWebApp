@@ -141,14 +141,33 @@ class TaskController extends Controller
         //
     }
 
+    public function eliminar($id)
+    {
+        $evaluacion = YearUnion::find($id)->load('evaluation');
+        $tasks = $evaluacion->tasks()->get();
+        $eval = Evaluation::find($evaluacion->evaluation_id);
+
+        return view('Notas.eliminarTarea', compact('tasks', 'evaluacion', 'eval'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($task_id, $yearUnion_id)
     {
-        //
+        $evaluacion = YearUnion::find($yearUnion_id)->load('evaluation');
+        $task = Task::find($task_id);
+
+        $usuarios = $evaluacion->users;
+        foreach ($usuarios as $user) {
+            $task->yearUnionUsers()->detach($user->pivot->id);
+        }
+        $task->delete();
+
+        //TODO hacer redirect bien
+        return redirect()->route('tasks.eliminar', $evaluacion->id);
     }
 }
