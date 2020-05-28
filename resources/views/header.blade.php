@@ -10,11 +10,6 @@
                     <i class="far fa-bell dropDownIcon mr-5"></i>
                 </a>
 
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    @foreach (Session::get('notifications') as $notification)
-                        <a class="dropdown-item" href="{{ route('messages.show',$notification->data['message_id'])}}">Tienes un nuevo mensaje de: {{$notification->data['email']}}</a>
-                    @endforeach
-                </div>
               </div>
 
 
