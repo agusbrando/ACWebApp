@@ -61,6 +61,10 @@ class HomeController extends Controller
             $post->comments=$post->comments;
         }
 
+        foreach($comments as $comment) {
+            $comment->user=$comment->user;
+        }
+
     return view('home', compact('posts', 'comments'));
     }
 }

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             CoursesTableSeeder::class,
             SubjectsTableSeeder::class,
             UsersTableSeeder::class,
-            CourseSubjectsTableSeeder::class,
+            //CourseSubjectsTableSeeder::class,
             EvaluationsTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,
@@ -42,16 +42,16 @@ class DatabaseSeeder extends Seeder
             
             YearsTableSeeder::class,
             YearUnionsTableSeeder::class,
-            ProgramsTableSeeder::class,
-            EvaluatedsTableSeeder::class,
+            //ProgramsTableSeeder::class,
+            //EvaluatedsTableSeeder::class,
 
-            ItemsTableSeeder::class,
+            //ItemsTableSeeder::class,
             
             PercentagesTableSeeder::class,
-            SessionTimetableTableSeeder::class,
+            //SessionTimetableTableSeeder::class,
             YearUnionUserTableSeeder::class,
-            MisbehaviorsTableSeeder::class,
-            ItemYearTableSeeder::class,
+            //MisbehaviorsTableSeeder::class,
+            //ItemYearTableSeeder::class,
 
         ]);
     }
