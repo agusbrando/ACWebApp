@@ -300,7 +300,6 @@ class SubjectController extends Controller
     public function evaluations(Request $request, $subject_id)
     {
 
-        
         $request->session()->put('subject_id', $subject_id);
         if ($request->session()->has('course_id') && $request->session()->has('year_id')) {
             $course_id = $request->session()->get('course_id');
@@ -314,6 +313,7 @@ class SubjectController extends Controller
         $course = Course::find($course_id);
         $yearUnions = YearUnion::where('subject_id', $subject_id)->where('year_id', $year_id)->where('course_id', $course_id)->get()->load('evaluation');
         $taskTypes = Type::all()->where('model', Task::class);
+        $evalFinal = null;
 
         foreach ($yearUnions as $yearUnion) {
             $yearUnion->evaluation = $yearUnion->evaluation;
@@ -354,12 +354,14 @@ class SubjectController extends Controller
                                             $resultados[$task_type->name] = true;
                                         }
                                         if ($task_type->name == 'Recuperacion' && $user->tareas[$task_type->name] != 0) {
-                                            if($user->tareas[$task_type->name] < 5){
+                                            if ($user->tareas[$task_type->name] < 5) {
                                                 $user->boletin = floor($user->tareas[$task_type->name]);
-                                            }else{
+                                            } else {
                                                 $user->boletin = round($user->tareas[$task_type->name], 0);
-
                                             }
+                                            $user->nota_final = $user->tareas[$task_type->name];
+                                            $evalFinal[$user->id] = $user->tareas[$task_type->name];
+                                            $yearUnion->evalFinal = $evalFinal;
                                             $recuperado = true;
                                             break;
                                         } else {
@@ -376,14 +378,10 @@ class SubjectController extends Controller
                                         break;
                                     }
                                 }
-                                if ($recuperado) {
-                                    $user->nota_final = $sumaFinal;
-                                } else {
-                                    if($sumaFinal < 5){
-                                        $user->boletin = floor($sumaFinal);
-                                    }else{
-                                        $user->boletin = round($sumaFinal, 0);
-                                    }
+                                if ($sumaFinal < 5 && $recuperado != true) {
+                                    $user->boletin = floor($sumaFinal);
+                                } else if ($sumaFinal > 5 && $recuperado != true) {
+                                    $user->boletin = round($sumaFinal, 0);
                                 }
                             }
                         }
@@ -391,6 +389,22 @@ class SubjectController extends Controller
                 } else {
                     //TODO: Controlar Error
                     return view('Notas.evaluations');
+                }
+                if (isset($evalFinal[$user->id]) && $recuperado != true) {
+                    $evalFinal[$user->id] += $user->nota_final;
+                    $yearUnion->evalFinal = $evalFinal;
+                } else if ($recuperado != true) {
+                    $evalFinal[$user->id] = $user->nota_final;
+                    $yearUnion->evalFinal = $evalFinal;
+                }
+            }
+            //TODO comprobar que no ha recuperado
+            if ($yearUnion->evaluation->name == "EvalFinal") {
+                foreach ($yearUnion->evalFinal as $id_user => $user) {
+                    $aux = $id_user;
+                    $notaFinal = $evalFinal[$id_user] / 3;
+                    $evalFinal[$id_user] = round($notaFinal, 2);
+                    $yearUnion->evalFinal = $evalFinal;
                 }
             }
         }
