@@ -1,6 +1,11 @@
 @extends('base')
 
 @section('main')
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 <link href="{{ asset('css/notas.css') }}" rel="stylesheet" type="text/css" />
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="card shadow">
@@ -30,17 +35,21 @@
                             </button>
                         </div>
                         @endif
-                        <form  action="{{ url('porcentajes/updatePorcentaje') }}" method="post">
+                        <form action="{{ url('porcentajes/updatePorcentaje') }}" method="post">
                             @csrf
                             @foreach($yearUnions as $yearUnion)
                             <table class="table col-12">
                                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                                     <tr>
                                         <th>{{$yearUnion->evaluation->name}}</th>
-                                        <th>Porcentaje%</th>
-                                        <th>Nota Minima Tarea</th>
-                                        <th>Nota Media Tareas</th>
-                                        <th>Nota Media Minima</th>
+                                        <th data-toggle="tooltip" data-placement="bottom" title="El porcentaje del total que se le va asignar a un tipo de tareas. *La suma de los porcentajes no puede superar el 100%*">Porcentaje%</th>
+                                        <th data-toggle="tooltip" data-placement="bottom" title="La nota a la que debe llegar el alumno en cada tarea">
+                                            Nota Minima
+                                        </th>
+                                        <th data-toggle="tooltip" data-placement="bottom" title="La nota a la que debe llegar el alumno en la media de sus tareas">
+                                            Nota Media
+                                        </th>
+                                        <th data-toggle="tooltip" data-placement="bottom" title="La nota media minima que un alumno debe obtener para poder aprobar">Nota Media Minima</th>
                                     </tr>
                                 </thead>
                                 @foreach($yearUnion->percentages as $porcentaje)
@@ -91,7 +100,11 @@
                                     @endif
                                     @endforeach
                                     <td>{{$user->nota_final}}</td>
+                                    @if($user->boletin < 5 && $user->boletin != null) 
+                                    <td class="bg-secondary text-white">{{$user->boletin}}</td>
+                                    @else
                                     <td>{{$user->boletin}}</td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

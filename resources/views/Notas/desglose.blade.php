@@ -11,7 +11,7 @@
                 <h3 class="m-auto">Desglose {{$subject->name}} {{$eval->name}}</h3>
             </div>
             <div>
-                <a href="{{ url('desglose/crearTarea', $evaluation) }}" class="btn btn-outline-info">Crear Tarea</a>
+                <a href="{{ url('desglose/crearTarea', $evaluation) }}" class="btn btn-outline-success">Crear Tarea</a>
                 <a href="{{ url('tareas', $evaluation) }}" class="btn btn-outline-danger ">Eliminar Tarea</a>
             </div>
         </div>

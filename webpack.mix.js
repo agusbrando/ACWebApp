@@ -11,13 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-<<<<<<< HEAD
-
-mix.js('resources/js/datatable.js', 'public/js')
-    .version();
-=======
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .copy('node_modules/font-awesome/fonts', 'public/fonts')
+<<<<<<< HEAD
     
->>>>>>> master
+=======
+
+>>>>>>> a6ba7995fb16984d2945d6e5f94cae2ad688c15c

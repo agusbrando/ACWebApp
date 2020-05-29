@@ -14,7 +14,7 @@
                 <h3>Material del Aula</h3>
             </div>
             <div>
-                <a class="btn btn-outline-info" href="/items/create" role="button">Añadir Material</a>
+                <a class="btn btn-outline-primary" href="/items/create" role="button">Añadir Material</a>
 
             </div>
         </div>
@@ -56,7 +56,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="d-flex flex-row botones">
+                    <div class="d-flex flex-row align-self-stretch">
                         <button class="btn btn-outline-primary " type="submit">Filtrar</button>
                     </div>
 

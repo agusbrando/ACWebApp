@@ -10,13 +10,12 @@
     </div>
   </div>
   </br>
-  @foreach($users as $user)
   @foreach($posts as $post)
     <div class="card shadow">
       <div>
         <div>
           <img style="float: left;" src="{{asset('img/foto.png')}}" alt="" width="35" height="35">
-          <p style="font-weight: bold; float: left;">{{$user->first_name}} {{$user->last_name}}</p>
+          <p style="font-weight: bold;">{{$post->user->first_name}} {{$post->user->last_name}}</p>
           <h4 style="text-align: center;">{{$post->title}}</h4>
         </div>
         <div>
@@ -34,17 +33,29 @@
         <div>
           <img style="float: left;" src="{{asset('img/corazon.png')}}" alt="" width="25" height="25">
           <p style="float: left;">0</p>
-          <p style="float: right;">1 Comentarios</p>
+          <p style="float: right;">{{count($post->comments)}} Comentarios</p>
         </div>
         </br>
         <div>
           <textarea style="width: 94%; border: none;">Añadir un comentario</textarea>
           <a style="width: 6%; float: right;" href="#" class="btn btn-danger">Enviar</a>
         </div>
+        </br>
+        <div>
+          @foreach($comments as $comment)
+            <img style="float: left;" src="{{asset('img/usuarioDinantia.png')}}" alt="" width="35" height="35">
+            <div style="background-color: #E8EBF3;">
+              <div>
+                <p style="font-weight: bold;">{{$comment->user->first_name}} {{$comment->user->last_name}}</p>
+                <p style="float: right;">{{$comment->created_at}}</p>
+              </div>
+              <p>{{$comment->text}}</p>
+            </div>
+          @endforeach
+        </div>
       </div>
     </div>
     </br>
-  @endforeach
   @endforeach
 </main>
 @endsection
