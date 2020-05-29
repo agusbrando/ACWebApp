@@ -192,8 +192,8 @@ class ItemTest extends TestCase
         $state->delete();
     }
 
-    public function testYearUnionUser()
-    {
+    // public function testYearUnionUser()
+    // {
         //CREACION Year Union
         // $subject = Subject::create([
         //     'name' => 'AsignaturaEjemplo',
@@ -271,53 +271,53 @@ class ItemTest extends TestCase
         // $yearUnion->users()->attach($user2->id, ['assistance' => true]);
 
 
-        //CREACION Items
+    //     //CREACION Items
 
-        $yearUnionUser1 = YearUnionUser::create([
-            'year_union_id' => 1,
-            'user_id' => 1,
-            'assistance' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        $yearUnionUser2 = YearUnionUser::create([
-            'year_union_id' => 2,
-            'user_id' => 2,
-            'assistance' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+    //     $yearUnionUser1 = YearUnionUser::create([
+    //         'year_union_id' => 1,
+    //         'user_id' => 1,
+    //         'assistance' => true,
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ]);
+    //     $yearUnionUser2 = YearUnionUser::create([
+    //         'year_union_id' => 2,
+    //         'user_id' => 2,
+    //         'assistance' => true,
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ]);
 
-        //CREACION Items
+    //     //CREACION Items
 
-        $state = State::create([
-            'name' => 'Estado test prueba',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+    //     $state = State::create([
+    //         'name' => 'Estado test prueba',
+    //         'created_at' => now(),
+    //         'updated_at' => now()
+    //     ]);
 
-        $classroom2 = Classroom::create([
-            'name' => '1000',
-            'number' => 1000,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+    //     $classroom2 = Classroom::create([
+    //         'name' => '1000',
+    //         'number' => 1000,
+    //         'created_at' => now(),
+    //         'updated_at' => now()
+    //     ]);
 
-        $type = Type::create([
-            'name' => 'alumno',
-            'model' => 'defaultModel'
-        ]);
+    //     $type = Type::create([
+    //         'name' => 'alumno',
+    //         'model' => 'defaultModel'
+    //     ]);
 
-        $item = Item::create([
-            'name' => 'item test',
-            'number' => 2000,
-            'date_pucharse' => Carbon::create('2020', '03', '30'),
-            'classroom_id' => $classroom2->id,
-            'state_id' => $state->id,
-            'type_id' => $type->id,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+    //     $item = Item::create([
+    //         'name' => 'item test',
+    //         'number' => 2000,
+    //         'date_pucharse' => Carbon::create('2020', '03', '30'),
+    //         'classroom_id' => $classroom2->id,
+    //         'state_id' => $state->id,
+    //         'type_id' => $type->id,
+    //         'created_at' => now(),
+    //         'updated_at' => now()
+    //     ]);
 
 
         // $yearUnionUsers = $yearUnion->users;
@@ -326,17 +326,17 @@ class ItemTest extends TestCase
         //     //indicamos la tabla intermedia
         //     $item->yearUnionUsers()->attach($yearUnionUser->pivot->id,);
         // }
-        $item->yearUnionUsers()->attach($yearUnionUser1->id);
-        $item->yearUnionUsers()->attach($yearUnionUser2->id);
+    //     $item->yearUnionUsers()->attach($yearUnionUser1->id);
+    //     $item->yearUnionUsers()->attach($yearUnionUser2->id);
 
         // $yearUnionUser1->items()->attach($item->id);
         // $yearUnionUser2->items()->attach($item->id);
 
-        //Creamos un array de todos los id de los states creados en la DB
-        $yearUnionUsers = $item->yearUnionUsers;
+    //     //Creamos un array de todos los id de los states creados en la DB
+    //     $yearUnionUsers = $item->yearUnionUsers;
 
-        $this->assertEquals($yearUnionUsers[0]->id, $yearUnionUser1->id);
-        $this->assertEquals($yearUnionUsers[1]->id, $yearUnionUser2->id);
+    //     $this->assertEquals($yearUnionUsers[0]->id, $yearUnionUser1->id);
+    //     $this->assertEquals($yearUnionUsers[1]->id, $yearUnionUser2->id);
 
         // $expectedYearUnionUserIds = collect([
         //     ['id' => $yearUnionUser1->id],
@@ -361,7 +361,7 @@ class ItemTest extends TestCase
         // $classroom2->delete();
         // $type->delete();
         // $state->delete();
-    }
+    // }
 
     public function testClassroom()
     {
