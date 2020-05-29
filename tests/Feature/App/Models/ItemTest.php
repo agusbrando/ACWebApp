@@ -309,7 +309,7 @@ class ItemTest extends TestCase
         ]);
 
         $item = Item::create([
-            'name' => 'Portatil Asus1',
+            'name' => 'item test',
             'number' => 2000,
             'date_pucharse' => Carbon::create('2020', '03', '30'),
             'classroom_id' => $classroom2->id,
@@ -326,18 +326,24 @@ class ItemTest extends TestCase
         //     //indicamos la tabla intermedia
         //     $item->yearUnionUsers()->attach($yearUnionUser->pivot->id,);
         // }
-        $item->yearUnionUsers()->attach($yearUnionUser1->id,);
-        $item->yearUnionUsers()->attach($yearUnionUser2->id,);
-        
+        $item->yearUnionUsers()->attach($yearUnionUser1->id);
+        $item->yearUnionUsers()->attach($yearUnionUser2->id);
+
+        // $yearUnionUser1->items()->attach($item->id);
+        // $yearUnionUser2->items()->attach($item->id);
+
         //Creamos un array de todos los id de los states creados en la DB
-        $yearUnionUsers = $item->yearUnionUsers->pluck('id');
+        $yearUnionUsers = $item->yearUnionUsers;
 
-        $expectedYearUnionUserIds = collect([
-            ['id' => $yearUnionUser1->id],
-            ['id' => $yearUnionUser2->id]
-        ])->pluck('id');
+        $this->assertEquals($yearUnionUsers[0]->id, $yearUnionUser1->id);
+        $this->assertEquals($yearUnionUsers[1]->id, $yearUnionUser2->id);
 
-        $this->assertEquals($yearUnionUsers, $expectedYearUnionUserIds);
+        // $expectedYearUnionUserIds = collect([
+        //     ['id' => $yearUnionUser1->id],
+        //     ['id' => $yearUnionUser2->id]
+        // ])->pluck('id');
+
+        // $this->assertEquals($yearUnionUsers, $expectedYearUnionUserIds);
         //eliminamos los objetos de la BD
 
 

@@ -98,7 +98,7 @@
                                                 <div class="w-100 scrollbar scrollbar-primary">
                                                     <div class="card row no-gutters table-responsive force-overflow ">
 
-
+                                                
                                                         <table id='mytable' class="table w-100 ">
                                                             <thead class="thead-dark">
                                                                 <tr>
@@ -114,7 +114,7 @@
 
 
                                                                 <tr>
-
+                                                                
                                                                     <td>{{$user->first_name}}</td>
                                                                     <td>{{$user->last_name}}</td>
 
