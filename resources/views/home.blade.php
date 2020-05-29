@@ -41,7 +41,7 @@
         </div>
         </br>
         <div>
-          <textarea class="w-94 border-0">Añadir un comentario</textarea>
+          <textarea class="width94 border-0">Añadir un comentario</textarea>
           <a href="#" class="w-6 float-right btn btn-danger">Enviar</a>
         </div>
         </br>
