@@ -179,6 +179,12 @@ class DesgloseController extends Controller
         return redirect()->route('subjects.desglose', $request);
     }
 
+    /**
+     * Se actualizan las califications que sean de trabajos en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request.
+     * @return redirect subects.desglose.
+     */
     public function updateTrabajos(Request $request)
     {
         $request->validate([
@@ -186,10 +192,10 @@ class DesgloseController extends Controller
             'subject' => 'required',
             'yearUnion' => 'required',
         ]);
-
+        //Se recogen las notas de los trabajos pasadas por la base de datos
         $trabajos = $request->get('trabajos');
         $yearUnion = YearUnion::find($request->get('yearUnion'));
-
+        //Nos guardamos las variables que vienen desde la session
         $request->session()->put('subject', $yearUnion->subject_id);
         $request->session()->put('year', $yearUnion->course_id);
         $request->session()->put('course', $yearUnion->year_id);
@@ -199,6 +205,7 @@ class DesgloseController extends Controller
             foreach ($tasks as $task_id => $task_value) {
                 $yearUnionUser = YearUnionUser::where('user_id', $user_id)->where('year_union_id', $yearUnion->id)->first();
                 $task = Task::find($task_id);
+                //Actualizamos la calification mediante la funcion updateExistingPivot
                 $task->yearUnionUsers()->updateExistingPivot($yearUnionUser->id, [
                     'value' => $task_value
                 ]);

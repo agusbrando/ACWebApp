@@ -122,7 +122,6 @@ Route::post('courses/show/imprimir/{course_id}/{year_id}', 'CourseController@imp
 Route::get('courses/asignarAsignaturas', 'CourseController@asignarAsignaturas')->name('courses.asignarAsignaturas')->middleware('auth');
 
 //RUTAS SUBJECTS JAVI
-//TODO Revisar rutas distintas y poner mismmo prefijo a mismo tipo
 Route::get('subjects/evaluations/{subject_id}', 'SubjectController@evaluations')->name('subjects.evaluations')->middleware('auth');
 Route::get('desglose', 'SubjectController@desglose')->name('subjects.desglose')->middleware('auth');
 Route::resource('subjects','SubjectController')->middleware('auth');

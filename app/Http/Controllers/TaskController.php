@@ -42,52 +42,49 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra un formulario para crear una tarea.
      *
-     * @return \Illuminate\Http\Response
+     * @param int id.
+     * @return view Notas.crearTarea.
      */
     public function create($id)
     {
+        //Se busca el yearUnion mediante el id pasado como parametro.
         $yearUnion = YearUnion::find($id);
-        $evaluaciones = YearUnion::where('subject_id', $yearUnion->subject_id)->where('year_id', $yearUnion->year_id)->where('course_id', $yearUnion->course_id)->get()->load('evaluation');
+        //Se buscan todos los tipos de tareas que existen.
         $tipos = Type::all()->where('model', Task::class);
 
-        foreach ($evaluaciones as $eval) {
-            $eval->evaluation = $eval->evaluation;
-        }
-
-        return view('Notas.crearTarea', compact('yearUnion', 'evaluaciones', 'tipos'));
+        return view('Notas.crearTarea', compact('yearUnion', 'tipos'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Se alamacena una tarea en la base de datos.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request.
+     * @return redirect subects.desglose.
      */
     public function store(Request $request)
     {
-
-        
         $request->validate([
             'name' => 'required',
             'type' => 'required',
             'yearUnion' => 'required'
         ]);
-
+        //Se recoge el yearUnion desde $request
         $yearUnion = YearUnion::find($request->get('yearUnion'));
-
+        //Nos guardamos las variables que vienen desde la session
         $request->session()->put('subject', $yearUnion->subject_id);
         $request->session()->put('year', $yearUnion->course_id);
         $request->session()->put('course', $yearUnion->year_id);
         $request->session()->put('evaluation', $yearUnion->evaluation_id);
-
+        //Se crea la tarea
         $task = new Task([
             'year_union_id' => $yearUnion->id,
             'type_id' => $request->get('type'),
             'name' => $request->get('name')
         ]);
         $task->save();
+        //Funcion creada para crear una calificacion vacia a casa usuario
         $this->storeNotes($yearUnion, $task);
 
 
@@ -151,22 +148,27 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una tarea de la base de datos.
      *
-     * @param  int  $id
+     * @param  int  $task_id
+     * @param  int  $yearUnion_id
      * @return \Illuminate\Http\Response
      */
     public function destroy($task_id, $yearUnion_id)
     {
+        //Buscamos la la evaluacion de la tarea.
         $evaluacion = YearUnion::find($yearUnion_id)->load('evaluation');
+        //Buscamos la la tarea que queremos eliminar.
         $task = Task::find($task_id);
-
+        //Buscamos los usuarios de esa evaluacion para borrar las calificaciones
+        //que tienen en la base de datos.
         $usuarios = $evaluacion->users;
         foreach ($usuarios as $user) {
+            //eliminamos las calificaciones.
             $task->yearUnionUsers()->detach($user->pivot->id);
         }
+        //eliminamos la tarea.
         $task->delete();
-
         
         return redirect()->route('tasks.eliminar', $evaluacion->id);
     }
