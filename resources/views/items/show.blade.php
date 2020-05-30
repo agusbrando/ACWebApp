@@ -86,14 +86,6 @@
                 <div class="row justify-content-center">
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text spanShowBlade" id="basic-addon1">Aula</span>
-                    </div>
-                    <div class="form-control  text-truncate">{{$item->aula->name}}</div>
-                  </div>
-                </div>
-                <div class="row justify-content-center">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
                       <span class="input-group-text spanShowBlade" id="basic-addon1">Estado</span>
                     </div>
                     <div class="form-control  text-truncate">{{$item->state->name}}</div>

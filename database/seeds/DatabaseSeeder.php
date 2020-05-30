@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             CoursesTableSeeder::class,
             SubjectsTableSeeder::class,
             UsersTableSeeder::class,
-            //CourseSubjectsTableSeeder::class,
+            CourseSubjectsTableSeeder::class,
             EvaluationsTableSeeder::class,
             TasksTableSeeder::class,
             CalificationsTableSeeder::class,
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             EvaluablesTableSeeder::class,
 	        StatesTableSeeder::class,
             
-            EventsTableSeeder::class,
+            // EventsTableSeeder::class,
             PostsTableSeeder::class,
             CommentsTableSeeder::class,
             MessagesTableSeeder::class,
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             //ProgramsTableSeeder::class,
             //EvaluatedsTableSeeder::class,
 
-            //ItemsTableSeeder::class,
+            ItemsTableSeeder::class,
             
             PercentagesTableSeeder::class,
             //SessionTimetableTableSeeder::class,
