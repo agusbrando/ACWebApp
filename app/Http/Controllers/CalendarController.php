@@ -46,11 +46,12 @@ class CalendarController extends Controller
 
 
 
-  public function getTime(Request $request)
+  public function getTime(Request $request, $id)
   {
 
     $sessions = [];
     $events = [];
+    $teacher = $request->session()->put('profesor', $id);
 
     if ($request->session()->has('date') && $request->session()->has('tipo')) {
       $date = $request->session()->get('date');
@@ -65,8 +66,8 @@ class CalendarController extends Controller
 
     $events = Event::all()->where('type_id', $tipo->id)->where('date', $dia);
     $event_ids = $events->pluck('session_id');
-    $sessions = $tipo->sessions()->whereNotIn('id', $event_ids)->where('day', $day)->get();
-    return view('/Calendario/time', compact('sessions', 'dia', 'tipo', 'events'));
+    $sessions = $tipo->sessions()->whereNotIn('id', $event_ids)->where('day', $day)->where('user_id', $id)->get();
+    return view('/Calendario/time', compact('sessions', 'dia', 'tipo', 'events', 'teacher'));
   }
 
   public function getList(Request $request)
@@ -79,6 +80,8 @@ class CalendarController extends Controller
 
   public function getTeacher(Request $request)
   {
+    $tipo = $request->session()->get('tipo');
+    $dia = $request->session()->get('dia');
 
     $this->validate($request, [
       'date' =>  'required',

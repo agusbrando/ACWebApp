@@ -19,7 +19,7 @@ Route::resource('events', 'CalendarController')->middleware('auth');
 Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarController@show'])->middleware('auth'); //TODO Revisad esta ruta. Debe estar en resources por lo que esta duplicada
 Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento')->middleware('auth');
 Route::post('/crearEvento','CalendarController@store')->middleware('auth');
-Route::get('/time', 'CalendarController@getTime')->middleware('auth');
+Route::get('/time/{id}', 'CalendarController@getTime')->middleware('auth');
 Route::get('/list', 'CalendarController@getList')->middleware('auth');
 Route::get('/teacher', 'CalendarController@getTeacher')->middleware('auth');
 
