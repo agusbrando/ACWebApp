@@ -70,6 +70,29 @@ class CalendarController extends Controller
     return view('/Calendario/time', compact('sessions', 'dia', 'tipo', 'events', 'teacher'));
   }
 
+  public function getTime2(Request $request)
+  {
+
+    $sessions = [];
+    $events = [];
+
+    if ($request->session()->has('date') && $request->session()->has('tipo')) {
+      $date = $request->session()->get('date');
+      $tipo = $request->session()->get('tipo');
+    } else {
+        // TODO devolver error
+    }
+
+    $tipo = Type::where('name', $tipo)->first();
+    $dia = date($date);
+    $day = date('w', strtotime($dia));
+
+    $events = Event::all()->where('type_id', $tipo->id)->where('date', $dia);
+    $event_ids = $events->pluck('session_id');
+    $sessions = $tipo->sessions()->whereNotIn('id', $event_ids)->where('day', $day)->get();
+    return view('/Calendario/time', compact('sessions', 'dia', 'tipo', 'events'));
+  }
+
   public function getList(Request $request)
   {
     $user = Auth::user();
@@ -91,8 +114,15 @@ class CalendarController extends Controller
     $request->session()->put('date', $request->get('date'));
     $request->session()->put('tipo', $request->get('tipo'));
 
-    $teachers = User::all()->where('role_id', 3);
-    return view('/Calendario/teacher', compact('teachers', 'tipo', 'dia'));
+    if($request->get('tipo') == 'Tutorías'){
+
+      $teachers = User::all()->where('role_id', 3);
+      return view('/Calendario/teacher', compact('teachers', 'tipo', 'dia'));
+
+    }else{
+      return redirect('/times');
+    }
+
   }
 
   public function index()

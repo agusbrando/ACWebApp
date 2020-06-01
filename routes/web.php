@@ -20,6 +20,7 @@ Route::get('events/edit/{id}',['as' => 'events.showedit', 'uses' => 'CalendarCon
 Route::get('/crearEvento/{fecha}/{hora}/{tipo}','CalendarController@crearEvento')->name('crearEvento')->middleware('auth');
 Route::post('/crearEvento','CalendarController@store')->middleware('auth');
 Route::get('/time/{id}', 'CalendarController@getTime')->middleware('auth');
+Route::get('/times', 'CalendarController@getTime2')->middleware('auth');
 Route::get('/list', 'CalendarController@getList')->middleware('auth');
 Route::get('/teacher', 'CalendarController@getTeacher')->middleware('auth');
 
