@@ -7,11 +7,13 @@
             <h3>Nueva Evaluación</h3>
             <form action="{{ route('evaluations.store')}}" method="POST">
                 @method('POST')
+                @if(in_array('Crear_evaluation', Session::get('user_permissions')))
                 <div class="col-12">
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     @csrf
                     <a class="btn btn-outline-warning float-right" href="{{ route('evaluations.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
+                @endif
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-4 col-lg-2 p-3">

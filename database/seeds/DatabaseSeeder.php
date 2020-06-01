@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesTableSeeder::class,
             PermissionsTableSeeder::class,
+            RolePermissionsTableSeeder::class,
             TypesTableSeeder::class,
             TimetableTableSeeder::class,
             ClassroomsTableSeeder::class,
@@ -50,8 +51,15 @@ class DatabaseSeeder extends Seeder
             PercentagesTableSeeder::class,
             //SessionTimetableTableSeeder::class,
             YearUnionUserTableSeeder::class,
+<<<<<<< HEAD
+            MisbehaviorsTableSeeder::class,
+            ItemYearTableSeeder::class,
+            
+
+=======
             //MisbehaviorsTableSeeder::class,
             //ItemYearTableSeeder::class,
+>>>>>>> 206a9656a48dfa08084999de90d01966bd458d87
 
         ]);
     }

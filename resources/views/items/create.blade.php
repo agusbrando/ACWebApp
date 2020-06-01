@@ -79,13 +79,19 @@
                         </select>
                     </div>
 
+                        @if(in_array('Crear_item', Session::get('user_permissions')))
+                        <div class="form-group">
+                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
 
-
+                            <button type="submit" class="btn btn-outline-primary">Crear</button>
+                        </div>
+                        @endif
                     </form>
                 </div>
             </div>
 
         </div>
+        @if(in_array('Crear_item', Session::get('user_permissions')))
         <div class=" card-footer w-100">
             <form method="get">
                 <div class="d-flex flex-row-reverse">
@@ -97,6 +103,7 @@
             </form>
 
         </div>
+        @endif
 </main>
 
 @endsection

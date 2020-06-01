@@ -4,8 +4,8 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <link href="{{asset('css/home.css')}}" rel="stylesheet" type="text/css"/>
   <div class="card shadow">
+  @if(in_array('Crear_post', Session::get('user_permissions')))
     <div class="card-header row m-0 justify-content-between">
-    @if(Session::get('user_role')!= 'Alumno'&&'User'&&'Unverified')
       <a href="#" class="m-19 w-100 btn btn-outline-primary">Publicar</a>
     @endif
     </div>

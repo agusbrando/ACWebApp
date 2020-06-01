@@ -15,10 +15,12 @@
 
 
                 <div>
+                @if(in_array('Crear_event', Session::get('user_permissions')))
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1 mt-1" type='submit' value="Guardar">
                         <a class="btn btn-outline-warning float-right mt-1 mr-1" href="{{ route('events.show',$event->id)}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
+                @endif
                 </div>
 
             </div>

@@ -99,8 +99,13 @@
                             <label for="nombre">Fecha fin</label>
                             <input type="date" id="date_end" name="date_end" placeholder="- Seleccionar fecha -" class="form-control">
                         </div>
+                        @if(in_array('Modificar_course', Session::get('user_permissions')))
+                        <div class="form-group">
+                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
 
-                        
+                            <button type="submit" class="btn btn-outline-primary">Crear</button>
+                        </div>
+                        @endif
                     </form>
                 </div>
             </div>
