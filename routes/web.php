@@ -101,7 +101,9 @@ Route::resource('states', 'StateController')->middleware('auth');
 //RUTAS COURSEs Sergio Lopez
 Route::get('courses', 'CourseController@index');
 //create
-Route::get('courses/create', 'CourseController@create')->name('courses.create')->middleware('auth');
+Route::get('courses/createPaso1', 'CourseController@createPaso1')->name('courses.createPaso1')->middleware('auth');
+Route::get('courses/createPaso2', 'CourseController@createPaso2')->name('courses.createPaso2')->middleware('auth');
+Route::get('courses/createPaso3', 'CourseController@createPaso3')->name('courses.createPaso3')->middleware('auth');
 //store
 Route::get('courses/store', 'CourseController@store')->name('courses.store')->middleware('auth');
 //edit

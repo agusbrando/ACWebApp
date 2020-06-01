@@ -66,7 +66,7 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createPaso1()
     {
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
         $classrooms = Classroom::all();
@@ -85,7 +85,7 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storePaso1(Request $request)
     {
         for ($i = 1; $i <= 3; $i++) {
             $curso = Course::where('id', $request->get('course'));
@@ -117,7 +117,118 @@ class CourseController extends Controller
             }
         }
     }
+/**
+     * Creamos un nuevo curso .
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createPaso2()
+    {
+        //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
+        $classrooms = Classroom::all();
+        $courses = Course::all();
+        $users = User::all();
+        $subjects = Subject::all();
+        $evaluations = Evaluation::all();
+        $years = Year::orderBy("date_start", "DESC")->get();
 
+        return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
+    }
+
+    /**
+     * Guardamos el curso en la Base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storePaso2(Request $request)
+    {
+        for ($i = 1; $i <= 3; $i++) {
+            $curso = Course::where('id', $request->get('course'));
+
+            $fechasInicioFin = [];
+            $year = 1;
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_1_date_start'), 'date_end' => $request->get('eval_1_date_end')]); //1ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_2_date_start'), 'date_end' => $request->get('eval_2_date_end')]); //2ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_3_date_start'), 'date_end' => $request->get('eval_3_date_end')]); //3ºEVAL
+
+            foreach ($curso->subjects as $j => $subject) {
+                DB::table('yearUnions')->insert([
+                    'subject_id' => $subject->id,
+                    'course_id' => $curso->id,
+                    'evaluation_id' => $i,
+                    'year_id' => $year,
+                    'date_start' => $fechasInicioFin[$i - 1]['date_start'],
+                    'date_end' => $fechasInicioFin[$i - 1]['date_end'],
+                    'classroom_id' => $j + 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            if ($curso->level == 2) {
+                if ($i == 2) {
+                    break;
+                }
+            }
+        }
+    }
+    /**
+     * Creamos un nuevo curso .
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createPaso3()
+    {
+        //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
+        $classrooms = Classroom::all();
+        $courses = Course::all();
+        $users = User::all();
+        $subjects = Subject::all();
+        $evaluations = Evaluation::all();
+        $years = Year::orderBy("date_start", "DESC")->get();
+
+        return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
+    }
+
+    /**
+     * Guardamos el curso en la Base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storePaso3(Request $request)
+    {
+        for ($i = 1; $i <= 3; $i++) {
+            $curso = Course::where('id', $request->get('course'));
+
+            $fechasInicioFin = [];
+            $year = 1;
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_1_date_start'), 'date_end' => $request->get('eval_1_date_end')]); //1ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_2_date_start'), 'date_end' => $request->get('eval_2_date_end')]); //2ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_3_date_start'), 'date_end' => $request->get('eval_3_date_end')]); //3ºEVAL
+
+            foreach ($curso->subjects as $j => $subject) {
+                DB::table('yearUnions')->insert([
+                    'subject_id' => $subject->id,
+                    'course_id' => $curso->id,
+                    'evaluation_id' => $i,
+                    'year_id' => $year,
+                    'date_start' => $fechasInicioFin[$i - 1]['date_start'],
+                    'date_end' => $fechasInicioFin[$i - 1]['date_end'],
+                    'classroom_id' => $j + 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            if ($curso->level == 2) {
+                if ($i == 2) {
+                    break;
+                }
+            }
+        }
+    }
     /**
      * Redirigimos un curso al show para mostrar los detalles
      *

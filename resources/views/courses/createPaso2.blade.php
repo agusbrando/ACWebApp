@@ -14,13 +14,14 @@
                     @method('GET')
                     <a href="{{ url()->previous() }}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
 
-                    <h3>Crear Curso - Paso 1</h3>
+                    <h3>Crear Curso - Paso 2</h3>
                 </div>
             </form>
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
                 <div class="container">
+                    
                     <form method="post" action="{{ route('courses.store') }}">
                         <!-- Proteccion contra consultas no deseadas -->
                         @csrf
