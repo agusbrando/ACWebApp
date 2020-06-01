@@ -9,7 +9,7 @@
         <div class="card-header row m-0 justify-content-between">
             <div class="d-flex flex-row">
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
-                <h3> Perfil debug_backtrace usuario</h3>
+                <h3> Perfil usuario</h3>
             </div>
             <div>
 

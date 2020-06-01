@@ -40,10 +40,12 @@
           <p class="float-right">{{count($post->comments)}} Comentarios</p>
         </div>
         </br>
+        @if(in_array('Crear_post', Session::get('user_permissions')))
         <div>
           <textarea class="w94 border-0">Añadir un comentario</textarea>
           <a href="#" class="w-6 float-right btn btn-danger">Enviar</a>
         </div>
+        @endif
         </br>
         <div>
           @foreach($comments as $comment)

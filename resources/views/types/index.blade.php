@@ -8,9 +8,11 @@
                 <a href="/events" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3> Tipos</h3>
             </div>
+            @if(in_array('Crear_type', Session::get('user_permissions')))                       
             <div>
                 <a class="btn btn-outline-success" href="{{ route('types.create')}}">Añadir</a>
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters table-responsive">
             <table class="table col-12 ">
@@ -18,7 +20,9 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Model</th>
+                        @if(in_array('Listar_type', Session::get('user_permissions')))                       
                         <th scope="col">Accion</th>
+                        @endif
                     </tr>
                 </thead>
                 @foreach($types as $type)
@@ -26,9 +30,11 @@
                     <tr>
                         <td>{{$type->name }}</td>
                         <td>{{$type->model }}</td>
+                        @if(in_array('Listar_type', Session::get('user_permissions')))                       
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('types.show',$type->id)}}">Ver</a>
                         </td>
+                        @endif
                     </tr>
                 </tbody>
                 @endforeach

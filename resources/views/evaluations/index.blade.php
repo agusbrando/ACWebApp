@@ -15,17 +15,21 @@
             <table class="table col-12 ">
                 <thead class="thead-dark col-12 col-md-8 col-lg-10 p-3">
                     <tr>                       
-                        <th scope="col">Nombre</th>               
+                        <th scope="col">Nombre</th>   
+                        @if(in_array('Listar_evaluation', Session::get('user_permissions')))                                   
                         <th scope="col">Accion</th>
+                        @endif
                     </tr>
                 </thead>
                 @foreach($evaluations as $evaluation)
                 <tbody>
                     <tr>                        
                         <td>{{$evaluation->name }}</td>
+                        @if(in_array('Listar_evaluation', Session::get('user_permissions')))                       
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('evaluations.show',$evaluation->id)}}">Ver</a>
                         </td>
+                        @endif
                     </tr>
                 </tbody>
                 @endforeach
