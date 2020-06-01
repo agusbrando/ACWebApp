@@ -80,11 +80,14 @@
 
                                                                     @if(in_array('Listar_course', Session::get('user_permissions')))
                                                                     <td class="botones">
-                                                                        <a class="btn btn-outline-primary" href="{{ route('subjects.show',$asignatura->id)}}">Ver</a>
+                                                                        <div class="custom-control custom-switch">
+                                                                            <input type="checkbox" class="custom-control-input" id="customSwitch{{$asignatura->id}}" name="asignatura{{$asignatura->id}}Añadido" value="{{$asignatura->id}}">
+                                                                            <label class="custom-control-label" for="customSwitch{{$asignatura->id}}" name="asignatura{{$asignatura->id}}Añadido"></label>
+                                                                        </div>
                                                                     </td>
                                                                     @endif
                                                                 </tr>
-                                                                
+
                                                             </tbody>
                                                             @endforeach
                                                         </table>
