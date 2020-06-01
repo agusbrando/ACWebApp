@@ -18,7 +18,7 @@
             </div>
             @if(in_array('Crear_course', Session::get('user_permissions')))
             <div>
-                <a class="btn btn-outline-primary" href="{{route('courses.create')}}" role="button">Añadir Curso</a>
+                <a class="btn btn-outline-primary" href="{{route('courses.createPaso1')}}" role="button">Añadir Curso</a>
 
             </div>
             @endif
@@ -27,7 +27,7 @@
             <div class="col-sm-12">
 
                 <div class="divShowCoursesContent  d-flex flex-row bd-highlight mb-3 ">
-                    <div id="accordion" class="w-100 h-100">
+                    <div id="accordion" class=" divShowCoursesContent w-100 h-100">
 
                         @foreach($years as $year)
                         <div class="card">
