@@ -10,11 +10,15 @@
                 <h3>Detalles Evaluación</h3>
             </div>
             <div>
+            @if(in_array('Modificar_evaluation', Session::get('user_permissions')))
                 <a class="btn btn-outline-info" href="{{ route('evaluations.edit',$evaluation->id)}}">Editar</a>
                 <form class="float-right" action="{{ route('evaluations.destroy',$evaluation->id)}}" method="POST">
+            @endif
                     @csrf
                     @method('DELETE')
+                    @if(in_array('Eliminar_evaluation', Session::get('user_permissions')))
                     <button type="submit" class="btn btn-outline-danger ml-1">Eliminar</button>
+                    @endif
                 </form>
             </div>
         </div>

@@ -27,12 +27,13 @@ class EvaluationController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Muestra todas las evaluaciones de la base de datos.
      *
-     * @return \Illuminate\Http\Response
+     * @return view evaluations.index
      */
     public function index()
     {
+        //Recojo todas las evaluaciones de la base de datos.
         $evaluations = Evaluation::paginate(10);
         return view('evaluations.index', compact('evaluations'));
     }
@@ -70,13 +71,14 @@ class EvaluationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra los datos de una evaluacion.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $evaluation_id
+     * @return view evaluations.show
      */
     public function show($evaluation_id)
     {
+        //Recoge todas la evaluaciones de la base de datos mediante el parametro que se pasa.
         $evaluation = Evaluation::find($evaluation_id);
         return view('evaluations.show', compact('evaluation'));
     }

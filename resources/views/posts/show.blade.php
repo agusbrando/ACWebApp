@@ -7,12 +7,17 @@
             <a href="/posts" class="my-auto mx-2 h5"><i class="fas fa-arrow-left"></i></a>
             <h3>Post</h3>
             <div>
+            @if(in_array('Modificar_post', Session::get('user_permissions')))
+
                 <a class="btn btn-outline-info" href="{{ route('posts.edit',$post->id)}}">Editar</a>
+            @endif
+            @if(in_array('Eliminar_post', Session::get('user_permissions')))
                 <form class="float-right" action="{{ route('posts.destroy',$post->id)}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-danger ml-1">Eliminar</button>
                 </form>
+            @endif
             </div>
         </div>
         <div class="card-body row no-gutters">
@@ -42,6 +47,7 @@
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('comments.edit',$comment->id)}}">Editar</a>
                         </td>
+                        @if(in_array('Eliminar_post', Session::get('user_permissions')))
                         <td class="botones">
                             <form action="{{ route('comments.destroy', $comment->id)}}" method="post">
                                 @csrf
@@ -49,6 +55,7 @@
                                 <button class="btn btn-outline-danger" type="submit">Eliminar</button>
                             </form>
                         </td>
+                        @endif
                     </tr>
 
                 </tbody>

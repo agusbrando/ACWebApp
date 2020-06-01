@@ -5,6 +5,7 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <h3>Nuevo Mensaje</h3>
+            @if(in_array('Crear_message', Session::get('user_permissions')))
             <form action="{{ route('messages.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -12,6 +13,7 @@
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     <a class="btn btn-outline-warning float-right" href="{{ url()->previous() }}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
+            @endif
         </div>
         <div class="card-body row no-gutters">
             <div class="col-12 col-md-6 col-lg-3 p-3">

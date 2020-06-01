@@ -20,12 +20,13 @@
                 </div>
             </form>
             <div class="d-flex flex-row-reverse">
+            @if(in_array('Eliminar_item', Session::get('user_permissions')))
                 <form  method="post" action="{{ route('items.destroy', $itemId)}}">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
                 </form>
-                
+            @endif
             </div>
             
         </div>
@@ -104,10 +105,11 @@
                             </select>
                         </div>
 
-
+                        @if(in_array('Modificar_item', Session::get('user_permissions')))
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Modificar</button>
                         </div>
+                        @endif
                     </form>
                 </div>
             </div>

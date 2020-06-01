@@ -15,11 +15,13 @@
                     <h1>Añadir Falta</h1>
                     <form action="{{ route('faltas.store')}}" method="POST">
                         @method('POST')
+                        @if(in_array('Crear_misbehavior', Session::get('user_permissions')))
                         <div class="col-12">
                             <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                             @csrf
                             <a class="btn btn-outline-warning float-right" href="/faltas/{{$user->id}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                         </div>
+                        @endif
 
                 </div>
                 <hr>

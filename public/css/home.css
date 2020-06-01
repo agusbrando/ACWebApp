@@ -1,0 +1,54 @@
+.izquierda {
+    float: left;
+}
+
+.derecha {
+    float: right;
+}
+
+.publicar {
+    margin: 19px;
+    width: 100%;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+.centrado {
+    text-align: center;
+}
+
+.imagenPost {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.justificado {
+    text-align: justify;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.estiloTextarea {
+    width: 94%;
+    border: none;
+}
+
+.enviar {
+    width: 6%;
+    float: right;
+}
+
+.usuarioComentarios {
+    font-weight: bold;
+    float: left;
+}
+
+.w94 {
+    width: 94%;
+}
