@@ -116,7 +116,7 @@ class ItemController extends Controller
         $item->save();
 
         //y le redirijo a la vista principal para que vea que se ha añadido
-        return redirect('/items/'.$item->id)->with('exito', 'Item creado!');
+        return redirect('/items')->with('exito', 'Item creado!');
     }
 
     /**

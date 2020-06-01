@@ -96,7 +96,7 @@ class ClassroomTest extends TestCase
     {
         $classroom = Classroom::create([
             'name' => 'Aula_5',
-            'number' => 5,
+            'number' => 5000,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -115,8 +115,9 @@ class ClassroomTest extends TestCase
       
 
         $item1 = Item::create([
-            'name' => 'Portatil Asus',
-            'date_pucharse' => Carbon::create('2020','03','30'),
+            'name' => 'Portatil Asus1',
+            'number' => 2000,
+            'date_pucharse' => Carbon::create('2020', '03', '30'),
             'classroom_id' => $classroom->id,
             'state_id' => $state->id,
             'type_id' => $type->id,
@@ -124,8 +125,9 @@ class ClassroomTest extends TestCase
             'updated_at' => now()
         ]);
         $item2 = Item::create([
-            'name' => 'Portatil MSI',
-            'date_pucharse' => Carbon::create('2020','03','30'),
+            'name' => 'Portatil Asus 2',
+            'number' => 3000,
+            'date_pucharse' => Carbon::create('2020', '03', '30'),
             'classroom_id' => $classroom->id,
             'state_id' => $state->id,
             'type_id' => $type->id,
@@ -142,8 +144,8 @@ class ClassroomTest extends TestCase
 
         $this->assertEquals($items, $expected_items_ids);
 
-        $item2->delete();
-        $item1->delete();
+        $item2->forceDelete();
+        $item1->forceDelete();
         $classroom->delete();
     }
 }

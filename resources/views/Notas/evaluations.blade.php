@@ -99,7 +99,11 @@
                                     <td>{{$tarea}}</td>
                                     @endif
                                     @endforeach
+                                    @if($yearUnion->evaluation->name == 'EvalFinal')
+                                    <td>{{$yearUnion->evalFinal[$user->id]}}</td>
+                                    @else
                                     <td>{{$user->nota_final}}</td>
+                                    @endif
                                     @if($user->boletin < 5 && $user->boletin != null) 
                                     <td class="bg-secondary text-white">{{$user->boletin}}</td>
                                     @else

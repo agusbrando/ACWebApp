@@ -29,7 +29,7 @@
                 <form method="get" action="{{ route('courses.edit', array($courseId, $yearId))}}">
                     @csrf
                     @method('GET')
-                    <button class="btn btn-outline-info ml-2" type="submit">Editar Curso</button>
+                    <button class="btn btn-outline-primary ml-2" type="submit">Editar Curso</button>
                 </form>
             @endif
 
@@ -102,7 +102,7 @@
                                                 <div class="w-100 scrollbar scrollbar-primary">
                                                     <div class="card row no-gutters table-responsive force-overflow ">
 
-
+                                                
                                                         <table id='mytable' class="table w-100 ">
                                                             <thead class="thead-dark">
                                                                 <tr>
@@ -118,7 +118,7 @@
 
 
                                                                 <tr>
-
+                                                                
                                                                     <td>{{$user->first_name}}</td>
                                                                     <td>{{$user->last_name}}</td>
 

@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             EvaluablesTableSeeder::class,
 	        StatesTableSeeder::class,
             
-            EventsTableSeeder::class,
+            // EventsTableSeeder::class,
             PostsTableSeeder::class,
             CommentsTableSeeder::class,
             MessagesTableSeeder::class,
