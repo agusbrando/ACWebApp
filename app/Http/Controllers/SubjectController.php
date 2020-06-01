@@ -7,6 +7,7 @@ use App\Models\Task;
 use App\Models\Year;
 use App\Models\Course;
 use App\Models\Subject;
+use App\Models\User;
 use App\Models\YearUnion;
 use App\Models\Evaluation;
 use App\Models\YearUnionUser;
@@ -322,6 +323,7 @@ class SubjectController extends Controller
             $yearUnion->tareas = $taskTypes;
             $users = $yearUnion->users;
             foreach ($yearUnion->users as $user) {
+                $evalFinalRecuperado = false;
                 if (count($taskTypes) > 0) {
                     $sumaFinal = 0;
                     $recuperado = 0;
@@ -392,19 +394,21 @@ class SubjectController extends Controller
                 }
                 if (isset($evalFinal[$user->id]) && $recuperado != true) {
                     $evalFinal[$user->id] += $user->nota_final;
-                    $yearUnion->evalFinal = $evalFinal;
+                    $yearUnion->evalFinal = $evalFinal; 
                 } else if ($recuperado != true) {
                     $evalFinal[$user->id] = $user->nota_final;
                     $yearUnion->evalFinal = $evalFinal;
                 }
+                $user->boletin = $evalFinal[$user->id];
             }
             //TODO comprobar que no ha recuperado
             if ($yearUnion->evaluation->name == "EvalFinal") {
-                foreach ($yearUnion->evalFinal as $id_user => $user) {
-                    $aux = $id_user;
+                foreach ($yearUnion->evalFinal as $id_user => $nota) {
+                    $user = User::find($id_user);
                     $notaFinal = $evalFinal[$id_user] / 3;
                     $evalFinal[$id_user] = round($notaFinal, 2);
                     $yearUnion->evalFinal = $evalFinal;
+                    $user->boletin = round($notaFinal, 2);
                 }
             }
         }
