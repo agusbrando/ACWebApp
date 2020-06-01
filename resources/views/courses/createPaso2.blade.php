@@ -16,10 +16,10 @@
                     @method('GET')
                     <a href="{{ url()->previous() }}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 </form>
-                <h3>Crear Curso - Paso 1</h3>
+                <h3>Crear Curso - Paso 2</h3>
 
             </div>
-            <form method="get" action="{{ route('courses.createPaso2') }}">
+            <form method="get" action="{{ route('courses.createPaso3') }}">
                 @csrf
                 @method('GET')
                 @if(in_array('Crear_course', Session::get('user_permissions')))
@@ -34,56 +34,44 @@
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
-                <div class="container divShowCoursesContent">
+                <div class="divShowCoursesContent  d-flex flex-row bd-highlight mb-3 ">
+                    <table id='mytable' class="table w-100 pb-5">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Año</th>
+                                <th>Nombre</th>
+                                <th>Numero de Alumnos</th>
+                                @if(in_array('Listar_course', Session::get('user_permissions')))
+                                <th>Añadir</th>
+                                @endif
+                            </tr>
+                        </thead>
+                        @foreach($courses as $course)
+                        <tr>
 
-                    <!-- Proteccion contra consultas no deseadas -->
-                    @csrf
-                    <h3 class="pb-5 pt-3">¿En que año se va a impartir este curso?</h3 class="pb-2">
-                    <div class="form-group">
-                        
-                        <div class="card-deck justify-content-between p">
-                            <div class="card text-white bg-info mb-3 " style="max-width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Selecciona un año</h5>
+                            <td>{{$course->id}} </td>
+                            <td>{{$course->level}}</td>
+                            <td>{{$course->name}}</td>
+                            <td>{{$course->num_students}}</td>
+
+
+                            @if(in_array('Listar_course', Session::get('user_permissions')))
+                            <td class="botones">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch{{$course->id}}" name="curso{{$course->id}}Añadido" value="{{$course->id}}">
+                                    <label class="custom-control-label" for="customSwitch{{$course->id}}" name="curso{{$course->id}}Añadido"></label>
                                 </div>
-                                <div class="card-body">
-                                    <div class="form-group ">
-                                        <h6 class="card-title">Año</h6>
-                                        <select class="form-control" id="year_id" name="year_id">
-                                            <option disabled selected>Selecciona un año</option>
-                                            <!--Hace la funcion de un placeholder-->
-                                            @foreach($years as $year)
-                                            <option value="{{$year->id}}">{{$year->name}}</option>
-                                            @endforeach
+                            </td>
+                            @endif
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
 
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Crea un Año</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div>
-                                        <h6 class="card-title">Introduce un año</h6>
-                                        <input type="text" id="nuevoYear" name="nuevoYear" placeholder="Ejemplo: 2020/2021" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-
-
-                    </form>
                 </div>
             </div>
-
+            </form>
         </div>
         <div class=" card-footer w-100">
             <a class="btn btn-outline-warning float-right" href="/courses" aria-disabled="true">Cancelar</a>
