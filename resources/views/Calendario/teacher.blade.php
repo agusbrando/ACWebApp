@@ -22,23 +22,23 @@
     <div class="card-body row no-gutters">
 
       <div class="row border-right-0 border-top-0 border-bottom-0 col-12 w-100">
-        <form method="GET" action="{{ url('time') }}">
+        
           {{ csrf_field() }}
       </div>
 
       <div class="col-md-12 bg-light border-right p-0">
         <br>
-        <img id="snippet" src="{{asset('img/snippet1.jpg')}}" alt="...">
+        <img id="snippet" src="{{asset('img/snippet1_2.jpg')}}" alt="...">
         <h3 class="text-center mt-2 mb-1">Selecciona un profesor</h3>
         <hr class="w-75">
         <br>
         <div id="buttons">
           @foreach($teachers as $teacher)
-            <input type="submit" name="tipo" value="{{ $teacher->first_name }} {{ $teacher->last_name }}" class="btn btn-info btn-block" />
+            <a type="button" href="/time/{{ $teacher->id }}" class="btn btn-info mt-1 ml-1 col-12">{{ $teacher->first_name }} {{ $teacher->last_name }}</a>
           @endforeach
         </div>
         <br>
-        </form>
+        
       </div>
     </div>
 </main>

@@ -31,9 +31,11 @@
                         <td>{{$attachment->attachmentable_type }}</td>
                         <td>{{$post->created_at}}</td>
                         <td>{{$post->updated_at }}</td>
+                        @if(in_array('Listar_Attachment', Session::get('user_permissions')))
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('attachments.show',$attachment->id)}}">Ver</a>
                         </td>
+                        @endif
                     </tr>
 
                 </tbody>

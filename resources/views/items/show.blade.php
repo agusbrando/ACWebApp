@@ -16,16 +16,20 @@
         <h3>Material del {{$item->aula->name}}</h3> <!-- saco el nombre del array clave valor -->
       </div>
       <div class="d-flex flex-row-reverse">
+      @if(in_array('Eliminar_item', Session::get('user_permissions')))
         <form method="post" action="{{ route('items.destroy', $item->id)}}">
           @csrf
           @method('DELETE')
           <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
         </form>
+        @endif
+        @if(in_array('Modificar_item', Session::get('user_permissions')))
         <form method="get" action="{{ route('items.edit', $item->id) }}">
           @csrf
           @method('GET')
           <button class="btn btn-outline-info" role="button">Editar Material</button>
         </form>
+        @endif
 
       </div>
     </div>
@@ -73,14 +77,6 @@
                       <span class="input-group-text spanShowBlade" id="basic-addon1">Fecha de compra</span>
                     </div>
                     <div class="form-control  text-truncate">{{$item->date_pucharse}}</div>
-                  </div>
-                </div>
-                <div class="row justify-content-center">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text spanShowBlade" id="basic-addon1">Aula</span>
-                    </div>
-                    <div class="form-control  text-truncate">{{$item->aula->name}}</div>
                   </div>
                 </div>
                 <div class="row justify-content-center">

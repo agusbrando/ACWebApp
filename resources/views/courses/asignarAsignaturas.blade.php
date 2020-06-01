@@ -65,10 +65,11 @@
                                                                     <td>{{$asignatura->abbreviation}}</td>
                                                                     <td>{{$asignatura->hours}}</td>
 
-
+                                                                    @if(in_array('Listar_course', Session::get('user_permissions')))
                                                                     <td class="botones">
                                                                         <a class="btn btn-outline-primary" href="{{ route('subjects.show',$asignatura->id)}}">Ver</a>
                                                                     </td>
+                                                                    @endif
                                                                 </tr>
                                                                 @endforeach
                                                             </tbody>

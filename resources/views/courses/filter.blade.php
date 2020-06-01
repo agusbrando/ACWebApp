@@ -15,16 +15,21 @@
 
             </div>
             <div class="d-flex flex-row-reverse">
+                @if(in_array('Eliminar_course', Session::get('user_permissions')))
                 <form method="post" action="{{ route('courses.destroy', array($courseId, $yearId))}}">
                     @csrf
 
                     @method('DELETE')
                     <button class="btn btn-outline-danger ml-2" type="submit">Eliminar</button>
                 </form>
+                @endif 
+                @if(in_array('Modificar_course', Session::get('user_permissions')))
+
                 <form method="post" action="">
                     @csrf
                     <button class="btn btn-outline-primary ml-2" type="submit">Editar Curso</button>
                 </form>
+                @endif
 
 
             </div>
@@ -134,8 +139,9 @@
                                                                                 @endforeach
                                                                             </select>
 
-
+                                                                            @if(in_array('Listar_course', Session::get('user_permissions')))
                                                                             <button class="btn btn-outline-info mt-2" role="button">Asignar Item</button>
+                                                                            @endif
                                                                         </form>
                                                                     </div>
                                                                 </td>

@@ -9,10 +9,12 @@
             <form action="{{ route('posts.store')}}" method="POST">
                 @csrf
                 @method('POST')
+                @if(in_array('Crear_post', Session::get('user_permissions')))
                 <div class="col-12">
                     <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                     <a class="btn btn-outline-warning float-right" href="{{ route('posts.index')}}" tabindex="-1" aria-disabled="true">Cancelar</a>
                 </div>
+                @endif
             </form>
         </div>
         <div class="card-body row no-gutters">
@@ -21,9 +23,11 @@
                 </br>
                 </br>
                 <div class="input-group hdtuto control-group lst increment">
+                @if(in_array('Crear_post', Session::get('user_permissions')))
                     <div class="input-group-btn">
                         <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Añadir</button>
                     </div>
+                @endif
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-10 p-3">

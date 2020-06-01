@@ -12,10 +12,12 @@
             <form action="{{ route('comments.update',$comment->id)}}" method="POST">
                 @method('PATCH')
                 <div>
+                @if(in_array('Modificar_comment', Session::get('user_permissions')))
                     <div class="col-12">
                         <input class="btn btn-outline-success float-right ml-1" type='submit' value="Guardar">
                         <a class="btn btn-outline-warning float-right" href="/posts" tabindex="-1" aria-disabled="true">Cancelar</a>
                     </div>
+                @endif
                 </div>
         </div>
         <div class="card-body row no-gutters">

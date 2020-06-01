@@ -11,14 +11,16 @@
                 <h3>Detalles Aula</h3>
             </div>
             <div>
-
+            @if(in_array('Modificar_classroom', Session::get('user_permissions')))
                 <a class="btn btn-outline-info" href="{{ route('classrooms.edit',$classroom->id)}}">Editar</a>
                 <form class="float-right" action="{{ route('classrooms.destroy',$classroom->id)}}" method="POST">
                     @csrf
+            @endif
+            @if(in_array('Eliminar_classroom', Session::get('user_permissions')))
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-danger ml-1">Eliminar</button>
+            @endif
                 </form>
-
             </div>
         </div>
         <div class="card-body row no-gutters">

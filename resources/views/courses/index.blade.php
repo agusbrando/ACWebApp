@@ -16,11 +16,12 @@
                 <a href="{{ url()->previous() }}" class="my-auto mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 <h3>Cursos Académicos</h3>
             </div>
-
+            @if(in_array('Crear_course', Session::get('user_permissions')))
             <div>
                 <a class="btn btn-outline-primary" href="{{route('courses.create')}}" role="button">Añadir Curso</a>
 
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
@@ -58,7 +59,9 @@
                                                             <th>Año</th>
                                                             <th>Nombre</th>
                                                             <th>Numero de Alumnos</th>
+                                                            @if(in_array('Listar_course', Session::get('user_permissions')))
                                                             <th>Actions</th>
+                                                            @endif
                                                         </tr>
                                                     </thead>
                                                     @foreach($year->yearUnions as $course)
@@ -70,9 +73,11 @@
                                                         <td>{{$course->num_students}}</td>
 
 
+                                                        @if(in_array('Listar_course', Session::get('user_permissions')))
                                                         <td class="botones">
                                                             <a class="btn btn-outline-primary" href="{{url('courses/show',array($course->course_id,$year->id))}}">Ver</a>
                                                         </td>
+                                                        @endif
                                                     </tr>
                                                     @endforeach
                                                     </tbody>

@@ -5,9 +5,11 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <h3>Aulas</h3>
+            @if(in_array('Crear_classroom', Session::get('user_permissions')))
             <div>
             <a class="btn btn-outline-success" href="{{ route('classrooms.create')}}">Añadir</a>
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters table-responsive">
             <table class="table col-12 ">
@@ -22,10 +24,12 @@
                 <tbody>
                     <tr>
                         <td>{{$classroom->name }}</td>
-                        <td>{{$classroom->number }}</td>                      
+                        <td>{{$classroom->number }}</td>     
+                        @if(in_array('Listar_classroom', Session::get('user_permissions')))                 
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('classrooms.show',$classroom->id)}}">Ver</a>
                         </td>
+                        @endif
                     </tr>
 
                 </tbody>
