@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             EvaluablesTableSeeder::class,
 	        StatesTableSeeder::class,
             
-            // EventsTableSeeder::class,
+            EventsTableSeeder::class,
             PostsTableSeeder::class,
             CommentsTableSeeder::class,
             MessagesTableSeeder::class,
@@ -43,23 +43,16 @@ class DatabaseSeeder extends Seeder
             
             YearsTableSeeder::class,
             YearUnionsTableSeeder::class,
-            //ProgramsTableSeeder::class,
-            //EvaluatedsTableSeeder::class,
+            ProgramsTableSeeder::class,
+            EvaluatedsTableSeeder::class,
 
             ItemsTableSeeder::class,
             
             PercentagesTableSeeder::class,
-            //SessionTimetableTableSeeder::class,
+            SessionTimetableTableSeeder::class,
             YearUnionUserTableSeeder::class,
-<<<<<<< HEAD
             MisbehaviorsTableSeeder::class,
             ItemYearTableSeeder::class,
-            
-
-=======
-            //MisbehaviorsTableSeeder::class,
-            //ItemYearTableSeeder::class,
->>>>>>> 206a9656a48dfa08084999de90d01966bd458d87
 
         ]);
     }
