@@ -124,9 +124,26 @@ class CourseController extends Controller
      */
     public function createPaso2()
     {
+        //Cojo los cursos y sus asignaturas
+        $i = 0;
+        $courses = Course::all();
+        $subjects = Subject::all();
+        foreach ($courses as $course) {
+            $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
+            $asignaturas = array();
+            foreach ($courseSubjects as $courseSubject) {
+                foreach ($subjects as $subject) {
+                    if ($subject->id == $courseSubject->subject_id) {
+                        $asignaturas[$i] = $subject;
+                        $i = $i + 1;
+                    }
+                }
+            }
+            $course->asignaturas = $asignaturas;
+        }
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
         $classrooms = Classroom::all();
-        $courses = Course::all();
+        
         $users = User::all();
         $subjects = Subject::all();
         $evaluations = Evaluation::all();
