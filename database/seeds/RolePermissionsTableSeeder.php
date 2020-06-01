@@ -17,7 +17,7 @@ class RolePermissionsTableSeeder extends Seeder
         $roles = Role::all();
         $permissions = Permission::all();
         foreach ($roles as $role) {
-            if ($role->name == 'admin') {
+            if ($role->name == 'Admin') {
                 foreach ($permissions as $permission) {
                     $permission->roles()->sync($role->id);
                 }

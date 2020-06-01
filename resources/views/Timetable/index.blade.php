@@ -33,7 +33,6 @@
                                 <td>Fecha Inicio</td>
                                 <td>Fecha Fin</td>
                                 @if(in_array('Listar_timetable', Session::get('user_permissions')))
-
                                 <td>Ver</td>
                                 @endif
                             </tr>
