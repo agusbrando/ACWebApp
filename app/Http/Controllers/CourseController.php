@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\PDF;
@@ -27,17 +28,16 @@ class CourseController extends Controller
     public function __construct(Request $request)
     {
         $user = Auth::user();
-        if($user != null){
+        if ($user != null) {
             $notifications = $user->unreadNotifications;
             $countNotifications = $user->unreadNotifications->count();
-        }else{
+        } else {
             $notifications = [];
             $countNotifications = 0;
         }
 
         $request->session()->put('notifications', $notifications);
         $request->session()->put('countNotifications', $countNotifications);
-
     }
 
     /**
@@ -54,19 +54,18 @@ class CourseController extends Controller
             //Guardo los diferentes yearUnion en cada año
             $year->yearUnions = YearUnion::select('year_id', 'course_id', 'name', 'level', 'num_students')
                 ->where('year_id', $year->id)->distinct()->join('courses', 'course_id', '=', 'courses.id')->get();
-
         }
         // Aquí le redirijes a la vista y le pasas los datos que quieres,
         //en este caso, le redirijo a la vista index y le paso los años con los cursos
         return view('courses.index', compact('years'));
     }
-
+    // CREATE PASO 1
     /**
      * Creamos un nuevo curso .
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createPaso1()
     {
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
         $classrooms = Classroom::all();
@@ -76,7 +75,7 @@ class CourseController extends Controller
         $evaluations = Evaluation::all();
         $years = Year::orderBy("date_start", "DESC")->get();
 
-        return view('courses.create', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
+        return view('courses.createPaso1', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
     }
 
     /**
@@ -85,7 +84,64 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storePaso1(Request $request)
+    {
+        for ($i = 1; $i <= 3; $i++) {
+            $curso = Course::where('id', $request->get('course'));
+
+            $fechasInicioFin = [];
+            $year = 1;
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_1_date_start'), 'date_end' => $request->get('eval_1_date_end')]); //1ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_2_date_start'), 'date_end' => $request->get('eval_2_date_end')]); //2ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_3_date_start'), 'date_end' => $request->get('eval_3_date_end')]); //3ºEVAL
+
+            foreach ($curso->subjects as $j => $subject) {
+                DB::table('yearUnions')->insert([
+                    'subject_id' => $subject->id,
+                    'course_id' => $curso->id,
+                    'evaluation_id' => $i,
+                    'year_id' => $year,
+                    'date_start' => $fechasInicioFin[$i - 1]['date_start'],
+                    'date_end' => $fechasInicioFin[$i - 1]['date_end'],
+                    'classroom_id' => $j + 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            if ($curso->level == 2) {
+                if ($i == 2) {
+                    break;
+                }
+            }
+        }
+    }
+    // CREATE PASO 2
+    /**
+     * Creamos un nuevo curso .
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createPaso2()
+    {
+        //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
+        $classrooms = Classroom::all();
+        $courses = Course::all();
+        $users = User::all();
+        $subjects = Subject::all();
+        $evaluations = Evaluation::all();
+        $years = Year::orderBy("date_start", "DESC")->get();
+
+        return view('courses.createPaso2', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
+    }
+
+    /**
+     * Guardamos el curso en la Base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storePaso2(Request $request)
     {
         for ($i = 1; $i <= 3; $i++) {
             $curso = Course::where('id', $request->get('course'));
@@ -118,6 +174,63 @@ class CourseController extends Controller
         }
     }
 
+    // CREATE PASO 3
+    /**
+     * Creamos un nuevo curso .
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createPaso3()
+    {
+        //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
+        $classrooms = Classroom::all();
+        $courses = Course::all();
+        $users = User::all();
+        $subjects = Subject::all();
+        $evaluations = Evaluation::all();
+        $years = Year::orderBy("date_start", "DESC")->get();
+
+        return view('courses.createPaso3', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
+    }
+
+    /**
+     * Guardamos el curso en la Base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storePaso3(Request $request)
+    {
+        for ($i = 1; $i <= 3; $i++) {
+            $curso = Course::where('id', $request->get('course'));
+
+            $fechasInicioFin = [];
+            $year = 1;
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_1_date_start'), 'date_end' => $request->get('eval_1_date_end')]); //1ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_2_date_start'), 'date_end' => $request->get('eval_2_date_end')]); //2ºEVAL
+            array_push($fechasInicioFin, ['date_start' => $request->get('eval_3_date_start'), 'date_end' => $request->get('eval_3_date_end')]); //3ºEVAL
+
+            foreach ($curso->subjects as $j => $subject) {
+                DB::table('yearUnions')->insert([
+                    'subject_id' => $subject->id,
+                    'course_id' => $curso->id,
+                    'evaluation_id' => $i,
+                    'year_id' => $year,
+                    'date_start' => $fechasInicioFin[$i - 1]['date_start'],
+                    'date_end' => $fechasInicioFin[$i - 1]['date_end'],
+                    'classroom_id' => $j + 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            if ($curso->level == 2) {
+                if ($i == 2) {
+                    break;
+                }
+            }
+        }
+    }
     /**
      * Redirigimos un curso al show para mostrar los detalles
      *
@@ -134,7 +247,7 @@ class CourseController extends Controller
 
         $course = Course::find($courseId);
         $yearUnionsPrueba = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
-        $yearUnionPrograms = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('evaluation_id',1)->get();
+        $yearUnionPrograms = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('evaluation_id', 1)->get();
         $yearUnions = YearUnion::select('id', 'evaluation_id', 'subject_id')->where('course_id', $courseId)->where('year_id', $yearId)->distinct()->get()->load('evaluation', 'subject');
         $subject_ids = array();
         foreach ($yearUnions as $yearUnion) {
@@ -168,7 +281,7 @@ class CourseController extends Controller
         $types = Type::where('model', Item::class);
         $classrooms = Classroom::all();
 
-        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId', 'yearUnionsPrueba','yearUnionPrograms'));
+        return view('courses.show', compact('classrooms', 'types', 'yearUnions', 'items', 'subjects', 'yearId', 'courseId', 'yearUnionsPrueba', 'yearUnionPrograms'));
     }
 
 
@@ -187,8 +300,8 @@ class CourseController extends Controller
         $courses = Course::all();
         $evaluations = Evaluation::all();
         $years = Year::all();
-        
-        return view('courses.edit', compact('yearUnionUsers','subjects','classrooms','courses','evaluations','years'));
+
+        return view('courses.edit', compact('yearUnionUsers', 'subjects', 'classrooms', 'courses', 'evaluations', 'years'));
     }
 
     /**
@@ -305,34 +418,30 @@ class CourseController extends Controller
 
         $course = Course::find($courseId);
         //Cojo las evaluaciones
-        $yearUnions = YearUnion::where('course_id', $courseId )->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
+        $yearUnions = YearUnion::where('course_id', $courseId)->where('year_id', $yearId)->where('subject_id', $course->subjects->first()->id)->get();
 
 
         $pdf = \PDF::loadView('courses.pdf', compact('yearUnions'))->setPaper('a4', 'landscape');
         return $pdf->download('courses.pdf');
-
-
     }
     public function asignarAsignaturas()
     {
-         $i = 0;
-         $courses = Course::all();
-         $subjects = Subject::all();
-         foreach($courses as $course){
-             $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
-             $asignaturas = array();
-             foreach($courseSubjects as $courseSubject){
-                 foreach($subjects as $subject){
-                     if($subject->id == $courseSubject->subject_id){
+        $i = 0;
+        $courses = Course::all();
+        $subjects = Subject::all();
+        foreach ($courses as $course) {
+            $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
+            $asignaturas = array();
+            foreach ($courseSubjects as $courseSubject) {
+                foreach ($subjects as $subject) {
+                    if ($subject->id == $courseSubject->subject_id) {
                         $asignaturas[$i] = $subject;
-                        $i = $i+1;
-                     }
-                    
-                 }
-                
-             }
+                        $i = $i + 1;
+                    }
+                }
+            }
             $course->asignaturas = $asignaturas;
-         }
+        }
 
 
         return view('courses.asignarAsignaturas', compact('courses'));
