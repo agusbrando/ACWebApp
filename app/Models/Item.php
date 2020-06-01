@@ -43,6 +43,6 @@ class Item extends Model
         
     }
     public function yearUnionUsers(){
-        return $this->belongsToMany(YearUnionUser::class, 'ItemYear', 'year_union_id', 'user_id')->using(ItemYear::class)->withTimeStamps()->withPivot('id');
+        return $this->belongsToMany(YearUnionUser::class, 'ItemYear', 'item_id', 'year_user_id')->using(ItemYear::class)->withTimeStamps()->withPivot('id');
     }
 }

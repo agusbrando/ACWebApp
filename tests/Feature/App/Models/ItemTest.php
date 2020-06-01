@@ -194,81 +194,99 @@ class ItemTest extends TestCase
 
     // public function testYearUnionUser()
     // {
-    //     //CREACION Year Union
-    //     $subject = Subject::create([
-    //         'name' => 'AsignaturaEjemplo',
-    //         'abbreviation' => 'ASEG',
-    //         "hours" => 256,
-    //         'color' => '#aaffaa'
+        //CREACION Year Union
+        // $subject = Subject::create([
+        //     'name' => 'AsignaturaEjemplo',
+        //     'abbreviation' => 'ASEG',
+        //     "hours" => 256,
+        //     'color' => '#aaffaa'
+        // ]);
+
+        // $course = Course::create([
+        //     'level' => 2,
+        //     'name' => 'CourseEjemplo',
+        //     'abbreviation' => 'CE',
+        //     'num_students' => 30,
+        // ]);
+
+
+        // $evaluation = Evaluation::create([
+        //     'name' => '1Eval'
+        // ]);
+
+        // $year = Year::create([
+        //     'name' => '2022/2024',
+        //     'date_start' => now(),
+        //     'date_end' => now()
+        // ]);
+
+        // $classroom1 = Classroom::create([
+        //     'name' => 'Clase',
+        //     'number' => 35,
+        // ]);
+
+        // $yearUnion = YearUnion::create([
+        //     'subject_id' => $subject->id,
+        //     'course_id' => $course->id,
+        //     'evaluation_id' => $evaluation->id,
+        //     'year_id' => $year->id,
+        //     'date_start' => now(),
+        //     'date_end' => now(),
+        //     'classroom_id' => $classroom1->id
+        // ]);
+
+        //Creacion User
+        // $role = Role::create([
+        //     'name' => 'Test',
+        //     'slug' => 'test',
+        //     'description' => 'test role'
+        // ]);
+
+        // $timetable = Timetable::create([
+        //     'name' => 'testCE2022',
+        //     'date_start' =>  now(),
+        //     'date_end' => now()
+        // ]);
+
+        // $user = User::create([
+        //     'first_name' => 'UserTest',
+        //     'last_name' => 'UserTest',
+        //     'email' => 'UserTest.test@champusaula.com',
+        //     'password' => bcrypt('password'),
+        //     'role_id' => $role->id,
+        //     'timetable_id' => $timetable->id
+        // ]);
+
+        // $user2 = User::create([
+        //     'first_name' => 'UserTest2',
+        //     'last_name' => 'UserTest2',
+        //     'email' => 'UserTest2.test@champusaula.com',
+        //     'password' => bcrypt('password'),
+        //     'role_id' => $role->id,
+        //     'timetable_id' => $timetable->id
+        // ]);
+
+        //Creacion Year_Union_User
+        // $yearUnion->users()->attach($user->id, ['assistance' => true]);
+        // $yearUnion->users()->attach($user2->id, ['assistance' => true]);
+
+
+    //     //CREACION Items
+
+    //     $yearUnionUser1 = YearUnionUser::create([
+    //         'year_union_id' => 1,
+    //         'user_id' => 1,
+    //         'assistance' => true,
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
     //     ]);
-
-    //     $course = Course::create([
-    //         'level' => 2,
-    //         'name' => 'CourseEjemplo',
-    //         'abbreviation' => 'CE',
-    //         'num_students' => 30,
+    //     $yearUnionUser2 = YearUnionUser::create([
+    //         'year_union_id' => 2,
+    //         'user_id' => 2,
+    //         'assistance' => true,
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
     //     ]);
-
-
-    //     $evaluation = Evaluation::create([
-    //         'name' => '1Eval'
-    //     ]);
-
-    //     $year = Year::create([
-    //         'name' => '2022/2024',
-    //         'date_start' => now(),
-    //         'date_end' => now()
-    //     ]);
-
-    //     $classroom1 = Classroom::create([
-    //         'name' => 'Clase',
-    //         'number' => 35,
-    //     ]);
-
-    //     $yearUnion = YearUnion::create([
-    //         'subject_id' => $subject->id,
-    //         'course_id' => $course->id,
-    //         'evaluation_id' => $evaluation->id,
-    //         'year_id' => $year->id,
-    //         'date_start' => now(),
-    //         'date_end' => now(),
-    //         'classroom_id' => $classroom1->id
-    //     ]);
-
-    //     //Creacion User
-    //     $role = Role::create([
-    //         'name' => 'Test',
-    //         'slug' => 'test',
-    //         'description' => 'test role'
-    //     ]);
-
-    //     $timetable = Timetable::create([
-    //         'name' => 'testCE2022',
-    //         'date_start' =>  now(),
-    //         'date_end' => now()
-    //     ]);
-
-    //     $user = User::create([
-    //         'first_name' => 'UserTest',
-    //         'last_name' => 'UserTest',
-    //         'email' => 'UserTest.test@champusaula.com',
-    //         'password' => bcrypt('password'),
-    //         'role_id' => $role->id,
-    //         'timetable_id' => $timetable->id
-    //     ]);
-
-    //     $user2 = User::create([
-    //         'first_name' => 'UserTest2',
-    //         'last_name' => 'UserTest2',
-    //         'email' => 'UserTest2.test@champusaula.com',
-    //         'password' => bcrypt('password'),
-    //         'role_id' => $role->id,
-    //         'timetable_id' => $timetable->id
-    //     ]);
-
-    //     //Creacion Year_Union_User
-    //     $yearUnion->users()->attach($user->id, ['assistance' => true]);
-    //     $yearUnion->users()->attach($user2->id, ['assistance' => true]);
 
     //     //CREACION Items
 
@@ -291,7 +309,7 @@ class ItemTest extends TestCase
     //     ]);
 
     //     $item = Item::create([
-    //         'name' => 'Portatil Asus1',
+    //         'name' => 'item test',
     //         'number' => 2000,
     //         'date_pucharse' => Carbon::create('2020', '03', '30'),
     //         'classroom_id' => $classroom2->id,
@@ -301,41 +319,48 @@ class ItemTest extends TestCase
     //         'updated_at' => now()
     //     ]);
 
-        
-    //     $yearUnionUsers = $yearUnion->users;
 
-    //     foreach ($yearUnionUsers as $yearUnionUser) {
-    //         //indicamos la tabla intermedia
-    //         $item->yearUnionUsers()->attach($yearUnionUser->pivot->id, );
-    //     }
+        // $yearUnionUsers = $yearUnion->users;
 
+        // foreach ($yearUnionUsers as $yearUnionUser) {
+        //     //indicamos la tabla intermedia
+        //     $item->yearUnionUsers()->attach($yearUnionUser->pivot->id,);
+        // }
+    //     $item->yearUnionUsers()->attach($yearUnionUser1->id);
+    //     $item->yearUnionUsers()->attach($yearUnionUser2->id);
+
+        // $yearUnionUser1->items()->attach($item->id);
+        // $yearUnionUser2->items()->attach($item->id);
 
     //     //Creamos un array de todos los id de los states creados en la DB
-    //     $yearUnionUsers = $item->yearUnionUsers->pluck('id');
+    //     $yearUnionUsers = $item->yearUnionUsers;
 
-    //     $expectedYearUnionUserIds = collect([
-    //         ['id' => $yearUnionUsers[0]->id],
-    //         ['id' => $yearUnionUsers[1]->id]
-    //     ])->pluck('id');
+    //     $this->assertEquals($yearUnionUsers[0]->id, $yearUnionUser1->id);
+    //     $this->assertEquals($yearUnionUsers[1]->id, $yearUnionUser2->id);
 
-    //     $this->assertEquals($yearUnionUsers, $expectedYearUnionUserIds);
-    //     //eliminamos los objetos de la BD
+        // $expectedYearUnionUserIds = collect([
+        //     ['id' => $yearUnionUser1->id],
+        //     ['id' => $yearUnionUser2->id]
+        // ])->pluck('id');
+
+        // $this->assertEquals($yearUnionUsers, $expectedYearUnionUserIds);
+        //eliminamos los objetos de la BD
 
 
-        
-    //     $yearUnion->forceDelete();
-    //     $classroom1->delete();
-    //     $year->delete();
-    //     $course->delete();
-    //     $evaluation->delete();
-    //     $subject->delete();
 
-    //     $user->forceDelete();
+        // $yearUnion->forceDelete();
+        // $classroom1->delete();
+        // $year->delete();
+        // $course->delete();
+        // $evaluation->delete();
+        // $subject->delete();
 
-    //     $item->forceDelete();
-    //     $classroom2->delete();
-    //     $type->delete();
-    //     $state->delete();
+        // $user->forceDelete();
+
+        // $item->forceDelete();
+        // $classroom2->delete();
+        // $type->delete();
+        // $state->delete();
     // }
 
     public function testClassroom()
