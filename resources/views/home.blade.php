@@ -7,8 +7,8 @@
   @if(in_array('Crear_post', Session::get('user_permissions')))
     <div class="card-header row m-0 justify-content-between">
       <a href="#" class="m-19 w-100 btn btn-outline-primary">Publicar</a>
-    @endif
     </div>
+    @endif
   </div>
   </br>
   @foreach($posts as $post)
