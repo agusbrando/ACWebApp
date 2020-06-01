@@ -19,7 +19,7 @@
     <div class="card-body row no-gutters">
 
       <div class="row border-right-0 border-top-0 border-bottom-0 col-12 w-100">
-        <form method="GET" action="{{ url('teacher') }}">
+          <form method="GET" action="{{ url('teacher') }}">
           {{ csrf_field() }}
       </div>
 
@@ -36,14 +36,18 @@
         <div id="buttons">
         
           @foreach($types as $type)
-            @if($type->id == 1 || ($type->id == 2 && $user->role_id != 4))
-              <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block" />
+            @if($type->id == 1)
+                <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block mb-1" />
+              
+            @endif
+            @if($type->id == 2 && $user->role_id != 4)
+              
+                <input type="submit" name="tipo" value="{{ $type->name }}" class="btn btn-info btn-block" />
             @endif
           @endforeach
-        
+          </form>
         </div>
         <br>
-        </form>
       </div>
     </div>
 
