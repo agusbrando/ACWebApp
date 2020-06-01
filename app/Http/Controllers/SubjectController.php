@@ -309,6 +309,7 @@ class SubjectController extends Controller
             // TODO devolver error
         }
 
+
         $year = Year::find($year_id);
         $subject = Subject::find($subject_id);
         $course = Course::find($course_id);
@@ -316,12 +317,15 @@ class SubjectController extends Controller
         $taskTypes = Type::all()->where('model', Task::class);
         $evalFinal = null;
 
+
         foreach ($yearUnions as $yearUnion) {
             $yearUnion->evaluation = $yearUnion->evaluation;
             $yearUnion->percentages = $yearUnion->types;
             $yearUnion->users = $yearUnion->users;
             $yearUnion->tareas = $taskTypes;
             $users = $yearUnion->users;
+            $yearUnion->boletinEvalFinal = null;
+            $recuperadoEvalFinal = false;
             foreach ($yearUnion->users as $user) {
                 $evalFinalRecuperado = false;
                 if (count($taskTypes) > 0) {
@@ -365,6 +369,7 @@ class SubjectController extends Controller
                                             $evalFinal[$user->id] = $user->tareas[$task_type->name];
                                             $yearUnion->evalFinal = $evalFinal;
                                             $recuperado = true;
+                                            $recuperadoEvalFinal[$user->id] = true;
                                             break;
                                         } else {
                                             $sumaFinal += $tareas[$task_type->name];
@@ -394,21 +399,34 @@ class SubjectController extends Controller
                 }
                 if (isset($evalFinal[$user->id]) && $recuperado != true) {
                     $evalFinal[$user->id] += $user->nota_final;
-                    $yearUnion->evalFinal = $evalFinal; 
+                    $yearUnion->evalFinal = $evalFinal;
                 } else if ($recuperado != true) {
                     $evalFinal[$user->id] = $user->nota_final;
                     $yearUnion->evalFinal = $evalFinal;
                 }
-                $user->boletin = $evalFinal[$user->id];
             }
             //TODO comprobar que no ha recuperado
             if ($yearUnion->evaluation->name == "EvalFinal") {
                 foreach ($yearUnion->evalFinal as $id_user => $nota) {
-                    $user = User::find($id_user);
-                    $notaFinal = $evalFinal[$id_user] / 3;
-                    $evalFinal[$id_user] = round($notaFinal, 2);
-                    $yearUnion->evalFinal = $evalFinal;
-                    $user->boletin = round($notaFinal, 2);
+                    $notaFinal = 0;
+                    if (isset($recuperadoEvalFinal[$id_user]) &&  $recuperadoEvalFinal[$id_user]) {
+                        $evalFinal[$id_user] = $nota;
+                        $yearUnion->evalFinal = $evalFinal;
+                        $boletinEvalFinal[$id_user] = $nota;
+                        $yearUnion->boletinEvalFinal = $boletinEvalFinal;
+                    } else {
+                        $notaFinal = $nota / 3;
+                        $evalFinal[$id_user] = round($notaFinal, 2);
+                        $yearUnion->evalFinal = $evalFinal;
+
+                        if ($notaFinal < 5) {
+                            $boletinEvalFinal[$id_user] = floor($notaFinal);
+                            $yearUnion->boletinEvalFinal = $boletinEvalFinal;
+                        } else if ($notaFinal > 5) {
+                            $boletinEvalFinal[$id_user] = round($notaFinal, 0);
+                            $yearUnion->boletinEvalFinal = $boletinEvalFinal;
+                        }
+                    }
                 }
             }
         }
