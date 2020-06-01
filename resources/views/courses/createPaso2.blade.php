@@ -19,7 +19,7 @@
                 <h3>Crear Curso - Paso 2</h3>
 
             </div>
-            <form method="get" action="{{ route('courses.createPaso3') }}">
+            <form method="get" action="{{ url('courses/createPaso3') }}">
                 @csrf
                 @method('GET')
                 @if(in_array('Crear_course', Session::get('user_permissions')))
