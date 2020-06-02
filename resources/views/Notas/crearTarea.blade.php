@@ -13,7 +13,7 @@
                     <input type="hidden" name="subject" value={{$yearUnion->subject_id}}>
                     <input type="hidden" name="year" value={{$yearUnion->year_id}}>
                     <input type="hidden" name="course" value={{$yearUnion->course_id}}>
-                    <input type="hidden" name="evaluation" value={{$yearUnion->id}}>
+                    <input type="hidden" name="evaluation" value={{$yearUnion->evaluation->id}}>
                     <button type="submit" class="btn btn-outline-warning float-right mr-1">Cancelar</button>
                 </form>
                 <form action="{{ route('tasks.store') }}" method="post">
