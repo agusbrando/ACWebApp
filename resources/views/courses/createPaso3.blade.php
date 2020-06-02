@@ -14,7 +14,7 @@
                 <form method="get">
                     @csrf
                     @method('GET')
-                    <a href="{{ url()->previous() }}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                    <a href="{{ route('courses.createPaso2') }}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
                 </form>
                 <h3>Crear Curso - Paso 3</h3>
 
@@ -34,8 +34,11 @@
         </div>
         <div class="card-body row no-gutters">
             <div class="col-sm-12">
-                <div class="divShowCoursesContent  d-flex flex-row bd-highlight mb-3 ">
-                    <div id="accordion" class="w-100 h-100">
+                <div class="divShowCoursesContent   ">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width: 99%"></div>
+                    </div>
+                    <div id="accordion" class="w-100 h-100 mt-5">
 
                         @foreach($courses as $course)
                         <div class="card">

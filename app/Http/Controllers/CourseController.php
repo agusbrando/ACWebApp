@@ -21,6 +21,7 @@ use App\Models\Subject;
 use App\Models\YearUnion;
 use App\Models\YearUnionUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CourseController extends Controller
 {
@@ -68,7 +69,7 @@ class CourseController extends Controller
     public function createPaso1()
     {
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
-        
+
         $years = Year::orderBy("date_start", "DESC")->get();
 
         return view('courses.createPaso1', compact('years'));
@@ -76,18 +77,28 @@ class CourseController extends Controller
 
     // CREATE PASO 2
     /**
-     * Creamos un nuevo curso .
+     * Creamos un nuevo curso 
+     * Recibo los datos del paso anterior
      *
      * @return \Illuminate\Http\Response
      */
-    public function createPaso2()
+    public function createPaso2(Request $request)
     {
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
-       
-        $courses = Course::all();
-        
 
-        return view('courses.createPaso2', compact('courses'));
+        $yearSeleccionado = $request->get('selectYear_id');
+        $nuevoYear = $request->get('nuevoYearTextInput');
+
+        if ($yearSeleccionado != null && $nuevoYear != null || $yearSeleccionado != "" && $nuevoYear != "") {
+            $courses = Course::all();
+            if($yearSeleccionado != null && $nuevoYear == null || $yearSeleccionado != "" && $nuevoYear == ""){
+                $courses = Course::find($yearSeleccionado);
+            }
+
+            return view('courses.createPaso2', compact('courses'));
+        } else {
+            return Redirect::to('courses/createPaso1')->with('error', 'No has seleccionado o creado ningún año');
+        }
     }
 
     // CREATE PASO 3

@@ -100,7 +100,7 @@ Route::resource('items', 'ItemController')->middleware('auth');
 Route::resource('states', 'StateController')->middleware('auth');
 
 //RUTAS COURSEs Sergio Lopez
-Route::get('courses', 'CourseController@index');
+Route::get('courses', 'CourseController@index')->name('courses.index');
 //create
 Route::get('courses/createPaso1', 'CourseController@createPaso1')->name('courses.createPaso1')->middleware('auth');
 Route::get('courses/createPaso2', 'CourseController@createPaso2')->name('courses.createPaso2')->middleware('auth');
