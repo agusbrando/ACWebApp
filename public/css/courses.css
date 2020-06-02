@@ -1,13 +1,18 @@
-.divShowCoursesContent{
+.divShowCoursesContent {
     min-height: 500px;
     max-height: fit-content;
 }
-.divShowCoursesContent h2{
+
+.divShowCoursesContent h2 {
     padding-bottom: 220px;
 }
 
-.spanShowBlade{
+.spanShowBlade {
     min-width: fit-content;
     width: 150px;
     margin-bottom: 5px;
+}
+
+.bloque-duracion-year {
+    border: 2px black;
 }

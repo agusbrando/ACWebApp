@@ -40,7 +40,7 @@
                     @csrf
                     <div class="form-group ">
                         <div class="form-group mt-5 mb-5">
-                            <h6 class="card-title">En que año se imparte</h6>
+                            <h5 class="card-title">En que año se imparte</h5>
                             <select class="form-control mb-5" id="year_id" name="year_id">
                                 <option disabled selected>Selecciona un año</option>
                                 <!--Hace la funcion de un placeholder-->
@@ -50,25 +50,29 @@
 
                             </select>
                         </div>
-                        <hr class="mt-5 mb-5">
-                        <div class="mt-5">
-                            <h6 class="card-title">Crea un año</h6>
-                            <input type="text" id="nuevoYear" name="nuevoYear" placeholder="Ejemplo: 2020/2021" class="form-control">
+
+                        <div class="form-group mt-4 card shadow-sm p-3 mb-5 bg-white rounded">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3">Crea un año</h5>
+                                <input type="text" id="nuevoYear" name="nuevoYear" placeholder="Ejemplo: 2020/2021" class="form-control mb-4">
+
+                                <h6 class=" mb-3">Duración del año</h6>
+                                <label for="nombre">Fecha de incio</label>
+                                <input type="date" id="date_pucharse" name="date_pucharse" placeholder="- Seleccionar fecha -" class="form-control">
+
+                                <label for="nombre">Fecha de fin</label>
+                                <input type="date" id="date_pucharse" name="date_pucharse" placeholder="- Seleccionar fecha -" class="form-control">
+                            </div>
                         </div>
+
+                        </form>
                     </div>
-
-
-
-
-
-                    </form>
                 </div>
-            </div>
 
-        </div>
-        <div class=" card-footer w-100">
-            <a class="btn btn-outline-warning float-right" href="/courses" aria-disabled="true">Cancelar</a>
-        </div>
+            </div>
+            <div class=" card-footer w-100">
+                <a class="btn btn-outline-warning float-right" href="/courses" aria-disabled="true">Cancelar</a>
+            </div>
 </main>
 
 @endsection

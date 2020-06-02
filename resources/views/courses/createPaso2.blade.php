@@ -59,7 +59,7 @@
                             @if(in_array('Listar_course', Session::get('user_permissions')))
                             <td class="botones">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch{{$course->id}}" name="curso{{$course->id}}Añadido" value="{{$course->id}}">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch{{$course->id}}" name="cursos[]" value="{{$course->id}}">
                                     <label class="custom-control-label" for="customSwitch{{$course->id}}" name="curso{{$course->id}}Añadido"></label>
                                 </div>
                             </td>
