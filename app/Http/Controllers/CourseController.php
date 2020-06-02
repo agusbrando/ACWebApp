@@ -90,12 +90,32 @@ class CourseController extends Controller
         $nuevoYear = $request->get('nuevoYearTextInput');
 
         if ($yearSeleccionado != null && $nuevoYear != null || $yearSeleccionado != "" && $nuevoYear != "") {
-            $courses = Course::all();
-            if($yearSeleccionado != null && $nuevoYear == null || $yearSeleccionado != "" && $nuevoYear == ""){
-                $courses = Course::find($yearSeleccionado);
+            
+            if($yearSeleccionado == null && $nuevoYear != null || $yearSeleccionado == "" && $nuevoYear != ""){
+                //Si no ha seleccionado un year comprueba si ha rellenado el formulario para crear el year nuevo
+                if($request->validate([
+                    'nuevoYearTextInput' => 'required',
+                    'date_inicio' => 'required',
+                    'date_fin' => 'required',
+                ])){
+                    //creo el nuevo year
+                    DB::table('years')->insert([
+                        'name' => $yearSeleccionado,
+                        'date_start' => $request->get('date_inicio'),
+                        'date_end' => $request->get('date_fin'),
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+
+                    return view('courses.createPaso3', compact('yearSeleccionado'));
+
+                }else{
+                    return Redirect::to('courses/createPaso1')->with('error', 'No se ha completado correctamente el formulario');
+                }
+            }else{
+                return view('courses.createPaso3', compact('yearSeleccionado'));
             }
 
-            return view('courses.createPaso2', compact('courses'));
         } else {
             return Redirect::to('courses/createPaso1')->with('error', 'No has seleccionado o creado ningún año');
         }
@@ -107,7 +127,7 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createPaso3()
+    public function createPaso3($yearId)
     {
         //Cojo los cursos y sus asignaturas
         $i = 0;

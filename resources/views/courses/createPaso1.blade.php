@@ -37,7 +37,7 @@
 
                 <div class="container divShowCoursesContent">
                     @if ($message = Session::get('warning'))
-                    <div class="alert alert-info alert-block">
+                    <div class="alert alert-danger alert-block">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <strong>{{ $message }}</strong>
                     </div>
@@ -72,10 +72,10 @@
                                 <hr>
                                 <h6 class=" mb-3">Duración del año</h6>
                                 <label for="nombre">Fecha de incio</label>
-                                <input type="date" id="date_pucharse" name="date_pucharse" placeholder="- Seleccionar fecha -" class="form-control">
+                                <input type="date" id="date_inicio" name="date_inicio" placeholder="- Seleccionar fecha -" class="form-control">
 
                                 <label for="nombre">Fecha de fin</label>
-                                <input type="date" id="date_pucharse" name="date_pucharse" placeholder="- Seleccionar fecha -" class="form-control">
+                                <input type="date" id="date_fin" name="date_fin" placeholder="- Seleccionar fecha -" class="form-control">
                             </div>
                         </div>
 
