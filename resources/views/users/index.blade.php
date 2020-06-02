@@ -8,9 +8,11 @@
     <div class="card shadow">
         <div class="card-header row m-0 justify-content-between">
             <h3>Usuarios</h3>
+            @if(in_array('Crear_user', Session::get('user_permissions')))                       
             <div>
                 <a class="btn btn-outline-success" href="{{ route('users.create')}}">Añadir</a>
             </div>
+            @endif
         </div>
         <div class="card-body row no-gutters table-responsive">
             <table id="dtBasicExample" class="table col-12 ">
@@ -30,9 +32,11 @@
                         <td>{{$user->last_name }}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->role->name}}</td>
+                        @if(in_array('Listar_user', Session::get('user_permissions')))                       
                         <td class="botones">
                             <a class="btn btn-outline-primary" href="{{ route('users.show',$user->id)}}">Ver</a>
                         </td>
+                        @endif
                     </tr>
 
                 </tbody>
