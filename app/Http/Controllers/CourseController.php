@@ -68,54 +68,12 @@ class CourseController extends Controller
     public function createPaso1()
     {
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
-        $classrooms = Classroom::all();
-        $courses = Course::all();
-        $users = User::all();
-        $subjects = Subject::all();
-        $evaluations = Evaluation::all();
+        
         $years = Year::orderBy("date_start", "DESC")->get();
 
-        return view('courses.createPaso1', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
+        return view('courses.createPaso1', compact('years'));
     }
 
-    /**
-     * Guardamos el curso en la Base de datos.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storePaso1(Request $request)
-    {
-        for ($i = 1; $i <= 3; $i++) {
-            $curso = Course::where('id', $request->get('course'));
-
-            $fechasInicioFin = [];
-            $year = 1;
-            array_push($fechasInicioFin, ['date_start' => $request->get('eval_1_date_start'), 'date_end' => $request->get('eval_1_date_end')]); //1ºEVAL
-            array_push($fechasInicioFin, ['date_start' => $request->get('eval_2_date_start'), 'date_end' => $request->get('eval_2_date_end')]); //2ºEVAL
-            array_push($fechasInicioFin, ['date_start' => $request->get('eval_3_date_start'), 'date_end' => $request->get('eval_3_date_end')]); //3ºEVAL
-
-            foreach ($curso->subjects as $j => $subject) {
-                DB::table('yearUnions')->insert([
-                    'subject_id' => $subject->id,
-                    'course_id' => $curso->id,
-                    'evaluation_id' => $i,
-                    'year_id' => $year,
-                    'date_start' => $fechasInicioFin[$i - 1]['date_start'],
-                    'date_end' => $fechasInicioFin[$i - 1]['date_end'],
-                    'classroom_id' => $j + 1,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            if ($curso->level == 2) {
-                if ($i == 2) {
-                    break;
-                }
-            }
-        }
-    }
     // CREATE PASO 2
     /**
      * Creamos un nuevo curso .
@@ -125,53 +83,11 @@ class CourseController extends Controller
     public function createPaso2()
     {
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
-        $classrooms = Classroom::all();
+       
         $courses = Course::all();
-        $users = User::all();
-        $subjects = Subject::all();
-        $evaluations = Evaluation::all();
-        $years = Year::orderBy("date_start", "DESC")->get();
+        
 
-        return view('courses.createPaso2', compact('classrooms', 'courses', 'users', 'subjects', 'evaluations', 'years'));
-    }
-
-    /**
-     * Guardamos el curso en la Base de datos.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storePaso2(Request $request)
-    {
-        for ($i = 1; $i <= 3; $i++) {
-            $curso = Course::where('id', $request->get('course'));
-
-            $fechasInicioFin = [];
-            $year = 1;
-            array_push($fechasInicioFin, ['date_start' => $request->get('eval_1_date_start'), 'date_end' => $request->get('eval_1_date_end')]); //1ºEVAL
-            array_push($fechasInicioFin, ['date_start' => $request->get('eval_2_date_start'), 'date_end' => $request->get('eval_2_date_end')]); //2ºEVAL
-            array_push($fechasInicioFin, ['date_start' => $request->get('eval_3_date_start'), 'date_end' => $request->get('eval_3_date_end')]); //3ºEVAL
-
-            foreach ($curso->subjects as $j => $subject) {
-                DB::table('yearUnions')->insert([
-                    'subject_id' => $subject->id,
-                    'course_id' => $curso->id,
-                    'evaluation_id' => $i,
-                    'year_id' => $year,
-                    'date_start' => $fechasInicioFin[$i - 1]['date_start'],
-                    'date_end' => $fechasInicioFin[$i - 1]['date_end'],
-                    'classroom_id' => $j + 1,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            if ($curso->level == 2) {
-                if ($i == 2) {
-                    break;
-                }
-            }
-        }
+        return view('courses.createPaso2', compact('courses'));
     }
 
     // CREATE PASO 3
@@ -182,9 +98,26 @@ class CourseController extends Controller
      */
     public function createPaso3()
     {
+        //Cojo los cursos y sus asignaturas
+        $i = 0;
+        $courses = Course::all();
+        $subjects = Subject::all();
+        foreach ($courses as $course) {
+            $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
+            $asignaturas = array();
+            foreach ($courseSubjects as $courseSubject) {
+                foreach ($subjects as $subject) {
+                    if ($subject->id == $courseSubject->subject_id) {
+                        $asignaturas[$i] = $subject;
+                        $i = $i + 1;
+                    }
+                }
+            }
+            $course->asignaturas = $asignaturas;
+        }
+
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
         $classrooms = Classroom::all();
-        $courses = Course::all();
         $users = User::all();
         $subjects = Subject::all();
         $evaluations = Evaluation::all();

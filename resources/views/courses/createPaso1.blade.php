@@ -38,42 +38,23 @@
 
                     <!-- Proteccion contra consultas no deseadas -->
                     @csrf
-                    <h3 class="pb-5 pt-3">¿En que año se va a impartir este curso?</h3 class="pb-2">
-                    <div class="form-group">
-                        
-                        <div class="card-deck justify-content-between p">
-                            <div class="card text-white bg-info mb-3 " style="max-width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Selecciona un año</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group ">
-                                        <h6 class="card-title">Año</h6>
-                                        <select class="form-control" id="year_id" name="year_id">
-                                            <option disabled selected>Selecciona un año</option>
-                                            <!--Hace la funcion de un placeholder-->
-                                            @foreach($years as $year)
-                                            <option value="{{$year->id}}">{{$year->name}}</option>
-                                            @endforeach
+                    <div class="form-group ">
+                        <div class="form-group mt-5 mb-5">
+                            <h6 class="card-title">En que año se imparte</h6>
+                            <select class="form-control mb-5" id="year_id" name="year_id">
+                                <option disabled selected>Selecciona un año</option>
+                                <!--Hace la funcion de un placeholder-->
+                                @foreach($years as $year)
+                                <option value="{{$year->id}}">{{$year->name}}</option>
+                                @endforeach
 
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                                <div class="card-header">
-                                    <h5 class="card-title">Crea un Año</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div>
-                                        <h6 class="card-title">Introduce un año</h6>
-                                        <input type="text" id="nuevoYear" name="nuevoYear" placeholder="Ejemplo: 2020/2021" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
+                            </select>
                         </div>
-
+                        <hr class="mt-5 mb-5">
+                        <div class="mt-5">
+                            <h6 class="card-title">Crea un año</h6>
+                            <input type="text" id="nuevoYear" name="nuevoYear" placeholder="Ejemplo: 2020/2021" class="form-control">
+                        </div>
                     </div>
 
 
