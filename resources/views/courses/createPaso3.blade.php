@@ -11,12 +11,10 @@
         <div class="card-header row m-0 justify-content-between">
 
             <div class="d-flex flex-row">
-                <form method="get">
-                    @csrf
-                    @method('GET')
+                
                     <input type="hidden" value="$year->id" name="selectYear_id">
-                    <a href="{{ route('courses.createPaso2') }}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
-                </form>
+                    <a href="{{ url()->previous() }}" class="my-1 mx-1 h5"><i class="fas fa-arrow-left"></i></a>
+                
                 <h3>Crear Curso - Paso 3</h3>
 
             </div>
