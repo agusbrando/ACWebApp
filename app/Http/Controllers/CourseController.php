@@ -89,7 +89,7 @@ class CourseController extends Controller
         $yearSeleccionado = $request->get('selectYear_id');
         $nuevoYear = $request->get('nuevoYearTextInput');
 
-        if ($yearSeleccionado != null && $nuevoYear != null || $yearSeleccionado != "" && $nuevoYear != "") { //Si no hay nada vacio
+        if ($yearSeleccionado != null || $yearSeleccionado != "" || $nuevoYear != null || $nuevoYear != "") { //Si no hay nada vacio
 
             if ($yearSeleccionado == null && $nuevoYear != null || $yearSeleccionado == "" && $nuevoYear != "") {
                 //Si no ha seleccionado un year comprueba si ha rellenado el formulario para crear el year nuevo
@@ -100,8 +100,9 @@ class CourseController extends Controller
                 ])) {
                     $nuevoYearTextInput = $request->get('nuevoYearTextInput'); //Id del year recogido
                     //Compruebo que no exista en la BD
-                    $year = Year::find('name', $nuevoYearTextInput);
-                    if($year == null){
+                    $year = Year::where('name',$nuevoYearTextInput)->first();
+                    
+                    if( $year== null){
                         
                         //Si no existe creo el nuevo year
                         DB::table('years')->insert([
@@ -123,12 +124,13 @@ class CourseController extends Controller
                 }
             } elseif ($yearSeleccionado != null && $nuevoYear == null || $yearSeleccionado != "" && $nuevoYear == "") {
                 //Si entra aqui es porque ha seleccionado un year
-                $year = Year::find('yearSeleccionado');
+                $year = Year::find($yearSeleccionado);
                 return view('courses.createPaso2', compact('year','courses'));
             } else {
                 return redirect()->back()->with(['errors', 'No has seleccionado o creado ningún año']);
             }
-        } else {
+
+        }elseif($yearSeleccionado == null || $nuevoYear == null || $yearSeleccionado == "" || $nuevoYear == "") {
 
             if ($yearSeleccionado == null && $nuevoYear != null || $yearSeleccionado == "" && $nuevoYear != "") {
 
@@ -157,6 +159,8 @@ class CourseController extends Controller
             } else {
                 return redirect()->back()->with(['errors', 'No has seleccionado o creado ningún año']);
             }
+        }else{
+            return redirect()->back()->with(['errors', 'Los parámetros introducidos son erróneos']);
         }
     }
 
@@ -169,7 +173,7 @@ class CourseController extends Controller
     public function createPaso3($yearId, Request $request)
     {
 
-        $cursosRecibidos = $request->get('cursos[]');
+        $cursosRecibidos = $request->get('cursos');
 
         //Cojo los cursos y sus asignaturas
         $i = 0;
