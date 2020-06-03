@@ -85,39 +85,78 @@ class CourseController extends Controller
     public function createPaso2(Request $request)
     {
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables
-
+        $courses = Course::all();
         $yearSeleccionado = $request->get('selectYear_id');
         $nuevoYear = $request->get('nuevoYearTextInput');
 
-        if ($yearSeleccionado != null && $nuevoYear != null || $yearSeleccionado != "" && $nuevoYear != "") {
-            
-            if($yearSeleccionado == null && $nuevoYear != null || $yearSeleccionado == "" && $nuevoYear != ""){
+        if ($yearSeleccionado != null && $nuevoYear != null || $yearSeleccionado != "" && $nuevoYear != "") { //Si no hay nada vacio
+
+            if ($yearSeleccionado == null && $nuevoYear != null || $yearSeleccionado == "" && $nuevoYear != "") {
                 //Si no ha seleccionado un year comprueba si ha rellenado el formulario para crear el year nuevo
-                if($request->validate([
+                if ($request->validate([
                     'nuevoYearTextInput' => 'required',
                     'date_inicio' => 'required',
                     'date_fin' => 'required',
-                ])){
+                ])) {
+                    $nuevoYearTextInput = $request->get('nuevoYearTextInput'); //Id del year recogido
+                    //Compruebo que no exista en la BD
+                    $year = Year::find('name', $nuevoYearTextInput);
+                    if($year == null){
+                        
+                        //Si no existe creo el nuevo year
+                        DB::table('years')->insert([
+                            'name' => $request->get('nuevoYearTextInput'),
+                            'date_start' => $request->get('date_inicio'),
+                            'date_end' => $request->get('date_fin'),
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                        $year = Year::orderBy("id", "DESC")->first();
+                        return view('courses.createPaso2', compact('year','courses'));
+                    }else{
+                        //ya existe el year
+                        return view('courses.createPaso2', compact('year','courses'));
+                    }
+
+                } else {
+                    return redirect('courses/createPaso1')->with('error', 'No se ha completado correctamente el formulario');
+                }
+            } elseif ($yearSeleccionado != null && $nuevoYear == null || $yearSeleccionado != "" && $nuevoYear == "") {
+                //Si entra aqui es porque ha seleccionado un year
+                $year = Year::find('yearSeleccionado');
+                return view('courses.createPaso2', compact('year','courses'));
+            } else {
+                return redirect()->back()->with(['errors', 'No has seleccionado o creado ningún año']);
+            }
+        } else {
+
+            if ($yearSeleccionado == null && $nuevoYear != null || $yearSeleccionado == "" && $nuevoYear != "") {
+
+                //Si no ha seleccionado un year comprueba si ha rellenado el formulario para crear el year nuevo
+                if ($request->validate([
+                    'nuevoYearTextInput' => 'required',
+                    'date_inicio' => 'required',
+                    'date_fin' => 'required',
+                ])) {
                     //creo el nuevo year
                     DB::table('years')->insert([
-                        'name' => $yearSeleccionado,
+                        'name' => $request->get('nuevoYearTextInput'),
                         'date_start' => $request->get('date_inicio'),
                         'date_end' => $request->get('date_fin'),
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
-
-                    return view('courses.createPaso3', compact('yearSeleccionado'));
-
-                }else{
-                    return Redirect::to('courses/createPaso1')->with('error', 'No se ha completado correctamente el formulario');
+                    $year = Year::orderBy("id", "DESC")->first();
+                    return view('courses.createPaso2', compact('year','courses'));
+                } else {
+                    return redirect('courses/createPaso1')->with('error', 'No se ha completado correctamente el formulario');
                 }
-            }else{
-                return view('courses.createPaso3', compact('yearSeleccionado'));
+            } elseif ($yearSeleccionado != null && $nuevoYear == null || $yearSeleccionado != "" && $nuevoYear == "") {
+                $year = Year::find('yearSeleccionado');
+                return view('courses.createPaso2', compact('year','courses'));
+            } else {
+                return redirect()->back()->with(['errors', 'No has seleccionado o creado ningún año']);
             }
-
-        } else {
-            return Redirect::to('courses/createPaso1')->with('error', 'No has seleccionado o creado ningún año');
         }
     }
 
@@ -127,24 +166,34 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createPaso3($yearId)
+    public function createPaso3($yearId, Request $request)
     {
+
+        $cursosRecibidos = $request->get('cursos[]');
+
         //Cojo los cursos y sus asignaturas
         $i = 0;
-        $courses = Course::all();
-        $subjects = Subject::all();
-        foreach ($courses as $course) {
-            $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
-            $asignaturas = array();
-            foreach ($courseSubjects as $courseSubject) {
-                foreach ($subjects as $subject) {
-                    if ($subject->id == $courseSubject->subject_id) {
-                        $asignaturas[$i] = $subject;
-                        $i = $i + 1;
+        $courses= array();
+
+        if($cursosRecibidos != null){ //Si no es nulo recoge todos los cursos que ha recibido si no se pasa vacio
+            for($j = 0; count($cursosRecibidos) < 0; $j++){
+                $courses[$j] = $cursosRecibidos[$j];
+            }
+            
+            $subjects = Subject::all();
+            foreach ($courses as $course) {
+                $courseSubjects = CourseSubject::where('course_id', $course->id)->get();
+                $asignaturas = array();
+                foreach ($courseSubjects as $courseSubject) {
+                    foreach ($subjects as $subject) {
+                        if ($subject->id == $courseSubject->subject_id) {
+                            $asignaturas[$i] = $subject;
+                            $i = $i + 1;
+                        }
                     }
                 }
+                $course->asignaturas = $asignaturas;
             }
-            $course->asignaturas = $asignaturas;
         }
 
         //Cojo los diferentes datos de estas tablas para mostrarlos en los desplegables

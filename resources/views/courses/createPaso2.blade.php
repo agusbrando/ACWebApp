@@ -19,7 +19,7 @@
                 <h3>Crear Curso - Paso 2</h3>
 
             </div>
-            <form method="get" action="{{ url('courses/createPaso3') }}">
+            <form method="get" action="{{ route('courses.createPaso3', $year) }}">
                 @csrf
                 @method('GET')
                 @if(in_array('Crear_course', Session::get('user_permissions')))
@@ -33,7 +33,7 @@
             <div class="col-sm-12">
                 <div class="divShowCoursesContent  ">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 66%"></div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100" style="width: 66%"></div>
                     </div>
                     <div class="d-flex flex-row bd-highlight">
                         <table id='mytable' class="table w-100 mt-5">
