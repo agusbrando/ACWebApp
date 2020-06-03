@@ -407,24 +407,28 @@ class SubjectController extends Controller
             }
             //TODO comprobar que no ha recuperado
             if ($yearUnion->evaluation->name == "EvalFinal") {
-                foreach ($yearUnion->evalFinal as $id_user => $nota) {
-                    $notaFinal = 0;
-                    if (isset($recuperadoEvalFinal[$id_user]) &&  $recuperadoEvalFinal[$id_user]) {
-                        $evalFinal[$id_user] = $nota;
-                        $yearUnion->evalFinal = $evalFinal;
-                        $boletinEvalFinal[$id_user] = $nota;
-                        $yearUnion->boletinEvalFinal = $boletinEvalFinal;
-                    } else {
-                        $notaFinal = $nota / 3;
-                        $evalFinal[$id_user] = round($notaFinal, 2);
-                        $yearUnion->evalFinal = $evalFinal;
+                foreach ($yearUnion->users as $user) {
+                    $calculoFinal = true;
+                    foreach ($user->tareas as $tipo => $notaTarea) {
+                        if ($notaTarea != 0) {
+                            $calculoFinal = false;
+                            $evalFinal[$user->id] = $user->nota_final;
+                        }
+                    }
+                    if ($calculoFinal) {
+                        $notaFinal = 0;
+                        if (isset($recuperadoEvalFinal[$user->id]) &&  $recuperadoEvalFinal[$user->id]) {
+                            $user->nota_final = $evalFinal[$user->id];
+                            $user->boletin = $evalFinal[$user->id];
+                        } else {
+                            $notaFinal = $evalFinal[$user->id] / 3;
+                            $user->nota_final = round($notaFinal, 2);
 
-                        if ($notaFinal < 5) {
-                            $boletinEvalFinal[$id_user] = floor($notaFinal);
-                            $yearUnion->boletinEvalFinal = $boletinEvalFinal;
-                        } else if ($notaFinal > 5) {
-                            $boletinEvalFinal[$id_user] = round($notaFinal, 0);
-                            $yearUnion->boletinEvalFinal = $boletinEvalFinal;
+                            if ($notaFinal < 5) {
+                                $user->boletin = floor($notaFinal);
+                            } else if ($notaFinal > 5) {
+                                $user->boletin = round($notaFinal, 0);
+                            }
                         }
                     }
                 }

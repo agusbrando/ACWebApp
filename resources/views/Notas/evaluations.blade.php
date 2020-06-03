@@ -82,7 +82,11 @@
                                 <tr>
                                     <th>Apellidos, Nombre</th>
                                     @foreach($yearUnion->tareas as $tarea)
+                                    @if($yearUnion->evaluation->name == 'EvalFinal' && $tarea->name == "Recuperacion")
+                                    <th>Evaluacion Extraordinaria</th>
+                                    @else
                                     <th>{{$tarea->name}}</th>
+                                    @endif
                                     @endforeach
                                     <th>NOTA FINAL</th>
                                     <th>BOLETIN</th>
@@ -99,24 +103,11 @@
                                     <td>{{$tarea}}</td>
                                     @endif
                                     @endforeach
-                                    @if($yearUnion->evaluation->name == 'EvalFinal')
-                                    <td>{{$yearUnion->evalFinal[$user->id]}}</td>
-                                    @else
                                     <td>{{$user->nota_final}}</td>
-                                    @endif
-
-                                    @if($yearUnion->evaluation->name == 'EvalFinal')
-                                        @if($user->boletin < 5 && $user->boletin != null) 
-                                        <td class="bg-secondary text-white">{{$yearUnion->boletinEvalFinal[$user->id]}}</td>
-                                        @else
-                                        <td>{{$yearUnion->boletinEvalFinal[$user->id]}}</td>
-                                        @endif
-                                    @else
                                     @if($user->boletin < 5 && $user->boletin != null) 
                                     <td class="bg-secondary text-white">{{$user->boletin}}</td>
                                     @else
                                     <td>{{$user->boletin}}</td>
-                                    @endif
                                     @endif
                                 </tr>
                                 @endforeach
