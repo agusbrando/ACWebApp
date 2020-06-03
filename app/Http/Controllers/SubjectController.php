@@ -405,7 +405,6 @@ class SubjectController extends Controller
                     $yearUnion->evalFinal = $evalFinal;
                 }
             }
-            //TODO comprobar que no ha recuperado
             if ($yearUnion->evaluation->name == "EvalFinal") {
                 foreach ($yearUnion->users as $user) {
                     $calculoFinal = true;

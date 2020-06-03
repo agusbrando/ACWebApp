@@ -105,7 +105,7 @@
                                     @endforeach
                                     <td>{{$user->nota_final}}</td>
                                     @if($user->boletin < 5 && $user->boletin != null) 
-                                    <td class="bg-secondary text-white">{{$user->boletin}}</td>
+                                    <td class="bg-danger text-white">{{$user->boletin}}</td>
                                     @else
                                     <td>{{$user->boletin}}</td>
                                     @endif
