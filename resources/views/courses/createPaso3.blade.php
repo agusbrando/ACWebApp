@@ -37,7 +37,7 @@
             <div class="col-sm-12">
                 <div class="divShowCoursesContent   ">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="96" aria-valuemin="0" aria-valuemax="100" style="width: 99%"></div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="96" aria-valuemin="0" aria-valuemax="100" style="width: 96%">96%</div>
                     </div>
                     @if(count($courses) > 0)
                     <div id="accordion" class="w-100 h-100 mt-5">

@@ -38,7 +38,7 @@
                 <div class="container divShowCoursesContent">
                     
                     <div class="progress mt-3">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" style="width: 33%"></div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" style="width: 31%">31%</div>
                     </div>
 
                     <!-- Proteccion contra consultas no deseadas -->
