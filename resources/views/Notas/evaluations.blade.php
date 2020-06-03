@@ -27,14 +27,14 @@
                 </nav>
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active table-responsive" id="nav-base" role="tabpanel" aria-labelledby="nav-base-tab">
-                        
+                        @if(session()->get('error'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <strong>Error!</strong> {{ session()->get('error') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                       
+                        @endif
                         <form action="{{ url('porcentajes/updatePorcentaje') }}" method="post">
                             @csrf
                             @foreach($yearUnions as $yearUnion)
