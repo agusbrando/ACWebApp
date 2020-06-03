@@ -28,7 +28,6 @@
                     <h4 class="card-title">{{($role->name)}} </h4>
                     <h5 class="card-title">Slug: {{($role->slug)}}</h5>
                     <p class="card-text">Descripción: {{($role->description)}}</p>
-                    <p class="card-text">Nivel: {{($role->level)}}</p>
                 </div>
             </div>
 

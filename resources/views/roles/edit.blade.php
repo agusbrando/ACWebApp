@@ -37,10 +37,7 @@
                             <label for="description">Descripcion</label>
                             <input value="{{$role->description}}" name="description" id="description" type="text" class="@error('description') is-invalid @enderror form-control">
                         </div>
-                        <div class="form-group">
-                            <label for="level">Nivel</label>
-                            <input value="{{$role->level}}" readonly name="level" id="level" type="text" class="@error('level') is-invalid @enderror form-control">
-                        </div>
+                       
                     </fieldset>
                     @error('email', 'login')
                     <div class="alert alert-danger">{{ $message }}</div>
