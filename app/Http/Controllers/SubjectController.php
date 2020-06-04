@@ -366,7 +366,7 @@ class SubjectController extends Controller
                                                 $user->boletin = round($user->tareas[$task_type->name], 0);
                                             }
                                             $user->nota_final = $user->tareas[$task_type->name];
-                                            $evalFinal[$user->id] = $user->tareas[$task_type->name];
+                                            $evalFinal[$user->id] += $user->tareas[$task_type->name];
                                             $yearUnion->evalFinal = $evalFinal;
                                             $recuperado = true;
                                             $recuperadoEvalFinal[$user->id] = true;
@@ -405,7 +405,6 @@ class SubjectController extends Controller
                     $yearUnion->evalFinal = $evalFinal;
                 }
             }
-            //TODO comprobar que no ha recuperado
             if ($yearUnion->evaluation->name == "EvalFinal") {
                 foreach ($yearUnion->users as $user) {
                     $calculoFinal = true;
