@@ -30,10 +30,6 @@
           <label for="description">Descripcion</label>
           <input value="" name="description" id="description" type="text" class="@error('description') is-invalid @enderror form-control">
         </div>
-        <div class="form-group">
-          <label for="level">Nivel</label>
-          <input value=""  name="level" id="level" type="text" class="@error('level') is-invalid @enderror form-control" >
-        </div>
       </fieldset>
     </div>
   </div>
