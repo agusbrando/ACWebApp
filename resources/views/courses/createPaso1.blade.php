@@ -36,14 +36,9 @@
             <div class="col-sm-12">
 
                 <div class="container divShowCoursesContent">
-                    @if ($message = Session::get('warning'))
-                    <div class="alert alert-danger alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                    @endif
+                    
                     <div class="progress mt-3">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%"></div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" style="width: 31%">31%</div>
                     </div>
 
                     <!-- Proteccion contra consultas no deseadas -->
@@ -67,7 +62,7 @@
                             </div>
 
                             <div class="card-body p-3">
-                                <h6 class=" mb-3">Introduce el nuevo año</h6>
+                                <h6 class=" mb-3">Introduce el nuevo año lectivo</h6>
                                 <input type="text" id="nuevoYear" name="nuevoYearTextInput" placeholder="Ejemplo: 2020/2021" class="form-control mb-4" v>
                                 <hr>
                                 <h6 class=" mb-3">Duración del año</h6>
